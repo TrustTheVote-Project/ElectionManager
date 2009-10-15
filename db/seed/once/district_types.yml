@@ -1,0 +1,32 @@
+state:
+  id: 0
+  title: State
+
+county:
+  id: 1
+  title: County
+
+municipality:
+  id: 2
+  title: Municipality
+
+school:
+  id: 3
+  title: School
+
+water:
+  id: 4
+  title: Water
+  
+fire:
+  id: 5
+  title: Fire
+
+coast:
+  id: 6
+  title: Coastal
+  
+harbor:
+  id: 7
+  title: Harbor
+

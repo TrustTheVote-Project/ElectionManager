@@ -1,0 +1,22 @@
+<div class='errorExplanation' id='errorExplanation'>
+	<h2>Can't complete your request because of errors below.</h2>
+	<% 
+		base_errors = model.errors.on_base()
+	 	base_error_count = 0
+		if base_errors.instance_of?(Array)
+			base_error_count = base_errors.length
+		else
+			base_error_count = 1 if !base_errors.nil?
+		end
+ 	%>
+	<% base_only = base_error_count == error_messages.size %>
+	<% if options[:verbose] || base_only %>
+		<p>The errors are:</p>
+		<ul>
+			<% for error_message in error_messages %>
+			<li><%=h error_message %>.</li>
+			<% end%>
+		</ul>
+	<% end %>
+	
+</div>	

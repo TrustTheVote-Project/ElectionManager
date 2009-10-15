@@ -1,0 +1,17 @@
+<% display ||= 'block'%>
+<% div_id = "#{dom_id(contest)}_static"%>
+<div id="<%= div_id -%>"  style='display:<%= display %>'>
+	<div class='tools'>
+			<%= link_to_function "Add candidate", "ttv.makeCandidateForm('#{dom_id(contest)}')" -%>
+			<%= link_to_remote "Delete", :url => contest_path(contest), :method => 'delete', :confirm => "Are you sure?",
+				:failure => "ttv.error('Unexpected error, delete failed')" %>
+	</div>
+	<p>
+		<%= image_tag "icons/contest.gif", :class => "icon"  %>
+		<span class='canEdit'>
+		<%= h contest.display_name -%>
+		<%= h ", #{pluralize(contest.open_seat_count, 'open seat')}" if contest.open_seat_count != 1 -%>
+		<%= h ", #{contest.voting_method.display_name}" if contest.voting_method_id != 1 -%>
+		</span>
+	</p>
+</div>

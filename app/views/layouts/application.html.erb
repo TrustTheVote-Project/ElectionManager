@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>TTV: <%= h( yield(:title || @controller.action_name) ) %></title>
+  <%= stylesheet_link_tag 'main' %>
+	<%= javascript_include_tag :defaults %>
+	<% yield(:head) %>
+</head>
+<body>
+<div id='banner'>
+	<div id="banner_img" onClick='window.location.href="/"' style='cursor:pointer'><img id='spinner' src='/images/ajax-loader.gif'></div>
+	<div id='banner_middle'>
+		<%= yield(:toolbox) %>
+		<%= yield(:banner_middle) -%>
+		<div id='ttv_message'>
+			<% flash[:notice] = '' if flash[:notice].nil? -%>
+			<% flash[:error] = '' if flash[:error].nil? -%>
+			<% (flash.to_a.sort { |a,b| b[0].to_s <=> a[0].to_s } ).each do |name, msg| -%>
+				<%= content_tag :div, msg, :id => "flash_#{name}", :class => 'flash' %>
+			<% end -%>
+		</div>
+	</div>
+	<div id='banner_right'>
+		<% if current_user %>
+			<%= current_user.email %> |
+			<%= link_to "Edit profile", edit_user_path(:current) %> |
+			<%= link_to "Logout", logout_path %>
+		<% else %>
+			<%= link_to "Login", login_path %> |
+			<%= link_to "Register", new_user_path %>
+		<% end %>
+	</div>
+	<div style='clear:both'></div>
+</div>
+<div id='main_body'>
+<%= yield %>
+</div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+# Logfile created on Thu Oct 15 12:43:29 -0700 2009
+
+Processing ElectionsController#show (for 127.0.0.1 at 2009-10-15 12:43:57) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"elections"}
+  [4;36;1mElection Load (0.3ms)[0m   [0;1mSELECT * FROM "elections" WHERE ("elections"."id" = 1) [0m
+  [4;35;1mDistrictSet Load (0.3ms)[0m   [0mSELECT * FROM "district_sets" WHERE ("district_sets"."id" = 1) [0m
+  [4;36;1mDistrict Load (1.4ms)[0m   [0;1mSELECT "districts".*, t0.district_set_id as the_parent_record_id FROM "districts" INNER JOIN "district_sets_districts" t0 ON "districts".id = t0.district_id WHERE (t0.district_set_id = 1) [0m
+  [4;35;1mContest Load (4.0ms)[0m   [0mSELECT "contests".* FROM "contests" WHERE ("contests".election_id = 1) ORDER BY display_name[0m
+  [4;36;1mCandidate Load (13.0ms)[0m   [0;1mSELECT "candidates".* FROM "candidates" WHERE ("candidates".contest_id IN (15,10,23,11,4,12,16,1,8,17,18,5,14,3,26,24,31,7,21,28,19,25,9,22,6,30,20,13,27,217,2,29)) ORDER BY display_name[0m
+  [4;35;1mQuestion Load (0.6ms)[0m   [0mSELECT "questions".* FROM "questions" WHERE ("questions".election_id = 1) ORDER BY display_name[0m
+Rendering template within layouts/application
+Rendering elections/show
+Rendered elections/_toolbox (3.8ms)
+Rendered elections/_static (153.0ms)
+Rendered districts/_static (2.2ms)
+Rendered contests/_static (1.6ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 4) [0m
+  [4;35;1mParty Load (0.2ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (37.1ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 4) [0m
+  [4;35;1mParty Load (0.2ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.3ms)
+Rendered contests/_candidates (42.9ms)
+Rendered contests/_show (50.4ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 1) [0m
+  [4;35;1mParty Load (0.2ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.2ms)
+Rendered contests/_candidates (2.7ms)
+Rendered contests/_show (3.4ms)
+Rendered contests/_static (1.2ms)
+Rendered contests/_candidates (0.1ms)
+Rendered contests/_show (1.5ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.4ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 3) [0m
+  [4;35;1mParty Load (0.1ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (4.9ms)
+Rendered contests/_show (5.5ms)
+Rendered contests/_static (0.4ms)
+Rendered contests/_candidates (0.1ms)
+Rendered contests/_show (0.9ms)
+Rendered contests/_static (0.5ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 2) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 2) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.1ms)
+Rendered contests/_candidates (2.7ms)
+Rendered contests/_show (3.3ms)
+Rendered districts/_contests (71.2ms)
+Rendered districts/_questions (0.9ms)
+Rendered districts/_show (84.2ms)
+Rendered districts/_static (1.0ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 10) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.6ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 10) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (2.8ms)
+Rendered contests/_show (3.4ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.5ms)
+Rendered contests/_candidates (4.2ms)
+Rendered contests/_show (4.8ms)
+Rendered contests/_static (0.6ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (0.9ms)
+Rendered contests/_candidates (7.7ms)
+Rendered contests/_show (8.5ms)
+Rendered contests/_static (1.3ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.2ms)
+Rendered contests/_candidates (5.9ms)
+Rendered contests/_show (7.4ms)
+Rendered contests/_static (0.6ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.2ms)
+Rendered contests/_candidates (1.4ms)
+Rendered contests/_show (2.3ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 9) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.2ms)
+Rendered contests/_candidates (1.4ms)
+Rendered contests/_show (2.0ms)
+Rendered contests/_static (1.1ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 6) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 6) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 6) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.1ms)
+Rendered contests/_candidates (3.7ms)
+Rendered contests/_show (5.0ms)
+Rendered districts/_contests (34.5ms)
+Rendered districts/_questions (0.1ms)
+Rendered districts/_show (35.9ms)
+Rendered districts/_static (0.8ms)
+Rendered districts/_contests (0.4ms)
+Rendered districts/_questions (0.1ms)
+Rendered districts/_show (1.7ms)
+Rendered districts/_static (0.9ms)
+Rendered districts/_contests (0.5ms)
+Rendered districts/_questions (0.1ms)
+Rendered districts/_show (1.8ms)
+Rendered districts/_static (68.1ms)
+Rendered contests/_static (0.8ms)
+Rendered contests/_candidates (0.1ms)
+Rendered contests/_show (1.1ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.5ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.8ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.1ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 16) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+Rendered contests/_candidates (7.7ms)
+Rendered contests/_show (8.3ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 17) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.3ms)
+Rendered contests/_candidates (1.6ms)
+Rendered contests/_show (2.2ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 18) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.4ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 18) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 18) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 18) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 18) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (6.9ms)
+Rendered contests/_show (7.5ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 14) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 14) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.3ms)
+Rendered contests/_candidates (2.8ms)
+Rendered contests/_show (3.4ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 19) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 19) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.1ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 19) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.7ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 19) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 19) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (0.9ms)
+Rendered contests/_candidates (6.4ms)
+Rendered contests/_show (7.0ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 13) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.2ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 13) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.1ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 13) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 13) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 13) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (5.6ms)
+Rendered contests/_show (6.4ms)
+Rendered districts/_contests (36.9ms)
+Rendered districts/_questions (0.1ms)
+Rendered districts/_show (105.6ms)
+Rendered districts/_static (0.9ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.3ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 23) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.5ms)
+Rendered contests/_candidates (1.7ms)
+Rendered contests/_show (2.4ms)
+Rendered contests/_static (0.4ms)
+  [4;36;1mContest Load (0.2ms)[0m   [0;1mSELECT * FROM "contests" WHERE ("contests"."id" = 26) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.3ms)
+Rendered contests/_candidates (1.6ms)
+Rendered contests/_show (2.2ms)
+  [4;36;1mVotingMethod Load (0.2ms)[0m   [0;1mSELECT * FROM "voting_methods" WHERE ("voting_methods"."id" = 0) [0m
+Rendered contests/_static (4.7ms)
+  [4;35;1mContest Load (0.2ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 24) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+Rendered contests/_candidates (7.6ms)
+Rendered contests/_show (12.5ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.2ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.2ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (2.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 21) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (7.5ms)
+Rendered contests/_show (8.1ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.3ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 25) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.4ms)
+Rendered contests/_candidates (1.6ms)
+Rendered contests/_show (2.4ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.2ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 22) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.2ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 22) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (2.7ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 22) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.8ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 22) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (5.7ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 22) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (12.8ms)
+Rendered contests/_show (13.4ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.3ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 20) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 20) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 20) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (1.7ms)
+Rendered contests/_candidates (4.5ms)
+Rendered contests/_show (5.1ms)
+Rendered districts/_contests (48.2ms)
+Rendered questions/_static (5.8ms)
+Rendered questions/_show (22.8ms)
+Rendered districts/_questions (25.7ms)
+Rendered districts/_show (75.3ms)
+Rendered districts/_static (0.9ms)
+Rendered contests/_static (0.4ms)
+Rendered contests/_candidates (0.1ms)
+Rendered contests/_show (0.7ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.3ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 27) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.6ms)
+Rendered contests/_candidates (1.7ms)
+Rendered contests/_show (2.3ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.2ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (2.7ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.2ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (4.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 0) [0m
+Rendered candidates/_static (1.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 29) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+Rendered contests/_candidates (14.9ms)
+Rendered contests/_show (15.5ms)
+Rendered districts/_contests (19.2ms)
+Rendered districts/_questions (0.2ms)
+Rendered districts/_show (20.7ms)
+Rendered districts/_static (0.9ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.3ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 2) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (0.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (2.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 31) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 3) [0m
+Rendered candidates/_static (1.0ms)
+Rendered contests/_candidates (10.2ms)
+Rendered contests/_show (10.8ms)
+Rendered contests/_static (0.4ms)
+  [4;35;1mContest Load (0.3ms)[0m   [0mSELECT * FROM "contests" WHERE ("contests"."id" = 30) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "parties" WHERE ("parties"."id" = 1) [0m
+Rendered candidates/_static (1.9ms)
+Rendered contests/_candidates (2.1ms)
+Rendered contests/_show (2.7ms)
+Rendered districts/_contests (14.1ms)
+Rendered districts/_questions (0.1ms)
+Rendered districts/_show (15.5ms)
+Rendered elections/_districts (364.9ms)
+Rendered elections/_show (523.7ms)
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = '1') LIMIT 1[0m
+Completed in 976ms (View: 577, DB: 28) | 200 OK [http://localhost/elections/1]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-10-15 12:44:05) [GET]
+  Parameters: {"action"=>"index", "controller"=>"application"}
+Rendering template within layouts/application
+Rendering application/index
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = '1') LIMIT 1[0m
+Completed in 89ms (View: 87, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing ElectionsController#index (for 127.0.0.1 at 2009-10-15 12:44:07) [GET]
+  Parameters: {"action"=>"index", "controller"=>"elections"}
+  [4;35;1mElection Load (0.8ms)[0m   [0mSELECT * FROM "elections" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = '1') LIMIT 1[0m
+  [4;35;1mElection Load (0.5ms)[0m   [0mSELECT * FROM "elections" ORDER BY created_at DESC LIMIT 1[0m
+Rendering template within layouts/application
+Rendering elections/index
+Rendered elections/_toolbox (1.6ms)
+  [4;36;1mDistrictSet Load (0.2ms)[0m   [0;1mSELECT "district_sets".id FROM "district_sets" WHERE ("district_sets"."id" = 1) LIMIT 1[0m
+  [4;35;1mDistrictSet Load (0.2ms)[0m   [0mSELECT * FROM "district_sets" WHERE ("district_sets"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT "district_sets".id FROM "district_sets" WHERE ("district_sets"."id" = 1) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "district_sets" WHERE ("district_sets"."id" = 1) [0m
+  [4;36;1mDistrictSet Load (0.1ms)[0m   [0;1mSELECT "district_sets".id FROM "district_sets" WHERE ("district_sets"."id" = 2) LIMIT 1[0m
+  [4;35;1mDistrictSet Load (0.1ms)[0m   [0mSELECT * FROM "district_sets" WHERE ("district_sets"."id" = 2) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT "district_sets".id FROM "district_sets" WHERE ("district_sets"."id" = 2) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "district_sets" WHERE ("district_sets"."id" = 2) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = '1') LIMIT 1[0m
+Completed in 36ms (View: 17, DB: 2) | 200 OK [http://localhost/elections]

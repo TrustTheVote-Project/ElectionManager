@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election start_date="2009-12-31 00:00:00 -0800" display_name="Best Daddy 2009">
+  <districts display_name="State of Testonia Set">
+    <district type="state" display_name="State of Test" id="1">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+      <precinct idref="3"/>
+      <precinct idref="4"/>
+      <precinct idref="5"/>
+      <precinct idref="6"/>
+      <precinct idref="7"/>
+      <precinct idref="8"/>
+      <precinct idref="9"/>
+      <precinct idref="10"/>
+      <precinct idref="11"/>
+      <precinct idref="12"/>
+      <precinct idref="13"/>
+      <precinct idref="14"/>
+      <precinct idref="15"/>
+      <precinct idref="16"/>
+      <precinct idref="17"/>
+      <precinct idref="18"/>
+      <precinct idref="19"/>
+      <precinct idref="20"/>
+      <precinct idref="21"/>
+      <precinct idref="22"/>
+      <precinct idref="23"/>
+      <precinct idref="24"/>
+      <precinct idref="25"/>
+      <precinct idref="26"/>
+      <precinct idref="27"/>
+      <precinct idref="28"/>
+      <precinct idref="29"/>
+      <precinct idref="30"/>
+      <precinct idref="31"/>
+      <precinct idref="32"/>
+      <precinct idref="33"/>
+      <precinct idref="34"/>
+      <precinct idref="35"/>
+      <precinct idref="36"/>
+      <precinct idref="37"/>
+      <precinct idref="38"/>
+      <precinct idref="39"/>
+      <precinct idref="40"/>
+    </district>
+    <district type="county" display_name="Santa Clara County" id="2">
+      <precinct idref="2"/>
+      <precinct idref="3"/>
+      <precinct idref="4"/>
+      <precinct idref="5"/>
+      <precinct idref="6"/>
+      <precinct idref="22"/>
+      <precinct idref="23"/>
+      <precinct idref="24"/>
+      <precinct idref="25"/>
+      <precinct idref="26"/>
+    </district>
+    <district type="county" display_name="San Mateo County" id="3">
+      <precinct idref="7"/>
+      <precinct idref="8"/>
+      <precinct idref="9"/>
+      <precinct idref="10"/>
+      <precinct idref="11"/>
+      <precinct idref="27"/>
+      <precinct idref="28"/>
+      <precinct idref="29"/>
+      <precinct idref="30"/>
+      <precinct idref="31"/>
+    </district>
+    <district type="county" display_name="LA County" id="4">
+      <precinct idref="12"/>
+      <precinct idref="13"/>
+      <precinct idref="14"/>
+      <precinct idref="15"/>
+      <precinct idref="16"/>
+      <precinct idref="17"/>
+      <precinct idref="18"/>
+      <precinct idref="19"/>
+      <precinct idref="20"/>
+      <precinct idref="32"/>
+      <precinct idref="33"/>
+      <precinct idref="34"/>
+      <precinct idref="35"/>
+      <precinct idref="36"/>
+      <precinct idref="37"/>
+      <precinct idref="38"/>
+      <precinct idref="39"/>
+      <precinct idref="40"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct display_name="People Precinct 1" id="1"/>
+    <precinct display_name="People Precinct 2" id="2"/>
+    <precinct display_name="People Precinct 3" id="3"/>
+    <precinct display_name="People Precinct 4" id="4"/>
+    <precinct display_name="People Precinct 5" id="5"/>
+    <precinct display_name="People Precinct 6" id="6"/>
+    <precinct display_name="People Precinct 7" id="7"/>
+    <precinct display_name="People Precinct 8" id="8"/>
+    <precinct display_name="People Precinct 9" id="9"/>
+    <precinct display_name="People Precinct 10" id="10"/>
+    <precinct display_name="People Precinct 11" id="11"/>
+    <precinct display_name="People Precinct 12" id="12"/>
+    <precinct display_name="People Precinct 13" id="13"/>
+    <precinct display_name="People Precinct 14" id="14"/>
+    <precinct display_name="People Precinct 15" id="15"/>
+    <precinct display_name="People Precinct 16" id="16"/>
+    <precinct display_name="People Precinct 17" id="17"/>
+    <precinct display_name="People Precinct 18" id="18"/>
+    <precinct display_name="People Precinct 19" id="19"/>
+    <precinct display_name="People Precinct 20" id="20"/>
+    <precinct display_name="People Precinct 1" id="21"/>
+    <precinct display_name="People Precinct 2" id="22"/>
+    <precinct display_name="People Precinct 3" id="23"/>
+    <precinct display_name="People Precinct 4" id="24"/>
+    <precinct display_name="People Precinct 5" id="25"/>
+    <precinct display_name="People Precinct 6" id="26"/>
+    <precinct display_name="People Precinct 7" id="27"/>
+    <precinct display_name="People Precinct 8" id="28"/>
+    <precinct display_name="People Precinct 9" id="29"/>
+    <precinct display_name="People Precinct 10" id="30"/>
+    <precinct display_name="People Precinct 11" id="31"/>
+    <precinct display_name="People Precinct 12" id="32"/>
+    <precinct display_name="People Precinct 13" id="33"/>
+    <precinct display_name="People Precinct 14" id="34"/>
+    <precinct display_name="People Precinct 15" id="35"/>
+    <precinct display_name="People Precinct 16" id="36"/>
+    <precinct display_name="People Precinct 17" id="37"/>
+    <precinct display_name="People Precinct 18" id="38"/>
+    <precinct display_name="People Precinct 19" id="39"/>
+    <precinct display_name="People Precinct 20" id="40"/>
+  </precincts>
+  <body>
+    <contest open_seat="3" district_idref="1" display_name="Cooking" voting_method="ranked">
+      <candidates>
+        <candidate party="independent" display_name="C1"/>
+        <candidate party="democrat" display_name="C2"/>
+        <candidate party="independent" display_name="C3"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="4" display_name="Favorite outfit" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Ghost"/>
+        <candidate party="independent" display_name="Pirate"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="1" display_name="House cleaning" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Alekx"/>
+        <candidate party="democrat" display_name="Jud"/>
+        <candidate party="democrat" display_name="Lou"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="2" display_name="Roof walk" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Al daddy"/>
+        <candidate party="democrat" display_name="Mike StG daddy"/>
+        <candidate party="democrat" display_name="Mike daddy"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="2" display_name="Rough housing" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Foghorn"/>
+        <candidate party="democrat" display_name="Jerry"/>
+        <candidate party="independent" display_name="Tom"/>
+      </candidates>
+    </contest>
+    <question district_idref="1" display_name="Clothing state">
+      <text>
+Do you ever cook naked?      </text>
+    </question>
+    <question district_idref="2" display_name="Danger on the roof">
+      <text>
+Do you think roof walking is dangerous?      </text>
+    </question>
+  </body>
+</election>

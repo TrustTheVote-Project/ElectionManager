@@ -1,0 +1,23 @@
+<p>
+  <b>Display name:</b>
+  <%=h @question.display_name %>
+</p>
+
+<p>
+  <b>Question:</b>
+  <%=h @question.question %>
+</p>
+
+<p>
+  <b>District:</b>
+  <%=h @question.district_id %>
+</p>
+
+<p>
+  <b>Election:</b>
+  <%=h @question.election_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

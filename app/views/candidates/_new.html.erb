@@ -1,0 +1,50 @@
+<% # model is either an array of candidates, or one candidate %>
+<% 
+	if model.is_a? Candidate 
+		candidates = [model];
+		contest = model.contest;
+	else
+		candidates = model;
+		if (candidates.length == 0) 
+			logger.warn("No candidates displayed, error")
+			return;
+		else
+			contest = candidates[0].contest;
+		end
+	end
+%>
+
+<% div_id = "#{dom_id(contest)}_candidates_new" %>
+<div id="<%= div_id -%>" class='isEditor'>
+	<% remote_form_for contest,
+		:action => 'update', :html => { :inlineEditor => 1 }  do |f| %>
+		<%= render_error_messages(contest) %>
+		<% candidates.each_with_index do |candidate, index| %>
+			<% fields_for "contest[candidates_attributes][]", candidate, :index => index do |candidate_form| %>
+				<div class='fields'> 
+					<p>
+						<%= candidate_form.label :display_name, "Candidate name" %>: <%= candidate_form.text_field :display_name%> 
+						<%= candidate_form.label :party_id %>: 
+								<%= candidate_form.collection_select :party_id, Party.all, :id, :display_name %>
+					</p>
+				</div>
+						<%= candidate_form.hidden_field :contest_id %>
+			<% end %>
+		<% end %>
+	  <%= f.submit 'Create' %>
+		<input type="button" value="Cancel" onClick="ttv.cancelNew('<%= div_id -%>')">
+	<% end %>
+</div>
+<script>
+	$('<%= div_id %>').moreNewCandidates = function() {
+		var nextIndex = $(this).select(".fields").length;
+		// fix up the index of the attributes
+		var html = this.innerHTML.replace(/_attributes]\[0]/g, "_attributes][" + nextIndex + "]");		
+		html = html.replace(/_attributes_0_/g, "_attributes_" + nextIndex + "_");
+		// insert the field
+		var newFields = ttv.htmlToElement(".fields", html);
+		var formTag = this.select("form")[0];
+		var submitTag = formTag.select("input[type='submit']")[0];
+		formTag.insertBefore(newFields, submitTag);
+	}
+</script>

@@ -1,0 +1,17 @@
+<% content_for :title, "Trust The Vote"%>
+<h1>Welcome to TrustTheVote</h1>
+<% if current_user %>
+	<p>Hola <%= h current_user.email %></p>
+	<p>What would you like to do?</p>
+	<ul>
+		<li><%=link_to "View elections", elections_path %>
+		<li><%=link_to "View districts", districts_path %>
+		<li><%=link_to "View contests", contests_path %>
+		<li><%=link_to "View candidates", candidates_path %>
+		<li><%=link_to "View questions", questions_path %>
+	</ul>
+
+<% else %>
+	<p>Welcome to TrustTheVote election management system.</p>
+	<p>Please <%= link_to "Register", new_user_path %>, or <%= link_to "Login", login_path %> to play with it.</p>
+<% end %>

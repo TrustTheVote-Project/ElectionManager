@@ -1,0 +1,21 @@
+<% display ||= 'block'%>
+<% @div_id = "#{dom_id(election)}_edit" %>
+<div id="<%= @div_id -%>" class='isEditor' style='display:<%= display %>'>
+	<% remote_form_for election, 
+			:action => 'update', :html => { :inlineEditor => 1 }   do |f| %>
+			<%= render_error_messages(election) %>
+		  <p>
+		    <%= f.label :display_name, "Election name"%> 
+		    <%= f.text_field :display_name %>
+			</p>
+			<p>
+		    <%= f.label :start_date %>
+				<% @election = election %>
+				<%= datetime_select :election, :start_date, { :start_year => 2009 }%>
+			</p>
+			<p>
+	   		<%= f.submit 'Update' %>
+		 		<input type="button" value="Cancel" onClick="ttv.cancelEdit('<%= @div_id -%>')">
+			</p>
+		<% end %>
+</div>

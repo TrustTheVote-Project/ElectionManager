@@ -1,0 +1,15 @@
+<% display ||= 'block'%>
+<% div_id = "#{dom_id(question)}_static"%>
+<div id="<%= div_id -%>"  style='display:<%= display %>'>
+	<div class="tools">
+		<%= link_to_remote "Delete", :confirm => 'Are you sure?', :url => question_path(question), :method => 'delete',
+			:failure => "ttv.error('Unexpected error, delete failed')" %>
+	</div>
+	<p>
+		<span class='canEdit'>
+		<%= image_tag "icons/question.gif", :class => "icon"%>
+		<%= h question.display_name -%>
+		</span>
+	</p>
+	<blockquote><span class='canEdit'><%= h question.question %></span></blockquote>
+</div>

@@ -1,0 +1,9 @@
+<% content_for :toolbox do %>
+	<div id='main_task_name'>
+		Editing election
+	</div>
+<% end %>
+<div id="<%= dom_id(@election) -%>">
+	<%= render :partial => 'static', :locals => {:election => @election, :display => 'none'  } %>
+	<%= render :partial => 'edit', :locals => {:election => @election } %>
+</div>

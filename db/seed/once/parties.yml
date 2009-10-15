@@ -1,0 +1,16 @@
+independent:
+    id: 0
+    display_name: Independent
+
+democrat:
+    id: 1
+    display_name: Democrat
+
+republican:
+    id: 2
+    display_name: Republican
+    
+libertarian:
+    id: 3
+    display_name: Libertarian
+

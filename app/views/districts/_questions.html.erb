@@ -1,0 +1,4 @@
+<% div_id = "#{dom_id(district)}_questions" -%>
+<div id="<%= div_id %>" class='questions'>
+		<%= render :partial => "questions/show", :collection => district.questionsForElection(election), :as => :question %>
+</div>

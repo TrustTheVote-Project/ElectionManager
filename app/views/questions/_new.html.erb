@@ -1,0 +1,15 @@
+<% div_id = "#{dom_id(question.district)}_questions_new" %>
+<div id="<%= div_id -%>" class='isEditor'>
+	<% remote_form_for question,
+	:action => 'create', :html => { :inlineEditor => 1 }  do |f| %>
+		<%= render_error_messages(question) %>
+		<p>
+			<%= f.label :display_name, "Name" %>: <%= f.text_field :display_name%> <br>
+			<%= f.label :question, "Question text: " %><%= f.text_area :question, :rows => 10, :cols => 40 %>
+		</p>
+		<%= f.hidden_field :district_id %>
+		<%= f.hidden_field :election_id %>
+		<%= f.submit 'Create' %>
+		<input type="button" value="Cancel" onClick="ttv.cancelNew('<%= div_id -%>')">
+	<% end %>
+</div>

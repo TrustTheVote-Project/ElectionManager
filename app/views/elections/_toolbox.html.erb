@@ -1,0 +1,14 @@
+<% if @elections %>
+	<div id='toobox-pick-election'>
+	Edit <%= collection_select(:election, :id, @elections, :id, :display_name, {:prompt => 'Create a new election'}) %>
+	<%= observe_field 'election_id', 
+		:url => "/", 
+		:with => "'[session][election_id]='+ encodeURIComponent(value)"
+		%>
+	</div>
+<% end %>
+<%= link_to "New election...", new_election_path, :method => 'get' %>
+<% form_tag  import_elections_path, :method => 'put', :multipart => true do %>
+	<%= submit_tag "Import election" %>
+	<%= file_field_tag "importFile" , :accept => "text/xml" %>
+<% end %>

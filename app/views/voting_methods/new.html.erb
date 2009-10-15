@@ -1,0 +1,15 @@
+<h1>New voting_method</h1>
+
+<% form_for(@voting_method) do |f| %>
+  <%= render_error_messages(@voting_method) %>
+
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', voting_methods_path %>

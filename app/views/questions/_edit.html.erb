@@ -1,0 +1,18 @@
+<% display ||= 'block'%>
+<% @div_id = "#{dom_id(question)}_edit" %>
+<div id="<%= @div_id -%>" class='isEditor' style='display:<%= display %>'>
+	<% remote_form_for question, 
+			:action => 'update', :html => { :inlineEditor => 1 }   do |f| %>
+			<%= render_error_messages(question)  %>
+	  	<p>
+				<%= f.label :display_name, "Name" %>: <%= f.text_field :display_name%>
+			</p>
+			<p >
+				<%= f.label :question, "Question text: ", :style => 'vertical-align:top' %><%= f.text_area :question, :rows => 10, :cols => 40 %>
+	  	</p>
+			<p>
+	   		<%= f.submit 'Update' %>
+		 		<input type="button" value="Cancel" onClick="ttv.cancelEdit('<%= @div_id -%>')">
+			</p>
+		<% end %>
+</div>

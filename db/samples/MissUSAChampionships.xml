@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election start_date="2009-09-23 08:00:00 -0700" display_name="Miss USA Championships">
+  <districts display_name="State of Testonia Set3">
+    <district type="state" display_name="State of Test" id="12">
+      <precinct idref="121"/>
+      <precinct idref="122"/>
+      <precinct idref="123"/>
+      <precinct idref="124"/>
+      <precinct idref="125"/>
+      <precinct idref="126"/>
+      <precinct idref="127"/>
+      <precinct idref="128"/>
+      <precinct idref="129"/>
+      <precinct idref="130"/>
+      <precinct idref="131"/>
+      <precinct idref="132"/>
+      <precinct idref="133"/>
+      <precinct idref="134"/>
+      <precinct idref="135"/>
+      <precinct idref="136"/>
+      <precinct idref="137"/>
+      <precinct idref="138"/>
+      <precinct idref="139"/>
+      <precinct idref="140"/>
+      <precinct idref="141"/>
+      <precinct idref="142"/>
+      <precinct idref="143"/>
+      <precinct idref="144"/>
+      <precinct idref="145"/>
+      <precinct idref="146"/>
+      <precinct idref="147"/>
+      <precinct idref="148"/>
+      <precinct idref="149"/>
+      <precinct idref="150"/>
+      <precinct idref="151"/>
+      <precinct idref="152"/>
+      <precinct idref="153"/>
+      <precinct idref="154"/>
+      <precinct idref="155"/>
+      <precinct idref="156"/>
+      <precinct idref="157"/>
+      <precinct idref="158"/>
+      <precinct idref="159"/>
+      <precinct idref="160"/>
+    </district>
+    <district type="county" display_name="Santa Clara County" id="13">
+      <precinct idref="122"/>
+      <precinct idref="124"/>
+      <precinct idref="126"/>
+      <precinct idref="130"/>
+      <precinct idref="134"/>
+      <precinct idref="138"/>
+      <precinct idref="151"/>
+      <precinct idref="155"/>
+      <precinct idref="159"/>
+      <precinct idref="160"/>
+    </district>
+    <district type="county" display_name="San Mateo County" id="14">
+      <precinct idref="123"/>
+      <precinct idref="128"/>
+      <precinct idref="132"/>
+      <precinct idref="136"/>
+      <precinct idref="141"/>
+      <precinct idref="145"/>
+      <precinct idref="148"/>
+      <precinct idref="149"/>
+      <precinct idref="152"/>
+      <precinct idref="158"/>
+    </district>
+    <district type="county" display_name="LA County" id="15">
+      <precinct idref="121"/>
+      <precinct idref="125"/>
+      <precinct idref="127"/>
+      <precinct idref="129"/>
+      <precinct idref="131"/>
+      <precinct idref="133"/>
+      <precinct idref="135"/>
+      <precinct idref="137"/>
+      <precinct idref="139"/>
+      <precinct idref="140"/>
+      <precinct idref="142"/>
+      <precinct idref="143"/>
+      <precinct idref="144"/>
+      <precinct idref="146"/>
+      <precinct idref="150"/>
+      <precinct idref="153"/>
+      <precinct idref="154"/>
+      <precinct idref="156"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct display_name="People Precinct 13" id="121"/>
+    <precinct display_name="People Precinct 2" id="122"/>
+    <precinct display_name="People Precinct 11" id="123"/>
+    <precinct display_name="People Precinct 6" id="124"/>
+    <precinct display_name="People Precinct 14" id="125"/>
+    <precinct display_name="People Precinct 3" id="126"/>
+    <precinct display_name="People Precinct 12" id="127"/>
+    <precinct display_name="People Precinct 7" id="128"/>
+    <precinct display_name="People Precinct 15" id="129"/>
+    <precinct display_name="People Precinct 4" id="130"/>
+    <precinct display_name="People Precinct 13" id="131"/>
+    <precinct display_name="People Precinct 8" id="132"/>
+    <precinct display_name="People Precinct 16" id="133"/>
+    <precinct display_name="People Precinct 5" id="134"/>
+    <precinct display_name="People Precinct 14" id="135"/>
+    <precinct display_name="People Precinct 9" id="136"/>
+    <precinct display_name="People Precinct 17" id="137"/>
+    <precinct display_name="People Precinct 6" id="138"/>
+    <precinct display_name="People Precinct 15" id="139"/>
+    <precinct display_name="People Precinct 18" id="140"/>
+    <precinct display_name="People Precinct 7" id="141"/>
+    <precinct display_name="People Precinct 16" id="142"/>
+    <precinct display_name="People Precinct 20" id="143"/>
+    <precinct display_name="People Precinct 19" id="144"/>
+    <precinct display_name="People Precinct 8" id="145"/>
+    <precinct display_name="People Precinct 17" id="146"/>
+    <precinct display_name="People Precinct 1" id="147"/>
+    <precinct display_name="People Precinct 10" id="148"/>
+    <precinct display_name="People Precinct 9" id="149"/>
+    <precinct display_name="People Precinct 18" id="150"/>
+    <precinct display_name="People Precinct 2" id="151"/>
+    <precinct display_name="People Precinct 11" id="152"/>
+    <precinct display_name="People Precinct 20" id="153"/>
+    <precinct display_name="People Precinct 19" id="154"/>
+    <precinct display_name="People Precinct 3" id="155"/>
+    <precinct display_name="People Precinct 12" id="156"/>
+    <precinct display_name="People Precinct 1" id="157"/>
+    <precinct display_name="People Precinct 10" id="158"/>
+    <precinct display_name="People Precinct 4" id="159"/>
+    <precinct display_name="People Precinct 5" id="160"/>
+  </precincts>
+  <body>
+    <contest open_seat="1" district_idref="12" display_name="Appelate Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="John Sebes"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="14" display_name="Appelate Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Debra &#268;ur&#269;il"/>
+        <candidate party="republican" display_name="Ingrid Khan"/>
+        <candidate party="independent" display_name="Ingrid Khan"/>
+        <candidate party="republican" display_name="Ingrid Shohet"/>
+        <candidate party="liberitarian" display_name="John Simpson"/>
+        <candidate party="republican" display_name="Pito Simpson"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="Appelate Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="republican" display_name="Arnold Shohet"/>
+        <candidate party="liberitarian" display_name="Arnold Shohet"/>
+        <candidate party="democrat" display_name="Debra Sebes"/>
+        <candidate party="liberitarian" display_name="Gam Khan"/>
+        <candidate party="republican" display_name="Ingrid Shohet"/>
+        <candidate party="democrat" display_name="John Khan"/>
+        <candidate party="republican" display_name="Pito Khan"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="Appelate Govenor" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="Appelate Mayor" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Debra Khan"/>
+        <candidate party="republican" display_name="Gam Simpson"/>
+        <candidate party="independent" display_name="Pito Khan"/>
+        <candidate party="independent" display_name="Pito &#268;ur&#269;il"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="12" display_name="Appelate Treasurer" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Gam Gorbatchov"/>
+        <candidate party="independent" display_name="Gam &#268;ur&#269;il"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="Attorney Govenor" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="Attorney Govenor" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Aleks Khan"/>
+        <candidate party="liberitarian" display_name="Aleks Toti&#263;"/>
+        <candidate party="democrat" display_name="Arnold Khan2"/>
+        <candidate party="liberitarian" display_name="Gam Shohet"/>
+        <candidate party="independent" display_name="Ingrid Sebes"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="12" display_name="Attorney Treasurer" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Debra Sebes"/>
+        <candidate party="independent" display_name="Ingrid Sebes"/>
+        <candidate party="democrat" display_name="John Sebes"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="Attorney Treasurer" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Gam Khan"/>
+        <candidate party="republican" display_name="Gam Shohet"/>
+        <candidate party="republican" display_name="Ingrid Sebes"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="City Govenor" voting_method="winner">
+      <candidates>
+        <candidate party="republican" display_name="Aleks Khan"/>
+        <candidate party="republican" display_name="Debra Sebes"/>
+        <candidate party="independent" display_name="Debra Toti&#263;"/>
+        <candidate party="liberitarian" display_name="Debra &#268;ur&#269;il"/>
+        <candidate party="democrat" display_name="Gam Gorbatchov"/>
+        <candidate party="democrat" display_name="Gam Khan"/>
+        <candidate party="independent" display_name="Ingrid Khan"/>
+        <candidate party="democrat" display_name="Ingrid Toti&#263;"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="14" display_name="Liutenant Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Aleks Simpson"/>
+        <candidate party="independent" display_name="Aleks Simpson"/>
+        <candidate party="republican" display_name="Aleks Simpson"/>
+        <candidate party="liberitarian" display_name="Debra Gorbatchov"/>
+        <candidate party="liberitarian" display_name="Debra Gorbatchov"/>
+        <candidate party="independent" display_name="Gam Simpson"/>
+        <candidate party="liberitarian" display_name="John Gorbatchov"/>
+        <candidate party="democrat" display_name="John Khan"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="Liutenant Controller" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="John Gorbatchov"/>
+        <candidate party="independent" display_name="John &#268;ur&#269;il"/>
+        <candidate party="independent" display_name="John &#268;ur&#269;il"/>
+        <candidate party="independent" display_name="John &#268;ur&#269;il"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="Liutenant Mayor" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Aleks Simpson"/>
+        <candidate party="democrat" display_name="This rocks"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="14" display_name="Lucky?" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="12" display_name="Secretary Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Debra Khan"/>
+        <candidate party="independent" display_name="Pito Khan"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="Secretary Govenor" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Debra Khan"/>
+        <candidate party="liberitarian" display_name="Gam &#268;ur&#269;il"/>
+        <candidate party="independent" display_name="John Simpson"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="14" display_name="Secretary Govenor" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Ingrid Khan"/>
+        <candidate party="liberitarian" display_name="John &#268;ur&#269;il"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="Secretary Treasurer" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="12" display_name="State Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Arnold Khan"/>
+        <candidate party="democrat" display_name="Gam Simpson"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="State Commisioner" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Aleks Gorbatchov"/>
+        <candidate party="republican" display_name="Debra Sebes"/>
+        <candidate party="independent" display_name="Gam Sebes"/>
+        <candidate party="republican" display_name="Gam &#268;ur&#269;il"/>
+        <candidate party="democrat" display_name="Ingrid Shohet"/>
+        <candidate party="democrat" display_name="Ingrid Toti&#263;"/>
+        <candidate party="liberitarian" display_name="John Toti&#263;"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="15" display_name="State Controller" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="State Mayor" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Gam Shohet"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="13" display_name="State Mayor" voting_method="winner">
+      <candidates>
+        <candidate party="liberitarian" display_name="Debra Gorbatchov"/>
+        <candidate party="independent" display_name="Debra Simpson"/>
+        <candidate party="independent" display_name="Gam Sebes"/>
+        <candidate party="independent" display_name="Ingrid Shohet"/>
+        <candidate party="republican" display_name="John Shohet"/>
+        <candidate party="democrat" display_name="John &#268;ur&#269;il"/>
+        <candidate party="independent" display_name="Pito Sebes"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" district_idref="14" display_name="State Mayor" voting_method="winner">
+    </contest>
+    <contest open_seat="1" district_idref="12" display_name="State Treasurer" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Gary Rockyfella"/>
+        <candidate party="independent" display_name="Mike Spitz"/>
+      </candidates>
+    </contest>
+  </body>
+</election>

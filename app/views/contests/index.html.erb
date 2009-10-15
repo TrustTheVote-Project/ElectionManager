@@ -1,0 +1,28 @@
+<h1>Listing contests</h1>
+
+<table>
+  <tr>
+    <th>Display name</th>
+    <th>Open seat count</th>
+    <th>Voting method</th>
+    <th>District</th>
+    <th>Election</th>
+  </tr>
+
+<% @contests.each do |contest| %>
+  <tr>
+    <td><%=h contest.display_name %></td>
+    <td><%=h contest.open_seat_count %></td>
+    <td><%=h contest.voting_method.display_name %></td>
+    <td><%=h contest.district.display_name %></td>
+    <td><%=h contest.election.display_name if contest.election %></td>
+    <td><%= link_to 'Show', contest %></td>
+    <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
+    <td><%= link_to 'Destroy', contest, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New contest', new_contest_path %>

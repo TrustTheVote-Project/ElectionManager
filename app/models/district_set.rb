@@ -1,0 +1,16 @@
+class DistrictSet < ActiveRecord::Base
+  has_and_belongs_to_many :districts
+    
+  # returns all precincts in this district set
+  def precincts
+    precinct_ids = connection.select_values( <<-eos
+      SELECT DISTINCT districts_precincts.precinct_id
+      FROM	districts_precincts, district_sets_districts
+      WHERE	district_sets_districts.district_set_id = #{self.id}
+      AND	district_sets_districts.district_id = districts_precincts.district_id
+    eos
+    )
+    Precinct.find(precinct_ids)
+  end
+
+end

@@ -1,0 +1,20 @@
+<h1>Listing voting_methods</h1>
+
+<table>
+  <tr>
+    <th>Display name</th>
+  </tr>
+
+<% @voting_methods.each do |voting_method| %>
+  <tr>
+    <td><%=h voting_method.display_name %></td>
+    <td><%= link_to 'Show', voting_method %></td>
+    <td><%= link_to 'Edit', edit_voting_method_path(voting_method) %></td>
+    <td><%= link_to 'Destroy', voting_method, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New voting_method', new_voting_method_path %>

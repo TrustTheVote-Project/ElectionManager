@@ -1,0 +1,16 @@
+<% display ||= 'block'%>
+<% div_id = "#{dom_id(district)}_static"%>
+<div id="<%= div_id -%>"  style='display:<%= display %>'>
+	<div class='tools'>
+		<%= link_to_remote "Add contest", :url => new_election_district_contest_path(election, district), :method => 'get' -%>
+		<%= link_to_remote "Add question", :url => new_election_district_question_path(election, district), :method => 'get' -%>
+	</div>
+	<p>
+		<span>
+		<%= image_tag "icons/district_#{district.district_type_id}.jpg", :class => "icon"%>
+		<% contests = district.contestsForElection(election) %>
+		<% questions = district.questionsForElection(election) %>
+		<%= h district.display_name -%><%= h ", #{pluralize(contests.size, 'contest')}" if contests.size != 0 -%><%= h ", #{pluralize(questions.size, 'question')}" if questions.size != 0 -%>
+		</span>
+	</p>
+</div>

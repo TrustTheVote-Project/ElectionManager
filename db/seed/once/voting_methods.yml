@@ -1,0 +1,7 @@
+winner_take_all:
+    id: 0
+    display_name: Winner Take All
+    
+ranked:
+    id: 1
+    display_name: Ranked

@@ -1,0 +1,4 @@
+<div id="<%= dom_id(election) -%>" class='election'>
+<%= render :partial => 'static', :locals => {:election => election } %>
+<%= render :partial => 'districts', :locals => { :election => election } %>
+</div>

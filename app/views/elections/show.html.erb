@@ -1,0 +1,6 @@
+<% content_for :toolbox do %>
+	<%= render "toolbox" %>
+	<%= link_to "Export", export_election_path(@election) %>
+<% end %>
+<%= render :partial => 'show', :locals => {:election => @election } %>
+<%= link_to 'Edit', edit_election_path(@election) %>

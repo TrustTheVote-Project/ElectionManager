@@ -1,0 +1,4 @@
+<div id="<%= dom_id(contest) -%>" class='contest'>
+<%= render :partial => 'contests/static', :locals => {:contest => contest } %>
+<%= render :partial => 'contests/candidates', :locals => { :contest => contest } %>
+</div>

@@ -1,0 +1,8 @@
+edit_id = "#{dom_id(election)}_edit"
+static_id = "#{dom_id(election)}_static"
+if (election.invalid?)
+  page.replace edit_id, :partial => 'edit', :locals => { :election => @election }
+else
+  page.remove edit_id
+  page.replace static_id, :partial => 'static', :locals => { :election => @election }
+end

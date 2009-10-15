@@ -1,0 +1,175 @@
+/* Eric Meyer CSS reset */
+/*html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, caption  {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+*/
+.tools {
+	float: right;
+	min-width: 500px;
+}
+
+.candidates {
+	margin-left: 32px;
+}
+.contests {
+	margin-left: 32px;
+}
+.questions {
+	margin-left: 32px;
+}
+.icon {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+.candidate {
+/*	border-bottom: 1px dashed gray; */
+}
+
+.isEditor {
+	background: #DDDDDD;
+	padding: 8px;
+}
+.isEditor input[type="submit"],.isEditor input[type="button"]   {
+	font-size: 80%;
+}
+.isEditor select {
+	font-size:   13px;
+}
+body {
+	max-width: 1280px;
+	line-height: 1;
+	color: black;
+	background: white;
+}
+ol, ul {
+	list-style: none;
+}
+
+body, p, ol, ul, td, input {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+}
+
+#none {
+	color: #2D3A7C;
+	color: #3F51B0;
+	color: #9CA9C7;
+	color: #BACAEE;
+}
+
+/* main layout */
+#banner {
+	border-bottom-width: 10px;
+	border-bottom: 2px solid #9CA9C7;
+	overflow: auto;
+}
+
+#banner_img {
+	float:left;
+	width: 100px;
+	height: 100px;
+	background-image: url('/images/ttv-100.png');
+}
+#spinner {
+	width: 24px;
+	height: 24px;
+	display:none;
+	position: fixed;
+	top: 48px;
+	left: 48px;
+}
+
+#banner_middle {
+	float: left;
+}
+
+#banner_right {
+	float: right;
+}
+
+#main_body {
+	clear: both;
+}
+#main_task_name {
+	margin-top: 40px;
+	color: #2D3A7C;
+}
+
+
+/* error messages */
+#flash_notice {
+	background-color: #FFFFCC;
+	border-color: #323B7B;
+	border-width: 1px;
+}
+
+#flash_error {
+	background-color: #E0857D;
+}
+
+.error_message {
+	margin-left: 8px;
+	color: #DD0000;
+	font-weight: bold;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: #DD0000;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px #DD0000 solid;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+/*  border-radius: 8px; */
+  padding: 7px;
+  margin: 8px 0px 8px 0px;
+  color: #DD0000;
+}
+
+#errorExplanation h2 {
+  font-size: 13px;
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin: -7px;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* inline editing */
+.canEdit {
+	border: 1px solid transparent;
+}
+
+.canEdit:hover {
+	border: 1px solid yellow;
+	background-color: #FFFFCC;
+}

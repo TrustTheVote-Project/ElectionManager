@@ -1,0 +1,18 @@
+<% display ||= 'block'%>
+<% @div_id = "#{dom_id(contest)}_edit" %>
+<div id="<%= @div_id -%>" class='isEditor' style='display:<%= display %>'>
+	<% remote_form_for contest, 
+			:action => 'update', :html => { :inlineEditor => 1 }   do |f| %>
+			<%= render_error_messages(contest)  %>
+	  	<p>
+	    	<%= f.text_field :display_name, :size => 20 %>
+	    	<%= f.label :open_seat_count %>: <%= f.text_field :open_seat_count, :maxlength => 2, :size => 2 %>
+	    	<%= f.label :voting_method_id %>: 
+	    	<%= f.collection_select :voting_method_id, VotingMethod.all, :id, :display_name  %>
+	  	</p>
+			<p>
+	   		<%= f.submit 'Update' %>
+		 		<input type="button" value="Cancel" onClick="ttv.cancelEdit('<%= @div_id -%>')">
+			</p>
+		<% end %>
+</div>
