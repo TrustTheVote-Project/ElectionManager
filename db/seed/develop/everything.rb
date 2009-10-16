@@ -70,7 +70,7 @@ ds.districts.each do |district|
     contest = Contest.create(
       :display_name => randomContest, 
       :open_seat_count => 1, 
-      :voting_method_id => 1, 
+      :voting_method_id => 0, 
       :district_id => district.id,
       :election_id => election.id)
     1.upto(rand(9)) do 

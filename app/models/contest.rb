@@ -23,7 +23,7 @@ class Contest < ActiveRecord::Base
   
   def after_initialize
     write_attribute(:open_seat_count, 1) if !open_seat_count
-    write_attribute(:voting_method_id, 1) if !voting_method_id
+    write_attribute(:voting_method_id, 0) if !voting_method_id
   end
   
 end
