@@ -51,10 +51,14 @@ module TTV
 
       class QuestionItem < FlowItem
         def fits(render, rect)
-          
+          rect.height > 20         
         end
         
         def drawInto(render, rect)
+          render.p.setfont(render.helvetica, 10)
+           render.p.fit_textline("QUESTION", rect.left, rect.top-20, "")
+           rect.top = rect.top - 20
+           render.hline(rect.left, rect.top, rect.width)
         end
         
       end
@@ -109,12 +113,6 @@ module TTV
         render.p.fit_textline("FlowItem.drawInto", rect.left, rect.top-20, "")
         rect.top = rect.top - 20
         render.hline(rect.left, rect.top, rect.width)
-      end
-      
-      def fitChoice(render, rect)
-      end
-      
-      def drawChoice(render, rect)
       end
       
       def FlowItem.create(item)
@@ -221,6 +219,7 @@ module TTV
             break if currFlow == columns
           end
         end
+        Rails.logger.info("rendered page")
         @p.end_page_ext("") 
       end
 

@@ -16,8 +16,7 @@
    <td><%=h pretty_date(election.start_date) %></td>
    <td><%=h DistrictSet.exists? (election.district_set_id) ? election.district_set.display_name : "INVALID" %></td>
      <td><%= link_to 'Show', election %></td>
-    <td><%= link_to 'Edit', edit_election_path(election) %></td>
-    <td><%= link_to 'Destroy', election, :confirm => 'Are you sure?', :method => :delete %></td>
+     <td><%= link_to 'Destroy', election, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

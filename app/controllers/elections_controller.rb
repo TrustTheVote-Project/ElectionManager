@@ -89,5 +89,8 @@ class ElectionsController < ApplicationController
     render :xml => @election
   end
 
+  def precincts
+    @election = Election.find(params[:id])
+  end
 end
 
