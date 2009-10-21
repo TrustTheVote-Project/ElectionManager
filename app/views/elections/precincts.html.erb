@@ -11,8 +11,9 @@
 		</div>
 		<div class='district_name'>
 		<% districts = precinct.districts(@election.district_set) %>
-		<%= h precinct.display_name %>, inside districts <% districts.each do |district| %>
-			<%= district.display_name %>,
+		<%= h precinct.display_name %>, inside <% districts.each do |district| %>
+			<%= district.display_name %>(C:<%= district.contestsForElection(@election).size %>, Q:<%= district.questionsForElection(@election).size %>)
+			,
 		<% end %>
 		</div>
 	</div>

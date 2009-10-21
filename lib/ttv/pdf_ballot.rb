@@ -34,9 +34,10 @@ module TTV
     class FlowItem
       @@bubbleWidth = 22
       @@bubbleHeight = 10
+      @@headerPad = 6
 
       class HeaderFlowItem < FlowItem
-        
+        # single line text
         def fits(render, rect)
           rect.height > 16
         end
@@ -50,56 +51,97 @@ module TTV
       end
 
       class QuestionItem < FlowItem
+        # HEADER
+        # QUESTION
+        # BOX YES
+        # BOX NO
         def fits(render, rect)
-          rect.height > 20         
-        end
-        
-        def drawInto(render, rect)
-          render.p.setfont(render.helvetica, 10)
-           render.p.fit_textline("QUESTION", rect.left, rect.top-20, "")
-           rect.top = rect.top - 20
-           render.hline(rect.left, rect.top, rect.width)
-        end
-        
-      end
-
-      class ContestItem < FlowItem
-        @@headerPad = 6
-        def fits(render, rect)
+          Rails.logger.info("Question fits")
           total = 0
           total += render.textHeight(@item.display_name, rect.width - 4, render.helveticaBold, 10)
           total += @@headerPad
-          cWidth = rect.width - 14 - @@bubbleWidth 
-          @item.candidates.each do |candidate|
-            total += render.textHeight(candidate.display_name + "\n" + candidate.party.display_name, cWidth, render.helvetica, 10, "leading=120%")
-            total += 6
-          end
-          total < rect.height
+          total += render.textHeight(@item.question, rect.width - 4, render.helvetica, 10, "leading=120%")
+          total += @@headerPad
+          total += checkboxHeight(render, rect, "Yes")
+          total += checkboxHeight(render, rect, "No")
+          rect.height > total
         end
         
         def drawInto(render, rect)
+          Rails.logger.info("Question drawInto")
+          # render HEADER
           tf = render.p.add_textflow(-1, @item.display_name, "font=#{render.helveticaBold} fontsize=10")
           rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
           Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
           height = render.p.info_textflow(tf, "textheight")
           render.p.delete_textflow(tf)          
           rect.top = rect.top - height - 6
+          # render QUESTION
+          tf = render.p.add_textflow(-1, @item.question, "font=#{render.helvetica} fontsize=10 leading=120%")
+          rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
+          Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
+          height = render.p.info_textflow(tf, "textheight")
+          render.p.delete_textflow(tf)          
+          rect.top = rect.top - height - 6
+          # render CHECKBOXES
+          checkboxRender(render, rect, "Yes")
+          checkboxRender(render, rect, "No")
+          # closing line
+          render.p.setlinewidth(1)
+          render.hline(rect.left, rect.top, rect.width)
+        end
+        
+      end
+
+      class ContestItem < FlowItem
+        # HEADER
+        # BOX CANDIDATE NAME
+        #     PARTY
+        def fits(render, rect)
+          total = 0
+          total += render.textHeight(@item.display_name, rect.width - 4, render.helveticaBold, 10)
+          total += @@headerPad
+          cWidth = rect.width - 14 - @@bubbleWidth 
           @item.candidates.each do |candidate|
-            render.p.setlinewidth(2)
-            render.p.rect(rect.left + 4, rect.top - @@bubbleHeight, @@bubbleWidth, @@bubbleHeight)
-            render.p.stroke
-            tf = render.p.add_textflow(-1, candidate.display_name + "\n" + candidate.party.display_name, "font=#{render.helvetica} fontsize=10 leading=120%")
-            rv = render.p.fit_textflow(tf, rect.left + @@bubbleWidth + 10, rect.top - 1000, rect.right - 2, rect.top + 4, "")
-            Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
-            height = render.p.info_textflow(tf, "textheight")
-            render.p.delete_textflow(tf)          
-            rect.top = rect.top - height - 6
+            total += checkboxHeight(render, rect, candidate.display_name + "\n" + candidate.party.display_name)
+          end
+          total < rect.height
+        end
+        
+        def drawInto(render, rect)
+          # render HEADER
+          tf = render.p.add_textflow(-1, @item.display_name, "font=#{render.helveticaBold} fontsize=10")
+          rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
+          Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
+          height = render.p.info_textflow(tf, "textheight")
+          render.p.delete_textflow(tf)          
+          rect.top = rect.top - height - 6
+          # render CANDIDATES
+          @item.candidates.each do |candidate|
+            checkboxRender(render, rect, candidate.display_name + "\n" + candidate.party.display_name)
           end
           render.p.setlinewidth(1)
           render.hline(rect.left, rect.top, rect.width)
         end
       end
 
+      def checkboxHeight(render, rect, text)
+        height = render.textHeight(text, rect.width - 14 - @@bubbleWidth, render.helvetica, 10, "leading=120%")
+        height += 6
+      end
+      
+      def checkboxRender(render, rect, text)
+        render.p.setlinewidth(2)
+        render.p.rect(rect.left + 4, rect.top - @@bubbleHeight, @@bubbleWidth, @@bubbleHeight)
+        render.p.stroke
+        tf = render.p.add_textflow(-1, text, "font=#{render.helvetica} fontsize=10 leading=120%")
+        rv = render.p.fit_textflow(tf, rect.left + @@bubbleWidth + 10, rect.top - 1000, rect.right - 2, rect.top + 4, "")
+        Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
+        height = render.p.info_textflow(tf, "textheight")
+        render.p.delete_textflow(tf)   
+        rect.top = rect.top - height - 6
+      end
+      
       def initialize(item)
         @item = item
       end
@@ -155,6 +197,7 @@ module TTV
             @flowItems.push(FlowItem.create(contest))
           end
           district.questionsForElection(@election).each do |question|
+            Rails.logger.info("CREATED QUESTION")
             @flowItems.push(FlowItem.create(question))
           end
         end
