@@ -1,0 +1,19 @@
+<% content_for :toolbox do %>
+	<%= render "toolbox" %>
+	<%= link_to "Export", export_election_path(@election) %><br>
+<% end %>
+<p>	<%= h @election.display_name %>, scheduled for <%= h pretty_date(@election.start_date) -%>
+</p>
+<% @election.district_set.precincts.each do |precinct| %>
+	<div style="margin-bottom: 8px">
+		<div style='float:right'>
+			<%= link_to "Generate ballot", ballot_election_precinct_path(@election, precinct) %>
+		</div>
+		<div class='district_name'>
+		<% districts = precinct.districts(@election.district_set) %>
+		<%= h precinct.display_name %>, inside districts <% districts.each do |district| %>
+			<%= district.display_name %>,
+		<% end %>
+		</div>
+	</div>
+<% end %>
