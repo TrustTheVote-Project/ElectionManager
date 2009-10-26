@@ -303,7 +303,7 @@ module TTV
         @p.fit_textline(@election.display_name, left + oWidth, top - 14, opts)
         @p.fit_textline(@precinct.display_name, left + oWidth, top - 30, opts)
         lineLoc = top - 34
-        hline(@leftMargin, lineLoc, @pageWidth)
+        hline(@leftMargin, lineLoc, @pageWidth - 2*@leftMargin)
         lineLoc
       end
 
