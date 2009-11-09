@@ -1,8 +1,6 @@
 ElectionManager
 - design/import/export an election
 - register as a user
-- LA ballots
-http://smartvoter.org/2008/11/04/ca/la/ballot.html
 
 INSTALL
 # install required gems
