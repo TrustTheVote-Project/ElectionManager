@@ -1,10 +1,28 @@
-require 'PDFlib'
+require '../../test/test_helper'
+
+require 'prawn'
+
+#if false
+class PDFBallotTest < ActiveSupport::TestCase
+  def test_GenerateBallot
+    election = Election.find(:first)
+    precinct = election.district_set.precincts[12]
+    pdf = TTV::PDFBallot.create(election, precinct)
+    f = File.new("#{RAILS_ROOT}/test/PDFBallot.pdf", 'w')
+    f.write(pdf)
+    f.close
+    `open /Applications/Preview.app #{f.path}`
+    assert_not_nil(election)
+    assert_not_nil(precinct)
+  end
+end
+#end
 
 module TTV
   module PDFBallot
     class Rect
       attr_accessor :top, :left, :bottom, :right
-      
+
       def initialize(top, left, bottom, right)
         @top, @left, @bottom , @right = top, left, bottom, right
       end
@@ -12,317 +30,294 @@ module TTV
       def width
         right - left
       end
-      
+
       def height
         top - bottom
       end
-      
+
       def to_s
         "T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
       end
-      
-      def Rect.create(top, left, bottom, right)
+
+      def inset(horiz, vertical)
+        @top += vertical
+        @bottom -= vertical
+        @left += horiz
+        @right -= horiz
+      end
+
+      def self.create(top, left, bottom, right)
         return new(top, left, bottom, right)
       end
 
-      def Rect.createWH(left, bottom, width, height)
-        return new(bottom - height, left, bottom, left + width)
+      def self.create_wh(top, left, width, height)
+        return new(top, left, top - height, left + width)
       end
 
+      def self.create_bound_box(bb)
+        return self.create(bb.top, bb.left, bb.bottom, bb.right)
+      end
     end
 
     class FlowItem
-      @@bubbleWidth = 22
-      @@bubbleHeight = 10
-      @@headerPad = 6
 
-      class HeaderFlowItem < FlowItem
-        # single line text
-        def fits(render, rect)
-          rect.height > 16
-        end
-        
-        def drawInto(render, rect)
-          render.p.setfont(render.helvetica, 10)
-          render.p.fit_textline(@item, rect.left + 2, rect.top - 10 - 2, "")
-          render.hline(rect.left, rect.top - 16, rect.width)
-          rect.top = rect.top - 16         
-        end
-      end
-
-      class QuestionItem < FlowItem
-        # HEADER
-        # QUESTION
-        # BOX YES
-        # BOX NO
-        def fits(render, rect)
-          Rails.logger.info("Question fits")
-          total = 0
-          total += render.textHeight(@item.display_name, rect.width - 4, render.helveticaBold, 10)
-          total += @@headerPad
-          total += render.textHeight(@item.question, rect.width - 4, render.helvetica, 10, "leading=120%")
-          total += @@headerPad
-          total += checkboxHeight(render, rect, "Yes")
-          total += checkboxHeight(render, rect, "No")
-          rect.height > total
-        end
-        
-        def drawInto(render, rect)
-          Rails.logger.info("Question drawInto")
-          # render HEADER
-          tf = render.p.add_textflow(-1, @item.display_name, "font=#{render.helveticaBold} fontsize=10")
-          rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
-          Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
-          height = render.p.info_textflow(tf, "textheight")
-          render.p.delete_textflow(tf)          
-          rect.top = rect.top - height - 6
-          # render QUESTION
-          tf = render.p.add_textflow(-1, @item.question, "font=#{render.helvetica} fontsize=10 leading=120%")
-          rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
-          Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
-          height = render.p.info_textflow(tf, "textheight")
-          render.p.delete_textflow(tf)          
-          rect.top = rect.top - height - 6
-          # render CHECKBOXES
-          checkboxRender(render, rect, "Yes")
-          checkboxRender(render, rect, "No")
-          # closing line
-          render.p.setlinewidth(1)
-          render.hline(rect.left, rect.top, rect.width)
-        end
-        
-      end
-
-      class ContestItem < FlowItem
-        # HEADER
-        # BOX CANDIDATE NAME
-        #     PARTY
-        def fits(render, rect)
-          total = 0
-          total += render.textHeight(@item.display_name, rect.width - 4, render.helveticaBold, 10)
-          total += @@headerPad
-          cWidth = rect.width - 14 - @@bubbleWidth 
-          @item.candidates.each do |candidate|
-            total += checkboxHeight(render, rect, candidate.display_name + "\n" + candidate.party.display_name)
-          end
-          total < rect.height
-        end
-        
-        def drawInto(render, rect)
-          # render HEADER
-          tf = render.p.add_textflow(-1, @item.display_name, "font=#{render.helveticaBold} fontsize=10")
-          rv = render.p.fit_textflow(tf, rect.left + 2, rect.top - 1000, rect.right - 2, rect.top, "")
-          Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
-          height = render.p.info_textflow(tf, "textheight")
-          render.p.delete_textflow(tf)          
-          rect.top = rect.top - height - 6
-          # render CANDIDATES
-          @item.candidates.each do |candidate|
-            checkboxRender(render, rect, candidate.display_name + "\n" + candidate.party.display_name)
-          end
-          render.p.setlinewidth(1)
-          render.hline(rect.left, rect.top, rect.width)
-        end
-      end
-
-      def checkboxHeight(render, rect, text)
-        height = render.textHeight(text, rect.width - 14 - @@bubbleWidth, render.helvetica, 10, "leading=120%")
-        height += 6
-      end
-      
-      def checkboxRender(render, rect, text)
-        render.p.setlinewidth(2)
-        render.p.rect(rect.left + 4, rect.top - @@bubbleHeight, @@bubbleWidth, @@bubbleHeight)
-        render.p.stroke
-        tf = render.p.add_textflow(-1, text, "font=#{render.helvetica} fontsize=10 leading=120%")
-        rv = render.p.fit_textflow(tf, rect.left + @@bubbleWidth + 10, rect.top - 1000, rect.right - 2, rect.top + 4, "")
-        Rails.logger.error("fit_textflow returned #{rv}") if rv != "_stop"
-        height = render.p.info_textflow(tf, "textheight")
-        render.p.delete_textflow(tf)   
-        rect.top = rect.top - height - 6
-      end
-      
       def initialize(item)
         @item = item
       end
-            
-      def fits(render, rect)
-        rect.height > 20
+
+      def fits(config, rect)
+        # clever way to see if we fit, avoiding code duplication for measure vs. draw
+        # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
+        r = rect.clone;
+        config.pdf.transaction do
+          draw_into(config, r)
+          config.pdf.rollback
+        end
+        r.height > 0
       end
 
-      def drawInto(render, rect)
-        render.p.setfont(render.helvetica, 10)
-        render.p.fit_textline("FlowItem.drawInto", rect.left, rect.top-20, "")
-        rect.top = rect.top - 20
-        render.hline(rect.left, rect.top, rect.width)
+      def draw_into(config, rect)
+        config.pdf.font("Helvetica", :size => 10, :style => :italic)
+        config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2 ) do
+          config.pdf.move_down 3
+          config.pdf.text "FlowItem.draw_into"
+          rect.top -= config.pdf.bounds.height
+        end
+        config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
       end
-      
-      def FlowItem.create(item)
+
+      class Header < FlowItem
+        def draw_into(config, rect)
+          config.pdf.font("Helvetica", :size => 10)
+          config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2) do
+            config.pdf.move_down 3
+            config.pdf.text @item, :leading => 1
+            rect.top -= config.pdf.bounds.height 
+          end
+          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        end
+      end
+
+      class Question < FlowItem
+        def draw_into(config, rect)
+          config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 2) do
+            config.pdf.font "Helvetica", :size => 10, :style => :bold
+            config.pdf.move_down 3
+            config.pdf.text @item.display_name, :leading => 1 #header
+            config.pdf.move_down 6
+            config.pdf.font "Helvetica", :size => 10
+            config.pdf.text @item.question, :leading => 1 # question
+            rect.top -= config.pdf.bounds.height
+          end
+          draw_checkbox config, rect, "Yes"
+          draw_checkbox config, rect, "No"
+          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        end
+      end
+
+      class Contest < FlowItem
+        def draw_into(config, rect)
+          config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 2) do
+            config.pdf.font "Helvetica", :size => 10, :style => :bold
+            config.pdf.move_down 3
+            config.pdf.text @item.display_name, :leading => 1 #header
+            rect.top -= config.pdf.bounds.height
+          end
+          @item.candidates.each do |candidate|
+            rect.top -= 6
+            draw_checkbox config, rect, candidate.display_name + "\n" + candidate.party.display_name
+          end
+          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        end
+      end
+
+      def draw_checkbox(config, rect, text)
+        bbwidth, bbheight = 22, 10
+        config.pdf.bounding_box [rect.left+6, rect.top], :width => rect.width - 2 do
+          config.pdf.line_width 1.5
+          config.pdf.stroke_rectangle [0,0], bbwidth, bbheight
+          config.pdf.line_width 1
+        end
+        spacer = 6 + bbwidth + 6
+        config.pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
+          config.pdf.font "Helvetica", :size => 10
+          config.pdf.text text
+          rect.top -= [config.pdf.bounds.height, bbheight].max
+        end
+      end
+    end
+
+    class BallotConfig
+      attr_accessor :pdf, :page_size, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
+      def initialize(style)
+        @style = style
+        @page_size = "LETTER"
+        @left_margin = @right_margin = 18
+        @top_margin = @bottom_margin = 60
+        @padding = 8
+        @columns = 3
+      end
+
+      def setup(pdf, election, precinct)
+        @pdf = pdf
+        @election = election
+        @precinct = precinct
+        # FIXME - uncomment when 
+        #        pdf.font_families.update({
+        #           "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
+        #                            :bold => "/Library/Fonts/Arial Bold.ttf" },
+        #          "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }}
+        #          )
+      end
+
+      def debug_stroke_bounds #debug version, rainbow of colors
+        @stroke_colors = ["FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF"] unless @stroke_colors
+        old = @pdf.stroke_color
+        @pdf.stroke_color = @stroke_colors.shift
+        @pdf.dash(1)  if @pdf.bounds.height == 0
+        @pdf.stroke_rectangle @pdf.bounds.top_left, @pdf.bounds.width, [@pdf.bounds.height, 30].max
+        @pdf.undash
+        Rails.logger.info("bounds.height: #{@pdf.bounds.to_s}")
+        @stroke_colors.push @pdf.stroke_color
+        @pdf.stroke_color = old
+      end
+
+      def debug_rect(r)
+        @pdf.bounding_box([r.left, r.top], :width => r.width, :height => r.height) do 
+          stroke_bounds
+        end
+      end
+
+      def render_frame(flow_rect)
+        barWidth = 18
+        barHeight = 140
+        @pdf.fill_color = "#000000"
+        @pdf.rectangle([0,barHeight], barWidth, barHeight)
+        @pdf.rectangle(@pdf.bounds.top_left, barWidth, barHeight)
+        @pdf.rectangle([@pdf.bounds.right - barWidth, barHeight], barWidth, barHeight)
+        @pdf.fill_and_stroke
+        @pdf.stroke_rectangle([barWidth + @padding,@pdf.bounds.height], @pdf.bounds.width - (barWidth + @padding)* 2, @pdf.bounds.height)
+        @pdf.font("Courier", :size => 14)
+        @pdf.text "Sample Ballot", :at => [16, 275], :rotate => 90
+        @pdf.text "Sample Ballot", :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
+        @pdf.text "12001040100040", :at => [16, 410], :rotate => 90
+        @pdf.text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
+        flow_rect.inset(barWidth + @padding,0)
+      end
+
+      def render_header(flow_rect)
+        @pdf.font("Helvetica", :size => 13)
+        @pdf.bounding_box([flow_rect.left + @padding, flow_rect.top - @padding / 3], :width => flow_rect.width - @padding) do
+          @pdf.text "OFFICIAL BALLOT"
+          @pdf.text @election.start_date.strftime("%B %d, %Y")
+          @pdf.bounding_box([@pdf.bounds.width / 3,  @pdf.bounds.height], :width => @pdf.bounds.width * 2 / 3) do
+            @pdf.text @election.display_name, :align => :center
+            @pdf.text @precinct.display_name, :align => :center
+            @pdf.move_down(@padding / 3)
+            flow_rect.top -= @pdf.bounds.height  
+          end
+        end
+        @pdf.stroke_color "000000"
+        @pdf.stroke_line [flow_rect.left, flow_rect.height], [flow_rect.right, flow_rect.height]
+      end
+
+      def create_flow_item(item)
         case
-        when item.is_a?(Contest) then ContestItem.new(item)
-        when item.is_a?(Question) then QuestionItem.new(item)
-        when item.is_a?(String) then HeaderFlowItem.new(item)
+        when item.is_a?(Contest) then FlowItem::Contest.new(item)
+        when item.is_a?(Question) then FlowItem::Question.new(item)
+        when item.is_a?(String) then FlowItem::Header.new(item)
         end
       end
 
     end
 
     class Renderer
-      attr_accessor :p, :courier, :helvetica, :helveticaBold
-      
-      def initialize(election, precinct)
-        @election, @precinct = election, precinct
-        @pageWidth  = 612
-        @pageHeight = 792
-        @leftMargin = 44
-        @bottomMargin = 60
+      def initialize(election, precinct, config)
+        @election = election
+        @precinct = precinct
+        @c = config
+      end
+
+      def to_s
+        @pdf.render
       end
 
       def render
-        @p = PDFlib.new
-        @p.set_parameter("errorpolicy", "exception")
-        @p.set_parameter("textformat", "utf8");
-        @p.begin_document("", "")
-        @p.set_info("Creator", "TrustTheVote")
-        @p.set_info("Author", "BallotDesigner")
-        @p.set_info("Title", "#{@election.display_name} #{@precinct.display_name} ballot")
-        @helvetica = @p.load_font("Helvetica", "unicode", "")
-        @helveticaBold = @p.load_font("Helvetica Bold", "unicode", "")
-        @courier = @p.load_font("Courier New", "unicode", "")
-        @flowFontSize = 10
-        @flowItems = []
+        @pdf = Prawn::Document.new(
+        :page_size => @c.page_size, 
+        :left_margin => @c.left_margin,
+        :right_margin => @c.right_margin,
+        :top_margin => @c.top_margin,
+        :bottom_margin => @c.bottom_margin,
+        :skip_page_creation => true,
+        :info => { :Creator => "TrustTheVote",
+          :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+        }
+        )
+        @c.setup(@pdf, @election, @precinct)
+
+        # initialize flow items
+        @flow_items = []
         @precinct.districts(@election.district_set).each do |district|
-          @flowItems.push(FlowItem.create(district.display_name))
+          @flow_items.push(@c.create_flow_item(district.display_name))
           district.contestsForElection(@election).each do |contest|
-            @flowItems.push(FlowItem.create(contest))
+            @flow_items.push(@c.create_flow_item(contest))
           end
           district.questionsForElection(@election).each do |question|
-            Rails.logger.info("CREATED QUESTION")
-            @flowItems.push(FlowItem.create(question))
+            @flow_items.push(@c.create_flow_item(question))
           end
+        end       
+
+        # render all pages
+        page = 0
+        while @flow_items.size > 0
+          page += 1
+          render_page page
         end
-        while @flowItems.size > 0
-          render_page
-        end
-        @p.end_document("")
-      end
-      
-      def draw_rects(rects) # debugging
-        rects.each do |fR|
-          @p.rect(fR.left, fR.bottom, fR.width, fR.height)
-          Rails.logger.info(fR)
-        end
-        @p.stroke
+    
       end
 
-      def hline(left, top, width)
-        @p.moveto(left, top)
-        @p.lineto(left+width, top)
-        @p.stroke
-      end
-      
-      def vline(left, top, length)
-        @p.moveto(left, top)
-        @p.lineto(left, top - length)
-        @p.stroke
-      end
-      
-      def textHeight(text, width, font, size, opts="")
-        tf = @p.add_textflow(-1, text, "font=#{font} fontsize=#{size} " + opts)
-        @p.fit_textflow(tf, 0,0,width,2000, "blind=true")
-        height = @p.info_textflow(tf, "textheight")
-        @p.delete_textflow(tf)
-        height
-      end
-      
-      def render_page
-        @p.begin_page_ext(@pageWidth, @pageHeight, "")  # letter
-        render_frame
-        top = render_header
-        # compute flow rects
-        flowRects = []
-        columns = 3
-        left = @leftMargin
-        width = (@pageWidth - 2 * @leftMargin) /( columns * 1.0)
-        columns.times do |x|
-          flowRects.push Rect.create(top, @leftMargin + width *x, @bottomMargin, @leftMargin + width * (x+1))
+      def render_page(number)
+        @pdf.start_new_page
+        flow_rect = Rect.create_bound_box(@pdf.bounds)
+        @c.render_frame(flow_rect)
+        @c.render_header(flow_rect)
+        column_rects = []
+        column_width = flow_rect.width / ( @c.columns * 1.0)
+        @c.columns.times do |x|
+          column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
+          column_width, flow_rect.height)
         end
-        0.upto(columns-1) {|x| vline(flowRects[x].right, top, flowRects[x].height) }
-        currFlow = 0
-        # try to fill up all the columns with items 
-        while @flowItems.size > 0
-          if @flowItems.first.fits(self, flowRects[currFlow])
-            @flowItems.shift.drawInto(self, flowRects[currFlow])
+        0.upto(@c.columns-1) do |x|
+          @pdf.stroke_line [column_rects[x].right, column_rects[x].top],
+          [column_rects[x].right, column_rects[x].bottom] 
+        end
+        col = 0
+        # try to fill up all the columns with items
+        while @flow_items.size > 0
+          if @flow_items.first.fits(@c, column_rects[col])
+            @flow_items.shift.draw_into(@c, column_rects[col])
           else
-            if flowRects[currFlow].top == top # if column is full height
-              @p.setcolor("fillstroke", "rgb", 1.0, 0.0, 0.0, 0.0)
-              @flowItems.first.drawInto(self, flowRects[currFlow])
+            if column_rects[col].top == flow_rect.top # if column is full height
+              @pdf.stroke_color "FF0000"
+              @flow_items.first.draw_into(self, column_rects[col])
             end
-            currFlow += 1
-            break if currFlow == columns
+            col += 1
+            break if col == @c.columns
           end
         end
-        Rails.logger.info("rendered page")
-        @p.end_page_ext("") 
-      end
-
-      def render_frame
-        # FRAME
-        # frame rect
-        Rails.logger.info("T:#{@leftMargin} L:#{@bottomMargin} W:#{@pageWidth - @leftMargin * 2} H:#{@pageHeight - @bottomMargin * 2}")
-        @p.rect(@leftMargin, @bottomMargin, @pageWidth - @leftMargin * 2, @pageHeight - @bottomMargin * 2)
-        @p.stroke
-        # scanalign boxes
-        @p.setcolor("fillstroke", "rgb", 0.0, 0.0, 0.0, 0.0)
-        scanalignHeight = 140
-        saHeight = 140
-        saWidth = 18
-        @p.rect(18, @bottomMargin, saWidth, saHeight) #allignrect1
-        @p.rect(18, @pageHeight - saHeight - @bottomMargin, saWidth, saHeight) #allignrect2
-        @p.rect(@pageWidth - @leftMargin + 8 , @bottomMargin, saWidth, saHeight) #allignrect3
-        @p.fill_stroke
-        # side text
-        fontSize = 14
-        @p.setfont(@courier, fontSize)
-        @p.fit_textline("Sample Ballot", @leftMargin - fontSize - 4, 330, "orientate=west")
-        @p.fit_textline("Sample Ballot", @pageWidth - @leftMargin+12, 330, "orientate=west")
-        @p.fit_textline("12001040100040", @leftMargin - fontSize - 4, 470, "orientate=west")
-        @p.fit_textline("132301113", @pageWidth - @leftMargin+12, 210, "orientate=west")
-      end
-
-      # returns header height
-      def render_header
-        @p.setfont(@helvetica, 13)
-        left =  @leftMargin + 6
-        top = @pageHeight - @bottomMargin
-        offical = "OFFICIAL BALLOT"
-        @p.fit_textline(offical, left, top - 14, "")
-        @p.fit_textline(@election.start_date.strftime("%B %d, %Y"), left, top - 30, "")
-        oWidth = @p.info_textline(offical, "width", "")
-        opts = "boxsize={#{@pageWidth - 2 * @leftMargin - oWidth} 14} position={center bottom}"
-        @p.fit_textline(@election.display_name, left + oWidth, top - 14, opts)
-        @p.fit_textline(@precinct.display_name, left + oWidth, top - 30, opts)
-        lineLoc = top - 34
-        hline(@leftMargin, lineLoc, @pageWidth - 2*@leftMargin)
-        lineLoc
-      end
-
-      def pdf
-        @p.get_buffer()
       end
     end
 
-    def PDFBallot.create(election, precinct)
-      #      begin
-      renderer = Renderer.new(election, precinct)
-      renderer.render
-      renderer.pdf
+    def self.getBallotConfig(style)
+      BallotConfig.new(style)
+    end
 
-      #      rescue PDFlibException => pe
-      #        Rails.logger.error "PDFlib exception occurred in hello sample:\n" 
-      #        Rails.logger.error "[" + pe.get_errnum.to_s + "] " + pe.get_apiname + ": " + pe.get_errmsg + "\n" 
-      #        throw pe
-      #      end
+    def self.create(election, precinct, style='default')
+      renderer = Renderer.new(election, precinct, getBallotConfig(style))
+      renderer.render
+      renderer.to_s
     end
   end
 end
+
