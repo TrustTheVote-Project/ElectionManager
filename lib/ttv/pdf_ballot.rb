@@ -160,15 +160,14 @@ module TTV
 
     class BallotConfig
       attr_accessor :pdf, :page_size, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
-      def initialize()
+      def initialize(style)
         @page_size = "LETTER"
         @left_margin = @right_margin = 18
         @top_margin = @bottom_margin = 30
         @pleaseVoteHeight = 30
         @padding = 8
         @columns = 3
-        Rails.logger.info("My ancestors are #{self.ancestors}")
-        @file_root = "#{RAILS_ROOT}/ballots/#{}/ballot_config.rb"
+        @file_root = "#{RAILS_ROOT}/ballots/#{style}/"
       end
 
       def setup(pdf, election, precinct)
@@ -184,11 +183,16 @@ module TTV
       end
 
       def load_text(filename)
-        
+        IO.read("#{@file_root}#{filename}")
       end
       
+      def image_path(filename)
+        full_path = "#{@file_root}#{filename}"
+      end
+
       def load_image(filename)
-        
+        return Prawn::Images::PNG.new(IO.read(image_path(filename))) if filename =~ /png$/
+        return Prawn::Images::JPG.new(IO.read(image_path(filename)))
       end
       
       def debug_stroke_bounds #debug version, rainbow of colors
@@ -255,6 +259,7 @@ module TTV
           @pdf.text @election.start_date.strftime("%B %d, %Y")
           @pdf.bounding_box [@pdf.bounds.width / 3,  @pdf.bounds.height], 
                             :width => @pdf.bounds.width * 2 / 3 do
+            @pdf.move_down 3
             @pdf.text @election.display_name, :align => :center
             @pdf.text @precinct.display_name, :align => :center
             @pdf.move_down(@padding / 3)
@@ -265,13 +270,25 @@ module TTV
         @pdf.stroke_line [flow_rect.left, flow_rect.top], [flow_rect.right, flow_rect.top]
       end
 
-      def render_column_instructions(flow_rect, page)
+      def render_column_instructions(rect, page)
         return if page != 1
-        @pdf.bounding_box [flow_rect.left + @padding, flow_rect.top], 
-                          :width => flow_rect.width - @padding * 2 do
-            @pdf.text
+        top = rect.top
+        @pdf.font "Helvetica", :size => 9, :style => :bold
+        @pdf.bounding_box [rect.left + @padding, rect.top], 
+                          :width => rect.width - @padding * 2 do
+            @pdf.move_down 3
+            @pdf.text load_text("instructions1.txt")
+            img = load_image "instructions2.png"
+            Rails.logger.info("Rect: #{rect.width} W: #{img.width} H: #{img.height}")
+            @pdf.image image_path("instructions2.png"), 
+              :width => [img.width * 72 / 96, @pdf.bounds.width].min
+            @pdf.move_down 3
+            @pdf.text load_text("instructions3.txt")
         end
-        flow_rect.top = flow_rect.bottom
+        rect.top = rect.bottom
+        @pdf.line_width 0.5
+        @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
       end
 
       def page_complete(pagenum, last_page)
@@ -359,6 +376,7 @@ module TTV
         end
         col = 0
         # try to fill up all the columns with items
+        @c.render_column_instructions(column_rects[col], pagenum)
         while @flow_items.size > 0
           if @flow_items.first.fits(@c, column_rects[col])
             @flow_items.shift.draw_into(@c, column_rects[col])
@@ -377,14 +395,14 @@ module TTV
 
     def self.getBallotConfig(style)
       style ||= "default"
-      return BallotConfig.new() if style == "default"
+      return BallotConfig.new(style) if style == "default"
       
       name = "#{RAILS_ROOT}/ballots/#{style}/ballot_config.rb"
       if File.exists? name
         begin
           load name
           c = TTV::PDFBallot.const_get(style.camelize).const_get("BallotConfig")
-          c.new
+          c.new(style)
         rescue
           raise "File #{name} has not defined TTV::PDFBallot::#{style.camelize}::BallotConfig "
         end
@@ -394,7 +412,7 @@ module TTV
     end
 
     def self.create(election, precinct, style='default')
-      renderer = Renderer.new(election, precinct, getBallotConfig('aiga'))
+      renderer = Renderer.new(election, precinct, getBallotConfig(style))
       renderer.render
       renderer.to_s
     end
