@@ -1,15 +1,16 @@
 TODO:
-- turn page instructions as flow item
-- first page instructions
-- AIGA styling
-- page number dependent formatting
 - multi-column layouts, such as wider columns for propositions.
 - ranked choice voting
+- page number dependent formatting
 - splitting of contests between columns
 - internationalization support, especially chinese
+- flow_item togetherness property
+- AIGA styling
 - this page intentionally left blank
 
 FEATURES IMPLEMENTED:
+- turn page instructions as flow item
+- first page instructions
 - text layout in questions: via prawn/format, you can use simple html tags
 - write ins
 - turn page instructions in header/footer

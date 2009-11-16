@@ -70,26 +70,26 @@ module TTV
         # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
         r = rect.clone;
         config.pdf.transaction do
-          draw_into(config, r)
+          draw(config, r)
           config.pdf.rollback
         end
         r.height > 0
       end
 
-      def draw_into(config, rect)
+      def draw(config, rect)
         top = rect.top
         config.pdf.font("Helvetica", :size => 10, :style => :italic)
         config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2 ) do
           config.pdf.move_down 3
-          config.pdf.text "FlowItem.draw_into"
+          config.pdf.text "FlowItem.draw"
           rect.top -= config.pdf.bounds.height
         end
         config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
         config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
       end
-
+      
       class Header < FlowItem
-        def draw_into(config, rect)
+        def draw(config, rect)
           top = rect.top
           config.pdf.font("Helvetica", :size => 10, :style => :bold )
           config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2) do
@@ -97,14 +97,12 @@ module TTV
             config.pdf.text @item, :leading => 1
             rect.top -= config.pdf.bounds.height 
           end
-          config.pdf.line_width 0.5
-          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-          config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+          config.frame_item rect, top
         end
       end
 
       class Question < FlowItem
-        def draw_into(config, rect)
+        def draw(config, rect)
           top = rect.top
           config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 2) do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
@@ -121,15 +119,14 @@ module TTV
           config.draw_checkbox  rect, "No"
           config.pdf.line_width 0.5
           rect.top -= 3
-          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-          config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+          config.frame_item rect, top
         end
       end
 
       class Contest < FlowItem
-        def draw_into(config, rect)
+        def draw(config, rect)
           top = rect.top
-          config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 2) do
+          config.pdf.bounding_box [rect.left+2, rect.top], :width => rect.width - 2 do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
             config.pdf.move_down 3
             config.pdf.text @item.display_name, :leading => 1 #header
@@ -150,12 +147,69 @@ module TTV
               config.pdf.undash
           end
           rect.top -= 6 if @item.open_seat_count != 0
-          config.pdf.line_width 0.5
-          config.pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-          config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+          config.frame_item rect, top
         end
       end
 
+    end
+
+    class ContinuationBox
+      def initialize(pdf)
+        @pdf = pdf
+      end
+      
+      def height(rect, continue = false)
+        r = rect.clone;
+        @pdf.transaction do
+          draw(r, continue)
+          @pdf.rollback
+        end
+        rect.top - r.top
+      end
+      
+      def draw(rect, continue)
+        top = rect.top
+        @pdf.font "Helvetica", :size => 10, :style => :bold
+        if continue
+          circle_width = 20
+          text_height = 0
+          text_width = rect.width - circle_width - 8
+          @pdf.bounding_box [rect.left+2, rect.top], :width => text_width do
+            @pdf.move_down 6
+            @pdf.text "Continue voting\nnext side", :align => :center
+            @pdf.move_down 2
+            text_height = @pdf.bounds.height
+          end
+          circle_top = rect.top - 6
+          @pdf.bounding_box [rect.left + text_width, circle_top ], :width => rect.width - text_width - 8 , :height => circle_width do
+            @pdf.circle_at [circle_width / 2, circle_width / 2], :radius => circle_width / 2
+            @pdf.fill_color "000000"
+            @pdf.fill_and_stroke
+            @pdf.stroke_color "FFFFFF"
+            @pdf.cap_style :round
+            @pdf.line_width 2
+            inset = 4
+            @pdf.stroke_line [inset, circle_width / 2], [ circle_width - inset, circle_width / 2]
+            @pdf.move_to [circle_width / 2, circle_width - inset]
+            @pdf.line_to [circle_width - inset, circle_width / 2]
+            @pdf.line_to [circle_width / 2, inset]
+            @pdf.stroke
+          end
+          rect.top -= text_height
+        else
+          @pdf.bounding_box [rect.left + 2, rect.top], :width => (rect.width - 4) do
+            @pdf.move_down 6
+            @pdf.text "Thank you for voting!\nPlease turn in your finished ballot", :align => :center
+            @pdf.move_down 2
+            rect.top -= @pdf.bounds.height
+          end
+        end
+        @pdf.line_width 0.75
+        @pdf.stroke_color "000000"
+        @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+        @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
+      end
     end
 
     class BallotConfig
@@ -195,6 +249,10 @@ module TTV
         return Prawn::Images::JPG.new(IO.read(image_path(filename)))
       end
       
+      def continuation_box
+        ContinuationBox.new(@pdf)
+      end
+
       def debug_stroke_bounds #debug version, rainbow of colors
         @stroke_colors = ["FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF"] unless @stroke_colors
         old = @pdf.stroke_color
@@ -227,6 +285,13 @@ module TTV
           rect.top -= [@pdf.bounds.height, bbheight].max
         end
         spacer  # returns left-hand side of text position
+      end
+
+      def frame_item(rect, top)
+        @pdf.line_width 0.5
+        @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+        @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
       end
 
       def render_frame(flow_rect)
@@ -357,43 +422,55 @@ module TTV
           page += 1
           render_page page
         end
-    
       end
 
       def render_page(pagenum)
         @pdf.start_new_page
+
         flow_rect = Rect.create_bound_box(@pdf.bounds)
         @c.render_frame(flow_rect)
         @c.render_header(flow_rect)
+
         column_rects = []
         column_width = flow_rect.width / ( @c.columns * 1.0)
         @c.columns.times do |x|
           column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
           column_width, flow_rect.height)
         end
-        0.upto(@c.columns-1) do |x|
-          [column_rects[x].right, column_rects[x].bottom] 
-        end
+
+        continuation_box = @c.continuation_box
+        column_rects.last.bottom += continuation_box.height(column_rects.last, true)
+
+        # fill the columns with flow items
         col = 0
-        # try to fill up all the columns with items
         @c.render_column_instructions(column_rects[col], pagenum)
         while @flow_items.size > 0
           if @flow_items.first.fits(@c, column_rects[col])
-            @flow_items.shift.draw_into(@c, column_rects[col])
+            @flow_items.shift.draw(@c, column_rects[col])
           else
             if column_rects[col].top == flow_rect.top # if column is full height
               @pdf.stroke_color "FF0000"
-              @flow_items.first.draw_into(self, column_rects[col])
+              @flow_items.first.draw(self, column_rects[col])
             end
             col += 1
             break if col == @c.columns
           end
         end
+      
+        # draw continuation text in last used column, or last column if no space
+        continuation_col = column_rects[col == @c.columns ? col - 1 : col]
+        Rails.logger.info("Col: #{col - 1}")
+        if (continuation_col.height < 
+           continuation_box.height(continuation_col, @flow_items.size != 0) )
+           continuation_col = column_rects.last
+        end   
+        continuation_box.draw(continuation_col, @flow_items.size != 0)
+        
         @c.page_complete(pagenum, @flow_items.size > 0)
       end
     end
 
-    def self.getBallotConfig(style)
+    def self.get_ballot_config(style)
       style ||= "default"
       return BallotConfig.new(style) if style == "default"
       
@@ -412,7 +489,7 @@ module TTV
     end
 
     def self.create(election, precinct, style='default')
-      renderer = Renderer.new(election, precinct, getBallotConfig(style))
+      renderer = Renderer.new(election, precinct, get_ballot_config(style))
       renderer.render
       renderer.to_s
     end
