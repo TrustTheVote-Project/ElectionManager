@@ -3,6 +3,7 @@ require '../../test/test_helper'
 
 require 'prawn'
 require 'prawn/format'
+
 class PDFBallotTest < ActiveSupport::TestCase
   def test_GenerateBallot
     Rails.logger.level = 3
@@ -112,10 +113,15 @@ module TTV
           end
           s
        end        
-     end
+    end
 
     class FlowItem
-
+      
+      ANY_WIDTH = 1
+      HPAD = 3
+      HPAD2 = 6
+      VPAD = 3
+      
       def initialize(item)
         @item = item
       end
@@ -135,8 +141,8 @@ module TTV
         # debug only code
         top = rect.top
         config.pdf.font("Helvetica", :size => 10, :style => :italic)
-        config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2 ) do
-          config.pdf.move_down 3
+        config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD ) do
+          config.pdf.move_down VPAD
           config.pdf.text "FlowItem.draw"
           rect.top -= config.pdf.bounds.height
         end
@@ -150,14 +156,14 @@ module TTV
 
       class Header < FlowItem
         def min_width
-          1
+          ANY_WIDTH
         end
         
         def draw(config, rect)
           top = rect.top
           config.pdf.font("Helvetica", :size => 10, :style => :bold )
-          config.pdf.bounding_box([rect.left + 2, rect.top], :width => rect.width - 2) do
-            config.pdf.move_down 3
+          config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD * 2) do
+            config.pdf.move_down VPAD
             config.pdf.text @item, :leading => 1
             rect.top -= config.pdf.bounds.height 
           end
@@ -169,16 +175,16 @@ module TTV
 
         def min_width
           return 300 if @item.question.length > 100
-          0
+          return ANY_WIDTH
         end
 
         def draw(config, rect)
           top = rect.top
-          config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 2) do
+          config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 4) do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
-            config.pdf.move_down 3
+            config.pdf.move_down VPAD
             config.pdf.text @item.display_name, :leading => 1 #header
-            config.pdf.move_down 6
+            config.pdf.move_down VPAD * 2
             config.pdf.font "Helvetica", :size => 10
             config.pdf.text @item.question, :leading => 1 # question
             rect.top -= config.pdf.bounds.height
@@ -194,20 +200,41 @@ module TTV
       end
 
       class Contest < FlowItem
+        
+        NAME_WIDTH = 100
+        
+        def min_width
+          if @item.voting_method_id == VotingMethod::WINNER
+            super
+          else
+            100 + 3 * HPAD + @item.candidates.count * (HPAD + BallotConfig::CHECKBOX_WIDTH)
+          end
+        end
+        
         def draw(config, rect)
+          if @item.voting_method_id == VotingMethod::WINNER
+            draw_winner config, rect
+          else
+            draw_ranked config, rect
+          end
+        end
+
+        def draw_winner(config, rect)
           top = rect.top
-          config.pdf.bounding_box [rect.left+2, rect.top], :width => rect.width - 2 do
+          # HEADER
+          config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
-            config.pdf.move_down 3
+            config.pdf.move_down VPAD
             config.pdf.text @item.display_name, :leading => 1 #header
             rect.top -= config.pdf.bounds.height
           end
+          # CANDIDATES
           @item.candidates.each do |candidate|
-            rect.top -= 6
+            rect.top -= VPAD * 2
             config.draw_checkbox rect, candidate.display_name + "\n" + candidate.party.display_name
           end
           @item.open_seat_count.times do
-            rect.top -= 6
+            rect.top -= VPAD * 2
             left = config.draw_checkbox rect, "or write in"
             config.pdf.dash 1
             v = 16
@@ -217,6 +244,68 @@ module TTV
             config.pdf.undash
           end
           rect.top -= 6 if @item.open_seat_count != 0
+          config.frame_item rect, top
+        end
+        
+        def draw_ranked(config, rect)
+          top = rect.top
+          pdf = config.pdf
+          # title
+          pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
+            pdf.font "Helvetica", :size => 10, :style => :bold
+            pdf.move_down VPAD
+            pdf.text @item.display_name, :leading => 1 #header
+            rect.top -= pdf.bounds.height
+          end
+
+          # Ordinals: 1st 2nd...
+          hpad4 = HPAD2 * 2
+          rect.top -= VPAD * 2
+          count = @item.candidates.count
+          height = 0
+          0.upto(count - 1) do |i|
+            x = rect.left + HPAD2 + i * (BallotConfig::CHECKBOX_WIDTH + hpad4)
+            y = rect.top + VPAD 
+            pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
+              pdf.text((i + 1).ordinalize, :align => :center)
+              height = pdf.bounds.height
+            end
+          end
+          rect.top -= height;
+          
+          # checkboxes
+
+          0.upto(count) do |i|
+            0.upto(count - 1) do |j|
+              x = rect.left + HPAD2 + j * (BallotConfig::CHECKBOX_WIDTH + hpad4)
+              y = rect.top
+              pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
+                config.stroke_checkbox
+                f = pdf.font "Helvetica", :size => 9
+                pdf.move_down( (BallotConfig::CHECKBOX_HEIGHT - f.ascender) / 2)
+                pdf.fill_color "999999"
+                pdf.text j + 1, :align => :center
+              end
+            end
+            pdf.fill_color "000000"
+            spacer = HPAD2 + count * (BallotConfig::CHECKBOX_WIDTH + hpad4) 
+            pdf.font "Helvetica", :size => 10
+            pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
+              if i < count
+                pdf.text @item.candidates[i].display_name + "\n" + @item.candidates[i].party.display_name
+              else # writein
+                pdf.text "or write in"
+                pdf.dash 1
+                pdf.move_down 16
+                config.pdf.stroke_line [0, 0], [rect.width - spacer - HPAD2, 0]
+                pdf.undash
+                pdf.move_down VPAD
+              end            
+              rect.top -= [pdf.bounds.height, BallotConfig::CHECKBOX_HEIGHT].max
+            end
+            pdf.move_down VPAD * 2
+            rect.top -= VPAD * 2
+          end
           config.frame_item rect, top
         end
       end
@@ -244,10 +333,10 @@ module TTV
           circle_width = 20
           text_height = 0
           text_width = rect.width - circle_width - 8
-          @pdf.bounding_box [rect.left+2, rect.top], :width => text_width do
-            @pdf.move_down 6
+          @pdf.bounding_box [rect.left+FlowItem::HPAD, rect.top], :width => text_width do
+            @pdf.move_down FlowItem::VPAD
             @pdf.text "Continue voting\nnext side", :align => :center
-            @pdf.move_down 2
+            @pdf.move_down FlowItem::VPAD
             text_height = @pdf.bounds.height
           end
           circle_top = rect.top - 6
@@ -267,10 +356,10 @@ module TTV
           end
           rect.top -= text_height
         else
-          @pdf.bounding_box [rect.left + 2, rect.top], :width => (rect.width - 4) do
-            @pdf.move_down 6
+          @pdf.bounding_box [rect.left + FlowItem::HPAD, rect.top], :width => (rect.width - FlowItem::HPAD2) do
+            @pdf.move_down FlowItem::VPAD
             @pdf.text "Thank you for voting!\nPlease turn in your finished ballot", :align => :center
-            @pdf.move_down 2
+            @pdf.move_down FlowItem::VPAD
             rect.top -= @pdf.bounds.height
           end
         end
@@ -286,6 +375,12 @@ module TTV
 
       attr_accessor :pdf, :page_size, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
 
+      CHECKBOX_WIDTH = 22
+      CHECKBOX_HEIGHT = 10
+      HPAD = 3
+      HPAD2 = 6
+      VPAD = 3
+      
       def initialize(style)
         @page_size = "LETTER"
         @left_margin = @right_margin = 18
@@ -304,7 +399,7 @@ module TTV
                   "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
                                     :bold => "/Library/Fonts/Arial Bold.ttf" },
                   "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }}
-                  ) if false 
+                  )
       end
 
       def load_text(filename)
@@ -338,7 +433,7 @@ module TTV
         old = @pdf.stroke_color
         @pdf.stroke_color = @stroke_colors.shift
         @pdf.dash(1)  if @pdf.bounds.height == 0
-        @pdf.stroke_rectangle @pdf.bounds.top_left, @pdf.bounds.width, [@pdf.bounds.height, 30].max
+        @pdf.stroke_rectangle @pdf.bounds.top_left, @pdf.bounds.width, [@pdf.bounds.height, 5].max
         @pdf.undash
         Rails.logger.info("bounds.height: #{@pdf.bounds.to_s}")
         @stroke_colors.push @pdf.stroke_color
@@ -351,18 +446,24 @@ module TTV
         end
       end
 
+      def stroke_checkbox(pt = [0,0])
+        @pdf.line_width 1.5
+        @pdf.fill_color "FFFFFF"
+        @pdf.stroke_color "000000"
+        @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+        @pdf.fill_and_stroke
+        @pdf.fill_color "000000"
+      end
+
       def draw_checkbox(rect, text)
-        bbwidth, bbheight = 22, 10
-        @pdf.bounding_box [rect.left+6, rect.top], :width => rect.width - 2 do
-          @pdf.line_width 1.5
-          @pdf.stroke_rectangle [0,0], bbwidth, bbheight
-          @pdf.line_width 1
+        @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
+          stroke_checkbox
         end
-        spacer = 6 + bbwidth + 6
+        spacer = 2 * FlowItem::HPAD2 + CHECKBOX_WIDTH
         @pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
           @pdf.font "Helvetica", :size => 10
           @pdf.text text
-          rect.top -= [@pdf.bounds.height, bbheight].max
+          rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
         end
         spacer  # returns left-hand side of text position
       end
@@ -480,7 +581,6 @@ module TTV
       
       def next
         retval = @next
-        Rails.logger.error "r is #{retval}"
         @next = @column_rects[@column_rects.index(@next) + 1] if @next
         retval
       end
@@ -498,14 +598,15 @@ module TTV
       end
       
       def make_wide(column, width)
+        return nil if column == nil # not an error case
         cols = [column]
         i = @column_rects.index(column) + 1
         total = column.width
         while (total < width && i < @column_rects.size)
-          newCol = @column_rects[i]
+          new_col = @column_rects[i]
           @next = @column_rects[i+1]
-          total += newCol.width
-          cols.push newCol
+          total += new_col.width
+          cols.push new_col
         end
         return WideColumn.new(cols) if total >= width
         nil
@@ -645,6 +746,7 @@ module TTV
     end
 
     def self.create(election, precinct, style='default')
+      Prawn.debug = true
       renderer = Renderer.new(election, precinct, get_ballot_config(style))
       renderer.render
       renderer.to_s

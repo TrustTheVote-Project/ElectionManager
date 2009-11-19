@@ -1,5 +1,8 @@
 class VotingMethod < ActiveRecord::Base
 
+  WINNER = 0
+  RANKED = 1
+  
   @@xml_codes = ['winner', 'ranked']
 
   def idToXml
@@ -8,8 +11,8 @@ class VotingMethod < ActiveRecord::Base
 
   def VotingMethod.xmlToId(code)
     case code
-    when 'winner' then return 0 
-    when 'ranked' then return 1
+    when 'winner' then return WINNER
+    when 'ranked' then return RANKED
     else raise "illegal voting method #{code}"
     end
   end

@@ -1,6 +1,4 @@
 TODO:
-- multi-column layouts, such as wider columns for propositions.
-- ranked choice voting
 - page number dependent formatting
 - splitting of contests between columns
 - internationalization support, especially chinese
@@ -9,6 +7,8 @@ TODO:
 - this page intentionally left blank
 
 FEATURES IMPLEMENTED:
+- ranked choice voting, crude, no instructions
+- multi-column layouts, such as wider columns for propositions.
 - turn page instructions as flow item
 - first page instructions
 - text layout in questions: via prawn/format, you can use simple html tags
