@@ -9,6 +9,11 @@
 		<li><%=link_to "View contests", contests_path %>
 		<li><%=link_to "View candidates", candidates_path %>
 		<li><%=link_to "View questions", questions_path %>
+			<li>
+				<% form_tag  import_elections_path, :method => 'put', :multipart => true do %>
+					<%= submit_tag "Import election" %>
+					<%= file_field_tag "importFile" , :accept => "text/xml" %>
+				<% end %>
 	</ul>
 
 <% else %>
