@@ -1,12 +1,12 @@
 TODO:
-- page number dependent formatting
 - splitting of contests between columns
 - internationalization support, especially chinese
-- flow_item togetherness property
 - AIGA styling
 - this page intentionally left blank
+- page number dependent formatting
 
 FEATURES IMPLEMENTED:
+- flow_item togetherness property. Could be reimplemented as compression of flow items after initial placement if we need more sophisticated measures
 - ranked choice voting, crude, no instructions
 - multi-column layouts, such as wider columns for propositions.
 - turn page instructions as flow item
