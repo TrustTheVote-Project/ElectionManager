@@ -1,0 +1,19 @@
+Here are some sample elections you can import into election manager.
+
+Ideally, we should have one for each US state.
+
+Ballot designer test suite:
+
+candidates
+- contests with no/1/5/100 candidates
+- contests with candidate pairs: A and B
+voting styles
+- winner/ranked
+number of winners
+- 0,1,x
+districts
+- no contests
+- 1 contests
+- 10 contests
+questions
+- 1/10/100 sentence questions

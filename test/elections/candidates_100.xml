@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election start_date="2010-10-01 08:00:00 -0700" display_name="candidates_100.xml">
+  <districts display_name="DistrictSet test.xml">
+    <district type="state" display_name="State" id="1">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="county" display_name="County 1" id="2">
+      <precinct idref="1"/>
+    </district>
+    <district type="county" display_name="County 2" id="9">
+      <precinct idref="2"/>
+    </district>
+    <district type="municipality" display_name="Municipality" id="3">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="school" display_name="School" id="4">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="water" display_name="Water" id="5">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="fire" display_name="Fire" id="6">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="coastal" display_name="Coastal" id="7">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="harbor" display_name="Harbor" id="8">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct display_name="Precinct 1" id="1"/>
+    <precinct display_name="Precinct 2" id="2"/>
+  </precincts>
+	<body>
+    <contest voting_method="winner" district_idref="1" display_name="Many Candidates" open_seat="1">
+      <candidates>
+        <candidate display_name="Clayton Bascom" party="democrat"/>
+        <candidate display_name="Dona Barrio" party="republican"/>
+        <candidate display_name="Althea Hilgefor" party="independent"/>
+        <candidate display_name="Clayton Sak" party="democrat"/>
+        <candidate display_name="Rae Mendel" party="republican"/>
+        <candidate display_name="Lonnie Provence" party="independent"/>
+        <candidate display_name="Guy Pharris" party="democrat"/>
+        <candidate display_name="Mathew Holyfield" party="republican"/>
+        <candidate display_name="Serena Leduc" party="independent"/>
+        <candidate display_name="Ted Belgrave" party="democrat"/>
+        <candidate display_name="Lonnie Alas" party="republican"/>
+        <candidate display_name="Katy Gerling" party="independent"/>
+        <candidate display_name="Kathrine Grunwald" party="democrat"/>
+        <candidate display_name="Allie Partington" party="republican"/>
+        <candidate display_name="Esmeralda Meurer" party="independent"/>
+        <candidate display_name="Tameka Pinner" party="democrat"/>
+        <candidate display_name="Neil Ikner" party="republican"/>
+        <candidate display_name="Neil Uber" party="independent"/>
+        <candidate display_name="Malinda Lindstedt" party="democrat"/>
+        <candidate display_name="Milagros Cleaves" party="republican"/>
+        <candidate display_name="Christian Pisani" party="independent"/>
+        <candidate display_name="Darryl Isler" party="democrat"/>
+        <candidate display_name="Lance Divers" party="republican"/>
+        <candidate display_name="Lance Lucus" party="independent"/>
+        <candidate display_name="Noreen Fluitt" party="democrat"/>
+        <candidate display_name="Kurt Whitelaw" party="republican"/>
+        <candidate display_name="Tameka Linnen" party="independent"/>
+        <candidate display_name="Lance Hanberry" party="democrat"/>
+        <candidate display_name="Darryl Winther" party="republican"/>
+        <candidate display_name="Allie Letts" party="independent"/>
+        <candidate display_name="Katy Freels" party="democrat"/>
+        <candidate display_name="Katy Hendryx" party="republican"/>
+        <candidate display_name="Nannie Rueckert" party="independent"/>
+        <candidate display_name="Ted Ritts" party="democrat"/>
+        <candidate display_name="Althea Duchesne" party="republican"/>
+        <candidate display_name="Julianne Mcmackin" party="independent"/>
+        <candidate display_name="Hillary Castano" party="democrat"/>
+        <candidate display_name="Kelly Saffer" party="republican"/>
+        <candidate display_name="Max Vida" party="independent"/>
+        <candidate display_name="Chandra Mendelson" party="democrat"/>
+        <candidate display_name="Jami Hollenbach" party="republican"/>
+        <candidate display_name="Neva Borquez" party="independent"/>
+        <candidate display_name="Carlene Heims" party="democrat"/>
+        <candidate display_name="Liza Groleau" party="republican"/>
+        <candidate display_name="Elinor Lebsock" party="independent"/>
+        <candidate display_name="Lorrie Modeste" party="democrat"/>
+        <candidate display_name="Noreen Hetzler" party="republican"/>
+        <candidate display_name="Earnestine Stelly" party="independent"/>
+        <candidate display_name="Clayton Bascom" party="democrat"/>
+        <candidate display_name="Dona Barrio" party="republican"/>
+        <candidate display_name="Althea Hilgefor" party="independent"/>
+        <candidate display_name="Clayton Sak" party="democrat"/>
+        <candidate display_name="Rae Mendel" party="republican"/>
+        <candidate display_name="Lonnie Provence" party="independent"/>
+        <candidate display_name="Guy Pharris" party="democrat"/>
+        <candidate display_name="Mathew Holyfield" party="republican"/>
+        <candidate display_name="Serena Leduc" party="independent"/>
+        <candidate display_name="Ted Belgrave" party="democrat"/>
+        <candidate display_name="Lonnie Alas" party="republican"/>
+        <candidate display_name="Katy Gerling" party="independent"/>
+        <candidate display_name="Kathrine Grunwald" party="democrat"/>
+        <candidate display_name="Allie Partington" party="republican"/>
+        <candidate display_name="Esmeralda Meurer" party="independent"/>
+        <candidate display_name="Tameka Pinner" party="democrat"/>
+        <candidate display_name="Neil Ikner" party="republican"/>
+        <candidate display_name="Neil Uber" party="independent"/>
+        <candidate display_name="Malinda Lindstedt" party="democrat"/>
+        <candidate display_name="Milagros Cleaves" party="republican"/>
+        <candidate display_name="Christian Pisani" party="independent"/>
+        <candidate display_name="Darryl Isler" party="democrat"/>
+        <candidate display_name="Lance Divers" party="republican"/>
+        <candidate display_name="Lance Lucus" party="independent"/>
+        <candidate display_name="Noreen Fluitt" party="democrat"/>
+        <candidate display_name="Kurt Whitelaw" party="republican"/>
+        <candidate display_name="Tameka Linnen" party="independent"/>
+        <candidate display_name="Lance Hanberry" party="democrat"/>
+        <candidate display_name="Darryl Winther" party="republican"/>
+        <candidate display_name="Allie Letts" party="independent"/>
+        <candidate display_name="Katy Freels" party="democrat"/>
+        <candidate display_name="Katy Hendryx" party="republican"/>
+        <candidate display_name="Nannie Rueckert" party="independent"/>
+        <candidate display_name="Ted Ritts" party="democrat"/>
+        <candidate display_name="Althea Duchesne" party="republican"/>
+        <candidate display_name="Julianne Mcmackin" party="independent"/>
+        <candidate display_name="Hillary Castano" party="democrat"/>
+        <candidate display_name="Kelly Saffer" party="republican"/>
+        <candidate display_name="Max Vida" party="independent"/>
+        <candidate display_name="Chandra Mendelson" party="democrat"/>
+        <candidate display_name="Jami Hollenbach" party="republican"/>
+        <candidate display_name="Neva Borquez" party="independent"/>
+        <candidate display_name="Carlene Heims" party="democrat"/>
+        <candidate display_name="Liza Groleau" party="republican"/>
+        <candidate display_name="Elinor Lebsock" party="independent"/>
+        <candidate display_name="Lorrie Modeste" party="democrat"/>
+        <candidate display_name="Noreen Hetzler" party="republican"/>
+        <candidate display_name="Earnestine Stelly" party="independent"/>
+      </candidates>
+    </contest>
+	</body>
+</election>

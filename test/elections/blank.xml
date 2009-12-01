@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election start_date="2010-10-01 08:00:00 -0700" display_name="blank.xml">
+  <districts display_name="DistrictSet test.xml">
+    <district type="state" display_name="State" id="1">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="county" display_name="County 1" id="2">
+      <precinct idref="1"/>
+    </district>
+    <district type="county" display_name="County 2" id="9">
+      <precinct idref="2"/>
+    </district>
+    <district type="municipality" display_name="Municipality" id="3">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="school" display_name="School" id="4">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="water" display_name="Water" id="5">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="fire" display_name="Fire" id="6">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="coastal" display_name="Coastal" id="7">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="harbor" display_name="Harbor" id="8">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct display_name="Precinct 1" id="1"/>
+    <precinct display_name="Precinct 2" id="2"/>
+  </precincts>
+	<body>
+	</body>
+</election>
