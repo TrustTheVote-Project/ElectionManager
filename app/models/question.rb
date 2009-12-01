@@ -8,5 +8,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :display_name, :question, :district_id, :election_id
   validates_numericality_of :district_id, :election_id
 
-    
+  def to_s
+    "QUESTION: #{self.display_name}"
+  end
 end

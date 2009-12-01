@@ -1,6 +1,11 @@
 TODO:
 - splitting of contests between columns
 - internationalization support, especially chinese
+- import elections with multiple district sets.
+    alternative: just import district sets. Or allow definition of district sets in UI?
+    still need export/import. Maybe a different file format. Or a similar file format?
+    similar file format would work the best. 
+    new xml tag, district sets?
 - AIGA styling
 - this page intentionally left blank
 - page number dependent formatting

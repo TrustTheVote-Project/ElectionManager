@@ -1,9 +1,8 @@
 
-#require '../../test/test_helper'
+require 'test/test_helper'
 
 require 'prawn'
-require 'prawn/format'
-if false
+# require 'prawn/format'
 class PDFBallotTest < ActiveSupport::TestCase
   def test_GenerateBallot
     Rails.logger.level = 3
@@ -13,12 +12,12 @@ class PDFBallotTest < ActiveSupport::TestCase
     f = File.new("#{RAILS_ROOT}/test/PDFBallot.pdf", 'w')
     f.write(pdf)
     f.close
-    `open /Applications/Preview.app #{f.path}`
+    `open  #{f.path}`
     assert_not_nil(election)
     assert_not_nil(precinct)
   end
 end
-end
+
 module TTV
   module PDFBallot
     class Rect
@@ -26,6 +25,7 @@ module TTV
 
       def initialize(top, left, bottom, right)
         @top, @left, @bottom , @right = top, left, bottom, right
+        @original_top = @top
       end
 
       def width
@@ -37,7 +37,7 @@ module TTV
       end
 
       def to_s
-        "T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
+        "#{full_height? ? 'empty' : ''  }T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
       end
 
       def inset(horiz, vertical)
@@ -45,6 +45,14 @@ module TTV
         @bottom += vertical
         @left += horiz
         @right -= horiz
+      end
+
+      def first
+        self
+      end
+
+      def full_height?
+        @original_top == @top
       end
 
       def self.create(top, left, bottom, right)
@@ -63,65 +71,70 @@ module TTV
     # WideColumn is used in layout to group columns together
     # its boundaries are leftmost/rightmost/lowest top/highest bottom
     class WideColumn
-       def initialize (rects)
-         @rects = rects
-       end
+      def initialize (rects)
+        @rects = rects
+        @original_top = top
+      end
 
-       def initialize_copy(old)
-         @rects =  @rects.map { |r| r.clone }
-       end
-       
-       def top
-         @rects.map { |r| r.top}.min
-       end
-       def top=(x)
-         @rects.each { |r| r.top = x }
-       end        
-       def bottom
-         @rects.map { |r| r.bottom}.max
-       end
-       def bottom=(x)
-         @rects.each { |r| r.bottom = x} 
-       end
-       def left
-         @rects.map { |r| r.left}.min
-       end
-       def right
-         @rects.map { |r| r.right}.max
-       end
-       
-       def width
-         right - left
-       end
+      def initialize_copy(old)
+        @rects =  @rects.map { |r| r.clone }
+      end
 
-       def height
-         top - bottom
-       end
-       
-       def index(r)
-         @rects.index(r)
-       end
-       
-       def first
-         @rects.first
-       end
-       
-       def to_s
-          s = "T:#{top} L:#{left} B:#{bottom} R:#{right} W:#{width} H#{height}\n\n"
-          @rects.each do |r| 
-            s += "Combo: #{r.to_s}\n" 
-          end
-          s
-       end        
+      def top
+        @rects.map { |r| r.top}.min
+      end
+      def top=(x)
+        @rects.each { |r| r.top = x }
+      end        
+      def bottom
+        @rects.map { |r| r.bottom}.max
+      end
+      def bottom=(x)
+        @rects.each { |r| r.bottom = x} 
+      end
+      def left
+        @rects.map { |r| r.left}.min
+      end
+      def right
+        @rects.map { |r| r.right}.max
+      end
+
+      def width
+        right - left
+      end
+
+      def height
+        top - bottom
+      end
+
+      def index(r)
+        @rects.index(r)
+      end
+
+      def first
+        @rects.first
+      end
+
+      def full_height?
+        @original_top == top
+      end
+
+      def to_s
+        s = "T:#{top} L:#{left} B:#{bottom} R:#{right} W:#{width} H#{height}\n\n"
+        @rects.each do |r| 
+          s += "Combo: #{r.to_s}\n" 
+        end
+        s
+      end        
     end
 
     class FlowItem
-      
+
       ANY_WIDTH = 1
       HPAD = 3
       HPAD2 = 6
       VPAD = 3
-      
+
       def initialize(item)
         @item = item
       end
@@ -153,6 +166,10 @@ module TTV
       def min_width
         0
       end
+      
+      def to_s
+        @item.to_s
+      end
 
       class Combo
         def initialize(flow_items)
@@ -167,21 +184,27 @@ module TTV
           end
           r.height > 0
         end
-        
+
         def min_width
           @flow_items.map { |r| r.min_width }.max
         end
-        
+
         def draw(config, rect)
           @flow_items.each { |f| f.draw config, rect }
         end
+        
+        def to_s
+          s = "Combo\n"
+          @flow_items.each { |f| s += f.to_s + "\n" }
+          s
+        end
       end
-      
+
       class Header < FlowItem
         def min_width
           ANY_WIDTH
         end
-        
+
         def draw(config, rect)
           top = rect.top
           config.pdf.font("Helvetica", :size => 10, :style => :bold )
@@ -192,6 +215,7 @@ module TTV
           end
           config.frame_item rect, top
         end
+        
       end
 
       class Question < FlowItem
@@ -223,9 +247,9 @@ module TTV
       end
 
       class Contest < FlowItem
-        
+
         NAME_WIDTH = 100
-        
+
         def min_width
           if @item.voting_method_id == VotingMethod::WINNER
             super
@@ -233,7 +257,7 @@ module TTV
             100 + 3 * HPAD + @item.candidates.count * (HPAD + BallotConfig::CHECKBOX_WIDTH)
           end
         end
-        
+
         def draw(config, rect)
           if @item.voting_method_id == VotingMethod::WINNER
             draw_winner config, rect
@@ -269,7 +293,7 @@ module TTV
           rect.top -= 6 if @item.open_seat_count != 0
           config.frame_item rect, top
         end
-        
+
         def draw_ranked(config, rect)
           top = rect.top
           pdf = config.pdf
@@ -295,7 +319,7 @@ module TTV
             end
           end
           rect.top -= height;
-          
+
           # checkboxes
 
           0.upto(count) do |i|
@@ -403,7 +427,7 @@ module TTV
       HPAD = 3
       HPAD2 = 6
       VPAD = 3
-      
+
       def initialize(style)
         @page_size = "LETTER"
         @left_margin = @right_margin = 18
@@ -419,10 +443,10 @@ module TTV
         @election = election
         @precinct = precinct
         pdf.font_families.update({
-                  "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
-                                    :bold => "/Library/Fonts/Arial Bold.ttf" },
-                  "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }}
-                  )
+          "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
+                           :bold => "/Library/Fonts/Arial Bold.ttf" },
+          "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }
+            })
       end
 
       def load_text(filename)
@@ -450,7 +474,7 @@ module TTV
         # do narrow flow items continue flowing after wide ones?
         return :continue
       end
-      
+
       def debug_stroke_bounds #debug version, rainbow of colors
         @stroke_colors = ["FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF"] unless @stroke_colors
         old = @pdf.stroke_color
@@ -499,23 +523,23 @@ module TTV
       end
 
       def render_frame(flow_rect)
-        barWidth = 18
-        barHeight = 140
+        bar_width = 18
+        bar_height = 140
 
         @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
           @pdf.fill_color = "#000000"
-          @pdf.rectangle [0,barHeight], barWidth, barHeight
-          @pdf.rectangle @pdf.bounds.top_left, barWidth, barHeight
-          @pdf.rectangle [@pdf.bounds.right - barWidth, barHeight], barWidth, barHeight
+          @pdf.rectangle [0,bar_height], bar_width, bar_height
+          @pdf.rectangle @pdf.bounds.top_left, bar_width, bar_height
+          @pdf.rectangle [@pdf.bounds.right - bar_width, bar_height], bar_width, bar_height
           @pdf.fill_and_stroke
-          @pdf.stroke_rectangle [barWidth + @padding,@pdf.bounds.height], 
-          @pdf.bounds.width - (barWidth + @padding)* 2, @pdf.bounds.height
+          @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
+          @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
           @pdf.font("Courier", :size => 14)
           @pdf.text "Sample Ballot", :at => [16, 275], :rotate => 90
           @pdf.text "Sample Ballot", :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
           @pdf.text "12001040100040", :at => [16, 410], :rotate => 90
           @pdf.text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
-          flow_rect.inset barWidth + @padding, @pleaseVoteHeight
+          flow_rect.inset bar_width + @padding, @pleaseVoteHeight
         end
       end
 
@@ -539,8 +563,9 @@ module TTV
         @pdf.stroke_line [flow_rect.left, flow_rect.top], [flow_rect.right, flow_rect.top]
       end
 
-      def render_column_instructions(rect, page)
+      def render_column_instructions(columns, page)
         return if page != 1
+        rect = columns.next
         top = rect.top
         @pdf.font "Helvetica", :size => 9, :style => :bold
         @pdf.bounding_box [rect.left + @padding, rect.top], 
@@ -580,9 +605,9 @@ module TTV
         when item.is_a?(Array) then FlowItem::Combo.new(item)
         end
       end
-      
+
     end
-    
+
     # encapsulates columns for rendering
     class Columns
       def initialize(col_count, flow_rect)
@@ -602,7 +627,7 @@ module TTV
         end
         s
       end
-      
+
       def next
         retval = @next
         @next = @column_rects[@column_rects.index(@next) + 1] if @next
@@ -612,13 +637,17 @@ module TTV
       def first
         @column_rects.first
       end
-      
+
       def last
         @column_rects.last
       end
 
       def current=(r)
         @next = @column_rects[@column_rects.index(r) + 1]
+      end
+
+      def empty?
+        @column_rects.select{ |r| r.full_height? }.size == @column_rects.size
       end
       
       def make_wide(column, width)
@@ -631,6 +660,7 @@ module TTV
           @next = @column_rects[i+1]
           total += new_col.width
           cols.push new_col
+          i += 1
         end
         return WideColumn.new(cols) if total >= width
         nil
@@ -649,25 +679,11 @@ module TTV
         @pdf.render
       end
 
-      def render
-        @pdf = Prawn::Document.new(
-        :page_size => @c.page_size, 
-        :left_margin => @c.left_margin,
-        :right_margin => @c.right_margin,
-        :top_margin => @c.top_margin,
-        :bottom_margin => @c.bottom_margin,
-        :skip_page_creation => true,
-        :info => { :Creator => "TrustTheVote",
-          :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
-        }
-        )
-        @c.setup(@pdf, @election, @precinct)
-
-        # initialize flow items
+      def init_flow_items
         @flow_items = []
         @precinct.districts(@election.district_set).each do |district|
           header_item = @c.create_flow_item(district.display_name)
-  #        @flow_items.push(@c.create_flow_item(district.display_name))
+          #        @flow_items.push(@c.create_flow_item(district.display_name))
           district.contestsForElection(@election).each do |contest|
             if header_item
               @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(contest)] ))
@@ -685,81 +701,140 @@ module TTV
             end
           end
         end       
-
-        # render all pages
-        page = 0
-        while @flow_items.size > 0
-          page += 1
-          render_page page
-        end
       end
 
-      def render_flow_rect(flow_rect, pagenum)
-        columns = @c.create_columns(flow_rect)
+      def render
+        @pdf = Prawn::Document.new(
+        :page_size => @c.page_size, 
+        :left_margin => @c.left_margin,
+        :right_margin => @c.right_margin,
+        :top_margin => @c.top_margin,
+        :bottom_margin => @c.bottom_margin,
+        :skip_page_creation => true,
+        :info => { :Creator => "TrustTheVote",
+          :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+        }
+        )
+        @c.setup(@pdf, @election, @precinct)
 
-        # make space for continuation box
-        continuation_box = @c.create_continuation_box
-        columns.last.bottom += continuation_box.height(columns.last, true)
-
-        @c.render_column_instructions(columns.first, pagenum)
-
-        curr_column = columns.next
-        last_column = curr_column
-        while @flow_items.size > 0
-          item = @flow_items.first
-
-          if item.min_width != 0 # fit the wide items in narrow column
-            if item.min_width > curr_column.width
-              if curr_column.top == flow_rect.top
-                curr_column = columns.make_wide curr_column, item.min_width
-              else
-                curr_column = columns.make_wide columns.next, item.min_width
-              end
-            end
-          elsif curr_column.class == WideColumn # fit narrow items in wide column
-            if @c.wide_style == :continue
-              curr_column = curr_column.first
-              columns.current = curr_column
-            else
-              curr_column = columns.next
-            end
-          end
-          break if curr_column == nil
-
-          if item.fits @c, curr_column
-            last_column = curr_column
-            @flow_items.shift.draw @c, curr_column
-          else
-            if curr_column.top == flow_rect.top # if column is full height, can't break up items yet
-              @pdf.stroke_color "FF0000"  # draw an error column in red
-              item.draw @c, curr_column
-            end
-            curr_column = columns.next
-            break if curr_column == nil
-          end
-        end
-
-        # draw continuation text in last used column, or last column if no space
-        continuation_col = last_column
-        if (continuation_col.height < 
-          continuation_box.height(continuation_col, @flow_items.size != 0) )
-          if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
-              continuation_col = columns.last
-          end
-        end
-        continuation_box.draw(continuation_col, @flow_items.size != 0)
+        init_flow_items
+        render_everything
       end
 
-      def render_page(pagenum)
+      # initializes everything outside of the flow rect on a new page
+      def start_page
+        end_page if @page
+        @pagenum += 1
         @pdf.start_new_page
 
         flow_rect = Rect.create_bound_box(@pdf.bounds)
         @c.render_frame flow_rect
         @c.render_header flow_rect
-        render_flow_rect flow_rect, pagenum
 
-        @c.page_complete(pagenum, @flow_items.size > 0)
+        columns = @c.create_columns(flow_rect)
+        # make space for continuation box
+        continuation_box = @c.create_continuation_box
+        columns.last.bottom += continuation_box.height(columns.last, true)
+        @c.render_column_instructions(columns, @pagenum)
+        curr_column = columns.next
+
+        @page = { :continuation_box => continuation_box, :columns => columns, :last_column => curr_column }
+        [flow_rect, columns, curr_column]
       end
+
+      def end_page
+        return if @page == nil
+        continuation_col = @page[:last_column]
+        return if continuation_col == nil
+        continuation_box = @page[:continuation_box]
+        columns = @page[:columns]
+        if (continuation_col.height < 
+          continuation_box.height(continuation_col, @flow_items.size != 0) )
+          if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
+            continuation_col = columns.last
+          end
+        end
+        continuation_box.draw(continuation_col, @flow_items.size != 0)        
+        @c.page_complete(@pagenum, @flow_items.size > 0)
+        @page = nil
+      end
+
+      # tries to fit current item into any columns on the current page
+      # returns nil if item does not fit
+      #
+      def fit_width(item, flow_rect, curr_column, columns)
+        return nil if curr_column == nil
+        if item.min_width != 0 # if width >= narrow column
+          if item.min_width > curr_column.width
+            if curr_column.full_height?
+              curr_column = columns.make_wide curr_column, item.min_width # widen the current column
+            else
+              curr_column = columns.make_wide columns.next, item.min_width # 
+            end
+          end
+        elsif curr_column.class == WideColumn # fit narrow items in wide column
+          if @c.wide_style == :continue
+            curr_column = curr_column.first
+            columns.current = curr_column
+          else
+            curr_column = columns.next
+          end
+        end
+        curr_column
+      end
+
+      def render_error(text)
+        @pdf.fill_color "FF0000"
+        @pdf.font "Helvetica", :size => 18, :style => :bold
+        @pdf.text_box text, :at => [50, @pdf.bounds.top - 100], :width    => 300, :height => 1000
+      end
+      
+      def render_everything
+        @pagenum = 0
+        @page =  nil
+        curr_column = nil   # used as a flag that we need a new page
+        while @flow_items.size > 0
+          flow_rect, columns, curr_column = start_page if curr_column == nil
+          item = @flow_items.first
+          curr_column = fit_width(item, flow_rect, curr_column, columns)
+          
+          if curr_column == nil # item too wide for current page, start a new one
+            if columns.empty? # too wide for empty page, that's an error
+              @flow_items.shift
+              render_error "ERROR Item #{item.to_s} is too wide to fit onto page."
+            end
+            next
+          end
+          
+          if item.fits @c, curr_column
+            @page[:last_column] = curr_column
+            @flow_items.shift.draw @c, curr_column
+          elsif curr_column.full_height? # item is taller than a single column, need to break it up
+            if curr_column.first != columns.first # split items go on a brand new page for now
+              curr_column = nil
+              next
+            else
+              @flow_items.shift
+              item.draw @c, curr_column do
+                # returns new columns for item to draw in
+                curr_column = columns.next
+                curr_column = fit_width(item, flow_rect, curr_column, columns)
+                if (curr_column == nil)
+                  flow_rect, columns, curr_column = start_page
+                  curr_column = fit_width(item, flow_rect, curr_column, columns)
+                  if (curr_column == nil) # cannot fit on a single blank page, error
+                    render_error "ERROR, item #{item.to_s} too wide to fit onto page"
+                  end
+                end
+              end # block
+            end
+          else
+            curr_column = columns.next
+          end
+        end
+        end_page
+      end
+
     end
 
     def self.get_ballot_config(style)

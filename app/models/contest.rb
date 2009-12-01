@@ -26,4 +26,8 @@ class Contest < ActiveRecord::Base
     write_attribute(:voting_method_id, 0) if !voting_method_id
   end
   
+  def to_s
+    "CONTEST #{self.display_name}"
+  end
+  
 end

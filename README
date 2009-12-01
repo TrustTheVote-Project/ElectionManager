@@ -26,6 +26,11 @@ rake ttv:seed RAILS_ENV=test  # loads up our seed data
 For this, I had to write custom rake tasks inside lib/db.rake
 http://stackoverflow.com/questions/1097845/how-to-prevent-rake-test-to-call-task-dbtestprepare
 
+TODO
+- db transaction logging and viewing
+- import of multiple district sets at the same time (allows us to get california, and
+a separate set for each county)
+
 AJAX
 flash messages are automatically passed on as X-JSON headers, use to report errors, etc
 
@@ -73,8 +78,6 @@ DEBUGGING
 script/console
 - execute url_for like this: app.url_for
 
-TODO
-- db transaction logging and viewing
 
 OTHER CODE THAT MIGHT BE USEFUL
 auto_resize_options[:onKeyPress] = "if (this.scrollHeight > this.clientHeight && !window.opera)\nthis.rows += 1;"
