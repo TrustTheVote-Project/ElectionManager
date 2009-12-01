@@ -1,21 +1,29 @@
 
-require 'test/test_helper'
+#require 'test/test_helper'
 
 require 'prawn'
 # require 'prawn/format'
+if false
 class PDFBallotTest < ActiveSupport::TestCase
-  def test_GenerateBallot
-    Rails.logger.level = 3
-    election = Election.find(:first)
-    precinct = election.district_set.precincts[12]
-    pdf = TTV::PDFBallot.create(election, precinct)
-    f = File.new("#{RAILS_ROOT}/test/PDFBallot.pdf", 'w')
-    f.write(pdf)
-    f.close
-    `open  #{f.path}`
-    assert_not_nil(election)
-    assert_not_nil(precinct)
+ 
+  def test_generate_ballot
+#    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
+    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
+    election_to_ballot(file) 
   end
+  
+  def election_to_ballot(file)
+    ActiveRecord::Base.transaction do
+      election = TTV::ImportExport.import(file)
+      precinct = election.district_set.precincts.first
+      pdf = TTV::PDFBallot.create(election, precinct)
+      f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.pdf", 'w')
+      f.write(pdf)
+      f.close
+      `open  #{f.path}`
+    end
+  end
+end
 end
 
 module TTV
@@ -189,8 +197,8 @@ module TTV
           @flow_items.map { |r| r.min_width }.max
         end
 
-        def draw(config, rect)
-          @flow_items.each { |f| f.draw config, rect }
+        def draw(config, rect, &bloc)
+          @flow_items.each { |f| f.draw config, rect, &bloc }
         end
         
         def to_s
@@ -249,24 +257,26 @@ module TTV
       class Contest < FlowItem
 
         NAME_WIDTH = 100
-
+        MAX_RANKED = 10
+        NEXT_COL_BOUNCE = 30
+        
         def min_width
           if @item.voting_method_id == VotingMethod::WINNER
             super
           else
-            100 + 3 * HPAD + @item.candidates.count * (HPAD + BallotConfig::CHECKBOX_WIDTH)
+            100 + 3 * HPAD + [@item.candidates.count, MAX_RANKED].min * (HPAD + BallotConfig::CHECKBOX_WIDTH)
           end
         end
 
-        def draw(config, rect)
+        def draw(config, rect, &bloc)
           if @item.voting_method_id == VotingMethod::WINNER
-            draw_winner config, rect
+            draw_winner config, rect, &bloc
           else
-            draw_ranked config, rect
+            draw_ranked config, rect, &bloc
           end
         end
 
-        def draw_winner(config, rect)
+        def draw_winner(config, rect, &bloc)
           top = rect.top
           # HEADER
           config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
@@ -277,6 +287,10 @@ module TTV
           end
           # CANDIDATES
           @item.candidates.each do |candidate|
+            if bloc && rect.height < NEXT_COL_BOUNCE
+              config.frame_item rect, top
+              rect = yield
+            end
             rect.top -= VPAD * 2
             config.draw_checkbox rect, candidate.display_name + "\n" + candidate.party.display_name
           end
@@ -294,7 +308,7 @@ module TTV
           config.frame_item rect, top
         end
 
-        def draw_ranked(config, rect)
+        def draw_ranked(config, rect, &bloc)
           top = rect.top
           pdf = config.pdf
           # title
@@ -309,8 +323,9 @@ module TTV
           hpad4 = HPAD2 * 2
           rect.top -= VPAD * 2
           count = @item.candidates.count
+          checkbox_count = [@item.candidates.count, MAX_RANKED].min
           height = 0
-          0.upto(count - 1) do |i|
+          0.upto(checkbox_count - 1) do |i|
             x = rect.left + HPAD2 + i * (BallotConfig::CHECKBOX_WIDTH + hpad4)
             y = rect.top + VPAD 
             pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
@@ -322,8 +337,13 @@ module TTV
 
           # checkboxes
 
-          0.upto(count) do |i|
-            0.upto(count - 1) do |j|
+          0.upto(count) do |i|  # candidates
+            if bloc && rect.height < NEXT_COL_BOUNCE
+              config.frame_item rect, top
+              rect = yield
+              rect.top -= HPAD2
+            end
+            0.upto(checkbox_count - 1) do |j|
               x = rect.left + HPAD2 + j * (BallotConfig::CHECKBOX_WIDTH + hpad4)
               y = rect.top
               pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
@@ -335,7 +355,7 @@ module TTV
               end
             end
             pdf.fill_color "000000"
-            spacer = HPAD2 + count * (BallotConfig::CHECKBOX_WIDTH + hpad4) 
+            spacer = HPAD2 + checkbox_count * (BallotConfig::CHECKBOX_WIDTH + hpad4)
             pdf.font "Helvetica", :size => 10
             pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
               if i < count
@@ -373,10 +393,10 @@ module TTV
         rect.top - r.top
       end
 
-      def draw(rect, continue)
+      def draw(rect, last_page)
         top = rect.top
         @pdf.font "Helvetica", :size => 10, :style => :bold
-        if continue
+        unless last_page
           circle_width = 20
           text_height = 0
           text_width = rect.width - circle_width - 8
@@ -585,7 +605,7 @@ module TTV
       end
 
       def page_complete(pagenum, last_page)
-        if last_page
+        unless last_page
           @pdf.font "Helvetica", :size => 14, :style => :bold
           @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => @pdf.bounds.width do
             @pdf.text "Vote Both Sides", :align => :center
@@ -723,7 +743,7 @@ module TTV
 
       # initializes everything outside of the flow rect on a new page
       def start_page
-        end_page if @page
+        end_page(false) if @page
         @pagenum += 1
         @pdf.start_new_page
 
@@ -742,7 +762,7 @@ module TTV
         [flow_rect, columns, curr_column]
       end
 
-      def end_page
+      def end_page(last_page)
         return if @page == nil
         continuation_col = @page[:last_column]
         return if continuation_col == nil
@@ -754,8 +774,8 @@ module TTV
             continuation_col = columns.last
           end
         end
-        continuation_box.draw(continuation_col, @flow_items.size != 0)        
-        @c.page_complete(@pagenum, @flow_items.size > 0)
+        continuation_box.draw(continuation_col, last_page)
+        @c.page_complete(@pagenum, last_page)
         @page = nil
       end
 
@@ -814,6 +834,7 @@ module TTV
               curr_column = nil
               next
             else
+              @page[:last_column] = curr_column
               @flow_items.shift
               item.draw @c, curr_column do
                 # returns new columns for item to draw in
@@ -826,13 +847,15 @@ module TTV
                     render_error "ERROR, item #{item.to_s} too wide to fit onto page"
                   end
                 end
+                @page[:last_column] = curr_column if curr_column
+                curr_column
               end # block
             end
           else
             curr_column = columns.next
           end
         end
-        end_page
+        end_page(true)
       end
 
     end
