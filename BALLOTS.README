@@ -9,11 +9,18 @@ TODO:
 - this page intentionally left blank
 - page number dependent formatting
 
+INTERNATIONALIZATION
+- internationalize ballot style
+- internationalize ballot contests
+
+- take text from all items, and export it to a file
+
+
 FEATURES IMPLEMENTED:
 - splitting of contests between columns
   split contests start a new page
   ranked contests are limited to 10 ranks
-
+- new test directories
 - flow_item togetherness property. Could be reimplemented as compression of flow items after initial placement if we need more sophisticated measures
 - ranked choice voting, crude, no instructions
 - multi-column layouts, such as wider columns for propositions.
@@ -27,10 +34,6 @@ FEATURES IMPLEMENTED:
 
 - LA ballots
 http://smartvoter.org/2008/11/04/ca/la/ballot.html
-
-Prawn:
-stroke_rectangle
-rectangle
 
 RUBY:
 require 'PP' # pretty print library

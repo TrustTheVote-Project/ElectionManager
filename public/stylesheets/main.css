@@ -52,12 +52,12 @@ fieldset, form, label, legend, caption  {
 }
 body {
 	max-width: 1280px;
-	line-height: 1;
+	line-height: 120%;
 	color: black;
 	background: white;
 }
 ol, ul {
-	list-style: none;
+	/* list-style: none; */
 }
 
 body, p, ol, ul, td, input {

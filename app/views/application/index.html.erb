@@ -2,18 +2,18 @@
 <h1>Welcome to TrustTheVote</h1>
 <% if current_user %>
 	<p>Hola <%= h current_user.email %></p>
-	<p>What would you like to do?</p>
+	<p>What would you like to do?asd</p>
 	<ul>
 		<li><%=link_to "View elections", elections_path %>
 		<li><%=link_to "View districts", districts_path %>
 		<li><%=link_to "View contests", contests_path %>
 		<li><%=link_to "View candidates", candidates_path %>
 		<li><%=link_to "View questions", questions_path %>
-			<li>
-				<% form_tag  import_elections_path, :method => 'put', :multipart => true do %>
+		<li><% form_tag  import_elections_path, :method => 'put', :multipart => true do %>
 					<%= submit_tag "Import election" %>
 					<%= file_field_tag "importFile" , :accept => "text/xml" %>
 				<% end %>
+		<li><%=link_to "View ballot styles", ballot_styles_path %> 
 	</ul>
 
 <% else %>
