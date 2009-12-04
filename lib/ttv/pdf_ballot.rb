@@ -1,8 +1,7 @@
 
-#require 'test/test_helper'
+#require '../../test/test_helper'
 
 require 'prawn'
-# require 'prawn/format'
 if false
 class PDFBallotTest < ActiveSupport::TestCase
  
@@ -25,7 +24,6 @@ class PDFBallotTest < ActiveSupport::TestCase
   end
 end
 end
-
 module TTV
   module PDFBallot
     class Rect
@@ -860,30 +858,11 @@ module TTV
 
     end
 
-    def self.get_ballot_config(style)
-      style ||= "default"
-      return BallotConfig.new(style) if style == "default"
-
-      name = "#{RAILS_ROOT}/ballots/#{style}/ballot_config.rb"
-      if File.exists? name
-        begin
-          load name
-          c = TTV::PDFBallot.const_get(style.camelize).const_get("BallotConfig")
-          c.new(style)
-        rescue
-          raise "File #{name} has not defined TTV::PDFBallot::#{style.camelize}::BallotConfig "
-        end
-      else
-        raise "Illegal ballot style: file #{name} does not exist."
-      end
-    end
-
     def self.create(election, precinct, style='default')
       Prawn.debug = true
-      renderer = Renderer.new(election, precinct, get_ballot_config(style))
+      renderer = Renderer.new(election, precinct, TTV::PDFBallotStyle.get_ballot_config(style))
       renderer.render
       renderer.to_s
     end
   end
 end
-
