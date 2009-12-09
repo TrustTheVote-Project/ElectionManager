@@ -2,12 +2,13 @@
 #require '../../test/test_helper'
 
 require 'prawn'
+
 if false
 class PDFBallotTest < ActiveSupport::TestCase
  
   def test_generate_ballot
-#    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
-    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
+    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
+#    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
     election_to_ballot(file) 
   end
   
@@ -15,8 +16,9 @@ class PDFBallotTest < ActiveSupport::TestCase
     ActiveRecord::Base.transaction do
       election = TTV::ImportExport.import(file)
       precinct = election.district_set.precincts.first
-      pdf = TTV::PDFBallot.create(election, precinct)
-      f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.pdf", 'w')
+      lang = 'zh'
+      pdf = TTV::PDFBallot.create(election, precinct, 'default', lang)
+      f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.#{lang}.pdf", 'w')
       f.write(pdf)
       f.close
       `open  #{f.path}`
@@ -24,6 +26,7 @@ class PDFBallotTest < ActiveSupport::TestCase
   end
 end
 end
+
 module TTV
   module PDFBallot
     class Rect
@@ -359,7 +362,7 @@ module TTV
               if i < count
                 pdf.text @item.candidates[i].display_name + "\n" + @item.candidates[i].party.display_name
               else # writein
-                pdf.text "or write in"
+                pdf.text config.bt[:or_write_in]
                 pdf.dash 1
                 pdf.move_down 16
                 config.pdf.stroke_line [0, 0], [rect.width - spacer - HPAD2, 0]
@@ -382,16 +385,16 @@ module TTV
         @pdf = pdf
       end
 
-      def height(rect, continue = false)
+      def height(config, rect, last_page = false)
         r = rect.clone;
         @pdf.transaction do
-          draw(r, continue)
+          draw(config, r, last_page)
           @pdf.rollback
         end
         rect.top - r.top
       end
 
-      def draw(rect, last_page)
+      def draw(config, rect, last_page)
         top = rect.top
         @pdf.font "Helvetica", :size => 10, :style => :bold
         unless last_page
@@ -400,7 +403,7 @@ module TTV
           text_width = rect.width - circle_width - 8
           @pdf.bounding_box [rect.left+FlowItem::HPAD, rect.top], :width => text_width do
             @pdf.move_down FlowItem::VPAD
-            @pdf.text "Continue voting\nnext side", :align => :center
+            @pdf.text config.bt[:Continue_voting_next_side], :align => :center
             @pdf.move_down FlowItem::VPAD
             text_height = @pdf.bounds.height
           end
@@ -423,7 +426,7 @@ module TTV
         else
           @pdf.bounding_box [rect.left + FlowItem::HPAD, rect.top], :width => (rect.width - FlowItem::HPAD2) do
             @pdf.move_down FlowItem::VPAD
-            @pdf.text "Thank you for voting!\nPlease turn in your finished ballot", :align => :center
+            @pdf.text config.bt[:Thank_you], :align => :center
             @pdf.move_down FlowItem::VPAD
             rect.top -= @pdf.bounds.height
           end
@@ -446,33 +449,45 @@ module TTV
       HPAD2 = 6
       VPAD = 3
 
-      def initialize(style)
+      def initialize(style, lang, translation)
+        @file_root = "#{RAILS_ROOT}/ballots/#{style}"
+        @ballot_translation = translation
+        @lang = lang
         @page_size = "LETTER"
         @left_margin = @right_margin = 18
         @top_margin = @bottom_margin = 30
         @pleaseVoteHeight = 30
         @padding = 8
         @columns = 3
-        @file_root = "#{RAILS_ROOT}/ballots/#{style}/"
       end
 
       def setup(pdf, election, precinct)
         @pdf = pdf
         @election = election
         @precinct = precinct
-        pdf.font_families.update({
+        if @lang == "zh"  # chinese fonts, 
+          pdf.font_families.update({
           "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
-                           :bold => "/Library/Fonts/Arial Bold.ttf" },
-          "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }
-            })
+                           :bold => "/Library/Fonts/Arial Unicode.ttf" },
+          "Courier" => { :normal => "/Library/Fonts/Arial Unicode.ttf" }
+          })
+          @wrap = :character
+        else
+          pdf.font_families.update({
+            "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
+                             :bold => "/Library/Fonts/Arial Bold.ttf" },
+            "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }
+              })
+          @wrap = :space
+        end
       end
-
+     
       def load_text(filename)
-        IO.read("#{@file_root}#{filename}")
+        IO.read "#{@file_root}/lang/#{@lang}/#{filename}"
       end
 
       def image_path(filename)
-        full_path = "#{@file_root}#{filename}"
+        full_path = "#{@file_root}/lang/#{@lang}/#{filename}"
       end
 
       def load_image(filename)
@@ -480,6 +495,16 @@ module TTV
         return Prawn::Images::JPG.new(IO.read(image_path(filename)))
       end
 
+      def ballot_translation
+        @ballot_translation
+      end     
+      alias bt ballot_translation
+      
+      def election_translation
+        @election_translation
+      end
+      alias et election_translation
+      
       def create_continuation_box
         ContinuationBox.new(@pdf)
       end
@@ -490,7 +515,7 @@ module TTV
 
       def wide_style
         # do narrow flow items continue flowing after wide ones?
-        return :continue
+        return :continue # :stop for narrow items starting new column
       end
 
       def debug_stroke_bounds #debug version, rainbow of colors
@@ -552,9 +577,9 @@ module TTV
           @pdf.fill_and_stroke
           @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
           @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
-          @pdf.font("Courier", :size => 14)
-          @pdf.text "Sample Ballot", :at => [16, 275], :rotate => 90
-          @pdf.text "Sample Ballot", :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
+          @pdf.font "Courier", :size => 14
+          @pdf.text bt[:Sample_Ballot], :at => [16, 275], :rotate => 90
+          @pdf.text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
           @pdf.text "12001040100040", :at => [16, 410], :rotate => 90
           @pdf.text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
           flow_rect.inset bar_width + @padding, @pleaseVoteHeight
@@ -566,7 +591,7 @@ module TTV
         @pdf.bounding_box [flow_rect.left + @padding, flow_rect.top], 
         :width => flow_rect.width - @padding do
           @pdf.move_down 3
-          @pdf.text "OFFICIAL BALLOT"
+          @pdf.text bt[:OFFICIAL_BALLOT]
           @pdf.text @election.start_date.strftime("%B %d, %Y")
           @pdf.bounding_box [@pdf.bounds.width / 3,  @pdf.bounds.height], 
           :width => @pdf.bounds.width * 2 / 3 do
@@ -589,12 +614,12 @@ module TTV
         @pdf.bounding_box [rect.left + @padding, rect.top], 
         :width => rect.width - @padding * 2 do
           @pdf.move_down 3
-          @pdf.text load_text("instructions1.txt")
+          @pdf.text load_text("instructions1.txt"), :wrap => @wrap 
           img = load_image "instructions2.png"
           @pdf.image image_path("instructions2.png"), 
           :width => [img.width * 72 / 96, @pdf.bounds.width].min
           @pdf.move_down 3
-          @pdf.text load_text("instructions3.txt")
+          @pdf.text load_text("instructions3.txt"), :wrap => @wrap
         end
         rect.top = rect.bottom
         @pdf.line_width 0.5
@@ -606,11 +631,11 @@ module TTV
         unless last_page
           @pdf.font "Helvetica", :size => 14, :style => :bold
           @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => @pdf.bounds.width do
-            @pdf.text "Vote Both Sides", :align => :center
+            @pdf.text bt[:Vote_Both_Sides], :align => :center
           end
           @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
             @pdf.move_down 10
-            @pdf.text "Vote Both Sides", :align => :center
+            @pdf.text bt[:Vote_Both_Sides], :align => :center
           end
         end
       end
@@ -752,7 +777,7 @@ module TTV
         columns = @c.create_columns(flow_rect)
         # make space for continuation box
         continuation_box = @c.create_continuation_box
-        columns.last.bottom += continuation_box.height(columns.last, true)
+        columns.last.bottom += continuation_box.height(@c, columns.last, true)
         @c.render_column_instructions(columns, @pagenum)
         curr_column = columns.next
 
@@ -767,12 +792,12 @@ module TTV
         continuation_box = @page[:continuation_box]
         columns = @page[:columns]
         if (continuation_col.height < 
-          continuation_box.height(continuation_col, @flow_items.size != 0) )
+          continuation_box.height(@c, continuation_col, @flow_items.size != 0) )
           if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
             continuation_col = columns.last
           end
         end
-        continuation_box.draw(continuation_col, last_page)
+        continuation_box.draw(@c, continuation_col, last_page)
         @c.page_complete(@pagenum, last_page)
         @page = nil
       end
@@ -858,10 +883,12 @@ module TTV
 
     end
 
-    def self.create(election, precinct, style='default')
+    def self.create(election, precinct, style='default', lang='en')
       Prawn.debug = true
-      renderer = Renderer.new(election, precinct, TTV::PDFBallotStyle.get_ballot_config(style))
+      config = TTV::PDFBallotStyle.get_ballot_config(style, lang)
+      renderer = Renderer.new(election, precinct, config)
       renderer.render
+      config.bt.save
       renderer.to_s
     end
   end

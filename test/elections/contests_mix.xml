@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election start_date="2010-10-01 08:00:00 -0700" display_name="contests_mix.xml">
+  <districts display_name="DistrictSet test.xml">
+    <district type="state" id="17" display_name="State">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="county" id="18" display_name="County 1">
+      <precinct idref="101"/>
+    </district>
+    <district type="county" id="19" display_name="County 2">
+      <precinct idref="102"/>
+    </district>
+    <district type="municipality" id="20" display_name="Municipality">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="school" id="21" display_name="School">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="water" id="22" display_name="Water">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="fire" id="23" display_name="Fire">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="coastal" id="24" display_name="Coastal">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+    <district type="harbor" id="25" display_name="Harbor">
+      <precinct idref="101"/>
+      <precinct idref="102"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct id="101" display_name="Precinct 1"/>
+    <precinct id="102" display_name="Precinct 2"/>
+  </precincts>
+  <body>
+    <contest open_seat="1" voting_method="winner" district_idref="17" display_name="A Winner simple">
+      <candidates>
+        <candidate party="democrat" display_name="Aby Abigail"/>
+        <candidate party="independent" display_name="Bob Brandeis"/>
+        <candidate party="republican" display_name="Christine Columbus"/>
+        <candidate party="liberitarian" display_name="Dave Delta"/>
+      </candidates>
+    </contest>
+    <contest open_seat="2" voting_method="winner" district_idref="17" display_name="A Winner with two seats">
+      <candidates>
+        <candidate party="democrat" display_name="Aby Abigail"/>
+        <candidate party="independent" display_name="Bob Brandeis"/>
+        <candidate party="republican" display_name="Christine Columbus"/>
+        <candidate party="liberitarian" display_name="Dave Delta"/>
+      </candidates>
+    </contest>
+    <contest open_seat="2" voting_method="ranked" district_idref="17" display_name="Ranked 2 seats">
+      <candidates>
+        <candidate party="democrat" display_name="Aby Ranked"/>
+        <candidate party="republican" display_name="Bob Ranked"/>
+        <candidate party="independent" display_name="Christine Ranked"/>
+        <candidate party="liberitarian" display_name="Dave Delta"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" voting_method="ranked" district_idref="17" display_name="Ranked simple">
+      <candidates>
+        <candidate party="democrat" display_name="Aby Ranked"/>
+        <candidate party="independent" display_name="Bob Ranked"/>
+        <candidate party="republican" display_name="Christine Ranked"/>
+        <candidate party="liberitarian" display_name="Dave Ranked"/>
+      </candidates>
+    </contest>
+    <question district_idref="17" display_name="A Short question">
+      <text>
+What do you think about this ballot. Is this ballot any good?      </text>
+    </question>
+    <question district_idref="17" display_name="Long question">
+      <text>
+The beauty of the ballot design is in the eye of the beholder. The funny thing is that coding it takes fewer words than deciding what to code. Therefore, we'll code first to give participants something to play with as we debate different proposals. We live in the golden age of software. Never before, it has been possible to do so much in so little time.
+
+Lets start a new paragraph. Would like to help us code a few more ballot designs?      </text>
+    </question>
+  </body>
+</election>

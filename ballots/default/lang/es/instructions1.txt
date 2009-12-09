@@ -1,0 +1,6 @@
+Instrucciones:
+Vote por un solo candidato en cada carrera.
+
+Por favor, use un negro bolígrafo para marcar sus selecciones en la boleta electoral. Para votar por su selección en cada concurso, rellene completamente la casilla correspondiente a la izquierda de su elección.
+
+Para votar por un candidato cuyo nombre no se ha impreso en la boleta, rellene completamente la casilla correspondiente a la izquierda de las palabras &quot;write-in&quot; y escribir el nombre del candidato en la línea provista.
