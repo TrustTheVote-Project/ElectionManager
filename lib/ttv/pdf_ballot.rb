@@ -7,16 +7,17 @@ if false
 class PDFBallotTest < ActiveSupport::TestCase
  
   def test_generate_ballot
-    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
+#    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
 #    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
-    election_to_ballot(file) 
+    file = File.new( RAILS_ROOT + "/test/elections/contests_mix.xml")
+    election_to_ballot(file, 'es') 
   end
   
-  def election_to_ballot(file)
+  def election_to_ballot(file, lang)
     ActiveRecord::Base.transaction do
       election = TTV::ImportExport.import(file)
       precinct = election.district_set.precincts.first
-      lang = 'zh'
+      lang ||= 'en'
       pdf = TTV::PDFBallot.create(election, precinct, 'default', lang)
       f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.#{lang}.pdf", 'w')
       f.write(pdf)
@@ -239,16 +240,16 @@ module TTV
           config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 4) do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
             config.pdf.move_down VPAD
-            config.pdf.text @item.display_name, :leading => 1 #header
+            config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
             config.pdf.move_down VPAD * 2
             config.pdf.font "Helvetica", :size => 10
-            config.pdf.text @item.question, :leading => 1 # question
+            config.pdf.text config.et.get(@item, :question), :leading => 1 # question
             rect.top -= config.pdf.bounds.height
           end
           rect.top -= 3
-          config.draw_checkbox rect, "Yes"
+          config.draw_checkbox rect, config.bt[:Yes]
           rect.top -= 3
-          config.draw_checkbox  rect, "No"
+          config.draw_checkbox  rect, config.bt[:No]
           config.pdf.line_width 0.5
           rect.top -= 3
           config.frame_item rect, top
@@ -283,7 +284,7 @@ module TTV
           config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
             config.pdf.font "Helvetica", :size => 10, :style => :bold
             config.pdf.move_down VPAD
-            config.pdf.text @item.display_name, :leading => 1 #header
+            config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
             rect.top -= config.pdf.bounds.height
           end
           # CANDIDATES
@@ -293,11 +294,11 @@ module TTV
               rect = yield
             end
             rect.top -= VPAD * 2
-            config.draw_checkbox rect, candidate.display_name + "\n" + candidate.party.display_name
+            config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
           end
           @item.open_seat_count.times do
             rect.top -= VPAD * 2
-            left = config.draw_checkbox rect, "or write in"
+            left = config.draw_checkbox rect, config.bt[:or_write_in]
             config.pdf.dash 1
             v = 16
             config.pdf.stroke_line [rect.left + left, rect.top - v], 
@@ -316,7 +317,7 @@ module TTV
           pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
             pdf.font "Helvetica", :size => 10, :style => :bold
             pdf.move_down VPAD
-            pdf.text @item.display_name, :leading => 1 #header
+            pdf.text config.et.get(@item, :display_name), :leading => 1 #header
             rect.top -= pdf.bounds.height
           end
 
@@ -330,7 +331,7 @@ module TTV
             x = rect.left + HPAD2 + i * (BallotConfig::CHECKBOX_WIDTH + hpad4)
             y = rect.top + VPAD 
             pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
-              pdf.text((i + 1).ordinalize, :align => :center)
+              pdf.text(config.et.ordinalize(i + 1), :align => :center)
               height = pdf.bounds.height
             end
           end
@@ -360,7 +361,7 @@ module TTV
             pdf.font "Helvetica", :size => 10
             pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
               if i < count
-                pdf.text @item.candidates[i].display_name + "\n" + @item.candidates[i].party.display_name
+                pdf.text config.et.get(@item.candidates[i], :display_name) + "\n" + config.et.get( @item.candidates[i].party, :display_name)
               else # writein
                 pdf.text config.bt[:or_write_in]
                 pdf.dash 1
@@ -449,10 +450,13 @@ module TTV
       HPAD2 = 6
       VPAD = 3
 
-      def initialize(style, lang, translation)
+      def initialize(style, lang, election)
         @file_root = "#{RAILS_ROOT}/ballots/#{style}"
-        @ballot_translation = translation
+        @election = election
         @lang = lang
+        @ballot_translation = TTV::PDFBallotStyle.get_ballot_translation(style, lang)
+        @election_translation = TTV::PDFBallotStyle.get_election_translation(election, lang)
+
         @page_size = "LETTER"
         @left_margin = @right_margin = 18
         @top_margin = @bottom_margin = 30
@@ -461,9 +465,8 @@ module TTV
         @columns = 3
       end
 
-      def setup(pdf, election, precinct)
+      def setup(pdf, precinct)
         @pdf = pdf
-        @election = election
         @precinct = precinct
         if @lang == "zh"  # chinese fonts, 
           pdf.font_families.update({
@@ -592,12 +595,12 @@ module TTV
         :width => flow_rect.width - @padding do
           @pdf.move_down 3
           @pdf.text bt[:OFFICIAL_BALLOT]
-          @pdf.text @election.start_date.strftime("%B %d, %Y")
+          @pdf.text et.strftime(@election.start_date, "%B %d, %Y")
           @pdf.bounding_box [@pdf.bounds.width / 3,  @pdf.bounds.height], 
           :width => @pdf.bounds.width * 2 / 3 do
             @pdf.move_down 3
-            @pdf.text @election.display_name, :align => :center
-            @pdf.text @precinct.display_name, :align => :center
+            @pdf.text et.get(@election, :display_name), :align => :center
+            @pdf.text et.get(@precinct, :display_name), :align => :center
             @pdf.move_down(@padding / 3)
             flow_rect.top -= @pdf.bounds.height  
           end
@@ -725,7 +728,7 @@ module TTV
       def init_flow_items
         @flow_items = []
         @precinct.districts(@election.district_set).each do |district|
-          header_item = @c.create_flow_item(district.display_name)
+          header_item = @c.create_flow_item @c.et.get(district, :display_name)
           #        @flow_items.push(@c.create_flow_item(district.display_name))
           district.contestsForElection(@election).each do |contest|
             if header_item
@@ -758,7 +761,7 @@ module TTV
           :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
         }
         )
-        @c.setup(@pdf, @election, @precinct)
+        @c.setup(@pdf, @precinct)
 
         init_flow_items
         render_everything
@@ -884,12 +887,29 @@ module TTV
     end
 
     def self.create(election, precinct, style='default', lang='en')
-      Prawn.debug = true
-      config = TTV::PDFBallotStyle.get_ballot_config(style, lang)
+#      Prawn.debug = true
+      config = TTV::PDFBallotStyle.get_ballot_config(style, lang, election)
       renderer = Renderer.new(election, precinct, config)
       renderer.render
-      config.bt.save
+      throw "Translation to #{TTV::Translate.human_language(lang)} is not available. Translate, then try again." if config.et.dirty?
+#      config.bt.save
       renderer.to_s
     end
+    
+    # no rebuild is used in testing to prevent continuous rebuilds
+    def self.translate(election, lang, no_rebuild = false)
+      return if no_rebuild && File.exists?(election.translation_path(lang))
+
+      # generate english yaml file by generating ballots for all precincts
+      # 
+      config = TTV::PDFBallotStyle.get_ballot_config('default', 'en', election)
+      election.district_set.precincts.each do | precinct |
+        renderer = Renderer.new(election, precinct, config)
+        renderer.render
+      end
+      config.et.save
+      TTV::Translate.translate_file(election.translation_path('en'), election.translation_path(lang), 'en', lang)
+    end
+    
   end
 end

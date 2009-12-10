@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
-  map.resources :elections, :member => { :export => :get, :precincts => :get }, 
+  map.resources :elections, :member => { :export => :get, :precincts => :get , :translate => :put }, 
                             :collection => { :import => :put } do | elections |
     elections.resources :districts do | districts | 
       districts.resources :contests, :only => [:new]

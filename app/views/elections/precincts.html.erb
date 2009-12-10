@@ -1,19 +1,41 @@
 <% content_for :toolbox do %>
 	<%= render "toolbox" %>
 	<%= link_to "Export", export_election_path(@election) %><br>
+	<%= link_to "Edit", election_path(@election) %>
 <% end %>
-<p>	<%= h @election.display_name %>, scheduled for <%= h pretty_date(@election.start_date) -%>
+<p>
+Here you can generate ballots in different languages. </p>
+<p>For languages other than English,
+you'll need to translate your elections using Google's services. In the real election, translation
+would be done by professionals. This google hack allows us to test how our ballots look
+in different languages.
+</p>
+<h1>Language translation</h1>
+<p>Translate your election into: 
+<%= link_to "Spanish", translate_election_path(@election)  +  "?lang=es",  :method => :put %>, or 
+<%= link_to "Chinese", translate_election_path(@election)  +  "?lang=zh" , :method => :put%>.</p>
+<p>This might take a while, as we generate ballots for all precincts in English (just a brute force algorithm)
+</p>
+
+<h1>Ballot generation</h1>
+<p>Election: <%= h @election.display_name %>, scheduled for <%= h pretty_date(@election.start_date) -%>
 </p>
 <% @election.district_set.precincts.each do |precinct| %>
 	<div style="margin-bottom: 8px">
 		<div style='float:right'>
-			<%= link_to "Generate ballot", ballot_election_precinct_path(@election, precinct) %>
+			Generate ballot in 
+				<%= link_to "English", ballot_election_precinct_path(@election, precinct) + "?lang=en" %>
+				<%= link_to "Spanish", ballot_election_precinct_path(@election, precinct) + "?lang=es" %>
+				<%= link_to "Chinese", ballot_election_precinct_path(@election, precinct) + "?lang=zh" %>
 		</div>
 		<div class='district_name'>
 		<% districts = precinct.districts(@election.district_set) %>
-		<%= h precinct.display_name %>, inside <% districts.each do |district| %>
-			<%= district.display_name %>(C:<%= district.contestsForElection(@election).size %>, Q:<%= district.questionsForElection(@election).size %>)
-			,
+		<%= h precinct.display_name %>, in 
+		<% districts.each do |district| %>
+			<% cc = district.contestsForElection(@election).size %>
+			<% qc = district.questionsForElection(@election).size %>
+			<% next unless qc != 0 || cc != 0 %>
+			<%= district.display_name %>(C:<%= cc %>, Q:<%= qc %>),
 		<% end %>
 		</div>
 	</div>

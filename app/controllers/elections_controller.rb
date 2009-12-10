@@ -63,7 +63,6 @@ class ElectionsController < ApplicationController
   end
 
   def import
-    
     begin
       if params[:importFile].nil? 
         flash[:error] = "Import failed because file was not specified."
@@ -92,5 +91,13 @@ class ElectionsController < ApplicationController
   def precincts
     @election = Election.find(params[:id])
   end
+  
+  def translate
+    @election = Election.find(params[:id])
+    TTV::PDFBallot.translate(@election, params[:lang])
+    flash[:notice] = "Election was successfully translated"
+    redirect_to precincts_election_url
+  end
+
 end
 

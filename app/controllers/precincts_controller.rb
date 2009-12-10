@@ -47,14 +47,15 @@ class PrecinctsController < ApplicationController
   def ballot
     election = Election.find(params[:election_id])
     precinct = Precinct.find(params[:id])
-    
+    lang = params[:lang] || 'en'
+    style = params[:style] || 'default'
     begin
-      pdfBallot = TTV::PDFBallot.create(election, precinct)
+      pdfBallot = TTV::PDFBallot.create(election, precinct, style, lang)
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
     rescue Exception => ex
-      raise ex
-      flash[:error] = "Ballot generation error: #{ex.message}";
+      flash[:error] = ex.message
+      redirect_to precincts_election_path(precinct, election)
     end
   end
 end

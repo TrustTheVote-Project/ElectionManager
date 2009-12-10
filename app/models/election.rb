@@ -5,6 +5,8 @@ class Election < ActiveRecord::Base
     validates_presence_of :display_name
     belongs_to :district_set
     
+    before_destroy :destroy_translations
+    
     def to_s
       s = ""
       attributes.each do |key, value| 
@@ -25,6 +27,19 @@ class Election < ActiveRecord::Base
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
     def to_xml( options = {}, &block )
       return TTV::ImportExport.export(self)
+    end
+    
+    TRANSLATION_FOLDER = "#{RAILS_ROOT}/db/translations"
+    
+    def translation_path(lang)
+      "#{TRANSLATION_FOLDER}/election-#{id}.#{lang}.yml"
+    end
+    
+    def destroy_translations
+      Dir.foreach TRANSLATION_FOLDER do |f|
+        next unless f =~ /election-#{id}.*yml$/
+        File.unlink("#{TRANSLATION_FOLDER}/#{f}")
+      end
     end
     
 end

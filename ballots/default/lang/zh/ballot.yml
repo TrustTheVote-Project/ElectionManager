@@ -1,17 +1,23 @@
 --- 
-:OFFICIAL_BALLOT: !binary |
-  5q2j5byP6YCJ56Wo
-
-:Continue_voting_next_side: "\xE7\xBB\xA7\xE7\xBB\xAD\xE6\x8A\x95\xE7\xA5\xA8\n\
-  \xE4\xB8\x8B\xE4\xBE\xA7\n"
-:Vote_Both_Sides: !binary |
-  5oqV56Wo5Y+M6Z2i
-
 :Thank_you: "\xE6\x84\x9F\xE8\xB0\xA2\xE6\x82\xA8\xE6\x8A\x95\xE7\xA5\xA8\xE3\x80\x82\n\
   \xE8\xAF\xB7\xE8\xB0\x88\xE8\xB0\x88\xE4\xBD\xA0\xE7\x9A\x84\xE9\x80\x89\xE7\xA5\xA8\n"
+:Yes: !binary |
+  5piv
+
 :Sample_Ballot: !binary |
   6YCJ56Wo5qC35pys
 
+:No: !binary |
+  5ZCm
+
+:Continue_voting_next_side: "\xE7\xBB\xA7\xE7\xBB\xAD\xE6\x8A\x95\xE7\xA5\xA8\n\
+  \xE4\xB8\x8B\xE4\xBE\xA7\n"
 :or_write_in: !binary |
   5oiW5YaZ5Zyo
+
+:Vote_Both_Sides: !binary |
+  5oqV56Wo5Y+M6Z2i
+
+:OFFICIAL_BALLOT: !binary |
+  5q2j5byP6YCJ56Wo
 

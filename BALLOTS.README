@@ -1,5 +1,5 @@
 TODO:
-- internationalization support, especially chinese
+- brief instructions for every contest
 - import elections with multiple district sets.
     alternative: just import district sets. Or allow definition of district sets in UI?
     still need export/import. Maybe a different file format. Or a similar file format?
@@ -7,7 +7,7 @@ TODO:
     new xml tag, district sets?
 - AIGA styling
 - this page intentionally left blank
-- page number dependent formatting
+- localize ordinals
 
 INTERNATIONALIZATION
 - internationalize ballot style
@@ -17,6 +17,7 @@ INTERNATIONALIZATION
 
 
 FEATURES IMPLEMENTED:
+- internationalization support, especially chinese
 - splitting of contests between columns
   split contests start a new page
   ranked contests are limited to 10 ranks

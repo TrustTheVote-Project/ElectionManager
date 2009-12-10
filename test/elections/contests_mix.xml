@@ -41,7 +41,7 @@
     <precinct id="102" display_name="Precinct 2"/>
   </precincts>
   <body>
-    <contest open_seat="1" voting_method="winner" district_idref="17" display_name="A Winner simple">
+    <contest open_seat="1" display_name="A Winner simple" district_idref="17" voting_method="winner">
       <candidates>
         <candidate party="democrat" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
@@ -49,7 +49,7 @@
         <candidate party="liberitarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="2" voting_method="winner" district_idref="17" display_name="A Winner with two seats">
+    <contest open_seat="2" display_name="A Winner with two seats" district_idref="17" voting_method="winner">
       <candidates>
         <candidate party="democrat" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
@@ -57,7 +57,30 @@
         <candidate party="liberitarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="2" voting_method="ranked" district_idref="17" display_name="Ranked 2 seats">
+    <contest open_seat="1" display_name="Absolute Ruler" district_idref="17" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Nicole Andreson"/>
+        <candidate party="independent" display_name="Samuel H. Angell"/>
+        <candidate party="democrat" display_name="Stephen S. Ankuda"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" display_name="Appelate Mayor" district_idref="17" voting_method="winner">
+      <candidates>
+        <candidate party="democrat" display_name="Gavin Newsom"/>
+        <candidate party="liberitarian" display_name="Meg Whitman"/>
+        <candidate party="republican" display_name="Michael Bloomberg"/>
+        <candidate party="independent" display_name="Setti Warren"/>
+        <candidate party="republican" display_name="Yetti Warren"/>
+      </candidates>
+    </contest>
+    <contest open_seat="1" display_name="Attorney General" district_idref="17" voting_method="winner">
+      <candidates>
+        <candidate party="independent" display_name="Ernest M. Allen III"/>
+        <candidate party="democrat" display_name="Jay Abramson"/>
+        <candidate party="independent" display_name="Teri Ames"/>
+      </candidates>
+    </contest>
+    <contest open_seat="2" display_name="Ranked 2 seats" district_idref="17" voting_method="ranked">
       <candidates>
         <candidate party="democrat" display_name="Aby Ranked"/>
         <candidate party="republican" display_name="Bob Ranked"/>
@@ -65,7 +88,7 @@
         <candidate party="liberitarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="1" voting_method="ranked" district_idref="17" display_name="Ranked simple">
+    <contest open_seat="1" display_name="Ranked simple" district_idref="17" voting_method="ranked">
       <candidates>
         <candidate party="democrat" display_name="Aby Ranked"/>
         <candidate party="independent" display_name="Bob Ranked"/>
@@ -73,11 +96,11 @@
         <candidate party="liberitarian" display_name="Dave Ranked"/>
       </candidates>
     </contest>
-    <question district_idref="17" display_name="A Short question">
+    <question display_name="A Short question" district_idref="17">
       <text>
 What do you think about this ballot. Is this ballot any good?      </text>
     </question>
-    <question district_idref="17" display_name="Long question">
+    <question display_name="Long question" district_idref="17">
       <text>
 The beauty of the ballot design is in the eye of the beholder. The funny thing is that coding it takes fewer words than deciding what to code. Therefore, we'll code first to give participants something to play with as we debate different proposals. We live in the golden age of software. Never before, it has been possible to do so much in so little time.
 
