@@ -33,8 +33,6 @@ module TTV
     end
 
     def self.get_ballot_config(style, lang, election)
-      style ||= "default"
-      return TTV::PDFBallot::BallotConfig.new(style, lang, election) if style == "default"
       name = "#{BALLOT_DIR}/#{style}/ballot_config.rb"
       if File.exists? name
         begin
