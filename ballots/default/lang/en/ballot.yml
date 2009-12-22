@@ -1,13 +1,17 @@
 --- 
-:Continue_voting_next_side: |-
-  Continue voting 
-  next side
+:Sample_Ballot: Sample Ballot
+:OFFICIAL_BALLOT: OFFICIAL BALLOT
 :Vote_Both_Sides: Vote Both Sides
 :Thank_you: |-
   Thank you for voting. 
   Please turn in your ballot
-:Yes: "Yes"
-:Sample_Ballot: Sample Ballot
-:No: "No"
+:Continue_voting_next_side: |-
+  Continue voting 
+  next side
 :or_write_in: or write-in
-:OFFICIAL_BALLOT: OFFICIAL BALLOT
+:Yes: "Yes"
+:No: "No"
+:Rank_candidates: Rank the candidates
+:Vote_for_1: Vote for &1;
+:Vote_for_many: Vote for up to &1;
+:Vote_yes_or_no: Vote yes or no
