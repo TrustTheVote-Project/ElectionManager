@@ -224,7 +224,7 @@ module Default
               f = pdf.font "Helvetica", :size => 9
               pdf.move_down( (BallotConfig::CHECKBOX_HEIGHT - f.ascender) / 2)
               pdf.fill_color "999999"
-              pdf.text j + 1, :align => :center
+              pdf.text( (j + 1).to_s, :align => :center)
             end
           end
           pdf.fill_color "000000"
