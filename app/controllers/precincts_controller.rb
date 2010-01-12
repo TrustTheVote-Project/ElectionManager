@@ -55,7 +55,7 @@ class PrecinctsController < ApplicationController
       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
     rescue Exception => ex
       flash[:error] = ex.message
-      redirect_to precincts_election_path(precinct, election)
+      redirect_to precincts_election_path election
     end
   end
 end

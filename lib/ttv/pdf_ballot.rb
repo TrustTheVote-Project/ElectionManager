@@ -10,14 +10,15 @@ class PDFBallotTest < ActiveSupport::TestCase
 #    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
 #    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
     file = File.new( RAILS_ROOT + "/test/elections/contests_mix.xml")
-    election_to_ballot(file, 'en') 
+    election_to_ballot(file, 'en')
   end
   
   def election_to_ballot(file, lang)
     ActiveRecord::Base.transaction do
       election = TTV::ImportExport.import(file)
-      precinct = election.district_set.precincts.first
       lang ||= 'en'
+      TTV::PDFBallot.translate(election, lang, true) if (lang != 'en')
+      precinct = election.district_set.precincts.first
       pdf = TTV::PDFBallot.create(election, precinct, 'default', lang)
       f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.#{lang}.pdf", 'w')
       f.write(pdf)
@@ -36,8 +37,8 @@ module TTV
       config = TTV::PDFBallotStyle.get_ballot_config(style, lang, election)
       renderer = Renderer.new(election, precinct, config)
       renderer.render
-      throw "Translation to #{TTV::Translate.human_language(lang)} is not available. Translate, then try again." if config.et.dirty?
-  #      config.bt.save
+      raise ArgumentError, "Translation to #{TTV::Translate.human_language(lang)} has not been done. Translate, then try again." if config.et.dirty?
+#      config.bt.save
       renderer.to_s
     end
 

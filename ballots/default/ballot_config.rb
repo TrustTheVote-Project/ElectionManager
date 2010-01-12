@@ -398,7 +398,7 @@ module Default
       elsif item.is_a?(Question)
         return bt[:Vote_yes_or_no]
       else
-        throw "Unknown short instruction type #{item.class}"
+        raise "Unknown short instruction type #{item.class}"
       end      
     end
     
