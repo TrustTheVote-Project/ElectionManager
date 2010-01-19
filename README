@@ -1,3 +1,6 @@
+Prawn 0.6.3 is required due to incompatibility with 0.7
+http://github.com/sandal/prawn/issues/#issue/79
+
 ElectionManager
 - design/import/export an election
 - register as a user
@@ -6,10 +9,7 @@ INSTALL
 # install required gems
 # authlogic 
 sudo gem install authlogic	# authentication
-# PDFlib
-get PDFlib, version 8 from www.pdflib.com
-cp PDFlib.bundle /Library/Ruby/Site/1.8/ # on OS X leopard
-
+sudo gem install prawn # 
 # initialize the database using these custom tasks
 # this will generate a site with a single dummy election, and no users
 rake db:reset ttv:seed ttv:develop
@@ -22,7 +22,7 @@ TESTING
 To test, first set up seed database
 rake db:test:load # resets the schema
 rake ttv:seed RAILS_ENV=test  # loads up our seed data
-
+  
 For this, I had to write custom rake tasks inside lib/db.rake
 http://stackoverflow.com/questions/1097845/how-to-prevent-rake-test-to-call-task-dbtestprepare
 
