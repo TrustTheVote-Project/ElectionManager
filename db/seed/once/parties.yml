@@ -1,16 +1,28 @@
-independent:
+american_independent:
     id: 0
+    display_name: "American Independent"
+
+democratic:
+    id: 1
+    display_name: Democratic
+
+green:
+    id: 2
+    display_name: Green
+
+independent:
+    id: 3
     display_name: Independent
 
-democrat:
-    id: 1
-    display_name: Democrat
-
-republican:
-    id: 2
-    display_name: Republican
-    
 libertarian:
-    id: 3
+    id: 4
     display_name: Libertarian
 
+peace_and_freedom:
+    id: 5
+    display_name: "Peace and Freedom"
+
+republican:
+    id: 6
+    display_name: Republican
+    

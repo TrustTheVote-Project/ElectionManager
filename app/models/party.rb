@@ -1,6 +1,6 @@
 class Party < ActiveRecord::Base
 
-  @@xml_ids = ['independent', 'democrat', 'republican', 'liberitarian']
+  @@xml_ids = ['american_independent', 'democratic', 'green', 'independent', 'liberitarian', 'peace_and_freedom', 'republican']
 
   def idToXml
     @@xml_ids[self.id]
