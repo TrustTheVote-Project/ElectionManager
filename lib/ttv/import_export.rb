@@ -1,3 +1,5 @@
+require 'rexml/document'
+
 module TTV
   module ImportExport
 
