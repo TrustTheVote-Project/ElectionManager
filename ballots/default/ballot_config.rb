@@ -313,7 +313,7 @@ module Default
 
   class BallotConfig
 
-    attr_accessor :pdf, :page_size, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
+    attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
 
     CHECKBOX_WIDTH = 22
     CHECKBOX_HEIGHT = 10
@@ -329,6 +329,7 @@ module Default
       @election_translation = TTV::PDFBallotStyle.get_election_translation(election, lang)
 
       @page_size = "LETTER"
+      @page_layout = :portrait
       @left_margin = @right_margin = 18
       @top_margin = @bottom_margin = 30
       @pleaseVoteHeight = 30

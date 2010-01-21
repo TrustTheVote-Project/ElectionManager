@@ -262,6 +262,7 @@ module TTV
 
       def render
         @pdf = Prawn::Document.new(
+        :page_layout => @c.page_layout,
         :page_size => @c.page_size, 
         :left_margin => @c.left_margin,
         :right_margin => @c.right_margin,
