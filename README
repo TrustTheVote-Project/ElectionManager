@@ -9,11 +9,8 @@ INSTALL
 # install required gems
 sudo gem install authlogic	# authentication
 sudo gem install prawn # PDF
-
-# initialize the database using these custom tasks
-# this will generate a site with a single dummy election, and no users
-rake db:reset ttv:seed ttv:develop
-rake db:test:load ttv:seed RAILS_ENV=test
+rake db:reset ttv:seed ttv:develop # initialize the database
+rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
 rake test # run tests
 script/server # start the server
 
