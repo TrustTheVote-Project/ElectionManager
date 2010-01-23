@@ -7,16 +7,15 @@ ElectionManager
 
 INSTALL
 # install required gems
-# authlogic 
 sudo gem install authlogic	# authentication
-sudo gem install prawn # 
+sudo gem install prawn # PDF
+
 # initialize the database using these custom tasks
 # this will generate a site with a single dummy election, and no users
 rake db:reset ttv:seed ttv:develop
-
-# start the server
-
-script/server
+rake db:test:load ttv:seed RAILS_ENV=test
+rake test # run tests
+script/server # start the server
 
 TESTING
 To test, first set up seed database
