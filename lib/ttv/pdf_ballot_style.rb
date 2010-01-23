@@ -1,3 +1,5 @@
+require "ballots/default/ballot_config.rb"
+
 module TTV
   module PDFBallotStyle
 
@@ -36,11 +38,12 @@ module TTV
       name = "#{BALLOT_DIR}/#{style}/ballot_config.rb"
       if File.exists? name
         begin
-          load name
+          require name
           c = TTV::PDFBallot.const_get(style.camelize).const_get("BallotConfig")
           c.new(style, lang, election)
-        rescue
-          raise "File #{name} has not defined TTV::PDFBallot::#{style.camelize}::BallotConfig "
+        rescue => ex
+          Rails.logger.error(ex)
+          raise ex.to_s + ".  Have you defined  TTV::PDFBallot::#{style.camelize}::BallotConfig inside #{name}"
         end
       else
         raise "Illegal ballot style: file #{name} does not exist."
