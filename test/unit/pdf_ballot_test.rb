@@ -5,6 +5,10 @@ class PDFBallotTest < ActiveSupport::TestCase
     election_to_ballot(File.new( RAILS_ROOT + "/test/elections/contests_mix.xml"), 'en')
   end
   
+  def test_AigaBallot
+    election_to_ballot(File.new( RAILS_ROOT + "/test/elections/contests_mix.xml"), 'en', 'aiga')
+  end
+  
 # commented out because translation involves lots of network activity for Google Translation API  
   def not_test_Spanish
     election = TTV::ImportExport.import(File.new( RAILS_ROOT + "/test/elections/contests_mix.xml"))
@@ -17,10 +21,10 @@ class PDFBallotTest < ActiveSupport::TestCase
     end
   end
   
-  def election_to_ballot(file, lang = 'en')
+  def election_to_ballot(file, lang = 'en', style  = 'default')
     election = TTV::ImportExport.import(file)
     precinct = election.district_set.precincts.first
-    pdf = TTV::PDFBallot.create(election, precinct, 'default', lang)
+    pdf = TTV::PDFBallot.create(election, precinct, style, lang)
     File.open "#{RAILS_ROOT}/test/tmp/UnitTest.pdf", 'w' do |f|
       f.write(pdf)
     end
