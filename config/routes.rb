@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :district_sets
   map.resources :district_types
   map.resources :elections, :member => { :export => :get, :precincts => :get , :translate => :put }, 
-                            :collection => { :import => :put } do | elections |
+                            :collection => { :import => :put, :import_yml => :put } do | elections |
     elections.resources :districts do | districts | 
       districts.resources :contests, :only => [:new]
       districts.resources :questions, :only => [:new]
@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
-
+  map.maintain '/maintain/:action', :controller => 'maintain'
   map.root :controller => "application", :action=>"index"
 
   # The priority is based upon order of creation: first created -> highest priority.

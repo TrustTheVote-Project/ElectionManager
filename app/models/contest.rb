@@ -14,7 +14,7 @@ class Contest < ActiveRecord::Base
   
   def validate
     osc = open_seat_count.to_i
-    errors.add(:open_seat_count, "must be more than 1") if osc < 1
+    errors.add(:open_seat_count, "must be more than 0") if osc < 1
     errors.add(:open_seat_count, "must be less than 10") if osc > 10
     errors.add(:voting_method_id, "is invalid") if !VotingMethod.exists?(voting_method_id)
     errors.add(:district_id, "is invalid") if !District.exists?(district_id)
