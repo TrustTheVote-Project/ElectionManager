@@ -1,5 +1,5 @@
 
-#require '../../test/test_helper'
+#require 'test/test_helper'
 
 require 'prawn'
 
@@ -34,7 +34,8 @@ module TTV
     
     def self.create(election, precinct, style='default', lang='en')
   #      Prawn.debug = true
-      config = TTV::PDFBallotStyle.get_ballot_config(style, lang, election)
+      scanner = TTV::Scanner.new()
+      config = TTV::PDFBallotStyle.get_ballot_config(style, lang, election, scanner)
       renderer = Renderer.new(election, precinct, config)
       renderer.render
       raise ArgumentError, "Translation to #{TTV::Translate.human_language(lang)} has not been done. Translate, then try again." if config.et.dirty?
@@ -48,7 +49,8 @@ module TTV
 
       # generate english yaml file by generating ballots for all precincts
       # 
-      config = TTV::PDFBallotStyle.get_ballot_config('default', 'en', election)
+      scanner = Scanner.new()
+      config = TTV::PDFBallotStyle.get_ballot_config('default', 'en', election, scanner)
       election.district_set.precincts.each do | precinct |
         renderer = Renderer.new(election, precinct, config)
         renderer.render
@@ -315,6 +317,9 @@ module TTV
         continuation_box.draw(@c, continuation_col, last_page)
         @c.page_complete(@pagenum, last_page)
         @page = nil
+        if last_page
+          puts @c.scanner.to_json
+        end
       end
 
       # tries to fit current item into any columns on the current page
@@ -366,7 +371,9 @@ module TTV
           
           if item.fits @c, curr_column
             @page[:last_column] = curr_column
-            @flow_items.shift.draw @c, curr_column
+            item = @flow_items.shift
+            item.draw @c, curr_column
+            @c.scanner.append_ballot_marks(item.ballot_marks)
           elsif curr_column.full_height? # item is taller than a single column, need to break it up
             if curr_column.first != columns.first # split items go on a brand new page for now
               curr_column = nil
@@ -388,6 +395,7 @@ module TTV
                 @page[:last_column] = curr_column if curr_column
                 curr_column
               end # block
+              @c.scanner.append_ballot_marks(item.ballot_marks)
             end
           else
             curr_column = columns.next
@@ -397,6 +405,6 @@ module TTV
       end
 
     end
- 
+    
   end
 end

@@ -34,13 +34,13 @@ module TTV
       return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
     end
 
-    def self.get_ballot_config(style, lang, election)
+    def self.get_ballot_config(style, lang, election, scanner)
       name = "#{BALLOT_DIR}/#{style}/ballot_config.rb"
       if File.exists? name
         begin
-          require name
+          require name unless name =~ /.*ballots\/default\/ballot_config.rb$/
           c = TTV::PDFBallot.const_get(style.camelize).const_get("BallotConfig")
-          c.new(style, lang, election)
+          c.new(style, lang, election, scanner)
         rescue => ex
           Rails.logger.error(ex)
           raise ex.to_s + ".  Have you defined  TTV::PDFBallot::#{style.camelize}::BallotConfig inside #{name}"
