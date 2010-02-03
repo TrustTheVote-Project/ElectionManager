@@ -10,10 +10,23 @@ module Default
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(item)
+    def initialize(item, scanner)
       @item = item
+      @scanner = scanner
     end
 
+    def reset_ballot_marks
+      @ballot_marks = []
+    end
+    
+    def ballot_marks
+      @ballot_marks || []
+    end
+    
+    def add_ballot_mark(contest, choice, page, location)
+      @ballot_marks.push(@scanner.create_ballot_mark contest, choice, page, location )
+    end
+    
     def fits(config, rect)
       # clever way to see if we fit, avoiding code duplication for measure vs. draw
       # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
@@ -65,7 +78,18 @@ module Default
       end
 
       def draw(config, rect, &bloc)
+        reset_ballot_marks
         @flow_items.each { |f| f.draw config, rect, &bloc }
+      end
+      
+      def reset_ballot_marks
+        @flow_items.each { |f| f.reset_ballot_marks }
+      end
+      
+      def ballot_marks
+        ret = []
+        @flow_items.each { |f| ret.concat f.ballot_marks }
+        ret
       end
 
       def to_s
@@ -101,6 +125,7 @@ module Default
       end
 
       def draw(config, rect)
+        reset_ballot_marks
         top = rect.top
         config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 4) do
           config.pdf.font "Helvetica", :size => 10, :style => :bold
@@ -114,9 +139,11 @@ module Default
           rect.top -= config.pdf.bounds.height
         end
         rect.top -= 3
-        config.draw_checkbox rect, config.bt[:Yes]
+        space, location = config.draw_checkbox rect, config.bt[:Yes]
+        add_ballot_mark @item, "Yes", config.pdf.page_number, location
         rect.top -= 3
-        config.draw_checkbox  rect, config.bt[:No]
+        space, location = config.draw_checkbox  rect, config.bt[:No]
+        add_ballot_mark @item, "No", config.pdf.page_number, location
         config.pdf.line_width 0.5
         rect.top -= 3
         config.frame_item rect, top
@@ -138,6 +165,7 @@ module Default
       end
 
       def draw(config, rect, &bloc)
+        reset_ballot_marks
         if @item.voting_method_id == VotingMethod::WINNER
           draw_winner config, rect, &bloc
         else
@@ -163,11 +191,13 @@ module Default
             rect = yield
           end
           rect.top -= VPAD * 2
-          config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
+          space, location = config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
+          add_ballot_mark @item, candidate, config.pdf.page_number, location
         end
         @item.open_seat_count.times do
           rect.top -= VPAD * 2
-          left = config.draw_checkbox rect, config.bt[:or_write_in]
+          left, location = config.draw_checkbox rect, config.bt[:or_write_in]
+          add_ballot_mark @item, "Writein", config.pdf.page_number, location
           config.pdf.dash 1
           v = 16
           config.pdf.stroke_line [rect.left + left, rect.top - v], 
@@ -313,7 +343,7 @@ module Default
 
   class BallotConfig
 
-    attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns
+    attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns, :scanner
 
     CHECKBOX_WIDTH = 22
     CHECKBOX_HEIGHT = 10
@@ -321,7 +351,7 @@ module Default
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election)
+    def initialize(style, lang, election, scanner)
       @file_root = "#{RAILS_ROOT}/ballots/#{style}"
       @election = election
       @lang = lang
@@ -335,6 +365,8 @@ module Default
       @pleaseVoteHeight = 30
       @padding = 8
       @columns = 3
+      @scanner = scanner
+      @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT)
     end
 
     def setup(pdf, precinct)
@@ -436,16 +468,26 @@ module Default
     end
 
     def draw_checkbox(rect, text)
-      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
-        stroke_checkbox
-      end
-      spacer = 2 * FlowItem::HPAD2 + CHECKBOX_WIDTH
+#      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
+#        stroke_checkbox
+#      end
+      check_top_left, location = @scanner.align_checkbox(@pdf, [rect.left + FlowItem::HPAD2, rect.top])
+      stroke_checkbox check_top_left
+#      @pdf.bounding_box check_top_left.dup, :width => CHECKBOX_WIDTH do
+#        @pdf.fill_color "FF0000"
+#        @pdf.rectangle [0,0], CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+#        @pdf.fill_and_stroke
+#        @pdf.fill_color "000000"
+#      end
+      rect.top -= rect.top - check_top_left[1]
+#      spacer = 2 * FlowItem::HPAD2 + CHECKBOX_WIDTH
+      spacer = check_top_left[0] - rect.left + CHECKBOX_WIDTH + FlowItem::HPAD2
       @pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
         @pdf.font "Helvetica", :size => 10
         @pdf.text text
         rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
       end
-      spacer  # returns left-hand side of text position
+      return spacer, location  # returns left-hand side of text position
     end
 
     def frame_item(rect, top)
@@ -458,13 +500,10 @@ module Default
     def render_frame(flow_rect)
       bar_width = 18
       bar_height = 140
-
+      @scanner.render_grid(@pdf)
+      @scanner.render_ballot_marks(@pdf)
       @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
-        @pdf.fill_color = "#000000"
-        @pdf.rectangle [0,bar_height], bar_width, bar_height
-        @pdf.rectangle @pdf.bounds.top_left, bar_width, bar_height
-        @pdf.rectangle [@pdf.bounds.right - bar_width, bar_height], bar_width, bar_height
-        @pdf.fill_and_stroke
+
         @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
         @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
         @pdf.font "Courier", :size => 14
@@ -532,9 +571,9 @@ module Default
 
     def create_flow_item(item)
       case
-      when item.is_a?(Contest) then FlowItem::Contest.new(item)
-      when item.is_a?(Question) then FlowItem::Question.new(item)
-      when item.is_a?(String) then FlowItem::Header.new(item)
+      when item.is_a?(Contest) then FlowItem::Contest.new(item, @scanner)
+      when item.is_a?(Question) then FlowItem::Question.new(item, @scanner)
+      when item.is_a?(String) then FlowItem::Header.new(item, @scanner)
       when item.is_a?(Array) then FlowItem::Combo.new(item)
       end
     end

@@ -2,7 +2,7 @@ module TTV
 module PDFBallot
 module Aiga
   class BallotConfig < TTV::PDFBallot::Default::BallotConfig
-    def initialize(style, lang, election)
+    def initialize(style, lang, election, scanner)
       super
     end      
 
