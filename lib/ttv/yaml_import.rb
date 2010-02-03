@@ -30,7 +30,7 @@ module TTV
   # load another contest into Election object
   # <tt>contest::</tt>Hash contains single contest from yaml
     def load_contest yml_cont
-      dist = @dist_id_map[yml_cont["district_id"]]
+      dist = @dist_id_map[yml_cont["district_ident"]]
       new_contest = Contest.create(:display_name =>yml_cont["display_name"],
                                    :open_seat_count => 1)
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
@@ -59,7 +59,7 @@ module TTV
 #
 # Find or create the districts
 #
-      yaml_prec["districts"].each do |yaml_dist|
+      yaml_prec["district_list"].each do |yaml_dist|
         dist_disp_name = yaml_dist["display_name"]
         new_district = District.find_by_display_name(dist_disp_name)
         if !new_district
