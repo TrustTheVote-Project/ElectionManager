@@ -9,6 +9,7 @@ module Default
     HPAD = 3
     HPAD2 = 6
     VPAD = 3
+    VPAD2 = 6
 
     def initialize(item, scanner)
       @item = item
@@ -195,6 +196,10 @@ module Default
           add_ballot_mark @item, candidate, config.pdf.page_number, location
         end
         @item.open_seat_count.times do
+          if bloc && rect.height < NEXT_COL_BOUNCE
+             config.frame_item rect, top
+             rect = yield
+           end
           rect.top -= VPAD * 2
           left, location = config.draw_checkbox rect, config.bt[:or_write_in]
           add_ballot_mark @item, "Writein", config.pdf.page_number, location
@@ -364,9 +369,10 @@ module Default
       @top_margin = @bottom_margin = 30
       @pleaseVoteHeight = 30
       @padding = 8
-      @columns = 3
+      @columns = @columns || 3
+      @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
-      @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT)
+      @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
     end
 
     def setup(pdf, precinct)

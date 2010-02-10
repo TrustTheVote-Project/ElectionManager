@@ -1,5 +1,5 @@
 
-#require 'test/test_helper'
+require 'test/test_helper'
 
 require 'prawn'
 
@@ -9,7 +9,7 @@ class PDFBallotTest < ActiveSupport::TestCase
   def test_generate_ballot
 #    file = File.new( RAILS_ROOT + "/test/elections/candidates_100.xml")
 #    file = File.new( RAILS_ROOT + "/test/elections/candidates_100_ranked.xml")
-    file = File.new( RAILS_ROOT + "/test/elections/contests_mix.xml")
+    file = File.new( RAILS_ROOT + "/test/elections/NewHampshireGeneral.xml")
     election_to_ballot(file, 'en')
   end
   
@@ -19,7 +19,7 @@ class PDFBallotTest < ActiveSupport::TestCase
       lang ||= 'en'
       TTV::PDFBallot.translate(election, lang, true) if (lang != 'en')
       precinct = election.district_set.precincts.first
-      pdf = TTV::PDFBallot.create(election, precinct, 'default', lang)
+      pdf = TTV::PDFBallot.create(election, precinct, 'nh', lang)
       f = File.new("#{RAILS_ROOT}/test/tmp/#{File.basename(file.path, '.xml')}.#{lang}.pdf", 'w')
       f.write(pdf)
       f.close
@@ -318,6 +318,7 @@ module TTV
         @c.page_complete(@pagenum, last_page)
         @page = nil
         if last_page
+#          @pdf.store.info.data[:TTVBallotInformation] = @c.scanner.to_json  # saves scanner info as metadata
           puts @c.scanner.to_json
         end
       end

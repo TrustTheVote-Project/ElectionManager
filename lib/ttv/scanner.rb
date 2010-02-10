@@ -35,9 +35,10 @@ module TTV
       @ballot_marks.to_json(*a)
     end
 
-    def set_checkbox(width, height)
+    def set_checkbox(width, height, orientation)
       @check_width = width
       @check_height = height
+      @orientation = orientation
     end
 
     def create_ballot_mark(contest, choice, page, location )
@@ -71,7 +72,7 @@ module TTV
       x_offset = pdf.bounds.absolute_left
       y_offset = pdf.bounds.absolute_top - pdf.bounds.top
       x = (point[0] + x_offset) / (@check_width + @hspace)
-      x_count = x.ceil
+      x_count = @orientations == :left ? x.ceil : x.floor
       x = x.ceil * (@check_width + @hspace) - x_offset
       y = (pdf.bounds.absolute_top - point[1] + y_offset) / (@check_height + @vspace)
       y_count = y.ceil
