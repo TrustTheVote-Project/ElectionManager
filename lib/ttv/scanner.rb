@@ -57,7 +57,7 @@ module TTV
           y.times do |j|
             my_x = (@check_width + @hspace) * i
             my_y = pdf.bounds.top - (@check_height + @vspace) * j
-            pdf.rectangle([ my_x, my_y], @check_width, @check_height)
+#            pdf.rectangle([ my_x, my_y], @check_width, @check_height)
           end
         end
         pdf.fill
