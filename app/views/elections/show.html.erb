@@ -1,6 +1,2 @@
-<% content_for :toolbox do %>
-	<%= render "toolbox" %>
-	<%= link_to "Export", export_election_path(@election) %><br>
-	<%= link_to "Precincts and ballots", precincts_election_path, :method => 'get' %>
-<% end %>
+<%= link_to "Precincts and ballots", precincts_election_path, :method => 'get' %>
 <%= render :partial => 'show', :locals => {:election => @election } %>

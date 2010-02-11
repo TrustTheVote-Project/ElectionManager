@@ -29,7 +29,7 @@ module TTV
 
       def importCandidate(xmlCandidate)
         Candidate.new(:display_name => xmlCandidate.attributes['display_name'],
-        :party_id => Party.xmlToId(xmlCandidate.attributes['party']))
+                      :party_id => Party.xmlToId(xmlCandidate.attributes['party']))
       end
 
       def importContests(xmlContests)

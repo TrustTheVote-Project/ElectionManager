@@ -6,7 +6,7 @@ class DistrictsController < ApplicationController
 
   def show
     @district = District.find(params[:id])
-    @election = params[:election_id]
+    @election = Electparams[:election_id]
   end
 
   def new

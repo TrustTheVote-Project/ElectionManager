@@ -21,7 +21,7 @@ class Election < ActiveRecord::Base
     end
 
     def validate 
-       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set_id)
+       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
     end
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it

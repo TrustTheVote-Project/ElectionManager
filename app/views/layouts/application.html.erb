@@ -11,7 +11,6 @@
 <div id='banner'>
 	<div id="banner_img" onClick='window.location.href="/"' style='cursor:pointer'><img id='spinner' src='/images/ajax-loader.gif'></div>
 	<div id='banner_middle'>
-		<%= yield(:toolbox) %>
 		<%= yield(:banner_middle) -%>
 		<div id='ttv_message'>
 			<% flash[:notice] = '' if flash[:notice].nil? -%>
