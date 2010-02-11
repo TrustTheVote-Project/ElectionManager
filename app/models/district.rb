@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100210222409
+#
+# Table name: districts
+#
+#  id               :integer         not null, primary key
+#  district_type_id :integer
+#  display_name     :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class District < ActiveRecord::Base
   has_and_belongs_to_many :district_sets
   has_and_belongs_to_many :precincts

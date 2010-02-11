@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20100210222409
+#
+# Table name: contests
+#
+#  id               :integer         not null, primary key
+#  display_name     :string(255)
+#  open_seat_count  :integer
+#  voting_method_id :integer
+#  district_id      :integer
+#  election_id      :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Contest < ActiveRecord::Base
   belongs_to  :district
   belongs_to :election

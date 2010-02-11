@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20100210222409
+#
+# Table name: district_types
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class DistrictType < ActiveRecord::Base
 
   @@xmlid = { 'state' => 0, 

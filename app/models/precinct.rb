@@ -1,9 +1,34 @@
+# == Schema Information
+# Schema version: 20100210222409
+#
+# Table name: precincts
+#
+#  id           :integer         not null, primary key
+#  display_name :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  ident        :string(255)
+#
+
 class Precinct < ActiveRecord::Base
+  
   has_and_belongs_to_many :districts
   
   attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
   
-  
+  validates_format_of :ident, 
+      :with => /^prec-\d+/,
+      :message => "invalid format of prec.ident", 
+      :if => Proc.new { |p| !p.new_record?}
+
+  # Make sure that ident is not nil.
+  def after_save
+    if self.ident.nil?
+      self.ident = "prec-#{Time.now.to_i}"
+      self.save!
+    end
+  end
+
   def districts(districtSet)
     district_ids = connection.select_values( <<-eos
        SELECT DISTINCT districts_precincts.district_id
