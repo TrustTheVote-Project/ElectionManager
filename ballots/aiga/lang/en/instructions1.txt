@@ -1,0 +1,2 @@
+AIGA instructions to be written.
+This text is in file aiga/lang/en/instruction1.txt
