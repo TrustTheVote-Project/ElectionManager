@@ -5,3 +5,4 @@ tmp/*
 test/tmp/*.pdf
 .DS_Store
 .loadpath
+db/test.sqlite3-journal

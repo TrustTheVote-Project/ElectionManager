@@ -24,7 +24,7 @@ class PDFBallotTest < ActiveSupport::TestCase
   def election_to_ballot(file, lang = 'en', style  = 'default')
     election = TTV::ImportExport.import(file)
     precinct = election.district_set.precincts.first
-    pdf = TTV::PDFBallot.create(election, precinct, style, lang)
+    pdf = AbstractBallot.create(election, precinct, style, lang)
     File.open "#{RAILS_ROOT}/test/tmp/UnitTest.pdf", 'w' do |f|
       f.write(pdf)
     end

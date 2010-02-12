@@ -1,8 +1,14 @@
+#
+# DefaultBallot is is used to layout and render the most basic ballot. It's the first one we implemented.
+# The "include AbstractBallot" makes the DefaultBallot module sort of inherit form the AbstractBallot module. Any methods not definedf
+# here are defined in AbstractBallot.
+
+
+require 'lib/ttv/abstract_ballot'
 require 'prawn'
 
-module TTV
-module PDFBallot
-module Default
+module DefaultBallot
+  include AbstractBallot
   class FlowItem
 
     ANY_WIDTH = 1
@@ -355,8 +361,8 @@ module Default
       @file_root = "#{RAILS_ROOT}/ballots/#{style}"
       @election = election
       @lang = lang
-      @ballot_translation = TTV::PDFBallotStyle.get_ballot_translation(style, lang)
-      @election_translation = TTV::PDFBallotStyle.get_election_translation(election, lang)
+      @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
+      @election_translation = PDFBallotStyle.get_election_translation(election, lang)
 
       @page_size = "LETTER"
       @page_layout = :portrait
@@ -417,7 +423,7 @@ module Default
     end
 
     def create_columns(flow_rect)
-      Columns.new(@columns, flow_rect)
+      AbstractBallot::Columns.new(@columns, flow_rect)
     end
 
     def short_instructions(item)
@@ -580,6 +586,4 @@ module Default
 
   end
 
-end
-end
 end
