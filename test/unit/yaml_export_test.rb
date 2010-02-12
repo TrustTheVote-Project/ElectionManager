@@ -13,11 +13,11 @@ class YAMLExportTest < ActiveSupport::TestCase
     end
     
     should "export tiny correctly and safely" do
-      @export_obj.export
+      @export_obj.do_export
       res_hash = @export_obj.election_hash
-      assert_equal "One Contest Election", res_hash[:display_name]
-      assert_equal 1, res_hash[:precinct_list].length
-      assert_equal "City of Random", res_hash[:precinct_list][0][:district_list][0][:display_name]
+      assert_equal "One Contest Election", res_hash["display_name"]
+      assert_equal 1, res_hash["precinct_list"].length
+      assert_equal "City of Random", res_hash["precinct_list"][0]["district_list"][0]["display_name"]
     end
     
     context "also import generated.yml and try to export it back" do
@@ -28,9 +28,8 @@ class YAMLExportTest < ActiveSupport::TestCase
       end
       
       should "export generated.yml back correctly too" do
-        @export_obj.export
+        @export_obj.do_export
         res_hash = @export_obj.election_hash
-        pp res_hash
       end
     end
   end
