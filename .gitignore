@@ -3,7 +3,4 @@ db/translations/*.yml
 log/*.log
 tmp/*
 test/tmp/*.pdf
-app/.DS_Store
-.DS_Store
-.loadpath
-db/test.sqlite3-journal
+
