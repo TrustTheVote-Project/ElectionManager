@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100210222409
+# Schema version: 20100215144641
 #
 # Table name: parties
 #
@@ -11,10 +11,22 @@
 
 class Party < ActiveRecord::Base
 
+
   @@xml_ids = ['american_independent', 'democrat', 'green', 'independent', 'liberitarian', 'peace_and_freedom', 'republican']
 
   def idToXml
     @@xml_ids[self.id]
+  end
+  
+  validates_presence_of :ident
+  validates_uniqueness_of :ident, :message => "Non-unique Party ident attempted: {{value}}."
+
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "party-#{SecureRandom.hex}"
+      self.save!
+    end
   end
 
   def Party.xmlToId(xml)

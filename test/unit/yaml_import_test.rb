@@ -22,6 +22,7 @@ class YAMLImportTest < ActiveSupport::TestCase
         @ds_count = DistrictSet.all.length
         @import_obj.import
         @elect = @import_obj.election
+        assert_valid @elect
       end
       
       should "have 10 precincts overall" do

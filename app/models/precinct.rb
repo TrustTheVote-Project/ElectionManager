@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100210222409
+# Schema version: 20100215144641
 #
 # Table name: precincts
 #
@@ -16,15 +16,13 @@ class Precinct < ActiveRecord::Base
   
   attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
   
-  validates_format_of :ident, 
-      :with => /^prec-\d+/,
-      :message => "invalid format of prec.ident", 
-      :if => Proc.new { |p| !p.new_record?}
+  validates_presence_of :ident
+  validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
 
-  # Make sure that ident is not nil.
-  def after_save
-    if self.ident.nil?
-      self.ident = "prec-#{Time.now.to_i}"
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "prec-#{SecureRandom.hex}"
       self.save!
     end
   end

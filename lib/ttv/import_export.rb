@@ -56,7 +56,7 @@ module TTV
 
       def importDistrict(xmlDistrict, precinctsMasterList)
         district = District.new(:display_name => xmlDistrict.attributes['display_name'], 
-        :district_type_id => DistrictType.xmlToId(xmlDistrict.attributes['type'] ))
+                                :district_type_id => DistrictType.xmlToId(xmlDistrict.attributes['type'] ))
         importPrecincts = {}
         xmlDistrict.get_elements('precinct').each do |xmlPrecinct|
           id = xmlPrecinct.attributes['idref']
@@ -138,6 +138,7 @@ module TTV
       end
 
       def exportDistrict(district)
+        pp district
         @xml.district :id => district.id, :display_name => district.display_name, :type => district.district_type.idToXml do 
           district.precincts.each do | precinct |
             @xml.precinct :idref => precinct.id

@@ -49,9 +49,10 @@ module TTV
         raise "Invalid yml"
       end
       new_contest = Contest.create(:display_name =>yml_cont["display_name"],
-                                   :open_seat_count => 1)
+                                   :open_seat_count => 1, :voting_method_id => 0)
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
       @election.contests << new_contest
+      new_contest.save
       dist.contests << new_contest
      end
     

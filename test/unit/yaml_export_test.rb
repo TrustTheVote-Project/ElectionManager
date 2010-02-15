@@ -5,11 +5,16 @@ require 'ttv/yaml_export'
 
 class YAMLExportTest < ActiveSupport::TestCase
   
+  def imp_exp path
+    import_obj = TTV::YAMLImport.new(File.new(path))
+    @imp_object = import_obj.import
+    @export_obj = TTV::YAMLExport.new(@imp_object)
+
+  end
+  
   context "import tiny.yml and try to export it back" do
     setup do
-      import_obj = TTV::YAMLImport.new(File.new("/mydev/ElectionManager/test/elections/tiny.yml"))
-      @tiny_election = import_obj.import
-      @export_obj = TTV::YAMLExport.new(@tiny_election)
+      imp_exp("/mydev/ElectionManager/test/elections/tiny.yml")
     end
     
     should "export tiny correctly and safely" do
@@ -22,9 +27,7 @@ class YAMLExportTest < ActiveSupport::TestCase
     
     context "also import generated.yml and try to export it back" do
       setup do
-        import_obj = TTV::YAMLImport.new(File.new("/mydev/ElectionManager/test/elections/generated.yml"))
-        @gen_election = import_obj.import
-        @export_obj = TTV::YAMLExport.new(@gen_election)
+        imp_exp("/mydev/ElectionManager/test/elections/generated.yml")
       end
       
       should "export generated.yml back correctly too" do

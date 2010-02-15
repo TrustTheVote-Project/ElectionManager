@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100210222409
+# Schema version: 20100215144641
 #
 # Table name: districts
 #
@@ -8,6 +8,7 @@
 #  display_name     :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  ident            :string(255)
 #
 
 class District < ActiveRecord::Base
@@ -24,6 +25,17 @@ class District < ActiveRecord::Base
   attr_accessor :importId, :importPrecincts # for xml import
   
   validates_presence_of :display_name
+  
+  validates_presence_of :ident
+  validates_uniqueness_of :ident, :message => "Non-unique district ident attempted: {{value}}."
+
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "dist-#{SecureRandom.hex}"
+      self.save!
+    end
+  end
   
   # we assume election has preloaded the contents/questions
   def contestsForElection(election)

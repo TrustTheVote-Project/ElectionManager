@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100210222409
+# Schema version: 20100215144641
 #
 # Table name: voting_methods
 #

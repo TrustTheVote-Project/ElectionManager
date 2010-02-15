@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100210222409
+# Schema version: 20100215144641
 #
 # Table name: candidates
 #
@@ -9,11 +9,24 @@
 #  contest_id   :integer
 #  created_at   :datetime
 #  updated_at   :datetime
+#  ident        :string(255)
 #
 
 class Candidate < ActiveRecord::Base
   belongs_to :contest
   belongs_to :party
+  
+  validates_presence_of :ident
+  validates_uniqueness_of :ident, :message => "Non-unique candidate ident attempted: {{value}}."
+
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "cand-#{SecureRandom.hex}"
+      self.save!
+    end
+  end
+  
 
   attr_accessible :display_name, :party_id, :contest_id
 
