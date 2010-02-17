@@ -1,9 +1,12 @@
 <% display ||= 'block'%>
 <% div_id = "#{dom_id(election)}_static"%>
 <div id="<%= div_id -%>"  style='display:<%= display %>'>
-	<p>
-		<span class='canEdit'>
-		<%= h election.display_name %>, scheduled for <%= h pretty_date(election.start_date) -%> in <%= h election.district_set.display_name %>
-		</span>
-	</p>
+  <p>
+    <span class='canEdit'>
+      <%= h election.display_name %>, 
+	      scheduled for <%= h pretty_date(election.start_date) -%> 
+	      in <%= h election.district_set.display_name %>
+		
+    </span>
+  </p>
 </div>

@@ -20,6 +20,7 @@ class ElectionsController < ApplicationController
 
   def edit
     @election = Election.find(params[:id])
+    @dist_sets = DistrictSet.find(:all)
     render :partial => 'edit', :locals => { :election => @election } if request.xhr?
   end
 

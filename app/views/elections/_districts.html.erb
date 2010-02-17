@@ -1,4 +1,4 @@
 <% div_id = "#{dom_id(election)}_districts" %>
 <div id="<% div_id %>" class='districts'>
-		<%= render :partial => "districts/show", :collection => election.districts, :as => :district, :locals => {:election => election }%>
+	<%= render :partial => "districts_show", :collection => election.districts, :as => :district, :locals => {:election => election }%>
 </div>
