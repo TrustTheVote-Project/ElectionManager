@@ -47,6 +47,7 @@ class ElectionsController < ApplicationController
           page.remove edit_id
           page.replace static_id, :partial => 'static', :locals => { :election => @election }
         else
+          @dist_sets = DistrictSet.find(:all)
           page.replace edit_id, :partial => 'edit', :locals => { :election => @election }
         end
       end
