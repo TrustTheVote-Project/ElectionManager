@@ -27,3 +27,8 @@ config.action_mailer.smtp_settings = {
   :password => 'NOTTELLING',
   :enable_starttls_auto => true
 }
+
+#
+# Extra global requires
+#
+require 'pp'

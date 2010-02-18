@@ -4,13 +4,15 @@
   <tr>
     <th>District type</th>
     <th>Display name</th>
+    <th>Ident</th>	
   </tr>
 
 <% @districts.each do |district| %>
   <tr>
     <td><%=h district.district_type_id %></td>
     <td><%=h district.display_name %></td>
-    <td><%= link_to 'Show', district %></td>
+	<td><%=h district.ident %>
+
     <td><%= link_to 'Edit', edit_district_path(district) %></td>
     <td><%= link_to 'Destroy', district, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

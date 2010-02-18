@@ -20,6 +20,7 @@ class ElectionsController < ApplicationController
 
   def edit
     @election = Election.find(params[:id])
+    @dist_sets = DistrictSet.find(:all)
     render :partial => 'edit', :locals => { :election => @election } if request.xhr?
   end
 
@@ -46,6 +47,7 @@ class ElectionsController < ApplicationController
           page.remove edit_id
           page.replace static_id, :partial => 'static', :locals => { :election => @election }
         else
+          @dist_sets = DistrictSet.find(:all)
           page.replace edit_id, :partial => 'edit', :locals => { :election => @election }
         end
       end
@@ -69,6 +71,26 @@ class ElectionsController < ApplicationController
         redirect_to :back
       else
         @election = TTV::ImportExport.import(params[:importFile])
+        flash[:notice] = "Election import was successful. Here is your new election."
+        redirect_to @election
+      end
+    rescue ActionController::RedirectBackError => ex
+      redirect_to elections_url
+    rescue Exception => ex
+      raise ex
+      flash[:error] = "Import error: #{ex.message}";
+      redirect_to elections_url
+    end
+  end
+  
+  def import_yml
+    begin
+      if params[:importFile].nil? 
+        flash[:error] = "Import failed because file was not specified."
+        redirect_to :back
+      else
+        import_handler = TTV::YAMLImport.new(params[:importFile])
+        @election = import_handler.import
         flash[:notice] = "Election import was successful. Here is your new election."
         redirect_to @election
       end

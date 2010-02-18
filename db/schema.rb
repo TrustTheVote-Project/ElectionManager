@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090912040051) do
+ActiveRecord::Schema.define(:version => 20100215211615) do
 
   create_table "candidates", :force => true do |t|
     t.string   "display_name"
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20090912040051) do
     t.integer  "contest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ident"
   end
 
   create_table "contests", :force => true do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20090912040051) do
     t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ident"
   end
 
   create_table "districts_precincts", :id => false, :force => true do |t|
@@ -70,12 +72,14 @@ ActiveRecord::Schema.define(:version => 20090912040051) do
     t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ident"
   end
 
   create_table "precincts", :force => true do |t|
     t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ident"
   end
 
   create_table "questions", :force => true do |t|
@@ -102,13 +106,13 @@ ActiveRecord::Schema.define(:version => 20090912040051) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
+    t.string   "perishable_token"
     t.integer  "failed_login_count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "perishable_token",   :limit => nil
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
   create_table "voting_methods", :force => true do |t|
     t.string   "display_name"

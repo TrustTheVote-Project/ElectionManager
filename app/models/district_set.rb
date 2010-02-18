@@ -1,5 +1,17 @@
+# == Schema Information
+# Schema version: 20100215144641
+#
+# Table name: district_sets
+#
+#  id           :integer         not null, primary key
+#  display_name :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
+  has_many :elections
     
   # returns all precincts in this district set
   def precincts

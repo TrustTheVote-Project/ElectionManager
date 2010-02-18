@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20100215144641
+#
+# Table name: elections
+#
+#  id              :integer         not null, primary key
+#  display_name    :string(255)
+#  district_set_id :integer
+#  start_date      :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class Election < ActiveRecord::Base
     has_many :contests, :order => :display_name, :dependent => :destroy
     has_many :questions, :order => :display_name, :dependent => :destroy
@@ -21,7 +34,7 @@ class Election < ActiveRecord::Base
     end
 
     def validate 
-       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set_id)
+       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
     end
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it

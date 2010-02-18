@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20100215144641
+#
+# Table name: voting_methods
+#
+#  id           :integer         not null, primary key
+#  display_name :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class VotingMethod < ActiveRecord::Base
 
   WINNER = 0

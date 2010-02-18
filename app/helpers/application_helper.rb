@@ -6,4 +6,13 @@ module ApplicationHelper
     render :partial => 'layouts/error_messages', :object => messages, 
       :locals => { :options => options, :model => model} unless messages.empty?
   end
+  
+  #
+  # Pretty print objects, to be used in views
+  #
+  def pp_debug(obj)
+    '<pre>' +
+    h(obj.pretty_inspect) +
+    '</pre>'
+  end
 end

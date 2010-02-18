@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 20100215144641
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  email              :string(255)
+#  crypted_password   :string(255)
+#  password_salt      :string(255)
+#  persistence_token  :string(255)
+#  perishable_token   :string(255)
+#  failed_login_count :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   

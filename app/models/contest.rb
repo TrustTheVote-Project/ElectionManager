@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20100215144641
+#
+# Table name: contests
+#
+#  id               :integer         not null, primary key
+#  display_name     :string(255)
+#  open_seat_count  :integer
+#  voting_method_id :integer
+#  district_id      :integer
+#  election_id      :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Contest < ActiveRecord::Base
   belongs_to  :district
   belongs_to :election
@@ -14,7 +29,7 @@ class Contest < ActiveRecord::Base
   
   def validate
     osc = open_seat_count.to_i
-    errors.add(:open_seat_count, "must be more than 1") if osc < 1
+    errors.add(:open_seat_count, "must be more than 0") if osc < 1
     errors.add(:open_seat_count, "must be less than 10") if osc > 10
     errors.add(:voting_method_id, "is invalid") if !VotingMethod.exists?(voting_method_id)
     errors.add(:district_id, "is invalid") if !District.exists?(district_id)

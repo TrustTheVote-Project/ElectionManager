@@ -1,3 +1,5 @@
+require 'ttv/abstract_ballot.rb'
+
 class PrecinctsController < ApplicationController
 
   def index
@@ -50,7 +52,7 @@ class PrecinctsController < ApplicationController
     lang = params[:lang] || 'en'
     style = params[:style] || 'default'
     begin
-      pdfBallot = TTV::PDFBallot.create(election, precinct, style, lang)
+      pdfBallot = AbstractBallot.create(election, precinct, style, lang)
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
     rescue Exception => ex

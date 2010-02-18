@@ -1,0 +1,27 @@
+<h1>Maintain</h1>
+
+What would you like to maintain?
+<ul>
+	<li>Import for bulk Election load: 
+		<p>
+			<% form_tag ({:action => 'import_file'}, {:method => 'put', :multipart => true}) do %>
+				Choose file: <%= file_field_tag "importFile", :accept => "text/xml" %>
+				<br>Import as:
+					<%= submit_tag "XML file" %>	
+					<%= submit_tag "YML file" %>
+			<% end %>	
+		</p>
+	</li>
+	<li>Export for bulk Election dump: 
+		<p>
+			<% form_tag ({:action => 'export_file'}, {:method => 'put', :multipart => true}) do %>
+				Export what election: 
+					<%= collection_select(:election_to_export, :id, Election.all, :id, :display_name) %>
+				<br>Export as: 
+					<%= submit_tag "XML file" %>	
+					<%= submit_tag "YML file"%>
+			<% end %>
+		</p>
+	</li>
+	<li>Anyone got any opther maintenance chores?</li>
+</ul>

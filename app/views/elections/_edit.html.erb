@@ -14,8 +14,15 @@
 				<%= datetime_select :election, :start_date, { :start_year => 2009 }%>
 			</p>
 			<p>
-	   		<%= f.submit 'Update' %>
+			<%= f.label :district_set %>
+			<p>
+				<select id="dist_set" name="election[district_set_id]">
+					<%= options_from_collection_for_select @dist_sets, "id", "display_name", @election.district_set.id %>
+				</select>
+			</p>
+				<%= f.submit 'Update' %>
 		 		<input type="button" value="Cancel" onClick="ttv.cancelEdit('<%= @div_id -%>')">
 			</p>
+
 		<% end %>
 </div>

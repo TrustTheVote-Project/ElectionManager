@@ -1,0 +1,2 @@
+More unwritten instructions for AIGA.
+This text is in file aiga/lang/en/instructions3.txt

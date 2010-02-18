@@ -1,15 +1,7 @@
-module TTV
-module PDFBallot
-module Aiga
-  class BallotConfig < TTV::PDFBallot::Default::BallotConfig
-    def initialize(style, lang, election, scanner)
-      super
-    end      
+require 'lib/ttv/abstract_ballot'
+require 'prawn'
 
-    def render_column_instructions(columns, page)
-    end
+module AigaBallot
+  include DefaultBallot
 
-  end
-end
-end
 end

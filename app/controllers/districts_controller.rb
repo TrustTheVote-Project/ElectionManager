@@ -6,7 +6,6 @@ class DistrictsController < ApplicationController
 
   def show
     @district = District.find(params[:id])
-    @election = params[:election_id]
   end
 
   def new
@@ -17,7 +16,8 @@ class DistrictsController < ApplicationController
 
   def edit
     @district = District.find(params[:id])
-    @election = params[:election_id]
+    @district_sets = {}
+    DistrictSet.find(:all).collect { |ds| @district_sets[ds.display_name] = ds.id}
   end
 
   def create
@@ -33,10 +33,10 @@ class DistrictsController < ApplicationController
 
   def update
     @district = District.find(params[:id])
-    @election = params[:election_id]
+    handle_district_sets
     if @district.update_attributes(params[:district])
       flash[:notice] = 'District was successfully updated.'
-      redirect_to(@district)
+      redirect_to districts_url
     else
       render :action => "edit"
     end
@@ -46,5 +46,15 @@ class DistrictsController < ApplicationController
     @district = District.find(params[:id])
     @district.destroy
     redirect_to(districts_url)
+  end
+  
+  private
+  
+  def handle_district_sets
+    if params['district_sets']
+      @district.district_sets.clear
+      chosen_sets = params[:district_sets].map { |id| DistrictSet.find(id)}
+      @district.district_sets << chosen_sets
+    end
   end
 end
