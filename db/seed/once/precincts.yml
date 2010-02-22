@@ -1,0 +1,5 @@
+default:
+    id: 0
+    ident: prec-000
+    display_name: (built in default precinct)
+

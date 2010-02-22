@@ -25,9 +25,9 @@ class YAMLImportTest < ActiveSupport::TestCase
         assert_valid @elect
       end
       
-      should "have 10 precincts overall" do
+      should "have the right number of precincts overall" do
         prec = Precinct.find(:all)
-        assert_equal 8, prec.length
+        assert_equal 9, prec.length
       end
       
       should "have 10 contests" do
@@ -73,6 +73,21 @@ class YAMLImportTest < ActiveSupport::TestCase
         assert_valid a_dist
         prec_list = a_dist.precincts
         prec_list.each { |prec| assert_valid prec }
+      end
+    end
+    
+    context "yaml file of type ballot_config" do
+      setup do
+        afile = File.new("/mydev/ElectionManager/test/elections/ballot_config.yml")
+        importer = TTV::YAMLImport.new(afile)
+        @e = importer.import
+
+      end
+      
+      should "be imported and give the right town" do
+        puts @e.inspect
+        puts @e.contests.inspect
+        assert_valid @e
       end
     end
   end

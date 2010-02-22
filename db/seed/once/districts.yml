@@ -1,0 +1,6 @@
+default:
+  id: 0
+  district_type_id: 0
+  display_name: (built-in default district)
+  ident: dist-0000
+  

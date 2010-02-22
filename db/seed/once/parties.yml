@@ -1,28 +1,39 @@
-american_independent:
+default:
     id: 0
+    display_name: "(built-in default party)"
+
+american_independent:
+    id: 1
     display_name: "American Independent"
+    ident: party-1
 
 democratic:
-    id: 1
+    id: 2
     display_name: Democratic
+    ident: party-2
 
 green:
-    id: 2
+    id: 3
     display_name: Green
+    ident: party-3
 
 independent:
-    id: 3
+    id: 4
     display_name: Independent
+    ident: party-4
 
 libertarian:
-    id: 4
+    id: 5
     display_name: Libertarian
+    ident: party-5
 
 peace_and_freedom:
-    id: 5
+    id: 6
     display_name: "Peace and Freedom"
+    ident: party-6
 
 republican:
-    id: 6
+    id: 7
     display_name: Republican
+    ident: party-7
     

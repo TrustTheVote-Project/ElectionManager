@@ -1,7 +1,11 @@
-winner_take_all:
+default:
     id: 0
+    display_name: "(built-in default voting method)"
+
+winner_take_all:
+    id: 1
     display_name: Winner Take All
     
 ranked:
-    id: 1
+    id: 2
     display_name: Ranked

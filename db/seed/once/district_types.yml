@@ -1,32 +1,36 @@
-state:
+default:
   id: 0
+  title: (built-in default district type)
+
+state:
+  id: 1
   title: State
 
 county:
-  id: 1
+  id: 2
   title: County
 
 municipality:
-  id: 2
+  id: 3
   title: Municipality
 
 school:
-  id: 3
+  id: 4
   title: School
 
 water:
-  id: 4
+  id: 5
   title: Water
   
 fire:
-  id: 5
+  id: 6
   title: Fire
 
 coast:
-  id: 6
+  id: 7
   title: Coastal
   
 harbor:
-  id: 7
+  id: 8
   title: Harbor
 
