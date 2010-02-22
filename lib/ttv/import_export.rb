@@ -138,7 +138,6 @@ module TTV
       end
 
       def exportDistrict(district)
-        pp district
         @xml.district :id => district.id, :display_name => district.display_name, :type => district.district_type.idToXml do 
           district.precincts.each do | precinct |
             @xml.precinct :idref => precinct.id

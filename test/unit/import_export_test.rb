@@ -1,6 +1,5 @@
 require 'test_helper'
 require 'ttv/import_export'
-require 'election'
 
 class ImportExportTest < ActiveSupport::TestCase
   

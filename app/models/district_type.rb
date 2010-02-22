@@ -11,14 +11,16 @@
 
 class DistrictType < ActiveRecord::Base
 
-  @@xmlid = { 'state' => 0, 
-    'county' => 1, 
-    'municipality' => 2, 
-    'school' => 3,
-    'water' => 4,
-    'fire' => 5,
-    'coastal' => 6,
-    'harbor' => 7 
+  @@xmlid = 
+  { '(built-in default district type)' => 0, 
+    'state' => 1, 
+    'county' => 2, 
+    'municipality' => 3, 
+    'school' => 4,
+    'water' => 5,
+    'fire' => 6,
+    'coastal' => 7,
+    'harbor' => 8 
   }
     
   def DistrictType.xmlToId(xml)

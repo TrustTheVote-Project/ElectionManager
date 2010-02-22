@@ -11,10 +11,11 @@
 
 class VotingMethod < ActiveRecord::Base
 
-  WINNER = 0
-  RANKED = 1
+  DEFAULT = 0
+  WINNER = 1
+  RANKED = 2
   
-  @@xml_codes = ['winner', 'ranked']
+  @@xml_codes = ['(built-in default voting method)', 'winner', 'ranked']
 
   def idToXml
     @@xml_codes[self.id]
@@ -24,6 +25,7 @@ class VotingMethod < ActiveRecord::Base
     case code
     when 'winner' then return WINNER
     when 'ranked' then return RANKED
+    when '(built-in default voting method)' then return DEFAULT
     else raise "illegal voting method #{code}"
     end
   end
