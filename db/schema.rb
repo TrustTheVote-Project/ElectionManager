@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100215211615) do
+ActiveRecord::Schema.define(:version => 20100222161608) do
 
   create_table "candidates", :force => true do |t|
     t.string   "display_name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20100215211615) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ident"
+    t.integer  "order",        :default => 0
   end
 
   create_table "contests", :force => true do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20100215211615) do
     t.integer  "election_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order",            :default => 0
   end
 
   create_table "district_sets", :force => true do |t|

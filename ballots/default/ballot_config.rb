@@ -192,7 +192,8 @@ module DefaultBallot
           rect.top -= config.pdf.bounds.height
         end
         # CANDIDATES
-        @item.candidates.each do |candidate|
+        candidates_list = @item.candidates
+        candidates_list.sort { |a,b| a.order <=> b.order}.each do |candidate|
           if bloc && rect.height < NEXT_COL_BOUNCE
             config.frame_item rect, top
             rect = yield
@@ -556,11 +557,11 @@ module DefaultBallot
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
         @pdf.text load_text("instructions1.txt"), :wrap => @wrap 
-        img = load_image "instructions2.png"
-        @pdf.image image_path("instructions2.png"), 
-        :width => [img.width * 72 / 96, @pdf.bounds.width].min
-        @pdf.move_down 3
-        @pdf.text load_text("instructions3.txt"), :wrap => @wrap
+#        img = load_image "instructions2.png"
+#        @pdf.image image_path("instructions2.png"), 
+#        :width => [img.width * 72 / 96, @pdf.bounds.width].min
+#        @pdf.move_down 3
+#        @pdf.text load_text("instructions3.txt"), :wrap => @wrap
       end
       rect.top = rect.bottom
       @pdf.line_width 0.5

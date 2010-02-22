@@ -17,11 +17,9 @@ module TTV
       @yml_election["type"] == "ballot_config"
     end
 
-  
 # Do the whole import process. Main entry point.
     def import
       @dist_id_map = {}
-#      @prec_id_map = {}
       @yml_election = YAML.load(@source)
       ActiveRecord::Base.transaction do
         @dist_set = load_district_set
@@ -73,6 +71,7 @@ module TTV
       end
       new_contest = Contest.create(:display_name =>yml_cont["display_name"],
                                    :open_seat_count => 1, :voting_method_id => 0)
+      new_contest.order = yml_cont["order"] || 0
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
       @election.contests << new_contest
       new_contest.save
@@ -91,6 +90,7 @@ module TTV
         end
         new_cand.party = party
       end
+      new_cand.order = y_cand["order"] || 0
       cont.candidates << new_cand
     end
     

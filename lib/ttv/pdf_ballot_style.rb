@@ -1,5 +1,6 @@
 require "ballots/default/ballot_config.rb"
 require "ballots/aiga/ballot_config.rb"
+require "ballots/nh/ballot_config.rb"
 
 class PDFBallotStyle
 
