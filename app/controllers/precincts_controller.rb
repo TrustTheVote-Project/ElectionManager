@@ -1,4 +1,4 @@
-require 'ttv/abstract_ballot'
+require 'abstract_ballot'
 
 class PrecinctsController < ApplicationController
 
@@ -56,7 +56,7 @@ class PrecinctsController < ApplicationController
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
     rescue Exception => ex
-      flash[:error] = ex.message
+      flash[:error] = "precinct_controller - #{ex.message}"
       redirect_to precincts_election_path election
     end
   end

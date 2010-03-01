@@ -1,4 +1,3 @@
-require 'ttv/pdf_ballot_style'
 require 'prawn'
 
 module AbstractBallot

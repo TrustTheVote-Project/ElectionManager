@@ -4,7 +4,7 @@
 # here are defined in AbstractBallot.
 
 
-load 'ttv/abstract_ballot.rb'
+require 'ttv/abstract_ballot.rb'
 require 'prawn'
 
 module DefaultBallot
