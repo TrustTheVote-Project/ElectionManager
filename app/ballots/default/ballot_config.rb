@@ -4,7 +4,7 @@
 # here are defined in AbstractBallot.
 
 
-require 'ttv/abstract_ballot'
+load 'ttv/abstract_ballot.rb'
 require 'prawn'
 
 module DefaultBallot
@@ -365,7 +365,7 @@ module DefaultBallot
     VPAD = 3
 
     def initialize(style, lang, election, scanner)
-      @file_root = "#{RAILS_ROOT}/ballots/#{style}"
+      @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
       @lang = lang
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)

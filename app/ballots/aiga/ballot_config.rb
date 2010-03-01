@@ -1,4 +1,4 @@
-require 'lib/ttv/abstract_ballot'
+require 'ttv/abstract_ballot'
 require 'prawn'
 
 module AigaBallot

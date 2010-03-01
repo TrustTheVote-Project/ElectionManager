@@ -379,4 +379,3 @@ module AbstractBallot
   end
   
 end
-  
