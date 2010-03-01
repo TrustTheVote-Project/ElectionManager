@@ -28,6 +28,9 @@ config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true
 }
 
+# Reloads module automatically (without having to restart server)
+ActiveSupport::Dependencies.explicitly_unloadable_constants = 'AbstractBallot'
+
 #
 # Extra global requires
 #
