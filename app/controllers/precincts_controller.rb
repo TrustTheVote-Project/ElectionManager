@@ -1,4 +1,4 @@
-require 'ttv/abstract_ballot.rb'
+require 'ttv/abstract_ballot'
 
 class PrecinctsController < ApplicationController
 

@@ -1,4 +1,4 @@
-require 'lib/ttv/pdf_ballot_style.rb'
+require 'ttv/pdf_ballot_style'
 require 'prawn'
 
 module AbstractBallot

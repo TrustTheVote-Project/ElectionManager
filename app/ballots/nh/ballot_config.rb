@@ -1,14 +1,12 @@
 #
 # NhBallot implements a columnar office format
 #
-
-require 'lib/ttv/abstract_ballot'
+require 'ttv/abstract_ballot'
 require 'ballots/default/ballot_config'
 require 'prawn'
 
 module NhBallot
   include AbstractBallot
-  include 
 
   class FlowItem 
     TINY_FONT = 7
@@ -33,10 +31,17 @@ module NhBallot
               config.pdf.font "Helvetica", :size => SMALL_FONT
               config.pdf.text config.et.get(candidate.party, :display_name), :align => :center
             end
-            config.pdf.font "Helvetica", :size => BIG_FONT
-            name = config.et.get(candidate, :display_name)
-            name = name.sub(" and ", "\n") # hack to split joint names to two lines, wont work i10n
-            config.pdf.text name, :align => :right
+          
+# Render name of candidate
+            config.pdf.bounding_box [0, 0], :width => 80 do
+              config.pdf.font "Helvetica", :size => BIG_FONT
+              name = config.et.get(candidate, :display_name)
+              name = name.sub(" and ", "\n") # hack to split joint names to two lines, wont work i10n
+              config.pdf.text name, :align => :right
+            end
+ #           config.pdf.bounding_box [0,81], :width => 20 do
+  #            config.stroke_checkbox
+   #         end
             config.pdf.line [0, 0], [rect.width - HPAD2, 0] unless (i == candidates.length - 1)
           end
           height = config.pdf.bounds.height

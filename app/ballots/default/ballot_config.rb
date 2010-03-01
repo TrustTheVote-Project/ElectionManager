@@ -4,11 +4,12 @@
 # here are defined in AbstractBallot.
 
 
-require 'lib/ttv/abstract_ballot'
+require 'ttv/abstract_ballot'
 require 'prawn'
 
 module DefaultBallot
-  include AbstractBallot
+  include ::AbstractBallot
+  
   class FlowItem
 
     ANY_WIDTH = 1
@@ -520,10 +521,10 @@ module DefaultBallot
         @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
         @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
         @pdf.font "Courier", :size => 14
-        @pdf.text bt[:Sample_Ballot], :at => [16, 275], :rotate => 90
-        @pdf.text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
-        @pdf.text "12001040100040", :at => [16, 410], :rotate => 90
-        @pdf.text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
+        @pdf.draw_text bt[:Sample_Ballot], :at => [16, 275], :rotate => 90
+        @pdf.draw_text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
+        @pdf.draw_text "12001040100040", :at => [16, 410], :rotate => 90
+        @pdf.draw_text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
         flow_rect.inset bar_width + @padding, @pleaseVoteHeight
       end
     end
