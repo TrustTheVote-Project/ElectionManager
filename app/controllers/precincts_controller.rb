@@ -1,5 +1,5 @@
 require 'abstract_ballot'
-
+CHECKBOX = "\xE2\x98\x90" # "☐"
 class PrecinctsController < ApplicationController
 
   def index
@@ -51,13 +51,15 @@ class PrecinctsController < ApplicationController
     precinct = Precinct.find(params[:id])
     lang = params[:lang] || 'en'
     style = params[:style] || 'default'
+    
     begin
-      pdfBallot = AbstractBallot.create(election, precinct, style, lang)
-      title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
-      send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
-    rescue Exception => ex
-      flash[:error] = "precinct_controller - #{ex.message}"
-      redirect_to precincts_election_path election
-    end
+       pdfBallot = AbstractBallot.create(election, precinct, style, lang)
+       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
+     rescue Exception => ex
+       flash[:error] = "precinct_controller - #{ex.message}"
+       redirect_to precincts_election_path election
+     end
+    
   end
 end

@@ -27,21 +27,29 @@ module NhBallot
           candidates.each_index do |i|
             candidate = candidates[i]
             config.pdf.move_down VPAD2
-            if draw_party
-              config.pdf.font "Helvetica", :size => SMALL_FONT
-              config.pdf.text config.et.get(candidate.party, :display_name), :align => :center
-            end
           
-# Render name of candidate
+            # Render name of candidate
             config.pdf.bounding_box [0, 0], :width => 80 do
               config.pdf.font "Helvetica", :size => BIG_FONT
               name = config.et.get(candidate, :display_name)
               name = name.sub(" and ", "\n") # hack to split joint names to two lines, wont work i10n
-              config.pdf.text name, :align => :right
+              name = name 
+              config.pdf.move_down 10
+              config.pdf.text name, :align => :left
+              config.pdf.move_down 10
             end
- #           config.pdf.bounding_box [0,81], :width => 20 do
-  #            config.stroke_checkbox
-   #         end
+            #OVAL BOX TO THE RIGHT OF THE CANDIDATE NAME
+            config.pdf.bounding_box [75,20], :width => 20 do
+               config.stroke_checkbox
+             end
+             config.pdf.move_down 12
+             
+             # PARTY NAME FOR CANDIDATE
+             if draw_party
+               config.pdf.font "Helvetica", :size => SMALL_FONT
+               config.pdf.text config.et.get(candidate.party, :display_name), :align => :left
+             end
+     
             config.pdf.line [0, 0], [rect.width - HPAD2, 0] unless (i == candidates.length - 1)
           end
           height = config.pdf.bounds.height
