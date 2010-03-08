@@ -20,8 +20,10 @@ module NhBallot
 
       # returns height
       def draw_column(config, rect, candidates)
+       
         return 0 if candidates.length == 0
         height = 0
+        
         draw_party = !(candidates[0].party.idToXml == 'democrat' || candidates[0].party.idToXml == 'republican')
         config.pdf.bounding_box [rect.left + HPAD, rect.top], :width => rect.width - HPAD2 do
           candidates.each_index do |i|
@@ -116,7 +118,7 @@ module NhBallot
           end
         end
         rect.top -= height;
-        puts "height was #{height} for item #{@item}"
+        #puts "height was #{height} for item #{@item}"
         config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
       end
     end # class NHContest
@@ -130,6 +132,7 @@ module NhBallot
     def initialize(style, lang, election, scanner)
       @checkbox_orientation = :right
       @columns = 1
+      
       super
     end
 
@@ -171,6 +174,27 @@ module NhBallot
       @pdf.fill_and_stroke
       @pdf.fill_color "000000"
     end
+    
+    
+    def page_complete(pagenum, last_page)
+      unless last_page
+        @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => 400 do
+          @pdf.text "temp", :align => :left
+        end
+        @pdf.bounding_box [ 400 , @pdf.bounds.height ], :width => 400 do
+          @pdf.font "Helvetica", :size => 14, :style => :bold
+            @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
+          @pdf.font "Helvetica", :size => 10
+            @pdf.text ballot_translation[:Instruction_Number_One], :align => :center
+        end
+        @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
+          @pdf.move_down 10
+          @pdf.text bt[:Instruction_To_Voters], :align => :center
+          
+        end
+      end
+    end
+    
 
     def create_flow_item(item)
       case

@@ -1,6 +1,10 @@
 --- 
 :Sample_Ballot: Sample Ballot
 :OFFICIAL_BALLOT: OFFICIAL BALLOT
+:Instruction_To_Voters: INSTRUCTIONS TO VOTERS
+:Instruction_Number_One: 1. To Vote, Completely fill in the oval to the right of your choice. For each office vote for not
+                         more than the number stated in the sentence "Vote for not more than______". If you
+                         vote for more than the stated number of candidates, your vote for that office will not be counted.
 :Vote_Both_Sides: Vote Both Sides
 :Thank_you: |-
   Thank you for voting. 

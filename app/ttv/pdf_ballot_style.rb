@@ -4,7 +4,7 @@ require 'ballots/nh/ballot_config.rb'
 
 class PDFBallotStyle
 
-  BALLOT_DIR = "#{RAILS_ROOT}/ballots"
+  BALLOT_DIR = "#{RAILS_ROOT}/app/ballots"
 
   def self.list
     styles = ['default']
@@ -31,6 +31,7 @@ class PDFBallotStyle
   end
     
   def self.get_ballot_translation(style, lang)
+    puts BALLOT_DIR
     return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
   end
 
