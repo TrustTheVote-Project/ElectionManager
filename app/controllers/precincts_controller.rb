@@ -56,7 +56,7 @@ class PrecinctsController < ApplicationController
        pdfBallot = AbstractBallot.create(election, precinct, style, lang)
        title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
        send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
-     rescue Exception => ex
+      rescue Exception => ex
        flash[:error] = "precinct_controller - #{ex.message}"
        redirect_to precincts_election_path election
      end

@@ -516,7 +516,7 @@ module DefaultBallot
       bar_height = 140
       @scanner.render_grid(@pdf)
       @scanner.render_ballot_marks(@pdf)
-      @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
+      @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight + 35], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
 
         @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
         @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height

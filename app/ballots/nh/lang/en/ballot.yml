@@ -1,10 +1,20 @@
 --- 
 :Sample_Ballot: Sample Ballot
 :OFFICIAL_BALLOT: OFFICIAL BALLOT
+:Title_Text: |-
+    ABSENTEE
+    OFFICIAL BALLOT FOR
+    DURHAM
+    GENERAL ELECTION
+    NOVEMBER 4, 2008
 :Instruction_To_Voters: INSTRUCTIONS TO VOTERS
-:Instruction_Number_One: 1. To Vote, Completely fill in the oval to the right of your choice. For each office vote for not
+:Instruction_Text1: 1. To Vote. Completely fill in the oval to the right of your choice. For each office vote for not
                          more than the number stated in the sentence "Vote for not more than______". If you
                          vote for more than the stated number of candidates, your vote for that office will not be counted.
+:Instruction_Text2: 2. To Vote by Write-in. To vote for a person whose name is not printed on the ballot, write in
+                         the name of the "write-in" space.  Completely fill in the oval to the right of 
+                         your choice.
+
 :Vote_Both_Sides: Vote Both Sides
 :Thank_you: |-
   Thank you for voting. 

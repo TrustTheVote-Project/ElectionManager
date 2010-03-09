@@ -99,8 +99,8 @@ module NhBallot
         r.left, r.right = rect.left + config.col_width * 4, rect.left + config.col_width * 5
         height = [height, draw_writein_column(config, r)].max
 
-        # draw title
-        config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => config.col_width - HPAD2 do
+        # OFFICES
+          config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => config.col_width - HPAD2 do
           config.pdf.move_down VPAD2
           config.pdf.font "Helvetica", :size => TINY_FONT
           config.pdf.text config.bt[:For]
@@ -111,6 +111,7 @@ module NhBallot
           config.pdf.text config.short_instructions(@item), :align => :center
           height = [height, config.pdf.bounds.height].max
         end
+        
         # draw vertical bars
         config.pdf.bounding_box [rect.left, rect.top], :width => rect.width, :height =>height do
           4.times do |i|
@@ -120,6 +121,8 @@ module NhBallot
         rect.top -= height;
         #puts "height was #{height} for item #{@item}"
         config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
+        
+        
       end
     end # class NHContest
     
@@ -132,7 +135,6 @@ module NhBallot
     def initialize(style, lang, election, scanner)
       @checkbox_orientation = :right
       @columns = 1
-      
       super
     end
 
@@ -147,7 +149,8 @@ module NhBallot
       @col_left = flow_rect.left
       @header_height = 40
       @col_headers.length.times do |i|            
-        @pdf.bounding_box [col_loc(i), flow_rect.top], :width => @col_width, :height => @header_height do
+        #640 BELOW IS THE TOP LOCATION OF THE COLUMN HEADERS, NEED TO PARAMATIZE THIS
+        @pdf.bounding_box [col_loc(i), 640], :width => @col_width, :height => @header_height do
           @pdf.fill_color '000000'
           @pdf.stroke_color 'FFFFFF'
           @pdf.rectangle [0, 0], @col_width, -@header_height
@@ -157,13 +160,14 @@ module NhBallot
           @pdf.text_box @col_headers[i], :at => [0, @header_height - 6], :align => :center
         end
       end
-      flow_rect.top -= @header_height
+      flow_rect.top = 600  #TOP LOCATION OF COLUMNS 
       @pdf.stroke_color "000000"
       @pdf.fill_color '000000'
       @pdf.stroke_line [flow_rect.left, flow_rect.top], [flow_rect.right, flow_rect.top]
     end
 
     def render_column_instructions(columns, page)
+      
     end
 
     def stroke_checkbox(pt = [0,0])
@@ -178,19 +182,28 @@ module NhBallot
     
     def page_complete(pagenum, last_page)
       unless last_page
-        @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => 400 do
-          @pdf.text "temp", :align => :left
-        end
-        @pdf.bounding_box [ 400 , @pdf.bounds.height ], :width => 400 do
+        #BALLOT TITLE ON TOP LEFT BALLOT
+        @pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
+             @pdf.font "Helvetica", :size => 10, :style => :bold
+             @pdf.text ballot_translation[:Title_Text], :align => :center
+             state_signature = "#{RAILS_ROOT}/public/images/new_hampshire_signature.png"
+             @pdf.image state_signature, :at => [20,@pdf.bounds.height - 55], :width => 100, :height => 30
+           @pdf.bounding_box [ 135 , @pdf.bounds.height - 45], :width => 150 do
+            state_seal = "#{RAILS_ROOT}/public/images/new_hampshire_seal.png"
+            @pdf.image state_seal, :at => [0,@pdf.bounds.height + 40], :width => 80, :height => 80
+           end
+         end
+        #INSTRUCTIONS ON TOP OF BALLOT
+        @pdf.bounding_box [ 240 , @pdf.bounds.height], :width => 300 do
           @pdf.font "Helvetica", :size => 14, :style => :bold
-            @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
-          @pdf.font "Helvetica", :size => 10
-            @pdf.text ballot_translation[:Instruction_Number_One], :align => :center
+          @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
+          @pdf.font "Helvetica", :size => 8
+          @pdf.text ballot_translation[:Instruction_Text1], :align => :left
+          @pdf.text ballot_translation[:Instruction_Text2], :align => :left
         end
         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
           @pdf.move_down 10
-          @pdf.text bt[:Instruction_To_Voters], :align => :center
-          
+          @pdf.text bt[:Vote_Both_Sides], :align => :center
         end
       end
     end

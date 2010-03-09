@@ -257,6 +257,7 @@ module AbstractBallot
       end_page(false) if @page
       @pagenum += 1
       @pdf.start_new_page
+      
 
       flow_rect = Rect.create_bound_box(@pdf.bounds)
       @c.render_frame flow_rect
