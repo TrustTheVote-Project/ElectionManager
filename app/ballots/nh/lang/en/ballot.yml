@@ -1,10 +1,110 @@
 --- 
-:Sample_Ballot: Sample Ballot
-:OFFICIAL_BALLOT: OFFICIAL BALLOT
+
+# ========================================================================================================================================
+# = BALLOT CONFIGURATION FILE - NOTE: Use 'show_border' options to display borders around bounding boxes for help visualizing the layout =
+# ========================================================================================================================================
+  
+# ======================
+# = BALLOT PAGE CONFIG =
+# ======================
+:ballot_page_size: LETTER
+:ballot_page_layout: :portrait
+:ballot_left_margin: 18
+:ballot_right_margin: 18
+:ballot_top_margin: 30
+:ballot_bottom_margin: 30
+:ballot_skip_page_creation: true
+
+# ================
+# = BALLOT TITLE =
+# ================
+:ballot_title_box_show_border: false
+:ballot_title_box_width: 120
+:ballot_title_box_height: 55
+:ballot_title_text_font: Helvetica
+:ballot_title_text_size: 14px
+:ballot_title_text_style: :bold
+:ballot_title_text_align: :center
+:ballot_title_text: "ABSENTEE<BR/>OFFICIAL<BR/>BALLOT FOR DURHAM</BR>GENERAL ELECTION<BR/>NOVEMBER 4, 2008"
+:ballot_state_seal_image: new_hampshire_seal.png
+:ballot_state_seal_image_x: 110
+:ballot_state_seal_image_y: 50
+:ballot_state_seal_image_width: 50
+:ballot_state_signature_image: new_hampshire_signature.png
+:ballot_state_signature_image_x: 20
+:ballot_state_signature_image_y: 0
+:ballot_state_signature_image_width: 75
+
+# =======================
+# = BALLOT INSTRUCTIONS =
+# =======================
+:ballot_instructions_box_show_border: false
+:ballot_instructions_box_width: 350
+:ballot_instructions_box_height: 80
+:ballot_instructions_title_text_font: Helvetica
+:ballot_instructions_title_text_style: :bold
+:ballot_instructions_title_text_size: 24px
+:ballot_instructions_title_text_align: :center
+:ballot_instructions_title_text: INSTRUCTIONS TO VOTERS
+:ballot_instructions_text_font: Helvetica
+:ballot_instructions_text_style: :normal
+:ballot_instructions_text_size: 12px
+:ballot_instructions_text_align: :left
+:ballot_instructions_text:
+    "1. To Vote.  Completely fill in the oval to the right of your choice. For each office for not
+    more than the number of candidates stated in the sentence: 'Vote for no more than_______.' If you
+    vote for more than the stated number of candidates, your vote for that office will not be counted.<BR/>
+    <BR/>
+    2. To Vote by Write-in. To vote for a person whose name is not printed on the ballot, write in
+    the name of the person in the \"write-in\" space. Completely fill in the oval to the right of
+    your choice."
+    
+    
+# =========================
+# = BALLOT COLUMN HEADERS =
+# =========================  
+:ballot_column_headers_show_border: false
+:ballot_column_headers_width: 500
+:ballot_column_headers_height: 40
+:ballot_column_headers_background_color: '#000000'
+:ballot_column_headers_stroke_color: '#FFFFFF'
+:ballot_column_headers_text_color: '#FFFFFF'
+:ballot_column_headers_header_width: 100
+:ballot_column_headers_header_height: 40
+:ballot_column_headers_text: ["OFFICES", "DEMOCRATIC<BR/>CANDIDATES", "OTHER<BR/>CANDIDATES", "REPUBLICAN<BR/>CANDIDATES", "WRITE-IN<BR/>CANDIDATES"]
+:ballot_column_headers_text_font: Helvetica
+:ballot_column_headers_text_align: center
+:ballot_column_headers_text_style: bold
+:ballot_column_headers_text_size: 18px
+
+
+# ===========
+# = CONTESTS =
+# ===========
+:ballot_contest_text_font: Helvetica
+:ballot_contest_text_align: left
+:ballot_contest_text_style: bold
+:ballot_contest_text_size: 14px
+
+# ==============
+# = CANDIDATES =
+# ==============
+:ballot_candidate_text_font: Helvetica
+:ballot_candidate_text_align: left
+:ballot_candidate_text_style: bold
+:ballot_candidate_text_size: 14px
+
+
+# ==============
+# = THANK YOU  =
+# ==============
+:ballot_thankyou_text_font: Helvetica
+:ballot_thankyou_text_align: center
+:ballot_thankyou_text_style: bold
+:ballot_thankyou_text_size: 14px
+
 :Vote_Both_Sides: Vote Both Sides
-:Thank_you: |-
-  Thank you for voting. 
-  Please turn in your ballot
+:Thank_you: "Thank you for voting. <BR/>Please turn in your ballot."
 :Continue_voting_next_side: |-
   Continue voting 
   next side

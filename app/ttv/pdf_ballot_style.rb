@@ -4,7 +4,7 @@ require 'ballots/nh/ballot_config.rb'
 
 class PDFBallotStyle
 
-  BALLOT_DIR = "#{RAILS_ROOT}/ballots"
+  BALLOT_DIR = "#{RAILS_ROOT}/app/ballots"
 
   def self.list
     styles = ['default']

@@ -1,0 +1,171 @@
+<%= stylesheet_link_tag 'blueprint/screen.css' %>
+<!-- <%= stylesheet_link_tag 'blueprint/print.css' %> -->
+<%= stylesheet_link_tag 'styles' %>
+<!--[if lt IE 8]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+<!-- ================= -->
+<!-- = BALLOT HEADER = -->
+<!-- ================= -->
+<div id="ballot_header" class="span-20 last" style="padding-left:75px">
+	<!-- BALLOT TITLE TEXT -->
+	<div id="ballot_title" class="span-5">
+		<p style="text-align:<%= @ballot_config[:ballot_title_text_align]%>;
+			font-size: <%= @ballot_config[:ballot_title_text_size] %>; 
+			font-family: <%= @ballot_config[:ballot_title_text_font] %>;
+			font-weight:<%= @ballot_config[:ballot_title_text_style] %>">
+			<%= @ballot_translation[:ballot_title_text]%>
+		</p>
+		<!-- BALLOT STATE SIGNATURE -->
+		<%= image_tag 'ballots/'+@ballot_config[:ballot_state_signature_image] %>
+	</div>
+	
+	<!-- BALLOT STATE SEAL -->
+	<div id="ballot_seal" class="span-4 last">
+		<%= image_tag 'ballots/'+@ballot_config[:ballot_state_seal_image] %>
+	</div>
+	
+	<!-- BALLOT INSTRUCTIONS -->
+	<div id="ballot_instructions" class="span-11">
+		<!-- BALLOT INSTRUCTIONS TITLE -->
+		<div id="ballot_instructions_title" class="span-11 last" style="height:<%= @ballot_config[:ballot_instructions_title_text_size] %>; padding-bottom:10px">
+			<p class="span-11" style="text-align:<%= @ballot_config[:ballot_instructions_title_text_align]%>;
+				font-size: <%= @ballot_config[:ballot_instructions_title_text_size] %>;
+				font-family: <%= @ballot_config[:ballot_instructions_title_text_font] %>;
+				font-weight: <%= @ballot_config[:ballot_instructions_title_text_style] %>;">
+			<%= @ballot_config[:ballot_instructions_title_text] %>
+			</p>
+		</div>
+		
+		<!-- BALLOT INSTRUCTIONS -->
+		<div id="ballot_instructions" style="text-align:<%= @ballot_config[:ballot_instructions_text_align]%>;
+			font-size: <%= @ballot_config[:ballot_instructions_text_size] %>;
+			font-family: <%= @ballot_config[:ballot_instructions_text_font] %>;
+			font-weight: <%= @ballot_config[:ballot_instructions_text_style] %>;">
+			<%= @ballot_config[:ballot_instructions_text] %>
+		</div>
+	</div>
+	
+	
+<!-- ================== -->
+<!-- = BALLOT COLUMNS = -->
+<!-- ================== -->	
+<table style="border-size:2px;border-color:#000">
+	
+	<!-- BALLOT COLUMN HEADERS -->
+	<tr style="background-color:<%= @ballot_config[:ballot_column_headers_background_color]%>;
+	 		 color:<%= @ballot_config[:ballot_column_headers_text_color]%>;">
+			<% @ballot_config[:ballot_column_headers_text].each do |header_text| %>
+				<th style="text-align:<%= @ballot_config[:ballot_column_headers_text_align] %>;
+						   font-size:<%= @ballot_config[:ballot_column_headers_text_size] %>;
+						   font-family:<%= @ballot_config[:ballot_column_headers_text_font] %>;
+						   font-weight:<%= @ballot_config[:ballot_column_headers_text_style] %>">
+						<%= header_text %>
+				</th>
+			<% end -%>
+	</tr>
+	
+	<!-- BALLOT COLUMNS -->
+	<% @election.contests.each do |contest|  %>
+		<tr>
+			<!-- OFFICE -->
+			<td>
+				For
+				<p style="text-align:<%= @ballot_config[:ballot_contest_text_align]%>;
+					font-size: <%= @ballot_config[:ballot_contest_text_size] %>;
+					font-family: <%= @ballot_config[:ballot_contest_text_font] %>;
+					font-weight: <%= @ballot_config[:ballot_contest_text_style] %>;
+					margin-bottom:0px">
+					<%= contest.display_name %>
+				</p>
+				Rank the candidates
+			</td>
+			
+			<!-- DEMOCRATIC CANDIDATES -->
+			<td>
+				<% contest.candidates.each do |candidate| %>
+					<% if candidate.party_id == 2 %>
+						<table style="border-style:none">
+							<td style="text-align:<%= @ballot_config[:ballot_candidate_text_align]%>;
+							font-size: <%= @ballot_config[:ballot_candidate_text_size] %>;
+							font-family: <%= @ballot_config[:ballot_candidate_text_font] %>;
+							font-weight: <%= @ballot_config[:ballot_candidate_text_style] %>;
+							margin-bottom:0px;
+							border-style:none">
+								<%= candidate.display_name  %>
+							</td>
+							<td style="border-style:none">
+								<%= image_tag 'oval.png',:style=>"width:40px;height:25px;vertical-align:middle;float:right; margin: 0 0 15px 15px;"%>
+							</td>
+						</table>
+						<hr>
+					<% end -%>
+				<% end -%>
+			</td>
+			
+			<!-- OTHER CANDIDATES -->
+			<td><% contest.candidates.each do |candidate| %>
+					<% unless candidate.party_id == 7 || candidate.party_id == 2 %>
+						<table style="border-style:none">
+							<td style="margin-bottom:0px;border-style:none">
+								<p style="text-align:<%= @ballot_config[:ballot_candidate_text_align]%>;
+									font-size: <%= @ballot_config[:ballot_candidate_text_size] %>;
+									font-family: <%= @ballot_config[:ballot_candidate_text_font] %>;
+									font-weight: <%= @ballot_config[:ballot_candidate_text_style] %>;
+									margin-bottom:0px">
+									<%= candidate.display_name  %>
+								<p>
+								<%= Party.find(candidate.party_id).display_name %>
+							</td>
+							<td style="border-style:none">		
+								<%= image_tag 'oval.png',:style=>"width:40px;height:25px;vertical-align:middle;float:right; margin: 0 0 15px 15px;"%>
+							</td>
+						</table>
+						<hr>
+					<% end -%>
+				<% end -%>
+			</td>
+			
+			<!-- REPUBLICAN CANDIDATES -->
+			<td>
+				<% contest.candidates.each do |candidate| %>
+					<% if candidate.party_id == 7 %>
+						<table style="border-style:none">
+							<td style="text-align:<%= @ballot_config[:ballot_candidate_text_align]%>;
+							font-size: <%= @ballot_config[:ballot_candidate_text_size] %>;
+							font-family: <%= @ballot_config[:ballot_candidate_text_font] %>;
+							font-weight: <%= @ballot_config[:ballot_candidate_text_style] %>;
+							margin-bottom:0px;
+							border-style:none">
+								<%= candidate.display_name  %>
+							</td>
+							<td style="border-style:none">
+								<%= image_tag 'oval.png',:style=>"width:40px;height:25px;vertical-align:middle;float:right; margin: 0 0 15px 15px;"%>
+							</td>
+						</table>
+						<hr>
+					<% end -%>
+				<% end -%>
+			</td>
+			
+			
+			<!-- WRITE IN CANDIDATES -->
+			<td>
+				<%= contest.display_name %>
+				<hr>
+			</td>
+			
+	  </tr>
+		<% end -%>
+</table>
+
+<div id="thank_you_for_voting" class="span-24 last">
+	<p style="text-align:<%= @ballot_config[:ballot_thankyou_text_align]%>;
+	font-size: <%= @ballot_config[:ballot_thankyou_text_size] %>;
+	font-family: <%= @ballot_config[:ballot_thankyou_text_font] %>;
+	font-weight: <%= @ballot_config[:ballot_thankyou_text_style] %>;">
+		<%= @ballot_translation[:Thank_you]%>
+	</p>
+</div>
+
+	
+</div>

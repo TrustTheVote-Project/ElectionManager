@@ -1,0 +1,21 @@
+table
+{
+    border-color: #600;
+    border-width: 1px;
+    border-style: solid;
+}
+
+td
+{
+    border-color: #600;
+    border-width: 1px;
+    border-style: solid;
+    margin: 0;
+    padding: 4px;
+	vertical-align:top;
+}
+
+hr
+{
+	background-color:#000;
+}
