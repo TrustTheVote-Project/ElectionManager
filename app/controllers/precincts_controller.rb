@@ -57,24 +57,32 @@ class PrecinctsController < ApplicationController
     @hpad2 = 6
     @vpad = 3
     @vpad2 = 6
-    prawnto :prawn => {
-              :page_layout => @ballot_translation[:ballot_page_layout],
-              :ballot_page_size => "#{@ballot_translation[:ballot_page_size]}",
-              :left_margin =>  @ballot_translation[:ballot_left_margin], 
-              :right_margin => @ballot_translation[:ballot_right_margin],
-              :top_margin => @ballot_translation[:ballot_top_margin],
-              :bottom_margin => @ballot_translation[:ballot_bottom_margin]}
+   
     begin
        #pdfBallot = AbstractBallot.create(election, precinct, style, lang)
-       
        #title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
        #send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
+       
+       respond_to do |format|
+             format.html
+             format.pdf do
+               render :pdf => "#{@election.display_name} Ballot",
+                      #:template => "show.pdf.erb", # OPTIONAL
+                      :layout => "pdf.html", # OPTIONAL
+                      :wkhtmltopdf => '/Users/jeff/Sites/OSDV/ElectionManager/lib/wkhtmltopdf', # OPTIONAL, path to binary
+                      :show_as_html => !params[:debug].blank? #OPTIONAL, maybe you just want to allow debuging in development environment?
+                      
+             end
+           end
     rescue Exception => ex
+      puts "precinct_controller - #{ex.message}"
        flash[:error] = "precinct_controller - #{ex.message}"
-       redirect_to precincts_election_path election
+       #redirect_to precincts_election_path election
      end
     
   end
+  
+  
   
   
 

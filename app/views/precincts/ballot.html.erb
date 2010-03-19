@@ -1,7 +1,13 @@
+<!-- ======================= -->
+<!-- = HTML VIEW OF BALLOT = -->
+<!-- ======================= -->
+
 <%= stylesheet_link_tag 'blueprint/screen.css' %>
 <!-- <%= stylesheet_link_tag 'blueprint/print.css' %> -->
 <%= stylesheet_link_tag 'styles' %>
 <!--[if lt IE 8]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+<%= link_to 'Create PDF of this ballot', :action=>'ballot', :params => params, :format => :pdf %>
 
 <!-- ================= -->
 <!-- = BALLOT HEADER = -->
@@ -45,7 +51,7 @@
 		</div>
 	</div>
 	
-	
+<div class="span-20 last">	
 <!-- ================== -->
 <!-- = BALLOT COLUMNS = -->
 <!-- ================== -->	
@@ -157,6 +163,7 @@
 	  </tr>
 		<% end -%>
 </table>
+</div>
 
 <div id="thank_you_for_voting" class="span-24 last">
 	<p style="text-align:<%= @ballot_config[:ballot_thankyou_text_align]%>;
