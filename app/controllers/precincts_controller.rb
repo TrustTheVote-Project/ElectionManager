@@ -69,7 +69,7 @@ class PrecinctsController < ApplicationController
                render :pdf => "#{@election.display_name} Ballot",
                       #:template => "show.pdf.erb", # OPTIONAL
                       :layout => "pdf.html", # OPTIONAL
-                      :wkhtmltopdf => '/Users/jeff/Sites/OSDV/ElectionManager/lib/wkhtmltopdf', # OPTIONAL, path to binary
+                      :wkhtmltopdf => 'lib/wkhtmltopdf', # OPTIONAL, path to binary
                       :show_as_html => !params[:debug].blank? #OPTIONAL, maybe you just want to allow debuging in development environment?
                       
              end
