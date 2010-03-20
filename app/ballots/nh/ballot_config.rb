@@ -181,7 +181,7 @@ module NhBallot
     
     
     def page_complete(pagenum, last_page)
-      unless last_page
+      #unless last_page
         #BALLOT TITLE ON TOP LEFT BALLOT
         @pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
              @pdf.font "Helvetica", :size => 10, :style => :bold
@@ -205,7 +205,7 @@ module NhBallot
           @pdf.move_down 10
           @pdf.text bt[:Vote_Both_Sides], :align => :center
         end
-      end
+      #end
     end
     
 
