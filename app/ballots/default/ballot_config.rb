@@ -388,16 +388,16 @@ module DefaultBallot
       @precinct = precinct
       if @lang == "zh"  # chinese fonts, 
         pdf.font_families.update({
-        "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
-                         :bold => "/Library/Fonts/Arial Unicode.ttf" },
-        "Courier" => { :normal => "/Library/Fonts/Arial Unicode.ttf" }
+        "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+                         :bold => "#{Rails.root}/fonts/Arial Unicode.ttf" },
+        "Courier" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf" }
         })
         @wrap = :character
       else
         pdf.font_families.update({
-          "Helvetica" => { :normal => "/Library/Fonts/Arial Unicode.ttf",
-                           :bold => "/Library/Fonts/Arial Bold.ttf" },
-          "Courier" => { :normal => "/Library/Fonts/Courier New.ttf" }
+          "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+                           :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
+          "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
             })
         @wrap = :space
       end
