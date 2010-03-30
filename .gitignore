@@ -5,3 +5,5 @@ tmp/*
 test/tmp/*.pdf
 .DS_Store
 .loadpath
+*~
+*#*
