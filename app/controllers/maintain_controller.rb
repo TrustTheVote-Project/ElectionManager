@@ -22,6 +22,29 @@ class MaintainController < ApplicationController
       flash[:error] = "Import error: #{ex.message}";
       redirect_to elections_url
     end
+  end  
+  
+  def import_batch
+    begin
+      if params[:import_folder_path].length == 0 
+        flash[:error] = "Import failed because the directory was not specified."
+        redirect_to :back
+        return
+      end
+      if params[:commit] == "XML files"
+            @election = TTV::ImportExport.import(params[:importFile])
+      elsif params[:commit] == "YML files"
+        import_handler = TTV::YAMLImport.new(params[:import_folder_path])
+        @election = import_handler.import
+      end
+      flash[:notice] = "Election import was successful. Here is your new election."
+      redirect_to @election
+      rescue ActionController::RedirectBackError => ex
+        redirect_to elections_url
+      rescue Exception => ex
+        flash[:error] = "Import error: #{ex.message}";
+        redirect_to elections_url
+      end
   end
 
   def export_file       

@@ -1,4 +1,5 @@
 require 'yaml'
+require 'ftools'
 
 module TTV
   # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
@@ -20,26 +21,64 @@ module TTV
 # Do the whole import process. Main entry point.
     def import
       @dist_id_map = {}
-      @yml_election = YAML.load(@source)
-      ActiveRecord::Base.transaction do
-        @dist_set = load_district_set
-        @election = Election.create(:display_name => @yml_election["display_name"])
-        @election.start_date = DateTime.now
-        @election.district_set = @dist_set
-        @election.save
-        if @yml_election["precinct_list"].nil?
-            puts "Invalid yml doesn't contain precinct_list"
-            pp @yml_election
-            raise "Invalid YAML election. See console for details."
-        elsif @yml_election["contest_list"].nil?          
-            puts "Invalid yml doesn't contain contest_list"
-            pp @yml_election
-            raise "Invalid YAML election. See console for details."
+      unless @source.class == String
+        # ============================
+        # = PROCESS SINGLE YAML FILE =
+        # ============================
+        @yml_election = YAML.load(@source)
+        ActiveRecord::Base.transaction do
+          @dist_set = load_district_set
+          @election = Election.create(:display_name => @yml_election["display_name"])
+          @election.start_date = DateTime.now
+          @election.district_set = @dist_set
+          @election.save
+          if @yml_election["precinct_list"].nil?
+              puts "Invalid yml doesn't contain precinct_list"
+              pp @yml_election
+              raise "Invalid YAML election. See console for details."
+          elsif @yml_election["contest_list"].nil?          
+              puts "Invalid yml doesn't contain contest_list"
+              pp @yml_election
+              raise "Invalid YAML election. See console for details."
+          end
+          @yml_election["precinct_list"].each { |prec| load_precinct prec}            
+          @yml_election["contest_list"].each { |yml_contest| load_contest(yml_contest)}
         end
-        @yml_election["precinct_list"].each { |prec| load_precinct prec}            
-        @yml_election["contest_list"].each { |yml_contest| load_contest(yml_contest)}
-      end
-      @election
+        @election
+     else
+       
+       # =================================
+       # = BATCH PROCESSING OF YML FILES =
+       # =================================
+       yaml_dir = Dir.new(@source)
+       yaml_dir.each do |yaml_file|
+         if yaml_file.length > 2
+            #@new_source = File.new("#{@source}/#{yaml_file}")
+            new_file = File.new("#{@source}/#{yaml_file}", "r")
+            @yml_election = YAML.load(new_file)
+            ActiveRecord::Base.transaction do
+              @dist_set = load_district_set
+              @election = Election.create(:display_name => @yml_election["display_name"])
+              @election.start_date = DateTime.now
+              @election.district_set = @dist_set
+              @election.save
+              if @yml_election["precinct_list"].nil?
+                  puts "Invalid yml doesn't contain precinct_list"
+                  pp @yml_election
+                  raise "Invalid YAML election. See console for details."
+              elsif @yml_election["contest_list"].nil?          
+                  puts "Invalid yml doesn't contain contest_list"
+                  pp @yml_election
+                  raise "Invalid YAML election. See console for details."
+              end
+              @yml_election["precinct_list"].each { |prec| load_precinct prec}            
+              @yml_election["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+            end
+            @election
+        end
+       end
+       
+     end
     end
 
 #
