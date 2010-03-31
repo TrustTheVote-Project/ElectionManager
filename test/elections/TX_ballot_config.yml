@@ -3,6 +3,7 @@ precinct_list:
 - display_name: Bexar Precinct
   district_list:
   - {display_name: City of Sebes, ident: DIST-199}
+  prec_ident: PREC-191
 type: ballot_config
 jurisdiction_display_name: Bexar County, Texas
 display_name: General Election
