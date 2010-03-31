@@ -22,7 +22,7 @@ class VotingMethod < ActiveRecord::Base
   end
 
   def VotingMethod.xmlToId(code)
-    case code
+    case code.downcase
     when 'winner' then return WINNER
     when 'ranked' then return RANKED
     when '(built-in default voting method)' then return DEFAULT

@@ -17,6 +17,7 @@ contest_list:
   - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
   contest_ident: Rep8thDistrict
   display_name: Representative in Congress
+  voting_method: winner
   district_ident: DIST-2
 - candidates:
   - {count: 0, display_name: Lois Pickett, ident: CAND-642, party_ident: PART-5}
@@ -24,7 +25,8 @@ contest_list:
   - {count: 0, display_name: Jonathan Stone, ident: CAND-686, party_ident: PART-5}
   - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
   contest_ident: StateRep8thHouse
-  display_name: State Representative
+  display_name: State Representative1
+  voting_method: ranked
   district_ident: DIST-4
 - candidates:
   - {count: 0, display_name: Ashley Lucas, ident: CAND-337, party_ident: PART-5}
@@ -32,14 +34,14 @@ contest_list:
   - {count: 0, display_name: Lucille Callahan, ident: CAND-929, party_ident: PART-8}
   - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
   contest_ident: StateRep4thHouse
-  display_name: State Representative
+  display_name: State Representative2
   district_ident: DIST-2
 - candidates:
   - {count: 0, display_name: Olga Harding, ident: CAND-481, party_ident: PART-9}
   - {count: 0, display_name: Willie Davis, ident: CAND-931, party_ident: PART-6}
   - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
   contest_ident: StateRep1stHouse
-  display_name: State Representative
+  display_name: State Representative3
   district_ident: DIST-1
 - candidates:
   - {count: 0, display_name: Valerie Pittman, ident: CAND-251, party_ident: PART-7}
@@ -89,6 +91,7 @@ contest_list:
   display_name: Representative in Congress
   district_ident: DIST-2
 display_name: 2012 Presidential
+start_date: November 9, 2010
 number_of_precincts: 8
 precinct_list:
 - display_name: 1338
