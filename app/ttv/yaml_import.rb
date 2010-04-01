@@ -14,7 +14,11 @@ module TTV
 # Is the .yml being imported of type 'ballot_config"? Ballot_config's have less stringent
 # validation and get connected to the 'default built-in district' etc.
     def ballot_config?
-      @yml_election["type"] == "ballot_config"
+      if @yml_election["Audit-header"].nil?
+        return false
+      else
+        return @yml_election["Audit-header"]["type"] == "ballot_config"
+      end
     end
 
 # Do the whole import process. Main entry point.
