@@ -76,6 +76,12 @@ class YAMLImportTest < ActiveSupport::TestCase
       end
     end
     
+    should "have one district with the right ident" do
+      assert_equal 1, @e.districts.length
+      assert_equal "City of Random",@e.districts[0].display_name
+      puts "heybrian"
+    end
+    
     context "yaml file of type ballot_config" do
       setup do
         afile = File.new("test/elections/ballot_config.yml")
