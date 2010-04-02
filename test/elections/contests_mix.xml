@@ -41,7 +41,7 @@
     <precinct id="102" display_name="Precinct 2"/>
   </precincts>
   <body>
-    <contest open_seat="1" display_name="A Winner simple" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="A Winner simple" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="democratic" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
@@ -49,7 +49,7 @@
         <candidate party="libertarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="2" display_name="A Winner with two seats" district_idref="17" voting_method="winner">
+    <contest open_seat="2" display_name="A Winner with two seats" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="democratic" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
@@ -57,14 +57,14 @@
         <candidate party="libertarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Absolute Ruler" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Absolute Ruler" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Nicole Andreson"/>
         <candidate party="independent" display_name="Samuel H. Angell"/>
         <candidate party="democratic" display_name="Stephen S. Ankuda"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Appelate Mayor" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Appelate Mayor" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="democratic" display_name="Gavin Newsom"/>
         <candidate party="libertarian" display_name="Meg Whitman"/>
@@ -73,7 +73,7 @@
         <candidate party="republican" display_name="Yetti Warren"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Attorney General" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Attorney General" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Ernest M. Allen III"/>
         <candidate party="democratic" display_name="Jay Abramson"/>
