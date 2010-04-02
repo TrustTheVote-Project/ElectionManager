@@ -5,7 +5,6 @@ class DistrictTest < ActiveSupport::TestCase
     should "able to create new district" do
       prec = District.new(:display_name => "i am new")
       prec.save!
-      pp prec
    end
   end
 end

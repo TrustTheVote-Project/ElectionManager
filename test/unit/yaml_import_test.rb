@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pp'
 require 'ttv/yaml_import'
 
 
@@ -85,8 +84,6 @@ class YAMLImportTest < ActiveSupport::TestCase
       end
       
       should "be imported and give the right town" do
-        puts @e.inspect
-        puts @e.contests.inspect
         assert_valid @e
       end
     end
