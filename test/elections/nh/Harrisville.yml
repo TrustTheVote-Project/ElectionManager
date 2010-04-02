@@ -1,0 +1,195 @@
+--- 
+precinct_list: 
+- ident: PREC-192
+  district_list: []
+
+  display_name: Harrisville
+display_name: Harrisville
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-02T10:59:00-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: President and Vice-President of the United States
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: John McCain and Sarah Palin
+  - party_display_name: Democratic
+    ident: CAND-1
+    party_ident: PART-2
+    display_name: Barack Obama and "Joe" Biden
+  - party_display_name: Independent
+    ident: CAND-2
+    party_ident: PART-3
+    display_name: Ralph Nader and "Matt" Gonzalez
+  - party_display_name: Libertarian
+    ident: CAND-3
+    party_ident: PART-4
+    display_name: George Phillies and Christopher Bennett
+  - party_display_name: Libertarian
+    ident: CAND-4
+    party_ident: PART-4
+    display_name: "\"Bob\" Barr and Wayne A. Root"
+- ident: CONT-1
+  display_name: Governor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-5
+    party_ident: PART-1
+    display_name: Joseph D. Kenney
+  - party_display_name: Democratic
+    ident: CAND-6
+    party_ident: PART-2
+    display_name: John Lynch
+  - party_display_name: Libertarian
+    ident: CAND-7
+    party_ident: PART-4
+    display_name: Susan M. Newell
+- ident: CONT-2
+  display_name: United States Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-8
+    party_ident: PART-1
+    display_name: John E. Sununu
+  - party_display_name: Democratic
+    ident: CAND-9
+    party_ident: PART-2
+    display_name: Jeanne Shaheen
+  - party_display_name: Libertarian
+    ident: CAND-10
+    party_ident: PART-4
+    display_name: "\"Ken\" Blevens"
+- ident: CONT-3
+  display_name: Representative in Congress
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-62
+    party_ident: PART-1
+    display_name: Jennifer Horn
+  - party_display_name: Democratic
+    ident: CAND-63
+    party_ident: PART-2
+    display_name: Paul W. Hodes
+  - party_display_name: Libertarian
+    ident: CAND-64
+    party_ident: PART-4
+    display_name: Chester L. Lapointe II
+- ident: CONT-4
+  display_name: Executive Councilor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-38
+    party_ident: PART-1
+    display_name: "\"Dan\" St. Hilaire"
+  - party_display_name: Democratic
+    ident: CAND-39
+    party_ident: PART-2
+    display_name: John D. Shea
+- ident: CONT-5
+  display_name: State Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-297
+    party_ident: PART-1
+    display_name: "\"Andy\" Sanborn"
+  - party_display_name: Democratic
+    ident: CAND-298
+    party_ident: PART-2
+    display_name: Harold Janeway
+- ident: CONT-6
+  display_name: State Representatives
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-145
+    party_ident: PART-1
+    display_name: Douglas H. Lyman
+  - party_display_name: Republican
+    ident: CAND-146
+    party_ident: PART-1
+    display_name: Judson K. Dexter
+  - party_display_name: Republican
+    ident: CAND-147
+    party_ident: PART-1
+    display_name: Jane B. Johnson
+  - party_display_name: Democratic
+    ident: CAND-148
+    party_ident: PART-2
+    display_name: Alfred "Gus" Lerandeau
+  - party_display_name: Democratic
+    ident: CAND-149
+    party_ident: PART-2
+    display_name: Peter H. Allen
+  - party_display_name: Democratic
+    ident: CAND-150
+    party_ident: PART-2
+    display_name: Nancy L. Carlson
+  - party_display_name: Democratic
+    ident: CAND-151
+    party_ident: PART-2
+    display_name: Anthony J. Dubois III
+- ident: CONT-7
+  display_name: Sheriff
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-114
+    party_ident: PART-1
+    display_name: Richard A. Foote
+  - party_display_name: Democratic
+    ident: CAND-114
+    party_ident: PART-2
+    display_name: Richard A. Foote
+- ident: CONT-8
+  display_name: County Attorney
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-115
+    party_ident: PART-1
+    display_name: Peter W. Heed
+  - party_display_name: Democratic
+    ident: CAND-115
+    party_ident: PART-2
+    display_name: Peter W. Heed
+- ident: CONT-9
+  display_name: County Treasurer
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-116
+    party_ident: PART-1
+    display_name: Fred S. Parker
+  - party_display_name: Democratic
+    ident: CAND-117
+    party_ident: PART-2
+    display_name: Stuart E. West
+  - party_display_name: Independent
+    ident: CAND-118
+    party_ident: PART-3
+    display_name: Patricia E. Putnam
+- ident: CONT-10
+  display_name: Register of Deeds
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-119
+    party_ident: PART-1
+    display_name: Evelyn S. Hubal
+  - party_display_name: Democratic
+    ident: CAND-119
+    party_ident: PART-2
+    display_name: Evelyn S. Hubal
+- ident: CONT-11
+  display_name: Register of Probate
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-120
+    party_ident: PART-1
+    display_name: Susan J. Castor
+  - party_display_name: Democratic
+    ident: CAND-121
+    party_ident: PART-2
+    display_name: Anna Z. Tilton

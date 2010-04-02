@@ -1,0 +1,2212 @@
+--- 
+precinct_list: 
+- ident: PREC-0
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "101.26"
+  display_order: 26
+- ident: PREC-1
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-4
+    display_name: Fire Protection Dist 11
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "101.31"
+  display_order: 31
+- ident: PREC-2
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "101.32"
+  display_order: 32
+- ident: PREC-3
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "101.36"
+  display_order: 36
+- ident: PREC-4
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  display_name: "102.5"
+  display_order: 5
+- ident: PREC-5
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  display_name: "102.15"
+  display_order: 15
+- ident: PREC-6
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "103.45"
+  display_order: 45
+- ident: PREC-7
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "103.55"
+  display_order: 55
+- ident: PREC-8
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.5"
+  display_order: 5
+- ident: PREC-9
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-12
+    display_name: Trails End Water Dist
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.6"
+  display_order: 6
+- ident: PREC-10
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-12
+    display_name: Trails End Water Dist
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.16"
+  display_order: 16
+- ident: PREC-11
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.75"
+  display_order: 75
+- ident: PREC-12
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-12
+    display_name: Trails End Water Dist
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.77"
+  display_order: 77
+- ident: PREC-13
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-13
+    display_name: Grapeview School 54
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "104.86"
+  display_order: 86
+- ident: PREC-14
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "105"
+  display_order: 105
+- ident: PREC-15
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "106.75"
+  display_order: 75
+- ident: PREC-16
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-15
+    display_name: Port of Dewatto
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "106.87"
+  display_order: 87
+- ident: PREC-17
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "106.99"
+  display_order: 99
+- ident: PREC-18
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "107.75"
+  display_order: 75
+- ident: PREC-19
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-16
+    display_name: Belfair Water Dist
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "107.76"
+  display_order: 76
+- ident: PREC-20
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-4
+    display_name: Fire Protection Dist 11
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "108.31"
+  display_order: 31
+- ident: PREC-21
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "108.32"
+  display_order: 32
+- ident: PREC-22
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "108.91"
+  display_order: 91
+- ident: PREC-23
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-18
+    display_name: Elma School 68
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "109.11"
+  display_order: 11
+- ident: PREC-24
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "109.41"
+  display_order: 41
+- ident: PREC-25
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-20
+    display_name: Fire Protection Dist 12
+  - ident: DIST-21
+    display_name: Mary M Knight School 311
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "109.66"
+  display_order: 66
+- ident: PREC-26
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-21
+    display_name: Mary M Knight School 311
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "109.67"
+  display_order: 67
+- ident: PREC-27
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-22
+    display_name: McCleary School 65
+  display_name: "109.90"
+  display_order: 90
+- ident: PREC-28
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-23
+    display_name: Fire Protection Dist 16
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "110.42"
+  display_order: 42
+- ident: PREC-29
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-20
+    display_name: Fire Protection Dist 12
+  - ident: DIST-21
+    display_name: Mary M Knight School 311
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "110.66"
+  display_order: 66
+- ident: PREC-30
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "111"
+  display_order: 111
+- ident: PREC-31
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-25
+    display_name: Fire Protection Dist 3
+  - ident: DIST-13
+    display_name: Grapeview School 54
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "112.80"
+  display_order: 80
+- ident: PREC-32
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-13
+    display_name: Grapeview School 54
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "112.85"
+  display_order: 85
+- ident: PREC-33
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  display_name: "113.82"
+  display_order: 82
+- ident: PREC-34
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-26
+    display_name: Hartstene Pointe Water
+  display_name: "113.99"
+  display_order: 99
+- ident: PREC-35
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-27
+    display_name: Fire Protection Dist 1
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "114.25"
+  display_order: 25
+- ident: PREC-36
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "114.35"
+  display_order: 35
+- ident: PREC-37
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-29
+    display_name: Fire Protection Dist 18
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "114.36"
+  display_order: 36
+- ident: PREC-38
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "115.45"
+  display_order: 45
+- ident: PREC-39
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "115.51"
+  display_order: 51
+- ident: PREC-40
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "115.55"
+  display_order: 55
+- ident: PREC-41
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-18
+    display_name: Elma School 68
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "116.11"
+  display_order: 11
+- ident: PREC-42
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "116.45"
+  display_order: 45
+- ident: PREC-43
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-22
+    display_name: McCleary School 65
+  display_name: "116.90"
+  display_order: 90
+- ident: PREC-44
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "117.45"
+  display_order: 45
+- ident: PREC-45
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-30
+    display_name: Southside School 42
+  display_name: "117.70"
+  display_order: 70
+- ident: PREC-46
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-13
+    display_name: Grapeview School 54
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "118.85"
+  display_order: 85
+- ident: PREC-47
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "118.87"
+  display_order: 87
+- ident: PREC-48
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-31
+    display_name: Fire Protection Dist 17
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "119.11"
+  display_order: 11
+- ident: PREC-49
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-27
+    display_name: Fire Protection Dist 1
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "119.15"
+  display_order: 15
+- ident: PREC-50
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "119.30"
+  display_order: 30
+- ident: PREC-51
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-31
+    display_name: Fire Protection Dist 17
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "119.33"
+  display_order: 33
+- ident: PREC-52
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-20
+    display_name: Fire Protection Dist 12
+  - ident: DIST-21
+    display_name: Mary M Knight School 311
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "120"
+  display_order: 120
+- ident: PREC-53
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "121.55"
+  display_order: 55
+- ident: PREC-54
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-30
+    display_name: Southside School 42
+  display_name: "121.70"
+  display_order: 70
+- ident: PREC-55
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "122"
+  display_order: 122
+- ident: PREC-56
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-4
+    display_name: Fire Protection Dist 11
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "123.31"
+  display_order: 31
+- ident: PREC-57
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-23
+    display_name: Fire Protection Dist 16
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "123.34"
+  display_order: 34
+- ident: PREC-58
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "124.6"
+  display_order: 6
+- ident: PREC-59
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "124.32"
+  display_order: 32
+- ident: PREC-60
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "124.91"
+  display_order: 91
+- ident: PREC-61
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-25
+    display_name: Fire Protection Dist 3
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  display_name: "125.81"
+  display_order: 81
+- ident: PREC-62
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  display_name: "125.82"
+  display_order: 82
+- ident: PREC-63
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-25
+    display_name: Fire Protection Dist 3
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "125.86"
+  display_order: 86
+- ident: PREC-64
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-14
+    display_name: Port of Grapeview
+  display_name: "125.87"
+  display_order: 87
+- ident: PREC-65
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "125.91"
+  display_order: 91
+- ident: PREC-66
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-27
+    display_name: Fire Protection Dist 1
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "126"
+  display_order: 126
+- ident: PREC-67
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-20
+    display_name: Fire Protection Dist 12
+  - ident: DIST-21
+    display_name: Mary M Knight School 311
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "127"
+  display_order: 127
+- ident: PREC-68
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-27
+    display_name: Fire Protection Dist 1
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "128.15"
+  display_order: 15
+- ident: PREC-69
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "128.16"
+  display_order: 16
+- ident: PREC-70
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "129.58"
+  display_order: 58
+- ident: PREC-71
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-32
+    display_name: Fire Protection Dist 8
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "129.59"
+  display_order: 59
+- ident: PREC-72
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-32
+    display_name: Fire Protection Dist 8
+  - ident: DIST-33
+    display_name: Maggie Lake Water Dist
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "129.60"
+  display_order: 60
+- ident: PREC-73
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-34
+    display_name: Tahuya River Water Dist
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "129.63"
+  display_order: 63
+- ident: PREC-74
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-35
+    display_name: Fire Protection Dist 6
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "130.7"
+  display_order: 7
+- ident: PREC-75
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "130.26"
+  display_order: 26
+- ident: PREC-76
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "130.36"
+  display_order: 36
+- ident: PREC-77
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-35
+    display_name: Fire Protection Dist 6
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "130.50"
+  display_order: 50
+- ident: PREC-78
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-35
+    display_name: Fire Protection Dist 6
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "130.55"
+  display_order: 55
+- ident: PREC-79
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-35
+    display_name: Fire Protection Dist 6
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "130.57"
+  display_order: 57
+- ident: PREC-80
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "130.61"
+  display_order: 61
+- ident: PREC-81
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-1
+    display_name: Fire Protection Dist 9
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  display_name: "130.62"
+  display_order: 62
+- ident: PREC-82
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  display_name: "131.35"
+  display_order: 35
+- ident: PREC-83
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  display_name: "131.45"
+  display_order: 45
+- ident: PREC-84
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-23
+    display_name: Fire Protection Dist 16
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "132.34"
+  display_order: 34
+- ident: PREC-85
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-19
+    display_name: Fire Protection Dist 13
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "132.51"
+  display_order: 51
+- ident: PREC-86
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "201"
+  display_order: 201
+- ident: PREC-87
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "202"
+  display_order: 202
+- ident: PREC-88
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "203"
+  display_order: 203
+- ident: PREC-89
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "204"
+  display_order: 204
+- ident: PREC-90
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "205"
+  display_order: 205
+- ident: PREC-91
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "206"
+  display_order: 206
+- ident: PREC-92
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "207"
+  display_order: 207
+- ident: PREC-93
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "208"
+  display_order: 208
+- ident: PREC-94
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "209"
+  display_order: 209
+- ident: PREC-95
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "210"
+  display_order: 210
+- ident: PREC-96
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "211"
+  display_order: 211
+- ident: PREC-97
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "212"
+  display_order: 212
+- ident: PREC-98
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "213"
+  display_order: 213
+- ident: PREC-99
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "214"
+  display_order: 214
+- ident: PREC-100
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "215"
+  display_order: 215
+- ident: PREC-101
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-36
+    display_name: City of Shelton
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "216"
+  display_order: 216
+- ident: PREC-102
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "301.75"
+  display_order: 75
+- ident: PREC-103
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-16
+    display_name: Belfair Water Dist
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "301.76"
+  display_order: 76
+- ident: PREC-104
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "302.58"
+  display_order: 58
+- ident: PREC-105
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-15
+    display_name: Port of Dewatto
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "302.62"
+  display_order: 62
+- ident: PREC-106
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-34
+    display_name: Tahuya River Water Dist
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "302.63"
+  display_order: 63
+- ident: PREC-107
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "303"
+  display_order: 303
+- ident: PREC-108
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-10
+    display_name: Fire Protection Dist 4
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-30
+    display_name: Southside School 42
+  display_name: "304"
+  display_order: 304
+- ident: PREC-109
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "305.63"
+  display_order: 63
+- ident: PREC-110
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-29
+    display_name: Fire Protection Dist 18
+  - ident: DIST-24
+    display_name: Hood Canal School 404
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-28
+    display_name: Port of Hoodsport
+  display_name: "305.64"
+  display_order: 64
+- ident: PREC-111
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "306"
+  display_order: 306
+- ident: PREC-112
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-5
+    display_name: Port of Shelton
+  - ident: DIST-3
+    display_name: Shelton School 309
+  display_name: "307.32"
+  display_order: 32
+- ident: PREC-113
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-17
+    display_name: Pioneer School 402
+  - ident: DIST-5
+    display_name: Port of Shelton
+  display_name: "307.91"
+  display_order: 91
+- ident: PREC-114
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-7
+    display_name: Fire Protection Dist 2
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  - ident: DIST-11
+    display_name: Public Hospital Dist 2
+  display_name: "308"
+  display_order: 308
+- ident: PREC-115
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-25
+    display_name: Fire Protection Dist 3
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  display_name: "309.10"
+  display_order: 10
+- ident: PREC-116
+  district_list: 
+  - ident: DIST-0
+    display_name: Mason County
+  - ident: DIST-6
+    display_name: Fire Protection Dist 5
+  - ident: DIST-2
+    display_name: Public Hospital Dist 1
+  - ident: DIST-8
+    display_name: North Mason School 403
+  - ident: DIST-9
+    display_name: Port of Allyn
+  display_name: "309.15"
+  display_order: 15
+display_name: General
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-04-02T10:58:06-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: State Initiative Measure 1033
+  district_ident: DIST-0
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: "Yes"
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-1
+    party_ident: PART-1
+    display_name: "No"
+    display_order: 2
+  display_order: 1
+- ident: CONT-1
+  display_name: City of Shelton Commissioner of Streets and Public Improvement
+  district_ident: DIST-36
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-2
+    party_ident: PART-1
+    display_name: Dawn Pannell
+    display_order: 1
+  display_order: 406
+- ident: CONT-2
+  display_name: "Fire Protection Dist 1 Fire Commissioner Position #3"
+  district_ident: DIST-27
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-3
+    party_ident: PART-1
+    display_name: Jim Goodpaster
+    display_order: 1
+  display_order: 413
+- ident: CONT-3
+  display_name: "Fire Protection Dist 2 Fire Commissioner Position #1"
+  district_ident: DIST-7
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-4
+    party_ident: PART-1
+    display_name: Dan Burrus
+    display_order: 1
+  display_order: 414
+- ident: CONT-4
+  display_name: "Fire Protection Dist 2 Fire Commissioner Position #5"
+  district_ident: DIST-7
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-5
+    party_ident: PART-1
+    display_name: Denny Hamilton
+    display_order: 1
+  display_order: 418
+- ident: CONT-5
+  display_name: "Fire Protection Dist 3 Fire Commissioner Position #1"
+  district_ident: DIST-25
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-6
+    party_ident: PART-1
+    display_name: Michael Petcu
+    display_order: 1
+  display_order: 419
+- ident: CONT-6
+  display_name: "Fire Protection Dist 4 Fire Commissioner Position #2"
+  district_ident: DIST-10
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-7
+    party_ident: PART-1
+    display_name: Curtis W. Bennett
+    display_order: 1
+  display_order: 423
+- ident: CONT-7
+  display_name: "Fire Protection Dist 5 Fire Commissioner Position #2"
+  district_ident: DIST-6
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-8
+    party_ident: PART-1
+    display_name: Tommy O. Taylor
+    display_order: 1
+  display_order: 426
+- ident: CONT-8
+  display_name: "Fire Protection Dist 6 Fire Commissioner Position #3"
+  district_ident: DIST-35
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-9
+    party_ident: PART-1
+    display_name: Steven D. Grout
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-10
+    party_ident: PART-1
+    display_name: Merlyn Flakus
+    display_order: 2
+  display_order: 430
+- ident: CONT-9
+  display_name: "Fire Protection Dist 8 Fire Commissioner Position #1"
+  district_ident: DIST-32
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-11
+    party_ident: PART-1
+    display_name: Bev Voss-Petredis
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-12
+    party_ident: PART-1
+    display_name: Tom Wampold
+    display_order: 2
+  display_order: 431
+- ident: CONT-10
+  display_name: "Fire Protection Dist 8 Fire Commissioner Position #2"
+  district_ident: DIST-32
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-13
+    party_ident: PART-1
+    display_name: Daniel K. Kewish
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-14
+    party_ident: PART-1
+    display_name: John W. Pate
+    display_order: 2
+  display_order: 432
+- ident: CONT-11
+  display_name: "Fire Protection Dist 9 Fire Commissioner Position #3"
+  district_ident: DIST-1
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-15
+    party_ident: PART-1
+    display_name: Marvin C. Anderson
+    display_order: 1
+  display_order: 436
+- ident: CONT-12
+  display_name: "Fire Protection Dist 11 Fire Commissioner Position #1"
+  district_ident: DIST-4
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-16
+    party_ident: PART-1
+    display_name: Chris Perrott
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-17
+    party_ident: PART-1
+    display_name: Dan C. Ward
+    display_order: 2
+  display_order: 437
+- ident: CONT-13
+  display_name: "Fire Protection Dist 12 Fire Commissioner Position #2"
+  district_ident: DIST-20
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-18
+    party_ident: PART-1
+    display_name: Steve Townsend
+    display_order: 1
+  display_order: 441
+- ident: CONT-14
+  display_name: "Fire Protection Dist 12 Fire Commissioner Position #3"
+  district_ident: DIST-20
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-19
+    party_ident: PART-1
+    display_name: Terri S. Wood
+    display_order: 1
+  display_order: 442
+- ident: CONT-15
+  display_name: "Fire Protection Dist 13 Fire Commissioner Position #3"
+  district_ident: DIST-19
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-20
+    party_ident: PART-1
+    display_name: Jan Hedman
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-21
+    party_ident: PART-1
+    display_name: Randy Norris
+    display_order: 2
+  display_order: 445
+- ident: CONT-16
+  display_name: "Fire Protection Dist 16 Fire Commissioner Position #3"
+  district_ident: DIST-23
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-22
+    party_ident: PART-1
+    display_name: Steve Edmondson
+    display_order: 1
+  display_order: 448
+- ident: CONT-17
+  display_name: "Fire Protection Dist 17 Fire Commissioner Position #1"
+  district_ident: DIST-31
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-23
+    party_ident: PART-1
+    display_name: Jim Boldt
+    display_order: 1
+  display_order: 449
+- ident: CONT-18
+  display_name: "Fire Protection Dist 18 Fire Commissioner Position #2"
+  district_ident: DIST-29
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-24
+    party_ident: PART-1
+    display_name: Franklin D. Phillips
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-25
+    party_ident: PART-1
+    display_name: Douglas Drinkall
+    display_order: 2
+  display_order: 453
+- ident: CONT-19
+  display_name: "Public Hospital Dist 1 Hospital Commissioner Position #3"
+  district_ident: DIST-2
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-26
+    party_ident: PART-1
+    display_name: Chris A. Truppner
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-27
+    party_ident: PART-1
+    display_name: Nancy R. Trucksess
+    display_order: 2
+  display_order: 457
+- ident: CONT-20
+  display_name: "Public Hospital Dist 2 Hospital Commissioner Position #3"
+  district_ident: DIST-11
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-28
+    party_ident: PART-1
+    display_name: Peggy VanBuskirk
+    display_order: 1
+  display_order: 460
+- ident: CONT-21
+  display_name: "Port of Allyn Port Commissioner District #1"
+  district_ident: DIST-9
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-29
+    party_ident: PART-1
+    display_name: Judy Scott
+    display_order: 1
+  display_order: 463
+- ident: CONT-22
+  display_name: "Port of Dewatto Port Commissioner District #2"
+  district_ident: DIST-15
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-30
+    party_ident: PART-1
+    display_name: Doug Stevens
+    display_order: 1
+  display_order: 467
+- ident: CONT-23
+  display_name: "Port of Grapeview Port Commissioner District #1"
+  district_ident: DIST-14
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-31
+    party_ident: PART-1
+    display_name: William C. VanderWal
+    display_order: 1
+  display_order: 469
+- ident: CONT-24
+  display_name: "Port of Hoodsport Port Commissioner Position #1"
+  district_ident: DIST-28
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-32
+    party_ident: PART-1
+    display_name: Terry W. Brazil
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-33
+    party_ident: PART-1
+    display_name: Lew Parsons
+    display_order: 2
+  display_order: 472
+- ident: CONT-25
+  display_name: "Port of Hoodsport Port Commissioner Position #2"
+  district_ident: DIST-28
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-34
+    party_ident: PART-1
+    display_name: Ed Johnston
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-35
+    party_ident: PART-1
+    display_name: Mike Petz
+    display_order: 2
+  display_order: 473
+- ident: CONT-26
+  display_name: "Port of Hoodsport Port Commissioner Position #3"
+  district_ident: DIST-28
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-36
+    party_ident: PART-1
+    display_name: John Olaughlin
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-37
+    party_ident: PART-1
+    display_name: Frank Benavente
+    display_order: 2
+  display_order: 474
+- ident: CONT-27
+  display_name: "Port of Shelton Port Commissioner District #1"
+  district_ident: DIST-5
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-38
+    party_ident: PART-1
+    display_name: Tom Wallitner
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-39
+    party_ident: PART-1
+    display_name: Richard Byrd
+    display_order: 2
+  display_order: 475
+- ident: CONT-28
+  display_name: "Southside School 42 School Board Position #3"
+  district_ident: DIST-30
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-40
+    party_ident: PART-1
+    display_name: Sadie Whitener
+    display_order: 1
+  display_order: 486
+- ident: CONT-29
+  display_name: "Southside School 42 School Board Position #5"
+  district_ident: DIST-30
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-41
+    party_ident: PART-1
+    display_name: Linda S. Farrimond
+    display_order: 1
+  display_order: 488
+- ident: CONT-30
+  display_name: "Grapeview School 54 School Board Position #1"
+  district_ident: DIST-13
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-42
+    party_ident: PART-1
+    display_name: Jolene Dumont
+    display_order: 1
+  display_order: 489
+- ident: CONT-31
+  display_name: "Grapeview School 54 School Board Position #3"
+  district_ident: DIST-13
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-43
+    party_ident: PART-1
+    display_name: Pamela Berger
+    display_order: 1
+  display_order: 491
+- ident: CONT-32
+  display_name: "Shelton School 309 School Board Director District #3"
+  district_ident: DIST-3
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-44
+    party_ident: PART-1
+    display_name: Holly M. Sharpe
+    display_order: 1
+  display_order: 496
+- ident: CONT-33
+  display_name: "Shelton School 309 School Board Director District #4"
+  district_ident: DIST-3
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-45
+    party_ident: PART-1
+    display_name: Brian R. Major
+    display_order: 1
+  display_order: 497
+- ident: CONT-34
+  display_name: "Shelton School 309 School Board Director District #5"
+  district_ident: DIST-3
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-46
+    party_ident: PART-1
+    display_name: Dean Hirschi
+    display_order: 1
+  display_order: 498
+- ident: CONT-35
+  display_name: "Mary M Knight School 311 School Board Director District #2"
+  district_ident: DIST-21
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-47
+    party_ident: PART-1
+    display_name: Joe E. Rothrock
+    display_order: 1
+  display_order: 500
+- ident: CONT-36
+  display_name: "Mary M Knight School 311 School Board Position #1"
+  district_ident: DIST-21
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-48
+    party_ident: PART-1
+    display_name: Leroy T. Valley
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-49
+    party_ident: PART-1
+    display_name: Jim Frost
+    display_order: 2
+  display_order: 502
+- ident: CONT-37
+  display_name: "Pioneer School 402 School Board Position #1"
+  district_ident: DIST-17
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-50
+    party_ident: PART-1
+    display_name: Sandra Borys
+    display_order: 1
+  display_order: 504
+- ident: CONT-38
+  display_name: "Pioneer School 402 School Board Position #3"
+  district_ident: DIST-17
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-51
+    party_ident: PART-1
+    display_name: Dick Parrett
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-52
+    party_ident: PART-1
+    display_name: Kirk Schwerzler
+    display_order: 2
+  display_order: 506
+- ident: CONT-39
+  display_name: "Pioneer School 402 School Board Position #4"
+  district_ident: DIST-17
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-53
+    party_ident: PART-1
+    display_name: Jeanette L. Leach
+    display_order: 1
+  display_order: 507
+- ident: CONT-40
+  display_name: "Pioneer School 402 School Board Position #5"
+  district_ident: DIST-17
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-54
+    party_ident: PART-1
+    display_name: Mike Felton
+    display_order: 1
+  display_order: 508
+- ident: CONT-41
+  display_name: "North Mason School 403 School Board Director District #5"
+  district_ident: DIST-8
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-55
+    party_ident: PART-1
+    display_name: Mike Gaudio
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-56
+    party_ident: PART-1
+    display_name: Danielle Skeeters
+    display_order: 2
+  display_order: 513
+- ident: CONT-42
+  display_name: "Hood Canal School 404 School Board Director District #1"
+  district_ident: DIST-24
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-57
+    party_ident: PART-1
+    display_name: Judi Woodard
+    display_order: 1
+  display_order: 514
+- ident: CONT-43
+  display_name: "Hood Canal School 404 School Board Position #4"
+  district_ident: DIST-24
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-58
+    party_ident: PART-1
+    display_name: Roslynne Reed
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-59
+    party_ident: PART-1
+    display_name: Ginger R. Tejada
+    display_order: 2
+  display_order: 518
+- ident: CONT-44
+  display_name: "Belfair Water Dist Water Commissioner Position #1"
+  district_ident: DIST-16
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-60
+    party_ident: PART-1
+    display_name: Michael D. Pope
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-61
+    party_ident: PART-1
+    display_name: Irene B. Werdall
+    display_order: 2
+  display_order: 519
+- ident: CONT-45
+  display_name: "Hartstene Pointe Water Commissioner Position #2"
+  district_ident: DIST-26
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-62
+    party_ident: PART-1
+    display_name: Mary A. Cary
+    display_order: 1
+  display_order: 523
+- ident: CONT-46
+  display_name: "Maggie Lake Water Dist Water Commissioner Position #1"
+  district_ident: DIST-33
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-63
+    party_ident: PART-1
+    display_name: Donald R. Husted
+    display_order: 1
+  display_order: 525
+- ident: CONT-47
+  display_name: "Maggie Lake Water Dist Water Commissioner Position #3"
+  district_ident: DIST-33
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-64
+    party_ident: PART-1
+    display_name: Robert K. Sample
+    display_order: 1
+  display_order: 527
+- ident: CONT-48
+  display_name: "Tahuya River Water Dist Water Commissioner Position #2"
+  district_ident: DIST-34
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-65
+    party_ident: PART-1
+    display_name: Anthony T. Butler
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-66
+    party_ident: PART-1
+    display_name: Darrin Klein
+    display_order: 2
+  display_order: 529
+- ident: CONT-49
+  display_name: "Trails End Water Dist Water Commissioner Position #2"
+  district_ident: DIST-12
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-67
+    party_ident: PART-1
+    display_name: Douglas E. Doll
+    display_order: 1
+  display_order: 532
+- ident: CONT-50
+  display_name: Sch Dist 68 - Elma School 68 Director District 1
+  district_ident: DIST-18
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-68
+    party_ident: PART-1
+    display_name: Larry Bridenback
+    display_order: 1
+  display_order: 647
+- ident: CONT-51
+  display_name: Sch Dist 68 - Elma School 68 Director District 2
+  district_ident: DIST-18
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-69
+    party_ident: PART-1
+    display_name: Jamie Bailey
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-70
+    party_ident: PART-1
+    display_name: Rick Gravatt
+    display_order: 2
+  display_order: 648
+- ident: CONT-52
+  display_name: Sch Dist 68 - Elma School 68 Director District 5
+  district_ident: DIST-18
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-71
+    party_ident: PART-1
+    display_name: Teresa Boling
+    display_order: 1
+  display_order: 651
+- ident: CONT-53
+  display_name: Sch Dist 65 - McCleary School 65 Director District 5
+  district_ident: DIST-22
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-72
+    party_ident: PART-1
+    display_name: R. Troy Colley
+    display_order: 1
+  display_order: 656

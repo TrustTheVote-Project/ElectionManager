@@ -1,0 +1,198 @@
+--- 
+precinct_list: 
+- ident: PREC-151
+  district_list: []
+
+  display_name: Dover - Ward 4
+display_name: Dover - Ward 4
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-02T10:59:00-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: President and Vice-President of the United States
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: John McCain and Sarah Palin
+  - party_display_name: Democratic
+    ident: CAND-1
+    party_ident: PART-2
+    display_name: Barack Obama and "Joe" Biden
+  - party_display_name: Independent
+    ident: CAND-2
+    party_ident: PART-3
+    display_name: Ralph Nader and "Matt" Gonzalez
+  - party_display_name: Libertarian
+    ident: CAND-3
+    party_ident: PART-4
+    display_name: George Phillies and Christopher Bennett
+  - party_display_name: Libertarian
+    ident: CAND-4
+    party_ident: PART-4
+    display_name: "\"Bob\" Barr and Wayne A. Root"
+- ident: CONT-1
+  display_name: Governor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-5
+    party_ident: PART-1
+    display_name: Joseph D. Kenney
+  - party_display_name: Democratic
+    ident: CAND-6
+    party_ident: PART-2
+    display_name: John Lynch
+  - party_display_name: Libertarian
+    ident: CAND-7
+    party_ident: PART-4
+    display_name: Susan M. Newell
+- ident: CONT-2
+  display_name: United States Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-8
+    party_ident: PART-1
+    display_name: John E. Sununu
+  - party_display_name: Democratic
+    ident: CAND-9
+    party_ident: PART-2
+    display_name: Jeanne Shaheen
+  - party_display_name: Libertarian
+    ident: CAND-10
+    party_ident: PART-4
+    display_name: "\"Ken\" Blevens"
+- ident: CONT-3
+  display_name: Representative in Congress
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-11
+    party_ident: PART-1
+    display_name: Jeb Bradley
+  - party_display_name: Democratic
+    ident: CAND-12
+    party_ident: PART-2
+    display_name: Carol Shea-Porter
+  - party_display_name: Libertarian
+    ident: CAND-13
+    party_ident: PART-4
+    display_name: Robert Kingsbury
+- ident: CONT-4
+  display_name: Executive Councilor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-594
+    party_ident: PART-1
+    display_name: Russell Prescott
+  - party_display_name: Democratic
+    ident: CAND-595
+    party_ident: PART-2
+    display_name: Beverly A. Hollingworth
+- ident: CONT-5
+  display_name: State Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-677
+    party_ident: PART-1
+    display_name: Kelly Remick Halldorson
+  - party_display_name: Democratic
+    ident: CAND-678
+    party_ident: PART-2
+    display_name: Amanda Merrill
+- ident: CONT-6
+  display_name: State Representatives
+  candidates: 
+  - party_display_name: Democratic
+    ident: CAND-812
+    party_ident: PART-2
+    display_name: Jennifer M. Brown
+  - party_display_name: Democratic
+    ident: CAND-813
+    party_ident: PART-2
+    display_name: Baldwin "Dom" Domingo
+  - party_display_name: Democratic
+    ident: CAND-814
+    party_ident: PART-2
+    display_name: Sarah Hutz
+- ident: CONT-7
+  display_name: Sheriff
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-799
+    party_ident: PART-1
+    display_name: Wayne M. Estes
+  - party_display_name: Democratic
+    ident: CAND-800
+    party_ident: PART-2
+    display_name: "\"Tim\" Brown"
+- ident: CONT-8
+  display_name: County Attorney
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-801
+    party_ident: PART-1
+    display_name: Thomas P. Velardi
+  - party_display_name: Democratic
+    ident: CAND-801
+    party_ident: PART-2
+    display_name: Thomas P. Velardi
+- ident: CONT-9
+  display_name: County Treasurer
+  candidates: 
+  - party_display_name: Democratic
+    ident: CAND-802
+    party_ident: PART-2
+    display_name: Pamela J. Arnold
+- ident: CONT-10
+  display_name: Register of Deeds
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-803
+    party_ident: PART-1
+    display_name: Leo E. Lessard
+  - party_display_name: Democratic
+    ident: CAND-803
+    party_ident: PART-2
+    display_name: Leo E. Lessard
+- ident: CONT-11
+  display_name: Register of Probate
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-804
+    party_ident: PART-1
+    display_name: Kimberly Quint Wood
+  - party_display_name: Democratic
+    ident: CAND-804
+    party_ident: PART-2
+    display_name: Kimberly Quint Wood
+- ident: CONT-16
+  display_name: County Commissioners
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-805
+    party_ident: PART-1
+    display_name: George Maglaras
+  - party_display_name: Republican
+    ident: CAND-806
+    party_ident: PART-1
+    display_name: Robert J. Watson
+  - party_display_name: Republican
+    ident: CAND-807
+    party_ident: PART-1
+    display_name: Paul J. Dumont
+  - party_display_name: Democratic
+    ident: CAND-805
+    party_ident: PART-2
+    display_name: George Maglaras
+  - party_display_name: Democratic
+    ident: CAND-806
+    party_ident: PART-2
+    display_name: Robert J. Watson
+  - party_display_name: Democratic
+    ident: CAND-807
+    party_ident: PART-2
+    display_name: Paul J. Dumont

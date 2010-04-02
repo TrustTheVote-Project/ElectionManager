@@ -1,0 +1,210 @@
+--- 
+precinct_list: 
+- ident: PREC-291
+  district_list: []
+
+  display_name: Boscawen
+display_name: Boscawen
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-02T10:59:00-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: President and Vice-President of the United States
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: John McCain and Sarah Palin
+  - party_display_name: Democratic
+    ident: CAND-1
+    party_ident: PART-2
+    display_name: Barack Obama and "Joe" Biden
+  - party_display_name: Independent
+    ident: CAND-2
+    party_ident: PART-3
+    display_name: Ralph Nader and "Matt" Gonzalez
+  - party_display_name: Libertarian
+    ident: CAND-3
+    party_ident: PART-4
+    display_name: George Phillies and Christopher Bennett
+  - party_display_name: Libertarian
+    ident: CAND-4
+    party_ident: PART-4
+    display_name: "\"Bob\" Barr and Wayne A. Root"
+- ident: CONT-1
+  display_name: Governor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-5
+    party_ident: PART-1
+    display_name: Joseph D. Kenney
+  - party_display_name: Democratic
+    ident: CAND-6
+    party_ident: PART-2
+    display_name: John Lynch
+  - party_display_name: Libertarian
+    ident: CAND-7
+    party_ident: PART-4
+    display_name: Susan M. Newell
+- ident: CONT-2
+  display_name: United States Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-8
+    party_ident: PART-1
+    display_name: John E. Sununu
+  - party_display_name: Democratic
+    ident: CAND-9
+    party_ident: PART-2
+    display_name: Jeanne Shaheen
+  - party_display_name: Libertarian
+    ident: CAND-10
+    party_ident: PART-4
+    display_name: "\"Ken\" Blevens"
+- ident: CONT-3
+  display_name: Representative in Congress
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-62
+    party_ident: PART-1
+    display_name: Jennifer Horn
+  - party_display_name: Democratic
+    ident: CAND-63
+    party_ident: PART-2
+    display_name: Paul W. Hodes
+  - party_display_name: Libertarian
+    ident: CAND-64
+    party_ident: PART-4
+    display_name: Chester L. Lapointe II
+- ident: CONT-4
+  display_name: Executive Councilor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-38
+    party_ident: PART-1
+    display_name: "\"Dan\" St. Hilaire"
+  - party_display_name: Democratic
+    ident: CAND-39
+    party_ident: PART-2
+    display_name: John D. Shea
+- ident: CONT-5
+  display_name: State Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-297
+    party_ident: PART-1
+    display_name: "\"Andy\" Sanborn"
+  - party_display_name: Democratic
+    ident: CAND-298
+    party_ident: PART-2
+    display_name: Harold Janeway
+- ident: CONT-6
+  display_name: State Representatives
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-526
+    party_ident: PART-1
+    display_name: Jared King
+  - party_display_name: Republican
+    ident: CAND-527
+    party_ident: PART-1
+    display_name: Priscilla Parmenter Lockwood
+  - party_display_name: Republican
+    ident: CAND-528
+    party_ident: PART-1
+    display_name: Jennifer Coffey
+  - party_display_name: Democratic
+    ident: CAND-529
+    party_ident: PART-2
+    display_name: "\"Danny\" Loehr"
+  - party_display_name: Democratic
+    ident: CAND-530
+    party_ident: PART-2
+    display_name: Joy K. Tilton
+  - party_display_name: Democratic
+    ident: CAND-531
+    party_ident: PART-2
+    display_name: Frank A. Tupper
+  - party_display_name: Democratic
+    ident: CAND-532
+    party_ident: PART-2
+    display_name: Deborah Wheeler
+  - party_display_name: Democratic
+    ident: CAND-533
+    party_ident: PART-2
+    display_name: "\"Tim\" Chrysostom"
+  - party_display_name: Democratic
+    ident: CAND-534
+    party_ident: PART-2
+    display_name: Claire D. Clarke
+- ident: CONT-7
+  display_name: Sheriff
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-510
+    party_ident: PART-1
+    display_name: Scott E. Hilliard
+  - party_display_name: Democratic
+    ident: CAND-510
+    party_ident: PART-2
+    display_name: Scott E. Hilliard
+- ident: CONT-8
+  display_name: County Attorney
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-511
+    party_ident: PART-1
+    display_name: "\"Tom\" Reid"
+  - party_display_name: Democratic
+    ident: CAND-512
+    party_ident: PART-2
+    display_name: Katherine D. Rogers
+- ident: CONT-9
+  display_name: County Treasurer
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-513
+    party_ident: PART-1
+    display_name: Roy Maxfield
+  - party_display_name: Democratic
+    ident: CAND-514
+    party_ident: PART-2
+    display_name: James Monahan
+- ident: CONT-10
+  display_name: Register of Deeds
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-515
+    party_ident: PART-1
+    display_name: Kathi L. Guay
+  - party_display_name: Democratic
+    ident: CAND-516
+    party_ident: PART-2
+    display_name: Lawrence K. Hennessy
+- ident: CONT-11
+  display_name: Register of Probate
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-517
+    party_ident: PART-1
+    display_name: Jane Bradstreet
+  - party_display_name: Democratic
+    ident: CAND-517
+    party_ident: PART-2
+    display_name: Jane Bradstreet
+- ident: CONT-12
+  display_name: County Commissioner
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-543
+    party_ident: PART-1
+    display_name: Elizabeth D. Blanchard
+  - party_display_name: Democratic
+    ident: CAND-543
+    party_ident: PART-2
+    display_name: Elizabeth D. Blanchard

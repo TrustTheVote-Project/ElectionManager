@@ -1,0 +1,192 @@
+--- 
+precinct_list: 
+- ident: PREC-0
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "1"
+  display_order: 1
+- ident: PREC-1
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "2"
+  display_order: 2
+- ident: PREC-2
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "3"
+  display_order: 3
+- ident: PREC-3
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "4"
+  display_order: 4
+- ident: PREC-4
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "5"
+  display_order: 5
+- ident: PREC-5
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "6"
+  display_order: 6
+- ident: PREC-6
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "7"
+  display_order: 7
+- ident: PREC-7
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "8"
+  display_order: 8
+- ident: PREC-8
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "9"
+  display_order: 9
+- ident: PREC-9
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "10"
+  display_order: 10
+- ident: PREC-10
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "11"
+  display_order: 11
+- ident: PREC-11
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "12"
+  display_order: 12
+- ident: PREC-12
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "13"
+  display_order: 13
+- ident: PREC-13
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "14"
+  display_order: 14
+- ident: PREC-14
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "15"
+  display_order: 15
+- ident: PREC-15
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "16"
+  display_order: 16
+- ident: PREC-16
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "17"
+  display_order: 17
+- ident: PREC-17
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "18"
+  display_order: 18
+- ident: PREC-18
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "19"
+  display_order: 19
+- ident: PREC-19
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "20"
+  display_order: 20
+- ident: PREC-20
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "21"
+  display_order: 21
+- ident: PREC-21
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "22"
+  display_order: 22
+- ident: PREC-22
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "23"
+  display_order: 23
+- ident: PREC-23
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "24"
+  display_order: 24
+- ident: PREC-24
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "25"
+  display_order: 25
+- ident: PREC-25
+  district_list: 
+  - ident: DIST-0
+    display_name: CITY 1
+  display_name: "26"
+  display_order: 26
+display_name: Primary
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-04-02T10:57:51-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: "CITY 1 Council #2"
+  district_ident: DIST-0
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: Edna Petersen
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-1
+    party_ident: PART-1
+    display_name: Peter J. Ripley
+    display_order: 2
+  - party_display_name: Nonpartisan
+    ident: CAND-2
+    party_ident: PART-1
+    display_name: Max Mania
+    display_order: 3
+  - party_display_name: Nonpartisan
+    ident: CAND-3
+    party_ident: PART-1
+    display_name: Rick Burton
+    display_order: 4
+  display_order: 406

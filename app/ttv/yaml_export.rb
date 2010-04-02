@@ -22,7 +22,7 @@ module TTV
                  "jurisdiction_display_name" =>  @elec.display_name,
                  "number_of_precincts" => precinct_list_h.length
               }
-      end
+     end
     
 #
 # Convert contest to a hash which can be converted to yaml directly.
@@ -39,7 +39,7 @@ module TTV
         contests_h << new_cont_h
       end
       contests_h
-  end
+    end
   
 #
 # Convert the list of candidates for a contest to a hash

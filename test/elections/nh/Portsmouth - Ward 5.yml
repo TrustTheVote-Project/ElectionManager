@@ -1,0 +1,226 @@
+--- 
+precinct_list: 
+- ident: PREC-139
+  district_list: []
+
+  display_name: Portsmouth - Ward 5
+display_name: Portsmouth - Ward 5
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-02T10:59:00-04:00
+contest_list: 
+- ident: CONT-0
+  display_name: President and Vice-President of the United States
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-0
+    party_ident: PART-1
+    display_name: John McCain and Sarah Palin
+  - party_display_name: Democratic
+    ident: CAND-1
+    party_ident: PART-2
+    display_name: Barack Obama and "Joe" Biden
+  - party_display_name: Independent
+    ident: CAND-2
+    party_ident: PART-3
+    display_name: Ralph Nader and "Matt" Gonzalez
+  - party_display_name: Libertarian
+    ident: CAND-3
+    party_ident: PART-4
+    display_name: George Phillies and Christopher Bennett
+  - party_display_name: Libertarian
+    ident: CAND-4
+    party_ident: PART-4
+    display_name: "\"Bob\" Barr and Wayne A. Root"
+- ident: CONT-1
+  display_name: Governor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-5
+    party_ident: PART-1
+    display_name: Joseph D. Kenney
+  - party_display_name: Democratic
+    ident: CAND-6
+    party_ident: PART-2
+    display_name: John Lynch
+  - party_display_name: Libertarian
+    ident: CAND-7
+    party_ident: PART-4
+    display_name: Susan M. Newell
+- ident: CONT-2
+  display_name: United States Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-8
+    party_ident: PART-1
+    display_name: John E. Sununu
+  - party_display_name: Democratic
+    ident: CAND-9
+    party_ident: PART-2
+    display_name: Jeanne Shaheen
+  - party_display_name: Libertarian
+    ident: CAND-10
+    party_ident: PART-4
+    display_name: "\"Ken\" Blevens"
+- ident: CONT-3
+  display_name: Representative in Congress
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-11
+    party_ident: PART-1
+    display_name: Jeb Bradley
+  - party_display_name: Democratic
+    ident: CAND-12
+    party_ident: PART-2
+    display_name: Carol Shea-Porter
+  - party_display_name: Libertarian
+    ident: CAND-13
+    party_ident: PART-4
+    display_name: Robert Kingsbury
+- ident: CONT-4
+  display_name: Executive Councilor
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-594
+    party_ident: PART-1
+    display_name: Russell Prescott
+  - party_display_name: Democratic
+    ident: CAND-595
+    party_ident: PART-2
+    display_name: Beverly A. Hollingworth
+- ident: CONT-5
+  display_name: State Senator
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-698
+    party_ident: PART-1
+    display_name: Christian Callahan
+  - party_display_name: Democratic
+    ident: CAND-699
+    party_ident: PART-2
+    display_name: Martha Fuller Clark
+- ident: CONT-6
+  display_name: State Representatives
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-737
+    party_ident: PART-1
+    display_name: Minto M. Thorsen
+  - party_display_name: Republican
+    ident: CAND-738
+    party_ident: PART-1
+    display_name: Jack Thorsen
+  - party_display_name: Republican
+    ident: CAND-739
+    party_ident: PART-1
+    display_name: Christopher R. Burns
+  - party_display_name: Republican
+    ident: CAND-740
+    party_ident: PART-1
+    display_name: Daniel H. Carroll
+  - party_display_name: Republican
+    ident: CAND-741
+    party_ident: PART-1
+    display_name: Warren Goddard
+  - party_display_name: Republican
+    ident: CAND-742
+    party_ident: PART-1
+    display_name: Robley R. Hall
+  - party_display_name: Democratic
+    ident: CAND-743
+    party_ident: PART-2
+    display_name: Paul McEachern
+  - party_display_name: Democratic
+    ident: CAND-744
+    party_ident: PART-2
+    display_name: Terie Norelli
+  - party_display_name: Democratic
+    ident: CAND-745
+    party_ident: PART-2
+    display_name: Laura C. Pantelakos
+  - party_display_name: Democratic
+    ident: CAND-746
+    party_ident: PART-2
+    display_name: Robin P. Read, Jr.
+  - party_display_name: Democratic
+    ident: CAND-747
+    party_ident: PART-2
+    display_name: James R. Splaine
+  - party_display_name: Democratic
+    ident: CAND-748
+    party_ident: PART-2
+    display_name: Jacqueline Cali-Pitts
+  - party_display_name: Democratic
+    ident: CAND-749
+    party_ident: PART-2
+    display_name: "\"Rich\" DiPentima"
+- ident: CONT-7
+  display_name: Sheriff
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-598
+    party_ident: PART-1
+    display_name: "\"Dan\" Linehan"
+  - party_display_name: Democratic
+    ident: CAND-599
+    party_ident: PART-2
+    display_name: David J. Lovejoy
+- ident: CONT-8
+  display_name: County Attorney
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-600
+    party_ident: PART-1
+    display_name: "\"Jim\" Reams"
+  - party_display_name: Democratic
+    ident: CAND-601
+    party_ident: PART-2
+    display_name: Kevin L. Coyle
+- ident: CONT-9
+  display_name: County Treasurer
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-602
+    party_ident: PART-1
+    display_name: Edward "Sandy" Buck III
+  - party_display_name: Democratic
+    ident: CAND-603
+    party_ident: PART-2
+    display_name: David E. Ahearn
+- ident: CONT-10
+  display_name: Register of Deeds
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-604
+    party_ident: PART-1
+    display_name: Cathy Stacey
+  - party_display_name: Democratic
+    ident: CAND-605
+    party_ident: PART-2
+    display_name: Philip Nugent
+- ident: CONT-11
+  display_name: Register of Probate
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-606
+    party_ident: PART-1
+    display_name: Andrew "Spizz" Christie
+  - party_display_name: Democratic
+    ident: CAND-607
+    party_ident: PART-2
+    display_name: Debra E. Crapo
+- ident: CONT-12
+  display_name: County Commissioner
+  candidates: 
+  - party_display_name: Republican
+    ident: CAND-645
+    party_ident: PART-1
+    display_name: Katharin "Kate" Pratt
+  - party_display_name: Democratic
+    ident: CAND-646
+    party_ident: PART-2
+    display_name: Norman J. Patenaude
