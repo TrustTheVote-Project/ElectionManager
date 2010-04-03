@@ -41,59 +41,59 @@
     <precinct id="102" display_name="Precinct 2"/>
   </precincts>
   <body>
-    <contest open_seat="1" display_name="A Winner simple" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="A Winner simple" district_idref="17" voting_method="winner take all">
       <candidates>
-        <candidate party="democrat" display_name="Aby Abigail"/>
+        <candidate party="democratic" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
         <candidate party="republican" display_name="Christine Columbus"/>
-        <candidate party="liberitarian" display_name="Dave Delta"/>
+        <candidate party="libertarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="2" display_name="A Winner with two seats" district_idref="17" voting_method="winner">
+    <contest open_seat="2" display_name="A Winner with two seats" district_idref="17" voting_method="winner take all">
       <candidates>
-        <candidate party="democrat" display_name="Aby Abigail"/>
+        <candidate party="democratic" display_name="Aby Abigail"/>
         <candidate party="independent" display_name="Bob Brandeis"/>
         <candidate party="republican" display_name="Christine Columbus"/>
-        <candidate party="liberitarian" display_name="Dave Delta"/>
+        <candidate party="libertarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Absolute Ruler" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Absolute Ruler" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Nicole Andreson"/>
         <candidate party="independent" display_name="Samuel H. Angell"/>
-        <candidate party="democrat" display_name="Stephen S. Ankuda"/>
+        <candidate party="democratic" display_name="Stephen S. Ankuda"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Appelate Mayor" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Appelate Mayor" district_idref="17" voting_method="winner take all">
       <candidates>
-        <candidate party="democrat" display_name="Gavin Newsom"/>
-        <candidate party="liberitarian" display_name="Meg Whitman"/>
+        <candidate party="democratic" display_name="Gavin Newsom"/>
+        <candidate party="libertarian" display_name="Meg Whitman"/>
         <candidate party="republican" display_name="Michael Bloomberg"/>
         <candidate party="independent" display_name="Setti Warren"/>
         <candidate party="republican" display_name="Yetti Warren"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Attorney General" district_idref="17" voting_method="winner">
+    <contest open_seat="1" display_name="Attorney General" district_idref="17" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Ernest M. Allen III"/>
-        <candidate party="democrat" display_name="Jay Abramson"/>
+        <candidate party="democratic" display_name="Jay Abramson"/>
         <candidate party="independent" display_name="Teri Ames"/>
       </candidates>
     </contest>
     <contest open_seat="2" display_name="Ranked 2 seats" district_idref="17" voting_method="ranked">
       <candidates>
-        <candidate party="democrat" display_name="Aby Ranked"/>
+        <candidate party="democratic" display_name="Aby Ranked"/>
         <candidate party="republican" display_name="Bob Ranked"/>
         <candidate party="independent" display_name="Christine Ranked"/>
-        <candidate party="liberitarian" display_name="Dave Delta"/>
+        <candidate party="libertarian" display_name="Dave Delta"/>
       </candidates>
     </contest>
     <contest open_seat="1" display_name="Ranked simple" district_idref="17" voting_method="ranked">
       <candidates>
-        <candidate party="democrat" display_name="Aby Ranked"/>
+        <candidate party="democratic" display_name="Aby Ranked"/>
         <candidate party="independent" display_name="Bob Ranked"/>
         <candidate party="republican" display_name="Christine Ranked"/>
-        <candidate party="liberitarian" display_name="Dave Ranked"/>
+        <candidate party="libertarian" display_name="Dave Ranked"/>
       </candidates>
     </contest>
     <question display_name="A Short question" district_idref="17">

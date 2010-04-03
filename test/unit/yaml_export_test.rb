@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pp'
 require 'ttv/yaml_export'
 
 
