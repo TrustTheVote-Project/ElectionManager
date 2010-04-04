@@ -1,0 +1,2 @@
+module JurisdElectionsHelper
+end
