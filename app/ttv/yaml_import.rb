@@ -87,13 +87,13 @@ module TTV
     def load_candidate y_cand, cont
       new_cand = Candidate.create(:display_name => y_cand["display_name"])
       party_name = y_cand["party_display_name"]
-      if ballot_config?
-        party = Party.find_by_display_name(party_name)
-        if party.nil? 
-          party = Party.new(:display_name => party_name)
-        end
-        new_cand.party = party
+
+      party = Party.find_by_display_name(party_name)
+      if party.nil? 
+        party = Party.new(:display_name => party_name)
       end
+      new_cand.party = party
+      
       new_cand.order = y_cand["order"] || 0
       cont.candidates << new_cand
     end

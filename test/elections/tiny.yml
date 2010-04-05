@@ -9,7 +9,7 @@ Audit-header:
 
 contest_list:
 - candidates:
-  - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_ident: PART-6}
+  - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_display_name: Democrat}
   contest_ident: Rep8thDistrict
   display_name: Representative in Congress
   district_ident: DIST-2

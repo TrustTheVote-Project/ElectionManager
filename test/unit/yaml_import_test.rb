@@ -60,6 +60,7 @@ class YAMLImportTest < ActiveSupport::TestCase
       assert_equal 1, @e.contests.length
       assert_equal "Representative in Congress",@e.contests[0].display_name
       assert_equal "Kristin Curtis", @e.contests[0].candidates[0].display_name
+      assert_equal "Democrat", @e.contests[0].candidates[0].party.display_name
       @c = Election.find_by_display_name("One Contest Election")
       assert_valid @c
     end
