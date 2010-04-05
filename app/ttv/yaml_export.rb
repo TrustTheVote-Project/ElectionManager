@@ -49,7 +49,7 @@ module TTV
     def export_candidates(a_contest)
       candidates_h = []
       a_contest.candidates.each do |cand| 
-        candidates_h << {"display_name" => cand.display_name, "ident" => "cand-#{cand.id}", "party_ident" => "party-xxx" }
+        candidates_h << {"display_name" => cand.display_name, "ident" => "cand-#{cand.id}", "party_display_name" => cand.party.display_name, "party_ident" => "party-#{cand.party.id}" }
       end
       candidates_h
     end

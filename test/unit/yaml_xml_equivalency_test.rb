@@ -55,7 +55,6 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
 
           # puts "XML xml_candidate: " + xml_candidate.display_name + " party " + xml_candidate.party.display_name
           # puts "YAML yaml_candidate: " + yaml_candidate.display_name + " party " + yaml_candidate.party.display_name
-          # Test failure is in YAML export of parties -- not exporting party_display_name  
           assert_equal yaml_candidate.party.display_name, xml_candidate.party.display_name
         }
       }

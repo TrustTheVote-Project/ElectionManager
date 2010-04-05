@@ -23,6 +23,7 @@ class YAMLExportTest < ActiveSupport::TestCase
       assert_equal "One Contest Election", res_hash["display_name"]
       assert_equal 1, res_hash["precinct_list"].length
       assert_equal "City of Random", res_hash["precinct_list"][0]["district_list"][0]["display_name"]
+      assert_equal "Democrat", res_hash["contest_list"][0]["candidates"][0]["party_display_name"]
     end
     
     context "also import generated.yml and try to export it back" do
