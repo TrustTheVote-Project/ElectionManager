@@ -83,8 +83,7 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
         
         assert_equal xml_question.question, yaml_question.question
         
-        # TODO: check for district equivalence
-        #assert_equal xml_question.district, yaml_question.district
+        assert_equal xml_question.district, yaml_question.district
       }
       
     end
@@ -92,18 +91,6 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
     should "import should get an election of the right name" do
       assert_equal "contests_mix.xml", @yaml_election.display_name
       assert_valid @yaml_election
-      #puts "XML election:"
-      #puts @xml_election
-      #puts "YAML election:"
-      #puts @yaml_election
-      #puts "YAML string:"
-      #puts @yaml_string
-      #puts "XML file:"
-      #puts @file
-      #puts "Contests:"
-
-      #puts @xml_election.questions
-      #puts @yaml_election.questions
     end
   end
 end
