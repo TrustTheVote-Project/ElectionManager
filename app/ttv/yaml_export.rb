@@ -15,17 +15,36 @@ module TTV
     def do_export 
       precinct_list_h = export_district_set(@elec)
       contests_h = export_contests(@elec)
+      questions_h = export_questions(@elec)
       @election_hash = {"display_name" => @elec.display_name, 
                  "start_date" => @elec.start_date,
                  "contest_list" => contests_h,
+                 "question_list" => questions_h,
                  "precinct_list" => precinct_list_h,
                  "jurisdiction_display_name" =>  @elec.display_name,
                  "number_of_precincts" => precinct_list_h.length
               }
      end
+ 
+#
+# Convert questions to a hash which can be converted to yaml directly.
+# <tt>election:</tt>  Election object
+# returns: an array containing the questions which can be converted to yaml for export
+
+    def export_questions(election)
+      questions_h = []
+      election.questions.each {|question|
+        puts "Processing question!" + question.display_name
+        new_question_h = {"display_name" => question.display_name,
+                          "question" => question.question,
+                          "district_ident" => @district_to_ident_map[question.district]}
+        questions_h << new_question_h
+      }
+      questions_h
+    end
     
 #
-# Convert contest to a hash which can be converted to yaml directly.
+# Convert contests to a hash which can be converted to yaml directly.
 # <tt>election:</tt>  Election object
 # returns: an array containing the contests which can be converted to yaml for export
 #
