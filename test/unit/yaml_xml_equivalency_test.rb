@@ -93,4 +93,27 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
       assert_valid @yaml_election
     end
   end
+  
+  # Import YML as @yml_election, exports as XML, imports XML as @xml_election
+  context "A YML-imported election and its XML export / import" do
+    setup do
+      @file = File.new("test/elections/xml/101.26.yml")
+
+      # Import YML election
+      @yaml_import = TTV::YAMLImport.new(@file)
+      @yaml_import.import
+      @yaml_election = @yaml_import.election
+      
+      # Export XML election
+      @xml_export = TTV::ImportExport.export(@yaml_election) 
+      @xml_import = TTV::ImportExport.import(@xml_export)
+      
+      @xml_election = @xml_import.election
+    end
+  
+    should "have valid yaml and xml elections" do
+      assert_valid @yaml_election
+      assert_valid @xml_election
+    end
+  end
 end
