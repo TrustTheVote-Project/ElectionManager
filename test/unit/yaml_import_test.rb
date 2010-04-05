@@ -97,6 +97,20 @@ class YAMLImportTest < ActiveSupport::TestCase
       end
     end
   end
-end
-
   
+  context "Using 101.26.yml for import" do
+    setup do
+      afile = File.new("test/elections/xml/101.26.yml")
+      importer = TTV::YAMLImport.new(afile)
+      importer.import
+      @e = Election.find_by_display_name("General")
+    end
+  
+    should "import 1 question" do
+      assert_equal 1, @e.questions.length
+      assert_equal "State Initiative Measure 1033", @e.questions[0].display_name
+      assert_equal  "Initiative Measure No. 1033 concerns state, county and city revenue. | |This measure would limit growth of certain state, county and city revenue to annual inflation and population growth, not including voter-approved revenue increases. Revenue collected above the limit would reduce property tax levies.  | |Should this measure be enacted into law? Yes [ ] No [ ]",
+                    @e.questions[0].question
+    end
+  end
+end

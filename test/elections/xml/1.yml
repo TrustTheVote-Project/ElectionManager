@@ -156,6 +156,8 @@ precinct_list:
     display_name: CITY 1
   display_name: "26"
   display_order: 26
+question_list: []
+
 display_name: Primary
 Audit-header: 
   software: TTV Election Management System 0.1 JAN-1-2010
@@ -163,7 +165,7 @@ Audit-header:
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: jurisdiction_slate
-  create_date: 2010-04-02T10:57:51-04:00
+  create_date: 2010-04-05T13:29:15-04:00
 contest_list: 
 - ident: CONT-0
   display_name: "CITY 1 Council #2"

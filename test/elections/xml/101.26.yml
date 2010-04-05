@@ -1566,6 +1566,11 @@ precinct_list:
     display_name: Port of Allyn
   display_name: "309.15"
   display_order: 15
+question_list: 
+- question: Initiative Measure No. 1033 concerns state, county and city revenue. | |This measure would limit growth of certain state, county and city revenue to annual inflation and population growth, not including voter-approved revenue increases. Revenue collected above the limit would reduce property tax levies.  | |Should this measure be enacted into law? Yes [ ] No [ ]
+  display_name: State Initiative Measure 1033
+  district_ident: DIST-0
+  display_order: 1
 display_name: General
 Audit-header: 
   software: TTV Election Management System 0.1 JAN-1-2010
@@ -1573,639 +1578,624 @@ Audit-header:
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: jurisdiction_slate
-  create_date: 2010-04-02T10:58:06-04:00
+  create_date: 2010-04-05T13:28:00-04:00
 contest_list: 
 - ident: CONT-0
-  display_name: State Initiative Measure 1033
-  district_ident: DIST-0
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-0
-    party_ident: PART-1
-    display_name: "Yes"
-    display_order: 1
-  - party_display_name: Nonpartisan
-    ident: CAND-1
-    party_ident: PART-1
-    display_name: "No"
-    display_order: 2
-  display_order: 1
-- ident: CONT-1
   display_name: City of Shelton Commissioner of Streets and Public Improvement
   district_ident: DIST-36
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-2
+    ident: CAND-0
     party_ident: PART-1
     display_name: Dawn Pannell
     display_order: 1
   display_order: 406
-- ident: CONT-2
+- ident: CONT-1
   display_name: "Fire Protection Dist 1 Fire Commissioner Position #3"
   district_ident: DIST-27
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-3
+    ident: CAND-1
     party_ident: PART-1
     display_name: Jim Goodpaster
     display_order: 1
   display_order: 413
-- ident: CONT-3
+- ident: CONT-2
   display_name: "Fire Protection Dist 2 Fire Commissioner Position #1"
   district_ident: DIST-7
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-4
+    ident: CAND-2
     party_ident: PART-1
     display_name: Dan Burrus
     display_order: 1
   display_order: 414
-- ident: CONT-4
+- ident: CONT-3
   display_name: "Fire Protection Dist 2 Fire Commissioner Position #5"
   district_ident: DIST-7
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-5
+    ident: CAND-3
     party_ident: PART-1
     display_name: Denny Hamilton
     display_order: 1
   display_order: 418
-- ident: CONT-5
+- ident: CONT-4
   display_name: "Fire Protection Dist 3 Fire Commissioner Position #1"
   district_ident: DIST-25
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-6
+    ident: CAND-4
     party_ident: PART-1
     display_name: Michael Petcu
     display_order: 1
   display_order: 419
-- ident: CONT-6
+- ident: CONT-5
   display_name: "Fire Protection Dist 4 Fire Commissioner Position #2"
   district_ident: DIST-10
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-7
+    ident: CAND-5
     party_ident: PART-1
     display_name: Curtis W. Bennett
     display_order: 1
   display_order: 423
-- ident: CONT-7
+- ident: CONT-6
   display_name: "Fire Protection Dist 5 Fire Commissioner Position #2"
   district_ident: DIST-6
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-8
+    ident: CAND-6
     party_ident: PART-1
     display_name: Tommy O. Taylor
     display_order: 1
   display_order: 426
-- ident: CONT-8
+- ident: CONT-7
   display_name: "Fire Protection Dist 6 Fire Commissioner Position #3"
   district_ident: DIST-35
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-9
+    ident: CAND-7
     party_ident: PART-1
     display_name: Steven D. Grout
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-10
+    ident: CAND-8
     party_ident: PART-1
     display_name: Merlyn Flakus
     display_order: 2
   display_order: 430
-- ident: CONT-9
+- ident: CONT-8
   display_name: "Fire Protection Dist 8 Fire Commissioner Position #1"
+  district_ident: DIST-32
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-9
+    party_ident: PART-1
+    display_name: Bev Voss-Petredis
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-10
+    party_ident: PART-1
+    display_name: Tom Wampold
+    display_order: 2
+  display_order: 431
+- ident: CONT-9
+  display_name: "Fire Protection Dist 8 Fire Commissioner Position #2"
   district_ident: DIST-32
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-11
     party_ident: PART-1
-    display_name: Bev Voss-Petredis
+    display_name: Daniel K. Kewish
     display_order: 1
   - party_display_name: Nonpartisan
     ident: CAND-12
     party_ident: PART-1
-    display_name: Tom Wampold
-    display_order: 2
-  display_order: 431
-- ident: CONT-10
-  display_name: "Fire Protection Dist 8 Fire Commissioner Position #2"
-  district_ident: DIST-32
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-13
-    party_ident: PART-1
-    display_name: Daniel K. Kewish
-    display_order: 1
-  - party_display_name: Nonpartisan
-    ident: CAND-14
-    party_ident: PART-1
     display_name: John W. Pate
     display_order: 2
   display_order: 432
-- ident: CONT-11
+- ident: CONT-10
   display_name: "Fire Protection Dist 9 Fire Commissioner Position #3"
   district_ident: DIST-1
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-15
+    ident: CAND-13
     party_ident: PART-1
     display_name: Marvin C. Anderson
     display_order: 1
   display_order: 436
-- ident: CONT-12
+- ident: CONT-11
   display_name: "Fire Protection Dist 11 Fire Commissioner Position #1"
   district_ident: DIST-4
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-16
+    ident: CAND-14
     party_ident: PART-1
     display_name: Chris Perrott
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-17
+    ident: CAND-15
     party_ident: PART-1
     display_name: Dan C. Ward
     display_order: 2
   display_order: 437
-- ident: CONT-13
+- ident: CONT-12
   display_name: "Fire Protection Dist 12 Fire Commissioner Position #2"
   district_ident: DIST-20
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-18
+    ident: CAND-16
     party_ident: PART-1
     display_name: Steve Townsend
     display_order: 1
   display_order: 441
-- ident: CONT-14
+- ident: CONT-13
   display_name: "Fire Protection Dist 12 Fire Commissioner Position #3"
   district_ident: DIST-20
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-19
+    ident: CAND-17
     party_ident: PART-1
     display_name: Terri S. Wood
     display_order: 1
   display_order: 442
-- ident: CONT-15
+- ident: CONT-14
   display_name: "Fire Protection Dist 13 Fire Commissioner Position #3"
   district_ident: DIST-19
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-20
+    ident: CAND-18
     party_ident: PART-1
     display_name: Jan Hedman
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-21
+    ident: CAND-19
     party_ident: PART-1
     display_name: Randy Norris
     display_order: 2
   display_order: 445
-- ident: CONT-16
+- ident: CONT-15
   display_name: "Fire Protection Dist 16 Fire Commissioner Position #3"
   district_ident: DIST-23
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-22
+    ident: CAND-20
     party_ident: PART-1
     display_name: Steve Edmondson
     display_order: 1
   display_order: 448
-- ident: CONT-17
+- ident: CONT-16
   display_name: "Fire Protection Dist 17 Fire Commissioner Position #1"
   district_ident: DIST-31
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-23
+    ident: CAND-21
     party_ident: PART-1
     display_name: Jim Boldt
     display_order: 1
   display_order: 449
-- ident: CONT-18
+- ident: CONT-17
   display_name: "Fire Protection Dist 18 Fire Commissioner Position #2"
   district_ident: DIST-29
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-24
+    ident: CAND-22
     party_ident: PART-1
     display_name: Franklin D. Phillips
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-25
+    ident: CAND-23
     party_ident: PART-1
     display_name: Douglas Drinkall
     display_order: 2
   display_order: 453
-- ident: CONT-19
+- ident: CONT-18
   display_name: "Public Hospital Dist 1 Hospital Commissioner Position #3"
   district_ident: DIST-2
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-26
+    ident: CAND-24
     party_ident: PART-1
     display_name: Chris A. Truppner
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-27
+    ident: CAND-25
     party_ident: PART-1
     display_name: Nancy R. Trucksess
     display_order: 2
   display_order: 457
-- ident: CONT-20
+- ident: CONT-19
   display_name: "Public Hospital Dist 2 Hospital Commissioner Position #3"
   district_ident: DIST-11
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-28
+    ident: CAND-26
     party_ident: PART-1
     display_name: Peggy VanBuskirk
     display_order: 1
   display_order: 460
-- ident: CONT-21
+- ident: CONT-20
   display_name: "Port of Allyn Port Commissioner District #1"
   district_ident: DIST-9
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-29
+    ident: CAND-27
     party_ident: PART-1
     display_name: Judy Scott
     display_order: 1
   display_order: 463
-- ident: CONT-22
+- ident: CONT-21
   display_name: "Port of Dewatto Port Commissioner District #2"
   district_ident: DIST-15
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-30
+    ident: CAND-28
     party_ident: PART-1
     display_name: Doug Stevens
     display_order: 1
   display_order: 467
-- ident: CONT-23
+- ident: CONT-22
   display_name: "Port of Grapeview Port Commissioner District #1"
   district_ident: DIST-14
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-31
+    ident: CAND-29
     party_ident: PART-1
     display_name: William C. VanderWal
     display_order: 1
   display_order: 469
-- ident: CONT-24
+- ident: CONT-23
   display_name: "Port of Hoodsport Port Commissioner Position #1"
+  district_ident: DIST-28
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-30
+    party_ident: PART-1
+    display_name: Terry W. Brazil
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-31
+    party_ident: PART-1
+    display_name: Lew Parsons
+    display_order: 2
+  display_order: 472
+- ident: CONT-24
+  display_name: "Port of Hoodsport Port Commissioner Position #2"
   district_ident: DIST-28
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-32
     party_ident: PART-1
-    display_name: Terry W. Brazil
+    display_name: Ed Johnston
     display_order: 1
   - party_display_name: Nonpartisan
     ident: CAND-33
     party_ident: PART-1
-    display_name: Lew Parsons
+    display_name: Mike Petz
     display_order: 2
-  display_order: 472
+  display_order: 473
 - ident: CONT-25
-  display_name: "Port of Hoodsport Port Commissioner Position #2"
+  display_name: "Port of Hoodsport Port Commissioner Position #3"
   district_ident: DIST-28
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-34
     party_ident: PART-1
-    display_name: Ed Johnston
+    display_name: John Olaughlin
     display_order: 1
   - party_display_name: Nonpartisan
     ident: CAND-35
     party_ident: PART-1
-    display_name: Mike Petz
-    display_order: 2
-  display_order: 473
-- ident: CONT-26
-  display_name: "Port of Hoodsport Port Commissioner Position #3"
-  district_ident: DIST-28
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-36
-    party_ident: PART-1
-    display_name: John Olaughlin
-    display_order: 1
-  - party_display_name: Nonpartisan
-    ident: CAND-37
-    party_ident: PART-1
     display_name: Frank Benavente
     display_order: 2
   display_order: 474
-- ident: CONT-27
+- ident: CONT-26
   display_name: "Port of Shelton Port Commissioner District #1"
   district_ident: DIST-5
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-38
+    ident: CAND-36
     party_ident: PART-1
     display_name: Tom Wallitner
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-39
+    ident: CAND-37
     party_ident: PART-1
     display_name: Richard Byrd
     display_order: 2
   display_order: 475
-- ident: CONT-28
+- ident: CONT-27
   display_name: "Southside School 42 School Board Position #3"
   district_ident: DIST-30
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-40
+    ident: CAND-38
     party_ident: PART-1
     display_name: Sadie Whitener
     display_order: 1
   display_order: 486
-- ident: CONT-29
+- ident: CONT-28
   display_name: "Southside School 42 School Board Position #5"
   district_ident: DIST-30
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-41
+    ident: CAND-39
     party_ident: PART-1
     display_name: Linda S. Farrimond
     display_order: 1
   display_order: 488
-- ident: CONT-30
+- ident: CONT-29
   display_name: "Grapeview School 54 School Board Position #1"
   district_ident: DIST-13
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-42
+    ident: CAND-40
     party_ident: PART-1
     display_name: Jolene Dumont
     display_order: 1
   display_order: 489
-- ident: CONT-31
+- ident: CONT-30
   display_name: "Grapeview School 54 School Board Position #3"
   district_ident: DIST-13
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-43
+    ident: CAND-41
     party_ident: PART-1
     display_name: Pamela Berger
     display_order: 1
   display_order: 491
-- ident: CONT-32
+- ident: CONT-31
   display_name: "Shelton School 309 School Board Director District #3"
+  district_ident: DIST-3
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-42
+    party_ident: PART-1
+    display_name: Holly M. Sharpe
+    display_order: 1
+  display_order: 496
+- ident: CONT-32
+  display_name: "Shelton School 309 School Board Director District #4"
+  district_ident: DIST-3
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-43
+    party_ident: PART-1
+    display_name: Brian R. Major
+    display_order: 1
+  display_order: 497
+- ident: CONT-33
+  display_name: "Shelton School 309 School Board Director District #5"
   district_ident: DIST-3
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-44
     party_ident: PART-1
-    display_name: Holly M. Sharpe
-    display_order: 1
-  display_order: 496
-- ident: CONT-33
-  display_name: "Shelton School 309 School Board Director District #4"
-  district_ident: DIST-3
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-45
-    party_ident: PART-1
-    display_name: Brian R. Major
-    display_order: 1
-  display_order: 497
-- ident: CONT-34
-  display_name: "Shelton School 309 School Board Director District #5"
-  district_ident: DIST-3
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-46
-    party_ident: PART-1
     display_name: Dean Hirschi
     display_order: 1
   display_order: 498
-- ident: CONT-35
+- ident: CONT-34
   display_name: "Mary M Knight School 311 School Board Director District #2"
   district_ident: DIST-21
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-47
+    ident: CAND-45
     party_ident: PART-1
     display_name: Joe E. Rothrock
     display_order: 1
   display_order: 500
-- ident: CONT-36
+- ident: CONT-35
   display_name: "Mary M Knight School 311 School Board Position #1"
   district_ident: DIST-21
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-48
+    ident: CAND-46
     party_ident: PART-1
     display_name: Leroy T. Valley
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-49
+    ident: CAND-47
     party_ident: PART-1
     display_name: Jim Frost
     display_order: 2
   display_order: 502
-- ident: CONT-37
+- ident: CONT-36
   display_name: "Pioneer School 402 School Board Position #1"
   district_ident: DIST-17
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-50
+    ident: CAND-48
     party_ident: PART-1
     display_name: Sandra Borys
     display_order: 1
   display_order: 504
-- ident: CONT-38
+- ident: CONT-37
   display_name: "Pioneer School 402 School Board Position #3"
+  district_ident: DIST-17
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-49
+    party_ident: PART-1
+    display_name: Dick Parrett
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-50
+    party_ident: PART-1
+    display_name: Kirk Schwerzler
+    display_order: 2
+  display_order: 506
+- ident: CONT-38
+  display_name: "Pioneer School 402 School Board Position #4"
   district_ident: DIST-17
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-51
     party_ident: PART-1
-    display_name: Dick Parrett
-    display_order: 1
-  - party_display_name: Nonpartisan
-    ident: CAND-52
-    party_ident: PART-1
-    display_name: Kirk Schwerzler
-    display_order: 2
-  display_order: 506
-- ident: CONT-39
-  display_name: "Pioneer School 402 School Board Position #4"
-  district_ident: DIST-17
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-53
-    party_ident: PART-1
     display_name: Jeanette L. Leach
     display_order: 1
   display_order: 507
-- ident: CONT-40
+- ident: CONT-39
   display_name: "Pioneer School 402 School Board Position #5"
   district_ident: DIST-17
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-54
+    ident: CAND-52
     party_ident: PART-1
     display_name: Mike Felton
     display_order: 1
   display_order: 508
-- ident: CONT-41
+- ident: CONT-40
   display_name: "North Mason School 403 School Board Director District #5"
   district_ident: DIST-8
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-55
+    ident: CAND-53
     party_ident: PART-1
     display_name: Mike Gaudio
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-56
+    ident: CAND-54
     party_ident: PART-1
     display_name: Danielle Skeeters
     display_order: 2
   display_order: 513
-- ident: CONT-42
+- ident: CONT-41
   display_name: "Hood Canal School 404 School Board Director District #1"
   district_ident: DIST-24
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-57
+    ident: CAND-55
     party_ident: PART-1
     display_name: Judi Woodard
     display_order: 1
   display_order: 514
-- ident: CONT-43
+- ident: CONT-42
   display_name: "Hood Canal School 404 School Board Position #4"
   district_ident: DIST-24
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-58
+    ident: CAND-56
     party_ident: PART-1
     display_name: Roslynne Reed
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-59
+    ident: CAND-57
     party_ident: PART-1
     display_name: Ginger R. Tejada
     display_order: 2
   display_order: 518
-- ident: CONT-44
+- ident: CONT-43
   display_name: "Belfair Water Dist Water Commissioner Position #1"
   district_ident: DIST-16
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-60
+    ident: CAND-58
     party_ident: PART-1
     display_name: Michael D. Pope
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-61
+    ident: CAND-59
     party_ident: PART-1
     display_name: Irene B. Werdall
     display_order: 2
   display_order: 519
-- ident: CONT-45
+- ident: CONT-44
   display_name: "Hartstene Pointe Water Commissioner Position #2"
   district_ident: DIST-26
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-62
+    ident: CAND-60
     party_ident: PART-1
     display_name: Mary A. Cary
     display_order: 1
   display_order: 523
-- ident: CONT-46
+- ident: CONT-45
   display_name: "Maggie Lake Water Dist Water Commissioner Position #1"
   district_ident: DIST-33
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-63
+    ident: CAND-61
     party_ident: PART-1
     display_name: Donald R. Husted
     display_order: 1
   display_order: 525
-- ident: CONT-47
+- ident: CONT-46
   display_name: "Maggie Lake Water Dist Water Commissioner Position #3"
   district_ident: DIST-33
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-64
+    ident: CAND-62
     party_ident: PART-1
     display_name: Robert K. Sample
     display_order: 1
   display_order: 527
-- ident: CONT-48
+- ident: CONT-47
   display_name: "Tahuya River Water Dist Water Commissioner Position #2"
   district_ident: DIST-34
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-65
+    ident: CAND-63
     party_ident: PART-1
     display_name: Anthony T. Butler
     display_order: 1
   - party_display_name: Nonpartisan
-    ident: CAND-66
+    ident: CAND-64
     party_ident: PART-1
     display_name: Darrin Klein
     display_order: 2
   display_order: 529
-- ident: CONT-49
+- ident: CONT-48
   display_name: "Trails End Water Dist Water Commissioner Position #2"
   district_ident: DIST-12
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-67
+    ident: CAND-65
     party_ident: PART-1
     display_name: Douglas E. Doll
     display_order: 1
   display_order: 532
-- ident: CONT-50
+- ident: CONT-49
   display_name: Sch Dist 68 - Elma School 68 Director District 1
   district_ident: DIST-18
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-68
+    ident: CAND-66
     party_ident: PART-1
     display_name: Larry Bridenback
     display_order: 1
   display_order: 647
-- ident: CONT-51
+- ident: CONT-50
   display_name: Sch Dist 68 - Elma School 68 Director District 2
+  district_ident: DIST-18
+  candidates: 
+  - party_display_name: Nonpartisan
+    ident: CAND-67
+    party_ident: PART-1
+    display_name: Jamie Bailey
+    display_order: 1
+  - party_display_name: Nonpartisan
+    ident: CAND-68
+    party_ident: PART-1
+    display_name: Rick Gravatt
+    display_order: 2
+  display_order: 648
+- ident: CONT-51
+  display_name: Sch Dist 68 - Elma School 68 Director District 5
   district_ident: DIST-18
   candidates: 
   - party_display_name: Nonpartisan
     ident: CAND-69
     party_ident: PART-1
-    display_name: Jamie Bailey
-    display_order: 1
-  - party_display_name: Nonpartisan
-    ident: CAND-70
-    party_ident: PART-1
-    display_name: Rick Gravatt
-    display_order: 2
-  display_order: 648
-- ident: CONT-52
-  display_name: Sch Dist 68 - Elma School 68 Director District 5
-  district_ident: DIST-18
-  candidates: 
-  - party_display_name: Nonpartisan
-    ident: CAND-71
-    party_ident: PART-1
     display_name: Teresa Boling
     display_order: 1
   display_order: 651
-- ident: CONT-53
+- ident: CONT-52
   display_name: Sch Dist 65 - McCleary School 65 Director District 5
   district_ident: DIST-22
   candidates: 
   - party_display_name: Nonpartisan
-    ident: CAND-72
+    ident: CAND-70
     party_ident: PART-1
     display_name: R. Troy Colley
     display_order: 1

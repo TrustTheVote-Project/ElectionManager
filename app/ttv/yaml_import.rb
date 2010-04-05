@@ -41,7 +41,8 @@ module TTV
             raise "Invalid YAML election. See console for details."
         end
         @yml_election["precinct_list"].each { |prec| load_precinct prec}            
-        @yml_election["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+        @yml_election["contest_list"].each { |yml_contest| load_contest yml_contest}
+        @yml_election["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["question_list"].nil?
       end
       @election
     end
@@ -56,6 +57,31 @@ module TTV
       else
         DistrictSet.create(:display_name => @yml_election["jurisdiction_display_name"])
       end
+    end
+    
+# load another question into Election object
+# <tt>question::</tt>Hash contains single question from yaml
+    def load_question yml_question
+      if ballot_config?
+        dist = District.find(0)
+      else
+        if yml_question["district_ident"].nil? || @dist_id_map[yml_question["district_ident"]].nil?
+          puts "Error in yaml_import: invalid question"
+          pp yml_cont
+          raise "Invalid yaml in question. See console for details."
+        end
+        dist = @dist_id_map[yml_question["district_ident"]]
+      end
+      new_question = Question.create(:display_name =>yml_question["display_name"],
+                                   :question => yml_question["question"])
+      
+      #new_question.order = yml_question["order"] || 0
+      # TODO: add order support to question model
+      
+      @election.questions << new_question
+      new_question.save
+      dist.questions << new_question
+      
     end
     
 # load another contest into Election object
