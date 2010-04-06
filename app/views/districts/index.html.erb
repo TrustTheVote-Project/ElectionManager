@@ -1,24 +1,69 @@
-<h1>Listing districts</h1>
+<div class="block">
+    <div class="secondary-navigation">
+        <ul class="wat-cf">
+            <li class="first active">
+                <%= link_to "#{t("web-app-theme.list", :default => "List")}", districts_path %>
+            </li>
+            <li>
+                <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_path %>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2 class="title"><%= t("web-app-theme.all", :default => "All") %> Districts</h2>
+        <div class="inner">
+            <table class="table">
+                <tr>
+                    <th class="first">
+                        ID
+                    </th>
+					<th>
+                        <%= t("activerecord.attributes.district.display_name", :default => t("activerecord.labels.district.display_name", :default => "Name")) %>
+                    </th>
+                    <th>
+                        <%= t("activerecord.attributes.district.district_type_id", :default => t("activerecord.labels.district_type_id", :default => "District Type")) %>
+                    </th>
+                    <th>
+                        <%= t("activerecord.attributes.precinct", :default => "Precincts") %>
+                    </th>
+					<th>
+                        <%= t("activerecord.attributes.precinct", :default => "Contests") %>
+                    </th>
 
-<table>
-  <tr>
-    <th>District type</th>
-    <th>Display name</th>
-    <th>Ident</th>	
-  </tr>
+                    <th class="last">
+                        &nbsp;
+                    </th>
+                </tr>
+                <% @districts.each do |district| -%>
+                <tr class="<%= cycle("odd", "even") %>">
+                    <td>
+                        <%= district.id %>
+                    </td>
+                    <td>
+                        <%= link_to district.display_name, district_path(district) %>
+                    </td>
+					<td>
+                        <%= link_to district.district_type.title, district_type_path(district) %>
+                    </td>
+                    <td>
+                        <%= district.precincts.count %>
+                    </td>
+                    <td>
+                        <%= district.contests.count %>
+                    </td>
 
-<% @districts.each do |district| %>
-  <tr>
-    <td><%=h district.district_type_id %></td>
-    <td><%=h district.display_name %></td>
-	<td><%=h district.ident %>
-
-    <td><%= link_to 'Edit', edit_district_path(district) %></td>
-    <td><%= link_to 'Destroy', district, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New district', new_district_path %>
+                    <td class="last">
+                        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", district_path(district) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_path(district) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", district_path(district), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+                    </td>
+                </tr>
+                <% end -%>
+            </table>
+            <div class="actions-bar wat-cf">
+                <div class="actions">
+                </div>
+                <%= will_paginate @districts %>
+            </div>
+        </div>
+    </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

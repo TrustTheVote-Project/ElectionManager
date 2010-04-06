@@ -1,26 +1,19 @@
-<h1>Editing district</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", districts_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> District</h2>
+    <div class="inner">
+      <% form_for @district, :url => district_path(@district), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@district) do |f| %>
-  <%= render_error_messages(@district) %>
-
-  <p>
-    <%= f.label :district_type_id %><br />
-    <%= f.text_field :district_type_id %>
-  </p>
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>
-  <p>
-  	<%= f.label :district_sets %><br />
-  	<select id="district_sets" name="district_sets[]" multiple="multiple">
-  		<%= options_for_select(@district_sets, @district.district_sets.collect {|ds| ds.id }) %>
-  	</select>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @district %> |
-<%= link_to 'Back', districts_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
