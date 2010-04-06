@@ -1,28 +1,50 @@
-<h1>Listing contests</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", contests_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contest_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Contests</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.contest.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
+</th>
+					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @contests.each do |contest| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= contest.id %>
+          </td>
+										<td>
+						<%= link_to contest.display_name, contest_path(contest) %>
+					</td>
+										<td>
+            <%= contest.created_at %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @contests  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Display name</th>
-    <th>Open seat count</th>
-    <th>Voting method</th>
-    <th>District</th>
-    <th>Election</th>
-  </tr>
-
-<% @contests.each do |contest| %>
-  <tr>
-    <td><%=h contest.display_name %></td>
-    <td><%=h contest.open_seat_count %></td>
-    <td><%=h contest.voting_method.display_name %></td>
-    <td><%=h contest.district.display_name %></td>
-    <td><%=h contest.election.display_name if contest.election %></td>
-    <td><%= link_to 'Show', contest %></td>
-    <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
-    <td><%= link_to 'Destroy', contest, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New contest', new_contest_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,50 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>TTV EMS</title>
-	<%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/drastic-dark/style", :cache => true %>
-</head>
-<body>
-  <div id="container">
-    <div id="header">
-      <h1><a href="/">TrustTheVote EMS</a></h1>
-      <div id="user-navigation">
-        <ul class="wat-cf">    
-          <% if current_user %>
-      			<li><%= current_user.email %></li>
-      			<li><%= link_to t("web-app-theme.profile", :default => "Profile"), edit_user_path(:current) %></li>
-      			<li><%= link_to t("web-app-theme.logout", :default => "Logout"), logout_path, :class => "logout" %></li>
-      		<% else %>
-      		  <li><%= link_to t("web-app-theme.login", :default => "Login"), login_path %></li>
-    			  <li><%= link_to t("web-app-theme.register", :default => "Register"), new_user_path %></li>
-      		<% end %>
-      </ul>
-      </div>      
-      <div id="main-navigation">
-        <ul class="wat-cf"> <li class="<%= controller.controller_path == 'parties' ? 'active' : '' %>"><a href="<%= parties_path %>">Parties</a></li> <li class="<%= controller.controller_path == 'district_types' ? 'active' : '' %>"><a href="<%= district_types_path %>">DistrictTypes</a></li> <li class="<%= controller.controller_path == 'districts' ? 'active' : '' %>"><a href="<%= districts_path %>">Districts</a></li></ul>
+  <head>
+    <meta name="generator" content= "HTML Tidy, see www.w3.org" />
+    <meta http-equiv="Content-Type" content= "text/html; charset=utf-8" />
+    <title>TTV EMS</title>
+    <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/drastic-dark/style", :cache => true %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1><a href="/">TrustTheVote EMS</a></h1>
+        <div id="user-navigation">
+          <ul class="wat-cf">
+            <% if current_user %>
+            <li>
+              <%= current_user.email %>
+            </li>
+            <li>
+              <%= link_to t("web-app-theme.profile", :default => "Profile"), edit_user_path(:current) %>
+            </li>
+            <li>
+              <%= link_to t("web-app-theme.logout", :default => "Logout"), logout_path, :class => "logout" %>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to t("web-app-theme.login", :default => "Login"), login_path %>
+            </li>
+            <li>
+              <%= link_to t("web-app-theme.register", :default => "Register"), new_user_path %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        
       </div>
-    </div>    
-    <div id="wrapper" class="wat-cf">
-      <div class="flash">
-        <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
-            <p><%= message %></p>
+      <div id="wrapper" class="wat-cf">
+        <div class="flash">
+          <% flash.each do |type, message| -%>
+          <div class="message &lt;%= type %&gt;">
+            <p>
+              <%= message %>
+            </p>
           </div>
-        <% end -%>
-      </div>
-      <div id="main">
-        <%= yield %>
-        <div id="footer">
-          <div class="block">
-            <p>Copyright &copy; <%= Time.now.year %> OSDV.ORG.</p>
-          </div>      
+          <% end -%>
+        </div>
+        <div id="main">
+          <%= yield %>
+          <br/><div id="footer">
+            <div class="block">
+              <p>
+                Copyright &copy;<%= Time.now.year %>: Open Source Digital Voting Foundation (OSDV.ORG)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="sidebar">
+          <%= yield :sidebar %>
         </div>
       </div>
-      <div id="sidebar">
-        <%= yield :sidebar %>
-      </div>
-    </div>    
-  </div>
-</body>
+    </div>
+  </body>
 </html>

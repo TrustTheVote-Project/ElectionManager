@@ -1,9 +1,9 @@
 <% content_for :title, "Trust The Vote"%>
-<h3 class="block">Welcome to TrustTheVote</h1>
+<h2>Welcome to TrustTheVote</h1>
 <% if current_user %>
 	<p>Hola <%= h current_user.email %></p>
 	<p>What would you like to do?</p>
-	<ul>
+	<ul class=list>
 		<li><%=link_to "View elections", elections_path %>
 		<li><%=link_to "View districts", districts_path %>
 		<li><%=link_to "View contests", contests_path %>
