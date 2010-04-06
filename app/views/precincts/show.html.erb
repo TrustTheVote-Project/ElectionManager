@@ -1,9 +1,29 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", precincts_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_precinct_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", precinct_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.precinct.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
+          <%= @precinct.display_name %>
+        </p>
 
-<p>
-  <b>Display name:</b>
-  <%=h @precinct.display_name %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.precinct.ident", :default => t("activerecord.labels.ident", :default => "Ident")) %>:</b>
+          <%= @precinct.ident %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_precinct_path(@precinct), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", precinct_path(@precinct), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-
-<%= link_to 'Edit', edit_precinct_path(@precinct) %> |
-<%= link_to 'Back', precincts_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
