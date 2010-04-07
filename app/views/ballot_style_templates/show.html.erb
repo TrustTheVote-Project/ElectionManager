@@ -1,0 +1,23 @@
+<p>
+  <b>Display name:</b>
+  <%=h @ballot_style_template.display_name %>
+</p>
+
+<p>
+  <b>Default voting method:</b>
+  <%=h @ballot_style_template.default_voting_method %>
+</p>
+
+<p>
+  <b>Instruction text:</b>
+  <%=h @ballot_style_template.instruction_text %>
+</p>
+
+<p>
+  <b>State graphic:</b>
+  <%=h @ballot_style_template.state_graphic %>
+</p>
+
+
+<%= link_to 'Edit', edit_ballot_style_template_path(@ballot_style_template) %> |
+<%= link_to 'Back', ballot_style_templates_path %>

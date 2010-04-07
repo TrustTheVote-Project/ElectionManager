@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :ballot_style_templates
+
  
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates

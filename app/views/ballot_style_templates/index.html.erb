@@ -1,0 +1,26 @@
+<h1>Listing Ballot Style Templates</h1>
+
+<table>
+  <tr>
+    <th>Display Name</th>
+    <th>Default Voting Method</th>
+    <th>Instruction Text</th>
+    <th>State Graphic</th>
+  </tr>
+
+<% @ballot_style_templates.each do |ballot_style_template| %>
+  <tr>
+    <td><%=h ballot_style_template.display_name %></td>
+    <td><%=h ballot_style_template.default_voting_method %></td>
+    <td><%=h ballot_style_template.instruction_text %></td>
+    <td><%=h ballot_style_template.state_graphic %></td>
+    <td><%= link_to 'Show', ballot_style_template %></td>
+    <td><%= link_to 'Edit', edit_ballot_style_template_path(ballot_style_template) %></td>
+    <td><%= link_to 'Destroy', ballot_style_template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New ballot_style_template', new_ballot_style_template_path %>
