@@ -1,9 +1,11 @@
 class ElectionsController < ApplicationController
+
   
   def index
     @elections = Election.all
     redirect_to :action => 'new' if @elections.empty?
     @election = UserSession.find.election if UserSession.find
+    render :layout => 'none'
   end
 
   def show

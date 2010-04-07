@@ -2,6 +2,7 @@ class ContestsController < ApplicationController
 
   def index
     @contests = Contest.all
+    render :layout => 'none'    
   end
 
   def show

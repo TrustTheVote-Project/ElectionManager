@@ -1,5 +1,9 @@
 require 'pathname'
 class MaintainController < ApplicationController
+
+  def index
+    render :layout => 'none'        
+  end
   
   def import_file
     begin

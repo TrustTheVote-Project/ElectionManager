@@ -2,6 +2,7 @@ class CandidatesController < ApplicationController
 
   def index
     @candidates = Candidate.all
+    render :layout => 'none'
   end
 
   def show
