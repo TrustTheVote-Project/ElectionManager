@@ -14,6 +14,10 @@
   <p>
     <%= f.label :district_set_id %><br />
 		<%= select("election", "district_set_id", DistrictSet.all.collect {|p| [ p.display_name, p.id ] }) %>
+  </p>  
+<p>
+    <%= f.label :ballot_style_template_id %><br />
+		<%= select("election", "ballot_style_template_id", BallotStyleTemplate.all.collect {|p| [p.display_name,p.id]}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>
