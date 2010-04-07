@@ -1,0 +1,39 @@
+<div class="inner">
+  <table class="table">
+    <tr>
+      <th class="first">
+        ID
+      </th>
+      <th>
+        <%= t("activerecord.attributes.candidate.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
+      </th>
+      <th>
+        <%= t("web-app-theme.created_at", :default => "Created at") %>
+      </th>
+      <th class="last">
+        &nbsp;
+      </th>
+    </tr>
+    <% @candidates.each do |candidate| -%>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td>
+        <%= candidate.id %>
+      </td>
+      <td>
+        <%= link_to candidate.display_name, candidate_path(candidate) %>
+      </td>
+      <td>
+        <%= candidate.created_at %>
+      </td>
+      <td class="last">
+        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", candidate_path(candidate), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </td>
+    </tr>
+    <% end -%>
+  </table>
+  <div class="actions-bar wat-cf">
+    <div class="actions">
+    </div>
+    <%= will_paginate @candidates %>
+  </div>
+</div>

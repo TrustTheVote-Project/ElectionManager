@@ -32,14 +32,17 @@
       </div>
     </div>
   </div>
-    <div class="content">
- 	<%= render :partial => 'precincts/precinct_list' %>
+  <div class="content">
+    <h2 class="title">Precincts</h2>
+    <%= render :partial => 'precincts/precinct_list' %>
   </div>
   <div class="content">
- 	<%= render :partial => 'contests/contest_list' %>
+    <h2 class="title">Contests</h2>
+    <%= render :partial => 'contests/contest_list' %>
   </div>
   <div class="content">
-	<%= render :partial => 'districts/district_list' %>
+    <h2 class="title">Districts</h2>
+    <%= render :partial => 'districts/district_list' %>
   </div>
 </div>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>
