@@ -5,7 +5,7 @@
 
 <p>
   <b>Default voting method:</b>
-  <%=h @ballot_style_template.default_voting_method %>
+  <%=h VotingMethod.find(@ballot_style_template.default_voting_method).display_name %>
 </p>
 
 <p>

@@ -17,7 +17,7 @@
   </p>  
 <p>
     <%= f.label :ballot_style_template_id %><br />
-		<%= select("election", "ballot_style_template_id", BallotStyleTemplate.all.collect {|p| [p.display_name,p.id]}) %>
+		<%= select("election", "ballot_style_template_id", BallotStyleTemplate.all.collect {|p| [p.display_name,p.id ]}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>

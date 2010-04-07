@@ -1,4 +1,4 @@
-<h1>Editing ballot_style_template</h1>
+<h1>Editing Ballot Style Template</h1>
 
 <% form_for(@ballot_style_template) do |f| %>
   <%= f.error_messages %>
@@ -9,7 +9,8 @@
   </p>
   <p>
     <%= f.label :default_voting_method %><br />
-    <%= f.text_field :default_voting_method %>
+    <%= select("ballot_style_template", "default_voting_method", VotingMethod.all.collect {|p| [p.display_name,p.id ]}) %>
+	
   </p>
   <p>
     <%= f.label :instruction_text %><br />
