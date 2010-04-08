@@ -152,6 +152,10 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
       assert_valid @xml_election
     end
     
+    should "be equal elections" do
+      assert @yaml_election == @xml_election
+    end
+    
     should "contain the same election name" do
       assert_equal @xml_election.display_name, @yaml_election.display_name
     end
