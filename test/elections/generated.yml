@@ -17,7 +17,7 @@ contest_list:
   - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
   contest_ident: Rep8thDistrict
   display_name: Representative in Congress
-  voting_method: winner
+  voting_method: winner_take_all
   district_ident: DIST-2
 - candidates:
   - {count: 0, display_name: Lois Pickett, ident: CAND-642, party_ident: PART-5}

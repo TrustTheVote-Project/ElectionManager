@@ -46,17 +46,17 @@ class YAMLImportTest < ActiveSupport::TestCase
       
       should "process ranked voting method correctly" do
         cont = Contest.find_by_display_name "State Representative1"
-        assert_equal VotingMethod::RANKED, cont.voting_method.id
+        assert_equal VotingMethod::RANKED, cont.voting_method
       end
       
      should "process winner voting method correctly" do
         cont = Contest.find_by_display_name "Representative in Congress"
-        assert_equal VotingMethod::WINNER, cont.voting_method.id
+        assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
       end
 
      should "process defaukt voting method correctly" do
         cont = Contest.find_by_display_name "State Representative2"
-        assert_equal VotingMethod::WINNER, cont.voting_method.id
+        assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
       end
     end
   end

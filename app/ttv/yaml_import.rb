@@ -72,7 +72,7 @@ module TTV
       if yml_cont.key? "voting_method"
         new_contest.voting_method_id = VotingMethod.xmlToId(yml_cont["voting_method"])
       else # default if none specified
-        new_contest.voting_method_id = VotingMethod::WINNER
+        new_contest.voting_method_id = VotingMethod::WINNER_TAKE_ALL
       end
       new_contest.order = yml_cont["order"] || 0
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
