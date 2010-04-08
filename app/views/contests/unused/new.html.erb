@@ -1,0 +1,17 @@
+<% div_id = "#{dom_id(contest.district)}_contests_new" %>
+<div id="<%= div_id -%>" class='isEditor'>
+	<% remote_form_for contest,
+	:action => 'create', :html => { :inlineEditor => 1 }  do |f| %>
+		<%= render_error_messages(contest) %>
+		<p>
+			<%= f.label :display_name, "Contests name" %>: <%= f.text_field :display_name%> 
+			<%= f.label :open_seat_count %><%= f.text_field :open_seat_count, :maxlength => 2 %>
+			<%= f.label :voting_method_id %>
+			<%= f.collection_select :voting_method_id, VotingMethod.all, :id, :display_name  %>
+		</p>
+		<%= f.hidden_field :district_id %>
+		<%= f.hidden_field :election_id %>
+		<%= f.submit 'Create' %>
+		<input type="button" value="Cancel" onClick="ttv.cancelNew('<%= div_id -%>')">
+	<% end %>
+</div>

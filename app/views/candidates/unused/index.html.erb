@@ -1,0 +1,29 @@
+<% content_for :toolbox do %>
+	<div id='main_task_name'>
+		Listing candidates<br>
+			<%= link_to 'New candidate', new_candidate_path %>
+	</div>
+<% end %>
+<h1>Listing candidates</h1>
+
+<table>
+  <tr>
+    <th>Display name</th>
+    <th>Party</th>
+    <th>Contest</th>
+  </tr>
+
+<% @candidates.each do |candidate| %>
+  <tr>
+    <td><%=h candidate.display_name %></td>
+    <td><%=h candidate.party.display_name %></td>
+    <td><%=h candidate.contest_id.nil? ? "" : candidate.contest.display_name %></td>
+    <td><%= link_to 'Show', candidate %></td>
+    <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
+    <td><%= link_to 'Destroy', candidate, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

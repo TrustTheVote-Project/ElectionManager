@@ -5,5 +5,10 @@ tmp/*
 test/tmp/*.pdf
 .DS_Store
 .loadpath
+<<<<<<< HEAD
 *~
 *#*
+=======
+.tmp_*
+
+>>>>>>> web-theme

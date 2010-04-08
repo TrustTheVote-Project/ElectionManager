@@ -1,0 +1,8 @@
+<% content_for :toolbox do %>
+	<div id='main_task_name'>
+		New candidate
+	</div>
+<% end %>	
+<div id="<%= dom_id(@candidate) -%>">
+<%= render :partial => 'new', :locals => {:model => @candidate } %>
+</div>

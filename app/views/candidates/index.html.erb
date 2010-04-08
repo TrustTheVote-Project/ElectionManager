@@ -1,29 +1,17 @@
-<% content_for :toolbox do %>
-	<div id='main_task_name'>
-		Listing candidates<br>
-			<%= link_to 'New candidate', new_candidate_path %>
-	</div>
-<% end %>
-<h1>Listing candidates</h1>
-
-<table>
-  <tr>
-    <th>Display name</th>
-    <th>Party</th>
-    <th>Contest</th>
-  </tr>
-
-<% @candidates.each do |candidate| %>
-  <tr>
-    <td><%=h candidate.display_name %></td>
-    <td><%=h candidate.party.display_name %></td>
-    <td><%=h candidate.contest_id.nil? ? "" : candidate.contest.display_name %></td>
-    <td><%= link_to 'Show', candidate %></td>
-    <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
-    <td><%= link_to 'Destroy', candidate, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active">
+        <%= link_to "#{t("web-app-theme.list", :default => "List")}", candidates_path %>
+      </li>
+      <li>
+        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_candidate_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All") %>Candidates</h2>
+    <%= render :partial => 'candidates_list' %>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
