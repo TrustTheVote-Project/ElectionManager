@@ -28,8 +28,18 @@ module TTV
       end
 
       def importCandidate(xmlCandidate)
-        Candidate.new(:display_name => xmlCandidate.attributes['display_name'],
-                      :party_id => Party.xmlToId(xmlCandidate.attributes['party']))
+        party_name = xmlCandidate.attributes['party']
+  
+        party = Party.find_by_display_name(party_name)
+        if party.nil? 
+          party = Party.new(:display_name => party_name)
+        end
+        
+        #puts "XML Import: " + xmlCandidate.attributes['display_name'] + party.display_name
+        new_candidate = Candidate.new(:display_name => xmlCandidate.attributes['display_name'],
+                      :party_id => party.id)
+        new_candidate.party = party
+        new_candidate
       end
 
       def importContests(xmlContests)
@@ -163,8 +173,9 @@ module TTV
       end
 
       def exportCandidate(candidate)
+        #puts "XML export: " + candidate.display_name + " " + candidate.party.display_name
         @xml.candidate :display_name => candidate.display_name,
-          :party => candidate.party.idToXml
+          :party => candidate.party.display_name
       end
 
       def exportContest(contest)
