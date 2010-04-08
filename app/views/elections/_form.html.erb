@@ -9,6 +9,12 @@
     <%= f.label :district_set_id, t("activerecord.attributes.election.district_set_id", :default => "District set"), :class => :label %>
     <%= f.text_field :district_set_id, :class => 'text_field' %>
     <span class="description">Ex: a simple text</span>
+  </div>  
+
+	<div class="group">
+	 	<%= f.label :ballot_style_template_id %><br />
+		<%= select("election", "ballot_style_template_id", BallotStyleTemplate.all.collect {|p| [p.display_name,p.id ]}) %>
+	    <span class="description">Ex: a simple text</span>
   </div>
 
   <div class="group">

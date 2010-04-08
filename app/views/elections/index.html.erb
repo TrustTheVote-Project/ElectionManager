@@ -48,32 +48,6 @@
 </div>
 
 
-<table>
-  <tr>
-    <th>Display name</th>
-	<th>Start date</th>
-    <th>District set</th>
-    <th>Ballot Style Template</th>
-  </tr>
-
-<% @elections.each do |election| %>
-  <tr>
-    <td><%=h election.display_name %></td>
-   <td><%=h pretty_date(election.start_date) %></td>
-   <td><%=h DistrictSet.exists?(election.district_set_id) ? election.district_set.display_name : "INVALID" %></td>
-   <td><% unless  election.ballot_style_template_id == nil%>
-		<%=h BallotStyleTemplate.find(election.ballot_style_template_id).display_name  %>
-		<% end -%>
-	</td>
-     <td><%= link_to 'Show', election %></td>
-     <td><%= link_to 'Destroy', election, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New election', new_election_path %>
 
 <% content_for :sidebar, render(:partial => 'sidebar') -%>
 

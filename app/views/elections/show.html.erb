@@ -1,8 +1,3 @@
-
-<%= link_to "Precincts and ballots", precincts_election_path, :method => 'get' %>
-<%= link_to "Edit Ballot Style Template", :controller => 'ballot_style_templates',:action => 'edit', :id => @election.ballot_style_template_id %>
-<%= render :partial => 'show', :locals => {:election => @election } %>
-
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
@@ -28,8 +23,10 @@
         <%= @election.district_set_id %>
       </p>      
 	 <p>
-        <b><%= t("activerecord.attributes.election.ballot_style_template_id", :default => t("activerecord.labels.ballot_style_template_id", :default => "Ballot Style Template")) %>:</b>
-        <%= @election.district_set_id %>
+        <b><%= t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => "Ballot Style Template")) %>:</b>
+       	<% unless @election.ballot_style_template_id == nil %>
+ 			<%= BallotStyleTemplate.find(@election.ballot_style_template_id).display_name %>
+		<% end -%>
       </p>
       <p>
         <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>
