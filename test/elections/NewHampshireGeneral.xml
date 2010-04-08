@@ -14,73 +14,73 @@
     <precinct display_name="Bedford County" id="2"/>
   </precincts>
   <body>
-    <contest open_seat="1" display_name="County Attorney" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="County Attorney" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="Marguerite Lefebvre Wageling"/>
+        <candidate party="democratic" display_name="Marguerite Lefebvre Wageling"/>
         <candidate party="republican" display_name="Marguerite Lefebvre Wageling"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Executive Councilor" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="Executive Councilor" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="&quot;Bob&quot; Bruce"/>
+        <candidate party="democratic" display_name="&quot;Bob&quot; Bruce"/>
         <candidate party="republican" display_name="Raymond J. Wieczorek"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Governor" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="Governor" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="John Lynch"/>
+        <candidate party="democratic" display_name="John Lynch"/>
         <candidate party="republican" display_name="Joseph D. Kenney"/>
-        <candidate party="liberitarian" display_name="Susan M. Newell"/>
+        <candidate party="libertarian" display_name="Susan M. Newell"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="President and Vice-President of the United States" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="President and Vice-President of the United States" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="liberitarian" display_name="&quot;Bob&quot; Barr and Wayne A. Root"/>
-        <candidate party="democrat" display_name="Barrack Obama and Joe Biden"/>
-        <candidate party="liberitarian" display_name="George Phillies and Christopher Bennett"/>
+        <candidate party="libertarian" display_name="&quot;Bob&quot; Barr and Wayne A. Root"/>
+        <candidate party="democratic" display_name="Barrack Obama and Joe Biden"/>
+        <candidate party="libertarian" display_name="George Phillies and Christopher Bennett"/>
         <candidate party="republican" display_name="John Mc. Cain and Sarah Palin"/>
         <candidate party="independent" display_name="Ralph Nader and Matt Gonzalez"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Representative in Congress" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="Representative in Congress" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="Carol Shea-Porter"/>
+        <candidate party="democratic" display_name="Carol Shea-Porter"/>
         <candidate party="republican" display_name="Jeb Bradley"/>
-        <candidate party="liberitarian" display_name="Robert Kingsbury"/>
+        <candidate party="libertarian" display_name="Robert Kingsbury"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="Sheriff" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="Sheriff" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="Harold &quot;Red&quot; Wheeler"/>
+        <candidate party="DEMOCRATIC" display_name="Harold &quot;Red&quot; Wheeler"/>
         <candidate party="republican" display_name="James A. Hardy"/>
       </candidates>
     </contest>
-    <contest open_seat="6" display_name="State Representatives" district_idref="1" voting_method="winner">
+    <contest open_seat="6" display_name="State Representatives" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="&quot;Bob&quot; Jones"/>
+        <candidate party="DEMOCRATIC" display_name="&quot;Bob&quot; Jones"/>
         <candidate party="republican" display_name="&quot;Ken&quot; Hawkins"/>
         <candidate party="republican" display_name="&quot;Moe&quot; Villeneuve"/>
         <candidate party="republican" display_name="Edward P. Moran"/>
-        <candidate party="democrat" display_name="Isabel Partin"/>
+        <candidate party="DEMOCRATIC" display_name="Isabel Partin"/>
         <candidate party="republican" display_name="Jayne E. Spaulding"/>
-        <candidate party="democrat" display_name="Jerry Hanauer"/>
+        <candidate party="democratic" display_name="Jerry Hanauer"/>
         <candidate party="republican" display_name="John A. Graham"/>
         <candidate party="republican" display_name="John Cebrowski"/>
-        <candidate party="democrat" display_name="Kristie Guerin Poltronieri"/>
-        <candidate party="democrat" display_name="Nancy Glennan-Brethauer"/>
-        <candidate party="democrat" display_name="Stephanie F. Willer"/>
+        <candidate party="democratic" display_name="Kristie Guerin Poltronieri"/>
+        <candidate party="democratic" display_name="Nancy Glennan-Brethauer"/>
+        <candidate party="democratic" display_name="Stephanie F. Willer"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="State Senator" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="State Senator" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="democrat" display_name="Michael Kaelin"/>
+        <candidate party="democratic" display_name="Michael Kaelin"/>
         <candidate party="republican" display_name="Sheila Roberge"/>
       </candidates>
     </contest>
-    <contest open_seat="1" display_name="United States Senator" district_idref="1" voting_method="winner">
+    <contest open_seat="1" display_name="United States Senator" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="liberitarian" display_name="&quot;Ken&quot; Blevens"/>
-        <candidate party="democrat" display_name="Jeanne Shaheen"/>
+        <candidate party="libertarian" display_name="&quot;Ken&quot; Blevens"/>
+        <candidate party="democratic" display_name="Jeanne Shaheen"/>
         <candidate party="republican" display_name="John E. Sununu"/>
       </candidates>
     </contest>
