@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pp'
 require 'ttv/yaml_import'
 
 
@@ -7,7 +6,7 @@ class YAMLImportTest < ActiveSupport::TestCase
   
   context "Using generated.yml for import" do
     setup do
-      @file = File.new("test/elections/generated.yml")
+      @file = File.new("#{RAILS_ROOT}/test/elections/generated.yml")
       @import_obj = TTV::YAMLImport.new(@file)
     end
     
@@ -64,7 +63,7 @@ class YAMLImportTest < ActiveSupport::TestCase
   
   context "using tiny" do
     setup do
-      afile = File.new("test/elections/tiny.yml")
+      afile = File.new("#{RAILS_ROOT}/test/elections/tiny.yml")
       importer = TTV::YAMLImport.new(afile)
       importer.import
       @e = Election.find_by_display_name("One Contest Election")
@@ -97,15 +96,13 @@ class YAMLImportTest < ActiveSupport::TestCase
     
     context "yaml file of type ballot_config" do
       setup do
-        afile = File.new("test/elections/ballot_config.yml")
+        afile = File.new("#{RAILS_ROOT}/test/elections/ballot_config.yml")
         importer = TTV::YAMLImport.new(afile)
         @e = importer.import
 
       end
       
       should "be imported and give the right town" do
-        puts @e.inspect
-        puts @e.contests.inspect
         assert_valid @e
       end
     end

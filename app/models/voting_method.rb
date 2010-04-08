@@ -10,23 +10,18 @@
 #
 
 class VotingMethod < ActiveRecord::Base
-
-  DEFAULT = 0
-  WINNER = 1
-  RANKED = 2
   
-  @@xml_codes = ['(built-in default voting method)', 'winner', 'ranked']
+  include ConstantCache
+
+  cache_constants :key => :display_name
 
   def idToXml
-    @@xml_codes[self.id]
+    self.display_name.downcase
   end
 
-  def VotingMethod.xmlToId(code)
-    case code.downcase
-    when 'winner' then return WINNER
-    when 'ranked' then return RANKED
-    when '(built-in default voting method)' then return DEFAULT
-    else raise "illegal voting method #{code}"
-    end
+  def VotingMethod.xmlToId(xml)
+    raise "illegal voting method #{xml}" unless const_get(xml.constant_name)
+    const_get(xml.constant_name).id
   end
+  
 end
