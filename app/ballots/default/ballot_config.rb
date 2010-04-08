@@ -165,7 +165,7 @@ module DefaultBallot
       NEXT_COL_BOUNCE = 30
 
       def min_width
-        if @item.voting_method_id == VotingMethod::WINNER
+        if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
           super
         else
           100 + 3 * HPAD + [@item.candidates.count, MAX_RANKED].min * (HPAD + BallotConfig::CHECKBOX_WIDTH)
@@ -174,7 +174,7 @@ module DefaultBallot
 
       def draw(config, rect, &bloc)
         reset_ballot_marks
-        if @item.voting_method_id == VotingMethod::WINNER
+        if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
           draw_winner config, rect, &bloc
         else
           draw_ranked config, rect, &bloc
@@ -436,7 +436,7 @@ module DefaultBallot
 
     def short_instructions(item)
       if item.is_a?(Contest)
-        if item.voting_method_id == VotingMethod::WINNER
+        if item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
           return bt[:Vote_for_1].sub("&1;", "1") if item.open_seat_count < 2
           return bt[:Vote_for_many].sub("&1;", item.open_seat_count.to_s)
         else

@@ -22,9 +22,13 @@ module TTV
       @dist_id_map = {}
       @yml_election = YAML.load(@source)
       ActiveRecord::Base.transaction do
-        @dist_set = load_district_set
+        @dist_set = create_district_set
         @election = Election.create(:display_name => @yml_election["display_name"])
-        @election.start_date = DateTime.now
+        if @yml_election["start_date"].nil?
+             @election.start_date = Time.now
+        else
+          @election.start_date = Date.parse(@yml_election["start_date"])
+        end
         @election.district_set = @dist_set
         @election.save
         if @yml_election["precinct_list"].nil?
@@ -42,35 +46,34 @@ module TTV
       @election
     end
 
-#
-# Returns DistrictSet to use. If yaml file type is 'ballot_config' then we use the default
-# built in DistrictSet which is guaranteed to be zero. Otherwise, we create a new one. This
-# logic is bound to become more complicated as we go along.
-    def load_district_set
-      if ballot_config?
-        DistrictSet.find(0)
-      else
-        DistrictSet.create(:display_name => @yml_election["jurisdiction_display_name"])
-      end
+    def create_district_set
+      DistrictSet.create(:display_name => @yml_election["jurisdiction_display_name"])
     end
     
 # load another contest into Election object
 # <tt>contest::</tt>Hash contains single contest from yaml
     def load_contest yml_cont
-# if yaml is of type 'ballot_config' then there are no districts. We use 
-# the 'built-in default' district (0)
-      if ballot_config?
-        dist = District.find(0) 
-      else
-        if yml_cont["district_ident"].nil? || @dist_id_map[yml_cont["district_ident"]].nil?
+      if @dist_id_map[yml_cont["district_ident"]].nil?
+        # the only time we can survive without district and precinct lists is with ballot_config.
+        if ballot_config?
+          dist = District.find(0)
+        else
           puts "Error in yaml_import: invalid contest"
           pp yml_cont
           raise "Invalid yaml in contest. See console for details."
         end
+      else
         dist = @dist_id_map[yml_cont["district_ident"]]
       end
+
       new_contest = Contest.create(:display_name =>yml_cont["display_name"],
                                    :open_seat_count => 1, :voting_method_id => 0)
+                                   
+      if yml_cont.key? "voting_method"
+        new_contest.voting_method_id = VotingMethod.xmlToId(yml_cont["voting_method"])
+      else # default if none specified
+        new_contest.voting_method_id = VotingMethod::WINNER_TAKE_ALL
+      end
       new_contest.order = yml_cont["order"] || 0
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
       @election.contests << new_contest
@@ -103,8 +106,7 @@ module TTV
       if !new_precinct
         new_precinct = Precinct.create(:display_name => prec_disp_name)
       end
-# is this yaml with type=ballot_config?
-      if ballot_config?
+      if !yaml_prec.key? "district_list"
 # if so, just connect precinct to the built-in default district
         District.find(0).precincts << new_precinct
       else
