@@ -49,6 +49,7 @@ class PrecinctsController < ApplicationController
   def ballot
     election = Election.find(params[:election_id])
     precinct = Precinct.find(params[:id])
+    
     lang = params[:lang] || 'en'
     style = params[:style] || 'default'
     
