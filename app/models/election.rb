@@ -10,7 +10,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #
-
+require 'abstract_ballot'
 class Election < ActiveRecord::Base
     has_many :contests, :order => :display_name, :dependent => :destroy
     has_many :questions, :order => :display_name, :dependent => :destroy
@@ -54,5 +54,5 @@ class Election < ActiveRecord::Base
         File.unlink("#{TRANSLATION_FOLDER}/#{f}")
       end
     end
-    
+
 end

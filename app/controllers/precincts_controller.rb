@@ -49,18 +49,21 @@ class PrecinctsController < ApplicationController
   def ballot
     election = Election.find(params[:election_id])
     precinct = Precinct.find(params[:id])
-    
-    lang = params[:lang] || 'en'
-    style = params[:style] || 'default'
-    
+    unless election.ballot_style_template_id == nil
+      ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
+      lang = ballot_style_template.language
+      style = ballot_style_template.ballot_style 
+    else
+      style = 'default'
+      lang = 'en'
+    end
     begin
-       pdfBallot = AbstractBallot.create(election, precinct, style, lang)
-       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
-       send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
-      rescue Exception => ex
-       flash[:error] = "precinct_controller - #{ex.message}"
-       redirect_to precincts_election_path election
-     end
-    
+        pdfBallot = AbstractBallot.create(election, precinct, style, lang)
+        title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        send_data pdfBallot, :filename => title, :type => "application/pdf", :disposition => "inline"
+    rescue Exception => ex
+     flash[:error] = "precinct_controller - #{ex.message}"
+     redirect_to precincts_election_path election
+   end
   end
 end

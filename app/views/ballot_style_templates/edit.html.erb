@@ -14,8 +14,9 @@
   </p>
 	<p>
     <%= f.label :ballot_style %><br />
-    <%= select("ballot_style_template", "ballot_style", options_for_select([["Office Block", "office_block"], ["Party Column", "party_column"]])) %>
-  </p>
+    <%= select("ballot_style_template", "ballot_style", options_for_select([["Office Block", "default"], ["Party Column", "nh"]])) %>
+  </p>	
+
 
   <p>
     <%= f.label :instruction_text %><br />

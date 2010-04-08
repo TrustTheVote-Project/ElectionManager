@@ -1,2 +1,3 @@
 <%= link_to "Precincts and ballots", precincts_election_path, :method => 'get' %>
+<%= link_to "Edit Ballot Style Template", :controller => 'ballot_style_templates',:action => 'edit', :id => @election.ballot_style_template_id %>
 <%= render :partial => 'show', :locals => {:election => @election } %>
