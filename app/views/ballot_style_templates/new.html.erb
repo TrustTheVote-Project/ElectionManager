@@ -1,4 +1,4 @@
-<h1>New ballot_style_template</h1>
+<h1>New Ballot Style Template</h1>
 
 <% form_for(@ballot_style_template) do |f| %>
   <%= f.error_messages %>
@@ -11,6 +11,10 @@
     <%= f.label :default_voting_method %><br />
     <%= select("ballot_style_template", "default_voting_method", VotingMethod.all.collect {|p| [p.display_name,p.id ]}) %>
     
+  </p>  
+	<p>
+    <%= f.label :ballot_style %><br />
+    <%= select("ballot_style_template", "ballot_style", options_for_select([["Office Block", "office_block"], ["Party Column", "party_column"]])) %>
   </p>
   <p>
     <%= f.label :instruction_text %><br />
