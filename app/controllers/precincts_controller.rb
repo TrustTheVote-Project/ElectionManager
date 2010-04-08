@@ -51,12 +51,13 @@ class PrecinctsController < ApplicationController
     precinct = Precinct.find(params[:id])
     unless election.ballot_style_template_id == nil
       ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
-      lang = ballot_style_template.language
       style = ballot_style_template.ballot_style 
     else
       style = 'default'
-      lang = 'en'
     end
+    
+    lang = params[:lang] || 'en'
+    
     begin
         pdfBallot = AbstractBallot.create(election, precinct, style, lang)
         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
