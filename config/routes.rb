@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :contests
   end
   map.resources :parties
   map.resources :precincts
