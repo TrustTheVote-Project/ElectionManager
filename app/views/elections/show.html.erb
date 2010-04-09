@@ -25,7 +25,7 @@
 	 <p>
         <b><%= t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => "Ballot Style Template")) %>:</b>
        	<% unless @election.ballot_style_template_id == nil %>
- 			<%= BallotStyleTemplate.find(@election.ballot_style_template_id).display_name %>
+ 			<%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
 		<% end -%>
       </p>
       <p>
