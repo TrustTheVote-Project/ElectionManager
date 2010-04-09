@@ -29,6 +29,10 @@ class YAMLImportTest < ActiveSupport::TestCase
         assert_equal 9, prec.length
       end
       
+      should "have the right election date" do
+        assert "2010-11-08", @elect.start_date.to_date.to_s
+      end
+      
       should "have 10 contests" do
         cont = Contest.find(:all)
         assert_equal 10, cont.length
@@ -38,6 +42,21 @@ class YAMLImportTest < ActiveSupport::TestCase
         ds = DistrictSet.find(:all)
         assert_valid @elect.district_set
         assert_equal 1, ds.length - @ds_count
+      end
+      
+      should "process ranked voting method correctly" do
+        cont = Contest.find_by_display_name "State Representative1"
+        assert_equal VotingMethod::RANKED, cont.voting_method
+      end
+      
+     should "process winner voting method correctly" do
+        cont = Contest.find_by_display_name "Representative in Congress"
+        assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
+      end
+
+     should "process defaukt voting method correctly" do
+        cont = Contest.find_by_display_name "State Representative2"
+        assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
       end
     end
   end

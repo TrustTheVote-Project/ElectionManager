@@ -21,8 +21,8 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "authlogic"
   config.gem "prawn", :version => '>= 0.7.2'
-  config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

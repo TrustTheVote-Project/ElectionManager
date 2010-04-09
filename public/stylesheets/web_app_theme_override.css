@@ -1,1 +1,13 @@
 /* Override here any style definide by web-app-theme */
+
+div.right {
+/*    width: 50%;
+    float: right; 
+    background-color: red; */
+}
+
+div.left {
+/*  float: left;
+  width: 50%; 
+  background-color: green; */
+}

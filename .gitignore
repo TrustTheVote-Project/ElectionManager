@@ -6,9 +6,15 @@ test/tmp/*.pdf
 .DS_Store
 .loadpath
 <<<<<<< HEAD
+<<<<<<< HEAD
 *~
 *#*
 =======
 .tmp_*
 
+>>>>>>> web-theme
+=======
+.tmp_*
+*~
+*#*
 >>>>>>> web-theme
