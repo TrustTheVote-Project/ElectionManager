@@ -1,0 +1,37 @@
+<h1>Ballot styles</h1>
+<p>We support a variety of ballot styles. You can create your own
+	if you know a little ruby.</p>
+	<p>To create your own style:</p>
+	<ul>
+		<li>you need access to the server
+		<li>on the server, go to ballots directory
+		<li>each directory here contains a definition of a ballot style
+		<li>duplicate the style you want, and modify at will. The style will become available on the site automatically
+		<li>some hints for programmers:
+ 		<ul>
+ 			<li>Your module should be <tt>TTV::PDFBallot::&lt;your_style_name></tt>
+ 			<li>define <tt>class BallotConfig &lt; TTV::PDFBallot::BallotConfig</tt> in your module
+ 			<li>override BallotConfig methods at will to implement your style.
+ 		</ul>
+</ul>
+	<h3>Currently available styles are</h3>
+	<table>
+	  <tr>
+	    <th>Name</th>
+			<th>Description</th>
+	    <th>Sample</th>
+	  </tr>
+	<% @styles.each do |style| %>
+		<tr>
+			<td valign='top'><%= h style %></td>
+			<td valign='top'>
+				<%= TTV::PDFBallotStyle.get_file(style, "description.html") %></td>
+			<td valign='top'>
+				<% img = TTV::PDFBallotStyle.get_file(style, "sample.jpg") %>
+				<% data = "data:image/jpg;base64," + Base64.b64encode(img, 500) if img != "" %>
+				<%= "<img src='#{data}'>" if data %>
+			</td>
+		</tr>
+ <% end%>
+	</table>
+ 

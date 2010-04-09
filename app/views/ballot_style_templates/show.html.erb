@@ -14,7 +14,7 @@
 </p>
 <p>
   <b>Ballot Style:</b>
-  <%=h @ballot_style_template.ballot_style %>
+  <%=h BallotStyle.find(@ballot_style_template.ballot_style).display_name %>
 </p>
 
 <p>

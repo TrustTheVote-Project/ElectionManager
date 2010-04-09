@@ -9,12 +9,13 @@
   </p>
   <p>
     <%= f.label :default_voting_method %><br />
-    <%= select("ballot_style_template", "default_voting_method", VotingMethod.all.collect {|p| [p.display_name,p.id ]}) %>
+	<%= f.collection_select(:default_voting_method, VotingMethod.all, :id, :display_name) %>
 	
   </p>
 	<p>
     <%= f.label :ballot_style %><br />
-    <%= f.select("ballot_style", options_for_select([["Office Block", "default"], ["Party Column", "nh"]])) %>
+	<%= f.collection_select(:ballot_style, BallotStyle.all, :id, :display_name)
+ %>
   </p>	
 
 
