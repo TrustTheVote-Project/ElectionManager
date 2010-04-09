@@ -7,14 +7,15 @@
     <%= f.label :display_name %><br />
     <%= f.text_field :display_name %>
   </p>
-  <p>
+ <p>
     <%= f.label :default_voting_method %><br />
-    <%= select("ballot_style_template", "default_voting_method", VotingMethod.all.collect {|p| [p.display_name,p.id ]}) %>
-    
-  </p>  
+	<%= f.collection_select(:default_voting_method, VotingMethod.all, :id, :display_name) %>
+
+  </p>
 	<p>
     <%= f.label :ballot_style %><br />
-    <%= select("ballot_style_template", "ballot_style", options_for_select([["Office Block", "office_block"], ["Party Column", "party_column"]])) %>
+	<%= f.collection_select(:ballot_style, BallotStyle.all, :id, :display_name)
+ %>
   </p>
   <p>
     <%= f.label :instruction_text %><br />
