@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100412131907) do
+ActiveRecord::Schema.define(:version => 20100412132844) do
 
   create_table "ballot_style_templates", :force => true do |t|
     t.string   "display_name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20100412131907) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ballot_style"
+    t.integer  "default_language"
   end
 
   create_table "ballot_styles", :force => true do |t|
