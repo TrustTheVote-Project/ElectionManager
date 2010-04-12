@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :languages
+
+  map.resources :languages
+
   map.resources :ballot_styles
 
   map.resources :ballot_style_templates
