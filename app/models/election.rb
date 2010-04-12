@@ -94,6 +94,7 @@ class Election < ActiveRecord::Base
         equal = false if match = false
       }
     }
+    return equal
   end
 
   #
@@ -104,7 +105,7 @@ class Election < ActiveRecord::Base
     equal = true
     districts.each {|e1_district|
       e2_district = election2.districts.find_by_display_name(e1_district.display_name)
-      equal = false if e2_district
+      equal = false if !e2_district
       
       # is the same district type
       equal = false if e1_district.district_type != e2_district.district_type
@@ -115,6 +116,7 @@ class Election < ActiveRecord::Base
         equal = false if e2_precinct.nil?
       }
     }
+    return equal
   end
 
   #
@@ -122,15 +124,16 @@ class Election < ActiveRecord::Base
   # election2 contain equivalent questions and associated districts
   #  
   def equal_questions? election2
-      equal = true
-      questions.each {|e1_question|
-        e2_question = election2.questions.find_by_display_name(e1_question.display_name)
-        equal = false if e2_question.nil?
-        
-        equal = false if e1_question.question != e2_question.question
-        
-        equal = false if e1_question.district.display_name != e2_question.district.display_name
-      }
+    equal = true
+    questions.each {|e1_question|
+      e2_question = election2.questions.find_by_display_name(e1_question.display_name)
+      equal = false if e2_question.nil?
+      
+      equal = false if e1_question.question != e2_question.question
+      
+      equal = false if e1_question.district.display_name != e2_question.district.display_name
+    }
+    return equal
   end
     
 end
