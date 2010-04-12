@@ -7,6 +7,10 @@
     <%= f.label :display_name %><br />
     <%= f.text_field :display_name %>
   </p>
+  <p>
+    <%= f.label :default_language %><br />
+	<%= f.collection_select(:default_language, Language.all, :id, :display_name) %>
+  </p>
  <p>
     <%= f.label :default_voting_method %><br />
 	<%= f.collection_select(:default_voting_method, VotingMethod.all, :id, :display_name) %>

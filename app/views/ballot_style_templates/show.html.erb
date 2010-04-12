@@ -2,6 +2,10 @@
   <b>Display name:</b>
   <%=h @ballot_style_template.display_name %>
 </p>
+<p>
+  <b>Default language:</b>
+  <%=h Language.find(@ballot_style_template.default_language).display_name %>
+</p>
 
 <p>
   <b>Default voting method:</b>
