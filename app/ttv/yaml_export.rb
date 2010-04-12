@@ -34,7 +34,6 @@ module TTV
     def export_questions(election)
       questions_h = []
       election.questions.each {|question|
-        puts "Processing question!" + question.display_name
         new_question_h = {"display_name" => question.display_name,
                           "question" => question.question,
                           "district_ident" => @district_to_ident_map[question.district]}

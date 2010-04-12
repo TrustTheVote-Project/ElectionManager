@@ -5,7 +5,7 @@ require 'ttv/yaml_export'
 require 'ttv/import_export' # XML import/export
 require 'shoulda'
 require 'yaml'
-
+require 'find'
 
 class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
   
@@ -85,25 +85,31 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
       }
   end
   
+  def xml_to_yaml xml_source
+    puts "XML to YAML -- " + xml_source
+    @file = File.new(xml_source)
+
+    # Import XML election
+    @xml_election = TTV::ImportExport.import(@file)
+    assert_not_nil @xml_election
+    
+    # Export YML
+    @yaml_export = TTV::YAMLExport.new(@xml_election)
+    @yaml_string = YAML.dump(@yaml_export.do_export)
+    # PREDICTION: have to add ballot type support to yaml_export? 
+
+    # Import YML
+    @yaml_import = TTV::YAMLImport.new(@yaml_string)
+    @yaml_import.import
+    @yaml_election = @yaml_import.election
+    
+    assert_election_equal @xml_election, @yaml_election
+  end
+  
   # Import XML as @xml_election, exports as YML, imports YML as @yml_election
   context "An XML-imported election and its YAML export / import" do
     setup do
-      @file = File.new("test/elections/contests_mix.xml")
-
-      # Import XML election
-      @xml_election = TTV::ImportExport.import(@file)
-      assert_not_nil @xml_election
-      
-      # Export YML
-      @yaml_export = TTV::YAMLExport.new(@xml_election)
-      @yaml_string = YAML.dump(@yaml_export.do_export)
-      # PREDICTION: have to add ballot type support to yaml_export? 
-
-      # Import YML
-      @yaml_import = TTV::YAMLImport.new(@yaml_string)
-      @yaml_import.import
-      @yaml_election = @yaml_import.election
-      
+      xml_to_yaml "test/elections/contests_mix.xml"       
     end
     
     should "contain the same election name" do
@@ -128,23 +134,26 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
     end
   end
   
+  def yaml_to_xml yaml_source
+    puts "YAML to XML -- " + yaml_source
+    @file = File.new(yaml_source)
+
+    # Import YML election
+    @yaml_import = TTV::YAMLImport.new(@file)
+    @yaml_import.import
+    @yaml_election = @yaml_import.election
+    
+    # Export XML election
+    @xml_export = TTV::ImportExport.export(@yaml_election) 
+    @xml_election = TTV::ImportExport.import(@xml_export)
+    
+    assert_election_equal @yaml_election, @xml_election
+  end
+  
   # Import YML as @yml_election, exports as XML, imports XML as @xml_election
   context "A YML-imported election and its XML export / import" do
     setup do
-      @file = File.new("test/elections/nh/Albany.yml")
-
-      # Import YML election
-      @yaml_import = TTV::YAMLImport.new(@file)
-      @yaml_import.import
-      @yaml_election = @yaml_import.election
-      
-      # Export XML election
-      puts "XML EXPORT"
-      @xml_export = TTV::ImportExport.export(@yaml_election) 
-      puts "XML IMPORT"
-      @xml_import = TTV::ImportExport.import(@xml_export)
-      
-      @xml_election = @xml_import
+      yaml_to_xml "test/elections/nh/Albany.yml" 
     end
   
     should "have valid yaml and xml elections" do
@@ -170,6 +179,42 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
     
     should "contain the same questions" do
       assert_questions_equal @xml_election, @yaml_election
+    end
+  end
+    
+  context "In test/elections" do
+    setup do
+      @xml_election = @yaml_election = nil
+    end
+    
+    def self.should_xml_import path
+      should "import XML file '#{path}'" do
+        xml_to_yaml path
+      end
+    end
+  
+    def self.should_yaml_import path
+      should "import YAML file '#{path}'" do
+        yaml_to_xml path
+      end
+    end
+
+    # Iterate through directories, testing import and export of .yml and .xml elections
+    dirs = ["test/elections","db/samples"]
+    excludes = [".nothing"]
+    for dir in dirs
+      Find.find(dir) do |path|
+        if FileTest.directory?(path)
+          if excludes.include?(File.basename(path))
+            Find.prune # Don't look down this dir
+          else
+            next
+          end
+        else
+          should_yaml_import path if File.extname(path) == ".yml"
+          should_xml_import path if File.extname(path) == ".xml"
+        end
+      end
     end
   end
 end
