@@ -1,4 +1,89 @@
 require 'test_helper'
 
 class ContestTest < ActiveSupport::TestCase
+
+  context 'initialization' do
+    
+    setup do
+      @election =  create_election_first
+      @voting_method = VotingMethod.create(:display_name =>"Winner Take All")
+    end
+    
+    should 'able to create a new contest' do
+
+      contest = Contest.new(:display_name => "State Representative")
+      contest.voting_method =  @voting_method
+      contest.district =  @election.district_set.districts.first
+      contest.election =  @election
+      
+      assert contest.save
+    end
+  end
+
+  context " with an existing contest" do
+    setup do
+      create_contest
+    end
+    
+    subject { Contest.last}
+    should_create :contest
+    should_belong_to :election
+    should_belong_to :district
+    should_belong_to :voting_method
+    
+    should  "be part of an election" do
+      election = Election.find_by_display_name("2012 State")
+      
+      # should be the only contest in the election
+      assert_equal election.contests.first, subject
+      assert_block{ election.contests.size == 1 }
+      
+      # test a searchlogic named scope
+      assert_equal 1, Contest.election_display_name_is(election.display_name).size
+    end
+    
+    should 'not be part of all elections' do
+      election_last = create_election_last
+      assert_block{ election_last.contests.size == 0 }
+      
+      # test a searchlogic named scope
+      assert_equal 0, Contest.election_display_name_is(election_last.display_name).size
+    end
+    
+  end
+  
+  # TODO: Should be replaced by factories, factory-girl or machinist
+  def create_contest
+
+    voting_method = VotingMethod.create!(:display_name =>"Winner Take All")
+    
+    election = create_election_first
+    
+    contest = Contest.new(:display_name => "State Representative")
+    contest.voting_method =  voting_method
+    contest.district =  election.district_set.districts.first
+    contest.election =  election
+    contest.save!
+    contest
+    
+  end
+
+  def create_election_first
+    district = District.create!(:display_name => "State House District 9")
+    district_set = DistrictSet.create!(:display_name => "Middlesex County")
+    district_set.districts << district
+    district_set.save!
+    voting_method = VotingMethod.create!(:display_name =>"Winner Take All")
+    election = Election.create!(:display_name => "2012 State", :district_set => district_set)
+
+  end
+  
+  def create_election_last
+    district = District.create(:display_name => "State House District 12")
+    district_set = DistrictSet.create(:display_name => "Suffolk County")
+    district_set.districts << district
+    district_set.save!
+    election = Election.create(:display_name => "2012 County", :district_set => district_set)     
+  end
+  
 end
