@@ -71,11 +71,22 @@ class ContestTest < ActiveSupport::TestCase
       assert_equal 1, contests.size
       assert_equal Contest.first.display_name, contests.first.display_name
     end
+
+    should "find contests by election name" do
+
+      contests  = Contest.election_display_name_is("2008 Massachusetts State")
+      assert_equal 1, contests.size
+    end
     
-    should "find contests by precinct_name" do
-      
-      precinct = Precinct.find_by_display_name "Chelmsford Precinct 3"
-      contests  = Contest.election_district_set_districts_precincts_display_name_is(precinct.display_name)
+    should "find contests by precinct name" do
+
+      contests  = Contest.district_precincts_display_name_is("Chelmsford Precinct 3")
+      assert_equal 1, contests.size
+    end
+    
+    should "find contests by precinct and election name" do
+
+      contests  = Contest.election_district_set_districts_precincts_display_name_is("Chelmsford Precinct 3")
       assert_equal 1, contests.size
       assert_equal Contest.first.display_name, contests.first.display_name
     end
