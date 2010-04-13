@@ -32,7 +32,7 @@ class ContestTest < ActiveSupport::TestCase
     should_belong_to :voting_method
     
     should  "be part of an election" do
-      election = Election.find_by_display_name("2012 State")
+      election = Election.find_by_display_name("2008 Massachusetts State")
       
       # should be the only contest in the election
       assert_equal election.contests.first, subject
@@ -50,6 +50,25 @@ class ContestTest < ActiveSupport::TestCase
       assert_equal 0, Contest.election_display_name_is(election_last.display_name).size
     end
     
+    should "find contests by election name" do
+
+      contests  = Contest.election_display_name_is("2008 Massachusetts State")
+      assert_equal 1, contests.size
+    end
+    
+    should "find contests by precinct name" do
+
+      contests  = Contest.district_precincts_display_name_is("Chelmsford Precinct 3")
+      assert_equal 1, contests.size
+    end
+    
+    should "find contests by precinct and election name" do
+
+      contests  = Contest.election_district_set_districts_precincts_display_name_is("Chelmsford Precinct 3")
+      assert_equal 1, contests.size
+      assert_equal Contest.first.display_name, contests.first.display_name
+    end
+
   end
   
   # TODO: Should be replaced by factories, factory-girl or machinist
@@ -69,12 +88,19 @@ class ContestTest < ActiveSupport::TestCase
   end
 
   def create_election_first
-    district = District.create!(:display_name => "State House District 9")
+
+    district = District.create!(:display_name => "Second Middlesex", :district_type => DistrictType::COUNTY)
+    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 3")
+    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 5")
+    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 7")
+    district.save!
+    
     district_set = DistrictSet.create!(:display_name => "Middlesex County")
     district_set.districts << district
     district_set.save!
+    
     voting_method = VotingMethod.create!(:display_name =>"Winner Take All")
-    election = Election.create!(:display_name => "2012 State", :district_set => district_set)
+    election = Election.create!(:display_name => "2008 Massachusetts State", :district_set => district_set)
 
   end
   
