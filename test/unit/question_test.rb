@@ -28,25 +28,33 @@ class QuestionTest < ActiveSupport::TestCase
   def create_question
 
     election = create_election_first
-    
-    question = Question.new(:display_name => "Free Chicken", :question => "A free chicken in every pot")
-    question.district =  election.district_set.districts.first
-    question.election =  election
-    question.save!
-    question
+
+    question1 = Question.new(:display_name => "Free Gas", :question => "Gas for free")
+    question1.district =  @district2
+    question1.election =  election
+    question1.save!
+     
+    question2 = Question.new(:display_name => "Free Chicken", :question => "A free chicken in every pot")
+    question2.district =  @district1
+    question2.election =  election
+    question2.save!
+    question2
     
   end
 
 def create_election_first
 
-    district = District.create!(:display_name => "Second Middlesex", :district_type => DistrictType::COUNTY)
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 3")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 5")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 7")
-    district.save!
+    @district2 = District.create!(:display_name => "First Middlesex", :district_type => DistrictType::COUNTY)
+    @district2.save!
+
+    @district1 = District.create!(:display_name => "Second Middlesex", :district_type => DistrictType::COUNTY)
+    @district1.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 3")
+    @district1.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 5")
+    @district1.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 7")
+    @district1.save!
     
     district_set = DistrictSet.create!(:display_name => "Middlesex County")
-    district_set.districts << district
+    district_set.districts << @district1
     district_set.save!
     
     voting_method = VotingMethod.create!(:display_name =>"Winner Take All")
