@@ -132,7 +132,7 @@ module NhBallot
 
     attr_accessor :col_width
 
-    def initialize(style, lang, election, scanner, instruction_text)
+    def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
       @instruction_text = instruction_text
       @checkbox_orientation = :right
       @columns = 1
@@ -187,10 +187,10 @@ module NhBallot
         @pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
              @pdf.font "Helvetica", :size => 10, :style => :bold
              @pdf.text ballot_translation[:Title_Text], :align => :center
-             state_signature = "#{RAILS_ROOT}/public/images/new_hampshire_signature.png"
+             state_signature = "#{RAILS_ROOT}/public/images/state_graphics/#{state_signature}"
              @pdf.image state_signature, :at => [20,@pdf.bounds.height - 55], :width => 100, :height => 30
            @pdf.bounding_box [ 135 , @pdf.bounds.height - 45], :width => 150 do
-            state_seal = "#{RAILS_ROOT}/public/images/new_hampshire_seal.png"
+            state_seal = "#{RAILS_ROOT}/public/images/state_graphics/#{state_seal}"
             @pdf.image state_seal, :at => [0,@pdf.bounds.height + 40], :width => 80, :height => 80
            end
          end

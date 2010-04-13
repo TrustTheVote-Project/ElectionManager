@@ -364,7 +364,7 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election, scanner, instruction_text)
+    def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
       @lang = lang

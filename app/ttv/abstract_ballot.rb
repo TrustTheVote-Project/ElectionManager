@@ -2,7 +2,7 @@ require 'prawn'
 
 module AbstractBallot
     
-  def self.create(election, precinct, style='default', lang='en', instruction_text='none')
+  def self.create(election, precinct, style='default', lang='en', instruction_text='none', state_seal = 'none', state_signature = 'none')
 #      Prawn.debug = true
     scanner = TTV::Scanner.new()
     config = PDFBallotStyle.get_ballot_config(style, lang, election, scanner, instruction_text)
