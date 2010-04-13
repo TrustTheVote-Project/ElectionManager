@@ -371,6 +371,8 @@ module DefaultBallot
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
       @election_translation = PDFBallotStyle.get_election_translation(election, lang)
       @instruction_text = instruction_text
+      @state_seal = state_seal
+      @state_signature = state_signature
       
       @page_size = "LETTER"
       @page_layout = :portrait
