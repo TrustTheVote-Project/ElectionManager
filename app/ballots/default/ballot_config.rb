@@ -364,13 +364,14 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election, scanner)
+    def initialize(style, lang, election, scanner, instruction_text)
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
       @lang = lang
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
       @election_translation = PDFBallotStyle.get_election_translation(election, lang)
-
+      @instruction_text = instruction_text
+      
       @page_size = "LETTER"
       @page_layout = :portrait
       @left_margin = @right_margin = 18
@@ -557,7 +558,9 @@ module DefaultBallot
       @pdf.bounding_box( [rect.left + @padding, rect.top], 
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
-        @pdf.text load_text("instructions1.txt"), :wrap => @wrap 
+        @pdf.text @instruction_text
+        #@pdf.text load_text("instructions1.txt"), :wrap => @wrap 
+       
 #        img = load_image "instructions2.png"
 #        @pdf.image image_path("instructions2.png"), 
 #        :width => [img.width * 72 / 96, @pdf.bounds.width].min

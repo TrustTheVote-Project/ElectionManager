@@ -132,7 +132,8 @@ module NhBallot
 
     attr_accessor :col_width
 
-    def initialize(style, lang, election, scanner)
+    def initialize(style, lang, election, scanner, instruction_text)
+      @instruction_text = instruction_text
       @checkbox_orientation = :right
       @columns = 1
       super
@@ -198,8 +199,9 @@ module NhBallot
           @pdf.font "Helvetica", :size => 14, :style => :bold
           @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
           @pdf.font "Helvetica", :size => 8
-          @pdf.text ballot_translation[:Instruction_Text1], :align => :left
-          @pdf.text ballot_translation[:Instruction_Text2], :align => :left
+          #@pdf.text ballot_translation[:Instruction_Text1], :align => :left
+          #@pdf.text ballot_translation[:Instruction_Text2], :align => :left
+          @pdf.text @instruction_text
         end
         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
           @pdf.move_down 10
