@@ -54,5 +54,17 @@ class Election < ActiveRecord::Base
         File.unlink("#{TRANSLATION_FOLDER}/#{f}")
       end
     end
+    
+    def render_ballots(election, precinct, ballot_style_template)
+      style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
+      lang = Language.find(ballot_style_template.default_language).code
+      instruction_text = ballot_style_template.instruction_text
+      state_seal = ballot_style_template.state_graphic
+      state_signature = ballot_style_template.state_signature_image
+      pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+      title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+      new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
+      return new_ballot
+    end
 
 end
