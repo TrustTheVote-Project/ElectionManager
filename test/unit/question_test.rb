@@ -15,6 +15,10 @@ class QuestionTest < ActiveSupport::TestCase
     should_belong_to :election
     should_belong_to :district
 
+    subject { Question.last}
+    should_belong_to :election
+    should_belong_to :district
+    
     if false
       should "find questions by precinct and election" do
       
