@@ -21,7 +21,7 @@ class ContestTest < ActiveSupport::TestCase
   end
 
   context " with an existing contest" do
-    
+
     setup do
       create_contest
     end
@@ -50,7 +50,7 @@ class ContestTest < ActiveSupport::TestCase
       # test a searchlogic named scope
       assert_equal 0, Contest.election_display_name_is(election_last.display_name).size
     end
-    
+
     should "find contests by election name" do
 
       contests  = Contest.election_display_name_is("2008 Massachusetts State")
@@ -79,7 +79,7 @@ class ContestTest < ActiveSupport::TestCase
       assert_equal 1, contests.size
       assert_equal Contest.first.display_name, contests.first.display_name
     end
-    
+
   end
   
   # TODO: Should be replaced by factories, factory-girl or machinist
@@ -121,7 +121,7 @@ class ContestTest < ActiveSupport::TestCase
     district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 99")
     district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 88")
     district.save!
-    
+
     district_set = DistrictSet.create(:display_name => "Suffolk County")
     district_set.districts << district
     district_set.save!
