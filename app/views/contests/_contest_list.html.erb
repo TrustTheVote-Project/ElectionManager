@@ -1,14 +1,11 @@
 <div class="inner">
   <table class="table">
     <tr>
-      <th class="first">
-        ID
-      </th>
       <th>
         <%= t("activerecord.attributes.contest.contest", :default => t("activerecord.labels.contest", :default => "Contest")) %>
       </th>
       <th>
-        <%= t("web-app-theme.created_at", :default => "Created at") %>
+        <%= t("activerecord.attributes.contest.candidates", :default => t("activerecord.labels.candidates", :default => "Candidates")) %>
       </th>
       <th class="last">
         &nbsp;
@@ -17,13 +14,10 @@
     <% @contests.each do |contest| -%>
     <tr class="<%= cycle("odd", "even") %>">
       <td>
-        <%= contest.id %>
-      </td>
-      <td>
         <%= link_to contest.display_name, contest_path(contest) %>
       </td>
       <td>
-        <%= contest.created_at %>
+        <%= contest.candidates.count %>
       </td>
       <td class="last">
         <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>

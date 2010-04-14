@@ -1,14 +1,14 @@
 <div class="inner">
   <table class="table">
     <tr>
-      <th class="first">
-        ID
+       <th>
+        <%= t("activerecord.attributes.candidate.display_name", :default => t("activerecord.labels.display_name", :default => "Name")) %>
       </th>
       <th>
-        <%= t("activerecord.attributes.candidate.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
+        <%= t("web-app-theme.party", :default => "Party") %>
       </th>
       <th>
-        <%= t("web-app-theme.created_at", :default => "Created at") %>
+        <%= t("web-app-theme.contest", :default => "Contest") %>
       </th>
       <th class="last">
         &nbsp;
@@ -17,13 +17,13 @@
     <% @candidates.each do |candidate| -%>
     <tr class="<%= cycle("odd", "even") %>">
       <td>
-        <%= candidate.id %>
-      </td>
-      <td>
         <%= link_to candidate.display_name, candidate_path(candidate) %>
       </td>
       <td>
-        <%= candidate.created_at %>
+        <%= link_to candidate.party.display_name, party_path(candidate.party) %>
+      </td>
+      <td>
+        <%= link_to candidate.contest.display_name, contest_path(candidate.contest) %>
       </td>
       <td class="last">
         <%= link_to "#{t("web-app-theme.show", :default => "Show")}", candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", candidate_path(candidate), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
