@@ -290,7 +290,7 @@ module AbstractBallot
       @c.page_complete(@pagenum, last_page)
       @page = nil
       if last_page
-        puts @c.scanner.to_json
+#        puts @c.scanner.to_json
       end
     end
 

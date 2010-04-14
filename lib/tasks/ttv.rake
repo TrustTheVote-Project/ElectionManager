@@ -21,7 +21,20 @@ namespace :ttv do
   task :develop => :environment do     
     load_fixtures 'seed/develop'
   end
-
+  
+  desc "Full Reset of DB after changing branches or installation"  
+  task :full_reset => :environment do 
+    puts "db reset"
+    Rake::Task['db:reset'].execute({:RAILS_ENV => "development"})   
+    puts "ttv seed"
+    Rake::Task['ttv:seed'].execute
+    puts "ttv develop"
+    Rake::Task['ttv:develop'].execute
+    puts "db test load"
+    Rake::Task['db:test:load'].execute({:RAILS_ENV => "test"})
+    puts "ttv seed test env"
+    Rake::Task['ttv:seed'].execute({:RAILS_ENV => "test"})
+  end
 
   private
 

@@ -1,9 +1,19 @@
-<% content_for :toolbox do %>
-	<div id='main_task_name'>
-		Editing contest
-	</div>
-<% end %>
-<div id="<%= dom_id(@contest) -%>">
-	<%= render :partial => 'static', :locals => {:contest => @contest, :display => 'none'  } %>
-	<%= render :partial => 'edit', :locals => {:contest => @contest } %>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", contests_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contest_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> Contest</h2>
+    <div class="inner">
+      <% form_for @contest, :url => contest_path(@contest), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
 </div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

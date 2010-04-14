@@ -1,15 +1,18 @@
-<h1>New precinct</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", precincts_path  %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_precinct_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  Precinct</h2>
+    <div class="inner">
+      <% form_for :precinct, :url => precincts_path, :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@precinct) do |f| %>
-  <%= render_error_messages(@precinct) %>
-
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', precincts_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

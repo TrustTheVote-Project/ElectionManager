@@ -1,0 +1,53 @@
+        <div class="inner">
+            <table class="table">
+                <tr>
+                    <th class="first">
+                        ID
+                    </th>
+					<th>
+                        <%= t("activerecord.attributes.district.district", :default => t("activerecord.labels.district.district", :default => "District")) %>
+                    </th>
+                    <th>
+                        <%= t("activerecord.attributes.district.district_type_id", :default => t("activerecord.labels.district_type_id", :default => "District Type")) %>
+                    </th>
+                    <th>
+                        <%= t("activerecord.attributes.precinct", :default => "Precincts") %>
+                    </th>
+					<th>
+                        <%= t("activerecord.attributes.precinct", :default => "Contests") %>
+                    </th>
+
+                    <th class="last">
+                        &nbsp;
+                    </th>
+                </tr>
+                <% @districts.each do |district| -%>
+                <tr class="<%= cycle("odd", "even") %>">
+                    <td>
+                        <%= district.id %>
+                    </td>
+                    <td>
+                        <%= link_to district.display_name, district_path(district) %>
+                    </td>
+					<td>
+                        <%= link_to district.district_type.title, district_type_path(district) %>
+                    </td>
+                    <td>
+                        <%= district.precincts.count %>
+                    </td>
+                    <td>
+                        <%= district.contests.count %>
+                    </td>
+
+                    <td class="last">
+                        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", district_path(district) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_path(district) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", district_path(district), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+                    </td>
+                </tr>
+                <% end -%>
+            </table>
+            <div class="actions-bar wat-cf">
+                <div class="actions">
+                </div>
+                <%= will_paginate @districts %>
+            </div>
+        </div>

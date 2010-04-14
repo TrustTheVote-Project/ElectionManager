@@ -1,20 +1,50 @@
-<h1>Listing district_types</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", district_types_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_type_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> DistrictTypes</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.district_type.title", :default => t("activerecord.labels.title", :default => "Title")) %>
+</th>
+					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @district_types.each do |district_type| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= district_type.id %>
+          </td>
+										<td>
+						<%= link_to district_type.title, district_type_path(district_type) %>
+					</td>
+										<td>
+            <%= district_type.created_at %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", district_type_path(district_type) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_type_path(district_type) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", district_type_path(district_type), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @district_types  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-  </tr>
-
-<% @district_types.each do |district_type| %>
-  <tr>
-    <td><%=h district_type.title %></td>
-    <td><%= link_to 'Show', district_type %></td>
-    <td><%= link_to 'Edit', edit_district_type_path(district_type) %></td>
-    <td><%= link_to 'Destroy', district_type, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New district_type', new_district_type_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

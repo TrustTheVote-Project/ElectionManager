@@ -1,16 +1,19 @@
-<h1>Editing district_type</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", district_types_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_type_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_type_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> DistrictType</h2>
+    <div class="inner">
+      <% form_for @district_type, :url => district_type_path(@district_type), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@district_type) do |f| %>
-  <%= render_error_messages(@district_type) %>
-
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @district_type %> |
-<%= link_to 'Back', district_types_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

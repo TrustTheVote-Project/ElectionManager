@@ -1,11 +1,12 @@
 class ContestsController < ApplicationController
 
   def index
-    @contests = Contest.all
+    @contests = Contest.paginate(:per_page => 10, :page => params[:page])
   end
 
   def show
     @contest = Contest.find(params[:id])
+    @candidates = @contest.candidates.paginate(:per_page => 10, :page => params[:page])
   end
 
   def new

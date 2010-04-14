@@ -1,0 +1,16 @@
+<h1>Editing party</h1>
+
+<% form_for(@party) do |f| %>
+  <%= render_error_messages(@party) %>
+
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @party %> |
+<%= link_to 'Back', parties_path %>

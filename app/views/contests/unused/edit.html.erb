@@ -1,0 +1,9 @@
+<% content_for :toolbox do %>
+	<div id='main_task_name'>
+		Editing contest
+	</div>
+<% end %>
+<div id="<%= dom_id(@contest) -%>">
+	<%= render :partial => 'static', :locals => {:contest => @contest, :display => 'none'  } %>
+	<%= render :partial => 'edit', :locals => {:contest => @contest } %>
+</div>

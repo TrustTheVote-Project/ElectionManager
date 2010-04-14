@@ -5,7 +5,6 @@ class CandidateTest < ActiveSupport::TestCase
     should "able to create new candidate" do
       prec = Candidate.new(:display_name => "i am new")
       prec.save!
-      pp prec
    end
   end
 end
