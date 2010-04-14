@@ -31,37 +31,38 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
       e2_contest = nil
       
       e2_contests.each {|check_contest|
-        if e1_contest.district.display_name == check_contest.district.display_name
-          e2_contest = check_contest
-        end
-        
-        # TODO: may be multiple contests which fulfill these reqs. Need to check candidates, parties. 
+        if e1_contest.district.display_name == check_contest.district.display_name and candidates_equal?(e1_contest, check_contest)
+            e2_contest = check_contest
+        end 
       }
+      
+      assert e2_contest, "Contest #{e1_contest.display_name} in district #{e1_contest.district.display_name} has no counterpart."
 
-      assert e2_contest, "Contest #{e1_contest.display_name} has no counterpart."
-
-      assert_equal e1_contest.district.display_name, e2_contest.district.display_name
-
-      # contain the same candidates associated with the same party
-      e1_contest.candidates.each {|e1_candidate|
-        # handle multiple candidates with the same name, different parties
-        e2_candidates = e2_contest.candidates.find_all_by_display_name(e1_candidate.display_name)
-        
-        assert !e2_candidates.empty?
-        
-        match = false
-        
-        e2_candidates.each {|e2_candidate|          
-          if e2_candidate.party.display_name == e1_candidate.party.display_name
-            match = true
-          end
-        }
-        
-        assert match, "Candidate #{e1_candidate.display_name}'s parties do not match."
-      }
     }
   end
 
+  # Checks whether two contests have the same candidates
+  def candidates_equal?(e1_contest, e2_contest)
+    equal = true
+    e1_contest.candidates.each {|e1_candidate|
+      # handle multiple candidates with the same name, different parties
+      e2_candidates = e2_contest.candidates.find_all_by_display_name(e1_candidate.display_name)
+      
+      equal = false if e2_candidates.empty?
+      
+      match = false
+      
+      e2_candidates.each {|e2_candidate|          
+        if e2_candidate.party.display_name == e1_candidate.party.display_name
+          match = true
+        end
+      }
+      
+      equal = false if match = false
+    }
+    return equal
+  end
+  
   #
   # Contains assertions that certify the election objects election1 and 
   # election2 contain equivalent precincts and associated districts
@@ -214,22 +215,24 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
     should_xml_import "db/samples/GeneralElection2010.xml"
     should_yaml_import "test/elections/generated.yml"
 
-#    # Iterate through directories, testing import and export of .yml and .xml elections
-#    dirs = ["test/elections","db/samples"]
-#    excludes = [".nothing"]
-#    for dir in dirs
-#      Find.find(dir) do |path|
-#        if FileTest.directory?(path)
-#          if excludes.include?(File.basename(path))
-#            Find.prune # Don't look down this dir
-#          else
-#            next
-#          end
-#        else
-#          should_yaml_import path if File.extname(path) == ".yml"
-#          should_xml_import path if File.extname(path) == ".xml"
-#        end
-#      end
-#    end
+    if false
+      # Iterate through directories, testing import and export of .yml and .xml elections
+      dirs = ["test/elections","db/samples"]
+      excludes = [".nothing"]
+      for dir in dirs
+        Find.find(dir) do |path|
+          if FileTest.directory?(path)
+            if excludes.include?(File.basename(path))
+              Find.prune # Don't look down this dir
+            else
+              next
+            end
+          else
+            should_yaml_import path if File.extname(path) == ".yml"
+            should_xml_import path if File.extname(path) == ".xml"
+          end
+        end
+      end
+    end #if false
   end
 end
