@@ -1,17 +1,5 @@
-<h1>Listing elections for <%= @jurisdiction.display_name%></h1>
-<%= render :partial => 'set_jurisdiction' %>
+<h1>Listing elections for <%= @jurisdiction.display_name%> <%= render :partial => 'set_jurisdiction' %> </h1>
 
 
-<table>
-  <tr>
-    <th>Election</th>
-	<th>Start date</th>
-  </tr>
+<%= render :partial => 'elections/election_list' %>    </div>
 
-<% @elections.each do |election| %>
-  <tr>
-    <td><%=h election.display_name %></td>
-	<td><%=h pretty_date(election.start_date) %></td>
-  </tr>
-<% end %>
-</table>

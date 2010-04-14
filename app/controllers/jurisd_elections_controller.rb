@@ -8,7 +8,7 @@ class JurisdElectionsController < ApplicationController
       render :action => :set_jurisdiction
     else
       @old_jurisd = @jurisdiction.id
-      @elections = DistrictSet.find(@old_jurisd).elections
+      @elections = DistrictSet.find(@old_jurisd).elections.paginate(:per_page => 10, :page => params[:page])
       render :action => :list_elections
     end  
   end

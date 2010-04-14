@@ -2,7 +2,6 @@ ActionController::Routing::Routes.draw do |map|
  
 # 'new' UI paths all start with '/n/'
 #
-
   map.juris_elections "/n/", :controller => :jurisd_elections, :action => :list
   map.set_jurisdiction "/n/set_jurisdiction", :controller => :jurisd_elections, :action => :set_jurisdiction
   
