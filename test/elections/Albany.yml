@@ -1,8 +1,13 @@
 --- 
 precinct_list: 
 - display_name: Albany
-type: ballot_config
-jurisdiction_display_name: middleworld
+Audit-header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-02T11:00:03-04:00jurisdiction_display_name: middleworld
 display_name: General Election
 contest_list: 
 - order: 0

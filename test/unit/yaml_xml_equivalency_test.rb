@@ -25,8 +25,20 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
   #
   def assert_contests_equal election1, election2
     election1.contests.each {|e1_contest|
-      e2_contest = election2.contests.find_by_display_name(e1_contest.display_name)
-      assert e2_contest
+      e2_contests = election2.contests.find_all_by_display_name(e1_contest.display_name)
+      assert e2_contests
+      
+      e2_contest = nil
+      
+      e2_contests.each {|check_contest|
+        if e1_contest.district.display_name == check_contest.district.display_name
+          e2_contest = check_contest
+        end
+        
+        # TODO: may be multiple contests which fulfill these reqs. Need to check candidates, parties. 
+      }
+
+      assert e2_contest, "Contest #{e1_contest.display_name} has no counterpart."
 
       assert_equal e1_contest.district.display_name, e2_contest.district.display_name
 
@@ -45,7 +57,7 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
           end
         }
         
-        assert match, "Candidate parties do not match."
+        assert match, "Candidate #{e1_candidate.display_name}'s parties do not match."
       }
     }
   end
@@ -199,22 +211,25 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
       end
     end
 
-    # Iterate through directories, testing import and export of .yml and .xml elections
-    dirs = ["test/elections","db/samples"]
-    excludes = [".nothing"]
-    for dir in dirs
-      Find.find(dir) do |path|
-        if FileTest.directory?(path)
-          if excludes.include?(File.basename(path))
-            Find.prune # Don't look down this dir
-          else
-            next
-          end
-        else
-          should_yaml_import path if File.extname(path) == ".yml"
-          should_xml_import path if File.extname(path) == ".xml"
-        end
-      end
-    end
+    should_xml_import "db/samples/GeneralElection2010.xml"
+    should_yaml_import "test/elections/generated.yml"
+
+#    # Iterate through directories, testing import and export of .yml and .xml elections
+#    dirs = ["test/elections","db/samples"]
+#    excludes = [".nothing"]
+#    for dir in dirs
+#      Find.find(dir) do |path|
+#        if FileTest.directory?(path)
+#          if excludes.include?(File.basename(path))
+#            Find.prune # Don't look down this dir
+#          else
+#            next
+#          end
+#        else
+#          should_yaml_import path if File.extname(path) == ".yml"
+#          should_xml_import path if File.extname(path) == ".xml"
+#        end
+#      end
+#    end
   end
 end
