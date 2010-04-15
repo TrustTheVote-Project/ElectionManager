@@ -26,16 +26,8 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
-
-  def districts(districtSet)
-    district_ids = connection.select_values( <<-eos
-       SELECT DISTINCT districts_precincts.district_id
-       FROM	districts_precincts, district_sets_districts
-       WHERE district_sets_districts.district_set_id = #{districtSet.id}
-       AND district_sets_districts.district_id = districts_precincts.district_id	
-       AND	districts_precincts.precinct_id = #{self.id}
-     eos
-     )
-    District.find(district_ids)
+  
+  def districts_for_election(election)
+    districts & election.district_set.districts
   end
 end
