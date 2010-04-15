@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new(:election_id => params[:election_id], :district_id => params[:district_id])
+    @question = Question.new(:election_id => params[:election_id], :requesting_district_id => params[:district_id])
     render :update do |page|
       editor_id = "#{dom_id(@question.district)}_questions_new"
       page << "if (!$('#{editor_id}')) {"
