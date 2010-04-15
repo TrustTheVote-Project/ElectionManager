@@ -51,13 +51,18 @@ class PrecinctsController < ApplicationController
      precinct = Precinct.find(params[:id])
      unless election.ballot_style_template_id == nil
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
-       begin
-             new_ballot = election.render_ballots(election, precinct, ballot_style_template,medium)
-             send_data new_ballot[:pdfBallot], :filename => new_ballot[:title], :type => "application/pdf", :disposition => "inline"
-       rescue Exception => ex
-        flash[:error] = "precinct_controller - #{ex.message}"
-        redirect_to precincts_election_path election
-       end
+       #begin
+             new_ballot = election.render_ballots(election, precinct, ballot_style_template)
+             puts new_ballot[:medium_id]
+             if new_ballot[:medium_id] == 1
+               send_data new_ballot[:pdfBallot], :filename => new_ballot[:title], :type => "application/pdf", :disposition => "inline"
+             else
+               render :text => 'This is where we will generate html ballot'
+             end
+       #rescue Exception => ex
+      #flash[:error] = "precinct_controller - #{ex.message}"
+       # redirect_to precincts_election_path election
+      # end
      else
        flash[:error] = "A Ballot Style Template must be selected for this election before a ballot can be generated."
        redirect_to election_path election
