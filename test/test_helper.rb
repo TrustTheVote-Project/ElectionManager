@@ -38,7 +38,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   
-
+  # create a macro that will be used to test question requesters
   def self.setup_question_requesters
     context "question requesters setup" do
       setup do
@@ -98,9 +98,10 @@ class ActiveSupport::TestCase
           q.save!
 
         end
-        
       end
-      yield 
+      # yield to the context in the test
+      yield
+      
     end
   end
 
