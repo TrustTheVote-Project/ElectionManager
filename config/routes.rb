@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :media
+
+  map.resources :media
+
   map.resources :languages
 
   map.resources :languages

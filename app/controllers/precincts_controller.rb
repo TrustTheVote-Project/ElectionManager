@@ -52,7 +52,7 @@ class PrecinctsController < ApplicationController
      unless election.ballot_style_template_id == nil
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
        begin
-             new_ballot = election.render_ballots(election, precinct, ballot_style_template)
+             new_ballot = election.render_ballots(election, precinct, ballot_style_template,medium)
              send_data new_ballot[:pdfBallot], :filename => new_ballot[:title], :type => "application/pdf", :disposition => "inline"
        rescue Exception => ex
         flash[:error] = "precinct_controller - #{ex.message}"

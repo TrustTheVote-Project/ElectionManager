@@ -19,7 +19,10 @@
     <%= f.label :ballot_style %><br />
 	<%= f.collection_select(:ballot_style, BallotStyle.all, :id, :display_name) %>
   </p>	
-
+	<p>
+    <%= f.label :medium_id%><br />
+	<%= f.collection_select(:medium_id, Medium.all, :id, :display_name) %>
+  </p>
 
   <p>
     <%= f.label :instruction_text %><br />
