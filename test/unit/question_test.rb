@@ -12,8 +12,27 @@ class QuestionTest < ActiveSupport::TestCase
 #    should_create :question    
     subject { Question.last}
     should_belong_to :election
-    should_belong_to :district
+    should_belong_to :requesting_district
+
+    should 'have a requesting district' do
+      assert subject.requesting_district
+    end
     
+    should 'be able to change the requesting district' do
+
+      q1 = Question.first
+      # original requesting district 
+      assert_equal District.find(1), q1.requesting_district(true)
+      
+      # change requesting district
+      q1.requesting_district = District.find(0)
+      q1.save!
+
+      assert_not_equal District.find(1), q1.requesting_district(true)
+      assert_equal District.find(0), q1.requesting_district(true)
+      
+    end
+  
     if false
       should "find questions by precinct and election" do
       
@@ -42,7 +61,7 @@ class QuestionTest < ActiveSupport::TestCase
       all_questions = Question.all
       result = []
       all_questions.each do |q|
-        if q.election == @el && dist_intersect.include?(q.district)
+        if q.election == @el && dist_intersect.include?(q.requesting_district)
           result << q
         end
       end
@@ -56,12 +75,12 @@ class QuestionTest < ActiveSupport::TestCase
     create_election_first
 
     @q1 = Question.new(:display_name => "Free Gas", :question => "Gas for free")
-    @q1.district =  @district2
+    @q1.requesting_district =  @district2
     @q1.election =  @el
     @q1.save!
      
     @q2 = Question.new(:display_name => "Free Chicken", :question => "A free chicken in every pot")
-    @q2.district =  @district1
+    @q2.requesting_district =  @district1
     @q2.election = @el
     @q2.save!
     
