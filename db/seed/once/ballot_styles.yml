@@ -1,0 +1,7 @@
+default:
+  id: 0
+  display_name: Office Block
+
+nh:
+  id: 1
+  display_name: Party Column
