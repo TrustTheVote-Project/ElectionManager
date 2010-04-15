@@ -1,0 +1,7 @@
+	change: 
+<% form_tag ({:controller => :jurisd_elections, :action => 'set_jurisdiction'}) do %>
+		<%= select_tag :jurisdiction, 
+			options_from_collection_for_select(@dist_sets, "id", "display_name", @old_jurisd)
+		%>
+		<%= submit_tag 'change' %>
+<% end %>

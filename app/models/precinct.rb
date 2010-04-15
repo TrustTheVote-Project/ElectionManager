@@ -26,6 +26,8 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
+  
+  
 
   def districts(districtSet)
     district_ids = connection.select_values( <<-eos

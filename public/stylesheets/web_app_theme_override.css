@@ -1,0 +1,15 @@
+/* @override http://0.0.0.0:3000/stylesheets/web_app_theme_override.css?1270836862 */
+
+/* Override here any style definide by web-app-theme */
+
+div.right {
+/*    width: 50%;
+    float: right; 
+    background-color: red; */
+}
+
+div.left {
+/*  float: left;
+  width: 50%; 
+  background-color: green; */
+}

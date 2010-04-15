@@ -1,0 +1,23 @@
+<h1>Listing elections</h1>
+
+<table>
+  <tr>
+    <th>Display name</th>
+		<th>Start date</th>
+    <th>District set</th>
+  </tr>
+
+<% @elections.each do |election| %>
+  <tr>
+    <td><%=h election.display_name %></td>
+   <td><%=h pretty_date(election.start_date) %></td>
+   <td><%=h DistrictSet.exists?(election.district_set_id) ? election.district_set.display_name : "INVALID" %></td>
+     <td><%= link_to 'Show', election %></td>
+     <td><%= link_to 'Destroy', election, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New election', new_election_path %>

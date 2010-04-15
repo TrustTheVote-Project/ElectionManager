@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'pp'
 require 'ttv/yaml_export'
 
 
@@ -14,7 +13,7 @@ class YAMLExportTest < ActiveSupport::TestCase
   
   context "import tiny.yml and try to export it back" do
     setup do
-      imp_exp("test/elections/tiny.yml")
+      imp_exp("#{RAILS_ROOT}/test/elections/tiny.yml")
     end
     
     should "export tiny correctly and safely" do
@@ -28,7 +27,7 @@ class YAMLExportTest < ActiveSupport::TestCase
     
     context "also import generated.yml and try to export it back" do
       setup do
-        imp_exp("test/elections/generated.yml")
+        imp_exp("#{RAILS_ROOT}/test/elections/generated.yml")
       end
       
       should "export generated.yml back correctly too" do

@@ -10,26 +10,17 @@
 #
 
 class DistrictType < ActiveRecord::Base
+  
+  include ConstantCache
 
-  @@xmlid = 
-  { '(built-in default district type)' => 0, 
-    'state' => 1, 
-    'county' => 2, 
-    'municipality' => 3, 
-    'school' => 4,
-    'water' => 5,
-    'fire' => 6,
-    'coastal' => 7,
-    'harbor' => 8 
-  }
+  cache_constants :key => :title
     
   def DistrictType.xmlToId(xml)
-    raise "unknown district type #{xml}" unless @@xmlid[xml]
-    @@xmlid[xml]
+    raise "unknown district type #{xml}" unless const_get(xml.constant_name)
+    const_get(xml.constant_name).id
   end
   
   def idToXml
     self.title.downcase
   end
-
 end

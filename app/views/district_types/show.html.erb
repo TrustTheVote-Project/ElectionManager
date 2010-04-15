@@ -1,8 +1,24 @@
-<p>
-  <b>Title:</b>
-  <%=h @district_type.title %>
-</p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", district_types_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_type_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", district_type_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.district_type.title", :default => t("activerecord.labels.title", :default => "Title")) %>:</b>
+          <%= @district_type.title %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_district_type_path(@district_type), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", district_type_path(@district_type), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-
-<%= link_to 'Edit', edit_district_type_path(@district_type) %> |
-<%= link_to 'Back', district_types_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

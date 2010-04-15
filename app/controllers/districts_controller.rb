@@ -1,7 +1,8 @@
 class DistrictsController < ApplicationController
 
   def index
-    @districts = District.all
+    @districts = District.paginate(:per_page => 10, :page => params[:page])
+    
   end
 
   def show
@@ -10,8 +11,8 @@ class DistrictsController < ApplicationController
 
   def new
     @district = District.new
-    @district.election_id = params[:election_id]
-    @election = params[:election_id]
+#    @district.election_id = params[:election_id]
+#    @election = params[:election_id]
   end
 
   def edit
