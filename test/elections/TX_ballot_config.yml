@@ -1,10 +1,18 @@
 --- 
+Audit-header:
+  file_id: 9F023408009B11DF924800163E3DE33F
+  create_date: 13-JAN-2010 23:30:23
+  type: ballot_config
+  operator: Pito Salas
+  hardware: TTV Tabulator TAB02
+  software: TTV Tabulator 0.1 JUL-1-2008
+  provenance:
+   
 precinct_list:
 - display_name: Bexar Precinct
   district_list:
   - {display_name: City of Sebes, ident: DIST-199}
   prec_ident: PREC-191
-type: ballot_config
 jurisdiction_display_name: Bexar County, Texas
 display_name: General Election
 start_date: November 9, 2010
@@ -12,7 +20,7 @@ contest_list:
 - order: 0
   display_name: United States Representative, District 20
   district_ident: DIST-199
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -26,7 +34,7 @@ contest_list:
 - order: 1
   display_name: Governor
   district_ident: DIST-199
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -40,7 +48,7 @@ contest_list:
 - order: 2
   display_name: Lieutenant Governor
   district_ident: DIST-199
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -54,7 +62,7 @@ contest_list:
 - order: 3
   display_name: Attorney General
   district_ident: DIST-199
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -68,7 +76,7 @@ contest_list:
 - order: 6
   display_name: Justice, Supreme Court, Place 5
   district_ident: DIST-199
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Undeclared
     order: 0
@@ -76,7 +84,7 @@ contest_list:
 - order: 7
   district_ident: DIST-199
   display_name: State Senator, District 26
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -87,7 +95,7 @@ contest_list:
 - order: 8
   district_ident: DIST-199
   display_name: State Representative, District 123
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
@@ -98,7 +106,7 @@ contest_list:
 - order: 9
   district_ident: DIST-199
   display_name: County Commissioner, Precinct No. 4
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Undeclared
     order: 0
@@ -106,7 +114,7 @@ contest_list:
 - order: 10
   district_ident: DIST-199
   display_name: Justice of the Peace, Precinct No. 1
-  voting_method: winner
+  voting_method: winner_take_all
   candidates: 
   - party_display_name: Republican
     order: 0
