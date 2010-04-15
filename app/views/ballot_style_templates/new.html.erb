@@ -26,6 +26,10 @@
 	<%= f.collection_select(:medium_id, Medium.all, :id, :display_name) %>
   </p>
   <p>
+    <%= f.label :destination, 'Folder for PDF output: '%><br />
+    <%= f.text_field :destination %>
+  </p>
+  <p>
     <%= f.label :instruction_text %><br />
     <%= f.text_area :instruction_text %>
   </p>

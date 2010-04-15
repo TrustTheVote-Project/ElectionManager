@@ -53,8 +53,22 @@ class PrecinctsController < ApplicationController
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
        begin
              new_ballot = election.render_ballots(election, precinct, ballot_style_template)
+            
+             #RENDER BASED ON MEDIUM CHOSEN   
              if new_ballot[:medium_id] == 1
-               send_data new_ballot[:pdfBallot], :filename => new_ballot[:title], :type => "application/pdf", :disposition => "inline"
+               
+              #RENDER TO BROWSER OR FILE BASED ON DESTINATION PROPERTY IN BALLOT_STYLE_TEMPLATE
+              if ballot_style_template.destination == nil 
+                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'inline'
+              else
+                #File.open(new_ballot[:fileName], 'w') {|f| f.write(new_ballot[:pdfBallot]) }
+                unless File.directory? ballot_style_template.destination
+                  FileUtils.mkdir_p ballot_style_template.destination
+                end
+                Dir.chdir(ballot_style_template.destination)
+                File.open(new_ballot[:fileName], 'w') {|f| f.write(new_ballot[:pdfBallot]) }
+              end
+              
              elsif new_ballot[:medium_id] == 2
                render :text => 'This is where we will generate html ballot'
              else

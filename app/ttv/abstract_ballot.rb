@@ -2,11 +2,11 @@ require 'prawn'
 
 module AbstractBallot
     
-  def self.create(election, precinct, style='default', lang='en', instruction_text='none', state_seal = 'none', state_signature = 'none')
+  def self.create(election, precinct, style='default', lang='en', instruction_text='none', state_seal = 'none', state_signature = 'none', destination = nil)
 #      Prawn.debug = true
     scanner = TTV::Scanner.new()
     config = PDFBallotStyle.get_ballot_config(style, lang, election, scanner, instruction_text, state_seal, state_signature)
-    renderer = Renderer.new(election, precinct, config)
+    renderer = Renderer.new(election, precinct, config, destination)
     renderer.render
     raise ArgumentError, "Translation to #{TTV::Translate.human_language(lang)} has not been done. Translate, then try again." if config.et.dirty?
 #      config.bt.save
@@ -198,9 +198,10 @@ module AbstractBallot
 
   class Renderer
 
-    def initialize(election, precinct, config)
+    def initialize(election, precinct, config, destination)
       @election = election
       @precinct = precinct
+      @destination = destination
       @c = config
     end
 
