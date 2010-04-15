@@ -31,7 +31,7 @@ module TTV
         if @yml_election["start_date"].nil?
              @election.start_date = Time.now
         else
-          @election.start_date = Date.parse(@yml_election["start_date"])
+          @election.start_date = Date.parse(@yml_election["start_date"].to_s)
         end
         @election.district_set = @dist_set
         @election.save
@@ -111,7 +111,7 @@ module TTV
       dist.contests << new_contest
      end
     
-  # load another candiate
+  # load another candidate
   # <tt>cand::</tt>Hash containing a single candidate from yaml
     def load_candidate y_cand, cont
       new_cand = Candidate.create(:display_name => y_cand["display_name"])
