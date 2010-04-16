@@ -1,246 +1,249 @@
 --- 
-precinct_list: 
-- ident: PREC-67
-  district_list: []
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-67
+    district_list: []
+
+    display_name: Manchester - Ward 11
+  question_list: []
 
   display_name: Manchester - Ward 11
-display_name: Manchester - Ward 11
-Audit-header: 
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-11
+      party_ident: PART-1
+      display_name: Jeb Bradley
+    - party_display_name: Democratic
+      ident: CAND-12
+      party_ident: PART-2
+      display_name: Carol Shea-Porter
+    - party_display_name: Libertarian
+      ident: CAND-13
+      party_ident: PART-4
+      display_name: Robert Kingsbury
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-249
+      party_ident: PART-1
+      display_name: Raymond J. Wieczorek
+    - party_display_name: Democratic
+      ident: CAND-250
+      party_ident: PART-2
+      display_name: "\"Bob\" Bruce"
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-279
+      party_ident: PART-1
+      display_name: Jason Sakellar
+    - party_display_name: Democratic
+      ident: CAND-278
+      party_ident: PART-2
+      display_name: "\"Lou\" D'Allesandro"
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-395
+      party_ident: PART-1
+      display_name: Richard "Dick" Marston
+    - party_display_name: Republican
+      ident: CAND-396
+      party_ident: PART-1
+      display_name: Irene M. Messier
+    - party_display_name: Republican
+      ident: CAND-397
+      party_ident: PART-1
+      display_name: Keith Murphy
+    - party_display_name: Republican
+      ident: CAND-398
+      party_ident: PART-1
+      display_name: Tammy Simmons
+    - party_display_name: Republican
+      ident: CAND-399
+      party_ident: PART-1
+      display_name: "\"Connie\" Soucy"
+    - party_display_name: Republican
+      ident: CAND-400
+      party_ident: PART-1
+      display_name: Jerry E. Bergevin
+    - party_display_name: Republican
+      ident: CAND-401
+      party_ident: PART-1
+      display_name: Carlos Gonzalez
+    - party_display_name: Republican
+      ident: CAND-402
+      party_ident: PART-1
+      display_name: Phil Greazzo
+    - party_display_name: Democratic
+      ident: CAND-403
+      party_ident: PART-2
+      display_name: George Katsiantonis
+    - party_display_name: Democratic
+      ident: CAND-404
+      party_ident: PART-2
+      display_name: David L. Nixon
+    - party_display_name: Democratic
+      ident: CAND-405
+      party_ident: PART-2
+      display_name: Joel Winters
+    - party_display_name: Democratic
+      ident: CAND-406
+      party_ident: PART-2
+      display_name: Patrick J. Arnold
+    - party_display_name: Democratic
+      ident: CAND-407
+      party_ident: PART-2
+      display_name: Roger R. Beauchamp
+    - party_display_name: Democratic
+      ident: CAND-408
+      party_ident: PART-2
+      display_name: Jane Ellen Beaulieu
+    - party_display_name: Democratic
+      ident: CAND-409
+      party_ident: PART-2
+      display_name: Ronald R. Boisvert
+    - party_display_name: Democratic
+      ident: CAND-410
+      party_ident: PART-2
+      display_name: David B. George
+    - party_display_name: Libertarian
+      ident: CAND-411
+      party_ident: PART-4
+      display_name: "\"Rich\" Tomasso"
+    - party_display_name: Independent
+      ident: CAND-412
+      party_ident: PART-3
+      display_name: Paul G. Boisseau
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-238
+      party_ident: PART-1
+      display_name: James A. Hardy
+    - party_display_name: Democratic
+      ident: CAND-239
+      party_ident: PART-2
+      display_name: Harold "Red" Wheeler
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-240
+      party_ident: PART-1
+      display_name: Marguerite Lefebvre Wageling
+    - party_display_name: Democratic
+      ident: CAND-240
+      party_ident: PART-2
+      display_name: Marguerite Lefebvre Wageling
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-241
+      party_ident: PART-1
+      display_name: "\"Bob\" Burns"
+    - party_display_name: Democratic
+      ident: CAND-242
+      party_ident: PART-2
+      display_name: Christopher C. Pappas
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-243
+      party_ident: PART-1
+      display_name: Pamela D. Coughlin
+    - party_display_name: Democratic
+      ident: CAND-244
+      party_ident: PART-2
+      display_name: Louise A. Wright
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-245
+      party_ident: PART-1
+      display_name: "\"Bob\" Rivard"
+    - party_display_name: Democratic
+      ident: CAND-246
+      party_ident: PART-2
+      display_name: Graham V. Smith
+  - ident: CONT-12
+    display_name: County Commissioner
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-265
+      party_ident: PART-1
+      display_name: "\"Toni\" Pappas"
+    - party_display_name: Democratic
+      ident: CAND-266
+      party_ident: PART-2
+      display_name: Jerome Duval
+audit_header: 
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: TTV Tabulator TAB02
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: ballot_config
-  create_date: 2010-04-02T10:59:00-04:00
-contest_list: 
-- ident: CONT-0
-  display_name: President and Vice-President of the United States
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-0
-    party_ident: PART-1
-    display_name: John McCain and Sarah Palin
-  - party_display_name: Democratic
-    ident: CAND-1
-    party_ident: PART-2
-    display_name: Barack Obama and "Joe" Biden
-  - party_display_name: Independent
-    ident: CAND-2
-    party_ident: PART-3
-    display_name: Ralph Nader and "Matt" Gonzalez
-  - party_display_name: Libertarian
-    ident: CAND-3
-    party_ident: PART-4
-    display_name: George Phillies and Christopher Bennett
-  - party_display_name: Libertarian
-    ident: CAND-4
-    party_ident: PART-4
-    display_name: "\"Bob\" Barr and Wayne A. Root"
-- ident: CONT-1
-  display_name: Governor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-5
-    party_ident: PART-1
-    display_name: Joseph D. Kenney
-  - party_display_name: Democratic
-    ident: CAND-6
-    party_ident: PART-2
-    display_name: John Lynch
-  - party_display_name: Libertarian
-    ident: CAND-7
-    party_ident: PART-4
-    display_name: Susan M. Newell
-- ident: CONT-2
-  display_name: United States Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-8
-    party_ident: PART-1
-    display_name: John E. Sununu
-  - party_display_name: Democratic
-    ident: CAND-9
-    party_ident: PART-2
-    display_name: Jeanne Shaheen
-  - party_display_name: Libertarian
-    ident: CAND-10
-    party_ident: PART-4
-    display_name: "\"Ken\" Blevens"
-- ident: CONT-3
-  display_name: Representative in Congress
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-11
-    party_ident: PART-1
-    display_name: Jeb Bradley
-  - party_display_name: Democratic
-    ident: CAND-12
-    party_ident: PART-2
-    display_name: Carol Shea-Porter
-  - party_display_name: Libertarian
-    ident: CAND-13
-    party_ident: PART-4
-    display_name: Robert Kingsbury
-- ident: CONT-4
-  display_name: Executive Councilor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-249
-    party_ident: PART-1
-    display_name: Raymond J. Wieczorek
-  - party_display_name: Democratic
-    ident: CAND-250
-    party_ident: PART-2
-    display_name: "\"Bob\" Bruce"
-- ident: CONT-5
-  display_name: State Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-279
-    party_ident: PART-1
-    display_name: Jason Sakellar
-  - party_display_name: Democratic
-    ident: CAND-278
-    party_ident: PART-2
-    display_name: "\"Lou\" D'Allesandro"
-- ident: CONT-6
-  display_name: State Representatives
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-395
-    party_ident: PART-1
-    display_name: Richard "Dick" Marston
-  - party_display_name: Republican
-    ident: CAND-396
-    party_ident: PART-1
-    display_name: Irene M. Messier
-  - party_display_name: Republican
-    ident: CAND-397
-    party_ident: PART-1
-    display_name: Keith Murphy
-  - party_display_name: Republican
-    ident: CAND-398
-    party_ident: PART-1
-    display_name: Tammy Simmons
-  - party_display_name: Republican
-    ident: CAND-399
-    party_ident: PART-1
-    display_name: "\"Connie\" Soucy"
-  - party_display_name: Republican
-    ident: CAND-400
-    party_ident: PART-1
-    display_name: Jerry E. Bergevin
-  - party_display_name: Republican
-    ident: CAND-401
-    party_ident: PART-1
-    display_name: Carlos Gonzalez
-  - party_display_name: Republican
-    ident: CAND-402
-    party_ident: PART-1
-    display_name: Phil Greazzo
-  - party_display_name: Democratic
-    ident: CAND-403
-    party_ident: PART-2
-    display_name: George Katsiantonis
-  - party_display_name: Democratic
-    ident: CAND-404
-    party_ident: PART-2
-    display_name: David L. Nixon
-  - party_display_name: Democratic
-    ident: CAND-405
-    party_ident: PART-2
-    display_name: Joel Winters
-  - party_display_name: Democratic
-    ident: CAND-406
-    party_ident: PART-2
-    display_name: Patrick J. Arnold
-  - party_display_name: Democratic
-    ident: CAND-407
-    party_ident: PART-2
-    display_name: Roger R. Beauchamp
-  - party_display_name: Democratic
-    ident: CAND-408
-    party_ident: PART-2
-    display_name: Jane Ellen Beaulieu
-  - party_display_name: Democratic
-    ident: CAND-409
-    party_ident: PART-2
-    display_name: Ronald R. Boisvert
-  - party_display_name: Democratic
-    ident: CAND-410
-    party_ident: PART-2
-    display_name: David B. George
-  - party_display_name: Libertarian
-    ident: CAND-411
-    party_ident: PART-4
-    display_name: "\"Rich\" Tomasso"
-  - party_display_name: Independent
-    ident: CAND-412
-    party_ident: PART-3
-    display_name: Paul G. Boisseau
-- ident: CONT-7
-  display_name: Sheriff
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-238
-    party_ident: PART-1
-    display_name: James A. Hardy
-  - party_display_name: Democratic
-    ident: CAND-239
-    party_ident: PART-2
-    display_name: Harold "Red" Wheeler
-- ident: CONT-8
-  display_name: County Attorney
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-240
-    party_ident: PART-1
-    display_name: Marguerite Lefebvre Wageling
-  - party_display_name: Democratic
-    ident: CAND-240
-    party_ident: PART-2
-    display_name: Marguerite Lefebvre Wageling
-- ident: CONT-9
-  display_name: County Treasurer
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-241
-    party_ident: PART-1
-    display_name: "\"Bob\" Burns"
-  - party_display_name: Democratic
-    ident: CAND-242
-    party_ident: PART-2
-    display_name: Christopher C. Pappas
-- ident: CONT-10
-  display_name: Register of Deeds
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-243
-    party_ident: PART-1
-    display_name: Pamela D. Coughlin
-  - party_display_name: Democratic
-    ident: CAND-244
-    party_ident: PART-2
-    display_name: Louise A. Wright
-- ident: CONT-11
-  display_name: Register of Probate
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-245
-    party_ident: PART-1
-    display_name: "\"Bob\" Rivard"
-  - party_display_name: Democratic
-    ident: CAND-246
-    party_ident: PART-2
-    display_name: Graham V. Smith
-- ident: CONT-12
-  display_name: County Commissioner
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-265
-    party_ident: PART-1
-    display_name: "\"Toni\" Pappas"
-  - party_display_name: Democratic
-    ident: CAND-266
-    party_ident: PART-2
-    display_name: Jerome Duval
+  create_date: 2010-04-16T12:19:20-04:00

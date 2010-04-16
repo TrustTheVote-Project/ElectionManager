@@ -1,186 +1,189 @@
 --- 
-precinct_list: 
-- ident: PREC-257
-  district_list: []
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-257
+    district_list: []
+
+    display_name: Hebron
+  question_list: []
 
   display_name: Hebron
-display_name: Hebron
-Audit-header: 
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-62
+      party_ident: PART-1
+      display_name: Jennifer Horn
+    - party_display_name: Democratic
+      ident: CAND-63
+      party_ident: PART-2
+      display_name: Paul W. Hodes
+    - party_display_name: Libertarian
+      ident: CAND-64
+      party_ident: PART-4
+      display_name: Chester L. Lapointe II
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-14
+      party_ident: PART-1
+      display_name: Raymond S. Burton
+    - party_display_name: Democratic
+      ident: CAND-15
+      party_ident: PART-2
+      display_name: J. Michael Cauble
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-55
+      party_ident: PART-1
+      display_name: William B. Tobin
+    - party_display_name: Democratic
+      ident: CAND-56
+      party_ident: PART-2
+      display_name: Deborah R. Reynolds
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-217
+      party_ident: PART-1
+      display_name: Neil F. McIver
+    - party_display_name: Republican
+      ident: CAND-218
+      party_ident: PART-1
+      display_name: John H. Randlett
+    - party_display_name: Democratic
+      ident: CAND-219
+      party_ident: PART-2
+      display_name: Suzanne Smith
+    - party_display_name: Democratic
+      ident: CAND-220
+      party_ident: PART-2
+      display_name: Mary R. Cooney
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-183
+      party_ident: PART-1
+      display_name: Douglas R. Dutile
+    - party_display_name: Democratic
+      ident: CAND-183
+      party_ident: PART-2
+      display_name: Douglas R. Dutile
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-184
+      party_ident: PART-1
+      display_name: Ricardo "Rick" St. Hilaire
+    - party_display_name: Democratic
+      ident: CAND-184
+      party_ident: PART-2
+      display_name: Ricardo "Rick" St. Hilaire
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-185
+      party_ident: PART-1
+      display_name: Carol A. Elliott
+    - party_display_name: Democratic
+      ident: CAND-186
+      party_ident: PART-2
+      display_name: Vanessa Sievers
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-187
+      party_ident: PART-1
+      display_name: Lynn W. Wheeler
+    - party_display_name: Democratic
+      ident: CAND-188
+      party_ident: PART-2
+      display_name: William A. "Bill" Sharp
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-189
+      party_ident: PART-1
+      display_name: Rebecca R. Wyman
+  - ident: CONT-12
+    display_name: County Commissioner
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-190
+      party_ident: PART-1
+      display_name: Omer C. Ahern, Jr.
+    - party_display_name: Democratic
+      ident: CAND-191
+      party_ident: PART-2
+      display_name: Martha B. Richards
+audit_header: 
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: TTV Tabulator TAB02
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: ballot_config
-  create_date: 2010-04-02T10:59:00-04:00
-contest_list: 
-- ident: CONT-0
-  display_name: President and Vice-President of the United States
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-0
-    party_ident: PART-1
-    display_name: John McCain and Sarah Palin
-  - party_display_name: Democratic
-    ident: CAND-1
-    party_ident: PART-2
-    display_name: Barack Obama and "Joe" Biden
-  - party_display_name: Independent
-    ident: CAND-2
-    party_ident: PART-3
-    display_name: Ralph Nader and "Matt" Gonzalez
-  - party_display_name: Libertarian
-    ident: CAND-3
-    party_ident: PART-4
-    display_name: George Phillies and Christopher Bennett
-  - party_display_name: Libertarian
-    ident: CAND-4
-    party_ident: PART-4
-    display_name: "\"Bob\" Barr and Wayne A. Root"
-- ident: CONT-1
-  display_name: Governor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-5
-    party_ident: PART-1
-    display_name: Joseph D. Kenney
-  - party_display_name: Democratic
-    ident: CAND-6
-    party_ident: PART-2
-    display_name: John Lynch
-  - party_display_name: Libertarian
-    ident: CAND-7
-    party_ident: PART-4
-    display_name: Susan M. Newell
-- ident: CONT-2
-  display_name: United States Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-8
-    party_ident: PART-1
-    display_name: John E. Sununu
-  - party_display_name: Democratic
-    ident: CAND-9
-    party_ident: PART-2
-    display_name: Jeanne Shaheen
-  - party_display_name: Libertarian
-    ident: CAND-10
-    party_ident: PART-4
-    display_name: "\"Ken\" Blevens"
-- ident: CONT-3
-  display_name: Representative in Congress
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-62
-    party_ident: PART-1
-    display_name: Jennifer Horn
-  - party_display_name: Democratic
-    ident: CAND-63
-    party_ident: PART-2
-    display_name: Paul W. Hodes
-  - party_display_name: Libertarian
-    ident: CAND-64
-    party_ident: PART-4
-    display_name: Chester L. Lapointe II
-- ident: CONT-4
-  display_name: Executive Councilor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-14
-    party_ident: PART-1
-    display_name: Raymond S. Burton
-  - party_display_name: Democratic
-    ident: CAND-15
-    party_ident: PART-2
-    display_name: J. Michael Cauble
-- ident: CONT-5
-  display_name: State Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-55
-    party_ident: PART-1
-    display_name: William B. Tobin
-  - party_display_name: Democratic
-    ident: CAND-56
-    party_ident: PART-2
-    display_name: Deborah R. Reynolds
-- ident: CONT-6
-  display_name: State Representatives
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-217
-    party_ident: PART-1
-    display_name: Neil F. McIver
-  - party_display_name: Republican
-    ident: CAND-218
-    party_ident: PART-1
-    display_name: John H. Randlett
-  - party_display_name: Democratic
-    ident: CAND-219
-    party_ident: PART-2
-    display_name: Suzanne Smith
-  - party_display_name: Democratic
-    ident: CAND-220
-    party_ident: PART-2
-    display_name: Mary R. Cooney
-- ident: CONT-7
-  display_name: Sheriff
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-183
-    party_ident: PART-1
-    display_name: Douglas R. Dutile
-  - party_display_name: Democratic
-    ident: CAND-183
-    party_ident: PART-2
-    display_name: Douglas R. Dutile
-- ident: CONT-8
-  display_name: County Attorney
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-184
-    party_ident: PART-1
-    display_name: Ricardo "Rick" St. Hilaire
-  - party_display_name: Democratic
-    ident: CAND-184
-    party_ident: PART-2
-    display_name: Ricardo "Rick" St. Hilaire
-- ident: CONT-9
-  display_name: County Treasurer
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-185
-    party_ident: PART-1
-    display_name: Carol A. Elliott
-  - party_display_name: Democratic
-    ident: CAND-186
-    party_ident: PART-2
-    display_name: Vanessa Sievers
-- ident: CONT-10
-  display_name: Register of Deeds
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-187
-    party_ident: PART-1
-    display_name: Lynn W. Wheeler
-  - party_display_name: Democratic
-    ident: CAND-188
-    party_ident: PART-2
-    display_name: William A. "Bill" Sharp
-- ident: CONT-11
-  display_name: Register of Probate
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-189
-    party_ident: PART-1
-    display_name: Rebecca R. Wyman
-- ident: CONT-12
-  display_name: County Commissioner
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-190
-    party_ident: PART-1
-    display_name: Omer C. Ahern, Jr.
-  - party_display_name: Democratic
-    ident: CAND-191
-    party_ident: PART-2
-    display_name: Martha B. Richards
+  create_date: 2010-04-16T12:19:20-04:00

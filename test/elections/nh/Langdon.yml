@@ -1,197 +1,200 @@
 --- 
-precinct_list: 
-- ident: PREC-316
-  district_list: []
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-316
+    district_list: []
+
+    display_name: Langdon
+  question_list: []
 
   display_name: Langdon
-display_name: Langdon
-Audit-header: 
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-62
+      party_ident: PART-1
+      display_name: Jennifer Horn
+    - party_display_name: Democratic
+      ident: CAND-63
+      party_ident: PART-2
+      display_name: Paul W. Hodes
+    - party_display_name: Libertarian
+      ident: CAND-64
+      party_ident: PART-4
+      display_name: Chester L. Lapointe II
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-38
+      party_ident: PART-1
+      display_name: "\"Dan\" St. Hilaire"
+    - party_display_name: Democratic
+      ident: CAND-39
+      party_ident: PART-2
+      display_name: John D. Shea
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-581
+      party_ident: PART-1
+      display_name: "\"Bob\" Odell"
+    - party_display_name: Democratic
+      ident: CAND-582
+      party_ident: PART-2
+      display_name: "\"Jay\" Phinizy"
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Undeclared
+      ident: CAND-908
+      party_ident: PART-6
+      display_name: Lois M. Corcoran
+    - party_display_name: Republican
+      ident: CAND-909
+      party_ident: PART-1
+      display_name: Russell Pope
+    - party_display_name: Republican
+      ident: CAND-910
+      party_ident: PART-1
+      display_name: Steven Smith
+    - party_display_name: Democratic
+      ident: CAND-911
+      party_ident: PART-2
+      display_name: Jim McClammer
+    - party_display_name: Democratic
+      ident: CAND-912
+      party_ident: PART-2
+      display_name: Cynthia P. Sweeney
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-858
+      party_ident: PART-1
+      display_name: "\"Mike\" Prozzo"
+    - party_display_name: Democratic
+      ident: CAND-858
+      party_ident: PART-2
+      display_name: "\"Mike\" Prozzo"
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-859
+      party_ident: PART-1
+      display_name: Marc B. Hathaway
+    - party_display_name: Democratic
+      ident: CAND-859
+      party_ident: PART-2
+      display_name: Marc B. Hathaway
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-860
+      party_ident: PART-1
+      display_name: Paul J. Brown
+    - party_display_name: Democratic
+      ident: CAND-861
+      party_ident: PART-2
+      display_name: Carroll "Dave" French
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-862
+      party_ident: PART-1
+      display_name: Sharron A. King
+    - party_display_name: Democratic
+      ident: CAND-863
+      party_ident: PART-2
+      display_name: Levi Noah Sanders
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-864
+      party_ident: PART-1
+      display_name: Diane M. Davis
+  - ident: CONT-17
+    display_name: County Commissioner, 1st District
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-865
+      party_ident: PART-1
+      display_name: Donald S. Clarke
+    - party_display_name: Democratic
+      ident: CAND-866
+      party_ident: PART-2
+      display_name: Jeffrey R. Barrette
+  - ident: CONT-14
+    display_name: County Commissioner, 2nd District
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-867
+      party_ident: PART-1
+      display_name: "\"Ben\" Nelson"
+audit_header: 
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: TTV Tabulator TAB02
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: ballot_config
-  create_date: 2010-04-02T10:59:00-04:00
-contest_list: 
-- ident: CONT-0
-  display_name: President and Vice-President of the United States
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-0
-    party_ident: PART-1
-    display_name: John McCain and Sarah Palin
-  - party_display_name: Democratic
-    ident: CAND-1
-    party_ident: PART-2
-    display_name: Barack Obama and "Joe" Biden
-  - party_display_name: Independent
-    ident: CAND-2
-    party_ident: PART-3
-    display_name: Ralph Nader and "Matt" Gonzalez
-  - party_display_name: Libertarian
-    ident: CAND-3
-    party_ident: PART-4
-    display_name: George Phillies and Christopher Bennett
-  - party_display_name: Libertarian
-    ident: CAND-4
-    party_ident: PART-4
-    display_name: "\"Bob\" Barr and Wayne A. Root"
-- ident: CONT-1
-  display_name: Governor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-5
-    party_ident: PART-1
-    display_name: Joseph D. Kenney
-  - party_display_name: Democratic
-    ident: CAND-6
-    party_ident: PART-2
-    display_name: John Lynch
-  - party_display_name: Libertarian
-    ident: CAND-7
-    party_ident: PART-4
-    display_name: Susan M. Newell
-- ident: CONT-2
-  display_name: United States Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-8
-    party_ident: PART-1
-    display_name: John E. Sununu
-  - party_display_name: Democratic
-    ident: CAND-9
-    party_ident: PART-2
-    display_name: Jeanne Shaheen
-  - party_display_name: Libertarian
-    ident: CAND-10
-    party_ident: PART-4
-    display_name: "\"Ken\" Blevens"
-- ident: CONT-3
-  display_name: Representative in Congress
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-62
-    party_ident: PART-1
-    display_name: Jennifer Horn
-  - party_display_name: Democratic
-    ident: CAND-63
-    party_ident: PART-2
-    display_name: Paul W. Hodes
-  - party_display_name: Libertarian
-    ident: CAND-64
-    party_ident: PART-4
-    display_name: Chester L. Lapointe II
-- ident: CONT-4
-  display_name: Executive Councilor
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-38
-    party_ident: PART-1
-    display_name: "\"Dan\" St. Hilaire"
-  - party_display_name: Democratic
-    ident: CAND-39
-    party_ident: PART-2
-    display_name: John D. Shea
-- ident: CONT-5
-  display_name: State Senator
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-581
-    party_ident: PART-1
-    display_name: "\"Bob\" Odell"
-  - party_display_name: Democratic
-    ident: CAND-582
-    party_ident: PART-2
-    display_name: "\"Jay\" Phinizy"
-- ident: CONT-6
-  display_name: State Representatives
-  candidates: 
-  - party_display_name: Undeclared
-    ident: CAND-908
-    party_ident: PART-6
-    display_name: Lois M. Corcoran
-  - party_display_name: Republican
-    ident: CAND-909
-    party_ident: PART-1
-    display_name: Russell Pope
-  - party_display_name: Republican
-    ident: CAND-910
-    party_ident: PART-1
-    display_name: Steven Smith
-  - party_display_name: Democratic
-    ident: CAND-911
-    party_ident: PART-2
-    display_name: Jim McClammer
-  - party_display_name: Democratic
-    ident: CAND-912
-    party_ident: PART-2
-    display_name: Cynthia P. Sweeney
-- ident: CONT-7
-  display_name: Sheriff
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-858
-    party_ident: PART-1
-    display_name: "\"Mike\" Prozzo"
-  - party_display_name: Democratic
-    ident: CAND-858
-    party_ident: PART-2
-    display_name: "\"Mike\" Prozzo"
-- ident: CONT-8
-  display_name: County Attorney
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-859
-    party_ident: PART-1
-    display_name: Marc B. Hathaway
-  - party_display_name: Democratic
-    ident: CAND-859
-    party_ident: PART-2
-    display_name: Marc B. Hathaway
-- ident: CONT-9
-  display_name: County Treasurer
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-860
-    party_ident: PART-1
-    display_name: Paul J. Brown
-  - party_display_name: Democratic
-    ident: CAND-861
-    party_ident: PART-2
-    display_name: Carroll "Dave" French
-- ident: CONT-10
-  display_name: Register of Deeds
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-862
-    party_ident: PART-1
-    display_name: Sharron A. King
-  - party_display_name: Democratic
-    ident: CAND-863
-    party_ident: PART-2
-    display_name: Levi Noah Sanders
-- ident: CONT-11
-  display_name: Register of Probate
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-864
-    party_ident: PART-1
-    display_name: Diane M. Davis
-- ident: CONT-17
-  display_name: County Commissioner, 1st District
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-865
-    party_ident: PART-1
-    display_name: Donald S. Clarke
-  - party_display_name: Democratic
-    ident: CAND-866
-    party_ident: PART-2
-    display_name: Jeffrey R. Barrette
-- ident: CONT-14
-  display_name: County Commissioner, 2nd District
-  candidates: 
-  - party_display_name: Republican
-    ident: CAND-867
-    party_ident: PART-1
-    display_name: "\"Ben\" Nelson"
+  create_date: 2010-04-16T12:19:20-04:00
