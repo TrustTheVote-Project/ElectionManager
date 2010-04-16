@@ -1,7 +1,9 @@
 default:
   id: 0
+  format: PDF
   display_name: PDF
 
 html:
   id: 1
+  format: PDF
   display_name: HTML

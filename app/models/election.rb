@@ -65,7 +65,7 @@ class Election < ActiveRecord::Base
       destination = ballot_style_template.destination
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       
-      if medium_id == 1
+      if medium_id == 0
         pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature,destination)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
       else

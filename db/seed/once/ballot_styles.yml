@@ -1,7 +1,9 @@
 default:
   id: 0
+  ballot_style_code: default
   display_name: Office Block
 
 nh:
   id: 1
+  ballot_style_code: nh
   display_name: Party Column
