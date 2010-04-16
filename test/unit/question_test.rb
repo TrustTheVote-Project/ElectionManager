@@ -8,12 +8,8 @@ class QuestionTest < ActiveSupport::TestCase
     setup do
       create_questions
     end
-    
-#    should_create :question    
 
-    subject { Question.last}
-    should_belong_to :election
-    should_belong_to :district
+#    should_create :question    
 
     subject { Question.last}
     should_belong_to :election
