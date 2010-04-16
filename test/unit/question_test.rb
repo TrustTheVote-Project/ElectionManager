@@ -33,7 +33,7 @@ class QuestionTest < ActiveSupport::TestCase
       assert_equal District.find(0), q1.requesting_district(true)
       
     end
-  
+
     if false
       should "find questions by precinct and election" do
       
@@ -82,6 +82,7 @@ class QuestionTest < ActiveSupport::TestCase
      
     @q2 = Question.new(:display_name => "Free Chicken", :question => "A free chicken in every pot")
     @q2.requesting_district =  @district1
+
     @q2.election = @el
     @q2.save!
     
