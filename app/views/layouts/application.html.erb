@@ -10,17 +10,7 @@
       <div id="header">
         <h1><a href="/"> <%=   image_tag("ttv-100.png")%> TrustTheVote Election Manager</a></h1>
         <div id="user-navigation">
-          <ul class="wat-cf">
-            <li>
-              <a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a>
-            </li>
-            <li>
-              <a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a>
-            </li>
-            <li>
-              <a href="/logout" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a>
-            </li>
-          </ul>
+            <%= user_navigation_helper %>          
         </div>
         <div id="main-navigation">
           <ul class="wat-cf">
