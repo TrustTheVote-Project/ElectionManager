@@ -21,14 +21,14 @@ namespace :ttv do
  end
   
   desc "Full Reset of DB for test"
-  task :test_reset  do
-    ENV['RAILS_ENV'] = 'test'
-    Rake::Task['db:schema:load'].invoke
-    # Rake::Task['db:test:load'].invoke
-    # ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
+  task :test_reset => :environment do
+    RAILS_ENV = 'test'
+    ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
+    Rake::Task['db:schema:load'].execute
 
-    Rake::Task['ttv:seed'].invoke
+    Rake::Task['ttv:seed'].execute
   end
+  
   desc "Full Reset of DB for test and development"
   task :full_reset => ['ttv:dev_reset', 'ttv:test_reset'] do
   end
