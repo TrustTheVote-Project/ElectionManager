@@ -17,11 +17,11 @@ module ApplicationHelper
   end
   
   def user_navigation_helper
+    jurisdiction_name = session[:jurisdiction] || "no jurisdiction selected"
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
-          content_tag(:li, "no jurisdiction selected") + 
-          content_tag(:li) { link_to("change jurisdiction", change_jurisdiction_path)} +
+          content_tag(:li, jurisdiction_name + link_to(" (change)", change_jurisdiction_path)) + 
           content_tag(:li) { current_user.email } + 
           content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
           content_tag(:li) { link_to("Logout", logout_path) }
@@ -31,15 +31,5 @@ module ApplicationHelper
         end
       end
     end
-  end
-  
-  def jurisdiction_chooser_helper(jurisdiction)
-#    content_tag(:div, :class => "banner_right") do
-      if jurisdiction.nil?
-        "none"
-      else
-        jurisdiction.display_name
-      end
-#    end
   end
 end
