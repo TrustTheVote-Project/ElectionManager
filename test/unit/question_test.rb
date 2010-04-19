@@ -12,10 +12,6 @@ class QuestionTest < ActiveSupport::TestCase
 
     subject { Question.last}
     should_belong_to :election
-    should_belong_to :district
-
-    subject { Question.last}
-    should_belong_to :election
     should_belong_to :requesting_district
 
     should 'have a requesting district' do
@@ -69,7 +65,6 @@ class QuestionTest < ActiveSupport::TestCase
           result << q
         end
       end
-      puts result
     end
   end
   
