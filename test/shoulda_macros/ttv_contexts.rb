@@ -1,4 +1,8 @@
 class ActiveSupport::TestCase
+  def self.setup_user_roles(options={})
+    options = {:role_name => 'guest'}.merge(options)
+    
+  end
   
   def self.setup_users(options={})
     options = {:count => 2, :uname => 'user', :dname => 'example.com', :pwd => "password"}.merge(options)
