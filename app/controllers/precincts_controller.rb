@@ -1,4 +1,7 @@
 require 'abstract_ballot'
+require 'rubygems'
+require 'zip/zip'
+
 CHECKBOX = "\xE2\x98\x90" # "☐"
 class PrecinctsController < ApplicationController
 
@@ -80,18 +83,31 @@ class PrecinctsController < ApplicationController
      
      unless election.ballot_style_template_id == nil
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
-      #begin
-             new_ballots = election.render_ballots(election, precincts, ballot_style_template)
-             puts new_ballots.length
-             #send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'attachment'
-      #rescue Exception => ex
-       # flash[:error] = "precinct_controller - #{ex.message}"
-      #  redirect_to precincts_election_path election
-      #end
+       begin
+        ballots_array = election.render_ballots(election, precincts, ballot_style_template)
+        zipped_ballots = zip_ballots(ballots_array)
+        send_file zipped_ballots, :type => 'application/zip', :disposition => 'application', :filename => "ballots-#{Time.now}.zip"
+       
+      rescue Exception => ex
+        flash[:error] = "precinct_controller - #{ex.message}"
+        redirect_to precincts_election_path election
+      end
      else
        flash[:error] = "A Ballot Style Template must be selected for this election before any ballots can be generated."
        redirect_to election_path election
      end    
 
+  end
+  
+  
+  def zip_ballots(ballots_array)
+     temp_file = "tmp/ballot_zips/ballots-#{Time.now}.zip"
+     Zip::ZipFile.open(temp_file, Zip::ZipFile::CREATE) {
+        |zipfile|
+         ballots_array.each do |new_ballot|
+           zipfile.get_output_stream(new_ballot[:fileName]) { |f| f.puts new_ballot[:pdfBallot] }
+         end
+       }
+    return temp_file
   end
 end

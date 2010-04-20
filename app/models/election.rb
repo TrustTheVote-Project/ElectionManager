@@ -86,7 +86,8 @@ class Election < ActiveRecord::Base
       precincts.each do |precinct|
         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
         pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
-        ballot_array << pdfBallot
+        new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
+        ballot_array << new_ballot
       end
       
          
