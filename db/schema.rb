@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20100418162424) do
     t.datetime "updated_at"
     t.string   "ballot_style"
     t.integer  "default_language"
-    t.string   "state_signature_image"
+    t.string   "state_signature_image", :limit => nil
     t.integer  "medium_id"
     t.string   "destination"
   end
