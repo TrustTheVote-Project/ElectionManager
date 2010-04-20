@@ -59,7 +59,7 @@ class PrecinctsController < ApplicationController
               
               #RENDER TO BROWSER OR FILE BASED ON DESTINATION PROPERTY IN BALLOT_STYLE_TEMPLATE
               if ballot_style_template.destination == nil || ballot_style_template.destination.length == 0
-                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/zip", :disposition => 'inline'
+                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'attachment'
               else
                 unless File.directory? ballot_style_template.destination
                   FileUtils.mkdir_p ballot_style_template.destination
