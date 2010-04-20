@@ -31,7 +31,7 @@ class PDFBallotStyle
   end
     
   def self.get_ballot_translation(style, lang)
-    puts BALLOT_DIR
+#    puts BALLOT_DIR
     return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
   end
 

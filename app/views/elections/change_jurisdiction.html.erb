@@ -1,0 +1,27 @@
+<div class="block">
+  <div class="content">
+    <h2 class="title">Choose Your Jurisdiction:</h2>
+    <div class="inner">
+      <p class="first">
+        Election Manager works on one Jurisdiction at a time. Please choose the jurisdiction
+        you would like to work with.
+      </p>
+      <ul class="list">
+        <% @district_sets.each do |district_set| %>
+        <li>
+          <div class="left">
+             <%= link_to(image_tag("ttv-100.png", :class =>"avatar"), set_jurisdiction_path(district_set)) %>
+          </div>
+          <div class="item">
+            <h3><%= district_set.display_name %> </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            </p>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

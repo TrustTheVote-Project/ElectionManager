@@ -1,53 +1,17 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", elections_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_election_path %></li>
+      <li class="first active">
+        <%= link_to "#{t("web-app-theme.list", :default => "List")}", elections_path %>
+      </li>
+      <li>
+        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_election_path %>
+      </li>
     </ul>
-  </div>          
-  <div class="content">          
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Elections</h2>
-    <div class="inner">
-      <table class="table">
-        <tr>             
-          <th class="first">ID</th>
-										<th>
-					<%= t("activerecord.attributes.election.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
-</th>
-					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
-          <th class="last">&nbsp;</th>
-        </tr>
-        <% @elections.each do |election| -%>
-        <tr class="<%= cycle("odd", "even") %>">
-          <td>
-            <%= election.id %>
-          </td>
-										<td>
-						<%= link_to election.display_name, election_path(election) %>
-					</td>
-										<td>
-            <%= election.created_at %>
-          </td>
-          <td class="last">
-            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", election_path(election) %> |
-            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_election_path(election) %> |
-            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", election_path(election), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-          </td>
-        </tr>          
-        <% end -%>
-      </table>
-      <div class="actions-bar wat-cf">
-        <div class="actions">
-        </div>
-        
-        <%= will_paginate @elections  %>
-        
-      </div>
-    </div>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All") %> Elections</h2>
+<%= render :partial => 'election_list' %>    </div>
   </div>
 </div>
-
-
-
 <% content_for :sidebar, render(:partial => 'sidebar') -%>
-

@@ -12,6 +12,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ballot_style_templates
 
  
+#
+# 'new' UI paths all start with '/n/'
+#
+  map.juris_elections "/n/", :controller => :elections, :action => :jurisdiction_index
+  map.change_jurisdiction "/n/change_jurisdiction", :controller => :elections, :action => :change_jurisdiction
+  map.set_jurisdiction "/n/set_jurisdiction/:id", :controller => :elections, :action => :set_jurisdiction 
+  
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates
   map.resources :districts
@@ -24,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :contests
   end
   map.resources :parties
   map.resources :precincts

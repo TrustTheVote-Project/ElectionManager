@@ -51,17 +51,17 @@
     </contest>
     <contest open_seat="1" display_name="Sheriff" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="DEMOCRATIC" display_name="Harold &quot;Red&quot; Wheeler"/>
+        <candidate party="democratic" display_name="Harold &quot;Red&quot; Wheeler"/>
         <candidate party="republican" display_name="James A. Hardy"/>
       </candidates>
     </contest>
     <contest open_seat="6" display_name="State Representatives" district_idref="1" voting_method="winner_take_all">
       <candidates>
-        <candidate party="DEMOCRATIC" display_name="&quot;Bob&quot; Jones"/>
+        <candidate party="democratic" display_name="&quot;Bob&quot; Jones"/>
         <candidate party="republican" display_name="&quot;Ken&quot; Hawkins"/>
         <candidate party="republican" display_name="&quot;Moe&quot; Villeneuve"/>
         <candidate party="republican" display_name="Edward P. Moran"/>
-        <candidate party="DEMOCRATIC" display_name="Isabel Partin"/>
+        <candidate party="democratic" display_name="Isabel Partin"/>
         <candidate party="republican" display_name="Jayne E. Spaulding"/>
         <candidate party="democratic" display_name="Jerry Hanauer"/>
         <candidate party="republican" display_name="John A. Graham"/>

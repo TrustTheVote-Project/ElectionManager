@@ -5,13 +5,34 @@ class ElectionsController < ApplicationController
     redirect_to :action => 'new' if @elections.empty?
     @election = UserSession.find.election if UserSession.find
   end
-
+  
+  def jurisdiction_index
+    @jurisdiction = session[:jurisdiction]
+    if @jurisdiction.nil?
+      redirect_to :action => :set_jurisdiction
+    else
+      @old_jurisd = @jurisdiction.id
+      @elections = DistrictSet.find(@old_jurisd).elections.paginate(:per_page => 10, :page => params[:page])
+      redirect_to :action => :index
+    end  
+  end
+    
+  def set_jurisdiction
+    session[:jurisdiction] = DistrictSet.find(params[:id])
+    redirect_to :action => :jurisdiction_index
+  end
+  
+  def change_jurisdiction
+    @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
+  end
+    
   def show
     @election = Election.find(params[:id], :include => [ 
       { :district_set => :districts }, 
       { :contests => :candidates },
       :questions, 
       ])
+      
     @districts = @election.districts.paginate(:per_page => 10, :page => params[:page])
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page])
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])

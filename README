@@ -81,9 +81,16 @@ Extending REST model, priceless: http://railscasts.com/episodes/35-custom-rest-a
 Routing: http://guides.rubyonrails.org/routing.html
 
 DEBUGGING 
-script/console
+script/console:
+
 - execute url_for like this: app.url_for
 
+# checking routing methods and what they do:
+>> r = ActionController::Routing::Routes
+>> default_url_options[:host] = "a.com"
+>> include ActionController::UrlWriter
+>> elections_url(1)
+=> "http://a.com/elections.1"
 
 OTHER CODE THAT MIGHT BE USEFUL
 auto_resize_options[:onKeyPress] = "if (this.scrollHeight > this.clientHeight && !window.opera)\nthis.rows += 1;"
