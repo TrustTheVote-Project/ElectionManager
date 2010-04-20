@@ -1,4 +1,3 @@
-
 <div class="inner">
   <table class="table">
     <tr>
@@ -27,14 +26,13 @@
         tbd
       </td>
       <td class="last">
-        <%= link_to "#{t("web-app-theme.ballot", :default => "Ballot")}", precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.show", :default => "Show")}", precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", precinct_path(precinct), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        <%= link_to "#{t("web-app-theme.ballot", :default => "Ballot")}", ballot_election_precinct_path(@election, precinct)  %> |<%= link_to "#{t("web-app-theme.show", :default => "Show")}", precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", precinct_path(precinct), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
       </td>
     </tr>
     <% end -%>
   </table>
   <div class="actions-bar wat-cf">
     <div class="actions">
-
     </div>
     <%= will_paginate @precincts %>
   </div>
