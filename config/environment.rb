@@ -24,7 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "prawn", :version => '>= 0.7.2'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
-  config.gem 'rubyzip'
+  config.gem 'rubyzip', :version => '>= 0.9.4', :lib => 'zip/zip'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
