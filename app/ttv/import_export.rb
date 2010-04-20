@@ -19,7 +19,7 @@ module TTV
           text = xmlText.size > 0 ? xmlText[0].text : ""
           text = text.rstrip.lstrip
           question = Question.create(:display_name => xmlQuestion.attributes['display_name'],
-          :district_id => @importIdDistrictMap[xmlQuestion.attributes['district_idref']],
+          :requesting_district_id => @importIdDistrictMap[xmlQuestion.attributes['district_idref']],
           :election_id => @election.id,
           :question => text );
           questions.push(question)
@@ -192,7 +192,7 @@ module TTV
       end
 
       def exportQuestion(question)
-        @xml.question :display_name => question.display_name, :district_idref => question.district_id do
+        @xml.question :display_name => question.display_name, :district_idref => question.requesting_district_id do
           @xml.text do
             @xml << question.question
           end
