@@ -17,7 +17,12 @@ module ApplicationHelper
   end
   
   def user_navigation_helper
-    jurisdiction_name = session[:jurisdiction] || "no jurisdiction selected"
+    curr_jurisd = session[:jurisdiction]
+    if curr_jurisd.nil?
+      jurisdiction_name = "no jurisdiction selected"
+    else
+      jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
+    end
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()

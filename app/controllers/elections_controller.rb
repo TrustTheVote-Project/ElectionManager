@@ -9,17 +9,21 @@ class ElectionsController < ApplicationController
   def jurisdiction_index
     @jurisdiction = session[:jurisdiction]
     if @jurisdiction.nil?
-      redirect_to :action => :index
+      redirect_to :action => :set_jurisdiction
     else
       @old_jurisd = @jurisdiction.id
       @elections = DistrictSet.find(@old_jurisd).elections.paginate(:per_page => 10, :page => params[:page])
-      render :action => :list_elections
+      redirect_to :action => :index
     end  
   end
     
   def set_jurisdiction
-    session[:jurisdiction] = DistrictSet.find(params[:jurisdiction])
-    redirect_to juris_elections_url
+    session[:jurisdiction] = DistrictSet.find(params[:id])
+    redirect_to :action => :jurisdiction_index
+  end
+  
+  def change_jurisdiction
+    @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
   end
     
   def show
@@ -28,6 +32,7 @@ class ElectionsController < ApplicationController
       { :contests => :candidates },
       :questions, 
       ])
+      
     @districts = @election.districts.paginate(:per_page => 10, :page => params[:page])
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page])
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
