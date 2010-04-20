@@ -7,5 +7,4 @@ default:
   state_signature_image: new_hampshire_signature.png
   ballot_style: 0
   default_language: 0
-  destination: 
   medium_id: 0

@@ -55,7 +55,7 @@ class Election < ActiveRecord::Base
       end
     end
     
-    def render_ballots(election, precinct, ballot_style_template)
+    def render_ballot(election, precinct, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
       lang = Language.find(ballot_style_template.default_language).code
       instruction_text = ballot_style_template.instruction_text
@@ -72,5 +72,28 @@ class Election < ActiveRecord::Base
       end
       return new_ballot
     end
+    
+    
+    
+    
+    def render_ballots(election, precincts, ballot_style_template)
+      style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
+      lang = Language.find(ballot_style_template.default_language).code
+      instruction_text = ballot_style_template.instruction_text
+      state_seal = ballot_style_template.state_graphic
+      state_signature = ballot_style_template.state_signature_image
+      ballot_array = Array.new
+      precincts.each do |precinct|
+        title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+        ballot_array << pdfBallot
+      end
+      
+         
+        #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
+        
+      return ballot_array
+    end
+    
 
 end

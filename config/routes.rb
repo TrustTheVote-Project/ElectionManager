@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :precincts, :member => { :ballots => :get }, :only => []
     elections.resources :contests
   end
   map.resources :parties
@@ -46,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
   map.maintain '/maintain/:action', :controller => 'maintain'
   map.root :controller => "application", :action=>"index"
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
 
