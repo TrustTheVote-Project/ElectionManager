@@ -1,4 +1,4 @@
-Audit-header:
+audit_header:
   file_id: 9F023408009B11DF924800163E3DE33F
   create_date: 13-JAN-2010 23:30:23
   type: jurisdiction_slate
@@ -7,22 +7,23 @@ Audit-header:
   software: TTV Tabulator 0.1 JUL-1-2008
   provenance: 
 
-contest_list:
-- candidates:
-  - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_display_name: Democrat}
-  contest_ident: Rep8thDistrict
-  display_name: Representative in Congress
-  district_ident: DIST-2
-display_name: One Contest Election
-number_of_precincts: 1
-precinct_list:
-- display_name: only one
-  district_list:
-  - {display_name: City of Random, ident: DIST-2}
-  precinct_ident: PREC-1
-  registered_voters: 940
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-1}
-type: jurisdiction_slate
-jurisdiction_display_name: middleworld
-vote_type: 'NULL'
+ballot_info:
+  contest_list:
+  - candidates:
+    - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_display_name: Democrat}
+    contest_ident: Rep8thDistrict
+    display_name: Representative in Congress
+    district_ident: DIST-2
+  display_name: One Contest Election
+  number_of_precincts: 1
+  precinct_list:
+  - display_name: only one
+    district_list:
+    - {display_name: City of Random, ident: DIST-2}
+    precinct_ident: PREC-1
+    registered_voters: 940
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-1}
+  type: jurisdiction_slate
+  jurisdiction_display_name: middleworld
+  vote_type: 'NULL'

@@ -1,147 +1,148 @@
 --- 
-precinct_list: 
-- display_name: Albany
-Audit-header: 
+audit_header: 
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: TTV Tabulator TAB02
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: ballot_config
   create_date: 2010-04-02T11:00:03-04:00jurisdiction_display_name: middleworld
-display_name: General Election
-contest_list: 
-- order: 0
-  display_name: President and Vice-President of the United States
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: John McCain and Sarah Palin
-  - party_display_name: Democratic
-    order: 1
-    display_name: Barack Obama and "Joe" Biden
-  - party_display_name: Independent
-    order: 2
-    display_name: Ralph Nader and "Matt" Gonzalez
-  - party_display_name: Libertarian
-    order: 3
-    display_name: George Phillies and Christopher Bennett
-  - party_display_name: Libertarian
-    order: 4
-    display_name: "\"Bob\" Barr and Wayne A. Root"
-- order: 1
-  display_name: Governor
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Joseph D. Kenney
-  - party_display_name: Democratic
-    order: 1
-    display_name: John Lynch
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Susan M. Newell
-- order: 2
-  display_name: United States Senator
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: John E. Sununu
-  - party_display_name: Democratic
-    order: 1
-    display_name: Jeanne Shaheen
-  - party_display_name: Libertarian
-    order: 2
-    display_name: "\"Ken\" Blevens"
-- order: 3
-  display_name: Representative in Congress
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Jeb Bradley
-  - party_display_name: Democratic
-    order: 1
-    display_name: Carol Shea-Porter
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Robert Kingsbury
-- order: 4
-  display_name: Executive Councilor
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Raymond S. Burton
-  - party_display_name: Democratic
-    order: 1
-    display_name: J. Michael Cauble
-- order: 5
-  display_name: State Senator
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: John Gallus
-  - party_display_name: Democratic
-    order: 1
-    display_name: Martha Stroup McLeod
-- order: 6
-  display_name: State Representative
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: "\"Bob\" Bridgham"
-- order: 7
-  display_name: Sheriff
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Christopher Conley
-  - party_display_name: Democratic
-    order: 1
-    display_name: Christopher Conley
-  - party_display_name: Independent
-    order: 2
-    display_name: Daniel J. Poirier
-- order: 8
-  display_name: County Attorney
-  candidates: 
-  - party_display_name: Democratic
-    order: 0
-    display_name: Robin J. Gordon
-- order: 9
-  display_name: County Treasurer
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Godfrey Howard
-- order: 10
-  display_name: Register of Deeds
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Ann P. Aiton
-- order: 11
-  display_name: Register of Probate
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Gail A. Monet
-  - party_display_name: Democratic
-    order: 1
-    display_name: Ruth A. Hall
-- order: 12
-  display_name: County Commissioner, 2nd District
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Peter A. Olkkola
-  - party_display_name: Democratic
-    order: 1
-    display_name: Dorothy Solomon
-- order: 13
-  display_name: County Commissioner, 3rd District
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: "\"Rod\" Cools"
-  - party_display_name: Democratic
-    order: 1
-    display_name: William Albee
+ballot_info:
+  precinct_list: 
+  - display_name: Albany
+  display_name: General Election
+  contest_list: 
+  - order: 0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      order: 1
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      order: 2
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      order: 3
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      order: 4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - order: 1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      order: 1
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Susan M. Newell
+  - order: 2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      order: 1
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      order: 2
+      display_name: "\"Ken\" Blevens"
+  - order: 3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Jeb Bradley
+    - party_display_name: Democratic
+      order: 1
+      display_name: Carol Shea-Porter
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Robert Kingsbury
+  - order: 4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Raymond S. Burton
+    - party_display_name: Democratic
+      order: 1
+      display_name: J. Michael Cauble
+  - order: 5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: John Gallus
+    - party_display_name: Democratic
+      order: 1
+      display_name: Martha Stroup McLeod
+  - order: 6
+    display_name: State Representative
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Bob\" Bridgham"
+  - order: 7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Christopher Conley
+    - party_display_name: Democratic
+      order: 1
+      display_name: Christopher Conley
+    - party_display_name: Independent
+      order: 2
+      display_name: Daniel J. Poirier
+  - order: 8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Democratic
+      order: 0
+      display_name: Robin J. Gordon
+  - order: 9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Godfrey Howard
+  - order: 10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Ann P. Aiton
+  - order: 11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Gail A. Monet
+    - party_display_name: Democratic
+      order: 1
+      display_name: Ruth A. Hall
+  - order: 12
+    display_name: County Commissioner, 2nd District
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Peter A. Olkkola
+    - party_display_name: Democratic
+      order: 1
+      display_name: Dorothy Solomon
+  - order: 13
+    display_name: County Commissioner, 3rd District
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Rod\" Cools"
+    - party_display_name: Democratic
+      order: 1
+      display_name: William Albee
