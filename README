@@ -11,6 +11,7 @@ sudo gem install authlogic	# authentication
 sudo gem install prawn # PDF
 sudo gem install will_paginate # Pagination
 sudo gem install tpitale-constant_cache # Set up model constants from database
+sudo gem install rubyzip #used for zipping up ballots
 
 rake db:reset ttv:seed ttv:develop # initialize the database
 rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
