@@ -14,10 +14,10 @@ module TTV
 # Is the .yml being imported of type 'ballot_config"? Ballot_config's have less stringent
 # validation and get connected to the 'default built-in district' etc.
     def ballot_config?
-      if @yml_election["Audit-header"].nil?
+      if @yml_election["audit_header"].nil?
         return false
       else
-        return @yml_election["Audit-header"]["type"] == "ballot_config"
+        return @yml_election["audit_header"]["type"] == "ballot_config"
       end
     end
 
@@ -27,32 +27,41 @@ module TTV
       @yml_election = YAML.load(@source)
       ActiveRecord::Base.transaction do
         @dist_set = create_district_set
-        @election = Election.create(:display_name => @yml_election["display_name"])
-        if @yml_election["start_date"].nil?
+        if @yml_election["ballot_info"].nil?
+          puts "No ballot information -- invalid yml"
+          pp @yml_election
+          raise "Invalid YAML election. See console for details."
+        end
+        @election = Election.create(:display_name => @yml_election["ballot_info"]["display_name"])
+        if @yml_election["ballot_info"]["start_date"].nil?
              @election.start_date = Time.now
         else
-          @election.start_date = Date.parse(@yml_election["start_date"].to_s)
+          @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
         end
         @election.district_set = @dist_set
         @election.save
-        if @yml_election["precinct_list"].nil?
+        if @yml_election["ballot_info"]["precinct_list"].nil?
             puts "Invalid yml doesn't contain precinct_list"
             pp @yml_election
             raise "Invalid YAML election. See console for details."
-        elsif @yml_election["contest_list"].nil?          
+        elsif @yml_election["ballot_info"]["contest_list"].nil?          
             puts "Invalid yml doesn't contain contest_list"
             pp @yml_election
             raise "Invalid YAML election. See console for details."
         end
-        @yml_election["precinct_list"].each { |prec| load_precinct prec}            
-        @yml_election["contest_list"].each { |yml_contest| load_contest yml_contest}
-        @yml_election["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["question_list"].nil?
+        @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
+        @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest yml_contest}
+        @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
       end
       @election
     end
 
     def create_district_set
-      DistrictSet.create(:display_name => @yml_election["jurisdiction_display_name"])
+      if ballot_config?
+        DistrictSet.find(0)
+      else
+        DistrictSet.create(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"])
+      end
     end
     
 # load another question into Election object
@@ -77,7 +86,6 @@ module TTV
       @election.questions << new_question
       new_question.save
       dist.questions << new_question
-      
     end
     
 # load another contest into Election object

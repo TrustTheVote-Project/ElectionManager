@@ -14,6 +14,7 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
   # election2 are functionally equivalent
   #  
   def assert_election_equal election1, election2
+    assert_equal election1.display_name, election2.display_name
     assert_contests_equal election1, election2
     assert_districts_equal election1, election2
     assert_questions_equal election1, election2
@@ -100,7 +101,6 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
   end
   
   def xml_to_yaml xml_source
-    puts "XML to YAML -- " + xml_source
     @file = File.new(xml_source)
 
     # Import XML election
@@ -149,7 +149,6 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
   end
   
   def yaml_to_xml yaml_source
-    puts "YAML to XML -- " + yaml_source
     @file = File.new(yaml_source)
 
     # Import YML election
@@ -160,14 +159,6 @@ class YAMLXMLEquivalencyTest < ActiveSupport::TestCase
     # Export XML election
     @xml_export = TTV::ImportExport.export(@yaml_election)
     @xml_election = TTV::ImportExport.import(@xml_export)
-    
-    # TODO: Fix bug where test/elections/nh/* contests are not XML-imported
-    
-    # puts "YAML:"
-    # @yaml_election.contests.each {|contest| puts contest.display_name}
-    
-    # puts "XML:"
-    # @xml_election.contests.each {|contest| puts contest.display_name}
     
     assert_election_equal @yaml_election, @xml_election
   end

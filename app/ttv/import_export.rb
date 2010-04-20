@@ -145,6 +145,8 @@ module TTV
       def initialize(election)
         @election = election
         @xml = nil
+        
+        @ballot_config = @election.district_set == DistrictSet.find(0)
       end
 
       def exportDistrict(district)

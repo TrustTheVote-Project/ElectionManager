@@ -118,8 +118,7 @@ class YAMLImportTest < ActiveSupport::TestCase
     setup do
       afile = File.new("test/elections/xml/101.26.yml")
       importer = TTV::YAMLImport.new(afile)
-      importer.import
-      @e = Election.find_by_display_name("General")
+      @e = importer.import
     end
   
     should "import 1 question" do

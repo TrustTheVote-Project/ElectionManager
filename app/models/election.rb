@@ -55,7 +55,7 @@ class Election < ActiveRecord::Base
       end
     end
   
-    def == compare
+    def comp compare
       equal = true
       equal = false if !equal_contests? compare
       equal = false if !equal_districts? compare
