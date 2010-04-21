@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :roles, :class_name => "UserRole"
 
   def role?(name)
-    name && roles && roles.map(&:name).include?(name)
+    name && roles && roles.map(&:name).include?(name.to_s)
   end
   
   attr_accessible :email, :password, :password_confirmation
