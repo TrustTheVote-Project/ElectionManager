@@ -13,3 +13,7 @@ div.left {
   width: 50%; 
   background-color: green; */
 }
+
+img.ttv-logo {
+  vertical-align:middle;
+}
