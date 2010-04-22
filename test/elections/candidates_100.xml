@@ -41,7 +41,7 @@
     <precinct display_name="Precinct 2" id="2"/>
   </precincts>
 	<body>
-    <contest voting_method="winner" district_idref="1" display_name="Many Candidates" open_seat="1">
+    <contest voting_method="winner_take_all" district_idref="1" display_name="Many Candidates" open_seat="1">
       <candidates>
         <candidate display_name="Clayton Bascom" party="democrat"/>
         <candidate display_name="Dona Barrio" party="republican"/>

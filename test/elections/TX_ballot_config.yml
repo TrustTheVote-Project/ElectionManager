@@ -1,118 +1,127 @@
 --- 
-precinct_list:
-- display_name: Bexar Precinct
-  district_list:
-  - {display_name: City of Sebes, ident: DIST-199}
-  prec_ident: PREC-191
-type: ballot_config
-jurisdiction_display_name: Bexar County, Texas
-display_name: General Election
-start_date: November 9, 2010
-contest_list: 
-- order: 0
-  display_name: United States Representative, District 20
-  district_ident: DIST-199
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Mary Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Patrick Example
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Chester Example
-- order: 1
-  display_name: Governor
-  district_ident: DIST-199
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Linda Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: John Example
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Susan Example
-- order: 2
-  display_name: Lieutenant Governor
-  district_ident: DIST-199
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Joseph Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Barbara Example
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Margaret Example
-- order: 3
-  display_name: Attorney General
-  district_ident: DIST-199
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Sandy Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Edward Example
-  - party_display_name: Libertarian
-    order: 2
-    display_name: Susan Example
-- order: 6
-  display_name: Justice, Supreme Court, Place 5
-  district_ident: DIST-199
-  voting_method: winner
-  candidates: 
-  - party_display_name: Undeclared
-    order: 0
-    display_name: Lois Example
-- order: 7
-  district_ident: DIST-199
-  display_name: State Senator, District 26
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Glenn Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Betty Example
-- order: 8
-  district_ident: DIST-199
-  display_name: State Representative, District 123
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Helen Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Paris Example
-- order: 9
-  district_ident: DIST-199
-  display_name: County Commissioner, Precinct No. 4
-  voting_method: winner
-  candidates: 
-  - party_display_name: Undeclared
-    order: 0
-    display_name: Troy Example
-- order: 10
-  district_ident: DIST-199
-  display_name: Justice of the Peace, Precinct No. 1
-  voting_method: winner
-  candidates: 
-  - party_display_name: Republican
-    order: 0
-    display_name: Michelle Example
-  - party_display_name: Democratic
-    order: 1
-    display_name: Donald Example
-number_of_precincts: 1
+audit_header:
+  file_id: 9F023408009B11DF924800163E3DE33F
+  create_date: 13-JAN-2010 23:30:23
+  type: ballot_config
+  operator: Pito Salas
+  hardware: TTV Tabulator TAB02
+  software: TTV Tabulator 0.1 JUL-1-2008
+  provenance:
+
+ballot_info:
+  precinct_list:
+  - display_name: Bexar Precinct
+    district_list:
+    - {display_name: City of Sebes, ident: DIST-199}
+    prec_ident: PREC-191
+  jurisdiction_display_name: Bexar County, Texas
+  display_name: General Election
+  start_date: November 9, 2010
+  contest_list: 
+  - order: 0
+    display_name: United States Representative, District 20
+    district_ident: DIST-199
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Mary Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Patrick Example
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Chester Example
+  - order: 1
+    display_name: Governor
+    district_ident: DIST-199
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Linda Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: John Example
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Susan Example
+  - order: 2
+    display_name: Lieutenant Governor
+    district_ident: DIST-199
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Joseph Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Barbara Example
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Margaret Example
+  - order: 3
+    display_name: Attorney General
+    district_ident: DIST-199
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Sandy Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Edward Example
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Susan Example
+  - order: 6
+    display_name: Justice, Supreme Court, Place 5
+    district_ident: DIST-199
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Undeclared
+      order: 0
+      display_name: Lois Example
+  - order: 7
+    district_ident: DIST-199
+    display_name: State Senator, District 26
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Glenn Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Betty Example
+  - order: 8
+    district_ident: DIST-199
+    display_name: State Representative, District 123
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Helen Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Paris Example
+  - order: 9
+    district_ident: DIST-199
+    display_name: County Commissioner, Precinct No. 4
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Undeclared
+      order: 0
+      display_name: Troy Example
+  - order: 10
+    district_ident: DIST-199
+    display_name: Justice of the Peace, Precinct No. 1
+    voting_method: winner_take_all
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Michelle Example
+    - party_display_name: Democratic
+      order: 1
+      display_name: Donald Example
+  number_of_precincts: 1
   
