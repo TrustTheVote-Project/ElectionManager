@@ -8,39 +8,40 @@
   <body>
     <div id="container">
       <div id="header">
-        <h1><a href="/"> <%=   image_tag("ttv-100.png")%> TrustTheVote Election Manager</a></h1>
+        <h1>
+        <%= link_to(image_tag("ttv-100.png") + "TrustTheVote Election Manager", :current_jurisdiction) %></h1>
         <div id="user-navigation">
-            <%= user_navigation_helper %>          
-        </div>
-        <div id="main-navigation">
-          <ul class="wat-cf">
-          </ul>
-        </div>
+        <%= user_navigation_helper %>
       </div>
-      <div id="wrapper" class="wat-cf">
-        <div class="flash">
-          <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
+      <div id="main-navigation">
+        <ul class="wat-cf">
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+        <% flash.each do |type, message| -%>
+        <div class="message <%= type %>">
+          <p>
+            <%= message %>
+          </p>
+        </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
             <p>
-              <%= message %>
+              Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
             </p>
           </div>
-          <% end -%>
-        </div>
-        <div id="main">
-          <%= yield %>
-          <div id="footer">
-            <div class="block">
-              <p>
-                Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div id="sidebar">
-          <%= yield :sidebar %>
         </div>
       </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </div>
     </div>
   </body>
 </html>
