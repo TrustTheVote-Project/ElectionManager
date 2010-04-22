@@ -46,13 +46,12 @@ module TTV
         end
         @election
      else
-       
        # =================================
        # = BATCH PROCESSING OF YML FILES =
        # =================================
        yaml_dir = Dir.new(@source)
        yaml_dir.each do |yaml_file|
-         if yaml_file.length > 2
+         if yaml_file[yaml_file.length - 3..yaml_file.length] == 'yml'
             #@new_source = File.new("#{@source}/#{yaml_file}")
             new_file = File.new("#{@source}/#{yaml_file}", "r")
             @yml_election = YAML.load(new_file)

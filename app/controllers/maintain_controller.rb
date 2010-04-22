@@ -32,7 +32,7 @@ class MaintainController < ApplicationController
         return
       end
       if params[:commit] == "XML files"
-            @election = TTV::ImportExport.import(params[:importFile])
+            @election = TTV::ImportExport.import(params[:import_folder_path])
       elsif params[:commit] == "YML files"
         import_handler = TTV::YAMLImport.new(params[:import_folder_path])
         @election = import_handler.import
