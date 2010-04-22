@@ -22,11 +22,17 @@ module ApplicationHelper
       jurisdiction_name = "no jurisdiction selected"
     else
       jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
+      if DistrictSet.find(curr_jurisd).secondary_name.nil?
+        jurisdiction_secondary = ""
+      else
+        jurisdiction_secondary = DistrictSet.find(curr_jurisd).secondary_name
+      end
     end
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
-          content_tag(:li, jurisdiction_name + link_to(" (change)", change_jurisdiction_path)) + 
+          content_tag(:li, jurisdiction_name + link_to(" (change)", change_jurisdiction_path) +
+                      "<br /><small>" + jurisdiction_secondary + "</small>") +
           content_tag(:li) { current_user.email } + 
           content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
           content_tag(:li) { link_to("Logout", logout_path) }
