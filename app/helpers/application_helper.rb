@@ -20,6 +20,7 @@ module ApplicationHelper
     curr_jurisd = session[:jurisdiction]
     if curr_jurisd.nil?
       jurisdiction_name = "no jurisdiction selected"
+      jurisdiction_secondary = ""
     else
       jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
       if DistrictSet.find(curr_jurisd).secondary_name.nil?
