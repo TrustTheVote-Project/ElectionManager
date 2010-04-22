@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GuessUserTest < ActiveSupport::TestCase
+class GuestUserTest < ActiveSupport::TestCase
   context "Guest User" do
     
     setup do
@@ -30,7 +30,7 @@ class GuessUserTest < ActiveSupport::TestCase
         assert @ability.cannot?(:edit, model)
       end
 
-      should "not be allowed to read a #{model}" do
+      should "be allowed to read a #{model}" do
         assert @ability.can?(:read, model)
       end
 
