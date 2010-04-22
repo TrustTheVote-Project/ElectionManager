@@ -1,0 +1,185 @@
+--- 
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-212
+    district_list: []
+
+    display_name: Colebrook
+  question_list: []
+
+  display_name: Colebrook
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-62
+      party_ident: PART-1
+      display_name: Jennifer Horn
+    - party_display_name: Democratic
+      ident: CAND-63
+      party_ident: PART-2
+      display_name: Paul W. Hodes
+    - party_display_name: Libertarian
+      ident: CAND-64
+      party_ident: PART-4
+      display_name: Chester L. Lapointe II
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-14
+      party_ident: PART-1
+      display_name: Raymond S. Burton
+    - party_display_name: Democratic
+      ident: CAND-15
+      party_ident: PART-2
+      display_name: J. Michael Cauble
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-160
+      party_ident: PART-1
+      display_name: John Gallus
+    - party_display_name: Democratic
+      ident: CAND-161
+      party_ident: PART-2
+      display_name: Martha Stroup McLeod
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-881
+      party_ident: PART-1
+      display_name: Laurence M. Rappaport
+    - party_display_name: Republican
+      ident: CAND-882
+      party_ident: PART-1
+      display_name: Eric G. Stohl
+    - party_display_name: Democratic
+      ident: CAND-882
+      party_ident: PART-2
+      display_name: Eric G. Stohl
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-167
+      party_ident: PART-1
+      display_name: Gerald Marcou
+    - party_display_name: Democratic
+      ident: CAND-167
+      party_ident: PART-2
+      display_name: Gerald Marcou
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-168
+      party_ident: PART-1
+      display_name: Keith W. Clouatre
+    - party_display_name: Democratic
+      ident: CAND-169
+      party_ident: PART-2
+      display_name: Robert Mekeel
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-170
+      party_ident: PART-1
+      display_name: Frederick W. King, Sr.
+    - party_display_name: Democratic
+      ident: CAND-170
+      party_ident: PART-2
+      display_name: Frederick W. King, Sr.
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-171
+      party_ident: PART-1
+      display_name: Carole A. Lamirande
+    - party_display_name: Democratic
+      ident: CAND-171
+      party_ident: PART-2
+      display_name: Carole A. Lamirande
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-172
+      party_ident: PART-1
+      display_name: Terri L. Peterson
+    - party_display_name: Democratic
+      ident: CAND-172
+      party_ident: PART-2
+      display_name: Terri L. Peterson
+  - ident: CONT-12
+    display_name: County Commissioner
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-176
+      party_ident: PART-1
+      display_name: Burnham "Bing" Judd
+audit_header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-16T12:19:20-04:00

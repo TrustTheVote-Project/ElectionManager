@@ -15,6 +15,13 @@
 #
 
 class User < ActiveRecord::Base
+  
+  has_many :roles, :class_name => "UserRole"
+
+  def role?(name)
+    name && roles && roles.map(&:name).include?(name)
+  end
+  
   attr_accessible :email, :password, :password_confirmation
   
   acts_as_authentic do |c|
