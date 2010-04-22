@@ -18,8 +18,11 @@ class User < ActiveRecord::Base
   
   has_many :roles, :class_name => "UserRole"
 
-  def role?(name)
-    name && roles && roles.map(&:name).include?(name.to_s)
+  def role?(role_name)
+    # roles.map(&:name)  build an array of role names for this user.
+    # include?(role_name.to_s)  check if the role_name param is in
+    # this array
+    role_name && !roles.blank? && roles.map(&:name).include?(role_name.to_s)
   end
   
   attr_accessible :email, :password, :password_confirmation
