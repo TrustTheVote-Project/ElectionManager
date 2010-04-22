@@ -1,16 +1,10 @@
-Prawn 0.6.3 is required due to incompatibility with 0.7
-http://github.com/sandal/prawn/issues/#issue/79
-
-ElectionManager
-- design/import/export an election
-- register as a user
-
 INSTALL
 # install required gems
 sudo gem install authlogic	# authentication
 sudo gem install prawn # PDF
 sudo gem install will_paginate # Pagination
 sudo gem install tpitale-constant_cache # Set up model constants from database
+sudo gem install redgreen # Nice red-green coloring in terminal for test results
 
 rake db:reset ttv:seed ttv:develop # initialize the database
 rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
@@ -24,6 +18,10 @@ rake ttv:seed RAILS_ENV=test  # loads up our seed data
   
 For this, I had to write custom rake tasks inside lib/db.rake
 http://stackoverflow.com/questions/1097845/how-to-prevent-rake-test-to-call-task-dbtestprepare
+
+GEM COMMENTARY
+Prawn 0.6.3 is required due to incompatibility with 0.7
+http://github.com/sandal/prawn/issues/#issue/79
 
 TODO
 - db transaction logging and viewing
@@ -105,3 +103,4 @@ http://www.oscaralexander.com/tutorials/how-to-make-sexy-buttons-with-css.html
 /activesupport/lib/activesupport/coreext/hash/conversions Hash::to_xml
 Options for generating seed data: http://derekdevries.com/2009/04/13/rails-seed-data/
 Doing i10n in database schemas: http://java.sun.com/blueprints/guidelines/designing_enterprise_applications_2e/i18n/i18n5.html
+
