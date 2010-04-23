@@ -5,7 +5,8 @@ audit_header:
   file_id: 9F023408009B11DF924800163E3DE33F
   operator: Pito Salas
   type: ballot_config
-  create_date: 2010-04-02T11:00:03-04:00jurisdiction_display_name: middleworld
+  create_date: 2010-04-02T11:00:03-04:00
+  jurisdiction_display_name: middleworld
 ballot_info:
   precinct_list: 
   - display_name: Albany
