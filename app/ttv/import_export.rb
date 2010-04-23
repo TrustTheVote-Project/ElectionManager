@@ -142,11 +142,11 @@ module TTV
      else
           xml_dir = Dir.new(@source)
           xml_dir.each do |xml_file|
-          if xml_file[xml_file.length - 3..xml_file.length] == 'xml'
-          file = File.new("#{@source}/#{xml_file}")
-          doc = REXML::Document.new(file)
-          xmlElection = doc.root
-           raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election'
+          if xml_file[xml_file.length - 3..xml_file.length] == 'xml' && xml_file.class == 'File'
+            file = File.new("#{@source}/#{xml_file}")
+            doc = REXML::Document.new(file)
+            xmlElection = doc.root
+            raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election'
             ActiveRecord::Base.transaction do
              district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
              xmlElection.get_elements('precincts')[0])
