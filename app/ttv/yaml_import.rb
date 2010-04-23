@@ -36,17 +36,17 @@ module TTV
           @election.start_date = DateTime.now
           @election.district_set = @dist_set
           @election.save
-          if @yml_election["precinct_list"].nil?
+          if @yml_election["ballot_info"]["precinct_list"].nil?
               puts "Invalid yml doesn't contain precinct_list"
               pp @yml_election
               raise "Invalid YAML election. See console for details."
-          elsif @yml_election["contest_list"].nil?          
+          elsif @yml_election["ballot_info"]["contest_list"].nil?          
               puts "Invalid yml doesn't contain contest_list"
               pp @yml_election
               raise "Invalid YAML election. See console for details."
           end
-          @yml_election["precinct_list"].each { |prec| load_precinct prec}            
-          @yml_election["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+          @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
+          @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest(yml_contest)}
         end
         @election
      else
