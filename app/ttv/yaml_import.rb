@@ -31,7 +31,7 @@ module TTV
         # ============================
         @yml_election = YAML.load(@source)
         ActiveRecord::Base.transaction do
-          @dist_set = load_district_set
+          @dist_set = create_district_set
           @election = Election.create(:display_name => @yml_election["display_name"])
           @election.start_date = DateTime.now
           @election.district_set = @dist_set
@@ -60,7 +60,7 @@ module TTV
             new_file = File.new("#{@source}/#{yaml_file}", "r")
             @yml_election = YAML.load(new_file)
             ActiveRecord::Base.transaction do
-              @dist_set = load_district_set
+              @dist_set = create_district_set
               @election = Election.create(:display_name => @yml_election["display_name"])
               @election.start_date = DateTime.now
               @election.district_set = @dist_set
