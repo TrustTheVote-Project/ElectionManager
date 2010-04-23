@@ -134,34 +134,34 @@
     <contest open_seat="3" district_idref="1" display_name="Cooking" voting_method="ranked">
       <candidates>
         <candidate party="independent" display_name="C1"/>
-        <candidate party="democrat" display_name="C2"/>
+        <candidate party="democratic" display_name="C2"/>
         <candidate party="independent" display_name="C3"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Favorite outfit" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Favorite outfit" voting_method="winner take all">
       <candidates>
-        <candidate party="democrat" display_name="Ghost"/>
+        <candidate party="democratic" display_name="Ghost"/>
         <candidate party="independent" display_name="Pirate"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="1" display_name="House cleaning" voting_method="winner">
+    <contest open_seat="1" district_idref="1" display_name="House cleaning" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Alekx"/>
-        <candidate party="democrat" display_name="Jud"/>
-        <candidate party="democrat" display_name="Lou"/>
+        <candidate party="democratic" display_name="Jud"/>
+        <candidate party="democratic" display_name="Lou"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Roof walk" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Roof walk" voting_method="winner take all">
       <candidates>
-        <candidate party="democrat" display_name="Al daddy"/>
-        <candidate party="democrat" display_name="Mike StG daddy"/>
-        <candidate party="democrat" display_name="Mike daddy"/>
+        <candidate party="democratic" display_name="Al daddy"/>
+        <candidate party="democratic" display_name="Mike StG daddy"/>
+        <candidate party="democratic" display_name="Mike daddy"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Rough housing" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Rough housing" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Foghorn"/>
-        <candidate party="democrat" display_name="Jerry"/>
+        <candidate party="democratic" display_name="Jerry"/>
         <candidate party="independent" display_name="Tom"/>
       </candidates>
     </contest>

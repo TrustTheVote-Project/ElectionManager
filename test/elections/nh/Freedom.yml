@@ -1,0 +1,204 @@
+--- 
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-182
+    district_list: []
+
+    display_name: Freedom
+  question_list: []
+
+  display_name: Freedom
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-11
+      party_ident: PART-1
+      display_name: Jeb Bradley
+    - party_display_name: Democratic
+      ident: CAND-12
+      party_ident: PART-2
+      display_name: Carol Shea-Porter
+    - party_display_name: Libertarian
+      ident: CAND-13
+      party_ident: PART-4
+      display_name: Robert Kingsbury
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-14
+      party_ident: PART-1
+      display_name: Raymond S. Burton
+    - party_display_name: Democratic
+      ident: CAND-15
+      party_ident: PART-2
+      display_name: J. Michael Cauble
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-69
+      party_ident: PART-1
+      display_name: William P. Denley
+    - party_display_name: Democratic
+      ident: CAND-70
+      party_ident: PART-2
+      display_name: "\"Bud\" Martin"
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-99
+      party_ident: PART-1
+      display_name: Mark McConkey
+    - party_display_name: Republican
+      ident: CAND-100
+      party_ident: PART-1
+      display_name: Donald "Don" McGarity
+    - party_display_name: Republican
+      ident: CAND-101
+      party_ident: PART-1
+      display_name: John E. Roberts
+    - party_display_name: Democratic
+      ident: CAND-102
+      party_ident: PART-2
+      display_name: Susan Wiley
+    - party_display_name: Democratic
+      ident: CAND-103
+      party_ident: PART-2
+      display_name: Howard N. Cunningham
+    - party_display_name: Democratic
+      ident: CAND-104
+      party_ident: PART-2
+      display_name: Virginia Heard
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-79
+      party_ident: PART-1
+      display_name: Christopher Conley
+    - party_display_name: Democratic
+      ident: CAND-79
+      party_ident: PART-2
+      display_name: Christopher Conley
+    - party_display_name: Independent
+      ident: CAND-80
+      party_ident: PART-3
+      display_name: Daniel J. Poirier
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Democratic
+      ident: CAND-81
+      party_ident: PART-2
+      display_name: Robin J. Gordon
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-82
+      party_ident: PART-1
+      display_name: Godfrey Howard
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-83
+      party_ident: PART-1
+      display_name: Ann P. Aiton
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-84
+      party_ident: PART-1
+      display_name: Gail A. Monet
+    - party_display_name: Democratic
+      ident: CAND-85
+      party_ident: PART-2
+      display_name: Ruth A. Hall
+  - ident: CONT-14
+    display_name: County Commissioner, 2nd District
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-86
+      party_ident: PART-1
+      display_name: Peter A. Olkkola
+    - party_display_name: Democratic
+      ident: CAND-87
+      party_ident: PART-2
+      display_name: Dorothy Solomon
+  - ident: CONT-15
+    display_name: County Commissioner, 3rd District
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-88
+      party_ident: PART-1
+      display_name: "\"Rod\" Cools"
+    - party_display_name: Democratic
+      ident: CAND-89
+      party_ident: PART-2
+      display_name: William Albee
+audit_header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-16T12:19:20-04:00

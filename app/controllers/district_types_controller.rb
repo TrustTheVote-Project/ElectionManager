@@ -1,7 +1,7 @@
 class DistrictTypesController < ApplicationController
 
   def index
-    @district_types = DistrictType.all
+    @district_types = DistrictType.paginate(:per_page => 10, :page => params[:page])
   end
 
   def show

@@ -1,5 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
  
+# 'new' UI paths all start with '/n/'
+#
+  map.juris_elections "/n/", :controller => :jurisd_elections, :action => :list
+  map.set_jurisdiction "/n/set_jurisdiction", :controller => :jurisd_elections, :action => :set_jurisdiction
+  
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates
   map.resources :districts
@@ -12,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :contests
   end
   map.resources :parties
   map.resources :precincts

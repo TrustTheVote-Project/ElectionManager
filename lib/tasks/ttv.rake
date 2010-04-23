@@ -11,6 +11,30 @@ namespace :db do
 end
 
 namespace :ttv do
+  desc "Full Reset of DB for development"
+  task :dev_reset => :environment do
+    ENV['RAILS_ENV'] = 'development'
+    Rake::Task['db:reset'].invoke
+    Rake::Task['db:seed'].invoke
+    Rake::Task['ttv:seed'].invoke
+    Rake::Task['ttv:develop'].invoke
+
+ end
+  
+  desc "Full Reset of DB for test"
+  task :test_reset => :environment do
+    RAILS_ENV = 'test'
+    ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
+    Rake::Task['db:schema:load'].execute
+
+    Rake::Task['ttv:seed'].execute
+  end
+  
+  desc "Full Reset of DB for test and development"
+  task :full_reset => ['ttv:dev_reset', 'ttv:test_reset'] do
+  end
+end
+namespace :ttv do
   desc "Seed the database with always fixtures."
   task :seed => :environment do 
     load_fixtures "seed/once"
@@ -21,8 +45,7 @@ namespace :ttv do
   task :develop => :environment do     
     load_fixtures 'seed/develop'
   end
-
-
+  
   private
 
   def load_fixtures(dir)

@@ -11,11 +11,12 @@
 
 class Party < ActiveRecord::Base
 
+  include ConstantCache
 
-  @@xml_ids = ['default', 'american_independent', 'democrat', 'green', 'independent', 'liberitarian', 'peace_and_freedom', 'republican']
+  cache_constants :key => :display_name
 
   def idToXml
-    @@xml_ids[self.id]
+    self.display_name.downcase
   end
   
   validates_presence_of :ident
@@ -24,14 +25,14 @@ class Party < ActiveRecord::Base
   # Make sure that ident is not nil. If it is, create a unique one.
   def before_validation
     if self.blank? || self.ident.blank?
-      self.ident = "party-#{SecureRandom.hex}"
+      self.ident = "party-#{ActiveSupport::SecureRandom.hex}"
       self.save!
     end
   end
 
   def Party.xmlToId(xml)
-    @@xml_ids.each_with_index { |e, i| return i if e == xml}
-    raise "Unknown party #{xml}"
+    raise "unknown party #{xml}" unless const_get(xml.constant_name)
+    const_get(xml.constant_name).id
   end
 
 end

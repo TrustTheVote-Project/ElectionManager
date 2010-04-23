@@ -1,20 +1,17 @@
-<h1>Listing precincts</h1>
-
-<table>
-  <tr>
-    <th>Display name</th>
-  </tr>
-
-<% @precincts.each do |precinct| %>
-  <tr>
-    <td><%=h precinct.display_name %></td>
-    <td><%= link_to 'Show', precinct %></td>
-    <td><%= link_to 'Edit', edit_precinct_path(precinct) %></td>
-    <td><%= link_to 'Destroy', precinct, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New precinct', new_precinct_path %>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active">
+        <%= link_to "#{t("web-app-theme.list", :default => "List")}", precincts_path %>
+      </li>
+      <li>
+        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_precinct_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All") %> Precincts</h2>
+    <%= render :partial => 'precinct_list' %>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
