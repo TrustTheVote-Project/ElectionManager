@@ -1,4 +1,5 @@
 class ActiveSupport::TestCase
+
   def self.setup_user_roles(options={})
     options = {:role_name => 'guest'}.merge(options)
     
@@ -19,7 +20,6 @@ class ActiveSupport::TestCase
     end
     
   end # end setup_users
-  
   
   def self.setup_precincts
     context "valid precincts" do
