@@ -8,7 +8,12 @@
   <body>
     <div id="container">
       <div id="header">
-        <h1><a href="/"> <%=   image_tag("ttv-100.png", :class => "ttv-logo")%> TrustTheVote Election Manager</a></h1>
+        <div style="display:table;width:500px;height:30px;line-height: 160%;">
+          <a href="/"><%=   image_tag("ttv-100.png", :class => "ttv-logo")%> 
+          <div style="display:table-cell;width:500px;height:60px;">
+            <%= header_helper %>
+          </div>
+        </div>
         <div id="user-navigation">
             <%= user_navigation_helper %>          
         </div>

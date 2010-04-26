@@ -15,6 +15,28 @@ module ApplicationHelper
     h(obj.pretty_inspect) +
     '</pre>'
   end
+
+  def header_helper
+    curr_jurisd = session[:jurisdiction]
+    if curr_jurisd.nil?
+      jurisdiction_name = "no jurisdiction selected"
+      jurisdiction_secondary = ""
+    else
+      jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
+      if DistrictSet.find(curr_jurisd).secondary_name.nil?
+        jurisdiction_secondary = ""
+      else
+        jurisdiction_secondary = DistrictSet.find(curr_jurisd).secondary_name
+      end
+    end
+    if current_user()
+      content_tag(:h1, jurisdiction_name +
+                      "<br /><small>" + jurisdiction_secondary + "</small>")
+    else
+      content_tag(:h1, "TTV Election Manager")
+    end
+    
+  end
   
   def user_navigation_helper
     curr_jurisd = session[:jurisdiction]
