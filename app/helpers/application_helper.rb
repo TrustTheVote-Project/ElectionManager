@@ -29,11 +29,11 @@ module ApplicationHelper
         jurisdiction_secondary = DistrictSet.find(curr_jurisd).secondary_name
       end
     end
-    if current_user()
+    if current_user() and jurisdiction_name != "no jurisdiction selected"
       content_tag(:h1, jurisdiction_name +
-                      "<br /><small>" + jurisdiction_secondary + "</small>")
+                      "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
     else
-      content_tag(:h1, "TTV Election Manager")
+      content_tag(:h1, "TTV Election Manager", :class=>"title-header") 
     end
     
   end
