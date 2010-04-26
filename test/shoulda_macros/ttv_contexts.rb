@@ -78,6 +78,39 @@ class ActiveSupport::TestCase
     end # end setup_precinct
   end # end setup_jurisdictions
 
+  def self.setup_contest_requesters
+    
+    setup_jurisdictions do
+
+      context 'valid contest requesters' do
+        
+        setup do
+        # Create contests that where requested by district 0
+
+         open_seat_count = 2
+         voting_method = VotingMethod::WINNER_TAKE_ALL
+        
+          d0 =  District.find_by_display_name("District 0")
+
+          4.times do |i|
+            c = Contest.new(:display_name => "Contest #{i}", :open_seat_count => open_seat_count)
+            c.district = d0
+            c.election = @e1
+            c.voting_method = voting_method
+            c.save!
+            
+          end
+          
+        end # end setup
+        
+        yield
+        
+      end  # end valid contest requesters context
+      
+    end # end setup_jurisdictions
+
+  end # end setup_contest_requesters
+  
   def self.setup_question_requesters
     
     setup_jurisdictions do     
