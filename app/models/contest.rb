@@ -14,8 +14,11 @@
 #
 
 class Contest < ActiveRecord::Base
+  # requesting district
   belongs_to  :district
+  
   belongs_to :election
+  
   belongs_to :voting_method
   
   has_many :candidates, :dependent => :destroy, :order => :display_name
@@ -43,6 +46,14 @@ class Contest < ActiveRecord::Base
   
   def to_s
     "CONTEST #{self.display_name}"
+  end
+
+  
+  def self.contests_for_precinct_election(p, e)
+    d = p.districts_for_election(e)
+    e.contests.map do |c|
+      c if d.include?(c.district)      
+    end.flatten.compact
   end
   
 end
