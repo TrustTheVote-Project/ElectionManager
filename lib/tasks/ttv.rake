@@ -11,6 +11,30 @@ namespace :db do
 end
 
 namespace :ttv do
+  desc "Full Reset of DB for development"
+  task :dev_reset => :environment do
+    ENV['RAILS_ENV'] = 'development'
+    Rake::Task['db:reset'].invoke
+    Rake::Task['db:seed'].invoke
+    Rake::Task['ttv:seed'].invoke
+    Rake::Task['ttv:develop'].invoke
+
+ end
+  
+  desc "Full Reset of DB for test"
+  task :test_reset => :environment do
+    RAILS_ENV = 'test'
+    ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
+    Rake::Task['db:schema:load'].execute
+
+    Rake::Task['ttv:seed'].execute
+  end
+  
+  desc "Full Reset of DB for test and development"
+  task :full_reset => ['ttv:dev_reset', 'ttv:test_reset'] do
+  end
+end
+namespace :ttv do
   desc "Seed the database with always fixtures."
   task :seed => :environment do 
     load_fixtures "seed/once"
@@ -22,20 +46,6 @@ namespace :ttv do
     load_fixtures 'seed/develop'
   end
   
-  desc "Full Reset of DB after changing branches or installation"  
-  task :full_reset => :environment do 
-    puts "db reset"
-    Rake::Task['db:reset'].execute({:RAILS_ENV => "development"})   
-    puts "ttv seed"
-    Rake::Task['ttv:seed'].execute
-    puts "ttv develop"
-    Rake::Task['ttv:develop'].execute
-    puts "db test load"
-    Rake::Task['db:test:load'].execute({:RAILS_ENV => "test"})
-    puts "ttv seed test env"
-    Rake::Task['ttv:seed'].execute({:RAILS_ENV => "test"})
-  end
-
   private
 
   def load_fixtures(dir)

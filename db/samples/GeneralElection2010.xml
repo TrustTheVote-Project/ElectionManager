@@ -131,7 +131,7 @@
     <precinct display_name="People Precinct 20" id="40"/>
   </precincts>
   <body>
-    <contest open_seat="1" district_idref="3" display_name="Appelate Commisioner" voting_method="winner">
+    <contest open_seat="1" district_idref="3" display_name="Appelate Commisioner" voting_method="winner take all">
       <candidates>
         <candidate party="democrat" display_name="Debra &#268;ur&#269;il"/>
         <candidate party="republican" display_name="Ingrid Khan"/>
@@ -141,7 +141,7 @@
         <candidate party="republican" display_name="Pito Simpson"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Appelate Commisioner" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Appelate Commisioner" voting_method="winner take all">
       <candidates>
         <candidate party="republican" display_name="Arnold Shohet"/>
         <candidate party="liberitarian" display_name="Arnold Shohet"/>
@@ -152,9 +152,9 @@
         <candidate party="republican" display_name="Pito Khan"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Appelate Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Appelate Govenor" voting_method="winner take all">
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Appelate Mayor" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Appelate Mayor" voting_method="winner take all">
       <candidates>
         <candidate party="liberitarian" display_name="Debra Khan"/>
         <candidate party="republican" display_name="Gam Simpson"/>
@@ -162,9 +162,9 @@
         <candidate party="independent" display_name="Pito &#268;ur&#269;il"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Attorney Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Attorney Govenor" voting_method="winner take all">
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Attorney Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Attorney Govenor" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Aleks Khan"/>
         <candidate party="liberitarian" display_name="Aleks Toti&#263;"/>
@@ -173,14 +173,14 @@
         <candidate party="independent" display_name="Ingrid Sebes"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Attorney Treasurer" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Attorney Treasurer" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Gam Khan"/>
         <candidate party="republican" display_name="Gam Shohet"/>
         <candidate party="republican" display_name="Ingrid Sebes"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="City Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="City Govenor" voting_method="winner take all">
       <candidates>
         <candidate party="republican" display_name="Aleks Khan"/>
         <candidate party="republican" display_name="Debra Sebes"/>
@@ -192,7 +192,7 @@
         <candidate party="democrat" display_name="Ingrid Toti&#263;"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="3" display_name="Liutenant Commisioner" voting_method="winner">
+    <contest open_seat="1" district_idref="3" display_name="Liutenant Commisioner" voting_method="winner take all">
       <candidates>
         <candidate party="democrat" display_name="Aleks Simpson"/>
         <candidate party="independent" display_name="Aleks Simpson"/>
@@ -204,7 +204,7 @@
         <candidate party="democrat" display_name="John Khan"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Liutenant Controller" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Liutenant Controller" voting_method="winner take all">
       <candidates>
         <candidate party="liberitarian" display_name="John Gorbatchov"/>
         <candidate party="independent" display_name="John &#268;ur&#269;il"/>
@@ -212,24 +212,24 @@
         <candidate party="independent" display_name="John &#268;ur&#269;il"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="3" display_name="Lucky?" voting_method="winner">
+    <contest open_seat="1" district_idref="3" display_name="Lucky?" voting_method="winner take all">
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Secretary Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="2" display_name="Secretary Govenor" voting_method="winner take all">
       <candidates>
         <candidate party="democrat" display_name="Debra Khan"/>
         <candidate party="liberitarian" display_name="Gam &#268;ur&#269;il"/>
         <candidate party="independent" display_name="John Simpson"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="3" display_name="Secretary Govenor" voting_method="winner">
+    <contest open_seat="1" district_idref="3" display_name="Secretary Govenor" voting_method="winner take all">
       <candidates>
         <candidate party="independent" display_name="Ingrid Khan"/>
         <candidate party="liberitarian" display_name="John &#268;ur&#269;il"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Secretary Treasurer" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="Secretary Treasurer" voting_method="winner take all">
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="State Commisioner" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="State Commisioner" voting_method="winner take all">
       <candidates>
         <candidate party="liberitarian" display_name="Aleks Gorbatchov"/>
         <candidate party="republican" display_name="Debra Sebes"/>
@@ -240,9 +240,9 @@
         <candidate party="liberitarian" display_name="John Toti&#263;"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="State Controller" voting_method="winner">
+    <contest open_seat="1" district_idref="4" display_name="State Controller" voting_method="winner take all">
     </contest>
-    <contest open_seat="1" district_idref="3" display_name="State Mayor" voting_method="winner">
+    <contest open_seat="1" district_idref="3" display_name="State Mayor" voting_method="winner take all">
     </contest>
     <question district_idref="1" display_name="State Initiative Measure 985">
       <text>

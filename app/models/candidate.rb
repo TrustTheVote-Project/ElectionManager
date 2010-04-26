@@ -34,7 +34,7 @@ class Candidate < ActiveRecord::Base
   
   # default values, should not be all republican/democrat
   def after_initialize
-    write_attribute(:party_id, rand(3)) if !party_id
+  #  write_attribute(:party_id, rand(3)) if !party_id
   end
   
   def validate

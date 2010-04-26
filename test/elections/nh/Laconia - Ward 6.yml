@@ -1,0 +1,213 @@
+--- 
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-10
+    district_list: []
+
+    display_name: Laconia - Ward 6
+  question_list: []
+
+  display_name: Laconia - Ward 6
+  contest_list: 
+  - ident: CONT-0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-0
+      party_ident: PART-1
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      ident: CAND-1
+      party_ident: PART-2
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      ident: CAND-2
+      party_ident: PART-3
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      ident: CAND-3
+      party_ident: PART-4
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      ident: CAND-4
+      party_ident: PART-4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - ident: CONT-1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-5
+      party_ident: PART-1
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      ident: CAND-6
+      party_ident: PART-2
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      ident: CAND-7
+      party_ident: PART-4
+      display_name: Susan M. Newell
+  - ident: CONT-2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-8
+      party_ident: PART-1
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      ident: CAND-9
+      party_ident: PART-2
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      ident: CAND-10
+      party_ident: PART-4
+      display_name: "\"Ken\" Blevens"
+  - ident: CONT-3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-11
+      party_ident: PART-1
+      display_name: Jeb Bradley
+    - party_display_name: Democratic
+      ident: CAND-12
+      party_ident: PART-2
+      display_name: Carol Shea-Porter
+    - party_display_name: Libertarian
+      ident: CAND-13
+      party_ident: PART-4
+      display_name: Robert Kingsbury
+  - ident: CONT-4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-14
+      party_ident: PART-1
+      display_name: Raymond S. Burton
+    - party_display_name: Democratic
+      ident: CAND-15
+      party_ident: PART-2
+      display_name: J. Michael Cauble
+  - ident: CONT-5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-16
+      party_ident: PART-1
+      display_name: Gregory J. Knytych
+    - party_display_name: Democratic
+      ident: CAND-17
+      party_ident: PART-2
+      display_name: Kathleen Sgambati
+  - ident: CONT-6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-43
+      party_ident: PART-1
+      display_name: John A. Veazey
+    - party_display_name: Republican
+      ident: CAND-44
+      party_ident: PART-1
+      display_name: James "Olie" Anderson
+    - party_display_name: Republican
+      ident: CAND-45
+      party_ident: PART-1
+      display_name: Thomas "Tom" Brown, Jr.
+    - party_display_name: Republican
+      ident: CAND-46
+      party_ident: PART-1
+      display_name: Glenn E. Dewhirst
+    - party_display_name: Republican
+      ident: CAND-47
+      party_ident: PART-1
+      display_name: "\"Don\" Flanders"
+    - party_display_name: Democratic
+      ident: CAND-48
+      party_ident: PART-2
+      display_name: Judith T. Reever
+    - party_display_name: Democratic
+      ident: CAND-49
+      party_ident: PART-2
+      display_name: Richard T. Stuart
+    - party_display_name: Democratic
+      ident: CAND-50
+      party_ident: PART-2
+      display_name: Edwin Allard
+    - party_display_name: Democratic
+      ident: CAND-51
+      party_ident: PART-2
+      display_name: Benjamin Arsenault
+    - party_display_name: Democratic
+      ident: CAND-52
+      party_ident: PART-2
+      display_name: Beth Arsenault
+  - ident: CONT-7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-31
+      party_ident: PART-1
+      display_name: Craig Wiggin
+    - party_display_name: Democratic
+      ident: CAND-31
+      party_ident: PART-2
+      display_name: Craig Wiggin
+  - ident: CONT-8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-32
+      party_ident: PART-1
+      display_name: James M. Carroll
+    - party_display_name: Democratic
+      ident: CAND-32
+      party_ident: PART-2
+      display_name: James M. Carroll
+  - ident: CONT-9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-33
+      party_ident: PART-1
+      display_name: Michael G. Muzzey
+  - ident: CONT-10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-34
+      party_ident: PART-1
+      display_name: Barbara R. Luther
+    - party_display_name: Democratic
+      ident: CAND-35
+      party_ident: PART-2
+      display_name: Gail Morrison
+  - ident: CONT-11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-36
+      party_ident: PART-1
+      display_name: Karen H. Brickner
+    - party_display_name: Democratic
+      ident: CAND-37
+      party_ident: PART-2
+      display_name: Lynn R. Chong
+  - ident: CONT-12
+    display_name: County Commissioner
+    candidates: 
+    - party_display_name: Republican
+      ident: CAND-53
+      party_ident: PART-1
+      display_name: Franklin T. Tilton
+    - party_display_name: Democratic
+      ident: CAND-54
+      party_ident: PART-2
+      display_name: Edward D. Philpot
+audit_header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: ballot_config
+  create_date: 2010-04-16T12:19:20-04:00

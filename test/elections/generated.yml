@@ -1,4 +1,4 @@
-Audit-header:
+audit_header:
   file_id: 9F023408009B11DF924800163E3DE33F
   create_date: 13-JAN-2010 23:30:23
   type: jurisdiction_slate
@@ -7,157 +7,157 @@ Audit-header:
   software: TTV Tabulator 0.1 JUL-1-2008
   provenance: 
 
-
-contest_list:
-- candidates:
-  - {count: 0, display_name: Holly Nash, ident: CAND-793, party_ident: PART-1}
-  - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_ident: PART-6}
-  - {count: 0, display_name: Ralph Roth, ident: CAND-711, party_ident: PART-9}
-  - {count: 0, display_name: Bernard Saunders, ident: CAND-698, party_ident: PART-1}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: Rep8thDistrict
-  display_name: Representative in Congress
-  voting_method: winner_take_all
-  district_ident: DIST-2
-- candidates:
-  - {count: 0, display_name: Lois Pickett, ident: CAND-642, party_ident: PART-5}
-  - {count: 0, display_name: Jeremy Morales, ident: CAND-690, party_ident: PART-9}
-  - {count: 0, display_name: Jonathan Stone, ident: CAND-686, party_ident: PART-5}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: StateRep8thHouse
-  display_name: State Representative1
-  voting_method: ranked
-  district_ident: DIST-4
-- candidates:
-  - {count: 0, display_name: Ashley Lucas, ident: CAND-337, party_ident: PART-5}
-  - {count: 0, display_name: Ethel Norton, ident: CAND-806, party_ident: PART-9}
-  - {count: 0, display_name: Lucille Callahan, ident: CAND-929, party_ident: PART-8}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: StateRep4thHouse
-  display_name: State Representative2
-  district_ident: DIST-2
-- candidates:
-  - {count: 0, display_name: Olga Harding, ident: CAND-481, party_ident: PART-9}
-  - {count: 0, display_name: Willie Davis, ident: CAND-931, party_ident: PART-6}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: StateRep1stHouse
-  display_name: State Representative3
-  district_ident: DIST-1
-- candidates:
-  - {count: 0, display_name: Valerie Pittman, ident: CAND-251, party_ident: PART-7}
-  - {count: 0, display_name: Pamela Abbott, ident: CAND-376, party_ident: PART-7}
-  - {count: 0, display_name: Calvin Golden, ident: CAND-724, party_ident: PART-1}
-  - {count: 0, display_name: Rick Cummings, ident: CAND-581, party_ident: PART-7}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: StateRep6thHouse
-  display_name: State Representative
-  district_ident: DIST-3
-- candidates:
-  - {count: 0, display_name: Claire Sykes, ident: CAND-522, party_ident: PART-3}
-  - {count: 0, display_name: Elmer Powell, ident: CAND-220, party_ident: PART-5}
-  - {count: 0, display_name: Sylvia Cooley, ident: CAND-757, party_ident: PART-5}
-  - {count: 0, display_name: Erik Flowers, ident: CAND-648, party_ident: PART-6}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: JustSupCrt
-  display_name: Supreme Court Justice
-  district_ident: DIST-3
-- candidates:
-  - {count: 0, display_name: Jared Grimes, ident: CAND-991, party_ident: PART-7}
-  - {count: 0, display_name: Dwayne Baker, ident: CAND-776, party_ident: PART-4}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: Rep9thDistrict
-  display_name: Representative in Congress
-  district_ident: DIST-2
-- candidates:
-  - {count: 0, display_name: Chris Patton, ident: CAND-518, party_ident: PART-9}
-  - {count: 0, display_name: Clifford Guthrie, ident: CAND-875, party_ident: PART-9}
-  - {count: 0, display_name: Kelly Livingston, ident: CAND-400, party_ident: PART-9}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: StateRep5thHouse
-  display_name: State Representative
-  district_ident: DIST-2
-- candidates:
-  - {count: 0, display_name: Bobby Olson, ident: CAND-886, party_ident: PART-9}
-  - {count: 0, display_name: Dan Dillon, ident: CAND-771, party_ident: PART-1}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: Rep1stDistrict
-  display_name: Representative in Congress
-  district_ident: DIST-1
-- candidates:
-  - {count: 0, display_name: Marshall Walsh, ident: CAND-218, party_ident: PART-9}
-  - {count: 0, display_name: Natalie Norris, ident: CAND-859, party_ident: PART-6}
-  - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
-  contest_ident: Rep2ndDistrict
-  display_name: Representative in Congress
-  district_ident: DIST-2
-display_name: 2012 Presidential
-start_date: November 9, 2010
-number_of_precincts: 8
-precinct_list:
-- display_name: 1338
-  district_list:
-  - {display_name: City of Random, ident: DIST-1}
-  - {display_name: State House District 11, ident: DIST-3}
-  prec_id: PREC-1
-  registered_voters: 940
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-1}
-- display_name: 1296
-  district_list:
-  - {display_name: City of Random, ident: DIST-1}
-  - {display_name: State House District 12, ident: DIST-4}
-  prec_id: PREC-2
-  registered_voters: 1080
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-2}
-- display_name: 1080
-  district_list:
-  - {display_name: City of Random, ident: DIST-1}
-  - {display_name: Random Creek Drainage District, ident: DIST-2}
-  - {display_name: State House District 12, ident: DIST-4}
-  prec_id: PREC-3
-  registered_voters: 972
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-3}
-- display_name: 5567
-  district_list:
-  - {display_name: State House District 11, ident: DIST-3}
-  prec_id: PREC-4
-  registered_voters: 991
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-4}
-- display_name: 9523
-  district_list:
-  - {display_name: Random Creek Drainage District, ident: DIST-2}
-  - {display_name: State House District 11, ident: DIST-3}
-  prec_id: PREC-5
-  registered_voters: 932
-  voting places:
-  - {ballot_counters: 5, ident: VLPC-5}
-- display_name: 7765
-  district_list:
-  - {display_name: City of Random, ident: DIST-1}
-  - {display_name: Random Creek Drainage District, ident: DIST-2}
-  - {display_name: State House District 12, ident: DIST-4}
-  prec_id: PREC-6
-  registered_voters: 931
-  voting places:
-  - {ballot_counters: 4, ident: VLPC-6}
-- display_name: 7407
-  district_list:
-  - {display_name: Random Creek Drainage District, ident: DIST-2}
-  prec_id: PREC-7
-  registered_voters: 975
-  voting places:
-  - {ballot_counters: 1, ident: VLPC-7}
-- display_name: 8193
-  district_list:
-  - {display_name: State House District 12, ident: DIST-4}
-  prec_id: PREC-8
-  registered_voters: 907
-  voting places:
-  - {ballot_counters: 3, ident: VLPC-8}
-registered_voters: 7728
-type: jurisdiction_slate
-jurisdiction_display_name: Middleworld County
-vote_type: 'NULL'
+ballot_info:
+  contest_list:
+  - candidates:
+    - {count: 0, display_name: Holly Nash, ident: CAND-793, party_ident: PART-1}
+    - {count: 0, display_name: Kristin Curtis, ident: CAND-651, party_ident: PART-6}
+    - {count: 0, display_name: Ralph Roth, ident: CAND-711, party_ident: PART-9}
+    - {count: 0, display_name: Bernard Saunders, ident: CAND-698, party_ident: PART-1}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: Rep8thDistrict
+    display_name: Representative in Congress
+    voting_method: winner_take_all
+    district_ident: DIST-2
+  - candidates:
+    - {count: 0, display_name: Lois Pickett, ident: CAND-642, party_ident: PART-5}
+    - {count: 0, display_name: Jeremy Morales, ident: CAND-690, party_ident: PART-9}
+    - {count: 0, display_name: Jonathan Stone, ident: CAND-686, party_ident: PART-5}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: StateRep8thHouse
+    display_name: State Representative1
+    voting_method: ranked
+    district_ident: DIST-4
+  - candidates:
+    - {count: 0, display_name: Ashley Lucas, ident: CAND-337, party_ident: PART-5}
+    - {count: 0, display_name: Ethel Norton, ident: CAND-806, party_ident: PART-9}
+    - {count: 0, display_name: Lucille Callahan, ident: CAND-929, party_ident: PART-8}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: StateRep4thHouse
+    display_name: State Representative2
+    district_ident: DIST-2
+  - candidates:
+    - {count: 0, display_name: Olga Harding, ident: CAND-481, party_ident: PART-9}
+    - {count: 0, display_name: Willie Davis, ident: CAND-931, party_ident: PART-6}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: StateRep1stHouse
+    display_name: State Representative3
+    district_ident: DIST-1
+  - candidates:
+    - {count: 0, display_name: Valerie Pittman, ident: CAND-251, party_ident: PART-7}
+    - {count: 0, display_name: Pamela Abbott, ident: CAND-376, party_ident: PART-7}
+    - {count: 0, display_name: Calvin Golden, ident: CAND-724, party_ident: PART-1}
+    - {count: 0, display_name: Rick Cummings, ident: CAND-581, party_ident: PART-7}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: StateRep6thHouse
+    display_name: State Representative
+    district_ident: DIST-3
+  - candidates:
+    - {count: 0, display_name: Claire Sykes, ident: CAND-522, party_ident: PART-3}
+    - {count: 0, display_name: Elmer Powell, ident: CAND-220, party_ident: PART-5}
+    - {count: 0, display_name: Sylvia Cooley, ident: CAND-757, party_ident: PART-5}
+    - {count: 0, display_name: Erik Flowers, ident: CAND-648, party_ident: PART-6}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: JustSupCrt
+    display_name: Supreme Court Justice
+    district_ident: DIST-3
+  - candidates:
+    - {count: 0, display_name: Jared Grimes, ident: CAND-991, party_ident: PART-7}
+    - {count: 0, display_name: Dwayne Baker, ident: CAND-776, party_ident: PART-4}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: Rep9thDistrict
+    display_name: Representative in Congress
+    district_ident: DIST-2
+  - candidates:
+    - {count: 0, display_name: Chris Patton, ident: CAND-518, party_ident: PART-9}
+    - {count: 0, display_name: Clifford Guthrie, ident: CAND-875, party_ident: PART-9}
+    - {count: 0, display_name: Kelly Livingston, ident: CAND-400, party_ident: PART-9}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: StateRep5thHouse
+    display_name: State Representative
+    district_ident: DIST-2
+  - candidates:
+    - {count: 0, display_name: Bobby Olson, ident: CAND-886, party_ident: PART-9}
+    - {count: 0, display_name: Dan Dillon, ident: CAND-771, party_ident: PART-1}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: Rep1stDistrict
+    display_name: Representative in Congress
+    district_ident: DIST-1
+  - candidates:
+    - {count: 0, display_name: Marshall Walsh, ident: CAND-218, party_ident: PART-9}
+    - {count: 0, display_name: Natalie Norris, ident: CAND-859, party_ident: PART-6}
+    - {count: 0, display_name: Write-In Votes, ident: CAND-000, party_ident: PART-0}
+    contest_ident: Rep2ndDistrict
+    display_name: Representative in Congress
+    district_ident: DIST-2
+  display_name: 2012 Presidential
+  start_date: November 9, 2010
+  number_of_precincts: 8
+  precinct_list:
+  - display_name: 1338
+    district_list:
+    - {display_name: City of Random, ident: DIST-1}
+    - {display_name: State House District 11, ident: DIST-3}
+    prec_id: PREC-1
+    registered_voters: 940
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-1}
+  - display_name: 1296
+    district_list:
+    - {display_name: City of Random, ident: DIST-1}
+    - {display_name: State House District 12, ident: DIST-4}
+    prec_id: PREC-2
+    registered_voters: 1080
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-2}
+  - display_name: 1080
+    district_list:
+    - {display_name: City of Random, ident: DIST-1}
+    - {display_name: Random Creek Drainage District, ident: DIST-2}
+    - {display_name: State House District 12, ident: DIST-4}
+    prec_id: PREC-3
+    registered_voters: 972
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-3}
+  - display_name: 5567
+    district_list:
+    - {display_name: State House District 11, ident: DIST-3}
+    prec_id: PREC-4
+    registered_voters: 991
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-4}
+  - display_name: 9523
+    district_list:
+    - {display_name: Random Creek Drainage District, ident: DIST-2}
+    - {display_name: State House District 11, ident: DIST-3}
+    prec_id: PREC-5
+    registered_voters: 932
+    voting places:
+    - {ballot_counters: 5, ident: VLPC-5}
+  - display_name: 7765
+    district_list:
+    - {display_name: City of Random, ident: DIST-1}
+    - {display_name: Random Creek Drainage District, ident: DIST-2}
+    - {display_name: State House District 12, ident: DIST-4}
+    prec_id: PREC-6
+    registered_voters: 931
+    voting places:
+    - {ballot_counters: 4, ident: VLPC-6}
+  - display_name: 7407
+    district_list:
+    - {display_name: Random Creek Drainage District, ident: DIST-2}
+    prec_id: PREC-7
+    registered_voters: 975
+    voting places:
+    - {ballot_counters: 1, ident: VLPC-7}
+  - display_name: 8193
+    district_list:
+    - {display_name: State House District 12, ident: DIST-4}
+    prec_id: PREC-8
+    registered_voters: 907
+    voting places:
+    - {ballot_counters: 3, ident: VLPC-8}
+  registered_voters: 7728
+  type: jurisdiction_slate
+  jurisdiction_display_name: Middleworld County
+  vote_type: 'NULL'
