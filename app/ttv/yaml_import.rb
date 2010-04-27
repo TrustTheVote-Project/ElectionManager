@@ -32,8 +32,17 @@ module TTV
         @yml_election = YAML.load(@source)
         ActiveRecord::Base.transaction do
           @dist_set = create_district_set
+         if @yml_election["ballot_info"].nil?
+            puts "No ballot information -- invalid yml"
+            pp @yml_election
+            raise "Invalid YAML election. See console for details."
+          end
           @election = Election.create(:display_name => @yml_election["display_name"])
-          @election.start_date = DateTime.now
+         if @yml_election["ballot_info"]["start_date"].nil?
+               @election.start_date = Time.now
+          else
+            @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+          end
           @election.district_set = @dist_set
           @election.save
           if @yml_election["ballot_info"]["precinct_list"].nil?
@@ -47,6 +56,7 @@ module TTV
           end
           @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
           @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+          @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
         end
         @election
      else
@@ -61,8 +71,19 @@ module TTV
             @yml_election = YAML.load(new_file)
             ActiveRecord::Base.transaction do
               @dist_set = create_district_set
+              if @yml_election["ballot_info"].nil?
+                  puts "No ballot information -- invalid yml"
+                  pp @yml_election
+                  raise "Invalid YAML election. See console for details."
+                end
+              
               @election = Election.create(:display_name => @yml_election["display_name"])
-              @election.start_date = DateTime.now
+              if @yml_election["ballot_info"]["start_date"].nil?
+                    @election.start_date = Time.now
+               else
+                 @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+               end
+              
               @election.district_set = @dist_set
               @election.save
               if @yml_election["ballot_info"]["precinct_list"].nil?
@@ -76,6 +97,7 @@ module TTV
               end
               @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
               @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+              @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
             end
             @election
         end
