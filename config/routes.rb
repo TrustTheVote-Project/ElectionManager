@@ -12,12 +12,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ballot_style_templates
 
  
-#
-# 'new' UI paths all start with '/n/'
-#
-  map.juris_elections "/n/", :controller => :elections, :action => :jurisdiction_index
-  map.change_jurisdiction "/n/change_jurisdiction", :controller => :elections, :action => :change_jurisdiction
-  map.set_jurisdiction "/n/set_jurisdiction/:id", :controller => :elections, :action => :set_jurisdiction 
+  map.current_jurisdiction "jurisdiction/current", :controller => :jurisdiction, :action => :index 
+  map.change_jurisdiction "jurisdiction/change_jurisdiction", :controller => :jurisdiction, :action =>  :change_jurisdiction
+  map.set_jurisdiction "jurisdiction/set_jurisdiction/:id", :controller => :jurisdiction, :action => :set_jurisdiction 
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates
@@ -46,8 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
   map.maintain '/maintain/:action', :controller => 'maintain'
-  map.root :controller => "application", :action=>"index"
-  
+  map.root :controller => :jurisdiction , :action=>"index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

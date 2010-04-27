@@ -20,10 +20,10 @@
         <%= link_to precinct.display_name, precinct_path(precinct) %>
       </td>
       <td>
-        tbd
+        <%= precinct_contest_count_helper(precinct, @election) %>
       </td>
       <td>
-        tbd
+        <%= precinct_question_count_helper(precinct, @election) %>
       </td>
       <td class="last">
 		<% if @controller.controller_name == 'elections' %>

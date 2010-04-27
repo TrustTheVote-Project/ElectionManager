@@ -9,27 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420160115) do
 
-  create_table "ballot_style_templates", :force => true do |t|
-    t.string   "display_name"
-    t.integer  "default_voting_method"
-    t.text     "instruction_text"
-    t.string   "state_graphic"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ballot_style"
-    t.integer  "default_language"
-    t.string   "state_signature_image"
-    t.integer  "medium_id"
-  end
+ActiveRecord::Schema.define(:version => 20100420010119) do
 
-  create_table "ballot_styles", :force => true do |t|
-    t.string   "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ballot_style_code"
-  end
+
+create_table "ballot_style_templates", :force => true do |t|
+  t.string   "display_name"
+  t.integer  "default_voting_method"
+  t.text     "instruction_text"
+  t.string   "state_graphic"
+  t.datetime "created_at"
+  t.datetime "updated_at"
+  t.string   "ballot_style"
+  t.integer  "default_language"
+  t.string   "state_signature_image"
+  t.integer  "medium_id"
+end
+
+create_table "ballot_styles", :force => true do |t|
+  t.string   "display_name"
+  t.datetime "created_at"
+  t.datetime "updated_at"
+  t.string   "ballot_style_code"
+end
 
   create_table "candidates", :force => true do |t|
     t.string   "display_name"
@@ -122,10 +124,10 @@ ActiveRecord::Schema.define(:version => 20100420160115) do
   create_table "questions", :force => true do |t|
     t.string   "display_name"
     t.text     "question"
-    t.integer  "district_id"
     t.integer  "election_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "requesting_district_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -137,6 +139,13 @@ ActiveRecord::Schema.define(:version => 20100420160115) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

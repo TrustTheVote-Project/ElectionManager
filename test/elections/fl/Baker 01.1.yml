@@ -1,0 +1,1615 @@
+--- 
+ballot_info: 
+  precinct_list: 
+  - ident: PREC-0
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-5
+      display_name: Fire BA/2
+    display_name: Baker 01.1
+  - ident: PREC-1
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-6
+      display_name: Fire ES/6
+    display_name: Blackman 02.1
+  - ident: PREC-2
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-7
+      display_name: Fire HO/8
+    display_name: Milligan 03.1
+  - ident: PREC-3
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-8
+      display_name: Fire N4/12
+    display_name: Milligan 03.2
+  - ident: PREC-4
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-7
+      display_name: Fire HO/8
+    display_name: Holt 04.1
+  - ident: PREC-5
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-11
+      display_name: Fire AL/1
+    display_name: Laurel Hill 05.1
+  - ident: PREC-6
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: Laurel Hill 05.2
+  - ident: PREC-7
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-11
+      display_name: Fire AL/1
+    display_name: Garden City 06.1
+  - ident: PREC-8
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-12
+      display_name: Fire DO/4
+    display_name: Garden City 06.2
+  - ident: PREC-9
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-13
+      display_name: Fire N2/10
+    display_name: Garden City 06.3
+  - ident: PREC-10
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-13
+      display_name: Fire N2/10
+    - ident: DIST-14
+      display_name: Special HP
+    display_name: Heritage Plantation CDD 06.4
+  - ident: PREC-11
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-11
+      display_name: Fire AL/1
+    display_name: Dorcas 07.1
+  - ident: PREC-12
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-12
+      display_name: Fire DO/4
+    display_name: Dorcas 07.2
+  - ident: PREC-13
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-12
+      display_name: Fire DO/4
+    display_name: Honey Creek 08.1
+  - ident: PREC-14
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-15
+      display_name: Fire N1/9
+    display_name: Honey Creek 08.2
+  - ident: PREC-15
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: Honey Creek 08.3
+  - ident: PREC-16
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-8
+      display_name: Fire N4/12
+    display_name: Yellow River 09.1
+  - ident: PREC-17
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: Yellow River 09.2
+  - ident: PREC-18
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: West Wright 10.1
+  - ident: PREC-19
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: West Wright 10.2
+  - ident: PREC-20
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: West Wright 10.3
+  - ident: PREC-21
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: East Crestview Courthouse 11.1
+  - ident: PREC-22
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-22
+      display_name: Fire N3/11
+    display_name: East Crestview Courthouse 11.2
+  - ident: PREC-23
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: East Crestview Courthouse 11.3
+  - ident: PREC-24
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-8
+      display_name: Fire N4/12
+    display_name: West Crestview 12.1
+  - ident: PREC-25
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: West Crestview 12.2
+  - ident: PREC-26
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-13
+      display_name: Fire N2/10
+    display_name: North Crestview 13.1
+  - ident: PREC-27
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-13
+      display_name: Fire N2/10
+    display_name: North Crestview 13.2
+  - ident: PREC-28
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: North Crestview 13.3
+  - ident: PREC-29
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: North Crestview 13.4
+  - ident: PREC-30
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: West Niceville 14.1
+  - ident: PREC-31
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: West Niceville 14.2
+  - ident: PREC-32
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: West Niceville 14.3
+  - ident: PREC-33
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: West Niceville 14.4
+  - ident: PREC-34
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: West Niceville 14.5
+  - ident: PREC-35
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: Mullet Fairgrounds 14.6
+  - ident: PREC-36
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: Valparaiso (Includes Eglin Dorms & MHP) 15.1
+  - ident: PREC-37
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Shalimar 16.1
+  - ident: PREC-38
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Shalimar 16.2
+  - ident: PREC-39
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Central Wright 17.1
+  - ident: PREC-40
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Central Wright 17.2
+  - ident: PREC-41
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Central Wright 17.3
+  - ident: PREC-42
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Ocean City 18.1
+  - ident: PREC-43
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Ocean City 18.2
+  - ident: PREC-44
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: East FWB 19.1
+  - ident: PREC-45
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: West Destin 20.1
+  - ident: PREC-46
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Mary Esther 21.1
+  - ident: PREC-47
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Mary Esther 21.2
+  - ident: PREC-48
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: South Central FWB 22.1
+  - ident: PREC-49
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Eglin AFB  (Main) 23.1
+  - ident: PREC-50
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: (Poquito) 23.2
+  - ident: PREC-51
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: West FWB 24.1
+  - ident: PREC-52
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: West FWB 24.2
+  - ident: PREC-53
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: North Central Niceville 25.1
+  - ident: PREC-54
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: North Central Niceville 25.2
+  - ident: PREC-55
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: North Central Niceville 25.3
+  - ident: PREC-56
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: North Central Niceville 25.4
+  - ident: PREC-57
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: North Central Niceville 25.5
+  - ident: PREC-58
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    display_name: Seminole 26.1
+  - ident: PREC-59
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    - ident: DIST-31
+      display_name: Special BW
+    display_name: Bluewater MSBU 26.2
+  - ident: PREC-60
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: Maxwell Gunter Rec Area 26.3
+  - ident: PREC-61
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Cinco Bayou 27.1
+  - ident: PREC-62
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: Garniers 28.1
+  - ident: PREC-63
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Golf Course 29.1
+  - ident: PREC-64
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    display_name: Golf Course 29.2
+  - ident: PREC-65
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-32
+      display_name: "Fire  "
+    display_name: Golf Course 29.3
+  - ident: PREC-66
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-26
+      display_name: School board 1
+    display_name: Golf Course 29.4
+  - ident: PREC-67
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-33
+      display_name: Fire OI/16
+    display_name: Okaloosa Island 30.1
+  - ident: PREC-68
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Longwood 31.1
+  - ident: PREC-69
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Longwood 31.2
+  - ident: PREC-70
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Longwood 31.3
+  - ident: PREC-71
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: Ferry Park 32.1
+  - ident: PREC-72
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: Rocky Bayou 33.1
+  - ident: PREC-73
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: Rocky Bayou 33.2
+  - ident: PREC-74
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: Rocky Bayou 33.3
+  - ident: PREC-75
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-34
+      display_name: Fire FL/7
+    display_name: Florosa 34.1
+  - ident: PREC-76
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-35
+      display_name: House 7
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: North Destin 35.1
+  - ident: PREC-77
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: South Niceville 36.1
+  - ident: PREC-78
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: South Niceville 36.2
+  - ident: PREC-79
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Lake Lorraine 37.1
+  - ident: PREC-80
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: Northgate 38.1
+  - ident: PREC-81
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-26
+      display_name: School board 1
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: East Wright 39.1
+  - ident: PREC-82
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    - ident: DIST-31
+      display_name: Special BW
+    display_name: South Bluewater 40.1
+  - ident: PREC-83
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-18
+      display_name: County 2
+    - ident: DIST-27
+      display_name: School board 2
+    display_name: North Central FWB 41.1
+  - ident: PREC-84
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-20
+      display_name: Fire OC/15
+    display_name: New Heights 42.1
+  - ident: PREC-85
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Commando Village, Hurlburt 42.2
+  - ident: PREC-86
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Commando Village, Hurlburt 42.3
+  - ident: PREC-87
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-25
+      display_name: Fire EN/5
+    display_name: South Central Niceville 43.1
+  - ident: PREC-88
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: South Central Niceville 43.2
+  - ident: PREC-89
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    display_name: South Central Niceville 43.3
+  - ident: PREC-90
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: Central Destin 44.1
+  - ident: PREC-91
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-8
+      display_name: Fire N4/12
+    display_name: South Crestview 45.1
+  - ident: PREC-92
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-8
+      display_name: Fire N4/12
+    display_name: South Crestview 45.2
+  - ident: PREC-93
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-2
+      display_name: House 1
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: South Crestview 45.3
+  - ident: PREC-94
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: South Crestview 45.4
+  - ident: PREC-95
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    display_name: North Bluewater 46.1
+  - ident: PREC-96
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    - ident: DIST-31
+      display_name: Special BW
+    display_name: North Bluewater 46.2
+  - ident: PREC-97
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    display_name: North Bluewater 46.3
+  - ident: PREC-98
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-24
+      display_name: School board 5
+    - ident: DIST-30
+      display_name: Fire NB/13
+    - ident: DIST-31
+      display_name: Special BW
+    display_name: North Bluewater 46.4
+  - ident: PREC-99
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Wynnehaven Beach Hurlburt Field (s of 98) 47.1
+  - ident: PREC-100
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Camp Rudder 47.2
+  - ident: PREC-101
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    display_name: Hurlburt Field (n of 98) 47.3
+  - ident: PREC-102
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-21
+      display_name: County 4
+    - ident: DIST-19
+      display_name: School board 3
+    - ident: DIST-34
+      display_name: Fire FL/7
+    display_name: Hurlburt Field (n of 98) 47.4
+  - ident: PREC-103
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-17
+      display_name: House 4
+    - ident: DIST-3
+      display_name: County 3
+    - ident: DIST-26
+      display_name: School board 1
+    display_name: Westwood 48.1
+  - ident: PREC-104
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-35
+      display_name: House 7
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: East Destin  49.1
+  - ident: PREC-105
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-35
+      display_name: House 7
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: East Destin  49.2
+  - ident: PREC-106
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-35
+      display_name: House 7
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: South Destin 50.1
+  - ident: PREC-107
+    district_list: 
+    - ident: DIST-29
+      display_name: Congress 2
+    - ident: DIST-16
+      display_name: Senate 4
+    - ident: DIST-35
+      display_name: House 7
+    - ident: DIST-23
+      display_name: County 5
+    - ident: DIST-27
+      display_name: School board 2
+    - ident: DIST-28
+      display_name: Fire DE/3
+    display_name: South Destin 50.2
+  - ident: PREC-108
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-12
+      display_name: Fire DO/4
+    display_name: Airport Road 51.1
+  - ident: PREC-109
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-15
+      display_name: Fire N1/9
+    display_name: Airport Road 51.2
+  - ident: PREC-110
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    - ident: DIST-22
+      display_name: Fire N3/11
+    display_name: Live Oak 52.1
+  - ident: PREC-111
+    district_list: 
+    - ident: DIST-0
+      display_name: Congress 1
+    - ident: DIST-1
+      display_name: Senate 2
+    - ident: DIST-9
+      display_name: House 5
+    - ident: DIST-10
+      display_name: County 1
+    - ident: DIST-4
+      display_name: School board 4
+    display_name: Live Oak 52.2
+  question_list: []
+
+  display_name: Election
+  contest_list: []
+
+audit_header: 
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  operator: Pito Salas
+  type: jurisdiction_info
+  create_date: 2010-04-16T12:20:13-04:00

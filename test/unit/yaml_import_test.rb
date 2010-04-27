@@ -78,6 +78,7 @@ class YAMLImportTest < ActiveSupport::TestCase
       assert_equal 1, @e.contests.length
       assert_equal "Representative in Congress",@e.contests[0].display_name
       assert_equal "Kristin Curtis", @e.contests[0].candidates[0].display_name
+      assert_equal "Democrat", @e.contests[0].candidates[0].party.display_name
       @c = Election.find_by_display_name("One Contest Election")
       assert_valid @c
     end
@@ -94,6 +95,11 @@ class YAMLImportTest < ActiveSupport::TestCase
       end
     end
     
+    should "have one district with the right ident" do
+      assert_equal 1, @e.districts.length
+      assert_equal "City of Random",@e.districts[0].display_name
+    end
+    
     context "yaml file of type ballot_config" do
       setup do
         afile = File.new("#{RAILS_ROOT}/test/elections/ballot_config.yml")
@@ -107,6 +113,19 @@ class YAMLImportTest < ActiveSupport::TestCase
       end
     end
   end
-end
-
   
+  context "Using 101.26.yml for import" do
+    setup do
+      afile = File.new("test/elections/xml/101.26.yml")
+      importer = TTV::YAMLImport.new(afile)
+      @e = importer.import
+    end
+  
+    should "import 1 question" do
+      assert_equal 1, @e.questions.length
+      assert_equal "State Initiative Measure 1033", @e.questions[0].display_name
+      assert_equal  "Initiative Measure No. 1033 concerns state, county and city revenue. | |This measure would limit growth of certain state, county and city revenue to annual inflation and population growth, not including voter-approved revenue increases. Revenue collected above the limit would reduce property tax levies.  | |Should this measure be enacted into law? Yes [ ] No [ ]",
+                    @e.questions[0].question
+    end
+  end
+end
