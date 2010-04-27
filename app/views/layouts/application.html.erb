@@ -6,47 +6,51 @@
     <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/warehouse/style", :cache => true %>
   </head>
   <body>
-    <div id="container">
-      <div id="header">
-        <table><tr><td>
-          <a href="/"><%=   image_tag("ttv-100.png", :class => "ttv-logo")%></a></td>
-          <td valign="middle"> 
+  <div id="container">
+    <div id="header">
+      <table>
+        <tr>
+          <td>
+            <%= link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdiction) %>
+          </td>
+          <td valign="middle">
             <a href="/"><%= header_helper %></a>
           </td>
-          </tr></table>
-        </div>
-        <div id="user-navigation">
-            <%= user_navigation_helper %>          
-        </div>
-        <div id="main-navigation">
-          <ul class="wat-cf">
-          </ul>
-        </div>
+        </tr>
+      </table>
+    </div>
+    <div id="user-navigation">
+      <%= user_navigation_helper %>
+    </div>
+    <div id="main-navigation">
+      <ul class="wat-cf">
+      </ul>
+    </div>
+  </div>
+  <div id="wrapper" class="wat-cf">
+    <div class="flash">
+      <% flash.each do |type, message| -%>
+      <div class="message <%= type %>">
+        <p>
+          <%= message %>
+        </p>
       </div>
-      <div id="wrapper" class="wat-cf">
-        <div class="flash">
-          <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
-            <p>
-              <%= message %>
-            </p>
-          </div>
-          <% end -%>
-        </div>
-        <div id="main">
-          <%= yield %>
-          <div id="footer">
-            <div class="block">
-              <p>
-                Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div id="sidebar">
-          <%= yield :sidebar %>
+      <% end -%>
+    </div>
+    <div id="main">
+      <%= yield %>
+      <div id="footer">
+        <div class="block">
+          <p>
+            Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
+          </p>
         </div>
       </div>
     </div>
-  </body>
+    <div id="sidebar">
+      <%= yield :sidebar %>
+    </div>
+  </div>
+  </div>
+</body>
 </html>

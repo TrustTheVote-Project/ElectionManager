@@ -54,7 +54,7 @@ module ApplicationHelper
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
-          content_tag(:li, jurisdiction_name + link_to(" (change)", change_jurisdiction_path) +
+          content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdiction_path) +
                       "<br /><small>" + jurisdiction_secondary + "</small>") +
           content_tag(:li) { current_user.email } + 
           content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
