@@ -37,7 +37,7 @@ module TTV
             pp @yml_election
             raise "Invalid YAML election. See console for details."
           end
-          @election = Election.create(:display_name => @yml_election["display_name"])
+          @election = Election.create(:display_name => @yml_election["ballot_info"]["display_name"])
          if @yml_election["ballot_info"]["start_date"].nil?
                @election.start_date = Time.now
           else
@@ -77,7 +77,7 @@ module TTV
                   raise "Invalid YAML election. See console for details."
                 end
               
-              @election = Election.create(:display_name => @yml_election["display_name"])
+              @election = Election.create(:display_name =>@yml_election["ballot_info"]["display_name"])
               if @yml_election["ballot_info"]["start_date"].nil?
                     @election.start_date = Time.now
                else
