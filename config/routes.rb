@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :images
+
   map.resources :media
 
   map.resources :media
@@ -42,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
+  map.image_upload "image_upload", :controller => 'images', :action => 'upload'
   map.maintain '/maintain/:action', :controller => 'maintain'
   map.root :controller => :jurisdiction , :action=>"index"
 

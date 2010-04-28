@@ -9,27 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420010119) do
+ActiveRecord::Schema.define(:version => 20100428184014) do
 
-create_table "ballot_style_templates", :force => true do |t|
-  t.string   "display_name"
-  t.integer  "default_voting_method"
-  t.text     "instruction_text"
-  t.string   "state_graphic"
-  t.datetime "created_at"
-  t.datetime "updated_at"
-  t.string   "ballot_style"
-  t.integer  "default_language"
-  t.string   "state_signature_image"
-  t.integer  "medium_id"
-end
+  create_table "ballot_style_templates", :force => true do |t|
+    t.string   "display_name"
+    t.integer  "default_voting_method"
+    t.text     "instruction_text"
+    t.string   "state_graphic"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ballot_style"
+    t.integer  "default_language"
+    t.string   "state_signature_image"
+    t.integer  "medium_id"
+  end
 
-create_table "ballot_styles", :force => true do |t|
-  t.string   "display_name"
-  t.datetime "created_at"
-  t.datetime "updated_at"
-  t.string   "ballot_style_code"
-end
+  create_table "ballot_styles", :force => true do |t|
+    t.string   "display_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ballot_style_code"
+  end
 
   create_table "candidates", :force => true do |t|
     t.string   "display_name"
@@ -90,6 +90,11 @@ end
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ballot_style_template_id", :default => 0
+  end
+
+  create_table "images", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "languages", :force => true do |t|
