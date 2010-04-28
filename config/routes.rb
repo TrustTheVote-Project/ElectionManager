@@ -1,9 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :media
+
+  map.resources :media
+
+  map.resources :languages
+
+  map.resources :languages
+
+  map.resources :ballot_styles
+
+  map.resources :ballot_style_templates
+
  
-# 'new' UI paths all start with '/n/'
-#
-  map.juris_elections "/n/", :controller => :jurisd_elections, :action => :list
-  map.set_jurisdiction "/n/set_jurisdiction", :controller => :jurisd_elections, :action => :set_jurisdiction
+  map.current_jurisdiction "jurisdiction/current", :controller => :jurisdiction, :action => :index 
+  map.change_jurisdiction "jurisdiction/change_jurisdiction", :controller => :jurisdiction, :action =>  :change_jurisdiction
+  map.set_jurisdiction "jurisdiction/set_jurisdiction/:id", :controller => :jurisdiction, :action => :set_jurisdiction 
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates
@@ -17,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :precincts, :member => { :ballots => :get }, :only => []
     elections.resources :contests
   end
   map.resources :parties
@@ -31,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
   map.maintain '/maintain/:action', :controller => 'maintain'
-  map.root :controller => "application", :action=>"index"
+  map.root :controller => :jurisdiction , :action=>"index"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

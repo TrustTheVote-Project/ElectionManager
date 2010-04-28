@@ -1,0 +1,16 @@
+<h1>Editing medium</h1>
+
+<% form_for(@medium) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @medium %> |
+<%= link_to 'Back', media_path %>

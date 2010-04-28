@@ -124,21 +124,47 @@ module TTV
       end
 
       def import
-        doc = REXML::Document.new @source
-        xmlElection = doc.root
-        raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election'
-        ActiveRecord::Base.transaction do
-          district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
-          xmlElection.get_elements('precincts')[0])
-          @election = Election.create(:display_name => xmlElection.attributes['display_name'],
-          :start_date => xmlElection.attributes['start_date'],
-          :district_set_id => district_set.id)
-          contests = importContests(xmlElection.get_elements('body/contest'))
-          questions = importQuestions(xmlElection.get_elements('body/question'))
-        end 
+          doc = REXML::Document.new @source
+          xmlElection = doc.root
+          raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election' 
+          ActiveRecord::Base.transaction do
+            district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
+            xmlElection.get_elements('precincts')[0])
+            @election = Election.create(:display_name => xmlElection.attributes['display_name'],
+            :start_date => xmlElection.attributes['start_date'],
+            :district_set_id => district_set.id)
+            contests = importContests(xmlElection.get_elements('body/contest'))
+            questions = importQuestions(xmlElection.get_elements('body/question'))
+          end 
         @election
-      end
+     end
+     
+     
+      def import_batch
+       xml_dir = Dir.new(@source)
+       xml_dir.each do |xml_file|
+         if xml_file[xml_file.length - 3..xml_file.length] == 'xml' && xml_file.class == 'File'
+           file = File.new("#{@source}/#{xml_file}")
+           doc = REXML::Document.new(file)
+           xmlElection = doc.root
+           raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election'
+           ActiveRecord::Base.transaction do
+             district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
+             xmlElection.get_elements('precincts')[0])
+             @election = Election.create(:display_name => xmlElection.attributes['display_name'],
+             :start_date => xmlElection.attributes['start_date'],
+             :district_set_id => district_set.id)
+             contests = importContests(xmlElection.get_elements('body/contest'))
+             questions = importQuestions(xmlElection.get_elements('body/question'))
+           end 
+         end
+       end
+       @election
     end
+   
+  end
+    
+  
 
     # exports the election as XML
     class Export

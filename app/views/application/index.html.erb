@@ -1,21 +1,21 @@
-<% content_for :title, "Trust The Vote"%>
-<h2>Welcome to TrustTheVote</h1>
+<% content_for :title, "Trust The Vote" %>
+<h2>
+Welcome to TrustTheVote</h1>
 <% if current_user %>
-	<p>Hola <%= h current_user.email %></p>
-	<p>What would you like to do?</p>
-	<ul class=list>
-		<li><%=link_to "View elections", elections_path %>
-		<li><%=link_to "View districts", districts_path %>
-		<li><%=link_to "View precincts", precincts_path %></li>
-		<li><%=link_to "View contests", contests_path %>
-		<li><%=link_to "View candidates", candidates_path %>
-		<li><%=link_to "View questions", questions_path %>
-		<li><%=link_to "View ballot styles", ballot_styles_path %>
-		<li><%=link_to "Maintainenace Tasks", maintain_path %></li>
 
-	</ul>
+<p>
+  Hola <%= h current_user.email %>
+</p>
+<p>
+  What would you like to do?
+</p>
+<%= render :partial => 'admin_toolbox' %>
 
 <% else %>
-	<p>Welcome to TrustTheVote election management system.</p>
-	<p>Please <%= link_to "Register", new_user_path %>, or <%= link_to "Login", login_path %> to play with it.</p>
+<p>
+  Welcome to TrustTheVote election management system.
+</p>
+<p>
+  Please <%= link_to "Register", new_user_path %>, or <%= link_to "Login", login_path %>to play with it.
+</p>
 <% end %>

@@ -26,7 +26,6 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
-  
 
   def districts_for_election(election)
     districts & election.district_set.districts

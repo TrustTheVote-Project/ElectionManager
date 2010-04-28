@@ -12,6 +12,16 @@ What would you like to maintain?
 			<% end %>	
 		</p>
 	</li>
+	<li>Import Batch for bulk Election load: 
+		<p>
+			<% form_tag ({:action => 'import_batch'}, {:method => 'POST', :multipart => true}) do %>
+				Enter full path to directory containing files: <%= text_field_tag "import_folder_path" %>
+				<br>Import as:
+					<%= submit_tag "XML files" %>	
+					<%= submit_tag "YML files" %>
+			<% end %>	
+		</p>
+	</li>
 	<li>Export for bulk Election dump: 
 		<p>
 			<% form_tag ({:action => 'export_file'}, {:method => 'put', :multipart => true}) do %>

@@ -1,0 +1,14 @@
+default:
+    id: 0
+    code: en
+    display_name: English
+
+spanish:
+    id: 1
+    code: es
+    display_name: Spanish
+    
+chinese:
+    id: 2
+    code: zh
+    display_name: Chinese

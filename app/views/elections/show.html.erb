@@ -13,27 +13,34 @@
     </ul>
   </div>
   <div class="content">
-    <div class="columns wat-cf inner">
-      <div class="column left">
-        <p>
-          <b><%= t("activerecord.attributes.election.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
-          <%= @election.display_name %>
-        </p>
-        <p>
-          <b><%= t("activerecord.attributes.election.district_set_id", :default => t("activerecord.labels.district_set_id", :default => "District set")) %>:</b>
-          <%= @election.district_set_id %>
-        </p>
-        <p>
-          <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>
-          <%= @election.start_date %>
-        </p>
+
+    <div class="inner">
+      <p>
+        <b><%= t("activerecord.attributes.election.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
+        <%= @election.display_name %>
+      </p>
+      <p>
+        <b><%= t("activerecord.attributes.election.district_set_id", :default => t("activerecord.labels.district_set_id", :default => "District set")) %>:</b>
+        <%= @election.district_set_id %>
+      </p>      
+	 <p>
+        <b><%= t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => "Ballot Style Template")) %>:</b>
+       	<% unless @election.ballot_style_template_id == nil %>
+ 			<%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
+		<% end -%>
+      </p>
+      <p>
+        <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>
+        <%= @election.start_date %>
+      </p>
       </div>
       <div class="column right">
         <div class="group">
-          <%= link_to "#{t("web-app-theme.ballot", :default => "All ballots")}", '' %>
+		  <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election)  %> 
         </div>
       </div>
       <br/>
+
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_election_path(@election), :class => "button" %>
         <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", election_path(@election), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
