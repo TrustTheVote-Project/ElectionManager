@@ -13,8 +13,10 @@
 
   <div class="group">
     <% voting_methods = VotingMethod.find(:all, :order => :id) %>
+    <% default_method = VotingMethod.determine_default_voting_method(@contest).to_i if @contest %>
     <%= f.label :voting_method_id, t("activerecord.attributes.contest.voting_method_id", :default => "Voting method"), :class => :label %>
-    <%= f.collection_select :voting_method_id, voting_methods, :id, :display_name %>
+    <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name) unless @contest %>
+    <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name, :selected => default_method) if @contest %>
     <span class="description">Ex: a simple text</span>
   </div>
 
