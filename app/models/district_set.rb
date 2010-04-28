@@ -3,10 +3,11 @@
 #
 # Table name: district_sets
 #
-#  id           :integer         not null, primary key
-#  display_name :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id             :integer         not null, primary key
+#  display_name   :string(255)
+#  secondary_name :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class DistrictSet < ActiveRecord::Base

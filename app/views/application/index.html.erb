@@ -2,6 +2,7 @@
 <h2>
 Welcome to TrustTheVote</h1>
 <% if current_user %>
+
 <p>
   Hola <%= h current_user.email %>
 </p>
@@ -9,6 +10,7 @@ Welcome to TrustTheVote</h1>
   What would you like to do?
 </p>
 <%= render :partial => 'admin_toolbox' %>
+
 <% else %>
 <p>
   Welcome to TrustTheVote election management system.

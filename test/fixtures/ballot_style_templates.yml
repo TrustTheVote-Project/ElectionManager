@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  display_name: MyString
+  default_voting_method: 1
+  instruction_text: MyText
+  state_graphic: MyString
+
+two:
+  display_name: MyString
+  default_voting_method: 1
+  instruction_text: MyText
+  state_graphic: MyString

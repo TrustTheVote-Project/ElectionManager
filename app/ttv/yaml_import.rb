@@ -55,6 +55,48 @@ module TTV
       end
       @election
     end
+    
+    
+    def import_batch
+        @dist_id_map = {}
+        yaml_dir = Dir.new(@source)
+        yaml_dir.each do |yaml_file|
+          if yaml_file[yaml_file.length - 3..yaml_file.length] == 'yml'
+            new_file = File.new("#{@source}/#{yaml_file}", "r")
+            @yml_election = YAML.load(new_file)
+            ActiveRecord::Base.transaction do
+              @dist_set = create_district_set
+              if @yml_election["ballot_info"].nil?
+                puts "No ballot information -- invalid yml"
+                pp @yml_election
+                raise "Invalid YAML election. See console for details."
+              end
+               @election = Election.create(:display_name =>@yml_election["ballot_info"]["display_name"])
+                if @yml_election["ballot_info"]["start_date"].nil?
+                      @election.start_date = Time.now
+                 else
+                   @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+                 end
+
+                @election.district_set = @dist_set
+                @election.save
+                if @yml_election["ballot_info"]["precinct_list"].nil?
+                    puts "Invalid yml doesn't contain precinct_list"
+                    pp @yml_election
+                    raise "Invalid YAML election. See console for details."
+                elsif @yml_election["ballot_info"]["contest_list"].nil?          
+                    puts "Invalid yml doesn't contain contest_list"
+                    pp @yml_election
+                    raise "Invalid YAML election. See console for details."
+                end
+                @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
+                @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+                @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
+                end
+                @election
+          end
+        end
+    end
 
     def create_district_set
       if ballot_config?

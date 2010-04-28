@@ -1,0 +1,45 @@
+<h1>Editing Ballot Style Template</h1>
+
+<% form_for(@ballot_style_template) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>
+  <p>
+    <%= f.label :default_language %><br />
+	<%= f.collection_select(:default_language, Language.all, :id, :display_name) %>
+  </p>
+  <p>
+    <%= f.label :default_voting_method %><br />
+	<%= f.collection_select(:default_voting_method, VotingMethod.all, :id, :display_name) %>
+  </p>
+	<p>
+    <%= f.label :ballot_style %><br />
+	<%= f.collection_select(:ballot_style, BallotStyle.all, :id, :display_name) %>
+  </p>	
+	<p>
+    <%= f.label :medium_id%><br />
+	<%= f.collection_select(:medium_id, Medium.all, :id, :display_name) %>
+  </p>
+  <p>
+    <%= f.label :instruction_text %><br />
+    <%= f.text_area :instruction_text %>
+  </p>
+  <p>
+    <%= f.label :state_graphic %><br />
+    <%= f.text_field :state_graphic %>
+  </p>  
+	<p>
+    <%= f.label :state_signature_image %><br />
+    <%= f.text_field :state_signature_image %>
+  </p>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ballot_style_template %> |
+<%= link_to 'Back', ballot_style_templates_path %>
