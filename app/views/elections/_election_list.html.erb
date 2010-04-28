@@ -27,7 +27,7 @@
             <%= election.start_date.to_date.to_formatted_s(:long)  %>
           </td>
           <td>
-            <%= election.district_set.precincts.count %>
+            <%= election.district_set.precincts.size %>
           </td>
           <td>
             <%= election.contests.count %>  

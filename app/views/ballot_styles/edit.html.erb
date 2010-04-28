@@ -1,0 +1,20 @@
+<h1>Editing ballot_style</h1>
+
+<% form_for(@ballot_style) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>  
+	<p>
+    <%= f.label :ballot_style_code %><br />
+    <%= f.text_field :ballot_style_code %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ballot_style %> |
+<%= link_to 'Back', ballot_styles_path %>

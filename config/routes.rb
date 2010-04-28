@@ -1,4 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :media
+
+  map.resources :media
+
+  map.resources :languages
+
+  map.resources :languages
+
+  map.resources :ballot_styles
+
+  map.resources :ballot_style_templates
+
  
   map.current_jurisdiction "jurisdiction/current", :controller => :jurisdiction, :action => :index 
   map.change_jurisdiction "jurisdiction/change_jurisdiction", :controller => :jurisdiction, :action =>  :change_jurisdiction
@@ -16,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
       districts.resources :questions, :only => [:new]
     end
     elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :precincts, :member => { :ballots => :get }, :only => []
     elections.resources :contests
   end
   map.resources :parties
