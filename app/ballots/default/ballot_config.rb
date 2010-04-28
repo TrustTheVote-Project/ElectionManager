@@ -512,7 +512,7 @@ module DefaultBallot
       @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
       @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
       @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
-    end
+    end 
 
     def render_frame(flow_rect)
       bar_width = 18
