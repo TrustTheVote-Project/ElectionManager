@@ -1,10 +1,23 @@
 db/*.sqlite3
 db/translations/*.yml
 log/*.log
-tmp/*
+tmp/cache
+tmp/pids
+tmp/sessions
+tmp/sockets
 test/tmp/*.pdf
 .DS_Store
 .loadpath
+<<<<<<< HEAD
+<<<<<<< HEAD
+*~
+*#*
+=======
+.tmp_*
+
+>>>>>>> web-theme
+=======
 .tmp_*
 *~
 *#*
+>>>>>>> web-theme

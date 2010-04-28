@@ -1,11 +1,7 @@
 INSTALL
 # install required gems
-sudo gem install authlogic	# authentication
-sudo gem install prawn # PDF
-sudo gem install will_paginate # Pagination
-sudo gem install tpitale-constant_cache # Set up model constants from database
-sudo gem install redgreen # Nice red-green coloring in terminal for test results
-
+<<<<<<< HEAD
+rake gems:install
 rake db:reset ttv:seed ttv:develop # initialize the database
 rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
 rake test # run tests
