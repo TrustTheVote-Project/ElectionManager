@@ -8,16 +8,8 @@ tmp/sockets
 test/tmp/*.pdf
 .DS_Store
 .loadpath
-<<<<<<< HEAD
-<<<<<<< HEAD
 *~
 *#*
-=======
 .tmp_*
+tmp/ballot_zips/*
 
->>>>>>> web-theme
-=======
-.tmp_*
-*~
-*#*
->>>>>>> web-theme
