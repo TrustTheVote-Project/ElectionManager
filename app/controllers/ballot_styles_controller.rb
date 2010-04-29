@@ -2,7 +2,7 @@ class BallotStylesController < ApplicationController
   # GET /ballot_styles
   # GET /ballot_styles.xml
   def index
-    @ballot_styles = BallotStyle.all
+    @ballot_styles = BallotStyle.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

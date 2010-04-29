@@ -1,19 +1,18 @@
-<h1>New district_set</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", district_sets_path  %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_set_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  DistrictSet</h2>
+    <div class="inner">
+      <% form_for :district_set, :url => district_sets_path, :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@district_set) do |f| %>
-  <%= render_error_messages(@district_set) %>
-
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>
-  <p>
-    <%= f.label :secondary_name %><br />
-    <%= f.text_field :secondary_name %>
-  </p>  
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', district_sets_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
