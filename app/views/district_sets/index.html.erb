@@ -1,20 +1,50 @@
-<h1>Listing district_sets</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", district_sets_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_district_set_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> DistrictSets</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.district_set.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
+</th>
+					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @district_sets.each do |district_set| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= district_set.id %>
+          </td>
+										<td>
+						<%= link_to district_set.display_name, district_set_path(district_set) %>
+					</td>
+										<td>
+            <%= district_set.created_at %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", district_set_path(district_set) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_set_path(district_set) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", district_set_path(district_set), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @district_sets  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Display name</th>
-  </tr>
-
-<% @district_sets.each do |district_set| %>
-  <tr>
-    <td><%=h district_set.display_name %></td>
-    <td><%= link_to 'Show', district_set %></td>
-    <td><%= link_to 'Edit', edit_district_set_path(district_set) %></td>
-    <td><%= link_to 'Destroy', district_set, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New district_set', new_district_set_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

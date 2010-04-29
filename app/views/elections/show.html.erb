@@ -32,10 +32,11 @@
         <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>
         <%= @election.start_date %>
       </p>
+              <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
+
     </div>
     <div class="column right">
       <div class="group">
-        <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
       </div>
     </div>
   </div>

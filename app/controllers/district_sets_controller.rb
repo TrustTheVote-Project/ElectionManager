@@ -2,7 +2,7 @@ class DistrictSetsController < ApplicationController
   # GET /district_sets
   # GET /district_sets.xml
   def index
-    @district_sets = DistrictSet.all
+    @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

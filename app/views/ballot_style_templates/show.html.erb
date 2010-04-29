@@ -1,31 +1,59 @@
-<p>
-  <b>Display name:</b>
-  <%=h @ballot_style_template.display_name %>
-</p>
-<p>
-  <b>Default language:</b>
-  <%=h Language.find(@ballot_style_template.default_language).display_name %>
-</p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", ballot_style_templates_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_ballot_style_template_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", ballot_style_template_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
+          <%= @ballot_style_template.display_name %>
+        </p>
 
-<p>
-  <b>Default voting method:</b>
-  <%=h VotingMethod.find(@ballot_style_template.default_voting_method).display_name %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.default_voting_method", :default => t("activerecord.labels.default_voting_method", :default => "Default voting method")) %>:</b>
+          <%= @ballot_style_template.default_voting_method %>
+        </p>
 
-<p>
-  <b>Instruction text:</b>
-  <%=h @ballot_style_template.instruction_text %>
-</p>
-<p>
-  <b>Ballot Style:</b>
-  <%=h BallotStyle.find(@ballot_style_template.ballot_style).display_name %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.instruction_text", :default => t("activerecord.labels.instruction_text", :default => "Instruction text")) %>:</b>
+          <%= @ballot_style_template.instruction_text %>
+        </p>
 
-<p>
-  <b>State graphic:</b>
-  <%=h @ballot_style_template.state_graphic %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.state_graphic", :default => t("activerecord.labels.state_graphic", :default => "State graphic")) %>:</b>
+          <%= @ballot_style_template.state_graphic %>
+        </p>
 
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.ballot_style", :default => t("activerecord.labels.ballot_style", :default => "Ballot style")) %>:</b>
+          <%= @ballot_style_template.ballot_style %>
+        </p>
 
-<%= link_to 'Edit', edit_ballot_style_template_path(@ballot_style_template) %> |
-<%= link_to 'Back', ballot_style_templates_path %>
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.default_language", :default => t("activerecord.labels.default_language", :default => "Default language")) %>:</b>
+          <%= @ballot_style_template.default_language %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.state_signature_image", :default => t("activerecord.labels.state_signature_image", :default => "State signature image")) %>:</b>
+          <%= @ballot_style_template.state_signature_image %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.medium_id", :default => t("activerecord.labels.medium_id", :default => "Medium")) %>:</b>
+          <%= @ballot_style_template.medium_id %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_ballot_style_template_path(@ballot_style_template), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", ballot_style_template_path(@ballot_style_template), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
