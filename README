@@ -1,6 +1,6 @@
 INSTALL
 # install required gems
-<<<<<<< HEAD
+script/plugin install git://github.com/mileszs/wicked_pdf.git
 rake gems:install
 rake db:reset ttv:seed ttv:develop # initialize the database
 rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database

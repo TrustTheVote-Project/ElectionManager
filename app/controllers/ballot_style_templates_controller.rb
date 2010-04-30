@@ -64,9 +64,7 @@ class BallotStyleTemplatesController < ApplicationController
 
     respond_to do |format|
       if @ballot_style_template.update_attributes(params[:ballot_style_template])
-        flash[:notice] = 'BallotStyleTemplate was successfully updated.'
-        format.html { redirect_to(@ballot_style_template) }
-        format.xml  { head :ok }
+        render :template => 'ballot_style_templates/convert_instructions_to_pdf.pdf.erb'
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
@@ -84,6 +82,20 @@ class BallotStyleTemplatesController < ApplicationController
       format.html { redirect_to(ballot_style_templates_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def convert_instructions_to_pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "file_name",
+               :template => "things/show.pdf.erb",
+               :layout => "pdf.html"
+      end
+    end
+    # flash[:notice] = 'BallotStyleTemplate was successfully updated.'
+    # format.html { redirect_to(@ballot_style_template) }
+    # format.xml  { head :ok }
   end
   
   
