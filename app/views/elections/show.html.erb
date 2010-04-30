@@ -22,16 +22,12 @@
       <p>
         <b><%= t("activerecord.attributes.election.district_set_id", :default => t("activerecord.labels.district_set_id", :default => "District set")) %>:</b>
         <%= @election.district_set_id %>
-      </p>
-      <p>
-        <b><%= t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => "Default Voting Method")) %>:</b>
-        <%= link_to VotingMethod.find(@election.default_voting_method_id).display_name ,edit_voting_method_path(VotingMethod.find(@election.default_voting_method_id)) %>
-      </p>   
-	    <p>
+      </p>      
+	 <p>
         <b><%= t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => "Ballot Style Template")) %>:</b>
        	<% unless @election.ballot_style_template_id == nil %>
- 			    <%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
-		    <% end -%>
+ 			<%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
+		<% end -%>
       </p>
       <p>
         <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>

@@ -1,28 +1,56 @@
-<h1>Listing Ballot Style Templates</h1>
+<div class="block">
+  <p>
+    Ballot Style Templates determine what a ballot looks like. There are numerous paramaters that can be
+    set here, including the basic Ballot Style which chooses among a small number of classes of styles that
+    form the basis.
+  </p>
 
-<table>
-  <tr>
-    <th>Display Name</th>
-    <th>Default Voting Method</th>
-    <th>Ballot Style</th>
-    <th>Instruction Text</th>
-    <th>State Graphic</th>
-  </tr>
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", ballot_style_templates_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_ballot_style_template_path %></li>
+    </ul>
+  </div>       
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Ballot Style Templates</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.ballot_style_template.display_name", :default => t("activerecord.labels.display_name", :default => "Display_name")) %>
+</th>
+					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @ballot_style_templates.each do |ballot_style_template| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= ballot_style_template.id %>
+          </td>
+										<td>
+						<%= link_to ballot_style_template.display_name, ballot_style_template_path(ballot_style_template) %>
+					</td>
+										<td>
+            <%= ballot_style_template.created_at %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", ballot_style_template_path(ballot_style_template) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_ballot_style_template_path(ballot_style_template) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", ballot_style_template_path(ballot_style_template), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @ballot_style_templates  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<% @ballot_style_templates.each do |ballot_style_template| %>
-  <tr>
-    <td><%=h ballot_style_template.display_name %></td>
-    <td><%=h VotingMethod.find(ballot_style_template.default_voting_method).display_name %></td>
-    <td><%=h BallotStyle.find(ballot_style_template.ballot_style).display_name %></td>
-    <td><%=h ballot_style_template.instruction_text %></td>
-    <td><%=h ballot_style_template.state_graphic %></td>
-    <td><%= link_to 'Show', ballot_style_template %></td>
-    <td><%= link_to 'Edit', edit_ballot_style_template_path(ballot_style_template) %></td>
-    <td><%= link_to 'Destroy', ballot_style_template, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Ballot Style Template', new_ballot_style_template_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
