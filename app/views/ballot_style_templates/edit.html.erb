@@ -1,7 +1,12 @@
 <!-- INCLUDE SCRIPTS FOR YUI RICH TEXT EDITOR -->
 <%= render :partial => 'yui_rte_includes' %>
 
-
+<script type="text/javascript" charset="utf-8">
+	function update() 
+	{
+		document.getElementById('ballot_style_template_instruction_text').value = document.getElementById('ballot_style_template_instruction_text_editor').contentDocument.body.innerHTML
+	}
+</script>
 
 <h1>Editing Ballot Style Template</h1>
 
@@ -34,7 +39,6 @@
   </p>
 
 
- 
   <p>
     <%= f.label :state_graphic %><br />
     <%= f.text_field :state_graphic %>
@@ -45,7 +49,7 @@
   </p>
 
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Update',  :onclick => "update()"%>
   </p>
 <% end %>
 
