@@ -85,7 +85,9 @@ class ImagesController < ApplicationController
   
   def upload
    if post = Image.save(params[:image])
-    render :text => "{status:'UPLOADED',image_url:'/images/uploaded/#{post.name}'}"
+     
+    render :text => "{status:'UPLOADED',image_url:'/images/uploaded/#{post.original_filename}'}"
+    
    else
      render :text =>  "failed"
    end   
