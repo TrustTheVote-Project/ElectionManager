@@ -1,4 +1,6 @@
 class ElectionsController < ApplicationController
+
+  load_and_authorize_resource
   
   def index
     @elections = Election.paginate(:per_page => 10, :page => params[:page])
