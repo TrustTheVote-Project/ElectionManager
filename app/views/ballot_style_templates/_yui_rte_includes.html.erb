@@ -1,0 +1,33 @@
+		<!-- Skin CSS file -->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/assets/skins/sam/skin.css">
+		<!-- Utility Dependencies -->
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/element/element-min.js"></script>
+		<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/container/container_core-min.js"></script>
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/menu/menu-min.js"></script>
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/button/button-min.js"></script>
+		<!-- Source file for Rich Text Editor-->
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/editor/editor-min.js"></script>
+		<script src="http://yui.yahooapis.com/2.8.0r4/build/connection/connection-min.js"></script>
+ 
+		<!-- Image Uploader Plugin-->
+		<%= javascript_include_tag 'yui_image_uploads' %>
+		
+		
+		<script type="text/javascript">
+		var myEditor = new YAHOO.widget.Editor('ballot_style_template_instruction_text', {
+				height: '200px',
+				width: '500px',
+				dompath: true, //Turns on the bar at the bottom
+				animate: true//Animates the opening, closing and moving of Editor windows
+			});
+
+			/*
+		Call our function by parameters
+		myEditor which indicates instance, 'msgpost' indicates name of the RTE, server side script that handles the file and response, name of the input box (here, it is 'image')
+		   */
+			yuiImgUploader(myEditor, 'ballot_style_template_instruction_text','/image_upload','image');
+
+			myEditor.render();
+		</script>
