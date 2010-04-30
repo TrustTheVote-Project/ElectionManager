@@ -62,14 +62,15 @@ class BallotStyleTemplatesController < ApplicationController
   def update
     @ballot_style_template = BallotStyleTemplate.find(params[:id])
 
-    respond_to do |format|
+    #respond_to do |format|
       if @ballot_style_template.update_attributes(params[:ballot_style_template])
-        render :template => 'ballot_style_templates/convert_instructions_to_pdf.pdf.erb'
+        #redirect_to 'http://localhost:3000/convert_instructions_to_pdf'
+        render :action => :convert_instructions_to_pdf, :id => params[:id]
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
       end
-    end
+    #end
   end
 
   # DELETE /ballot_style_templates/1
@@ -85,14 +86,17 @@ class BallotStyleTemplatesController < ApplicationController
   end
   
   def convert_instructions_to_pdf
+    @ballot_style_template = BallotStyleTemplate.find(params[:id])
+    #puts @ballot_style_template.instruction_text.gsub("images/uploaded/","#{RAILS_ROOT}/public/images/uploaded/")
+    
     respond_to do |format|
-      format.html
+      #format.html
       format.pdf do
-        render :pdf => "file_name",
-               :template => "things/show.pdf.erb",
-               :layout => "pdf.html"
-      end
-    end
+              render :pdf => "file_name",
+                     :layout => "pdf.html",
+                     :wkhtmltopdf => 'script/wkhtmltopdf'
+            end
+          end
     # flash[:notice] = 'BallotStyleTemplate was successfully updated.'
     # format.html { redirect_to(@ballot_style_template) }
     # format.xml  { head :ok }

@@ -45,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
   map.image_upload "image_upload", :controller => 'images', :action => 'upload'
+  map.convert_instructions_to_pdf "convert_instructions_to_pdf", :controller => 'ballot_style_templates', :action => 'convert_instructions_to_pdf'
   map.maintain '/maintain/:action', :controller => 'maintain'
   map.root :controller => :jurisdiction , :action=>"index"
 
