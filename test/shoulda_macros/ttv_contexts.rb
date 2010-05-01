@@ -1,5 +1,19 @@
 class ActiveSupport::TestCase
-
+  
+  def self.login_as(options={})
+    context 'with logged in user' do
+      setup do
+        @logged_in_user = User.make(options)
+        # login as one user
+        UserSession.create!(@logged_in_user)
+      end
+      
+      yield 
+      
+    end
+  end
+  
+  
   def self.setup_user_roles(options={})
     options = {:role_name => 'guest'}.merge(options)
     

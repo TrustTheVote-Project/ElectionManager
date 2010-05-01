@@ -7,6 +7,8 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require 'test_help'
 require 'shoulda'
 require 'redgreen'
+require 'mocha'
+require "authlogic/test_case"
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -39,9 +41,23 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   # fixtures :all
-
+  
   # Add more helper methods to be used by all tests here...
   
-  # for machinist 
-  setup { Sham.reset }  
+  setup { 
+    # Will reset the Sham library random number generator AND the list index back to 0
+    Sham.reset
+  }
+  
+end
+
+class  ActionController::TestCase
+  # for authlogic
+  setup :activate_authlogic
+  
+  setup {
+      # turn off automatic session creation when a user is created,
+    # this is a added to the User model by authlogic
+    User.maintain_sessions = false    
+    }
 end
