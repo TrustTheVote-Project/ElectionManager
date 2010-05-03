@@ -16,6 +16,15 @@ module ApplicationHelper
     '</pre>'
   end
 
+  def icon_helper
+    curr_jurisd = session[:jurisdiction]
+    if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
+      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdiction)
+    else
+      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdiction)
+    end
+  end
+
   def header_helper
     curr_jurisd = session[:jurisdiction]
     if curr_jurisd.nil?

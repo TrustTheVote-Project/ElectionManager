@@ -9,7 +9,7 @@
   <div class="content">            
     <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> DistrictSet</h2>
     <div class="inner">
-      <% form_for @district_set, :url => district_set_path(@district_set), :html => { :class => :form } do |f| -%>
+      <% form_for @district_set, :url => district_set_path(@district_set), :html => { :class => :form, :multipart => true } do |f| -%>
         <%= render :partial => "form", :locals => {:f => f} %>
       <% end -%>
     </div>

@@ -10,7 +10,17 @@
     <%= f.text_field :secondary_name, :class => 'text_field' %>
     <span class="description">Ex: a simple text</span>
   </div>
-        
+
+  <div class="group">
+    <%= f.label :secondary_name, t("activerecord.attributes.district_set.icon", :default => "Icon"), :class => :label %>
+    <%= link_to(image_tag("ttv-100.png", :class =>"avatar"), set_jurisdiction_path(@district_set)) unless @district_set.icon? %>
+    <%= link_to(image_tag(@district_set.icon.url(:thumb), :class => "avatar"), set_jurisdiction_path(@district_set)) if @district_set.icon? %>
+    <br />
+    <%= f.file_field :icon %>
+    <br />
+    <span class="description">Ex: a simple text</span>
+  </div>
+  
 <div class="group navform wat-cf">
   <button class="button" type="submit">
     <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>

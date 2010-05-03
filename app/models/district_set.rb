@@ -13,6 +13,7 @@
 class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
   has_many :elections
+  has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
     
   # returns all precincts in this district set
   def precincts
