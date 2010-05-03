@@ -13,6 +13,7 @@
     </ul>
   </div>
   <div class="content">
+
     <div class="inner">
       <p>
         <b><%= t("activerecord.attributes.election.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
@@ -23,37 +24,42 @@
         <%= @election.district_set_id %>
       </p>
       <p>
+        <b><%= t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => "Default Voting Method")) %>:</b>
+        <%= link_to VotingMethod.find(@election.default_voting_method_id).display_name ,edit_voting_method_path(VotingMethod.find(@election.default_voting_method_id)) %>
+      </p>   
+	    <p>
         <b><%= t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => t("BallotStyleTemplate.find(activerecord.attributes.election.ballot_style_template_id).display_name", :default => "Ballot Style Template")) %>:</b>
-        <% unless @election.ballot_style_template_id == nil %>
-        <%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
-        <% end -%>
+       	<% unless @election.ballot_style_template_id == nil %>
+ 			    <%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
+		    <% end -%>
       </p>
       <p>
         <b><%= t("activerecord.attributes.election.start_date", :default => t("activerecord.labels.start_date", :default => "Start date")) %>:</b>
         <%= @election.start_date %>
       </p>
-              <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
+      </div>
+      <div class="column right">
+        <div class="group">
+		  <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election)  %> 
+        </div>
+      </div>
+      <br/>
 
-    </div>
-    <div class="column right">
-      <div class="group">
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_election_path(@election), :class => "button" %>
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", election_path(@election), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>
+      <br/>
+      <br/>
+      <div class="content">
+        <h2 class="title">Precincts</h2>
+        <%= render :partial => 'precincts/precinct_list' %>
+      </div>
+      <div class="content">
+        <h2 class="title">Contests</h2>
+        <%= render :partial => 'contests/contest_list' %>
       </div>
     </div>
-  </div>
-  <br/>
-  <div class="wat-cf">
-    <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_election_path(@election)) %>
-    <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", election_path(@election), :delete) %>
-  </div>
-  <br/>
-  <br/>
-  <div class="content">
-    <h2 class="title">Precincts</h2>
-    <%= render :partial => 'precincts/precinct_list' %>
-  </div>
-  <div class="content">
-    <h2 class="title">Contests</h2>
-    <%= render :partial => 'contests/contest_list' %>
   </div>
 </div>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -15,6 +15,11 @@
 	 	<%= f.label :ballot_style_template_id ,'Ballot Style Template',:class => :label %>
 		<%= select("election", "ballot_style_template_id", BallotStyleTemplate.all.collect {|p| [p.display_name,p.id ]}) %>
   </div>
+  
+	<div class="group">
+	 	<%= f.label :default_voting_method_id ,'Default Voting Method',:class => :label %>
+		<%= select("election", "default_voting_method_id", VotingMethod.all.collect {|p| [p.display_name,p.id ]}) %>
+  </div>
 
   <div class="group">
     <%= f.label :start_date, t("activerecord.attributes.election.start_date", :default => "Start date"), :class => :label %>
