@@ -1,6 +1,6 @@
 class BallotStyleTemplatesController < ApplicationController
   
-  layout 'application'
+  layout 'application', :except => 'convert_instructions_to_pdf'
   
   # GET /ballot_style_templates
   # GET /ballot_style_templates.xml
@@ -86,17 +86,20 @@ class BallotStyleTemplatesController < ApplicationController
   end
   
   def convert_instructions_to_pdf
+   
     @ballot_style_template = BallotStyleTemplate.find(params[:id])
     #puts @ballot_style_template.instruction_text.gsub("images/uploaded/","#{RAILS_ROOT}/public/images/uploaded/")
     
     respond_to do |format|
-      #format.html
-      format.pdf do
-              render :pdf => "file_name",
-                     :layout => "pdf.html",
-                     :wkhtmltopdf => 'script/wkhtmltopdf'
-            end
-          end
+      format.html
+      #format.pdf do
+              # render :pdf => "file_name",
+              #              :layout => "pdf.html",
+              #              :wkhtmltopdf => 'script/wkhtmltopdf',
+              #              :page_width => 10
+              #              
+              #     end
+        end
     # flash[:notice] = 'BallotStyleTemplate was successfully updated.'
     # format.html { redirect_to(@ballot_style_template) }
     # format.xml  { head :ok }
