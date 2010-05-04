@@ -34,12 +34,12 @@ class UserRoleTest < ActiveSupport::TestCase
     context "with a user" do
       
       setup do
-        role = UserRole.new(:name => "public")
-        role.user =  User.new(:email => "user1@example.com", :password => "password1", :password_confirmation => "password1")
-        role.save
+        @role = UserRole.make
+        @role.user =  User.new(:email => "user1@example.com", :password => "password1", :password_confirmation => "password1")
+        @role.save
         
       end
-      subject { UserRole.first }
+      subject { @role }
       should_create :user_role
       should_belong_to :user
       
@@ -47,7 +47,8 @@ class UserRoleTest < ActiveSupport::TestCase
       should "find a user with this user role" do
         user_roles = User.last.roles
         assert_equal 1, user_roles.count
-        assert_equal subject, user_roles.first
+       
+        assert_equal subject, user_roles.last
       end
       
       

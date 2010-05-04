@@ -45,6 +45,7 @@ puts "Creating election"
 election = Election.create(
   :display_name => "Dummy Election", 
   :ballot_style_template_id => 0,
+  :default_voting_method_id => 0,
   :start_date => Time.now + 10.days,
   :district_set_id => DistrictSet.find(:first).id)
 

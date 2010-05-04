@@ -18,6 +18,17 @@ class ContestTest < ActiveSupport::TestCase
       
       assert contest.save
     end
+    
+    should 'store and retreive a contest order' do
+      contest = Contest.new(:display_name => "State Representative")
+      contest.voting_method =  @voting_method
+      contest.district =  @election.district_set.districts.first
+      contest.election =  @election
+      contest.order = 5
+      
+      assert contest.save
+      assert_equal 5, contest.order
+    end
   end
 
   context " with an existing contest" do

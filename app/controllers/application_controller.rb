@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
   before_filter :disable_etags
   after_filter :flash_xhr
   
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access Denied"
+    redirect_to root_url
+  end
+  
   def disable_etags
     # TODO remove this function when in production
     fresh_when(:etag => rand)

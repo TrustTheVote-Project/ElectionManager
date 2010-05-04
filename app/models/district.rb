@@ -20,7 +20,7 @@ class District < ActiveRecord::Base
 
   belongs_to :district_type
   
-  attr_accessible :district_type, :display_name, :district_type_id
+  attr_accessible :district_type, :display_name, :district_type_id, :ident
   
   attr_accessor :importId, :importPrecincts # for xml import
   

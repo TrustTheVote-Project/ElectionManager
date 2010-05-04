@@ -1,6 +1,10 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
+# for machinist blueprint file
+require File.expand_path(File.dirname(__FILE__) + "/blueprints")
+
+
 require 'test_help'
 require 'shoulda'
 require 'redgreen'
@@ -39,4 +43,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   
+  # for machinist 
+  setup { Sham.reset }  
 end

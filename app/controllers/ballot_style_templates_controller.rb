@@ -5,7 +5,7 @@ class BallotStyleTemplatesController < ApplicationController
   # GET /ballot_style_templates
   # GET /ballot_style_templates.xml
   def index
-    @ballot_style_templates = BallotStyleTemplate.all
+    @ballot_style_templates = BallotStyleTemplate.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
