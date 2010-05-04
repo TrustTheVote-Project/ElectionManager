@@ -560,7 +560,9 @@ module DefaultBallot
       @pdf.bounding_box( [rect.left + @padding, rect.top], 
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
-        @pdf.text @instruction_text
+        puts @pdf.text "<b>test</b>"
+           
+       # @pdf.text @instruction_text
         #@pdf.text load_text("instructions1.txt"), :wrap => @wrap 
        
 #        img = load_image "instructions2.png"

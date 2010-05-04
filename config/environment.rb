@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "authlogic"
-  config.gem "prawn", :version => '>= 0.7.2'
+  #config.gem "prawn", :version => '>= 0.7.2'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
   config.gem 'rubyzip', :version => '>= 0.9.4', :lib => 'zip/zip'
