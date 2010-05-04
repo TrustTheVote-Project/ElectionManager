@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
   def render_error_messages(model, options={})
     options = { :verbose => false }.merge(options)
     messages = model.errors.full_messages #objects.compact.map { |o| o.errors.full_messages}.flatten
@@ -7,6 +8,7 @@ module ApplicationHelper
       :locals => { :options => options, :model => model} unless messages.empty?
   end
   
+
   #
   # Pretty print objects, to be used in views
   #
@@ -17,19 +19,10 @@ module ApplicationHelper
   end
 
   def header_helper
-    curr_jurisd = session[:jurisdiction]
-    if curr_jurisd.nil?
-      jurisdiction_name = "no jurisdiction selected"
-      jurisdiction_secondary = ""
-    else
-      jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
-      if DistrictSet.find(curr_jurisd).secondary_name.nil?
-        jurisdiction_secondary = ""
-      else
-        jurisdiction_secondary = DistrictSet.find(curr_jurisd).secondary_name
-      end
-    end
-    if current_user() and jurisdiction_name != "no jurisdiction selected"
+    jurisdiction_name = current_context.current_jurisdiction_name
+    jurisdiction_secondary = current_context.current_jurisdiction_secondary_name
+
+    if current_user() and current_context.current_jurisdiction?
       content_tag(:h1, jurisdiction_name +
                       "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
     else
@@ -39,18 +32,8 @@ module ApplicationHelper
   end
   
   def user_navigation_helper
-    curr_jurisd = session[:jurisdiction]
-    if curr_jurisd.nil?
-      jurisdiction_name = "no jurisdiction selected"
-      jurisdiction_secondary = ""
-    else
-      jurisdiction_name = DistrictSet.find(curr_jurisd).display_name
-      if DistrictSet.find(curr_jurisd).secondary_name.nil?
-        jurisdiction_secondary = ""
-      else
-        jurisdiction_secondary = DistrictSet.find(curr_jurisd).secondary_name
-      end
-    end
+    jurisdiction_name = current_context.current_jurisdiction_name
+    jurisdiction_secondary = current_context.current_jurisdiction_secondary_name
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
