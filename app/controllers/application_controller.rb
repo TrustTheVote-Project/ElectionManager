@@ -45,7 +45,10 @@ private
   end
   
   def current_context
-    @current_context || UserContext.new
+    if session[:current_context].nil?
+      session[:current_context] = UserContext.new
+    end
+    session[:current_context]
   end
   
   

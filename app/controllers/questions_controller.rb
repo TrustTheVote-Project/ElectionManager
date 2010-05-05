@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    current_context.question = @question
   end
 
   def new

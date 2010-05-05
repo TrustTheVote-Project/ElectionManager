@@ -1,6 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  # Nice styling of error messages
   def render_error_messages(model, options={})
     options = { :verbose => false }.merge(options)
     messages = model.errors.full_messages #objects.compact.map { |o| o.errors.full_messages}.flatten
@@ -8,21 +9,12 @@ module ApplicationHelper
       :locals => { :options => options, :model => model} unless messages.empty?
   end
   
-
-  #
-  # Pretty print objects, to be used in views
-  #
-  def pp_debug(obj)
-    '<pre>' +
-    h(obj.pretty_inspect) +
-    '</pre>'
-  end
-
+  # HTML for header that is over all pages
   def header_helper
-    jurisdiction_name = current_context.current_jurisdiction_name
-    jurisdiction_secondary = current_context.current_jurisdiction_secondary_name
-
-    if current_user() and current_context.current_jurisdiction?
+    jurisdiction_name = current_context.jurisdiction_name
+    jurisdiction_secondary = current_context.jurisdiction_secondary_name
+    
+    if current_user() and current_context.jurisdiction?
       content_tag(:h1, jurisdiction_name +
                       "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
     else
@@ -31,14 +23,13 @@ module ApplicationHelper
     
   end
   
+  # HTML for top right user navigation bar where login etc live
   def user_navigation_helper
-    jurisdiction_name = current_context.current_jurisdiction_name
-    jurisdiction_secondary = current_context.current_jurisdiction_secondary_name
+    jurisdiction_name = current_context.jurisdiction_name
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
-          content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdiction_path) +
-                      "<br /><small>" + jurisdiction_secondary + "</small>") +
+          content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdiction_path)) +
           content_tag(:li) { current_user.email } + 
           content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
           content_tag(:li) { link_to("Logout", logout_path) }
@@ -49,7 +40,8 @@ module ApplicationHelper
       end
     end
   end
-   
+  
+  # HTML for nicely styled buttons in forms
   def button_link_helper(image_file, alt_tag, button_label, link_path, delete=nil)
     options = {}
     if (delete == :delete)
@@ -57,5 +49,39 @@ module ApplicationHelper
     end
     link_to("#{image_tag(image_file, :alt => alt_tag)} #{button_label}", link_path, {:class => "button"}.merge(options))
   end
-
+  
+  # HTML for breadcrums
+  def breadcrumb_helper(cc)
+    style = 2
+    if style == 1
+      return "" unless cc.jurisdiction?
+      return link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)) unless  cc.election?
+      return link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)) + " > " + 
+      link_to(cc.election.display_name, cc.election)
+    elsif style == 2
+      html = ""
+      jur_link = ""
+      el_link = ""
+      if cc.contest?
+        c_or_q_link = link_to(cc.contest.display_name, cc.contest)
+      end
+      if cc.question?
+        c_or_q_link = link_to(cc.question.display_name, cc.question)
+      end
+      if cc.election?
+        el_link = link_to(cc.election.display_name, cc.election)
+      end
+      if cc.jurisdiction?
+        jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
+      end
+      if c_or_q_link
+        html = c_or_q_link + " <small> (in " + el_link + " in " + jur_link + " )</small>"
+      elsif el_link
+        html = el_link + " <small> (in " + jur_link + " )</small>"
+      elsif jur_link
+        html = jur_link
+      end
+      content_tag(:h4, html)
+    end
+  end
 end
