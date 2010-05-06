@@ -12,8 +12,11 @@
   </div>
 
   <div class="group">
+    <% voting_methods = VotingMethod.find(:all, :order => :id) %>
+    <% default_method = Election.find_by_id(params[:election_id]).default_voting_method_id if !params[:election_id].nil? %>
     <%= f.label :voting_method_id, t("activerecord.attributes.contest.voting_method_id", :default => "Voting method"), :class => :label %>
-    <%= f.text_field :voting_method_id, :class => 'text_field' %>
+    <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name) if default_method.nil? %>
+    <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name, :selected => default_method) unless default_method.nil? %>
     <span class="description">Ex: a simple text</span>
   </div>
 

@@ -24,4 +24,12 @@ class VotingMethod < ActiveRecord::Base
     const_get(xml.constant_name).id
   end
   
+  def to_i
+    id
+  end
+  
+  def self.determine_default_voting_method(contest)
+    VotingMethod.find(contest.election.default_voting_method_id)
+  end
+  
 end
