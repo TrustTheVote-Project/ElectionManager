@@ -4,6 +4,7 @@ class ElectionsController < ApplicationController
   
   def index
     @elections = Election.paginate(:per_page => 10, :page => params[:page])
+    current_context.reset
     redirect_to :action => 'new' if @elections.empty?
     @election = UserSession.find.election if UserSession.find
   end
@@ -19,7 +20,6 @@ class ElectionsController < ApplicationController
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page])
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
     @precincts = @election.district_set.precincts.paginate(:per_page => 10, :page => params[:page])
-
   end
 
   def new

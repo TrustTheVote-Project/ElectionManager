@@ -52,36 +52,32 @@ module ApplicationHelper
   
   # HTML for breadcrums
   def breadcrumb_helper(cc)
-    style = 2
-    if style == 1
-      return "" unless cc.jurisdiction?
-      return link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)) unless  cc.election?
-      return link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)) + " > " + 
-      link_to(cc.election.display_name, cc.election)
-    elsif style == 2
-      html = ""
-      jur_link = ""
-      el_link = ""
-      if cc.contest?
-        c_or_q_link = link_to(cc.contest.display_name, cc.contest)
-      end
-      if cc.question?
-        c_or_q_link = link_to(cc.question.display_name, cc.question)
-      end
-      if cc.election?
-        el_link = link_to(cc.election.display_name, cc.election)
-      end
-      if cc.jurisdiction?
-        jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
-      end
-      if c_or_q_link
-        html = c_or_q_link + " <small> (in " + el_link + " in " + jur_link + " )</small>"
-      elsif el_link
-        html = el_link + " <small> (in " + jur_link + " )</small>"
-      elsif jur_link
-        html = jur_link
-      end
-      content_tag(:h4, html)
+    html = ""
+    jur_link = ""
+    el_link = ""
+    c_or_q_or_p_link = ""
+    if cc.contest?
+      c_or_q_or_p_link = link_to(cc.contest.display_name, cc.contest)
     end
+    if cc.question?
+      c_or_q_or_p_link = link_to(cc.question.display_name, cc.question)
+    end
+    if cc.precinct?
+      c_or_q_or_p_link = link_to(cc.precinct.display_name, cc.precinct)
+    end
+    if cc.election?
+      el_link = link_to(cc.election.display_name, cc.election)
+    end
+    if cc.jurisdiction?
+      jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
+    end
+    if c_or_q_or_p_link != ""
+      html = c_or_q_or_p_link + " <small> (in " + el_link + " in " + jur_link + " )</small>"
+    elsif el_link != ""
+      html = el_link + " <small> (in " + jur_link + " )</small>"
+    elsif jur_link
+      html = jur_link
+    end
+    content_tag(:h4, html)
   end
 end
