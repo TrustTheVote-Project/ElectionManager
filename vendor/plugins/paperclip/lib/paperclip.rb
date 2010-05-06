@@ -149,6 +149,11 @@ module Paperclip
   end
 
   class PaperclipCommandLineError < StandardError #:nodoc:
+    attr_accessor :output
+    def initialize(msg = nil, output = nil)
+      super(msg)
+      @output = output
+    end
   end
 
   class NotIdentifiedByImageMagickError < PaperclipError #:nodoc:
@@ -214,6 +219,9 @@ module Paperclip
     #   NOTE: While not deprecated yet, it is not recommended to specify options this way.
     #   It is recommended that :convert_options option be included in the hash passed to each
     #   :styles for compatability with future versions.
+    #   NOTE: Strings supplied to :convert_options are split on space in order to undergo
+    #   shell quoting for safety. If your options require a space, please pre-split them
+    #   and pass an array to :convert_options instead.
     # * +storage+: Chooses the storage backend where the files will be stored. The current
     #   choices are :filesystem and :s3. The default is :filesystem. Make sure you read the
     #   documentation for Paperclip::Storage::Filesystem and Paperclip::Storage::S3
