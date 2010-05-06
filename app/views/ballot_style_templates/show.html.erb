@@ -21,12 +21,7 @@
 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.instruction_text", :default => t("activerecord.labels.instruction_text", :default => "Instruction text")) %>:</b>
-          <%= @ballot_style_template.instruction_text %>
-        </p>
-
-        <p>
-          <b><%= t("activerecord.attributes.ballot_style_template.state_graphic", :default => t("activerecord.labels.state_graphic", :default => "State graphic")) %>:</b>
-          <%= @ballot_style_template.state_graphic %>
+          <%= link_to image_tag(@ballot_style_template.instructions_pdf.url(:thumb)), @ballot_style_template.instructions_pdf.url, :popup => true %>
         </p>
 
         <p>
@@ -39,11 +34,7 @@
           <%= @ballot_style_template.default_language %>
         </p>
 
-        <p>
-          <b><%= t("activerecord.attributes.ballot_style_template.state_signature_image", :default => t("activerecord.labels.state_signature_image", :default => "State signature image")) %>:</b>
-          <%= @ballot_style_template.state_signature_image %>
-        </p>
-
+ 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.medium_id", :default => t("activerecord.labels.medium_id", :default => "Medium")) %>:</b>
           <%= @ballot_style_template.medium_id %>
