@@ -132,8 +132,8 @@ module NhBallot
 
     attr_accessor :col_width
 
-    def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
-      @instruction_text = instruction_text
+    def initialize(style, lang, election, scanner, instruction_text_url)
+      @instruction_text = instruction_text_url
       @state_seal = state_seal
       @state_signature = state_signature
       @checkbox_orientation = :right
