@@ -16,8 +16,8 @@ class PaperclipTest < Test::Unit::TestCase
       should "execute the right command" do
         Paperclip.expects(:path_for_command).with("convert").returns("/usr/bin/convert")
         Paperclip.expects(:bit_bucket).returns("/dev/null")
-        Paperclip.expects(:"`").with("/usr/bin/convert one.jpg two.jpg 2>/dev/null")
-        Paperclip.run("convert", "one.jpg two.jpg")
+        Paperclip.expects(:"`").with("/usr/bin/convert 'one.jpg' 'two.jpg' 2>/dev/null")
+        Paperclip.run("convert", "one.jpg", "two.jpg")
       end
     end
   end
@@ -35,8 +35,8 @@ class PaperclipTest < Test::Unit::TestCase
     should "execute the right command" do
       Paperclip.expects(:path_for_command).with("convert").returns("convert")
       Paperclip.expects(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:"`").with("convert one.jpg two.jpg 2>/dev/null")
-      Paperclip.run("convert", "one.jpg two.jpg")
+      Paperclip.expects(:"`").with("convert 'one.jpg' 'two.jpg' 2>/dev/null")
+      Paperclip.run("convert", "one.jpg", "two.jpg")
     end
   end
 
@@ -45,8 +45,8 @@ class PaperclipTest < Test::Unit::TestCase
       Paperclip.options[:image_magick_path] = nil
       Paperclip.options[:command_path]      = nil
       Paperclip.stubs(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:log).with("this is the command 2>/dev/null")
-      Paperclip.expects(:"`").with("this is the command 2>/dev/null")
+      Paperclip.expects(:log).with("this 'is the command' 2>/dev/null")
+      Paperclip.expects(:"`").with("this 'is the command' 2>/dev/null")
       Paperclip.options[:log_command] = true
       Paperclip.run("this","is the command")
     end
@@ -55,11 +55,20 @@ class PaperclipTest < Test::Unit::TestCase
       Paperclip.options[:image_magick_path] = nil
       Paperclip.options[:command_path]      = nil
       Paperclip.stubs(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:log).with("this is the command 2>/dev/null").never
-      Paperclip.expects(:"`").with("this is the command 2>/dev/null")
+      Paperclip.expects(:log).with("this 'is the command' 2>/dev/null").never
+      Paperclip.expects(:"`").with("this 'is the command' 2>/dev/null")
       Paperclip.options[:log_command] = false
       Paperclip.run("this","is the command")
     end
+  end
+
+  should "prevent dangerous characters in the command via quoting" do
+    Paperclip.options[:image_magick_path] = nil
+    Paperclip.options[:command_path]      = nil
+    Paperclip.options[:log_command]       = false
+    Paperclip.options[:swallow_stderr]    = false
+    Paperclip.expects(:"`").with(%q[this 'is' 'jack'\''s' '`command`' 'line!'])
+    Paperclip.run("this", "is", "jack's", "`command`", "line!")
   end
 
   context "Paperclip.bit_bucket" do
@@ -226,11 +235,11 @@ class PaperclipTest < Test::Unit::TestCase
           end
           if validation == :presence
             should "have an error on the attachment" do
-              assert @dummy.errors.on(:avatar_file_name)
+              assert @dummy.errors[:avatar_file_name]
             end
           else
             should "not have an error on the attachment" do
-              assert_nil @dummy.errors.on(:avatar_file_name), @dummy.errors.full_messages.join(", ")
+              assert @dummy.errors[:avatar_file_name].blank?, @dummy.errors.full_messages.join(", ")
             end
           end
         end
@@ -279,7 +288,7 @@ class PaperclipTest < Test::Unit::TestCase
         end
         
         should "have a file size min/max error message" do
-          assert_match %r/between 0 and 10240 bytes/, @dummy.errors.on(:avatar_file_size)
+          assert @dummy.errors[:avatar_file_size].any?{|e| e.match %r/between 0 and 10240 bytes/ }
         end
       end
     end
