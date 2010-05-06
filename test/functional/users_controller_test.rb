@@ -37,9 +37,12 @@ class UsersControllerTest < ActionController::TestCase
   # Now we're gonna use Shoulda for testing
   
   context "without a logged in user" do
-    
+
+    # TODO: Should be able to show the users without being logged_in?
     context "on GET to :index" do    
       setup do
+        tmp_user = User.make
+        User.expects(:find).with(:all).returns([tmp_user])
         get :index
       end
    
@@ -47,10 +50,13 @@ class UsersControllerTest < ActionController::TestCase
       should_respond_with :success
       should_render_template :index
       should_not_set_the_flash
-    end 
+    end # INDEX ACTION
     
+    # Allow guest/public users to get the registration page.
     context "on GET to :new" do    
       setup do
+        tmp_user = User.new
+        User.expects(:new).returns(tmp_user)
         get :new
       end
    
@@ -62,8 +68,72 @@ class UsersControllerTest < ActionController::TestCase
       should "create an unsaved user" do
         assert assigns(:user).new_record?
       end
-    end 
-  end
+    end # NEW ACTION
+    
+    # Allow guest/public users to register a user
+    context "on POST to :create" do    
+      setup do
+        # expect Notification
+        Notifier.expects(:deliver_registration_confirmation).with(instance_of(User))
+        assert_difference('User.count') do
+          post :create, :user => User.plan
+        end
+      end
+
+      should_assign_to :user
+      should_redirect_to("Home Page") { root_url }
+      should_set_the_flash_to "Registration successful."
+      
+      should "create saved user" do
+        assert !assigns(:user).new_record?
+      end
+    end # CREATE ACTION
+
+    # RESTRICTED ACTIONS
+    # OK, Now these actions should fail without a logged in user.
+    
+    context "on GET to :show" do    
+      setup do
+        @show_user = User.make(:email => "show_user@gmail.com")
+        get :show, :id => @show_user.id
+      end
+      
+      should_redirect_to("Login page") { new_user_session_url }
+      should_set_the_flash_to "You must be logged in to access this page"
+    end # SHOW ACTION
+
+    context "on GET to :edit" do    
+      setup do
+        @show_user = User.make(:email => "show_user@gmail.com")
+        get :edit, :id => @show_user.id
+      end
+      
+      should_redirect_to("Login page") { new_user_session_url }
+      should_set_the_flash_to "You must be logged in to access this page"
+    end # EDIT ACTION
+    
+    context "on PUT to :update" do    
+      setup do
+        @show_user = User.make(:email => "show_user@gmail.com")
+        put :update, :id => @show_user.id, :user => { :email => "foo@bar.com"}
+      end
+      
+      should_redirect_to("Login page") { new_user_session_url }
+      should_set_the_flash_to "You must be logged in to access this page"
+    end # UPDATE ACTION
+
+    # TODO: Should probably not allow public users to destroy users.
+    context "on DELETE to :destroy" do    
+      setup do
+        @show_user = User.make(:email => "show_user@gmail.com")
+        delete :destroy, :id => @show_user.id
+      end
+      
+      #should_redirect_to("Login page") { new_user_session_url }
+      #should_set_the_flash_to "You must be logged in to access this page"
+    end # DESTROY ACTION
+
+  end # END tests for public, not logged_in, users
   
   # These actions require a logged in user.
   self.login_as(:email => "logged_in_user@gmail.com") do
@@ -93,18 +163,5 @@ class UsersControllerTest < ActionController::TestCase
     end
   end # end login_as
   
-  # make sure we handle attempting to access an action without logged
-  # in user.
-  context "without a logged in user" do
-    context "on GET to :show" do    
-      setup do
-        @show_user = User.make(:email => "show_user@gmail.com")
-        get :show, :id => @show_user.id
-      end
-      
-      should_redirect_to("Login page") { new_user_session_url }
-      should_set_the_flash_to "You must be logged in to access this page"
-    end
-  end
   
 end
