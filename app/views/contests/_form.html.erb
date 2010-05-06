@@ -21,8 +21,11 @@
   </div>
 
   <div class="group">
+    <%= params %>
+    <%= session %>
+    <% districts = @district_set.districts %>
     <%= f.label :district_id, t("activerecord.attributes.contest.district_id", :default => "District"), :class => :label %>
-    <%= f.text_field :district_id, :class => 'text_field' %>
+    <%= f.collection_select(:district_id, districts, :id, :display_name) %>
     <span class="description">Ex: a simple text</span>
   </div>
 
