@@ -139,14 +139,12 @@ class Election < ActiveRecord::Base
     def render_ballot(election, precinct, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
       lang = Language.find(ballot_style_template.default_language).code
-      instruction_text = ballot_style_template.instruction_text
-      state_seal = ballot_style_template.state_graphic
-      state_signature = ballot_style_template.state_signature_image
+      instruction_text_url = ballot_style_template.instructions_pdf.url
       medium_id = ballot_style_template.medium_id
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       
       if medium_id == 0
-        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text_url)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
       else
         new_ballot = {:title => title, :medium_id => medium_id}
@@ -160,13 +158,11 @@ class Election < ActiveRecord::Base
     def render_ballots(election, precincts, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
       lang = Language.find(ballot_style_template.default_language).code
-      instruction_text = ballot_style_template.instruction_text
-      state_seal = ballot_style_template.state_graphic
-      state_signature = ballot_style_template.state_signature_image
+      instruction_text_url = ballot_style_template.instructions_pdf.url
       ballot_array = Array.new
       precincts.each do |precinct|
         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
-        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text_url)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
         ballot_array << new_ballot
       end
