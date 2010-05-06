@@ -26,7 +26,7 @@ class UserContextTest < ActiveSupport::TestCase
       end
       
       should "locate secondary name" do
-        assert_equal @jur.second_name, @uc.jurisdiction_secondary_name
+        assert_equal @jur.secondary_name, @uc.jurisdiction_secondary_name
       end
     end
     
