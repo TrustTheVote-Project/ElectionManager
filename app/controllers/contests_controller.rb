@@ -6,6 +6,7 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
+    current_context.contest = @contest
     @candidates = @contest.candidates.paginate(:per_page => 10, :page => params[:page])
   end
 

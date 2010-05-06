@@ -26,5 +26,5 @@ class DistrictSet < ActiveRecord::Base
     )
     Precinct.find(precinct_ids)
   end
-
+  
 end

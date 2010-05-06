@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password,:confirm_password
   
-  helper_method :current_user, :pretty_date, :pluralize
+  helper_method :current_user, :pretty_date, :pluralize, :current_context
   
   before_filter :disable_etags
   after_filter :flash_xhr
@@ -43,6 +43,14 @@ private
     return d.to_s unless d.nil?
     return "unspecified date"
   end
+  
+  def current_context
+    if session[:current_context].nil?
+      session[:current_context] = UserContext.new
+    end
+    session[:current_context]
+  end
+  
   
   # 
   # Authlogic authenticatoin methods
