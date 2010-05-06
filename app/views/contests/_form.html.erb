@@ -13,7 +13,7 @@
 
   <div class="group">
     <% voting_methods = VotingMethod.find(:all, :order => :id) %>
-    <% default_method = Election.find_by_id(params[:election_id]).default_voting_method_id if !params[:election_id].nil? %>
+    <% default_method = current_context.election.default_voting_method_id if current_context.election? %>
     <%= f.label :voting_method_id, t("activerecord.attributes.contest.voting_method_id", :default => "Voting method"), :class => :label %>
     <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name) if default_method.nil? %>
     <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name, :selected => default_method) unless default_method.nil? %>
@@ -21,9 +21,7 @@
   </div>
 
   <div class="group">
-    <%= params %>
-    <%= session %>
-    <% districts = @district_set.districts %>
+    <% districts = current_context.jurisdiction.districts %>
     <%= f.label :district_id, t("activerecord.attributes.contest.district_id", :default => "District"), :class => :label %>
     <%= f.collection_select(:district_id, districts, :id, :display_name) %>
     <span class="description">Ex: a simple text</span>
