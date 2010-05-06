@@ -13,8 +13,7 @@
 
   <div class="group">
     <%= f.label :secondary_name, t("activerecord.attributes.district_set.icon", :default => "Icon"), :class => :label %>
-    <%= link_to(image_tag("ttv-100.png", :class =>"avatar"), set_jurisdiction_path(@district_set)) unless @district_set.icon? %>
-    <%= link_to(image_tag(@district_set.icon.url(:thumb), :class => "avatar"), set_jurisdiction_path(@district_set)) if @district_set.icon? %>
+    <%= icon_for @district_set %>
     <br />
     <%= f.file_field :icon %>
     <br />

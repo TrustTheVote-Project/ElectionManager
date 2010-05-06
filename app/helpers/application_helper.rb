@@ -25,6 +25,15 @@ module ApplicationHelper
     end
   end
 
+  def icon_for district_set
+   return image_tag("ttv-100.png", :class =>"avatar") unless district_set.icon?
+   return image_tag(district_set.icon.url(:thumb), :class => "avatar") if district_set.icon?
+  end
+
+  def link_icon_for district_set
+    link_to(icon_for(district_set), set_jurisdiction_path(district_set))
+  end
+
   def header_helper
     curr_jurisd = session[:jurisdiction]
     if curr_jurisd.nil?
