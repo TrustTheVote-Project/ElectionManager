@@ -30,4 +30,10 @@ class Precinct < ActiveRecord::Base
   def districts_for_election(election)
     districts & election.district_set.districts
   end
+  
+  # Return a list of DistrictSets tjat this Precinct belongs to. 
+  # In the real world, this should always be a list of length 1, even though the data model permits more
+  def district_sets
+    districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }
+  end
 end

@@ -35,8 +35,8 @@
         <%= @candidate.order %>
       </p>
       <div class="wat-cf">
-        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_candidate_path(@candidate), :class => "button" %>
-        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", candidate_path(@candidate), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_candidate_path(@candidate)) %>
+        <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", candidate_path(@candidate), :delete) %>
       </div>
     </div>
   </div>

@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
     should_change("the number of users", :by => 3){  User.count}
     
     should "create the correct email" do
-      assert_equal "foo_0@bar.com", subject.email
+      assert_contains User.all.map(&:email), 'foo_0@bar.com'
     end
     
 

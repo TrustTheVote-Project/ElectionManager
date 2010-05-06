@@ -3,14 +3,17 @@ require 'rubygems'
 require 'zip/zip'
 
 CHECKBOX = "\xE2\x98\x90" # "☐"
+
 class PrecinctsController < ApplicationController
 
   def index
     @precincts = Precinct.paginate(:per_page => 10, :page => params[:page])
+    current_context.reset
   end
 
   def show
     @precinct = Precinct.find(params[:id])
+    current_context.precinct = @precinct
   end
 
   def new
