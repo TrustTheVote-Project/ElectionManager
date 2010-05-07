@@ -1,12 +1,11 @@
 class JurisdictionController < ApplicationController
   
   def index
-    @jurisdiction = session[:jurisdiction]
-    if @jurisdiction.nil?
+    if !current_context.jurisdiction?
       redirect_to :action => :change_jurisdiction
     else
-      @old_jurisd = @jurisdiction.id
-      @elections = DistrictSet.find(@old_jurisd).elections.paginate(:per_page => 10, :page => params[:page])
+      current_context.election = nil
+      @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
     end  
   end
   
@@ -15,7 +14,7 @@ class JurisdictionController < ApplicationController
   end
   
   def set_jurisdiction
-    session[:jurisdiction] = DistrictSet.find(params[:id])
+    current_context.jurisdiction = DistrictSet.find(params[:id])
     redirect_to :action => :index
   end
  

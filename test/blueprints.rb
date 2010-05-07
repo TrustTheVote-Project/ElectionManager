@@ -28,6 +28,8 @@ Sham.define do
 
   role_name(:unique => false) { %w{ root standard public }.rand }
   
+  jurisdiction_name { %w{Northern MiddleSex Southern}.rand }
+  
 end
 
 Sham.date do
@@ -56,4 +58,11 @@ end
 UserRole.blueprint do
   name { 'public' }
 end
+
+DistrictSet.blueprint do
+  display_name { Sham.jurisdiction_name }
+  secondary_name { "secondary name" + Sham.jurisdiction_name }
+end
+
+
 

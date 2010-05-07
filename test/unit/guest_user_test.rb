@@ -1,5 +1,5 @@
 require 'test_helper'
-
+=begin
 class GuestUserTest < ActiveSupport::TestCase
   context "Guest User" do
     
@@ -50,3 +50,4 @@ class GuestUserTest < ActiveSupport::TestCase
   end
     
 end
+=end
