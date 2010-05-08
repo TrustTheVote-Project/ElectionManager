@@ -34,14 +34,14 @@
           <td class="last">
             <%= link_to "#{t("web-app-theme.show", :default =>
             "Show")}", election_path(election) %>
-            <% if can? :update, Election %>
+            <% # if can? :update, Election %>
               |<%= link_to "#{t("web-app-theme.edit", :default =>
             "Edit")}", edit_election_path(election) %>
               |<%= link_to "#{t("web-app-theme.delete", :default =>
             "Delete")}", election_path(election), :method => :delete,
             :confirm => "#{t("web-app-theme.confirm", :default => "Are
             you sure?")}" %>
-            <% end %>
+            <% # end %>
           </td>
         </tr>
         <% end -%>
