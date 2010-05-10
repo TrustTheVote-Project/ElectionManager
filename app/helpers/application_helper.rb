@@ -9,6 +9,33 @@ module ApplicationHelper
       :locals => { :options => options, :model => model} unless messages.empty?
   end
   
+  #
+  # Pretty print objects, to be used in views
+  #
+  def pp_debug(obj)
+    '<pre>' +
+    h(obj.pretty_inspect) +
+    '</pre>'
+  end
+
+  def icon_helper
+    curr_jurisd = session[:jurisdiction]
+    if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
+      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdiction)
+    else
+      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdiction)
+    end
+  end
+
+  def icon_for district_set
+   return image_tag("ttv-100.png", :class =>"avatar") unless district_set.icon?
+   return image_tag(district_set.icon.url(:thumb), :class => "avatar") if district_set.icon?
+  end
+
+  def link_icon_for district_set
+    link_to(icon_for(district_set), set_jurisdiction_path(district_set))
+  end
+
   # HTML for header that is over all pages
   def header_helper
     jurisdiction_name = current_context.jurisdiction_name

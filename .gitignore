@@ -12,5 +12,6 @@ test/tmp/*.pdf
 *#*
 .tmp_*
 tmp/ballot_zips/*
+public/system
 public/system/icons/*
 public/images/uploaded/*

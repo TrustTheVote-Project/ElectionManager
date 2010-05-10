@@ -1,5 +1,6 @@
 --- 
-ballot_info: 
+ballot_info:
+  jurisdiction_display_name: Baker County
   precinct_list: 
   - ident: PREC-0
     district_list: 

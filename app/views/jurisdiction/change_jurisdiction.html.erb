@@ -10,7 +10,7 @@
         <% @district_sets.each do |district_set| %>
         <li>
           <div class="left">
-             <%= link_to(image_tag("ttv-100.png", :class =>"avatar"), set_jurisdiction_path(district_set)) %>
+             <%= link_icon_for district_set %>
           </div>
           <div class="item">
             <h3><%= district_set.display_name %> </h3>
