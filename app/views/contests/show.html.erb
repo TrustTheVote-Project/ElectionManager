@@ -24,15 +24,15 @@
       </p>
       <p>
         <b><%= t("activerecord.attributes.contest.voting_method_id", :default => t("activerecord.labels.voting_method_id", :default => "Voting method")) %>:</b>
-        <%= @contest.voting_method_id %>
+        <%= VotingMethod.find_by_id(@contest.voting_method_id).display_name %>
       </p>
       <p>
         <b><%= t("activerecord.attributes.contest.district_id", :default => t("activerecord.labels.district_id", :default => "District")) %>:</b>
-        <%= @contest.district_id %>
+        <%= District.find_by_id(@contest.district_id).display_name %>
       </p>
       <p>
         <b><%= t("activerecord.attributes.contest.election_id", :default => t("activerecord.labels.election_id", :default => "Election")) %>:</b>
-        <%= @contest.election_id %>
+        <%= Election.find_by_id(@contest.election_id).display_name %>
       </p>
       <p>
         <b><%= t("activerecord.attributes.contest.order", :default => t("activerecord.labels.order", :default => "Order")) %>:</b>
