@@ -131,27 +131,27 @@
     <precinct display_name="People Precinct 20" id="40"/>
   </precincts>
   <body>
-    <contest open_seat="3" district_idref="1" display_name="Cooking" voting_method="ranked">
+    <contest open_seat="3" district_idref="1" display_name="Cooking" voting_method="ranked" order="2">
       <candidates>
         <candidate party="independent" display_name="C1"/>
         <candidate party="democratic" display_name="C2"/>
         <candidate party="independent" display_name="C3"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="4" display_name="Favorite outfit" voting_method="winner take all">
+    <contest open_seat="1" district_idref="4" display_name="Favorite outfit" voting_method="winner take all" order="1">
       <candidates>
         <candidate party="democratic" display_name="Ghost"/>
         <candidate party="independent" display_name="Pirate"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="1" display_name="House cleaning" voting_method="winner take all">
+    <contest open_seat="1" district_idref="1" display_name="House cleaning" voting_method="winner take all" order="4">
       <candidates>
         <candidate party="independent" display_name="Alekx"/>
         <candidate party="democratic" display_name="Jud"/>
         <candidate party="democratic" display_name="Lou"/>
       </candidates>
     </contest>
-    <contest open_seat="1" district_idref="2" display_name="Roof walk" voting_method="winner take all">
+    <contest open_seat="1" district_idref="2" display_name="Roof walk" voting_method="winner take all" order="3">
       <candidates>
         <candidate party="democratic" display_name="Al daddy"/>
         <candidate party="democratic" display_name="Mike StG daddy"/>

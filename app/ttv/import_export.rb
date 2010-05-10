@@ -46,6 +46,7 @@ module TTV
         contests = []
         xmlContests.each do |xmlContest|
           contest = Contest.create(:display_name => xmlContest.attributes['display_name'],
+          :order => xmlContest.attributes['order'],
           :open_seat_count => xmlContest.attributes['open_seat'],
           :voting_method_id => VotingMethod.xmlToId(xmlContest.attributes['voting_method'] || 'winner'),
           :district_id => @importIdDistrictMap[xmlContest.attributes['district_idref']],
