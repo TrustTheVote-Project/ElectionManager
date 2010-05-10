@@ -27,7 +27,7 @@
   </table>
   <div class="actions-bar wat-cf">
     <div class="actions">
-      <%= link_to "#{t("web-app-theme.new", :default => "Add new contest")}", :controller => "contests", :action => "new" if current_context.jurisdiction? %> 
+      <%= link_to "#{t("web-app-theme.new", :default => "Add new contest")}", :controller => "contests", :action => "new" %> 
     </div>
     <%= will_paginate @contests %>
   </div>
