@@ -13,3 +13,7 @@ h1.title-header {
    color: #eaeaea;
    line-height: 100%; 
 }
+
+span.error_message {
+  color: red;
+}
