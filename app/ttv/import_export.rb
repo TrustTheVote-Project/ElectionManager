@@ -211,7 +211,8 @@ module TTV
         @xml.contest :display_name => contest.display_name, 
         :open_seat => contest.open_seat_count,
         :voting_method => contest.voting_method.idToXml,
-        :district_idref => contest.district_id  do
+        :district_idref => contest.district_id,
+        :order => contest.order do
           @xml.candidates do
             contest.candidates.each do |candidate|
               exportCandidate(candidate)

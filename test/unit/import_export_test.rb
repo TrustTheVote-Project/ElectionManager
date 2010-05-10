@@ -28,17 +28,27 @@ class ImportExportTest < ActiveSupport::TestCase
   
   end
 
-  def test_Export
-    file = File.new( RAILS_ROOT + "/db/samples/BestDaddy2009.xml")
-    election = TTV::ImportExport.import(file)
-
-    election = Election.find(:first)
-    assert_not_nil(election, "Must have something to export in order to test it")
-    xml = TTV::ImportExport.export(election)
-    new_xml = REXML::Document.new xml
-    assert_not_nil(new_xml)
-    display_name = new_xml.root.attributes['display_name']
-    assert_equal(election.display_name, display_name)
+  context "exporting an XML file" do
+    setup do
+      file = File.new( RAILS_ROOT + "/db/samples/BestDaddy2009.xml")
+      @election = TTV::ImportExport.import(file)
+  
+      @election = Election.find(:first)
+      assert_not_nil(@election, "Must have something to export in order to test it")
+      xml = TTV::ImportExport.export(@election)
+      @new_xml = REXML::Document.new xml
+    end
+    
+    should "export the display name" do
+      assert_not_nil(@new_xml)
+      display_name = @new_xml.root.attributes['display_name']
+      assert_equal(@election.display_name, display_name)
+    end
+    
+    should "export the contest display order" do
+      assert_equal 2, @new_xml.root.elements["body/contest[@display_name='Cooking']"].attributes["order"].to_i
+    end
+    
   end
   
 end
