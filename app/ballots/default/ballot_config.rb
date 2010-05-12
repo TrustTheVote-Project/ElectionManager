@@ -559,7 +559,7 @@ module DefaultBallot
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
         unless @instruction_text_url.index("missing")
-          @pdf.image image_path(@instruction_text_url)
+          @pdf.pdf "#{RAILS_ROOT}/public/#{@instruction_text_url}"
         end
       end
       rect.top = rect.bottom
