@@ -9,7 +9,7 @@
   <div class="content">            
     <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> Ballot Style Template</h2>
     <div class="inner">
-      <% form_for @ballot_style_template, :url => ballot_style_template_path(@ballot_style_template), :html => { :class => :form } do |f| -%>
+      <% form_for @ballot_style_template, :url => ballot_style_template_path(@ballot_style_template), :html => { :class => :form, :multipart => true } do |f| -%>
         <%= render :partial => "form", :locals => {:f => f} %>
       <% end -%>
     </div>
