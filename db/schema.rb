@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100506180445) do
+ActiveRecord::Schema.define(:version => 20100512133144) do
 
   create_table "ballot_style_templates", :force => true do |t|
     t.string   "display_name"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(:version => 20100506180445) do
     t.integer  "default_language"
     t.string   "state_signature_image"
     t.integer  "medium_id"
-    t.string   "instructions_pdf_file_name"
-    t.string   "instructions_pdf_content_type"
-    t.string   "instructions_pdf_file_size"
+    t.string   "instructions_image_file_name"
+    t.string   "instructions_image_content_type"
+    t.string   "instructions_image_file_size"
   end
 
   create_table "ballot_styles", :force => true do |t|

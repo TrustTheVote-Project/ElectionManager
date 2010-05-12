@@ -139,7 +139,7 @@ class Election < ActiveRecord::Base
     def render_ballot(election, precinct, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
       lang = Language.find(ballot_style_template.default_language).code
-      instruction_text_url = ballot_style_template.instructions_pdf.url
+      instruction_text_url = ballot_style_template.instructions_image.url
       medium_id = ballot_style_template.medium_id
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       
@@ -158,7 +158,7 @@ class Election < ActiveRecord::Base
     def render_ballots(election, precincts, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
       lang = Language.find(ballot_style_template.default_language).code
-      instruction_text_url = ballot_style_template.instructions_pdf.url
+      instruction_text_url = ballot_style_template.instructions_image.url
       ballot_array = Array.new
       precincts.each do |precinct|
         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
