@@ -1,7 +1,7 @@
 INSTALL
 # install required gems
-<<<<<<< HEAD
 rake gems:install
+install imagemagick and ghostscript (for paperclip)
 rake db:reset ttv:seed ttv:develop # initialize the database
 rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
 rake test # run tests
