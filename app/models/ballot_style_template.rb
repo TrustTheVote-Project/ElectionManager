@@ -1,7 +1,7 @@
 class BallotStyleTemplate < ActiveRecord::Base
   validates_presence_of [:display_name], :on => :create, :message => "can't be blank"
   
-  has_attached_file :instructions_pdf,
+  has_attached_file :instructions_image,
     :styles => {
       :thumb=> "100x100#",
       :small  => "150x150>"
