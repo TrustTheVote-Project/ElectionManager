@@ -12,7 +12,7 @@
   </div>
 
   <div class="group">
-    <%= f.label :instruction_image, t("activerecord.attributes.ballot_style_template.instruction_text", :default => "Instruction text"), :class => :label %>
+    <%= f.label :instruction_image, t("activerecord.attributes.ballot_style_template.instruction_text", :default => "Instructions Image:"), :class => :label %>
     <%= f.file_field :instructions_image %>
 	<%= image_tag(@ballot_style_template.instructions_image.url(:thumb)) %>
   
