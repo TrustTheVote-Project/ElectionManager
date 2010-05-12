@@ -11,7 +11,7 @@
         &nbsp;
       </th>
     </tr>
-    <% @contests.sort!{|c1,c2|c1.order <=> c2.order} %>
+    <% @contests.sort!{|c1,c2|c1.position <=> c2.position} %>
     <% @contests.each do |contest| -%>
     <tr class="<%= cycle("odd", "even") %>">
       <td>

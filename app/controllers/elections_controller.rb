@@ -1,7 +1,15 @@
 class ElectionsController < ApplicationController
   
   # load_and_authorize_resource
-  
+  def sort
+@election = Election.find(params[:id])
+@election.contests.each do |contest|
+contest.position = params['contest-list'].index(contest.id.to_s) + 1
+contest.save
+end
+render :nothing => true
+end
+
   def index
     @elections = Election.paginate(:per_page => 10, :page => params[:page])
     current_context.reset
@@ -128,6 +136,5 @@ class ElectionsController < ApplicationController
     flash[:notice] = "Election was successfully translated"
     redirect_to precincts_election_url
   end
-
 end
 
