@@ -1,8 +1,12 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
+class UsersMockControllerTest < ActionController::TestCase
   context "without a logged in user" do
-
+    
+    setup do
+      @controller = UsersController.new
+    end
+    
     # TODO: Should be able to show the users without being logged_in?
     context "on GET to :index" do    
       setup do
