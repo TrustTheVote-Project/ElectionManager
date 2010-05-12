@@ -28,6 +28,9 @@ Rails::Initializer.run do |config|
   config.gem 'redgreen', :version => '>=1.2.2'
   config.gem 'searchlogic', :version => '>=2.4.14'
   config.gem 'cancan'
+  config.gem 'faker'
+  config.gem 'machinist'
+  config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
