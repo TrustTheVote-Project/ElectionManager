@@ -12,8 +12,10 @@
   </div>
 
   <div class="group">
-    <%= f.label :instruction_text, t("activerecord.attributes.ballot_style_template.instruction_text", :default => "Instruction text"), :class => :label %>
-    <%= f.text_area :instruction_text, :class => 'text_area' %>
+    <%= f.label :instruction_image, t("activerecord.attributes.ballot_style_template.instruction_text", :default => "Instruction text"), :class => :label %>
+    <%= f.file_field :instructions_image %>
+	<%= image_tag(@ballot_style_template.instructions_image.url(:thumb)) %>
+  
     <span class="description">Instructions for filling out ballots of this style</span>
   </div>
 

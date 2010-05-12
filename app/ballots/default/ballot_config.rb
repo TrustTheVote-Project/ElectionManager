@@ -559,7 +559,7 @@ module DefaultBallot
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
         unless @instruction_text_url.index("missing")
-          @pdf.pdf "#{RAILS_ROOT}/public/#{@instruction_text_url}"
+          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 170, :height => 600 #need to move sizes into style template?
         end
       end
       rect.top = rect.bottom

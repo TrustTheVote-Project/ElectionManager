@@ -21,7 +21,7 @@
 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.instruction_text", :default => t("activerecord.labels.instruction_text", :default => "Instruction text")) %>:</b>
-          <%= link_to image_tag(@ballot_style_template.instructions_pdf.url(:thumb)), @ballot_style_template.instructions_pdf.url, :popup => true %>
+          <%= link_to image_tag(@ballot_style_template.instructions_image.url(:thumb)), @ballot_style_template.instructions_image.url, :popup => true %>
         </p>
 
         <p>
