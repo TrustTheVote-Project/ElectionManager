@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20100512193008) do
     t.integer  "election_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "position"
+    t.integer  "position",         :default => 0
   end
 
   create_table "district_sets", :force => true do |t|
