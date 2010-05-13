@@ -115,4 +115,15 @@ class ContestsController < ApplicationController
     end
   end
 
+  def up
+    @contest = Contest.find(params[:id])
+
+    flash[:notice] = "Contest ##{@contest.order} should be moved up." 
+    asdasd
+  end
+
+  def down
+    "Hey!"
+  end
+
 end
