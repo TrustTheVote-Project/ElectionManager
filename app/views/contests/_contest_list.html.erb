@@ -2,8 +2,10 @@
   <table class="table">
     <thead>
       <tr>
+        <% unless current_context.election.nil? -%>         
         <th>Position
         </th>
+        <% end -%>
         <th>
           <%= t("activerecord.attributes.contest.contest", :default => t("activerecord.labels.contest", :default => "Contest")) %>
         </th>
@@ -18,9 +20,11 @@
     <tbody id="contest-list">
       <% @contests.each do |contest| -%>
         <% content_tag_for(:tr, contest, :class => cycle(:odd, :even)) do %>
-        <td class="drag_handle">
+        <% unless current_context.election.nil? -%> 
+				<td class="drag_handle">
           <b style="cursor:move">[drag]</b>
         </td>
+        <% end -%>
         <td>
           <%= link_to contest.display_name, contest_path(contest) %>
         </td>
@@ -41,5 +45,4 @@
     <%= will_paginate @contests %>
   </div>
 </div>
-<%= sortable_element('contest-list', :url => {:action => 'sort', :id => @election.id, :election => @election}, :handle => :drag_handle, :tag => :tr, :complete => visual_effect(:highlight, 'contest-list')) %>
-
+<%= sortable_element('contest-list', :url => {:action => 'sort', :id => @election}, :handle => :drag_handle, :tag => :tr, :complete => visual_effect(:highlight, 'contest-list')) unless current_context.election.nil? %>
