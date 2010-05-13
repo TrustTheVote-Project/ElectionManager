@@ -3,12 +3,6 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   
   # Lets start off with some plain ole TestUnit tests
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
-    assert_template 'index'
-  end
 
   test "should get new" do
     get :new
@@ -38,19 +32,6 @@ class UsersControllerTest < ActionController::TestCase
   
   context "without a logged in user" do
 
-    # TODO: Should be able to show the users without being logged_in?
-    context "on GET to :index" do    
-      setup do
-        tmp_user = User.make
-        User.expects(:find).with(:all).returns([tmp_user])
-        get :index
-      end
-   
-      should_assign_to :users
-      should_respond_with :success
-      should_render_template :index
-      should_not_set_the_flash
-    end # INDEX ACTION
     
     # Allow guest/public users to get the registration page.
     context "on GET to :new" do    
@@ -92,14 +73,23 @@ class UsersControllerTest < ActionController::TestCase
     # RESTRICTED ACTIONS
     # OK, Now these actions should fail without a logged in user.
     
+    # Should not be able to show the users without being logged_in?
+    context "on GET to :index" do    
+      setup do
+        get :index
+      end
+   
+      should_redirect_to("Login page") { new_user_session_url }
+      should_set_the_flash_to "You must be logged in to access this page"
+
+    end # INDEX ACTION
+    
     context "on GET to :show" do    
       setup do
         @show_user = User.make(:email => "show_user@gmail.com")
         get :show, :id => @show_user.id
       end
       
-      should_redirect_to("Login page") { new_user_session_url }
-      should_set_the_flash_to "You must be logged in to access this page"
     end # SHOW ACTION
 
     context "on GET to :edit" do    
