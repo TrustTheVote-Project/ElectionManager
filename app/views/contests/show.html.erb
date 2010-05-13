@@ -35,8 +35,8 @@
         <%= Election.find_by_id(@contest.election_id).display_name %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.order", :default => t("activerecord.labels.order", :default => "Order")) %>:</b>
-        <%= @contest.order %>
+        <b><%= t("activerecord.attributes.contest.position", :default => t("activerecord.labels.position", :default => "Position")) %>:</b>
+        <%= @contest.position %>
       </p>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_contest_path(@contest), :class => "button" %>

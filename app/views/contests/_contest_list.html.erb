@@ -1,30 +1,38 @@
 <div class="inner">
   <table class="table">
-    <tr>
-      <th>
-        <%= t("activerecord.attributes.contest.contest", :default => t("activerecord.labels.contest", :default => "Contest")) %>
-      </th>
-      <th>
-        <%= t("activerecord.attributes.contest.candidates", :default => t("activerecord.labels.candidates", :default => "Candidates")) %>
-      </th>
-      <th class="last">
-        &nbsp;
-      </th>
-    </tr>
-    <% @contests.sort!{|c1,c2|c1.position <=> c2.position} %>
-    <% @contests.each do |contest| -%>
-    <tr class="<%= cycle("odd", "even") %>">
-      <td>
-        <%= link_to contest.display_name, contest_path(contest) %>
-      </td>
-      <td>
-        <%= contest.candidates.count %>
-      </td>
-      <td class="last">
-        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-      </td>
-    </tr>
-    <% end -%>
+    <thead>
+      <tr>
+        <th>Position
+        </th>
+        <th>
+          <%= t("activerecord.attributes.contest.contest", :default => t("activerecord.labels.contest", :default => "Contest")) %>
+        </th>
+        <th>
+          <%= t("activerecord.attributes.contest.candidates", :default => t("activerecord.labels.candidates", :default => "Candidates")) %>
+        </th>
+        <th class="last">
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody id="contest-list">
+      <% @contests.each do |contest| -%>
+        <% content_tag_for(:tr, contest, :class => cycle(:odd, :even)) do %>
+        <td class="drag_handle">
+          <b style="cursor:move">[drag]</b>
+        </td>
+        <td>
+          <%= link_to contest.display_name, contest_path(contest) %>
+        </td>
+        <td>
+          <%= contest.candidates.count %>
+        </td>
+        <td class="last">
+          <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        </td>
+      <% end -%>
+      <% end -%>
+    </tbody>
   </table>
   <div class="actions-bar wat-cf">
     <div class="actions">
@@ -33,3 +41,5 @@
     <%= will_paginate @contests %>
   </div>
 </div>
+<%= sortable_element('contest-list', :url => {:action => 'sort', :id => @election.id, :election => @election}, :handle => :drag_handle, :tag => :tr, :complete => visual_effect(:highlight, 'contest-list')) %>
+
