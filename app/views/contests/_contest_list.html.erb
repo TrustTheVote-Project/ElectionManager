@@ -22,7 +22,11 @@
       </td>
       <td class="last">
         <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-      </td>
+        
+        <%= link_to "#{t("web-app-theme.up", :default => "Up")}", :controller => "contests", :method => "up", :id => contest.id %>
+         / 
+        <%= link_to "#{t("web-app-theme.down", :default => "Down")}", :controller => "contests", :method => "down" %>
+      </td>      
     </tr>
     <% end -%>
   </table>
