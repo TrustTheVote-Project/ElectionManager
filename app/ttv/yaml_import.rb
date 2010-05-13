@@ -154,10 +154,10 @@ module TTV
       else # default if none specified
         new_contest.voting_method_id = VotingMethod::WINNER_TAKE_ALL
       end
-      new_contest.order = yml_cont["display_order"] || 0
       yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
       @election.contests << new_contest
       new_contest.save
+      new_contest.insert_at(yml_cont["display_order"] || 0)
       dist.contests << new_contest
      end
     

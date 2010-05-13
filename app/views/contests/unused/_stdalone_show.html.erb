@@ -41,8 +41,8 @@
           <%= @contest.election_id %>
         </p>
         <p>
-          <strong><%= t("activerecord.attributes.contest.order", :default => t("activerecord.labels.order", :default => "Order")) %>:</strong>
-          <%= @contest.order %>HERE
+          <strong><%= t("activerecord.attributes.contest.position", :default => t("activerecord.labels.position", :default => "Position")) %>:</strong>
+          <%= @contest.position %>HERE
         </p>
         <div id="<%= dom_id(contest) -%>" class='contest'>
           <%= render :partial => 'contests/static', :locals => {:contest => contest } %>

@@ -63,7 +63,7 @@ module TTV
                       "candidates" => export_candidates(cont), 
                       "district_ident" => @district_to_ident_map[cont.district],
                       "ident" => "cont-#{cont.id}",
-                      "display_order" => cont.order}
+                      "display_order" => cont.position}
         contests_h << new_cont_h
       end
       contests_h

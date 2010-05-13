@@ -20,14 +20,31 @@ class ContestTest < ActiveSupport::TestCase
     end
     
     should 'store and retreive a contest order' do
+      contest2 = Contest.new(:display_name => "State 2 Representative")
       contest = Contest.new(:display_name => "State Representative")
       contest.voting_method =  @voting_method
       contest.district =  @election.district_set.districts.first
       contest.election =  @election
-      contest.order = 5
       
+      contest2.voting_method = @voting_method
+      contest2.district =  @election.district_set.districts.first
+      contest2.election =@election
       assert contest.save
-      assert_equal 5, contest.order
+      assert contest2.save
+      
+      contest.insert_at(500)
+      contest2.insert_at(50)
+      
+      assert_equal 50, contest2.position
+      assert_equal 500, contest.position
+
+      contest3 = Contest.new(:display_name => "State 3 Representative")
+      contest3.voting_method = @voting_method
+      contest3.district = @election.district_set.districts.first
+      contest3.election = @election
+      assert contest3.save
+      
+      assert_equal 500, contest.position
     end
   end
 

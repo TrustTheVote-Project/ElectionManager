@@ -46,13 +46,14 @@ module TTV
         contests = []
         xmlContests.each do |xmlContest|
           contest = Contest.create(:display_name => xmlContest.attributes['display_name'],
-          :order => xmlContest.attributes['order'] || 0,
           :open_seat_count => xmlContest.attributes['open_seat'],
           :voting_method_id => VotingMethod.xmlToId(xmlContest.attributes['voting_method'] || 'winner'),
           :district_id => @importIdDistrictMap[xmlContest.attributes['district_idref']],
           :election_id => @election.id )
           xmlContest.get_elements('candidates/candidate').each do | xmlCandidate |
             contest.candidates << importCandidate(xmlCandidate)
+          contest.save
+          contest.insert_at(xmlContest.attributes['order'] || 0)
           end
           contests.push(contest)
         end
@@ -212,7 +213,7 @@ module TTV
         :open_seat => contest.open_seat_count,
         :voting_method => contest.voting_method.idToXml,
         :district_idref => contest.district_id,
-        :order => contest.order do
+        :order => contest.position do
           @xml.candidates do
             contest.candidates.each do |candidate|
               exportCandidate(candidate)
