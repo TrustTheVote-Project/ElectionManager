@@ -61,7 +61,7 @@ class PrecinctsController < ApplicationController
              new_ballot = election.render_ballot(election, precinct, ballot_style_template)
              #RENDER BASED ON MEDIUM CHOSEN   
              if new_ballot[:medium_id] == 0
-                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'attachment'
+                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'inline'
              elsif new_ballot[:medium_id] == 1
                render :text => 'This is where we will generate html ballot'
              else
