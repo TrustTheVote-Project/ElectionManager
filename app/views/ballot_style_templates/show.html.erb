@@ -16,7 +16,7 @@
 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.default_voting_method", :default => t("activerecord.labels.default_voting_method", :default => "Default voting method")) %>:</b>
-          <%= @ballot_style_template.default_voting_method %>
+          <%= VotingMethod.find(@ballot_style_template.default_voting_method).display_name %>
         </p>
 
         <p>
@@ -26,18 +26,18 @@
 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.ballot_style", :default => t("activerecord.labels.ballot_style", :default => "Ballot style")) %>:</b>
-          <%= @ballot_style_template.ballot_style %>
+          <%= BallotStyle.find(@ballot_style_template.ballot_style).display_name%>
         </p>
 
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.default_language", :default => t("activerecord.labels.default_language", :default => "Default language")) %>:</b>
-          <%= @ballot_style_template.default_language %>
+          <%= Language.find(@ballot_style_template.default_language).display_name %>
         </p>
 
  
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.medium_id", :default => t("activerecord.labels.medium_id", :default => "Medium")) %>:</b>
-          <%= @ballot_style_template.medium_id %>
+          <%= Medium.find(@ballot_style_template.medium_id).display_name %>
         </p>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_ballot_style_template_path(@ballot_style_template), :class => "button" %> 

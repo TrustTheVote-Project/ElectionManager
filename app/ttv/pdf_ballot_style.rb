@@ -36,14 +36,14 @@ class PDFBallotStyle
   end
 
   def self.get_ballot_config(style, lang, election, scanner, instruction_text_url)
-    begin
+    #begin
       ballot_defining_module = style.camelize + "Ballot"
       mod = ballot_defining_module.constantize
       mod::BallotConfig.new(style, lang, election, scanner, instruction_text_url)
-    rescue => ex
-      Rails.logger.error(ex)
-      raise "Unknown Ballot Style: #{style}"
-    end
+    #rescue => ex
+    #  Rails.logger.error(ex)
+    #  raise "Unknown Ballot Style: #{style}"
+    #end
   end
 end
 
