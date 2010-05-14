@@ -559,13 +559,13 @@ module DefaultBallot
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
         unless @instruction_text_url.index("missing")
-          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 170, :height => 600 #need to move sizes into style template?
+          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600, :at =>[-6,+2] #need to move sizes into style template?
         end
       end
       rect.top = rect.bottom
       @pdf.line_width 0.5
-      @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-      @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+      #@pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+     # @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
     end
 
     def page_complete(pagenum, last_page)
