@@ -21,9 +21,9 @@ module ApplicationHelper
   def icon_helper
     curr_jurisd = session[:jurisdiction]
     if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
-      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdiction)
+      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdictions)
     else
-      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdiction)
+      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdictions)
     end
   end
 
@@ -56,7 +56,7 @@ module ApplicationHelper
     content_tag(:div, :class =>"banner_right") do
       content_tag(:ul, :class => "wat-cf") do
         if current_user()
-          content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdiction_path)) +
+          content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdictions_path)) +
           content_tag(:li) { current_user.email } + 
           content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
           content_tag(:li) { link_to("Logout", logout_path) }
