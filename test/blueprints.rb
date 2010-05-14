@@ -28,7 +28,9 @@ Sham.define do
 
   role_name(:unique => false) { %w{ root standard public }.rand }
   
-  jurisdiction_name { %w{Northern MiddleSex Southern}.rand }
+  jurisdiction_name(:unique => false) { %w{Northern MiddleSex Southern}.rand }
+
+  display_name(:unique => false) { Faker::Lorem.words(1).first }
   
 end
 
@@ -64,5 +66,9 @@ DistrictSet.blueprint do
   secondary_name { "secondary name" + Sham.jurisdiction_name }
 end
 
-
+Election.blueprint do
+  display_name 
+  district_set
+  start_date  { Sham.date_time }
+end
 
