@@ -56,8 +56,8 @@ class  ActionController::TestCase
   setup :activate_authlogic
   
   setup {
-      # turn off automatic session creation when a user is created,
+    # turn off automatic session creation when a user is created,
     # this is a added to the User model by authlogic
-    User.maintain_sessions = false    
+    # User.maintain_sessions = false    
     }
 end
