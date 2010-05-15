@@ -39,4 +39,6 @@ class ElectionsControllerTest < ActionController::TestCase
       should_redirect_to("New Election") { new_election_url}
     end
   end # END "without a logged in user"
+
+  # more election tests in the elections_access_test.rb 
 end
