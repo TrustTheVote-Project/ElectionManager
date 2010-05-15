@@ -1,18 +1,24 @@
 class ActiveSupport::TestCase
-  
+  # WARNING: This doesn't work in side of another context??
+  # must be at the top level of the test??
   def self.login_as(options={})
     context 'with logged in user' do
       setup do
-        @logged_in_user = User.make(options)
+        # get all but the roles
+        user_options = options.except(:roles)
+        @logged_in_user = User.make(user_options)
+        options[:roles].each do |rn|
+          @logged_in_user.roles << UserRole.make(:name => rn)
+        end if options[:roles]
+        
+        # @logged_in_user.save!
         # login as one user
         UserSession.create!(@logged_in_user)
       end
       
       yield 
-      
     end
   end
-  
   
   def self.setup_user_roles(options={})
     options = {:role_name => 'guest'}.merge(options)
