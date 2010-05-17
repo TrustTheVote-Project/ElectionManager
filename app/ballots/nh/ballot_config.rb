@@ -198,7 +198,7 @@ module NhBallot
          # @pdf.text @instruction_text
         #end
         unless @instruction_text_url.index("missing")
-           @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 500, :height => 90, :at =>[30,735] #need to move sizes into style template?
+           @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :fit => [700,90], :at =>[30,735] #need to move sizes into style template?
          end
           
         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
