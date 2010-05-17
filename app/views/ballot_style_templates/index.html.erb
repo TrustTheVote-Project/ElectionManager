@@ -8,7 +8,8 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", ballot_style_templates_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_ballot_style_template_path %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New Office Block Template")}", :action => 'new', :template => 'office_block' %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New Party Column Template")}", :action => 'new', :template => 'party_column' %></li>
     </ul>
   </div>       
   <div class="content">          
