@@ -1,7 +1,5 @@
 class BallotStyleTemplatesController < ApplicationController
-  require "rubygems"
-  require "image_size"
-  require "open-uri"
+
   
   layout 'application'
   
@@ -54,25 +52,19 @@ class BallotStyleTemplatesController < ApplicationController
   # POST /ballot_style_templates
   # POST /ballot_style_templates.xml
   def create
-    
-    open("http://localhost:3000/system/instructions_images/5/original/instructions.png", "rb") do |fh|
-        unless ImageSize.new(fh.read).get_size == [331, 1600]
-          render :action => "new"
-        end
-      end
-    
+
     @ballot_style_template = BallotStyleTemplate.new(params[:ballot_style_template])
 
-    # respond_to do |format|
-    #   if @ballot_style_template.save
-    #     flash[:notice] = 'BallotStyleTemplate was successfully created.'
-    #     format.html { redirect_to(@ballot_style_template) }
-    #     format.xml  { render :xml => @ballot_style_template, :status => :created, :location => @ballot_style_template }
-    #   else
-    #     format.html { render :action => "new" }
-    #     format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+         if @ballot_style_template.save
+           flash[:notice] = 'BallotStyleTemplate was successfully created.'
+           format.html { redirect_to(@ballot_style_template) }
+           format.xml  { render :xml => @ballot_style_template, :status => :created, :location => @ballot_style_template }
+         else
+           format.html { render :action => "new" }
+           format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
+         end
+       end
   end
 
   # PUT /ballot_style_templates/1
@@ -82,7 +74,7 @@ class BallotStyleTemplatesController < ApplicationController
 
     respond_to do |format|
       if @ballot_style_template.update_attributes(params[:ballot_style_template])
-        flash[:notice] = 'BallotStyleTemplate was successfully updated.'
+        flash[:notice] = 'Ballot Style Template was successfully updated.'
         format.html { redirect_to(@ballot_style_template) }
         format.xml  { head :ok }
       else
