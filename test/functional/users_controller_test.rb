@@ -2,6 +2,12 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   
+  setup do
+    # turn off automatic session creation when a user is created,
+    # this is a added to the User model by authlogic
+    User.maintain_sessions = false    
+  end
+  
   # Lets start off with some plain ole TestUnit tests
 
   test "should get new" do
