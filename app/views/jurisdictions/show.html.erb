@@ -16,7 +16,7 @@
     <div class="inner">
       <p>
         <b><%= t("activerecord.attributes.jurisdiction.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
-        <%= @district_set.display_name %>
+        <%=current_context.jurisdiction_name %>
       </p>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_jurisdiction_path(@district_set), :class => "button" %>

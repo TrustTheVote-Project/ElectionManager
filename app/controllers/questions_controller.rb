@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   def index
+    current_context.reset
     @questions = Question.all
   end
 

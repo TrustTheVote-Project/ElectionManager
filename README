@@ -1,9 +1,8 @@
 INSTALL
 # install required gems
-<<<<<<< HEAD
-rake gems:install
-rake db:reset ttv:seed ttv:develop # initialize the database
-rake db:test:load ttv:seed RAILS_ENV=test # initialize the test database
+
+sudo rake gems:install
+rake ttv:full_resert
 rake test # run tests
 script/server # start the server
 
@@ -18,6 +17,11 @@ http://stackoverflow.com/questions/1097845/how-to-prevent-rake-test-to-call-task
 GEM COMMENTARY
 Prawn 0.6.3 is required due to incompatibility with 0.7
 http://github.com/sandal/prawn/issues/#issue/79
+
+BUILT-IN TEST USERS
+root user: moe@example.com pw: password
+standard user: larry@example.com pw: password
+public user: curly@example.com pw: password
 
 TODO
 - db transaction logging and viewing
@@ -104,4 +108,3 @@ http://www.oscaralexander.com/tutorials/how-to-make-sexy-buttons-with-css.html
 /activesupport/lib/activesupport/coreext/hash/conversions Hash::to_xml
 Options for generating seed data: http://derekdevries.com/2009/04/13/rails-seed-data/
 Doing i10n in database schemas: http://java.sun.com/blueprints/guidelines/designing_enterprise_applications_2e/i18n/i18n5.html
-

@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def icon_helper
-    curr_jurisd = session[:jurisdiction]
+    curr_jurisd = current_context.jurisdiction
     if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
       link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdictions)
     else

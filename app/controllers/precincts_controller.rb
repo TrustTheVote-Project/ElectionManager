@@ -7,8 +7,8 @@ CHECKBOX = "\xE2\x98\x90" # "☐"
 class PrecinctsController < ApplicationController
 
   def index
-    @precincts = Precinct.paginate(:per_page => 10, :page => params[:page])
     current_context.reset
+    @precincts = Precinct.paginate(:per_page => 10, :page => params[:page])
   end
 
   def show

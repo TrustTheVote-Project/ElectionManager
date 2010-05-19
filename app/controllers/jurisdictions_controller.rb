@@ -4,7 +4,9 @@ class JurisdictionsController < ApplicationController
     if !current_context.jurisdiction?
       redirect_to :action => :change
     else
-      redirect_to :elections
+      current_context.election = nil
+      @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
+      render :elections
     end  
   end
   
