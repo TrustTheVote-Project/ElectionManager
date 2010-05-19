@@ -31,4 +31,5 @@ config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => '>=2.10.1'
 config.gem 'machinist'
 config.gem 'faker'
 config.gem 'mocha'
-
+config.gem 'webrat', :lib => false
+config.gem 'cucumber', :lib => false
