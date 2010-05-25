@@ -15,8 +15,6 @@ Feature: Manage Elections
     And I should not see "Delete"
     And I should not see "New"
 
-
-
   Scenario: Show an Election to a public user
     Given I am a public user
     And I have election titled Election 1

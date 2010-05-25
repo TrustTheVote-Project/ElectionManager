@@ -25,7 +25,15 @@ class ApplicationController < ActionController::Base
     fresh_when(:etag => rand)
   end
   
-private
+  
+  def current_context
+    if session[:current_context].nil?
+      session[:current_context] = UserContext.new
+    end
+    session[:current_context]
+  end
+  
+  private
 
   def pluralize(count, singular, plural = nil)
     "#{count || 0} " + ((count == 1 || count == '1') ? singular : (plural || singular.pluralize))
@@ -42,13 +50,6 @@ private
     return d.strftime("%A, %B %d %Y, %I:%M %p %Z") if d.respond_to? :strftime
     return d.to_s unless d.nil?
     return "unspecified date"
-  end
-  
-  def current_context
-    if session[:current_context].nil?
-      session[:current_context] = UserContext.new
-    end
-    session[:current_context]
   end
   
   
