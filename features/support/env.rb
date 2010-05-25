@@ -56,5 +56,5 @@ if defined?(ActiveRecord::Base)
   end
 end
 
-# Add machinist
-require File.join(RAILS_ROOT, 'test', 'blueprints')
+# Add machinist blueprints
+require "#{Rails.root}/test/blueprints"

@@ -1,3 +1,4 @@
+@elections
 Feature: Manage Elections
   In order manage elections
   As a public user
@@ -42,7 +43,31 @@ Feature: Manage Elections
     Then I should see "Access Denied"
     # And I should be on the home page
 
+    
+  Scenario: Show the list of Elections to a standard user
+    Given I am a standard user
+    And I have elections titled Election 1, Election 2
+    When I go to the list of elections
+    Then I should see "Election 1"
+    And I should see "Election 2"
+    And I should see "Show"
+    And I should see "List"
+    And I should see "Edit"
+    And I should see "Delete"
+    And I should see "New"
+
+  Scenario: Show the elections
+    Given I am logged in as one of the following users
+    | email          | password    | role      |
+    | curly@foo.com  | mypassword  | public    | 
+    | larry@foo.com  | mypassword  | standard  | 
+    | moe@foo.com    | mypassword  | root      | 
+    
+  Scenario: Show the elections for roles
+    Given Users with the following roles
+    | role      |
+    | public    | 
+    | standard  | 
+    | root      | 
 
 
-
-  
