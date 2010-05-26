@@ -115,15 +115,15 @@ class ContestsController < ApplicationController
     end
   end
 
-  def up
+  def move
     @contest = Contest.find(params[:id])
+    direction = params[:direction] == "up"?"up":"down"
 
-    flash[:notice] = "Contest ##{@contest.order} should be moved up." 
-    asdasd
-  end
+    new_order = direction == "up"?@contest.order+1:@contest.order-1
 
-  def down
-    "Hey!"
+    @contest.update_attributes(:order => new_order)
+    flash[:notice] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", has been moved " + direction
+    redirect_to(:back)
   end
 
 end
