@@ -7,11 +7,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ballot_styles
   map.resources :ballot_style_templates
   
-  
-#  map.current_jurisdiction "jurisdiction/current", :controller => :jurisdiction, :action => :index 
-#  map.change_jurisdiction "jurisdiction/change_jurisdiction", :controller => :jurisdiction, :action =>  :change_jurisdiction
-#  map.set_jurisdiction "jurisdiction/set_jurisdiction/:id", :controller => :jurisdiction, :action => :set_jurisdiction 
-  
   map.resources :jurisdictions,
     :collection => {:current => :get,
                     :change => :get},

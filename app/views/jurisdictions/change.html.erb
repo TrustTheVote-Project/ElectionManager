@@ -13,7 +13,7 @@
              <%= link_icon_for district_set %>
           </div>
           <div class="item">
-            <h3><%= district_set.display_name %> </h3>
+            <h3><%= link_to district_set.display_name, set_jurisdiction_path(district_set) %> </h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
             </p>
@@ -25,3 +25,5 @@
   </div>
 </div>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>
+
+ 

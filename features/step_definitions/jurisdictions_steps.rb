@@ -3,3 +3,8 @@ Given /^there are jurisdictions titled (.+)$/ do |jurisdictions|
     DistrictSet.make(:display_name => a_jurisdiction)
   end
 end
+
+When /^choose jurisdiction "([^\"]*)"$/ do |link|
+  click_link(link)
+end
+
