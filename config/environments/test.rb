@@ -30,4 +30,5 @@ config.action_mailer.delivery_method = :test
 config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => '>=2.10.1'
 config.gem 'machinist'
 config.gem 'faker'
+config.gem 'mocha'
 
