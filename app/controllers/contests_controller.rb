@@ -130,6 +130,11 @@ class ContestsController < ApplicationController
     else
       
       # Reordering logic goes here
+      # Squish all order numbers
+      contests.each do |cont|
+        cont.update_attributes(:order => (contests.index cont))
+      end
+      
       old_order = @contest.order
       if direction == "up"
         contests[contest_index].update_attributes(:order => contests[contest_index-1].order)
