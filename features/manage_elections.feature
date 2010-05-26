@@ -56,18 +56,4 @@ Feature: Manage Elections
     And I should see "Delete"
     And I should see "New"
 
-  Scenario: Show the elections
-    Given I am logged in as one of the following users
-    | email          | password    | role      |
-    | curly@foo.com  | mypassword  | public    | 
-    | larry@foo.com  | mypassword  | standard  | 
-    | moe@foo.com    | mypassword  | root      | 
-    
-  Scenario: Show the elections for roles
-    Given Users with the following roles
-    | role      |
-    | public    | 
-    | standard  | 
-    | root      | 
-
 
