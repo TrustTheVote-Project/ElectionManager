@@ -1,8 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.resources :media
-  map.resources :media
-  map.resources :languages
   map.resources :languages
   map.resources :ballot_styles
   map.resources :ballot_style_templates
@@ -15,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates
+  map.resources :contests, :member => { :move => :get }
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
