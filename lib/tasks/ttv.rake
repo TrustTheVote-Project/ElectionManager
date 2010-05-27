@@ -1,4 +1,5 @@
 require 'active_record/fixtures'
+require 'ttv/yaml_import'
 
 Rake.application.remove_task 'db:test:prepare'
 
@@ -25,9 +26,25 @@ namespace :ttv do
   task :test_reset => :environment do
     RAILS_ENV = 'test'
     ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
-    Rake::Task['db:schema:load'].execute
 
     Rake::Task['ttv:seed'].execute
+  end
+
+  desc "Full Reset of DB for production"
+  task :production_reset => :environment do
+    ENV['RAILS_ENV'] = 'production'
+
+    puts 1
+    Rake::Task['db:reset'].invoke
+    puts 2
+    Rake::Task['db:schema:load'].execute
+puts 3
+    Rake::Task['db:seed'].invoke
+    puts 4
+    ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['development'])
+    Rake::Task['ttv:seed'].invoke
+    puts 5
+    Rake::Task['ttv:production'].invoke
   end
   
   desc "Full Reset of DB for test and development"
@@ -45,8 +62,22 @@ namespace :ttv do
   task :develop => :environment do     
     load_fixtures 'seed/develop'
   end
+
+  desc "Seed the database with develop/ fixtures."
+  task :production => :environment do     
+    import_yaml 'seed/production'
+  end
   
   private
+
+  def import_yaml(dir)
+    Dir.glob(File.join(RAILS_ROOT, 'db', dir, '*.yml')).each do |fixture_file|
+      puts "Loading #{fixture_file}"
+      filename = File.basename(fixture_file, '.yml')
+      importer = TTV::YAMLImport.new(File.join('db/', dir, filename))
+      importer.import
+    end
+  end
 
   def load_fixtures(dir)
     Dir.glob(File.join(RAILS_ROOT, 'db', dir, '*.yml')).each do |fixture_file|
