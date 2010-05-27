@@ -12,8 +12,7 @@ ActionController::Routing::Routes.draw do |map|
                  :elections => :get}
   
   map.resources :candidates, :except => [:create]
-  map.resources :contests, :has_many => :candidates
-  map.resources :contests, :member => { :move => :get }
+  map.resources :contests, :has_many => :candidates, :member => { :move => :get }
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
@@ -25,7 +24,6 @@ ActionController::Routing::Routes.draw do |map|
           districts.resources :questions, :only => [:new]
         end
       elections.resources :precincts, :member => { :ballot => :get }, :only => []
-      elections.resources :precincts, :member => { :ballots => :get }, :only => []
       elections.resources :contests
     end
   map.resources :parties
