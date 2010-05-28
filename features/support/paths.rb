@@ -12,8 +12,9 @@ module NavigationHelpers
       root_path
     when /the list of elections/
       elections_path
-    when /the show election (.*) page/i
-      election_path(1)
+      #    when /the show election (.*) page/i
+    when /the show election "([^\"]*)" page/i
+      election_path(Election.find_by_display_name($1))
     when /the new election page/i
       new_election_path
       
