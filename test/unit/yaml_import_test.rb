@@ -3,7 +3,7 @@ require 'ttv/yaml_import'
 
 
 class YAMLImportTest < ActiveSupport::TestCase
-  
+
   context "Using generated.yml for import" do
     setup do
       @file = File.new("#{RAILS_ROOT}/test/elections/generated.yml")
