@@ -3,7 +3,7 @@ Given /^I have elections titled? (.+)$/ do |elections|
     Election.make(:display_name => election)
   end
 end
-Given /^I have election titled (.+)$/ do |election|
+Given /^I have an election titled (.+)$/ do |election|
   Election.make(:display_name => election)
 end
 
