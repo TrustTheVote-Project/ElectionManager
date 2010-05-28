@@ -22,7 +22,7 @@
       </p>
       <p>
         <b><%= t("activerecord.attributes.election.district_set_id", :default => t("activerecord.labels.district_set_id", :default => "District set")) %>:</b>
-        <%= @election.district_set_id %>
+        <%= DistrictSet.find_by_id(@election.district_set_id).display_name %>
       </p>
       <p>
         <b><%= t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => t("VotingMethod.find(activerecord.attributes.election.default_voting_method_id).display_name", :default => "Default Voting Method")) %>:</b>
