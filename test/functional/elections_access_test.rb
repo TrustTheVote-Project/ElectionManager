@@ -113,7 +113,7 @@ class ElectionsControllerAccessTest < ActionController::TestCase
   
   # with a logged in user
   self.login_as(:roles => %w{standard }) do
-    context "election access " do
+    context "election access" do
       
       setup do
         @controller = ElectionsController.new
@@ -162,7 +162,7 @@ class ElectionsControllerAccessTest < ActionController::TestCase
         should_render_template :new
         should_not_set_the_flash
 
-        should "respond with success" do
+        should "create a new election record" do
           assert assigns(:election).new_record?
         end
       end

@@ -92,7 +92,7 @@ class LoginTest < ActionController::TestCase
         assert_equal "standard", assigns(:current_user).roles.first.name
       end
 
-      should "respond with success" do
+      should "have create a new election record" do
         assert assigns(:current_user)
         assert_equal "standard", assigns(:current_user).roles.first.name
         assert assigns(:current_user).role?(:standard)
