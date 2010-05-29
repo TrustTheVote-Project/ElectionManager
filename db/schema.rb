@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428163925) do
+ActiveRecord::Schema.define(:version => 20100503151114) do
 
   create_table "ballot_style_templates", :force => true do |t|
     t.string   "display_name"
@@ -57,6 +57,10 @@ ActiveRecord::Schema.define(:version => 20100428163925) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "secondary_name"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "district_sets_districts", :id => false, :force => true do |t|

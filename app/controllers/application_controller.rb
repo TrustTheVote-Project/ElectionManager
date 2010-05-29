@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password,:confirm_password
   
-  helper_method :current_user, :pretty_date, :pluralize
+  helper_method :current_user, :pretty_date, :pluralize, :current_context
   
   before_filter :disable_etags
   after_filter :flash_xhr
@@ -25,7 +25,15 @@ class ApplicationController < ActionController::Base
     fresh_when(:etag => rand)
   end
   
-private
+  
+  def current_context
+    if session[:current_context].nil?
+      session[:current_context] = UserContext.new
+    end
+    session[:current_context]
+  end
+  
+  private
 
   def pluralize(count, singular, plural = nil)
     "#{count || 0} " + ((count == 1 || count == '1') ? singular : (plural || singular.pluralize))
@@ -43,6 +51,7 @@ private
     return d.to_s unless d.nil?
     return "unspecified date"
   end
+  
   
   # 
   # Authlogic authenticatoin methods

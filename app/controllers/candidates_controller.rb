@@ -1,6 +1,7 @@
 class CandidatesController < ApplicationController
 
   def index
+    current_context.reset
     @candidates = Candidate.paginate(:per_page => 10, :page => params[:page])
   end
 

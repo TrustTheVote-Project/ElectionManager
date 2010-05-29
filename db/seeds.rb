@@ -13,4 +13,3 @@ end
 moe.roles << UserRole.find_by_name('root')
 larry.roles << UserRole.find_by_name('standard')
 curly.roles << UserRole.find_by_name('public')
-

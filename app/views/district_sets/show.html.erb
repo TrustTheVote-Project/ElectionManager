@@ -18,6 +18,12 @@
           <b><%= t("activerecord.attributes.district_set.secondary_name", :default => t("activerecord.labels.secondary_name", :default => "Secondary name")) %>:</b>
           <%= @district_set.secondary_name %>
         </p>
+        
+        <p>
+          <b><%= t("activerecord.attributes.district_set.icon", :default => t("activerecord.labels.icon", :default => "Icon")) %>:</b>
+          <%= image_tag @district_set.icon.url(:thumb) %>
+        </p>
+
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_district_set_path(@district_set), :class => "button" %> 
         <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", district_set_path(@district_set), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>

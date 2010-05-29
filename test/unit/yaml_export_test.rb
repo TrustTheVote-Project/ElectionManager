@@ -51,6 +51,8 @@ class YAMLExportTest < ActiveSupport::TestCase
       assert_equal "State Initiative Measure 1033", res_hash["ballot_info"]["question_list"][0]["display_name"]
       assert_equal  "Initiative Measure No. 1033 concerns state, county and city revenue. | |This measure would limit growth of certain state, county and city revenue to annual inflation and population growth, not including voter-approved revenue increases. Revenue collected above the limit would reduce property tax levies.  | |Should this measure be enacted into law? Yes [ ] No [ ]",
                     res_hash["ballot_info"]["question_list"][0]["question"]
+      assert_equal "Belfair Water Dist Water Commissioner Position #1", res_hash["ballot_info"]["contest_list"][0]["display_name"]
+      assert_equal 519, res_hash["ballot_info"]["contest_list"][0]["display_order"]
       
     end
   end

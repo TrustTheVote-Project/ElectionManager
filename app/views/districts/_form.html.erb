@@ -2,19 +2,25 @@
     <% districts = DistrictType.find(:all, :order => :id) %>
     <%= f.label :district_type_id, t("activerecord.attributes.district.district_type_id", :default => "District type"), :class => :label %>
     <%= f.collection_select :district_type_id, districts, :id, :title %>
-    <span class="description">Ex: a simple text</span>
   </div>
 
   <div class="group">
     <%= f.label :display_name, t("activerecord.attributes.district.display_name", :default => "Display name"), :class => :label %>
     <%= f.text_field :display_name, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+    <span class="description">Name of district</span>
+  </div>
+
+  <div class="group">
+    <% district_sets = DistrictSet.find(:all, :order => :id) %>
+    <%= f.label :district_set_id, t("activerecord.attributes.district.district_sets", :default => "District set"), :class => :label %>
+    <%= f.collection_select :district_sets, district_sets, :id, :display_name %>
+    <span class="description">Jurisdiction within which this district resides</span>
   </div>
 
   <div class="group">
     <%= f.label :ident, t("activerecord.attributes.district.ident", :default => "Ident"), :class => :label %>
     <%= f.text_field :ident, :class => 'text_field' %>
-    <span class="description">Ex: a simple text</span>
+    <span class="description">Ident of district. Ex. DIST-001, DIST-053</span>
   </div>
         
 <div class="group navform wat-cf">

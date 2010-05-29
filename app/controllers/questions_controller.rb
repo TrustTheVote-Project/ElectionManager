@@ -1,11 +1,13 @@
 class QuestionsController < ApplicationController
 
   def index
+    current_context.reset
     @questions = Question.all
   end
 
   def show
     @question = Question.find(params[:id])
+    current_context.question = @question
   end
 
   def new

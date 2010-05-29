@@ -54,7 +54,7 @@ class YAMLImportTest < ActiveSupport::TestCase
         assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
       end
 
-     should "process defaukt voting method correctly" do
+     should "process default voting method correctly" do
         cont = Contest.find_by_display_name "State Representative2"
         assert_equal VotingMethod::WINNER_TAKE_ALL, cont.voting_method
       end
@@ -74,7 +74,7 @@ class YAMLImportTest < ActiveSupport::TestCase
       assert_valid @e
     end
     
-    should "have one contest with the right name and the right candidate" do
+    should "have one contest with correct name, candidate" do
       assert_equal 1, @e.contests.length
       assert_equal "Representative in Congress",@e.contests[0].display_name
       assert_equal "Kristin Curtis", @e.contests[0].candidates[0].display_name
@@ -127,10 +127,9 @@ class YAMLImportTest < ActiveSupport::TestCase
       assert_equal  "Initiative Measure No. 1033 concerns state, county and city revenue. | |This measure would limit growth of certain state, county and city revenue to annual inflation and population growth, not including voter-approved revenue increases. Revenue collected above the limit would reduce property tax levies.  | |Should this measure be enacted into law? Yes [ ] No [ ]",
                     @e.questions[0].question
     end
+    
+    should "retain contest order information" do
+      assert_equal 445, @e.contests.find_by_display_name("Fire Protection Dist 13 Fire Commissioner Position #3").order
+    end 
   end
-  
-  
-  
- 
-
 end
