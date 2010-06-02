@@ -15,8 +15,14 @@ module NavigationHelpers
       #    when /the show election (.*) page/i
     when /the show election "([^\"]*)" page/i
       election_path(Election.find_by_display_name($1))
-    when /the new election page/i
-      new_election_path
+    when /the list page for (.+)/
+      self.send("#{$1}_path")
+    when /the show page for that (.+)/
+      polymorphic_path(model($1))
+    when /the new (.+) page/i
+      uri = self.send("new_#{$1}_path")
+    when /the delete (.+) page/i
+      # ??
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
