@@ -4,8 +4,7 @@ Given /^I have elections titled? (.+)$/ do |elections|
   end
 end
 
-Given /^I have an election titled (.+)$/ do |election|
-#Given /^I have an election titled "([^\"]*)"$/ do |election|
+Given /^I have an election with a display name of (.+)$/ do |election|
   Election.make(:display_name => election)
 end
 
