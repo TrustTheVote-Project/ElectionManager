@@ -26,7 +26,8 @@ namespace :ttv do
   task :test_reset => :environment do
     RAILS_ENV = 'test'
     ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
-
+    Rake::Task['db:schema:load'].execute
+    
     Rake::Task['ttv:seed'].execute
   end
 
