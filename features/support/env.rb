@@ -55,6 +55,3 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
-
-# Add machinist
-require File.join(RAILS_ROOT, 'test', 'blueprints')
