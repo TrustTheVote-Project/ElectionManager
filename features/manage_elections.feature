@@ -8,7 +8,7 @@ Feature: Manage Elections
   Scenario: Allow user to create an election
     Given I am a standard user
     And I have a district set titled "Jurisdiction 1"
-    When I go to the list of elections
+    When I go to the list page for elections
     And I follow "New"
     And I fill in "Display Name" with "Election 1"
     And I fill in District Set with the id for district set "Jurisdiction 1"
@@ -23,7 +23,7 @@ Feature: Manage Elections
   Scenario: Allow root user to create an election
     Given I am a root user
     And I have a district set titled "Jurisdiction 2"
-    When I go to the list of elections
+    When I go to the list page for elections
     And I follow "New"
     And I fill in "Display Name" with "Election 2"
     And I fill in District Set with the id for district set "Jurisdiction 2"

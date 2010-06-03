@@ -10,13 +10,14 @@ module NavigationHelpers
     
     when /the home\s?page/
       root_path
-    when /the list of elections/
-      elections_path
-      #    when /the show election (.*) page/i
-    when /the show election "([^\"]*)" page/i
-      election_path(Election.find_by_display_name($1))
     when /the list page for (.+)/
+      # ex: When I go to the list page for elections
+      # will invoke self.send("elections_path")
       self.send("#{$1}_path")
+    when /the show (.+) "([^\"]*)" page/i
+      # model_name is $1,  display_name is $2
+      klass = $1.camelize.constantize
+      election_path(klass.find_by_display_name($2))
     when /the show page for that (.+)/
       polymorphic_path(model($1))
     when /the new (.+) page/i

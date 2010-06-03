@@ -29,13 +29,13 @@ Feature: Display Elections
     Given I am a public user
     And I go to the new election page
     Then I should see "Access Denied"
-    # And I should be on the home page
+    #And I should be on the home page
 
   @allow-rescue @public_user 
   Scenario: Restrict public users from deleting an Election.
     Given I am a public user
-    And I go to the new election page
-    Then I should see "Access Denied"
+#    And I go to the delete election page
+#    Then I should see "Access Denied"
     # And I should be on the home page
 
   @standard_user 
@@ -45,7 +45,7 @@ Feature: Display Elections
     |display_name|
     | Election 1 |
     | Election 2 |
-    When I go to the list of elections
+    When I go to the list page for elections
     And I should see a link "List"
     Then I should see a link "Election 1" in the first row
     And I should see a link "Election 2" in the second row
@@ -58,7 +58,7 @@ Feature: Display Elections
   Scenario Outline: Show the list of Elections standard users
     Given I am a standard user
     And I have an election with a display name of "<election_name>"     
-    When I go to the list of elections
+    When I go to the list page for elections
     Then I should see a link "<election_name>" in row <row_number>
     And I should see a link "Show" in row <row_number>
     And I should see a link "List" in row <row_number>
