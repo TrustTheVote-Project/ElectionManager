@@ -115,4 +115,38 @@ class ContestsController < ApplicationController
     end
   end
 
+  def move
+    @contest = Contest.find(params[:id])
+    direction = params[:direction] == "up"?"up":"down"
+
+    contests = @contest.election.contests
+    contests.sort!{|c1,c2|c1.order <=> c2.order}
+
+    contest_index = contests.index @contest
+
+    if (contest_index == 0 and direction == "up") or (contest_index == contests.length - 1 and direction == "down") 
+      flash[:error] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", cannot be moved further " + direction
+      redirect_to(:back)
+    else
+      
+      # Reordering logic goes here
+      # Squish all order numbers
+      contests.each do |cont|
+        cont.update_attributes(:order => (contests.index cont))
+      end
+      
+      old_order = @contest.order
+      if direction == "up"
+        contests[contest_index].update_attributes(:order => contests[contest_index-1].order)
+        contests[contest_index-1].update_attributes(:order => old_order)
+      else # direction == "down"
+        contests[contest_index].update_attributes(:order => contests[contest_index+1].order)
+        contests[contest_index+1].update_attributes(:order => old_order)      
+      end
+      
+      flash[:notice] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", has been moved " + direction
+      redirect_to(:back)
+    end
+  end
+
 end

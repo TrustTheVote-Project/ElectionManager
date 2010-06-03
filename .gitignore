@@ -15,3 +15,4 @@ tmp/ballot_zips/*
 public/system
 public/system/icons/*
 public/images/uploaded/*
+tmp/webrat-*

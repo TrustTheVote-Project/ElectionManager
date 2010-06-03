@@ -4,9 +4,11 @@
       <li class="first">
         <%= link_to "#{t("web-app-theme.list", :default => "List")}", elections_path %>
       </li>
+      <% if can? :create, Election %> 
       <li>
         <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_election_path %>
       </li>
+      <% end %>
       <li class="active">
         <%= link_to "#{t("web-app-theme.show", :default => "Show")}", election_path %>
       </li>
@@ -40,8 +42,16 @@
         <%= link_to "#{t("web-app-theme.ballot", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
       </p>
       <div class="wat-cf">
-        <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_election_path(@election)) %>
-        <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", election_path(@election), :delete) %>
+      <% if can? :create, Election %> 
+
+        <%= button_link_helper("web-app-theme/application_edit.png",
+        "edit", "Edit", edit_election_path(@election)) %>
+      <% end %>
+      <% if can? :destroy, Election %> 
+        <%= button_link_helper("web-app-theme/cross.png", "delete",
+        "Delete", election_path(@election), :delete) %>
+      <% end %>
+
       </div>
     </div>
     <br/>

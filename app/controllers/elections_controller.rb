@@ -1,10 +1,10 @@
 class ElectionsController < ApplicationController
   
-  # load_and_authorize_resource
+ authorize_resource
   
   def index
-    @elections = Election.paginate(:per_page => 10, :page => params[:page])
     current_context.reset
+    @elections = Election.paginate(:per_page => 10, :page => params[:page])
     redirect_to :action => 'new' if @elections.empty?
     @election = UserSession.find.election if UserSession.find
   end

@@ -1,6 +1,7 @@
 <div class="inner">
   <table class="table">
     <tr>
+      <th></th>
       <th>
         <%= t("activerecord.attributes.contest.contest", :default => t("activerecord.labels.contest", :default => "Contest")) %>
       </th>
@@ -15,6 +16,12 @@
     <% @contests.each do |contest| -%>
     <tr class="<%= cycle("odd", "even") %>">
       <td>
+         <% unless current_context.election.nil? -%> 
+           <%= link_to image_tag("ui_icons/uparrow.png", :border=>0, :alt => "Move contest up"), move_contest_path(:id=>contest.id, :direction=>"up") %>
+           <%= link_to image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move contest down"), move_contest_path(:id=>contest.id, :direction=>"down") %>
+        <% end -%>
+      </td>
+      <td>
         <%= link_to contest.display_name, contest_path(contest) %>
       </td>
       <td>
@@ -22,7 +29,7 @@
       </td>
       <td class="last">
         <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path(contest) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_contest_path(contest) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", contest_path(contest), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-      </td>
+      </td>      
     </tr>
     <% end -%>
   </table>
