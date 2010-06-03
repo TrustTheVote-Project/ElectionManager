@@ -3,6 +3,11 @@ When /^I delete (.+)$/ do |path_string|
   visit(path, :delete)
 end
 
+When /^I update (.+)$/ do |path_string|
+  path = path_to(path_string)
+  visit(path, :put)
+end
+
 Then /^I should see text "([^\"]*)" within "([^\"]*)"$/ do |selector, text|
   within(selector) do |content|
     content.should contain(text)

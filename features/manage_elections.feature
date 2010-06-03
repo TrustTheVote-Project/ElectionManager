@@ -43,6 +43,40 @@ Feature: Manage Elections
     Then I should be on the show election "Election 2" page
 
   ################ UPDATE ###########################    
+  @allow-rescue @public_user
+  Scenario: Restrict public users from updating an Election.
+    Given I am a public user
+    And an election exists with display_name: "Election 1"
+    And I update the election named "Election 1"
+    Then I should see "Access Denied"
+    And election should exist with display_name: "Election 1"
+
+  @standard_user
+  Scenario: Allow user to update an election
+    Given I am a standard user
+    And an election exists with display_name: "Election 1"
+    When I go to the list page for elections
+    And I follow "Edit"
+    Then I should not see "Access Denied"
+    And I should be on the edit election page
+    When I fill in "Display Name" with "Another Election name"
+    And I press "Save"
+    Then I should have an election titled "Another Election name"
+    And I should be on the show election "Another Election name" page
+
+  @root_user
+  Scenario: Allow a root user to update an election
+    Given I am a root user
+    And an election exists with display_name: "Election 1"
+    When I go to the list page for elections
+    And I follow "Edit"
+    Then I should not see "Access Denied"
+    And I should be on the edit election page
+    When I fill in "Display Name" with "Another Election name"
+    And I press "Save"
+    Then I should have an election titled "Another Election name"
+    And I should be on the show election "Another Election name" page
+
 
 
   ################ DELETE ###########################    
