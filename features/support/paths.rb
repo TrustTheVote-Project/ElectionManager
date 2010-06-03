@@ -22,8 +22,9 @@ module NavigationHelpers
       polymorphic_path(model($1))
     when /the new (.+) page/i
       uri = self.send("new_#{$1}_path")
-    when /the delete (.+) page/i
-      # ??
+    when /the (.+) named "([^\"]*)"/i
+      klass = $1.camelize.constantize
+      election_path(klass.find_by_display_name($2))
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

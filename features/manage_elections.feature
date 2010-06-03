@@ -3,7 +3,16 @@ Feature: Manage Elections
   In order manage elections
   As a user
   I want to mannage,(create, update or delete), elections
-   
+
+  ################ CREATE ###########################
+
+  @allow-rescue @public_user
+  Scenario: Restrict public users from creating an Election.
+    Given I am a public user
+    And I go to the new election page
+    Then I should see "Access Denied"
+    #And I should be on the home page
+
   @standard_user 
   Scenario: Allow user to create an election
     Given I am a standard user
@@ -32,4 +41,37 @@ Feature: Manage Elections
     And I press "Save"
     Then I should have an election titled "Election 2"
     Then I should be on the show election "Election 2" page
-    
+
+  ################ UPDATE ###########################    
+
+
+  ################ DELETE ###########################    
+  @allow-rescue @public_user 
+  Scenario: Restrict public users from deleting an Election.
+    Given I am a public user
+    And no elections exists
+    And an election exists with display_name: "Election 1"
+    When I delete the election named "Election 1"
+    Then I should see "Access Denied"
+    And election should exist with display_name: "Election 1"
+
+  @allow-rescue @standard_user
+  Scenario: Allow user to delete an election
+    Given I am a standard user
+    And no elections exists
+    And an election exists with display_name: "Election 1"
+    When I delete the election named "Election 1"
+    Then I should not see "Access Denied"
+    And election should not exist with display_name: "Election 1"
+    And an election should not exist
+
+  @allow-rescue @rootuser
+  Scenario: Allow root user to delete an election
+    Given I am a root user
+    And no elections exists
+    And an election exists with display_name: "Election 1"
+    When I delete the election named "Election 1"
+    Then I should not see "Access Denied"
+    And election should not exist with display_name: "Election 1"
+    And an election should not exist
+

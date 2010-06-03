@@ -24,20 +24,6 @@ Feature: Display Elections
     And I should not see "Delete"
     And I should not see "New"
 
-  @allow-rescue @public_user
-  Scenario: Restrict public users from creating an Election.
-    Given I am a public user
-    And I go to the new election page
-    Then I should see "Access Denied"
-    #And I should be on the home page
-
-  @allow-rescue @public_user 
-  Scenario: Restrict public users from deleting an Election.
-    Given I am a public user
-#    And I go to the delete election page
-#    Then I should see "Access Denied"
-    # And I should be on the home page
-
   @standard_user 
   Scenario: Show the list of Elections to a standard user
     Given I am a standard user
