@@ -33,13 +33,9 @@ namespace :ttv do
 
   desc "Full Reset of DB for production"
   task :production_reset => :environment  do
-    RAILS_ENV = 'test'
-
     Rake::Task['db:reset'].invoke
-    #Rake::Task['db:schema:load'].execute
     Rake::Task['db:seed'].invoke
     Rake::Task['ttv:seed'].invoke
-    #Rake::Task['db:fixtures:load'].invoke
     Rake::Task['ttv:production'].invoke
   end
   
@@ -61,13 +57,13 @@ namespace :ttv do
 
   desc "Seed the database with production/ data."
   task :production => :environment do 
-    import_yaml 'seed/production'
+    import_yaml 'demo/**'
   end
   
   private
 
   def import_yaml(dir)
-    Dir.glob(File.join(RAILS_ROOT, 'db', dir, '*.yml')).each do |fixture_file|
+    Dir.glob(File.join(RAILS_ROOT, dir, '*.yml')).each do |fixture_file|
       puts "Loading #{fixture_file}"
       
       import_file = File.new(fixture_file)
