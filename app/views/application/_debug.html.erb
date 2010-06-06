@@ -1,0 +1,29 @@
+  <!-- Show params-->
+  <a href="#" onclick="Element.toggle('params_debug_info');return false">
+  params</a> |
+  <!-- Show sessions -->			
+  <a href="#" onclick="Element.toggle('session_debug_info');return false">
+  sessions</a> |
+  <!-- Show Environment-->			
+  <a href="#" onclick="Element.toggle('env_debug_info');return false">
+  env</a> |				
+  <!-- Show Request-->			
+  <a href="#" onclick="Element.toggle('request_debug_info');return false">
+  request</a>				
+  
+  <fieldset id="params_debug_info" class="debug_info" style="display:none">
+  <%= debug(params) %>
+  </fieldset>
+  <fieldset id="session_debug_info" class="debug_info" style="display:none">
+    Warning: this crashes my ruby VM ??
+    <%= debug(session) %>
+  </fieldset>
+  <fieldset id="env_debug_info" class="debug_info"
+            style="display:none">
+    Warning: this crashes my ruby VM ??
+    <%= debug(request.env) %>
+  </fieldset>
+  <fieldset id="request_debug_info" class="debug_info" style="display:none">
+    Warning: this crashes my ruby VM ??
+  <%= debug(request) %>
+  </fieldset>

@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>TTV Election Manager</title>
     <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/warehouse/style", :cache => true %>
+    <%= javascript_include_tag :defaults %>
   </head>
   <body>
   <div id="container">
@@ -41,6 +42,11 @@
      <%= breadcrumb_helper(current_context) %>
       <%= yield %>
       <div id="footer">
+
+        <% if RAILS_ENV == 'development' %>
+          <%= render :partial => 'application/debug' %>
+        <% end %>
+
         <div class="block">
           <p>
             TTV Election Manager <%= IO.readlines("VERSION")[0] %> -- Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
