@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
                  :elections => :get}
   
   map.resources :candidates, :except => [:create]
-  map.resources :contests, :has_many => :candidates, :member => { :move => :get }
+  map.resources :contests, :has_many => :candidates, :member => { :move => :put }
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
