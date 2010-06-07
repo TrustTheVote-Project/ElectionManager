@@ -215,7 +215,7 @@ module AbstractBallot
         header_item = @c.create_flow_item @c.et.get(district, :display_name)
         #        @flow_items.push(@c.create_flow_item(district.display_name))
         contest_list = district.contestsForElection(@election)
-        contest_list.sort { |a,b| a.order <=> b.order}.each do |contest|
+        contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
           if header_item
             @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(contest)] ))
             header_item = nil

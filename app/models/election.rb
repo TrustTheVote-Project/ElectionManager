@@ -12,7 +12,7 @@
 #
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
-    has_many :contests, :order => :display_name, :dependent => :destroy
+    has_many :contests, :order => :position, :dependent => :destroy
     has_many :questions, :order => :display_name, :dependent => :destroy
     
     validates_presence_of :display_name

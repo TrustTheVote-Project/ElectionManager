@@ -129,7 +129,7 @@ class YAMLImportTest < ActiveSupport::TestCase
     end
     
     should "retain contest order information" do
-      assert_equal 445, @e.contests.find_by_display_name("Fire Protection Dist 13 Fire Commissioner Position #3").order
+      assert_equal 445, @e.contests.find_by_display_name("Fire Protection Dist 13 Fire Commissioner Position #3").position
     end 
   end
 end

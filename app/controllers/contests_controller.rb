@@ -120,33 +120,32 @@ class ContestsController < ApplicationController
     direction = params[:direction] == "up"?"up":"down"
 
     contests = @contest.election.contests
-    contests.sort!{|c1,c2|c1.order <=> c2.order}
+    contests.sort!{|c1,c2|c1.position <=> c2.position}
 
     contest_index = contests.index @contest
 
     if (contest_index == 0 and direction == "up") or (contest_index == contests.length - 1 and direction == "down") 
       flash[:error] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", cannot be moved further " + direction
-      redirect_to(:back)
+      render :partial => 'contests/contest_list', :locals => {:election => @contest.election, :page => params[:page]} 
     else
       
       # Reordering logic goes here
       # Squish all order numbers
       contests.each do |cont|
-        cont.update_attributes(:order => (contests.index cont))
+        cont.update_attributes(:position => (contests.index cont))
       end
       
-      old_order = @contest.order
+      old_order = @contest.position
       if direction == "up"
-        contests[contest_index].update_attributes(:order => contests[contest_index-1].order)
-        contests[contest_index-1].update_attributes(:order => old_order)
+        contests[contest_index].update_attributes(:position => contests[contest_index-1].position)
+        contests[contest_index-1].update_attributes(:position => old_order)
       else # direction == "down"
-        contests[contest_index].update_attributes(:order => contests[contest_index+1].order)
-        contests[contest_index+1].update_attributes(:order => old_order)      
+        contests[contest_index].update_attributes(:position => contests[contest_index+1].position)
+        contests[contest_index+1].update_attributes(:position => old_order)      
       end
       
       flash[:notice] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", has been moved " + direction
-      redirect_to(:back)
+      render :partial => 'contests/contest_list', :locals => {:election => @contest.election, :page => params[:page]} 
     end
   end
-
 end

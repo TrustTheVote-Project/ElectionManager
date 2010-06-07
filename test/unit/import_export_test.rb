@@ -23,7 +23,7 @@ class ImportExportTest < ActiveSupport::TestCase
     end
     
     should "retain contest order data" do
-      assert_equal 2, @election.contests.find_by_display_name("Cooking").order
+      assert_equal 2, @election.contests.find_by_display_name("Cooking").position
     end
   
   end
