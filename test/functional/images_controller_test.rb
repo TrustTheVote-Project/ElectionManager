@@ -20,6 +20,8 @@ class ImagesControllerTest < ActionController::TestCase
     assert_redirected_to image_path(assigns(:image))
   end
 
+=begin
+
   test "should show image" do
     get :show, :id => images(:one).to_param
     assert_response :success
@@ -41,5 +43,7 @@ class ImagesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to images_path
+
   end
+=end
 end
