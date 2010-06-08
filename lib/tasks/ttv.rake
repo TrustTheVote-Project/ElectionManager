@@ -70,6 +70,12 @@ namespace :ttv do
       importer = TTV::YAMLImport.new(import_file)
       importer.import
     end
+    Dir.glob(File.join(RAILS_ROOT, dir, '*.xml')).each do |fixture_file|
+      puts "Loading #{fixture_file}"
+      
+      file = File.new(fixture_file)
+      imported = TTV::ImportExport.import(file) 
+    end
   end
 
   def load_fixtures(dir)

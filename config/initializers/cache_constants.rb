@@ -5,11 +5,30 @@ begin
   class VotingMethod < ActiveRecord::Base
     include ConstantCache
     cache_constants :key => :display_name
+    
+    def idToXml
+      self.display_name.downcase
+    end
+  
+    def VotingMethod.xmlToId(xml)
+      raise "illegal voting method #{xml}" unless const_get(xml.constant_name)
+      const_get(xml.constant_name).id
+    end
+    
   end
 
   class DistrictType < ActiveRecord::Base
     include ConstantCache
     cache_constants :key => :title
+    
+    def DistrictType.xmlToId(xml)
+      raise "unknown district type #{xml}" unless const_get(xml.constant_name)
+      const_get(xml.constant_name).id
+    end
+    
+    def idToXml
+      self.title.downcase
+    end
   end
 
   class Party < ActiveRecord::Base
