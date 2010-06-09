@@ -30,7 +30,7 @@
       <td>
          <% unless current_context.election.nil? -%> 
            <%= link_to_remote image_tag("ui_icons/uparrow.png", :border=>0, :alt => "Move contest up", :title => "Move contest up"), :url => move_contest_path(:id=>contest.id, :direction=>"up", :page => params[:page]), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')" %>
-           <%= link_to_remote image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move contest down", :title => "Move contest up"), :url => move_contest_path(:id=>contest.id, :direction=>"down", :page => params[:page]), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')" %>
+           <%= link_to_remote image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move contest down", :title => "Move contest down"), :url => move_contest_path(:id=>contest.id, :direction=>"down", :page => params[:page]), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')" %>
         <% end -%>
       </td>
       <td>
