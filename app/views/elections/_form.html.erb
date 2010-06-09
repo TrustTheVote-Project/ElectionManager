@@ -5,13 +5,11 @@
     <span class="description">Name of election</span>
   </div>
 
-  <% if current_context.jurisdiction.nil? -%>
-    <div class="group">
-      <% district_sets = DistrictSet.find(:all, :order => :id) %>
-      <%= f.label :district_set_id, t("activerecord.attributes.election.district_set_id", :default => "Jurisdiction"), :class => :label %>
-      <%= f.collection_select(:district_set_id, district_sets, :id, :display_name) %>
-    </div>  
-  <% end -%>
+  <div class="group">
+    <% district_sets = DistrictSet.find(:all, :order => :id) %>
+    <%= f.label :district_set_id, t("activerecord.attributes.election.district_set_id", :default => "Jurisdiction"), :class => :label %>
+    <%= f.collection_select(:district_set_id, district_sets, :id, :display_name) %>
+  </div>
 
 	<div class="group">
 	 	<%= f.label :ballot_style_template_id ,'Ballot Style Template',:class => :label %>
