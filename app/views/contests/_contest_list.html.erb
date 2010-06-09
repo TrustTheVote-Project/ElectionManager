@@ -1,5 +1,15 @@
 <div id="contests">
 <div class="inner"><%= javascript_include_tag :defaults %>
+ <div class="flash" id="flash">
+    <% flash.each do |type, message| -%>
+    <div class="message <%= type %>">
+      <p>
+        <%= message %>
+      </p>
+    </div>
+    <% end -%>
+    <% flash.discard -%>
+  </div>
   <table class="table">
     <tr>
       <th></th>
@@ -19,8 +29,8 @@
     <tr class="<%= cycle("odd", "even") %>">
       <td>
          <% unless current_context.election.nil? -%> 
-           <%= link_to_remote image_tag("ui_icons/uparrow.png", :border=>0, :alt => "Move contest up"), :url => move_contest_path(:id=>contest.id, :direction=>"up"), :method => :get %>
-           <%= link_to_remote image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move contest down"), :url => move_contest_path(:id=>contest.id, :direction=>"down"), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')", :page => params[:page] %>
+           <%= link_to_remote image_tag("ui_icons/uparrow.png", :border=>0, :alt => "Move contest up"), :url => move_contest_path(:id=>contest.id, :direction=>"up", :page => params[:page]), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')" %>
+           <%= link_to_remote image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move contest down"), :url => move_contest_path(:id=>contest.id, :direction=>"down", :page => params[:page]), :update => 'contests', :method => :put, :complete => "new Effect.Highlight('contests')" %>
         <% end -%>
       </td>
       <td>
@@ -39,7 +49,8 @@
     <div class="actions">
       <%= link_to "#{t("web-app-theme.new", :default => "Add new contest")}", :controller => "contests", :action => "new" %> 
     </div>
-    <%= will_paginate @contests %>
+    <%= will_paginate @contests if @contest.nil? %>
+    <%= will_paginate @contests, :params => { :controller => "elections", :action => "show", :id => @contest.election.id } unless @contest.nil? %>
   </div>
 </div>
 </div>
