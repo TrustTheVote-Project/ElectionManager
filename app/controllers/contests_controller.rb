@@ -2,6 +2,17 @@ class ContestsController < ApplicationController
 
   def index
     @contests = Contest.paginate(:per_page => 10, :page => params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.js {
+        render :update do |page|
+          # 'page.replace' will replace full "results" block...works for this example
+          # 'page.replace_html' will replace "results" inner html...useful elsewhere
+         page.replace 'contests', :partial => 'contests/contest_list'
+       end
+      }
+    end
   end
 
   def show
@@ -116,6 +127,7 @@ class ContestsController < ApplicationController
   end
 
   def move
+    
     @contest = Contest.find(params[:id])
     direction = params[:direction] == "up"?"up":"down"
 

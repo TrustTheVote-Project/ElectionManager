@@ -20,6 +20,17 @@ class ElectionsController < ApplicationController
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
     @precincts = @election.district_set.precincts.paginate(:per_page => 10, :page => params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.js {
+        render :update do |page|
+          # 'page.replace' will replace full "results" block...works for this example
+          # 'page.replace_html' will replace "results" inner html...useful elsewhere
+         page.replace 'contests', :partial => 'contests/contest_list'
+       end
+      }
+    end
   end
 
   def new

@@ -1,5 +1,15 @@
 <div id="contests">
 <div class="inner"><%= javascript_include_tag :defaults %>
+  <div class="flash" id="flash">
+    <% flash.each do |type, message| -%>
+    <div class="message <%= type %>">
+      <p>
+        <%= message %>
+      </p>
+    </div>
+    <% end -%>
+    <% flash.discard -%>
+  </div>
   <table class="table">
     <tr>
       <th></th>
@@ -39,7 +49,7 @@
     <div class="actions">
       <%= link_to "#{t("web-app-theme.new", :default => "Add new contest")}", :controller => "contests", :action => "new" %> 
     </div>
-    <%= will_paginate @contests %>
+    <%= will_paginate @contests, :class => 'pagination ajax'%>
   </div>
 </div>
 </div>
