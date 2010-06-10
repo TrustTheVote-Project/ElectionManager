@@ -5,17 +5,17 @@
     <span class="description">Name of candidate</span>
   </div>
 
-  <div class="group">
-    <%= f.label :party_id, t("activerecord.attributes.candidate.party_id", :default => "Party"), :class => :label %>
-    <%= f.text_field :party_id, :class => 'text_field' %>
-    <span class="description">ID of candidate's party</span>
-  </div>
+<div class="group">
+  <% parties = Party.find(:all, :order => :id) %>
+  <%= f.label :party_id, t("activerecord.attributes.contest.party_id", :default => "Party"), :class => :label %>
+  <%= f.collection_select(:party_id, parties, :id, :display_name) %>
+</div>
 
-  <div class="group">
-    <%= f.label :contest_id, t("activerecord.attributes.candidate.contest_id", :default => "Contest"), :class => :label %>
-    <%= f.text_field :contest_id, :class => 'text_field' %>
-    <span class="description">ID of contest candidate is in</span>
-  </div>
+<div class="group">
+  <% contests = Contest.find(:all, :order => :id) %>
+  <%= f.label :contest_id, t("activerecord.attributes.candidate.contest_id", :default => "Contest"), :class => :label %>
+  <%= f.collection_select :contest_id, contests, :id, :display_name %>
+</div>
 
   <div class="group">
     <%= f.label :ident, t("activerecord.attributes.candidate.ident", :default => "Ident"), :class => :label %>
