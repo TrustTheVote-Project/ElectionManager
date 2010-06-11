@@ -4,7 +4,8 @@ class UserContextTest < ActiveSupport::TestCase
   
   context "basic UserContext" do
     setup do
-      @uc = UserContext.new
+      dummy_session = { }
+      @uc = UserContext.new(dummy_session)
     end
     should "successfully be created" do
       assert_not_nil @uc

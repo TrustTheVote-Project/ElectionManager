@@ -4,31 +4,45 @@
 # ApplicationController where it is created and returned to any other method that needs it.
 
 class UserContext
-  
   attr_accessor :jurisdiction, :election, :contest, :question, :precinct
   
-  # Make sure we start with context at the root
-  def initialize
-    @jurisdiction = nil
-    @election = nil
+  def initialize(session)
+    @session = session
+  end
+
+  #TODO: DRY these common methods with define_method
+  def jurisdiction
+    @jurisdiction || @session[:jurisdiction_id] && @jurisdiction = DistrictSet.find(@session[:jurisdiction_id])
   end
   
-  # Is there a Jurisdiction?
+  def election
+    @election || @session[:election_id] && @election = Election.find(@session[:election_id])
+  end
+  
+  def contest
+    @contest || @session[:contest_id] && @contest = Contest.find(@session[:contest_id])
+  end
+
+  def question
+    @question || @session[:question_id] && @question = Question.find(@session[:question_id])
+  end  
+  
+  def precinct
+    @precinct || @session[:precinct_id] && @precinct = Precinct.find(@session[:question_id])
+  end  
+
   def jurisdiction?
     !@jurisdiction.nil?
   end
-  
-  # Is there an Election?
+
   def election?
     !@election.nil?
   end
-  
-  # Is there a contst?
+
   def contest?
     !@contest.nil?
   end
   
-  # Is there a question?
   def question?
     !@question.nil?
   end
@@ -37,51 +51,58 @@ class UserContext
     !@precinct.nil?
   end
 
-  # set state when choosing a contest
   def contest= a_contest
-    @contest, @question, @precinct = a_contest, nil, nil
+    @question, @precinct = nil, nil
+    @session[:question_id], @session[:precinct_id] = nil, nil
+    
+    @session[:contest_id] = a_contest ? a_contest.id : nil
+    @contest = a_contest
   end
   
-  # set state when choosing a question
   def question= a_question
-    @contest, @question, @precinct = nil, a_question, nil
+    @contest, @precinct = nil, nil
+    @session[:contest_id], @session[:precinct_id] = nil, nil
+    
+    @session[:question_id] = a_question ? a_question.id : nil
+    @question= a_question
+  end  
+
+  def precinct= a_precinct
+    @contest, @question = nil, nil
+    @session[:contest_id], @session[:question_id] = nil, nil
+    
+    @session[:precint_id] = a_precinct ? a_precinct.id : nil
+    self.jurisdiction = a_precinct.district_sets[0]
+    @precinct= a_precinct
   end
   
-  # set state when choosing a precinct. A precinct always corresponds to a jurisdiction
-  def precinct= a_prec
-    @contest, @question, @precinct = nil, nil, a_prec
-    @jurisdiction = a_prec.district_sets[0]
+  def election= an_election
+    contest, question, precint  = nil, nil, nil
+    @session[:contest_id], @session[:question_id], @session[:precint_id]  = nil, nil, nil    
+    
+    @session[:election_id] = an_election ? an_election.id : nil
+    self.jurisdiction = an_election.district_set unless an_election.nil?
+    @election = an_election
   end
 
-  # set state when choosing an election. We automatically pick up the corresponding jurisdiction
-  def election= an_election
-    @election = an_election
-    @contest, @question, @precinct = nil, nil, nil
-    @jurisdiction = an_election.district_set unless an_election.nil?
+  def jurisdiction= a_jurisdiction
+    @session[:jurisdiction_id] = a_jurisdiction ? a_jurisdiction.id : nil
+    @jurisdiction = a_jurisdiction
   end
   
-  # What is the name of the Jurisdiction, if any? 
   def jurisdiction_name
-    if @jurisdiction
-      @jurisdiction.display_name
-    else
-      "no jurisdiction selected"
-    end
+    jurisdiction ? jurisdiction.display_name :  "no jurisdiction selected"
   end
   
   def reset
-    @jurisdiction, @election, @contest, @question, @precinct = nil
+    @session[:election_id] = @session[:jurisdiction_id] = @session[:contest] = @session[:question] = @session[:precinct]= nil
+    @election = @jurisdiction = @contest = @question = @precinct= nil
   end
   
-  # What is the secondary name of the Jurisdiction, if any?
   def jurisdiction_secondary_name
-    second_name = @jurisdiction && @jurisdiction.secondary_name
-    if second_name.nil?
-      second_name = ""
-    end
-    second_name
+    second_name = (jurisdiction ? jurisdiction.secondary_name :  nil)
+    second_name || ""
   end
-  
   # Convert to text
   def to_s
     s = ""

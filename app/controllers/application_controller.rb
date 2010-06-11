@@ -25,12 +25,8 @@ class ApplicationController < ActionController::Base
     fresh_when(:etag => rand)
   end
   
-  
   def current_context
-    if session[:current_context].nil?
-      session[:current_context] = UserContext.new
-    end
-    session[:current_context]
+    @user_context ||= UserContext.new(session)
   end
   
   private
