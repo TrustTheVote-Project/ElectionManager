@@ -1,16 +1,19 @@
-<h1>Editing medium</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", media_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_medium_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_medium_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> medium</h2>
+    <div class="inner">
+      <% form_for @medium, :url => medium_path(@medium), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@medium) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @medium %> |
-<%= link_to 'Back', media_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

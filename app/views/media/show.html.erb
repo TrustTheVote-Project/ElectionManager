@@ -1,8 +1,25 @@
-<p>
-  <b>Display name:</b>
-  <%=h @medium.display_name %>
-</p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", media_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_medium_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", medium_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.medium.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>:</b>
+          <%= @medium.display_name %>
+        </p>
 
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_medium_path(@medium), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", medium_path(@medium), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_medium_path(@medium) %> |
-<%= link_to 'Back', media_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

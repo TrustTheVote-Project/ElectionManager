@@ -1,4 +1,7 @@
 class BallotStylesController < ApplicationController
+  
+  layout 'application'
+  
   # GET /ballot_styles
   # GET /ballot_styles.xml
   def index
