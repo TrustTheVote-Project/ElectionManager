@@ -1,22 +1,59 @@
-<h1>Listing languages</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", languages_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_language_path %></li>
+    </ul>
+  </div>       
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Languages </h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+					<th>
+					  <%= t("activerecord.attributes.language.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>
+          </th>
+          <th>
+            <%= t("web-app-theme.created_at", :default => "Created at")  %>
+          </th>
+          <th>
+					  <%= t("activerecord.attributes.language.code", :default => t("activerecord.labels.code", :default => "Code")) %>
+          </th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @languages.each do |language| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= language.id %>
+          </td>
+					<td>
+						<%= link_to language.display_name, language_path(language) %>
+					</td>
+					<td>
+            <%= language.created_at %>
+          </td>
+          <td>
+            <%= language.code %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", language_path(language) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_language_path(language) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", language_path(language), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+            
+          </td>
+        </tr>
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @languages  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Display name</th>
-    <th>Code</th>
-  </tr>
-
-<% @languages.each do |language| %>
-  <tr>
-    <td><%=h language.display_name %></td>
-    <td><%=h language.code %></td>
-    <td><%= link_to 'Show', language %></td>
-    <td><%= link_to 'Edit', edit_language_path(language) %></td>
-    <td><%= link_to 'Destroy', language, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New language', new_language_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

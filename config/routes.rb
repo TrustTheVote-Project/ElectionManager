@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :precincts
   map.resources :questions
   map.resources :voting_methods
-  map.resources :ballot_styles, :only => [:index]
+  map.resources :ballot_styles, :only => [:index, :show]
   
   map.resources :password_resets
   map.resources :users

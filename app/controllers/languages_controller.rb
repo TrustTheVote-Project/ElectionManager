@@ -1,8 +1,11 @@
 class LanguagesController < ApplicationController
+
+  layout 'application'
+  
   # GET /languages
   # GET /languages.xml
   def index
-    @languages = Language.all
+    @languages = Language.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
