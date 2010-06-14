@@ -1,20 +1,56 @@
-<h1>Listing ballot_styles</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", ballot_styles_path  %></li>
+    </ul>
+  </div>       
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Ballot Styles </h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+					<th>
+					  <%= t("activerecord.attributes.ballot_style.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>
+          </th>
+          <th>
+            <%= t("web-app-theme.created_at", :default => "Created at")  %>
+          </th>
+          <th>
+					  <%= t("activerecord.attributes.ballot_style.ballot_style_code", :default => t("activerecord.labels.ballot_style_code", :default => "Code")) %>
+          </th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @ballot_styles.each do |ballot_style| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= ballot_style.id %>
+          </td>
+					<td>
+						<%= link_to ballot_style.display_name, ballot_style_path(ballot_style) %>
+					</td>
+					<td>
+            <%= ballot_style.created_at %>
+          </td>
+          <td>
+            <%= ballot_style.ballot_style_code %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", ballot_style_path(ballot_style) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_ballot_style_path(ballot_style) %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @ballot_styles  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Display name</th>
-  </tr>
-
-<% @ballot_styles.each do |ballot_style| %>
-  <tr>
-    <td><%=h ballot_style.display_name %></td>
-    <td><%= link_to 'Show', ballot_style %></td>
-    <td><%= link_to 'Edit', edit_ballot_style_path(ballot_style) %></td>
-    <td><%= link_to 'Destroy', ballot_style, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New ballot_style', new_ballot_style_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

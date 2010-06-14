@@ -1,20 +1,18 @@
-<h1>Editing ballot_style</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", ballot_styles_path  %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_ballot_style_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> Ballot Style</h2>
+    <div class="inner">
+      <% form_for @ballot_style, :url => ballot_style_path(@ballot_style), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@ballot_style) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>  
-	<p>
-    <%= f.label :ballot_style_code %><br />
-    <%= f.text_field :ballot_style_code %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @ballot_style %> |
-<%= link_to 'Back', ballot_styles_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
