@@ -15,8 +15,9 @@ class Ability
       can [:manage], [Election]
       # can [:read, :create, :update, :destroy], [Election]
       # can [:index], [Election]
-    else
-       can :read, :all
-     end
+    elsif user.role?(:public)
+      can :read, [Election]
+      can [:create], [User]
+    end
   end
 end

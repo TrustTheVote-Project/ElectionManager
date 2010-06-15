@@ -9,7 +9,7 @@ module NavigationHelpers
     case page_name
     
     when /the home\s?page/
-      root_path
+      change_jurisdictions_path
     when /the list page for (.+)/
       # ex: When I go to the list page for elections
       # will invoke self.send("elections_path")
@@ -24,16 +24,23 @@ module NavigationHelpers
       uri = self.send("new_#{$1}_path")
     when /the edit (.+) page/i
       uri = self.send("edit_#{$1}_path")
+    when /the (.+) with (.+): "([^\"]*)"/i
+      # puts "TGD: $1 = #{$1.inspect}"
+      # puts "TGD: $2 = #{$2.inspect}"
+      # puts "TGD: $3 = #{$3.inspect}"
+      klass = $1.camelize.constantize
+      model_obj = klass.send("find_by_#{$2}", $3)
+      send("#{$1}_path",model_obj)
     when /the (.+) named "([^\"]*)"/i
       klass = $1.camelize.constantize
-      election_path(klass.find_by_display_name($2))
-      
+      send("#{$1}_path",klass.find_by_display_name($2))
+      #election_path(klass.find_by_display_name($2))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
+      
     # added by script/generate pickle path
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page
