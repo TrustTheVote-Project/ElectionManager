@@ -1,0 +1,13 @@
+The demo/ directory is currently the place to store election data that will be imported into
+ElectionManager when the following rake task is run:
+
+	rake ttv:production_reset
+
+The directory structure looks like this:
+
+README - this readme
+jurisdiction1/
+		folder with .yaml and .xml files which contain election data pertaining
+		to jurisdiction 1
+jurisdiction1/Albany.yml
+		the yaml ballot information. Follows spec at https://wiki.trustthevote.org/index.php/BallotInfo 

@@ -1,0 +1,162 @@
+--- 
+audit_header:
+  file_id: 9F023408009B11DF924800163E3DE33F
+  create_date: 13-JAN-2010 23:30:23
+  type: ballot_config
+  operator: Pito Salas
+  hardware: TTV Tabulator TAB02
+  software: TTV Tabulator 0.1 JUL-1-2008
+  provenance: 
+ballot_info:
+  precinct_list: 
+  - display_name: Acworth
+  jurisdiction_display_name: middleworld
+  display_name: General Election
+  contest_list: 
+  - order: 0
+    display_name: President and Vice-President of the United States
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: John McCain and Sarah Palin
+    - party_display_name: Democratic
+      order: 1
+      display_name: Barack Obama and "Joe" Biden
+    - party_display_name: Independent
+      order: 2
+      display_name: Ralph Nader and "Matt" Gonzalez
+    - party_display_name: Libertarian
+      order: 3
+      display_name: George Phillies and Christopher Bennett
+    - party_display_name: Libertarian
+      order: 4
+      display_name: "\"Bob\" Barr and Wayne A. Root"
+  - order: 1
+    display_name: Governor
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Joseph D. Kenney
+    - party_display_name: Democratic
+      order: 1
+      display_name: John Lynch
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Susan M. Newell
+  - order: 2
+    display_name: United States Senator
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: John E. Sununu
+    - party_display_name: Democratic
+      order: 1
+      display_name: Jeanne Shaheen
+    - party_display_name: Libertarian
+      order: 2
+      display_name: "\"Ken\" Blevens"
+  - order: 3
+    display_name: Representative in Congress
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Jennifer Horn
+    - party_display_name: Democratic
+      order: 1
+      display_name: Paul W. Hodes
+    - party_display_name: Libertarian
+      order: 2
+      display_name: Chester L. Lapointe II
+  - order: 4
+    display_name: Executive Councilor
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Dan\" St. Hilaire"
+    - party_display_name: Democratic
+      order: 1
+      display_name: John D. Shea
+  - order: 5
+    display_name: State Senator
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Bob\" Odell"
+    - party_display_name: Democratic
+      order: 1
+      display_name: "\"Jay\" Phinizy"
+  - order: 6
+    display_name: State Representatives
+    candidates: 
+    - party_display_name: Undeclared
+      order: 0
+      display_name: Lois M. Corcoran
+    - party_display_name: Republican
+      order: 1
+      display_name: Russell Pope
+    - party_display_name: Republican
+      order: 2
+      display_name: Steven Smith
+    - party_display_name: Democratic
+      order: 3
+      display_name: Jim McClammer
+    - party_display_name: Democratic
+      order: 4
+      display_name: Cynthia P. Sweeney
+  - order: 7
+    display_name: Sheriff
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Mike\" Prozzo"
+    - party_display_name: Democratic
+      order: 1
+      display_name: "\"Mike\" Prozzo"
+  - order: 8
+    display_name: County Attorney
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Marc B. Hathaway
+    - party_display_name: Democratic
+      order: 1
+      display_name: Marc B. Hathaway
+  - order: 9
+    display_name: County Treasurer
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Paul J. Brown
+    - party_display_name: Democratic
+      order: 1
+      display_name: Carroll "Dave" French
+  - order: 10
+    display_name: Register of Deeds
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Sharron A. King
+    - party_display_name: Democratic
+      order: 1
+      display_name: Levi Noah Sanders
+  - order: 11
+    display_name: Register of Probate
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Diane M. Davis
+  - order: 12
+    display_name: County Commissioner, 1st District
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: Donald S. Clarke
+    - party_display_name: Democratic
+      order: 1
+      display_name: Jeffrey R. Barrette
+  - order: 13
+    display_name: County Commissioner, 2nd District
+    candidates: 
+    - party_display_name: Republican
+      order: 0
+      display_name: "\"Ben\" Nelson"
