@@ -1,0 +1,47 @@
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <th>
+            Email
+          </th>
+          <th>
+            Created
+          </th>
+          <th>
+            Updated
+          </th>
+         <th class="last">
+            &nbsp;
+          </th>
+        </tr>
+        <% @users.each do |user| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= link_to user.email, user_path(user) %>
+          </td>
+          <td>
+            <%= user.created_at.to_date.to_formatted_s(:long)  %>
+          </td>
+          <td>
+            <%= user.updated_at.to_date.to_formatted_s(:long)  %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default =>
+            "Show")}", user_path(user) %>
+            <% if can? :update, User %>
+              |<%= link_to "#{t("web-app-theme.edit", :default =>
+            "Edit")}", edit_user_path(user) %>
+              |<%= link_to "#{t("web-app-theme.delete", :default =>
+            "Delete")}", user_path(user), :method => :delete,
+            :confirm => "#{t("web-app-theme.confirm", :default => "Are
+            you sure?")}" %>
+            <% end %>
+          </td>
+        </tr>
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        <%= will_paginate @users %>
+      </div>
