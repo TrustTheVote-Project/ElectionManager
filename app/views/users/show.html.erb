@@ -21,6 +21,11 @@
         <%= @user.email %>
       </p>
       <p>
+      <p>
+        <b>Roles:</b>
+        <%= @user.roles.map(&:name).join(',') %>
+      </p>
+      <p>
         <b>Created:</b>
           <%= @user.created_at.to_date.to_formatted_s(:long)  %>
       </p>

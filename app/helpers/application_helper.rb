@@ -62,7 +62,7 @@ module ApplicationHelper
           content_tag(:li) { link_to("Logout", logout_path) }
         else
           content_tag(:li) { link_to("Login", login_path) } + 
-          content_tag(:li) { link_to("Register", new_user_path) }
+          content_tag(:li) { link_to("Register", register_path) }
         end
       end
     end

@@ -53,13 +53,24 @@ Feature: Manage Users
     And I should see "foo@example.com" within "#user-navigation"
     And I should see "Edit profile" within "#user-navigation"
 
+
   @root_user
   Scenario: Allow root users to view users
     Given I am a root user
     And an user exists with email: "foo@bar.com"
+    And an user exists with email: "tom@bar.com"
     And I go to the users page
+    Then I should see a link "List"
+    Then I should see a link "New"
     Then I should see "foo@bar.com"
     And I should be on the users page
+    And I should see "foo@bar.com" in row 2
+    And I should see a link "Show" in row 2
+    And I should see a link "Edit" in row 2
+    And I should see a link "Delete" in row 2
+    And I should see "tom@bar.com" in row 3
+    And I should see a link "foo@bar.com" in the second row
+
     
     
     

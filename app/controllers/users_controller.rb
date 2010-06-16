@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  authorize_resource
+ # authorize_resource
 
   def index
     @users = User.paginate(:per_page => 10, :page => params[:page])
@@ -9,6 +9,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def register
+    @user = User.new
   end
 
   def new
@@ -39,7 +43,12 @@ class UsersController < ApplicationController
   def update
     # @user = current_user
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    role = UserRole.find(params[:user][:roles])
+    
+    @user.roles << role
+    
+    if @user.update_attributes(params[:user]) 
+
       flash[:notice] = 'Update successful.'
       redirect_to root_url
     else
