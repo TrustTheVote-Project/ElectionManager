@@ -23,6 +23,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+
+    # default role for new users is 'standard'
+    @user.roles << UserRole.new(:name => 'standard')
+    
     if @user.save
       begin
         Notifier.deliver_registration_confirmation(@user)
