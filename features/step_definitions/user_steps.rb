@@ -63,6 +63,11 @@ Then /^I should see the users jurisdiction within "([^\"]*)"$/ do |selector|
   end
 end
 
+Then /^I should have a user with email: (.+) and a role of (.+)$/ do |email, role|
+  u =  User.find_by_email(email)
+  u || u.role?(role)
+end
+
 def login(options = {})
   options = {:role => 'standard'}.merge(options)
   std_user = User.make(options.except(:role))
@@ -76,3 +81,4 @@ def login(options = {})
   # no current user
   assert controller.send(:current_user), "could not login user"
 end
+
