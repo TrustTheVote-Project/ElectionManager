@@ -58,7 +58,7 @@ module ApplicationHelper
         if current_user()
           content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdictions_path)) +
           content_tag(:li) { current_user.email } + 
-          content_tag(:li) { link_to("Edit profile", edit_user_path(:current)) } +
+          content_tag(:li) { link_to("Edit profile", edit_user_path(current_user.id)) } +
           content_tag(:li) { link_to("Logout", logout_path) }
         else
           content_tag(:li) { link_to("Login", login_path) } + 
