@@ -19,7 +19,21 @@
           <div class="item">
             <h3><%= link_to district_set.display_name, set_jurisdiction_path(district_set) %> </h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              <%= district_set.display_name %><%= ", " + district_set.secondary_name unless district_set.secondary_name.nil? %>
+               was created at <%= district_set.created_at %>. It contains <%= pluralize (district_set.elections.size, 'election') %>
+               and <%= pluralize (district_set.districts.size, 'district') %> covering <%= pluralize (district_set.precincts.size, 'precinct') %>.
+<% if district_set.elections.size >= 1 %>
+  The 
+  <%= district_set.elections.size <= 5 ? district_set.elections.size : 5 %>
+  most recently changed
+  <%= district_set.elections.size == 1 ? "election" : "elections" %>
+  in this district 
+  <%= district_set.elections.size == 1 ? "is" : "are" %>:
+  <% elections = district_set.elections.sort {|x,y| x.updated_at <=> y.updated_at }[0..4]%>
+  <% elections.each_with_index { |election, index| %>
+     <%= "and " if index != 1 and index == elections.length - 1 %><%= link_to election.display_name, election  %><%= index == elections.length - 1 ? "." : "," %>
+  <% } %>
+<% end %>
             </p>
           </div>
         </li>
