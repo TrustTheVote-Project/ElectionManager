@@ -24,10 +24,10 @@ class ContestTest < ActiveSupport::TestCase
       contest.voting_method =  @voting_method
       contest.district =  @election.district_set.districts.first
       contest.election =  @election
-      contest.order = 5
+      contest.position = 5
       
       assert contest.save
-      assert_equal 5, contest.order
+      assert_equal 5, contest.position
     end
   end
 
