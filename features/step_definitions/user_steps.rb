@@ -20,6 +20,11 @@ Given /^I am a root user$/ do
   login(:role => 'root')
 end
 
+Given /^I login as a user with email: "([^\"]*)" and role: "([^\"]*)"$/ do |email, role|
+  login(:role => 'root', :email => email)
+end
+
+
 # for a set of users 
 Given /^[T|t]he following users$/ do |table|
   table.hashes.each do |hash|
@@ -62,20 +67,23 @@ Then /^I should see the users jurisdiction within "([^\"]*)"$/ do |selector|
       assert hc.matches?(content), hc.failure_message
   end
 end
-
-Then /^I should have a user with email: (.+) and a role of (.+)$/ do |email, role|
+  
+Then /^I should have a user with email: "([^\"]*)" and role: "([^\"]*)"$/ do |email, role|
   u =  User.find_by_email(email)
   u || u.role?(role)
 end
 
 def login(options = {})
   options = {:role => 'standard'}.merge(options)
-  std_user = User.make(options.except(:role))
-  std_user.roles << UserRole.make(:name => options[:role])
-  assert std_user, "could not create user"
+  user = User.make(options.except(:role))
+  user.roles << UserRole.make(:name => options[:role])
+  assert user, "could not create user"
 
+  #  puts "TGD: user = #{user.inspect}"
+  #  puts "TGD: user.roles = #{user.roles.map(&:name).inspect}"
+  
   visit login_path
-  fill_in "email", :with => std_user.email
+  fill_in "email", :with => user.email
   fill_in "password", :with => options[:password] || "password"
   click_button "Submit"
   # no current user

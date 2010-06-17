@@ -27,3 +27,17 @@ Feature: Display Header
     | standard       | larry@foo.com      |
     | root           | moe@foo.com        |
 
+  @root_user
+
+  Scenario: Allow the root user the ability to edit his profile
+    Given I login as a user with email: "foo@bar.com" and role: "root"
+    And I go to the home page
+    Then I should have a user with email: "foo@bar.com" and role: "root"
+    And I should see "foo@bar.com" within "#user-navigation"
+    And I should see "Edit profile" within "#user-navigation"
+    Given I follow "Edit profile"
+    Then I should be on the edit user page
+    And the "Email" field should contain "foo@bar.com"
+
+
+  

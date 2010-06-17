@@ -17,5 +17,5 @@ Feature: Register Users
     And user should have 1 roles
     And I should be on the home page
     And I should see "foo@example.com" within "#user-navigation"
-    And I should have a user with email: foo@example.com and a role of standard
+    And I should have a user with email: "foo@example.com" and role: "standard"
 
