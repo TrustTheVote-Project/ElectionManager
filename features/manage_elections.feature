@@ -20,7 +20,7 @@ Feature: Manage Elections
     When I go to the list page for elections
     And I follow "New"
     And I fill in "Display Name" with "Election 1"
-    And I fill in District Set with the id for district set "Jurisdiction 1"
+    And I fill in Jurisdiction with the id for jurisdiction "Jurisdiction 1"
     And I select "(built-in default Ballot Style Template)" from "Ballot Style Template"
     And I select "(built-in default voting method)" from "Default Voting Method"
     And I press "Save"
@@ -35,7 +35,7 @@ Feature: Manage Elections
     When I go to the list page for elections
     And I follow "New"
     And I fill in "Display Name" with "Election 2"
-    And I fill in District Set with the id for district set "Jurisdiction 2"
+    And I fill in Jurisdiction with the id for jurisdiction "Jurisdiction 2"
     And I select "(built-in default Ballot Style Template)" from "Ballot Style Template"
     And I select "(built-in default voting method)" from "Default Voting Method"
     And I press "Save"
