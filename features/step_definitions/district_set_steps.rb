@@ -18,7 +18,7 @@ Then /^I should have a district set titled "([^\"]*)"$/ do |district_set_name|
   assert district_set_name, ds1.display_name
 end
 
-When /^(?:|I )fill in District Set with the id for district set "([^\"]*)"$/ do |display_name|
+When /^(?:|I )fill in Jurisdiction with the id for jurisdiction "([^\"]*)"$/ do |display_name|
   ds = DistrictSet.find_by_display_name(display_name)
-  fill_in('District Set', :with => ds.id)
+  fill_in('Jurisdiction', :with => ds.id)
 end

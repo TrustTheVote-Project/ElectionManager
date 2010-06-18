@@ -36,9 +36,11 @@ class UsersControllerTest < ActionController::TestCase
   
   # Now we're gonna use Shoulda for testing
   
-  context "without a logged in user" do
+  # Emulates a login just creates a User and sets it in the
+  # UserSession
+  # This is needed to check the CanCan access control
+  self.login_as(:roles => %w{public}) do    
 
-    
     # Allow guest/public users to get the registration page.
     context "on GET to :new" do    
       setup do
@@ -46,7 +48,7 @@ class UsersControllerTest < ActionController::TestCase
         User.expects(:new).returns(tmp_user)
         get :new
       end
-   
+      
       should_assign_to :user
       should_respond_with :success
       should_render_template :new
@@ -84,9 +86,9 @@ class UsersControllerTest < ActionController::TestCase
       setup do
         get :index
       end
-   
-      should_redirect_to("Login page") { new_user_session_url }
-      should_set_the_flash_to "You must be logged in to access this page"
+      
+      should_redirect_to("Home page") { root_url }
+      should_set_the_flash_to "Access Denied"
 
     end # INDEX ACTION
     
@@ -103,9 +105,12 @@ class UsersControllerTest < ActionController::TestCase
         @show_user = User.make(:email => "show_user@gmail.com")
         get :edit, :id => @show_user.id
       end
-      
-      should_redirect_to("Login page") { new_user_session_url }
-      should_set_the_flash_to "You must be logged in to access this page"
+
+      should_redirect_to("Home page") { root_url }
+      should_set_the_flash_to "Access Denied"
+
+      #should_redirect_to("Login page") { new_user_session_url }
+      #should_set_the_flash_to "You must be logged in to access this page"
     end # EDIT ACTION
     
     context "on PUT to :update" do    
@@ -114,8 +119,8 @@ class UsersControllerTest < ActionController::TestCase
         put :update, :id => @show_user.id, :user => { :email => "foo@bar.com"}
       end
       
-      should_redirect_to("Login page") { new_user_session_url }
-      should_set_the_flash_to "You must be logged in to access this page"
+      should_redirect_to("Home page") { root_url }
+      should_set_the_flash_to "Access Denied"
     end # UPDATE ACTION
 
     # TODO: Should probably not allow public users to destroy users.
@@ -125,14 +130,16 @@ class UsersControllerTest < ActionController::TestCase
         delete :destroy, :id => @show_user.id
       end
       
+      should_redirect_to("Home page") { root_url }
+      should_set_the_flash_to "Access Denied"
+      
       #should_redirect_to("Login page") { new_user_session_url }
       #should_set_the_flash_to "You must be logged in to access this page"
     end # DESTROY ACTION
-
   end # END tests for public, not logged_in, users
   
-  # These actions require a logged in user.
-  self.login_as(:email => "logged_in_user@gmail.com") do
+  # These actions require a root user.
+  self.login_as(:email => "logged_in_user@gmail.com", :roles => %w{root}) do
 
     context "on GET to :show" do
       
@@ -158,6 +165,5 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
   end # end login_as
-  
-  
-end
+
+end 
