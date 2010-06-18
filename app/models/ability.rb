@@ -8,7 +8,7 @@ class Ability
       user =  User.new
       user.roles << UserRole.new(:name => 'public')
     end
-    
+
     if user.role?(:root)
        can :manage, :all
      elsif user.role?(:standard)
@@ -17,7 +17,7 @@ class Ability
       # can [:index], [Election]
     elsif user.role?(:public)
       can :read, [Election]
-      can [:create], [User]
+      can [:create, :register], [User]
     end
   end
 end

@@ -7,7 +7,6 @@ class UsersControllerTest < ActionController::TestCase
     # this is a added to the User model by authlogic
     User.maintain_sessions = false    
   end
-  
   # Lets start off with some plain ole TestUnit tests
 
   test "should get new" do
@@ -31,9 +30,9 @@ class UsersControllerTest < ActionController::TestCase
     assert !assigns(:user).new_record?
     assert assigns(:user).valid?
     assert_redirected_to root_url
-    assert_equal "Registration successful.", flash[:notice]
+    assert_equal "Successfully created a new user.", flash[:notice]
   end
-  
+
   # Now we're gonna use Shoulda for testing
   
   # Emulates a login just creates a User and sets it in the
@@ -71,7 +70,7 @@ class UsersControllerTest < ActionController::TestCase
 
       should_assign_to :user
       should_redirect_to("Home Page") { root_url }
-      should_set_the_flash_to "Registration successful."
+      should_set_the_flash_to "Successfully created a new user."
       
       should "create saved user" do
         assert !assigns(:user).new_record?

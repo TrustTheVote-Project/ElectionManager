@@ -11,6 +11,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def register
+    @user = User.new
+  end
+  
   def new
     @user = User.new
   end
@@ -33,10 +37,11 @@ class UsersController < ApplicationController
       rescue => ex
         flash[:error] = "Confirmation email not sent. #{ex.message}"
       end
-      flash[:notice] = 'Registration successful.'
+      flash[:notice] = 'Successfully created a new user.'
       redirect_to root_url
     else
-      render :action => "new" 
+      flash[:error] = "Failed to create a new user: " << @user.errors.full_messages.join(', ')
+      redirect_to new_user_url
     end
   end
 

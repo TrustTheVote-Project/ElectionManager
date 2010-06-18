@@ -6,7 +6,10 @@ Feature: Register Users
   @public_user
   Scenario: Allow public users the ability to register a new user
     Given I am a public user
-    And I go to the new user page
+    #And I go to the register user page
+    When I go to the home page
+    Then I should see "Register" within "#user-navigation"
+    When I follow "Register"
     Then I should not see "Access Denied"
     And I should see "Register with TrustTheVote"
     When I fill in "Email" with "foo@example.com"
@@ -17,5 +20,13 @@ Feature: Register Users
     And user should have 1 roles
     And I should be on the home page
     And I should see "foo@example.com" within "#user-navigation"
-    And I should have a user with email: "foo@example.com" and role: "standard"
+  @root_user
+
+
+  @allow-rescue @public_user
+  Scenario: Restrict public users from creating a new user, this is reserved for root users
+    #Given I am a public user
+    #And I go to the home page
+    #And I go to the new user page
+    # And I should not see "Register with TrustTheVote"
 

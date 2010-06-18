@@ -38,10 +38,17 @@ Feature: Manage Users
     Then I should see "Access Denied"
     And I should be on the home page
 
+  @wip @allow-rescue @public_user
+  Scenario: Restrict public users from creating new users
+    Given I am a public user
+    And I go to the new user page
+    Then I should see "Access Denied"
+    And I should be on the home page
+
   @public_user
   Scenario: Allow public users the ability to register a new user
     Given I am a public user
-    And I go to the new user page
+    And I go to the register user page
     Then I should not see "Access Denied"
     And I should see "Register with TrustTheVote"
     When I fill in "Email" with "foo@example.com"
@@ -60,7 +67,31 @@ Feature: Manage Users
     And I go to the users page
     Then I should see "foo@bar.com"
     And I should be on the users page
-    
+
+  @root_user    
+  Scenario: Prevent root users from creating a user without a password
+    Given I am a root user
+    And I go to the new user page
+    And I should not see "Register with TrustTheVote"
+    When I fill in "Email" with "foo@example.com"
+    And I press "Save"
+    Then a user should not exist with email: "foo@example.com"
+    And I should see "Failed to create a new user" within "#flash .error"
+    And I should see "Password needs to be 1 chars" within "#flash .error"
+
+
+  @root_user    
+  Scenario: Allo root users the ability to create new users
+    Given I am a root user
+    And I go to the new user page
+    And I should not see "Register with TrustTheVote"
+    When I fill in "Email" with "foo@example.com"
+    When I fill in "Password" with "password1"
+    When I fill in "Password Confirmation" with "password1"
+    And I press "Save"
+    Then a user should exist with email: "foo@example.com"
+    And I should be on the home page
+    And I should see "Successfully created a new user" within "#flash .notice"
     
     
 
