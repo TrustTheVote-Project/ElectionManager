@@ -63,3 +63,12 @@ Feature: Register Users
     #And I go to the new user page
     # And I should not see "Register with TrustTheVote"
 
+
+  @public_user
+  Scenario: Prompt public users to create a user account
+    Given I am a public user
+    When I go to the home page
+    Then I should see "You may access public information here without logging in"
+    And I should see "click here to register"
+    When I follow "here"
+    And I should be on the register user page

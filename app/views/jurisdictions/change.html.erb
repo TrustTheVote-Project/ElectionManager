@@ -3,8 +3,12 @@
     <h2 class="title">Choose Your Jurisdiction:</h2>
     <div class="inner">
       <p class="first">
-        Election Manager works on one Jurisdiction at a time. Please choose the jurisdiction
-        you would like to work with.
+        Welcome to the TrustTheVote Election Manager! 
+        <% if can? :register, User %>
+        You may access public information here without logging in. 
+        If you would likea free account, click <%= link_to "here", register_user_path %> to register.
+        <% end %>
+        Thank you for your interest!
       </p>
       <ul class="list">
         <% @district_sets.each do |district_set| %>
