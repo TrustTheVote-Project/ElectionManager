@@ -1,20 +1,55 @@
-<h1>Listing media</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", media_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_medium_path %></li>
+    </ul>
+  </div>       
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> media </h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+					<th>
+					  <%= t("activerecord.attributes.medium.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>
+          </th>
+          <th>
+            <%= t("web-app-theme.created_at", :default => "Created at")  %>
+          </th>
 
-<table>
-  <tr>
-    <th>Display name</th>
-  </tr>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @media.each do |medium| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= medium.id %>
+          </td>
+					<td>
+						<%= link_to medium.display_name, medium_path(medium) %>
+					</td>
+					<td>
+            <%= medium.created_at %>
+          </td>
 
-<% @media.each do |medium| %>
-  <tr>
-    <td><%=h medium.display_name %></td>
-    <td><%= link_to 'Show', medium %></td>
-    <td><%= link_to 'Edit', edit_medium_path(medium) %></td>
-    <td><%= link_to 'Destroy', medium, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", medium_path(medium) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_medium_path(medium) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", medium_path(medium), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+            
+          </td>
+        </tr>
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @media  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<br />
-
-<%= link_to 'New medium', new_medium_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,8 +1,10 @@
 class MediaController < ApplicationController
+  layout 'application'
+  
   # GET /media
   # GET /media.xml
   def index
-    @media = Medium.all
+    @media = Medium.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
