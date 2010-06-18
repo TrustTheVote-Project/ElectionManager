@@ -1,13 +1,48 @@
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first">
+        <%= link_to "List", users_path %>
+      </li>
+      <% if can? :create, User %> 
+      <li>
+        <%= link_to "New", new_user_path %>
+      </li>
+      <% end %>
+      <li class="active">
+        <%= link_to "Show", user_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="inner">
+      <p>
+        <b>Email:</b>
+        <%= @user.email %>
+      </p>
+      <p>
+        <b>Created:</b>
+          <%= @user.created_at.to_date.to_formatted_s(:long)  %>
+      </p>
+      <p>
+        <b>Updated:</b>
+          <%= @user.updated_at.to_date.to_formatted_s(:long)  %>
+      </p>
+      <div class="wat-cf">
+      <% if can? :create, User %> 
 
-<p>
-  <b>Password:</b>
-  <%=h @user.password %>
-</p>
+        <%= button_link_helper("web-app-theme/application_edit.png",
+        "edit", "Edit", edit_user_path(@user)) %>
+      <% end %>
+      <% if can? :destroy, User %> 
+        <%= button_link_helper("web-app-theme/cross.png", "delete",
+        "Delete", user_path(@user), :delete) %>
+      <% end %>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      </div>
+    </div>
+    <br/>
+    <br/>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
