@@ -8,6 +8,8 @@
 		<li><%=link_to "View all questions", questions_path %>
 		<li><%=link_to "View all style templates", ballot_style_templates_path %>
 		<li><%=link_to "View all ballot styles", ballot_styles_path %>
-		<li><%=link_to "Maintainenace Tasks", maintain_path %></li>
+		  <%  if can? :all, "Maintain" %>
+                    <li><%=link_to "Maintainenace Tasks", maintain_path %></li>
+                  <% end %>
 
 	</ul>
