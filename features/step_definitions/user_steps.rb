@@ -21,7 +21,7 @@ Given /^I am a root user$/ do
 end
 
 Given /^I login as a user with email: "([^\"]*)" and role: "([^\"]*)"$/ do |email, role|
-  login(:role => 'root', :email => email)
+  login(:role => role, :email => email)
 end
 
 
@@ -77,7 +77,7 @@ def login(options = {})
   options = {:role => 'standard'}.merge(options)
   user = User.make(options.except(:role))
   user.roles << UserRole.make(:name => options[:role])
-  assert user, "could not create user"
+  assert_valid( user)
 
   #  puts "TGD: user = #{user.inspect}"
   #  puts "TGD: user.roles = #{user.roles.map(&:name).inspect}"
