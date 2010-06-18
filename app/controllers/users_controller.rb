@@ -41,7 +41,8 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       flash[:error] = "Failed to create a new user: " << @user.errors.full_messages.join(', ')
-      redirect_to new_user_url
+      # redirect_to new_user_url
+      redirect_to request.referer
     end
   end
 
