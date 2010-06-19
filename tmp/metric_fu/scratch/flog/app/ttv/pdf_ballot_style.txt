@@ -1,0 +1,33 @@
+    33.0: flog total
+     5.5: flog/method average
+
+    11.8: PDFBallotStyle#get_ballot_config
+     4.4: assignment
+     1.7: camelize
+     1.7: logger
+     1.5: +
+     1.5: constantize
+     1.5: error
+     1.5: raise
+     1.5: new
+     1.3: branch
+    10.3: PDFBallotStyle#list
+     5.9: branch
+     4.0: assignment
+     1.7: directory?
+     1.7: ==
+     1.5: push
+     1.3: open
+     1.3: each
+     5.0: PDFBallotStyle#get_file
+     1.7: logger
+     1.5: warn
+     1.4: read
+     1.3: branch
+     1.3: assignment
+     3.3: main#none
+     3.3: require
+     1.3: PDFBallotStyle#get_election_translation
+     1.3: new
+     1.3: PDFBallotStyle#get_ballot_translation
+     1.3: new

@@ -33,3 +33,8 @@ config.gem 'faker'
 config.gem 'mocha'
 config.gem 'webrat', :lib => false
 config.gem 'cucumber', :lib => false
+
+config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu'
+config.gem 'reek'
+config.gem 'roodi'
+config.gem 'ruby-prof'

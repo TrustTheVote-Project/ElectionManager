@@ -1,0 +1,4866 @@
+Loaded suite /Users/tom/.rvm/gems/ruby-1.8.7-p249/bin/rcov
+Started
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0mBrowsingTest#test_homepage (16 ms warmup)
+        process_time: 24 ms
+              memory: unsupported
+             objects: unsupported
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+Finished in 89.679494 seconds.
+
+[32m269 tests, 1112 assertions, 0 failures, 0 errors[0m
+================================================================================
+app/controllers/contests_controller.rb
+================================================================================
+   class ContestsController < ApplicationController
+   
+     def index
+       @contests = Contest.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def show
+!!     @contest = Contest.find(params[:id])
+!!     current_context.contest = @contest
+!!     @candidates = @contest.candidates.paginate(:per_page => 10, :page => params[:page])
+!!   end
+   
+     def new
+!!     @contest = Contest.new(:election_id => params[:election_id], :district_id => params[:district_id])
+!!     render :update do |page|
+!!       editor_id = "#{dom_id(@contest.district)}_contests_new"
+!!       page << "if (!$('#{editor_id}')) {"
+!!       page.insert_html :after, "#{dom_id(@contest.district)}_static", :partial => 'new.html.erb', :locals => { :contest => @contest }
+!!       page << "}"
+!!     end if request.xhr?
+!!   end
+   
+     def edit
+!!     @contest = Contest.find(params[:id])
+!!     render :partial => 'edit', :locals => { :contest => @contest } if request.xhr?
+!!   end
+   
+     def create
+!!     @contest = Contest.new(params[:contest])
+!!     success = @contest.save
+!!     flash[:notice] = "Contest '" + @contest.display_name + "' has been created." if success
+!!     if request.xhr?
+!!       render :update do |page|
+!!          if success
+!!            page.replace("#{dom_id(@contest.district)}_contests_new", "")
+!!            page.replace "#{dom_id(@contest.district)}_contests", :partial => 'districts/contests', :locals => { :district => @contest.district, :election => @contest.election } 
+!!          else
+!!            page.replace "#{dom_id(@contest)}_contests_new", :partial => 'contests/new.html.erb', :locals => {:contest => @contest }
+!!          end
+!!       end
+!!     elsif success
+!!       redirect_to(@contest)
+!!     else
+!!       render :action => "new"
+!!     end
+!!   end
+   
+     # not a standard rails update. Here we handle two cases:
+     # - creation of new candidates : return only candidates with errors
+     # - update of existing contest's attributes
+     # They are mutually exclusive in our ui, and have different display requirements
+     def update
+!!     if params[:contest][:display_name]
+!!       update_contest
+!!     else
+!!       update_attributes
+!!     end
+!!   end
+   
+     def update_contest
+!!     @contest = Contest.find(params[:id])
+!!     success =  @contest.update_attributes(params[:contest])
+!!     flash[:notice] = "Contest '" + @contest.display_name + "' was updated." if success
+!!     if request.xhr?
+!!       edit_id = "#{dom_id(@contest)}_edit"
+!!       static_id = "#{dom_id(@contest)}_static"
+!!       render :update do |page|
+!!         if success
+!!           page.remove edit_id
+!!           page.replace static_id, :partial => 'static', :locals => { :contest => @contest }
+!!         else
+!!           page.replace edit_id, :partial => 'edit', :locals => { :contest => contest }
+!!         end
+!!       end
+!!     elsif success
+!!       redirect_to @contest
+!!     else
+!!       render :action => 'edit'
+!!     end
+!!   end
+   
+     def update_attributes
+!!     raise "No updating of attributes withou AJAX" if !request.xhr?
+!!     @contest = Contest.find(params[:id])
+!!     howMany = @contest.candidates.length;
+!!     success = @contest.update_attributes(params[:contest])
+!!     howMany = @contest.candidates.length - howMany;
+!!     
+!!     error_candidates = @contest.candidates.to_a.find_all { |c| c.invalid? }
+!!     flash[:notice] = pluralize(howMany, 'candidate has', 'candidates have') + " been created." if error_candidates.length == 0
+!!     render :update do |page|
+!!       if error_candidates.length == 0
+!!         page.replace("#{dom_id(@contest)}_candidates_new", "")
+!!         page.replace "#{dom_id(@contest)}_candidates", :partial => 'candidates', :locals => { :contest => @contest } 
+!!       else
+!!         page.replace "#{dom_id(@contest)}_candidates_new", :partial => 'candidates/new.html.erb', :locals => {:model => error_candidates }
+!!       end
+!!     end
+!!   end
+   
+     def destroy
+!!     @contest = Contest.find(params[:id])
+!!     display_name = @contest.display_name
+!!     district = @contest.district
+!!     election = @contest.election
+!!     @contest.destroy
+!!     flash[:notice] = "Contest #{display_name} has been deleted." 
+!!     if request.xhr? # coming from editor, replace contest list
+!!       render :update do |page|
+!!         page.replace("#{dom_id(district)}_contests", :partial => 'districts/contests.html.erb', 
+!!           :locals => {:district => district, :election => election })
+!!       end
+!!     else
+!!       redirect_to(contests_url)
+!!     end
+!!   end
+   
+     def move
+!!     @contest = Contest.find(params[:id])
+!!     direction = params[:direction] == "up"?"up":"down"
+!! 
+!!     contests = @contest.election.contests
+!!     contests.sort!{|c1,c2|c1.position <=> c2.position}
+!! 
+!!     contest_index = contests.index @contest
+!! 
+!!     if (contest_index == 0 and direction == "up") or (contest_index == contests.length - 1 and direction == "down") 
+!!       flash[:error] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", cannot be moved further " + direction
+!!       render :partial => 'contests/contest_list', :locals => {:election => @contest.election, :page => params[:page]} 
+!!     else
+!!       
+!!       # Reordering logic goes here
+!!       # Squish all order numbers
+!!       contests.each do |cont|
+!!         cont.update_attributes(:position => (contests.index cont))
+!!       end
+!!       
+!!       old_order = @contest.position
+!!       if direction == "up"
+!!         contests[contest_index].update_attributes(:position => contests[contest_index-1].position)
+!!         contests[contest_index-1].update_attributes(:position => old_order)
+!!       else # direction == "down"
+!!         contests[contest_index].update_attributes(:position => contests[contest_index+1].position)
+!!         contests[contest_index+1].update_attributes(:position => old_order)      
+!!       end
+!!       
+!!       flash[:notice] = "Contest ##{@contest.id}, \"#{@contest.display_name}\", has been moved " + direction
+!!       render :partial => 'contests/contest_list', :locals => {:election => @contest.election, :page => params[:page]} 
+!!     end
+!!   end
+!! end
+================================================================================
+app/ballots/nh/ballot_config.rb
+================================================================================
+   #
+   # NhBallot implements a columnar office format
+   #
+   require 'ttv/abstract_ballot'
+   require 'ballots/default/ballot_config'
+   require 'prawn'
+   
+   module NhBallot
+     include AbstractBallot
+   
+     class FlowItem 
+       TINY_FONT = 7
+       SMALL_FONT = 9
+       BIG_FONT = 11
+   
+       class NHContest < DefaultBallot::FlowItem::Contest
+         def initialize(item, scanner)
+!!         super
+!!       end
+   
+         # returns height
+         def draw_column(config, rect, candidates)
+!!        
+!!         return 0 if candidates.length == 0
+!!         height = 0
+!!         
+!!         draw_party = !(candidates[0].party.idToXml == 'democrat' || candidates[0].party.idToXml == 'republican')
+!!         config.pdf.bounding_box [rect.left + HPAD, rect.top], :width => rect.width - HPAD2 do
+!!           candidates.each_index do |i|
+!!             candidate = candidates[i]
+!!             config.pdf.move_down VPAD2
+!!           
+!!             # Render name of candidate
+!!             config.pdf.bounding_box [0, 0], :width => 80 do
+!!               config.pdf.font "Helvetica", :size => BIG_FONT
+!!               name = config.et.get(candidate, :display_name)
+!!               name = name.sub(" and ", "\n") # hack to split joint names to two lines, wont work i10n
+!!               name = name 
+!!               config.pdf.move_down 10
+!!               config.pdf.text name, :align => :left
+!!               config.pdf.move_down 10
+!!             end
+!!             #OVAL BOX TO THE RIGHT OF THE CANDIDATE NAME
+!!             config.pdf.bounding_box [75,20], :width => 20 do
+!!                config.stroke_checkbox
+!!              end
+!!              config.pdf.move_down 12
+!!              
+!!              # PARTY NAME FOR CANDIDATE
+!!              if draw_party
+!!                config.pdf.font "Helvetica", :size => SMALL_FONT
+!!                config.pdf.text config.et.get(candidate.party, :display_name), :align => :left
+!!              end
+!!      
+!!             config.pdf.line [0, 0], [rect.width - HPAD2, 0] unless (i == candidates.length - 1)
+!!           end
+!!           height = config.pdf.bounds.height
+!!         end
+!!         return height
+!!       end
+   
+         def draw_writein_column(config, rect)
+!!         height = 0
+!!         config.pdf.font "Helvetica", :size => TINY_FONT
+!!         config.pdf.bounding_box [rect.left, rect.top], :width => rect.width do
+!!           @item.open_seat_count.times do 
+!!             config.pdf.move_down 30
+!!             config.pdf.text config.et.get(@item, :display_name), :align => :center
+!!             config.pdf.line [0, 0], [rect.width, 0]
+!!             config.pdf.move_down VPAD
+!!           end
+!!           height = config.pdf.bounds.height
+!!         end
+!!         height
+!!       end
+   
+         def draw(config, rect, &bloc)
+!!         reset_ballot_marks
+!!         top = rect.top
+!!         # draw candidates first, to figure out max height
+!!         democrats = []
+!!         republicans = []
+!!         others = []
+!!         @item.candidates.each do |candidate|
+!!           case 
+!!           when candidate.party.idToXml == 'democrat' then democrats.push candidate
+!!           when candidate.party.idToXml == 'republican' then republicans.push candidate
+!!           else others.push candidate
+!!           end
+!!         end
+!!         # draw candidates
+!!         r = rect.clone
+!!         r.left, r.right = rect.left + config.col_width, rect.left + config.col_width * 2
+!!         height = draw_column(config, r, democrats)
+!!         r.left, r.right = rect.left + config.col_width * 2, rect.left + config.col_width * 3
+!!         height = [height, draw_column(config, r, others)].max
+!!         r.left, r.right = rect.left + config.col_width * 3, rect.left + config.col_width * 4
+!!         height = [height, draw_column(config, r, republicans)].max
+!!         r.left, r.right = rect.left + config.col_width * 4, rect.left + config.col_width * 5
+!!         height = [height, draw_writein_column(config, r)].max
+!! 
+!!         # OFFICES
+!!           config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => config.col_width - HPAD2 do
+!!           config.pdf.move_down VPAD2
+!!           config.pdf.font "Helvetica", :size => TINY_FONT
+!!           config.pdf.text config.bt[:For]
+!!           config.pdf.font "Helvetica", :size => BIG_FONT
+!!           config.pdf.text config.et.get(@item, :display_name), :align => :center
+!!           config.pdf.move_down VPAD
+!!           config.pdf.font "Helvetica", :size => TINY_FONT
+!!           config.pdf.text config.short_instructions(@item), :align => :center
+!!           height = [height, config.pdf.bounds.height].max
+!!         end
+!!         
+!!         # draw vertical bars
+!!         config.pdf.bounding_box [rect.left, rect.top], :width => rect.width, :height =>height do
+!!           4.times do |i|
+!!             config.pdf.line [config.col_width * (i+1), 0], [config.col_width * (i+1), height]
+!!           end
+!!         end
+!!         rect.top -= height;
+!!         #puts "height was #{height} for item #{@item}"
+!!         config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
+!!         
+!!         
+!!       end
+!!     end # class NHContest
+!!     
+!!   end # class FlowItem
+   
+     class BallotConfig < DefaultBallot::BallotConfig
+   
+       attr_accessor :col_width
+   
+       def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+!!       @instruction_text = instruction_text
+!!       @state_seal = state_seal
+!!       @state_signature = state_signature
+!!       @checkbox_orientation = :right
+!!       @columns = 1
+!!       super
+!!     end
+   
+       def col_loc(i)
+!!       @col_left + i * @col_width
+!!     end
+   
+       def render_header(flow_rect)
+!!       @pdf.font "Helvetica", :size => 14,  :style => :bold
+!!       @col_headers = ["OFFICES", "DEMOCRATIC CANDIDATES", "OTHER CANDIDATES", "REPUBLICAN CANDIDATES", "WRITE-IN\nCANDIDATES"]
+!!       @col_width = flow_rect.width / @col_headers.length
+!!       @col_left = flow_rect.left
+!!       @header_height = 40
+!!       @col_headers.length.times do |i|            
+!!         #640 BELOW IS THE TOP LOCATION OF THE COLUMN HEADERS, NEED TO PARAMATIZE THIS
+!!         @pdf.bounding_box [col_loc(i), 640], :width => @col_width, :height => @header_height do
+!!           @pdf.fill_color '000000'
+!!           @pdf.stroke_color 'FFFFFF'
+!!           @pdf.rectangle [0, 0], @col_width, -@header_height
+!!           @pdf.line([@col_width, 0], [@col_width, @header_height]) 
+!!           @pdf.fill_and_stroke
+!!           @pdf.fill_color 'FFFFFF'
+!!           @pdf.text_box @col_headers[i], :at => [0, @header_height - 6], :align => :center
+!!         end
+!!       end
+!!       flow_rect.top = 600  #TOP LOCATION OF COLUMNS 
+!!       @pdf.stroke_color "000000"
+!!       @pdf.fill_color '000000'
+!!       @pdf.stroke_line [flow_rect.left, flow_rect.top], [flow_rect.right, flow_rect.top]
+!!     end
+   
+       def render_column_instructions(columns, page)
+         
+       end
+   
+       def stroke_checkbox(pt = [0,0])
+!!       @pdf.line_width 1.5
+!!       @pdf.fill_color "FFFFFF"
+!!       @pdf.stroke_color "000000"
+!!       @pdf.ellipse_at [pt[0]+ CHECKBOX_WIDTH / 2, pt[1] - CHECKBOX_HEIGHT / 2 ] , CHECKBOX_WIDTH/ 2, CHECKBOX_HEIGHT / 2
+!!       @pdf.fill_and_stroke
+!!       @pdf.fill_color "000000"
+!!     end
+       
+       
+       def page_complete(pagenum, last_page)
+!!       #unless last_page
+!!         #BALLOT TITLE ON TOP LEFT BALLOT
+!!         @pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
+!!              @pdf.font "Helvetica", :size => 10, :style => :bold
+!!              @pdf.text ballot_translation[:Title_Text], :align => :center
+!!              state_signature = "#{RAILS_ROOT}/public/images/state_graphics/#{@state_signature}"
+!!              @pdf.image state_signature, :at => [20,@pdf.bounds.height - 55], :width => 100, :height => 30
+!!            @pdf.bounding_box [ 135 , @pdf.bounds.height - 45], :width => 150 do
+!!             state_seal = "#{RAILS_ROOT}/public/images/state_graphics/#{@state_seal}"
+!!             @pdf.image state_seal, :at => [0,@pdf.bounds.height + 40], :width => 80, :height => 80
+!!            end
+!!          end
+!!         #INSTRUCTIONS ON TOP OF BALLOT
+!!         @pdf.bounding_box [ 240 , @pdf.bounds.height], :width => 300 do
+!!           @pdf.font "Helvetica", :size => 14, :style => :bold
+!!           @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
+!!           @pdf.font "Helvetica", :size => 8
+!!           #@pdf.text ballot_translation[:Instruction_Text1], :align => :left
+!!           #@pdf.text ballot_translation[:Instruction_Text2], :align => :left
+!!           @pdf.text @instruction_text
+!!         end
+!!         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
+!!           @pdf.move_down 10
+!!           @pdf.text bt[:Vote_Both_Sides], :align => :center
+!!         end
+!!       #end
+!!     end
+       
+   
+       def create_flow_item(item)
+!!       case
+!!       when item.is_a?(Contest) then FlowItem::NHContest.new(item, @scanner)
+!!       when item.is_a?(Question) then super
+!!       when item.is_a?(String) then super
+!!       when item.is_a?(Array) then item[1] # hack, gets rid of district name
+!!       else raise "Unknown flow item"
+!!       end
+!!     end
+!! 
+!!   end
+!! end
+================================================================================
+app/controllers/candidates_controller.rb
+================================================================================
+   class CandidatesController < ApplicationController
+   
+     def index
+       current_context.reset
+       @candidates = Candidate.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def show
+!!     @candidate = Candidate.find(params[:id])
+!!   end
+   
+     def new
+!!     @candidate = Candidate.new
+!!     @candidate.contest_id = params[:contest_id];
+!!     raise "Invalid contest. Candidates must be created inside a contest" if params[:contest_id].nil?
+!!     render :update do |page|
+!!       editor_id = "#{dom_id(@candidate.contest)}_candidates_new"
+!!       page.insert_html :after, "#{dom_id(@candidate.contest)}_static", :partial => 'new.html.erb', :locals => { :model => @candidate }
+!!     end if request.xhr?;
+!!   end
+   
+     def edit
+!!     @candidate = Candidate.find(params[:id])
+!!     render :partial => 'edit', :locals => { :candidate => @candidate } if request.xhr?
+!!   end
+   
+     # def create -- candidates are created through contests:update nested attributes
+     # end
+     def update
+!!     @candidate = Candidate.find(params[:id])
+!!     success = @candidate.update_attributes(params[:candidate])
+!!     flash[:notice] = "Candidate '" + @candidate.display_name + "' was successfully updated." if success
+!!     if request.xhr?
+!!       edit_id = "#{dom_id(@candidate)}_edit"
+!!       static_id = "#{dom_id(@candidate)}_static"
+!!       render :update do |page|
+!!         if success
+!!           page.remove edit_id
+!!           page.replace static_id, :partial => 'static', :locals => { :candidate => @candidate }
+!!         else
+!!           page.replace edit_id, :partial => 'edit', :locals => { :candidate => @candidate }
+!!         end
+!!       end
+!!     elsif success
+!!       redirect_to @candidate
+!!     else
+!!       render :action => "edit"
+!!     end
+!!   end
+   
+     def destroy
+!!     begin
+!!       @candidate = Candidate.find(params[:id])
+!!       contest = @candidate.contest
+!!       display_name = @candidate.display_name
+!!       @candidate.destroy
+!!       flash[:notice] = "Candidate '" + display_name + "' has been deleted."
+!!       if request.xhr? # coming from contest editor, return all contests
+!!         render :update do |page|
+!!           page.replace("#{dom_id(contest)}_candidates", :partial => 'contests/candidates.html.erb', :locals => {:contest => contest})
+!!         end
+!!       else
+!!         redirect_to(candidates_url)
+!!       end
+!!     rescue => ex
+!!       flash[:error] = "Unexpected error: " + ex.message
+!!     end
+!!   end
+!! end
+================================================================================
+app/controllers/questions_controller.rb
+================================================================================
+   class QuestionsController < ApplicationController
+   
+     def index
+       current_context.reset
+       @questions = Question.all
+     end
+   
+     def show
+!!     @question = Question.find(params[:id])
+!!     current_context.question = @question
+!!   end
+   
+     def new
+       @question = Question.new(:election_id => params[:election_id], :requesting_district_id => params[:district_id])
+!!     render :update do |page|
+!!       editor_id = "#{dom_id(@question.district)}_questions_new"
+!!       page << "if (!$('#{editor_id}')) {"
+!!       page.insert_html :after, "#{dom_id(@question.district)}_static", :partial => 'new.html.erb', :locals => { :question => @question }
+!!       page << "}"
+       end if request.xhr?
+     end
+   
+     def edit
+!!     @question = Question.find(params[:id])
+!!     render :partial => 'edit', :locals => { :question => @question } if request.xhr?
+!!   end
+   
+     def create
+!!     @question = Question.new(params[:question])
+!!     success = @question.save
+!!     flash[:notice] = "Question '" + @question.display_name + "' has been created." if success
+!!     if request.xhr?
+!!       render :update do |page|
+!!         if success
+!!           page.replace("#{dom_id(@question.district)}_questions_new", "")
+!!           page.replace "#{dom_id(@question.district)}_questions", :partial => 'districts/questions', 
+!!             :locals => { :district => @question.district, :election => @question.election } 
+!!         else
+!!           page.replace "#{dom_id(@question)}_questions_new", :partial => 'question/new.html.erb', 
+!!             :locals => {:question => @question }
+!!         end
+!!       end
+!!     elsif success
+!!       redirect_to(@question)
+!!     else
+!!       render :action => "new"
+!!     end
+!!   end
+   
+     def update
+!!     @question = Question.find(params[:id])
+!!     success =  @question.update_attributes(params[:question])
+!!     flash[:notice] = "Question '" + @question.display_name + "' was updated." if success
+!!     if request.xhr?
+!!       edit_id = "#{dom_id(@question)}_edit"
+!!       static_id = "#{dom_id(@question)}_static"
+!!       render :update do |page|
+!!         if success
+!!           page.remove edit_id
+!!           page.replace static_id, :partial => 'static', :locals => { :question => @question }
+!!         else
+!!           page.replace edit_id, :partial => 'edit', :locals => { :question => question }
+!!         end
+!!       end
+!!     elsif success
+!!       redirect_to @question
+!!     else
+!!       render :action => 'edit'
+!!     end
+!! 
+!!   end
+   
+     def destroy
+!!     @question = Question.find(params[:id])
+!!     display_name = @question.display_name
+!!     district = @question.district
+!!     election = @question.election
+!!     @question.destroy
+!!     flash[:notice] = "Question '#{display_name}' has been deleted." 
+!!     if request.xhr? # coming from editor, replace question list
+!!       render :update do |page|
+!!         page.replace("#{dom_id(district)}_questions", :partial => 'districts/questions.html.erb', 
+!!         :locals => {:district => district, :election => election })
+!!       end
+!!     else
+!!       redirect_to(questions_path)
+!!     end
+!!   end
+!! end
+================================================================================
+app/models/notifier.rb
+================================================================================
+   class Notifier < ActionMailer::Base
+     
+     def password_reset_instructions(user)  
+!!     logger.info("user is #{user}")
+!!     subject       "TTV Password Reset Instructions"  
+!!     from "Aleks TTV Totic <a@totic.org>"
+!!     recipients    user.email  
+!!     sent_on       Time.now  
+!!     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token), :user => user
+!!   end
+     
+     def registration_confirmation(user)
+!!     recipients user.email
+!!     from "Aleks TTV Totic <a@totic.org>"
+!!     subject "Welcome to TTV system"
+!!     body :user => user
+!!   end
+!! end
+================================================================================
+app/controllers/password_resets_controller.rb
+================================================================================
+   class PasswordResetsController < ApplicationController
+   
+     before_filter :require_no_user
+     before_filter :load_user_using_perishable_token, :only => [:edit, :update]  
+     
+     def new  
+!!     render  
+!!   end  
+   
+     def edit
+!!     render
+!!   end
+     
+     def update  
+!!     @user.password = params[:user][:password]  
+!!     @user.password_confirmation = params[:user][:password_confirmation]  
+!!     if @user.save  
+!!       flash[:notice] = "Password successfully updated"  
+!!       redirect_to root_url  
+!!     else  
+!!       render :action => :edit  
+!!     end  
+!!   end
+   
+     def create  
+!!     @user = User.find_by_email(params[:email])  
+!!     if @user  
+!!       begin
+!!         @user.deliver_password_reset_instructions!  
+!!         flash[:notice] = "Instructions to reset your password have been emailed to you. Please check your email."
+!!       rescue => ex
+!!         flash[:error] = "Mailer error. Reset email not sent. You need Ruby 1.8.7 or greater. #{ex.message}"
+!!       end
+!!       redirect_to root_url  
+!!     else  
+!!       flash[:notice] = "No user was found with that email address"  
+!!       render :action => :new  
+!!     end  
+!!   end
+   
+   private
+   
+     def load_user_using_perishable_token  
+!!      @user = User.find_using_perishable_token(params[:id])  
+!!      unless @user  
+!!        flash[:notice] = "We're sorry, but we could not locate your account. " +  
+!!        "If you are having issues try copying and pasting the URL " +  
+!!        "from your email into your browser or restarting the " +  
+!!        "reset password process."  
+!!        redirect_to root_url  
+!!      end
+!!    end
+!! 
+!! end
+================================================================================
+app/controllers/precincts_controller.rb
+================================================================================
+   require 'abstract_ballot'
+   require 'rubygems'
+   require 'zip/zip'
+   
+   CHECKBOX = "\xE2\x98\x90" # "☐"
+   
+   class PrecinctsController < ApplicationController
+   
+     def index
+       current_context.reset
+       @precincts = Precinct.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def show
+!!     @precinct = Precinct.find(params[:id])
+!!     current_context.precinct = @precinct
+!!   end
+   
+     def new
+       @precinct = Precinct.new
+     end
+   
+     def edit
+!!     @precinct = Precinct.find(params[:id])
+!!   end
+   
+     def create
+!!     @precinct = Precinct.new(params[:precinct])
+!! 
+!!     if @precinct.save
+!!       flash[:notice] = 'Precinct was successfully created.'
+!!       redirect_to(@precinct)
+!!     else
+!!       render :action => "new" 
+!!     end
+!!   end
+   
+     def update
+!!     @precinct = Precinct.find(params[:id])
+!! 
+!!     if @precinct.update_attributes(params[:precinct])
+!!       flash[:notice] = 'Precinct was successfully updated.'
+!!       redirect_to(@precinct) 
+!!     else
+!!       render :action => "edit" 
+!!     end
+!!   end
+   
+     def destroy
+!!     @precinct = Precinct.find(params[:id])
+!!     @precinct.destroy
+!!     redirect_to(precincts_url) 
+!!   end
+     
+     def ballot
+!!      election = Election.find(params[:election_id])
+!!      precinct = Precinct.find(params[:id])
+!!      unless election.ballot_style_template_id == nil
+!!        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
+!!        begin
+!!              new_ballot = election.render_ballot(election, precinct, ballot_style_template)
+!!              #RENDER BASED ON MEDIUM CHOSEN   
+!!              if new_ballot[:medium_id] == 0
+!!                 send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'attachment'
+!!              elsif new_ballot[:medium_id] == 1
+!!                render :text => 'This is where we will generate html ballot'
+!!              else
+!!                flash[:error] = "Please edit ballot style template to include a output a medium and then try again."
+!!                redirect_to election_path election
+!!              end
+!!         rescue Exception => ex
+!!           flash[:error] = "precinct_controller - #{ex.message}"
+!!           redirect_to precincts_election_path election
+!!        end
+!!      else
+!!        flash[:error] = "A Ballot Style Template must be selected for this election before a ballot can be generated."
+!!        redirect_to election_path election
+!!      end    
+!! 
+!!   end
+     
+     
+     def ballots
+!!      election = Election.find(params[:election_id])
+!!      precincts = election.district_set.precincts
+!!      
+!!      unless election.ballot_style_template_id == nil
+!!        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
+!!        begin
+!!         ballots_array = election.render_ballots(election, precincts, ballot_style_template)
+!!         zipped_ballots = zip_ballots(ballots_array)
+!!         send_file zipped_ballots, :type => 'application/zip', :disposition => 'application', :filename => "ballots-#{Time.now}.zip"
+!!        
+!!       rescue Exception => ex
+!!         flash[:error] = "precinct_controller - #{ex.message}"
+!!         redirect_to precincts_election_path election
+!!       end
+!!      else
+!!        flash[:error] = "A Ballot Style Template must be selected for this election before any ballots can be generated."
+!!        redirect_to election_path election
+!!      end    
+!! 
+!!   end
+     
+     
+     def zip_ballots(ballots_array)
+!!      temp_file = "tmp/ballot_zips/ballots-#{Time.now}.zip"
+!!      Zip::ZipFile.open(temp_file, Zip::ZipFile::CREATE) {
+!!         |zipfile|
+!!          ballots_array.each do |new_ballot|
+!!            zipfile.get_output_stream(new_ballot[:fileName]) { |f| f.puts new_ballot[:pdfBallot] }
+!!          end
+!!        }
+!!     return temp_file
+!!   end
+!! end
+================================================================================
+app/controllers/user_sessions_controller.rb
+================================================================================
+   # login and password recovery
+   class UserSessionsController < ApplicationController
+     def new
+       @user_session = UserSession.new
+     end
+     
+     def create
+!!     @user_session = UserSession.new(params[:user_session])
+!!     if @user_session.save
+!!       flash[:notice] = "Successfully logged in."
+!!       redirect_to root_url
+!!     else
+!!       render :action => 'new'
+!!     end
+!!   end
+     
+     def update
+!!     @user_session = UserSession.find
+!!     if @election.update_attributes(params[:session])
+!!       if request.xhr?
+!!         render :update do |page|
+!!             page "<< window.location.reload()"
+!!         end
+!!       end
+!!     end
+!!   end
+   
+     def destroy
+!!     @user_session = UserSession.find
+!!     @user_session.destroy
+!!     flash[:notice] = "Successfully logged out."
+!!     redirect_to root_url
+!!   end
+!! 
+!! end
+================================================================================
+app/controllers/maintain_controller.rb
+================================================================================
+   require 'pathname'
+   class MaintainController < ApplicationController
+     
+     def import_file
+!!     begin
+!!       if params[:importFile].nil? 
+!!         flash[:error] = "Import failed because file was not specified."
+!!         redirect_to :back
+!!         return
+!!       end
+!!       if params[:commit] == "XML file"
+!!         @election = TTV::ImportExport.import(params[:importFile])
+!!       elsif params[:commit] == "YML file"
+!!         import_handler = TTV::YAMLImport.new(params[:importFile])
+!!         @election = import_handler.import
+!!       end
+!!       flash[:notice] = "Election import was successful. Here is your new election."
+!!       redirect_to @election
+!!     rescue ActionController::RedirectBackError => ex
+!!       redirect_to elections_url
+!!     rescue Exception => ex
+!!       flash[:error] = "Import error: #{ex.message}";
+!!       redirect_to elections_url
+!!     end
+!!   end  
+     
+     def import_batch
+       begin
+         if params[:import_folder_path].length == 0 
+!!         flash[:error] = "Import failed because the directory was not specified."
+!!         redirect_to :back
+!!         return
+!!       end
+         if params[:commit] == "XML files"
+               import_handler = TTV::ImportExport::Import.new(params[:import_folder_path])
+               @election = import_handler.import_batch
+         elsif params[:commit] == "YML files"
+           import_handler = TTV::YAMLImport.new(params[:import_folder_path])
+           @election = import_handler.import_batch
+         end
+         flash[:notice] = "Election import was successful. Here are your elections"
+         redirect_to elections_url
+!!     rescue ActionController::RedirectBackError => ex
+!!       redirect_to elections_url
+!!     rescue Exception => ex
+!!       flash[:error] = "Import error: #{ex.message}";
+!!       redirect_to elections_url
+!!     end
+!!   end
+   
+     def export_file       
+!!     if params[:commit] == "YML file"
+!!       election = Election.find(params[:election_to_export][:id])
+!!       export_obj = TTV::YAMLExport.new(election)
+!!       export_obj.do_export
+!!       election_hash = export_obj.election_hash
+!!       file_contents = YAML.dump(TTV::DataLayer.audit_header_dummy) + YAML.dump(election_hash)
+!!       send_data file_contents, :content_type => "text", :filename => election.display_name.gsub(' ', '_') + ".yml"
+!!       flash[:notice] = "Export succeeded."
+!!     elsif params[:commit] == "XML file"
+!!       election = Election.find(params[:election_to_export][:id])
+!!       xml_builder = TTV::ImportExport.export(election)
+!!       send_data xml_builder, :content_type => "text", :filename => election.display_name.gsub(' ', '_') + ".xml"
+!!       flash[:notice] = "Export succeeded."
+!!     else
+!!       flash[:error] = "Apparent bug in Maintain Controller. Call Pito :)"
+!!     end
+!!   end
+!! 
+!! end
+================================================================================
+app/controllers/districts_controller.rb
+================================================================================
+   class DistrictsController < ApplicationController
+   
+     def index
+       @districts = District.paginate(:per_page => 10, :page => params[:page])
+       
+     end
+   
+     def show
+!!     @district = District.find(params[:id])
+!!   end
+   
+     def new
+!!     @district = District.new
+!! #    @district.election_id = params[:election_id]
+!! #    @election = params[:election_id]
+!!   end
+   
+     def edit
+!!     @district = District.find(params[:id])
+!!     @district_sets = {}
+!!     DistrictSet.find(:all).collect { |ds| @district_sets[ds.display_name] = ds.id}
+!!   end
+   
+     def create
+!!     @district = District.new(params[:district])
+!!     @election = params[:election_id]
+!!     if @district.save
+!!       flash[:notice] = 'District was successfully created.'
+!!       redirect_to(@district)
+!!     else
+!!       render :action => "new"
+!!     end
+!!   end
+   
+     def update
+!!     @district = District.find(params[:id])
+!!     handle_district_sets
+!!     if @district.update_attributes(params[:district])
+!!       flash[:notice] = 'District was successfully updated.'
+!!       redirect_to districts_url
+!!     else
+!!       render :action => "edit"
+!!     end
+!!   end
+   
+     def destroy
+!!     @district = District.find(params[:id])
+!!     @district.destroy
+!!     redirect_to(districts_url)
+!!   end
+     
+     private
+     
+     def handle_district_sets
+!!     if params['district_sets']
+!!       @district.district_sets.clear
+!!       chosen_sets = params[:district_sets].map { |id| DistrictSet.find(id)}
+!!       @district.district_sets << chosen_sets
+!!     end
+!!   end
+!! end
+================================================================================
+app/models/election.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: elections
+   #
+   #  id              :integer         not null, primary key
+   #  display_name    :string(255)
+   #  district_set_id :integer
+   #  start_date      :datetime
+   #  created_at      :datetime
+   #  updated_at      :datetime
+   #
+   require 'abstract_ballot'
+   class Election < ActiveRecord::Base
+       has_many :contests, :order => :position, :dependent => :destroy
+       has_many :questions, :order => :display_name, :dependent => :destroy
+       
+       validates_presence_of :display_name
+       belongs_to :district_set
+       
+       before_destroy :destroy_translations
+       
+       def to_s
+!!       s = ""
+!!       attributes.each do |key, value| 
+!!         s += ("#{key}:#{value} ")
+!!       end
+!!       return s
+!!     end
+       
+       def districts
+         @districts = district_set.districts if (!@districts)
+         @districts  
+       end
+   
+       def validate 
+          errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
+       end
+       
+       # really used for export. I'd use a different method, if I could force 'render :xml' to call it
+       def to_xml( options = {}, &block )
+!!       return TTV::ImportExport.export(self)
+!!     end
+       
+       TRANSLATION_FOLDER = "#{RAILS_ROOT}/db/translations"
+       
+       def translation_path(lang)
+         "#{TRANSLATION_FOLDER}/election-#{id}.#{lang}.yml"
+       end
+       
+       def destroy_translations
+         Dir.foreach TRANSLATION_FOLDER do |f|
+           next unless f =~ /election-#{id}.*yml$/
+           File.unlink("#{TRANSLATION_FOLDER}/#{f}")
+         end
+       end
+     
+       def comp compare
+!!       equal = true
+!!       equal = false if !equal_contests? compare
+!!       equal = false if !equal_districts? compare
+!!       equal = false if !equal_questions? compare
+!!       equal = false if display_name != compare.display_name
+!!       return equal
+!!     end
+       
+     #
+     # Contains assertions that certify the election objects election1 and 
+     # election2 contain equivalent contests, district associations, candidates, parties
+     #
+     def equal_contests? election2
+!!     equal = true
+!!     contests.each {|e1_contest|
+!!       e2_contest = election2.contests.find_by_display_name(e1_contest.display_name)
+!!       equal = false if e2_contest.nil?
+!! 
+!!       equal = false if e1_contest.district.display_name != e2_contest.district.display_name
+!! 
+!!       # contain the same candidates associated with the same party
+!!       e1_contest.candidates.each {|e1_candidate|
+!!         # handle multiple candidates with the same name, different parties
+!!         e2_candidates = e2_contest.candidates.find_all_by_display_name(e1_candidate.display_name)
+!!         
+!!         equal = false if e2_candidates.empty?
+!!         
+!!         match = false
+!!         
+!!         e2_candidates.each {|e2_candidate|          
+!!           if e2_candidate.party.display_name == e1_candidate.party.display_name
+!!             match = true
+!!           end
+!!         }
+!!         
+!!         equal = false if match = false
+!!       }
+!!     }
+!!     return equal
+!!   end
+   
+     #
+     # Contains assertions that certify the election objects election1 and 
+     # election2 contain equivalent precincts and associated districts
+     #
+     def equal_districts? election2
+!!     equal = true
+!!     districts.each {|e1_district|
+!!       e2_district = election2.districts.find_by_display_name(e1_district.display_name)
+!!       equal = false if !e2_district
+!!       
+!!       # is the same district type
+!!       equal = false if e1_district.district_type != e2_district.district_type
+!!       
+!!       # contain the same precincts
+!!       e1_district.precincts.each {|e1_precinct|
+!!         e2_precinct = e2_district.precincts.find_by_display_name(e1_precinct.display_name)
+!!         equal = false if e2_precinct.nil?
+!!       }
+!!     }
+!!     return equal
+!!   end
+   
+     #
+     # Contains assertions that certify the election objects election1 and 
+     # election2 contain equivalent questions and associated districts
+     #  
+     def equal_questions? election2
+!!     equal = true
+!!     questions.each {|e1_question|
+!!       e2_question = election2.questions.find_by_display_name(e1_question.display_name)
+!!       equal = false if e2_question.nil?
+!!       
+!!       equal = false if e1_question.question != e2_question.question
+!!       
+!!       equal = false if e1_question.district.display_name != e2_question.district.display_name
+!!     }
+!!     return equal
+!!   end
+       
+       def render_ballot(election, precinct, ballot_style_template)
+!!       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
+!!       lang = Language.find(ballot_style_template.default_language).code
+!!       instruction_text = ballot_style_template.instruction_text
+!!       state_seal = ballot_style_template.state_graphic
+!!       state_signature = ballot_style_template.state_signature_image
+!!       medium_id = ballot_style_template.medium_id
+!!       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+!!       
+!!       if medium_id == 0
+!!         pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+!!         new_ballot = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
+!!       else
+!!         new_ballot = {:title => title, :medium_id => medium_id}
+!!       end
+!!       return new_ballot
+!!     end
+       
+       
+       
+       
+       def render_ballots(election, precincts, ballot_style_template)
+!!       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
+!!       lang = Language.find(ballot_style_template.default_language).code
+!!       instruction_text = ballot_style_template.instruction_text
+!!       state_seal = ballot_style_template.state_graphic
+!!       state_signature = ballot_style_template.state_signature_image
+!!       ballot_array = Array.new
+!!       precincts.each do |precinct|
+!!         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+!!         pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text, state_seal, state_signature)
+!!         new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
+!!         ballot_array << new_ballot
+!!       end
+!!       
+!!          
+!!         #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
+!!         
+!!       return ballot_array
+!!     end
+!!     
+!! 
+!! end
+================================================================================
+app/controllers/jurisdictions_controller.rb
+================================================================================
+   class JurisdictionsController < ApplicationController
+     
+     def current
+       if !current_context.jurisdiction?
+         redirect_to :action => :change
+!!     else
+!!       current_context.election = nil
+!!       @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
+!!       render :elections
+!!     end  
+!!   end
+     
+     def elections
+!!     current_context.election = nil
+!!     @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
+!!   end
+    
+     
+     def change
+!!     @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
+!!   end
+     
+     def set
+!!     current_context.jurisdiction = DistrictSet.find(params[:id])
+!!     redirect_to :action => :elections
+!!   end
+!!  
+!! end
+================================================================================
+app/controllers/voting_methods_controller.rb
+================================================================================
+   class VotingMethodsController < ApplicationController
+   
+     def index
+       @voting_methods = VotingMethod.all
+     end
+   
+     def show
+!!     @voting_method = VotingMethod.find(params[:id])
+!!   end
+   
+     def new
+       @voting_method = VotingMethod.new
+     end
+   
+     def edit
+!!     @voting_method = VotingMethod.find(params[:id])
+!!   end
+   
+     def create
+!!     @voting_method = VotingMethod.new(params[:voting_method])
+!! 
+!!     if @voting_method.save
+!!       flash[:notice] = 'VotingMethod was successfully created.'
+!!       redirect_to @voting_method
+!!     else
+!!       render :action => "new"
+!!     end
+!!   end
+   
+     def update
+!!     @voting_method = VotingMethod.find(params[:id])
+!! 
+!!     if @voting_method.update_attributes(params[:voting_method])
+!!       flash[:notice] = 'VotingMethod was successfully updated.'
+!!       redirect_to(@voting_method) 
+!!     else
+!!       render :action => "edit" 
+!!     end
+!!   end
+   
+     def destroy
+!!     @voting_method = VotingMethod.find(params[:id])
+!!     @voting_method.destroy
+!!     redirect_to(voting_methods_url)
+!!   end
+!! 
+!! end
+================================================================================
+app/controllers/district_types_controller.rb
+================================================================================
+   class DistrictTypesController < ApplicationController
+   
+     def index
+       @district_types = DistrictType.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def show
+!!     @district_type = DistrictType.find(params[:id])
+!!   end
+   
+     def new
+       @district_type = DistrictType.new
+     end
+   
+     def edit
+!!     @district_type = DistrictType.find(params[:id])
+!!   end
+   
+     def create
+!!     @district_type = DistrictType.new(params[:district_type])
+!! 
+!!     if @district_type.save
+!!       flash[:notice] = 'DistrictType was successfully created.'
+!!       redirect_to(@district_type) 
+!!     else
+!!       render :action => "new" 
+!!     end
+!!   end
+   
+     def update
+!!     @district_type = DistrictType.find(params[:id])
+!! 
+!!     if @district_type.update_attributes(params[:district_type])
+!!       flash[:notice] = 'DistrictType was successfully updated.'
+!!       redirect_to(@district_type) 
+!!     else
+!!       render :action => "edit" 
+!!     end
+!!   end
+   
+     def destroy
+!!     @district_type = DistrictType.find(params[:id])
+!!     @district_type.destroy
+!!     redirect_to(district_types_url) 
+!!   end
+!! end
+================================================================================
+app/controllers/district_sets_controller.rb
+================================================================================
+   class DistrictSetsController < ApplicationController
+     # GET /district_sets
+     # GET /district_sets.xml
+     def index
+       @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
+   
+       respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @district_sets }
+       end
+     end
+   
+     # GET /district_sets/1
+     # GET /district_sets/1.xml
+     def show
+!!     @district_set = DistrictSet.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       format.html # show.html.erb
+!!       format.xml  { render :xml => @district_set }
+!!     end
+!!   end
+   
+     # GET /district_sets/new
+     # GET /district_sets/new.xml
+     def new
+       @district_set = DistrictSet.new
+   
+       respond_to do |format|
+         format.html # new.html.erb
+         format.xml  { render :xml => @district_set }
+       end
+     end
+   
+     # GET /district_sets/1/edit
+     def edit
+!!     @district_set = DistrictSet.find(params[:id])
+!!   end
+   
+     # POST /district_sets
+     # POST /district_sets.xml
+     def create
+!!     @district_set = DistrictSet.new(params[:district_set])
+!! 
+!!     respond_to do |format|
+!!       if @district_set.save
+!!         flash[:notice] = 'DistrictSet was successfully created.'
+!!         format.html { redirect_to(@district_set) }
+!!         format.xml  { render :xml => @district_set, :status => :created, :location => @district_set }
+!!       else
+!!         format.html { render :action => "new" }
+!!         format.xml  { render :xml => @district_set.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # PUT /district_sets/1
+     # PUT /district_sets/1.xml
+     def update
+!!     @district_set = DistrictSet.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       if @district_set.update_attributes(params[:district_set])
+!!         flash[:notice] = 'DistrictSet was successfully updated.'
+!!         format.html { redirect_to(@district_set) }
+!!         format.xml  { head :ok }
+!!       else
+!!         format.html { render :action => "edit" }
+!!         format.xml  { render :xml => @district_set.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # DELETE /district_sets/1
+     # DELETE /district_sets/1.xml
+     def destroy
+!!     @district_set = DistrictSet.find(params[:id])
+!!     @district_set.destroy
+!! 
+!!     respond_to do |format|
+!!       format.html { redirect_to(district_sets_url) }
+!!       format.xml  { head :ok }
+!!     end
+!!   end
+!! end
+================================================================================
+app/controllers/ballot_style_templates_controller.rb
+================================================================================
+   class BallotStyleTemplatesController < ApplicationController
+     
+     layout 'application'
+     
+     # GET /ballot_style_templates
+     # GET /ballot_style_templates.xml
+     def index
+       @ballot_style_templates = BallotStyleTemplate.paginate(:per_page => 10, :page => params[:page])
+   
+       respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @ballot_style_templates }
+       end
+     end
+   
+     # GET /ballot_style_templates/1
+     # GET /ballot_style_templates/1.xml
+     def show
+!!     @ballot_style_template = BallotStyleTemplate.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       format.html # show.html.erb
+!!       format.xml  { render :xml => @ballot_style_template }
+!!     end
+!!   end
+   
+     # GET /ballot_style_templates/new
+     # GET /ballot_style_templates/new.xml
+     def new
+       @ballot_style_template = BallotStyleTemplate.new
+   
+       respond_to do |format|
+         format.html # new.html.erb
+         format.xml  { render :xml => @ballot_style_template }
+       end
+     end
+   
+     # GET /ballot_style_templates/1/edit
+     def edit
+!!     @ballot_style_template = BallotStyleTemplate.find(params[:id])
+!!   end
+   
+     # POST /ballot_style_templates
+     # POST /ballot_style_templates.xml
+     def create
+!!     @ballot_style_template = BallotStyleTemplate.new(params[:ballot_style_template])
+!! 
+!!     respond_to do |format|
+!!       if @ballot_style_template.save
+!!         flash[:notice] = 'BallotStyleTemplate was successfully created.'
+!!         format.html { redirect_to(@ballot_style_template) }
+!!         format.xml  { render :xml => @ballot_style_template, :status => :created, :location => @ballot_style_template }
+!!       else
+!!         format.html { render :action => "new" }
+!!         format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # PUT /ballot_style_templates/1
+     # PUT /ballot_style_templates/1.xml
+     def update
+!!     @ballot_style_template = BallotStyleTemplate.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       if @ballot_style_template.update_attributes(params[:ballot_style_template])
+!!         flash[:notice] = 'BallotStyleTemplate was successfully updated.'
+!!         format.html { redirect_to(@ballot_style_template) }
+!!         format.xml  { head :ok }
+!!       else
+!!         format.html { render :action => "edit" }
+!!         format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # DELETE /ballot_style_templates/1
+     # DELETE /ballot_style_templates/1.xml
+     def destroy
+!!     @ballot_style_template = BallotStyleTemplate.find(params[:id])
+!!     @ballot_style_template.destroy
+!! 
+!!     respond_to do |format|
+!!       format.html { redirect_to(ballot_style_templates_url) }
+!!       format.xml  { head :ok }
+!!     end
+!!   end
+!! end
+================================================================================
+app/controllers/media_controller.rb
+================================================================================
+   class MediaController < ApplicationController
+     layout 'application'
+     
+     # GET /media
+     # GET /media.xml
+     def index
+       @media = Medium.paginate(:per_page => 10, :page => params[:page])
+   
+       respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @media }
+       end
+     end
+   
+     # GET /media/1
+     # GET /media/1.xml
+     def show
+!!     @medium = Medium.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       format.html # show.html.erb
+!!       format.xml  { render :xml => @medium }
+!!     end
+!!   end
+   
+     # GET /media/new
+     # GET /media/new.xml
+     def new
+       @medium = Medium.new
+   
+       respond_to do |format|
+         format.html # new.html.erb
+         format.xml  { render :xml => @medium }
+       end
+     end
+   
+     # GET /media/1/edit
+     def edit
+!!     @medium = Medium.find(params[:id])
+!!   end
+   
+     # POST /media
+     # POST /media.xml
+     def create
+!!     @medium = Medium.new(params[:medium])
+!! 
+!!     respond_to do |format|
+!!       if @medium.save
+!!         flash[:notice] = 'Medium was successfully created.'
+!!         format.html { redirect_to(@medium) }
+!!         format.xml  { render :xml => @medium, :status => :created, :location => @medium }
+!!       else
+!!         format.html { render :action => "new" }
+!!         format.xml  { render :xml => @medium.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # PUT /media/1
+     # PUT /media/1.xml
+     def update
+!!     @medium = Medium.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       if @medium.update_attributes(params[:medium])
+!!         flash[:notice] = 'Medium was successfully updated.'
+!!         format.html { redirect_to(@medium) }
+!!         format.xml  { head :ok }
+!!       else
+!!         format.html { render :action => "edit" }
+!!         format.xml  { render :xml => @medium.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # DELETE /media/1
+     # DELETE /media/1.xml
+     def destroy
+!!     @medium = Medium.find(params[:id])
+!!     @medium.destroy
+!! 
+!!     respond_to do |format|
+!!       format.html { redirect_to(media_url) }
+!!       format.xml  { head :ok }
+!!     end
+!!   end
+!! end
+================================================================================
+app/controllers/ballot_styles_controller.rb
+================================================================================
+   class BallotStylesController < ApplicationController
+     
+     layout 'application'
+     
+     # GET /ballot_styles
+     # GET /ballot_styles.xml
+     def index
+       @ballot_styles = BallotStyle.paginate(:per_page => 10, :page => params[:page])
+   
+       respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @ballot_styles }
+       end
+     end
+   
+     # GET /ballot_styles/1
+     # GET /ballot_styles/1.xml
+     def show
+!!     @ballot_style = BallotStyle.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       format.html # show.html.erb
+!!       format.xml  { render :xml => @ballot_style }
+!!     end
+!!   end
+   
+     # GET /ballot_styles/new
+     # GET /ballot_styles/new.xml
+     def new
+       @ballot_style = BallotStyle.new
+   
+       respond_to do |format|
+         format.html # new.html.erb
+         format.xml  { render :xml => @ballot_style }
+       end
+     end
+   
+     # GET /ballot_styles/1/edit
+     def edit
+!!     @ballot_style = BallotStyle.find(params[:id])
+!!   end
+   
+     # POST /ballot_styles
+     # POST /ballot_styles.xml
+     def create
+!!     @ballot_style = BallotStyle.new(params[:ballot_style])
+!! 
+!!     respond_to do |format|
+!!       if @ballot_style.save
+!!         flash[:notice] = 'BallotStyle was successfully created.'
+!!         format.html { redirect_to(@ballot_style) }
+!!         format.xml  { render :xml => @ballot_style, :status => :created, :location => @ballot_style }
+!!       else
+!!         format.html { render :action => "new" }
+!!         format.xml  { render :xml => @ballot_style.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # PUT /ballot_styles/1
+     # PUT /ballot_styles/1.xml
+     def update
+!!     @ballot_style = BallotStyle.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       if @ballot_style.update_attributes(params[:ballot_style])
+!!         flash[:notice] = 'BallotStyle was successfully updated.'
+!!         format.html { redirect_to(@ballot_style) }
+!!         format.xml  { head :ok }
+!!       else
+!!         format.html { render :action => "edit" }
+!!         format.xml  { render :xml => @ballot_style.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # DELETE /ballot_styles/1
+     # DELETE /ballot_styles/1.xml
+     def destroy
+!!     @ballot_style = BallotStyle.find(params[:id])
+!!     @ballot_style.destroy
+!! 
+!!     respond_to do |format|
+!!       format.html { redirect_to(ballot_styles_url) }
+!!       format.xml  { head :ok }
+!!     end
+!!   end
+!! end
+================================================================================
+app/controllers/languages_controller.rb
+================================================================================
+   class LanguagesController < ApplicationController
+   
+     layout 'application'
+     
+     # GET /languages
+     # GET /languages.xml
+     def index
+       @languages = Language.paginate(:per_page => 10, :page => params[:page])
+   
+       respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @languages }
+       end
+     end
+   
+     # GET /languages/1
+     # GET /languages/1.xml
+     def show
+!!     @language = Language.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       format.html # show.html.erb
+!!       format.xml  { render :xml => @language }
+!!     end
+!!   end
+   
+     # GET /languages/new
+     # GET /languages/new.xml
+     def new
+       @language = Language.new
+   
+       respond_to do |format|
+         format.html # new.html.erb
+         format.xml  { render :xml => @language }
+       end
+     end
+   
+     # GET /languages/1/edit
+     def edit
+!!     @language = Language.find(params[:id])
+!!   end
+   
+     # POST /languages
+     # POST /languages.xml
+     def create
+!!     @language = Language.new(params[:language])
+!! 
+!!     respond_to do |format|
+!!       if @language.save
+!!         flash[:notice] = 'Language was successfully created.'
+!!         format.html { redirect_to(@language) }
+!!         format.xml  { render :xml => @language, :status => :created, :location => @language }
+!!       else
+!!         format.html { render :action => "new" }
+!!         format.xml  { render :xml => @language.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # PUT /languages/1
+     # PUT /languages/1.xml
+     def update
+!!     @language = Language.find(params[:id])
+!! 
+!!     respond_to do |format|
+!!       if @language.update_attributes(params[:language])
+!!         flash[:notice] = 'Language was successfully updated.'
+!!         format.html { redirect_to(@language) }
+!!         format.xml  { head :ok }
+!!       else
+!!         format.html { render :action => "edit" }
+!!         format.xml  { render :xml => @language.errors, :status => :unprocessable_entity }
+!!       end
+!!     end
+!!   end
+   
+     # DELETE /languages/1
+     # DELETE /languages/1.xml
+     def destroy
+!!     @language = Language.find(params[:id])
+!!     @language.destroy
+!! 
+!!     respond_to do |format|
+!!       format.html { redirect_to(languages_url) }
+!!       format.xml  { head :ok }
+!!     end
+!!   end
+!! end
+================================================================================
+app/ttv/translate.rb
+================================================================================
+   module TTV
+     module Translate
+       
+       # from http://ruby.geraldbauer.ca/google-translation-api.html
+       # for a list of languages, see http://code.google.com/apis/ajaxlanguage/documentation/reference.html#LangNameArray
+       def self.translate(text, from, to)
+!!       raise "#{text} is not a string, cannot translate" unless text.class == String
+!!       if text.count("\n") > 0 # line splits, and google chews them up, must separate manually
+!!         puts "translating #{text.length} '#{text}'"
+!!         translation = ""
+!!         text.split("\n").each do |t|
+!!           translation += self.translate(t, from, to) + "\n"
+!!         end
+!!         puts "translated ", translation
+!!         return translation
+!!       end
+!!       
+!!       return "" unless text =~ /\w+/
+!! 
+!!       base = 'http://ajax.googleapis.com/ajax/services/language/translate' 
+!! 
+!!       # assemble query params
+!!       params = {
+!!         :langpair => "#{from}|#{to}", 
+!!         :q => text,
+!!         :v => 1.0  
+!!       }
+!! 
+!!       query = params.map{ |k,v| "#{k}=#{CGI.escape(v.to_s)}" }.join('&')
+!! 
+!!       response = Net::HTTP.get_response( URI.parse( "#{base}?#{query}" ) )
+!!       json = ActiveSupport::JSON.decode( response.body )
+!! 
+!!       if json['responseStatus'] == 200
+!!         json['responseData']['translatedText']
+!!       else
+!!         raise StandardError, response['responseDetails']
+!!       end
+!!     end
+   
+       def self.translate_file(src_path, dest_path, from, to)
+!!       if src_path =~ /.yml$/
+!!         yaml = YAML::load_file(src_path)
+!!         translation = {}
+!!         yaml.each do |a, b|
+!!           translation[a] = self.translate(b, from, to)
+!!         end
+!!         File.open dest_path, 'w' do |out|
+!!           YAML.dump(translation, out )
+!!         end
+!!       else
+!!         text = IO.read src_path
+!!         translation = self.translate text, from, to
+!!         out = File.open dest_path, "w" do |f|
+!!           f.write translation
+!!         end
+!!       end
+!!     end
+       
+       # use from a command line to translate ballot directories
+       # load "lib/ttv/translate.rb"
+       # TTV::Translate.translate_directory("ballots/default/lang/en", "ballots/default/lang/zh", "en", "zh")
+       def self.translate_directory(src_dir, dest_dir, from, to)
+!!       Dir.foreach src_dir do |f|
+!!         next unless f =~ /txt|yml/
+!!         self.translate_file "#{src_dir}/#{f}", "#{dest_dir}/#{f}", from, to
+!!       end
+!!     end
+       
+       def self.human_language(code)
+!!       case code
+!!       when 'en'; "English"
+!!       when 'es'; "Spanish"
+!!       when 'zh'; "Chinese"
+!!       else code
+!!       end
+!!     end
+       
+       class YamlTranslation
+         def initialize(filename)
+           @filename = filename
+           @dirty = false
+           begin
+             @yaml = YAML::load_file(@filename)
+           rescue => ex
+             @dirty = true
+             @yaml = {}
+             @ex = ex
+           end
+         end
+   
+         def [](val)
+           return @yaml[val] if @yaml.has_key? val
+           @dirty = true
+           @yaml[val] = "NEEDSTRANSLATION"
+           "NEEDSTRANSLATION"
+         end
+   
+         def save
+!!         File.open( @filename, 'w' ) do |out|
+!!           YAML.dump( @yaml, out )
+!!         end unless !@dirty    
+!!       end
+         
+         def dirty?
+!!         @dirty
+!!       end
+!! 
+!!     end
+   
+       # for english (default_language)
+       #   recreate the file every time
+       # for other languages
+       #   recreate the file if needed
+       class ElectionTranslation
+   
+         DEFAULT_LANGUAGE = 'en'
+         
+         def initialize(election, lang)
+           @election = election
+           @filename = election.translation_path(lang)
+           @lang = lang
+           @dirty = false
+           begin
+             @yaml = YAML::load_file(@filename)
+           rescue => ex
+             @yaml = {}
+             @ex = ex
+           end
+         end
+         
+         def get(object, property)
+           key = "#{object.class.name}-#{object.id}.#{property}"
+           return @yaml[key] if @yaml.has_key? key
+           if @lang == DEFAULT_LANGUAGE
+             @yaml[key] = object.send property
+             @yaml[key]
+!!         else
+!!           return @yaml[key] if @yaml.has_key? key
+!!           @dirty = true
+!!           @yaml[key] = "NEEDSTRANSLATION"
+!!           "NEEDSTRANSLATION"
+!!         end
+!!       end
+   
+         def dirty?
+            @dirty
+          end
+   
+   # look at this for solutions
+   # http://www.artweb-design.de/2008/7/18/the-ruby-on-rails-i18n-core-api    
+   # http://guides.rubyonrails.org/i18n.html
+         def ordinalize(n)
+           n.ordinalize # FIXME, need international support, might come with rails for free in future releases
+         end
+         
+         def strftime(date, format)
+           I18n.localize date, :locale => @lang, :format => format
+           # date.strftime(format)
+         end
+         
+         def save
+!!         File.open( @filename, 'w' ) do |out|
+!!           YAML.dump( @yaml, out )
+!!         end
+!!       end
+!! 
+!!     end
+!!         
+!!   end
+!! end
+================================================================================
+app/controllers/elections_controller.rb
+================================================================================
+   class ElectionsController < ApplicationController
+     
+    authorize_resource
+     
+     def index
+       current_context.reset
+       @elections = Election.paginate(:per_page => 10, :page => params[:page])
+       redirect_to :action => 'new' if @elections.empty?
+       @election = UserSession.find.election if UserSession.find
+     end
+   
+     def show
+       @election = Election.find(params[:id], :include => [ 
+         { :district_set => :districts }, 
+         { :contests => :candidates },
+         :questions, 
+         ])
+       current_context.election = @election
+       @districts = @election.districts.paginate(:per_page => 10, :page => params[:page])
+       @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
+       @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
+       @precincts = @election.district_set.precincts.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def new
+       @election = Election.new
+     end
+   
+     def edit
+       @election = Election.find(params[:id])
+       @dist_sets = DistrictSet.find(:all)
+       render :partial => 'edit', :locals => { :election => @election } if request.xhr?
+     end
+   
+     def create
+       @election = Election.new(params[:election])
+       if @election.save
+         flash[:notice] = 'Election was successfully created.'
+         redirect_to @election
+!!     else
+!!       render :action => "new" 
+!!     end
+!!   end
+   
+     # responds to AJAX updates too
+     def update
+       @election = Election.find(params[:id])
+       success = @election.update_attributes(params[:election])
+       flash[:notice] = 'Election was successfully updated.' if success
+       if request.xhr?
+!!       edit_id = "#{dom_id(@election)}_edit"
+!!       static_id = "#{dom_id(@election)}_static"
+!!       render :update do |page|
+!!         if success
+!!           page.remove edit_id
+!!           page.replace static_id, :partial => 'static', :locals => { :election => @election }
+!!         else
+!!           @dist_sets = DistrictSet.find(:all)
+!!           page.replace edit_id, :partial => 'edit', :locals => { :election => @election }
+!!         end
+!!       end
+       elsif success
+         redirect_to @election
+!!     else
+!!      render :action => "edit"
+!!     end
+!!   end
+   
+     def destroy
+       @election = Election.find(params[:id])
+       @election.destroy
+       redirect_to elections_url
+     end
+   
+     def import
+!!     begin
+!!       if params[:importFile].nil? 
+!!         flash[:error] = "Import failed because file was not specified."
+!!         redirect_to :back
+!!       else
+!!         @election = TTV::ImportExport.import(params[:importFile])
+!!         flash[:notice] = "Election import was successful. Here is your new election."
+!!         redirect_to @election
+!!       end
+!!     rescue ActionController::RedirectBackError => ex
+!!       redirect_to elections_url
+!!     rescue Exception => ex
+!!       raise ex
+!!       flash[:error] = "Import error: #{ex.message}";
+!!       redirect_to elections_url
+!!     end
+!!   end
+     
+     def import_yml
+!!     begin
+!!       if params[:importFile].nil? 
+!!         flash[:error] = "Import failed because file was not specified."
+!!         redirect_to :back
+!!       else
+!!         import_handler = TTV::YAMLImport.new(params[:importFile])
+!!         @election = import_handler.import
+!!         flash[:notice] = "Election import was successful. Here is your new election."
+!!         redirect_to @election
+!!       end
+!!     rescue ActionController::RedirectBackError => ex
+!!       redirect_to elections_url
+!!     rescue Exception => ex
+!!       raise ex
+!!       flash[:error] = "Import error: #{ex.message}";
+!!       redirect_to elections_url
+!!     end
+!!   end
+     
+     def export
+!!     @election = Election.find(params[:id])
+!!     title = @election.display_name.gsub(/ /, "_").camelize
+!!     headers["Content-disposition"] = "attachment;filename=\"#{title}.xml\""
+!!     render :xml => @election
+!!   end
+   
+     def precincts
+!!     @election = Election.find(params[:id])
+!!   end
+     
+     def translate
+!!     @election = Election.find(params[:id])
+!!     TTV::PDFBallot.translate(@election, params[:lang])
+!!     flash[:notice] = "Election was successfully translated"
+!!     redirect_to precincts_election_url
+!!   end
+!! 
+!! end
+   
+================================================================================
+app/controllers/users_controller.rb
+================================================================================
+   class UsersController < ApplicationController
+   
+     authorize_resource
+   
+     def index
+!!     @users = User.paginate(:per_page => 10, :page => params[:page])
+!!     redirect_to :action => 'new' if @users.empty?
+!!   end
+   
+     def show
+       @user = User.find(params[:id])
+     end
+   
+     def register
+!!     @user = User.new
+!!   end
+     
+     def new
+       @user = User.new
+     end
+   
+     def edit
+!!     # @user = current_user
+!!     @user = User.find(params[:id])
+!!     #    logger.info("User is #{@user}")
+!!   end
+   
+     def create
+       @user = User.new(params[:user])
+   
+       # default role for new users is 'standard'
+       @user.roles << UserRole.new(:name => 'standard')
+       
+       if @user.save
+         begin
+           Notifier.deliver_registration_confirmation(@user)
+!!       rescue => ex
+!!         flash[:error] = "Confirmation email not sent. #{ex.message}"
+!!       end
+         flash[:notice] = 'Successfully created a new user.'
+         redirect_to root_url
+!!     else
+!!       flash[:error] = "Failed to create a new user: " << @user.errors.full_messages.join(', ')
+!!       # redirect_to new_user_url
+!!       redirect_to request.referer
+!!     end
+!!   end
+   
+     def update
+!!     # @user = current_user
+!!     @user = User.find(params[:id])
+!!     if @user.update_attributes(params[:user])
+!!       flash[:notice] = 'Update successful.'
+!!       redirect_to root_url
+!!     else
+!!       render :action => "edit" 
+!!     end
+!!   end
+   
+     def destroy
+!!     @user = User.find(params[:id])
+!!     @user.destroy
+!!     redirect_to(users_url) 
+!!   end
+!! end
+================================================================================
+app/controllers/parties_controller.rb
+================================================================================
+   class PartiesController < ApplicationController
+   
+     def index
+       @parties = Party.paginate(:per_page => 10, :page => params[:page])
+     end
+   
+     def show
+!!     @party = Party.find(params[:id])
+!!   end
+   
+     def new
+       @party = Party.new
+     end
+   
+     def edit
+!!     @party = Party.find(params[:id])
+!!   end
+   
+     def create
+       @party = Party.new(params[:party])
+   
+       if @party.save
+         flash[:notice] = 'Party was successfully created.'
+         redirect_to(@party) 
+!!     else
+!!       render :action => "new"
+!!     end
+!!   end
+   
+     def update
+!!     @party = Party.find(params[:id])
+!! 
+!!     if @party.update_attributes(params[:party])
+!!       flash[:notice] = 'Party was successfully updated.'
+!!       redirect_to(@party)
+!!     else
+!!       render :action => "edit"
+!!     end
+!!   end
+   
+     def destroy
+!!     @party = Party.find(params[:id])
+!!     @party.destroy
+!!     redirect_to(parties_url)
+!!   end
+!!   
+!! end
+================================================================================
+app/helpers/precincts_helper.rb
+================================================================================
+   module PrecinctsHelper
+   
+   # Return how many contests are defined for this precinct and election, 
+   # or the total number of contests if we are not looking at a specific election
+     def precinct_contest_count_helper (prec, elect)
+       if elect.nil? 
+         Contest.all.length
+!!     else
+!!       Contest.contests_for_precinct_election(prec, elect).length
+!!     end
+!!   end
+     
+   # Return how many questions are defined for this precinct and election, 
+   # or the total number of questions, if we are not looking at a specific election
+     def precinct_question_count_helper (prec, elect)
+       if elect.nil? 
+         "--"
+!!     else
+!!       Question.questions_for_precinct_election(prec, elect).length
+!!     end
+!!   end
+!!   
+!! end
+================================================================================
+app/ttv/pdf_ballot_style.rb
+================================================================================
+   require 'ballots/default/ballot_config.rb'
+   require 'ballots/aiga/ballot_config.rb'
+   require 'ballots/nh/ballot_config.rb'
+   
+   class PDFBallotStyle
+   
+     BALLOT_DIR = "#{RAILS_ROOT}/app/ballots"
+   
+     def self.list
+!!     styles = ['default']
+!!     dir = Dir.open BALLOT_DIR
+!!     dir.each do |f|
+!!       next if f =~ /\..*/ || ! File.directory?("#{BALLOT_DIR}/#{f}") || f == "default"
+!!       styles.push f
+!!     end
+!!     styles
+!!   end
+   
+     def self.get_file(style, name)
+!!     name = "#{BALLOT_DIR}/#{style}/#{name}"
+!!     begin
+!!       IO.read(name)
+!!     rescue
+!!       Rails.logger.warn "No such file #{name} " 
+!!       "-"
+!!     end
+!!   end
+   
+     def self.get_election_translation(election, lang)
+       return TTV::Translate::ElectionTranslation.new(election, lang)
+     end
+       
+     def self.get_ballot_translation(style, lang)
+   #    puts BALLOT_DIR
+       return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
+     end
+   
+     def self.get_ballot_config(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+       begin
+         ballot_defining_module = style.camelize + "Ballot"
+         mod = ballot_defining_module.constantize
+         mod::BallotConfig.new(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+!!     rescue => ex
+!!       Rails.logger.error(ex)
+!!       raise "Unknown Ballot Style: #{style}"
+!!     end
+!!   end
+!! end
+   
+================================================================================
+app/models/user_context.rb
+================================================================================
+   #
+   # Represent a place in the navigation of the application in a structured way. There is exactly one instance
+   # of this class and (for now) it is carried around in session[:current_context]. See current_context method in
+   # ApplicationController where it is created and returned to any other method that needs it.
+   
+   class UserContext
+     attr_accessor :jurisdiction, :election, :contest, :question, :precinct
+     
+     def initialize(session)
+       @session = session
+     end
+   
+     #TODO: DRY these common methods with define_method
+     def jurisdiction
+       @jurisdiction || @session[:jurisdiction_id] && @jurisdiction = DistrictSet.find(@session[:jurisdiction_id])
+     end
+     
+     def election
+       @election || @session[:election_id] && @election = Election.find(@session[:election_id])
+     end
+     
+     def contest
+       @contest || @session[:contest_id] && @contest = Contest.find(@session[:contest_id])
+     end
+   
+     def question
+       @question || @session[:question_id] && @question = Question.find(@session[:question_id])
+     end  
+     
+     def precinct
+       @precinct || @session[:precinct_id] && @precinct = Precinct.find(@session[:question_id])
+     end  
+   
+     def jurisdiction?
+       !@jurisdiction.nil?
+     end
+   
+     def election?
+       !@election.nil?
+     end
+   
+     def contest?
+       !@contest.nil?
+     end
+     
+     def question?
+       !@question.nil?
+     end
+     
+     def precinct?
+       !@precinct.nil?
+     end
+   
+     def contest= a_contest
+!!     @question, @precinct = nil, nil
+!!     @session[:question_id], @session[:precinct_id] = nil, nil
+!!     
+!!     @session[:contest_id] = a_contest ? a_contest.id : nil
+!!     @contest = a_contest
+!!   end
+     
+     def question= a_question
+!!     @contest, @precinct = nil, nil
+!!     @session[:contest_id], @session[:precinct_id] = nil, nil
+!!     
+!!     @session[:question_id] = a_question ? a_question.id : nil
+!!     @question= a_question
+!!   end  
+   
+     def precinct= a_precinct
+!!     @contest, @question = nil, nil
+!!     @session[:contest_id], @session[:question_id] = nil, nil
+!!     
+!!     @session[:precint_id] = a_precinct ? a_precinct.id : nil
+!!     self.jurisdiction = a_precinct.district_sets[0]
+!!     @precinct= a_precinct
+!!   end
+     
+     def election= an_election
+       contest, question, precint  = nil, nil, nil
+       @session[:contest_id], @session[:question_id], @session[:precint_id]  = nil, nil, nil    
+       
+       @session[:election_id] = an_election ? an_election.id : nil
+       self.jurisdiction = an_election.district_set unless an_election.nil?
+       @election = an_election
+     end
+   
+     def jurisdiction= a_jurisdiction
+       @session[:jurisdiction_id] = a_jurisdiction ? a_jurisdiction.id : nil
+       @jurisdiction = a_jurisdiction
+     end
+     
+     def jurisdiction_name
+       jurisdiction ? jurisdiction.display_name :  "no jurisdiction selected"
+     end
+     
+     def reset
+       @session[:election_id] = @session[:jurisdiction_id] = @session[:contest] = @session[:question] = @session[:precinct]= nil
+       @election = @jurisdiction = @contest = @question = @precinct= nil
+     end
+     
+     def jurisdiction_secondary_name
+       second_name = (jurisdiction ? jurisdiction.secondary_name :  nil)
+       second_name || ""
+     end
+     # Convert to text
+     def to_s
+!!     s = ""
+!!     if !@jurisdiction.nil?
+!!       s << @jurisdiction.display_name
+!!     end
+!!     if !@election.nil?
+!!       s << " > " + @election.display_name
+!!     end
+!!     if !@question.nil?
+!!       s << " > " + @question.display_name
+!!     end
+!!     if !@contest.nil?
+!!       s << " > " + @contest.display_name
+!!     end
+!!     if !@precinct.nil?
+!!       s << " > " + @precinct.display_name
+!!     end
+!!     s
+!!   end
+!! end
+================================================================================
+app/models/question.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: questions
+   #
+   #  id           :integer         not null, primary key
+   #  display_name :string(255)
+   #  question     :text
+   #  district_id  :integer
+   #  election_id  :integer
+   #  created_at   :datetime
+   #  updated_at   :datetime
+   #
+   
+   class Question < ActiveRecord::Base
+     
+     belongs_to  :requesting_district, :class_name => 'District'
+     belongs_to :election
+   
+     attr_accessible :display_name, :question, :district_id , :election_id
+     
+     validates_presence_of :display_name, :question, :requesting_district_id, :election_id
+     validates_numericality_of :requesting_district_id, :election_id
+   
+     def to_s
+!!     "QUESTION: #{self.display_name}"
+!!   end
+   
+     def self.questions_for_precinct_election(p, e)
+       d = p.districts_for_election(e)
+       e.questions.map do |q|
+         q if d.include?(q.requesting_district)      
+!!     end.flatten.compact
+!!   end
+!!   
+!! end
+================================================================================
+app/ttv/abstract_ballot.rb
+================================================================================
+   require 'prawn'
+   
+   module AbstractBallot
+       
+     def self.create(election, precinct, style='default', lang='en', instruction_text='none', state_seal = 'none', state_signature = 'none', destination = nil)
+   #      Prawn.debug = true
+       scanner = TTV::Scanner.new()
+       config = PDFBallotStyle.get_ballot_config(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+       renderer = Renderer.new(election, precinct, config, destination)
+       renderer.render
+       raise ArgumentError, "Translation to #{TTV::Translate.human_language(lang)} has not been done. Translate, then try again." if config.et.dirty?
+   #      config.bt.save
+       renderer.to_s
+     end
+   
+     # no rebuild is used in testing to prevent continuous rebuilds
+     def self.translate(election, lang, no_rebuild = false)
+!!     return if no_rebuild && File.exists?(election.translation_path(lang))
+!! 
+!!     # generate english yaml file by generating ballots for all precincts
+!!     # 
+!!     scanner = Scanner.new()
+!!     config = TTV::PDFBallotStyle.get_ballot_config('default', 'en', election, scanner, instruction_text, state_seal, state_signature)
+!!     election.district_set.precincts.each do | precinct |
+!!       renderer = Renderer.new(election, precinct, config)
+!!       renderer.render
+!!     end
+!!     config.et.save
+!!     TTV::Translate.translate_file(election.translation_path('en'), election.translation_path(lang), 'en', lang)
+!!   end
+   
+     class Rect
+       attr_accessor :top, :left, :bottom, :right
+   
+       def initialize(top, left, bottom, right)
+         @top, @left, @bottom , @right = top, left, bottom, right
+         @original_top = @top
+       end
+   
+       def width
+         right - left
+       end
+   
+       def height
+         top - bottom
+       end
+   
+       def to_s
+!!       "#{full_height? ? 'empty' : ''  }T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
+!!     end
+   
+       def inset(horiz, vertical)
+         @top -= vertical
+         @bottom += vertical
+         @left += horiz
+         @right -= horiz
+       end
+   
+       def first
+!!       self
+!!     end
+   
+       def full_height?
+         @original_top == @top
+       end
+   
+       def self.create(top, left, bottom, right)
+         return new(top, left, bottom, right)
+       end
+   
+       def self.create_wh(top, left, width, height)
+         return new(top, left, top - height, left + width)
+       end
+   
+       def self.create_bound_box(bb)
+         return self.create(bb.top, bb.left, bb.bottom, bb.right)
+       end
+     end
+   
+     # WideColumn is used in layout to group columns together
+     # its boundaries are leftmost/rightmost/lowest top/highest bottom
+     class WideColumn
+       def initialize (rects)
+         @rects = rects
+         @original_top = top
+       end
+   
+       def initialize_copy(old)
+         @rects =  @rects.map { |r| r.clone }
+       end
+   
+       def top
+         @rects.map { |r| r.top}.min
+       end
+       def top=(x)
+         @rects.each { |r| r.top = x }
+       end        
+       def bottom
+         @rects.map { |r| r.bottom}.max
+       end
+       def bottom=(x)
+!!       @rects.each { |r| r.bottom = x} 
+!!     end
+       def left
+         @rects.map { |r| r.left}.min
+       end
+       def right
+         @rects.map { |r| r.right}.max
+       end
+   
+       def width
+         right - left
+       end
+   
+       def height
+         top - bottom
+       end
+   
+       def index(r)
+!!       @rects.index(r)
+!!     end
+   
+       def first
+!!       @rects.first
+!!     end
+   
+       def full_height?
+!!       @original_top == top
+!!     end
+   
+       def to_s
+!!       s = "T:#{top} L:#{left} B:#{bottom} R:#{right} W:#{width} H#{height}\n\n"
+!!       @rects.each do |r| 
+!!         s += "Combo: #{r.to_s}\n" 
+!!       end
+!!       s
+!!     end        
+!!   end
+   
+     # encapsulates columns for rendering
+     class Columns
+       def initialize(col_count, flow_rect)
+         @column_rects = []
+         column_width = flow_rect.width / ( col_count * 1.0)
+         col_count.times do |x|
+           @column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
+           column_width, flow_rect.height)
+         end
+         @next = @column_rects.first
+       end
+   
+       def to_s
+!!       s = ""
+!!       @column_rects.each do |c|
+!!         s += "#{c}\n"
+!!       end
+!!       s
+!!     end
+   
+       def next
+         retval = @next
+         @next = @column_rects[@column_rects.index(@next) + 1] if @next
+         retval
+       end
+   
+       def first
+!!       @column_rects.first
+!!     end
+   
+       def last
+         @column_rects.last
+       end
+   
+       def current=(r)
+!!       @next = @column_rects[@column_rects.index(r) + 1]
+!!     end
+   
+       def empty?
+         @column_rects.select{ |r| r.full_height? }.size == @column_rects.size
+       end
+       
+       def make_wide(column, width)
+         return nil if column == nil # not an error case
+         cols = [column]
+         i = @column_rects.index(column) + 1
+         total = column.width
+         while (total < width && i < @column_rects.size)
+           new_col = @column_rects[i]
+           @next = @column_rects[i+1]
+           total += new_col.width
+           cols.push new_col
+           i += 1
+         end
+         return WideColumn.new(cols) if total >= width
+!!       nil
+!!     end      
+!!   end
+   
+     class Renderer
+   
+       def initialize(election, precinct, config, destination)
+         @election = election
+         @precinct = precinct
+         @destination = destination
+         @c = config
+       end
+   
+       def to_s
+         @pdf.render
+       end
+   
+       def init_flow_items
+         @flow_items = []
+         @precinct.districts(@election.district_set).each do |district|
+           header_item = @c.create_flow_item @c.et.get(district, :display_name)
+           #        @flow_items.push(@c.create_flow_item(district.display_name))
+           contest_list = district.contestsForElection(@election)
+           contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
+             if header_item
+               @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(contest)] ))
+               header_item = nil
+             else
+               @flow_items.push(@c.create_flow_item(contest))
+             end
+           end
+           district.questionsForElection(@election).each do |question|
+!!           if header_item
+!!             @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(question)] ))
+!!             header_item = nil
+!!           else
+!!             @flow_items.push(@c.create_flow_item(question))
+!!           end
+!!         end
+!!       end       
+!!     end
+   
+       def render
+         @pdf = Prawn::Document.new(
+         :page_layout => @c.page_layout,
+         :page_size => @c.page_size, 
+         :left_margin => @c.left_margin,
+         :right_margin => @c.right_margin,
+         :top_margin => @c.top_margin,
+         :bottom_margin => @c.bottom_margin,
+         :skip_page_creation => true,
+         :info => { :Creator => "TrustTheVote",
+           :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+         }
+         )
+         @c.setup(@pdf, @precinct)
+   
+         init_flow_items
+         render_everything
+       end
+   
+       # initializes everything outside of the flow rect on a new page
+       def start_page
+         end_page(false) if @page
+         @pagenum += 1
+         @pdf.start_new_page
+         
+   
+         flow_rect = Rect.create_bound_box(@pdf.bounds)
+         @c.render_frame flow_rect
+         @c.render_header flow_rect
+   
+         columns = @c.create_columns(flow_rect)
+         # make space for continuation box
+         continuation_box = @c.create_continuation_box
+         columns.last.bottom += continuation_box.height(@c, columns.last, true)
+         @c.render_column_instructions(columns, @pagenum)
+         curr_column = columns.next
+   
+         @page = { :continuation_box => continuation_box, :columns => columns, :last_column => curr_column }
+         [flow_rect, columns, curr_column]
+       end
+   
+       def end_page(last_page)
+         return if @page == nil
+         continuation_col = @page[:last_column]
+         return if continuation_col == nil
+         continuation_box = @page[:continuation_box]
+         columns = @page[:columns]
+         if (continuation_col.height < 
+           continuation_box.height(@c, continuation_col, @flow_items.size != 0) )
+!!         if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
+!!           continuation_col = columns.last
+!!         end
+!!       end
+         continuation_box.draw(@c, continuation_col, last_page)
+         @c.page_complete(@pagenum, last_page)
+         @page = nil
+         if last_page
+   #        puts @c.scanner.to_json
+         end
+       end
+   
+       # tries to fit current item into any columns on the current page
+       # returns nil if item does not fit
+       #
+       def fit_width(item, flow_rect, curr_column, columns)
+         return nil if curr_column == nil
+         if item.min_width != 0 # if width >= narrow column
+           if item.min_width > curr_column.width
+             if curr_column.full_height?
+               curr_column = columns.make_wide curr_column, item.min_width # widen the current column
+             else
+               curr_column = columns.make_wide columns.next, item.min_width # 
+             end
+           end
+         elsif curr_column.class == WideColumn # fit narrow items in wide column
+!!         if @c.wide_style == :continue
+!!           curr_column = curr_column.first
+!!           columns.current = curr_column
+!!         else
+!!           curr_column = columns.next
+!!         end
+!!       end
+         curr_column
+       end
+   
+       def render_error(text)
+!!       @pdf.fill_color "FF0000"
+!!       @pdf.font "Helvetica", :size => 18, :style => :bold
+!!       @pdf.text_box text, :at => [50, @pdf.bounds.top - 100], :width    => 300, :height => 1000
+!!     end
+       
+       def render_everything
+         @pagenum = 0
+         @page =  nil
+         curr_column = nil   # used as a flag that we need a new page
+         while @flow_items.size > 0
+           flow_rect, columns, curr_column = start_page if curr_column == nil
+           item = @flow_items.first
+           curr_column = fit_width(item, flow_rect, curr_column, columns)
+           
+           if curr_column == nil # item too wide for current page, start a new one
+             if columns.empty? # too wide for empty page, that's an error
+               @flow_items.shift
+!!             render_error "ERROR Item #{item.to_s} is too wide to fit onto page."
+!!           end
+             next
+           end
+           
+           if item.fits @c, curr_column
+             @page[:last_column] = curr_column
+             item = @flow_items.shift
+             item.draw @c, curr_column
+             @c.scanner.append_ballot_marks(item.ballot_marks)
+           elsif curr_column.full_height? # item is taller than a single column, need to break it up
+!!           if curr_column.first != columns.first # split items go on a brand new page for now
+!!             curr_column = nil
+!!             next
+!!           else
+!!             @page[:last_column] = curr_column
+!!             @flow_items.shift
+!!             item.draw @c, curr_column do
+!!               # returns new columns for item to draw in
+!!               curr_column = columns.next
+!!               curr_column = fit_width(item, flow_rect, curr_column, columns)
+!!               if (curr_column == nil)
+!!                 flow_rect, columns, curr_column = start_page
+!!                 curr_column = fit_width(item, flow_rect, curr_column, columns)
+!!                 if (curr_column == nil) # cannot fit on a single blank page, error
+!!                   render_error "ERROR, item #{item.to_s} too wide to fit onto page"
+!!                 end
+!!               end
+!!               @page[:last_column] = curr_column if curr_column
+!!               curr_column
+!!             end # block
+!!             @c.scanner.append_ballot_marks(item.ballot_marks)
+!!           end
+           else
+             curr_column = columns.next
+           end
+         end
+         end_page(true)
+       end
+   
+     end
+     
+   end
+================================================================================
+app/models/user.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: users
+   #
+   #  id                 :integer         not null, primary key
+   #  email              :string(255)
+   #  crypted_password   :string(255)
+   #  password_salt      :string(255)
+   #  persistence_token  :string(255)
+   #  perishable_token   :string(255)
+   #  failed_login_count :integer
+   #  created_at         :datetime
+   #  updated_at         :datetime
+   #
+   
+   class User < ActiveRecord::Base
+     
+     has_many :roles, :class_name => "UserRole"
+   
+     def role?(role_name)
+       # roles.map(&:name)  build an array of role names for this user.
+       # include?(role_name.to_s)  check if the role_name param is in
+       # this array
+       role_name && !roles.blank? && roles.map(&:name).include?(role_name.to_s)
+     end
+     
+     attr_accessible :email, :password, :password_confirmation
+     
+     acts_as_authentic do |c|
+       c.merge_validates_length_of_password_field_options( { :minimum => 1, :too_short => "needs to be 1 chars"})
+       c.ignore_blank_passwords=true
+       c.perishable_token_valid_for=24.hours
+     end
+   
+     def deliver_password_reset_instructions!  
+!!     reset_perishable_token!
+!!     Notifier.deliver_password_reset_instructions(self)  
+!!   end
+!! 
+!! end
+================================================================================
+app/models/user_session.rb
+================================================================================
+   class UserSession < Authlogic::Session::Base
+     generalize_credentials_error_messages "Your login information is invalid."
+     find_by_login_method :find_by_email
+     
+   #  attr_accessible :election_id
+     
+     def election
+       return Election.find(@election_id) if (@election_id && election = Election.find(@election_id))
+       election = Election.find(:last, :order => 'created_at')
+       @election_id = election.id if election
+       return election
+     end
+     
+     def election_id=(election_id)
+!!     @election_id = election_id
+!!   end
+!! end
+================================================================================
+app/helpers/application_helper.rb
+================================================================================
+   # Methods added to this helper will be available to all templates in the application.
+   module ApplicationHelper
+     
+     # Nice styling of error messages
+     def render_error_messages(model, options={})
+       options = { :verbose => false }.merge(options)
+       messages = model.errors.full_messages #objects.compact.map { |o| o.errors.full_messages}.flatten
+       render :partial => 'layouts/error_messages', :object => messages, 
+         :locals => { :options => options, :model => model} unless messages.empty?
+     end
+     
+     #
+     # Pretty print objects, to be used in views
+     #
+     def pp_debug(obj)
+!!     '<pre>' +
+!!     h(obj.pretty_inspect) +
+!!     '</pre>'
+!!   end
+   
+     def icon_helper
+       curr_jurisd = current_context.jurisdiction
+       if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
+         link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdictions)
+!!     else
+!!       link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdictions)
+!!     end
+!!   end
+   
+     def icon_for district_set
+      return image_tag("ttv-100.png", :class =>"avatar") unless district_set.icon?
+!!    return image_tag(district_set.icon.url(:thumb), :class => "avatar") if district_set.icon?
+!!   end
+   
+     def link_icon_for district_set
+!!     link_to(icon_for(district_set), set_jurisdiction_path(district_set))
+!!   end
+   
+     # HTML for header that is over all pages
+     def header_helper
+       jurisdiction_name = current_context.jurisdiction_name
+       jurisdiction_secondary = current_context.jurisdiction_secondary_name
+       
+       if current_user() and current_context.jurisdiction?
+         content_tag(:h1, jurisdiction_name +
+                         "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
+       else
+         content_tag(:h1, "TTV Election Manager", :class=>"title-header") 
+       end
+       
+     end
+     
+     # HTML for top right user navigation bar where login etc live
+     def user_navigation_helper
+       jurisdiction_name = current_context.jurisdiction_name
+       content_tag(:div, :class =>"banner_right") do
+         content_tag(:ul, :class => "wat-cf") do
+           if current_user()
+             content_tag(:li, jurisdiction_name + " " + link_to(" (change)", change_jurisdictions_path)) +
+             content_tag(:li) { current_user.email } + 
+             content_tag(:li) { link_to("Edit profile", edit_user_path(current_user)) } +
+             content_tag(:li) { link_to("Logout", logout_path) }
+           else
+             content_tag(:li) { link_to("Login", login_path) } + 
+             content_tag(:li) { link_to("Register", register_user_path) }
+           end
+         end
+       end
+     end
+     
+     # HTML for nicely styled buttons in forms
+     def button_link_helper(image_file, alt_tag, button_label, link_path, delete=nil)
+       options = {}
+       if (delete == :delete)
+         options = {:method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+       end
+       link_to("#{image_tag(image_file, :alt => alt_tag)} #{button_label}", link_path, {:class => "button"}.merge(options))
+     end
+     
+     # HTML for breadcrums
+     def breadcrumb_helper(cc)
+       html = ""
+       jur_link = ""
+       el_link = ""
+       c_or_q_or_p_link = ""
+       if cc.contest?
+!!       c_or_q_or_p_link = link_to(cc.contest.display_name, cc.contest)
+!!     end
+       if cc.question?
+!!       c_or_q_or_p_link = link_to(cc.question.display_name, cc.question)
+!!     end
+       if cc.precinct?
+!!       c_or_q_or_p_link = link_to(cc.precinct.display_name, cc.precinct)
+!!     end
+       if cc.election?
+         el_link = link_to(cc.election.display_name, cc.election)
+       end
+       if cc.jurisdiction?
+         jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
+       end
+       if c_or_q_or_p_link != ""
+!!       html = c_or_q_or_p_link + " <small> (in " + el_link + " in " + jur_link + " )</small>"
+       elsif el_link != ""
+         html = el_link + " <small> (in " + jur_link + " )</small>"
+       elsif jur_link
+         html = jur_link
+       end
+       content_tag(:h4, html)
+     end
+   end
+================================================================================
+app/ttv/yaml_import.rb
+================================================================================
+   require 'yaml'
+   
+   module TTV
+     # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
+     class YAMLImport
+       attr_reader :yml_election, :election, :dist_set
+   
+   # <tt>source::</tt> File object for file containing yaml text
+       def initialize(source)
+         @source = source
+       end
+     
+   #
+   # Is the .yml being imported of type 'ballot_config"? Ballot_config's have less stringent
+   # validation and get connected to the 'default built-in district' etc.
+       def ballot_config?
+         if @yml_election["audit_header"].nil?
+           return false
+         else
+           return @yml_election["audit_header"]["type"] == "ballot_config"
+         end
+       end
+   
+   # Do the whole import process. Main entry point.
+       def import
+         @dist_id_map = {}
+         @yml_election = YAML.load(@source)
+         ActiveRecord::Base.transaction do
+           @dist_set = create_district_set
+           if @yml_election["ballot_info"].nil?
+!!           puts "No ballot information -- invalid yml"
+!!           pp @yml_election
+!!           raise "Invalid YAML election. See console for details."
+!!         end
+           @election = Election.create(:display_name => @yml_election["ballot_info"]["display_name"])
+           if @yml_election["ballot_info"]["start_date"].nil?
+                @election.start_date = Time.now
+           else
+             @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+           end
+           @election.district_set = @dist_set
+           @election.save
+           if @yml_election["ballot_info"]["precinct_list"].nil?
+!!             puts "Invalid yml doesn't contain precinct_list"
+!!             pp @yml_election
+!!             raise "Invalid YAML election. See console for details."
+           elsif @yml_election["ballot_info"]["contest_list"].nil?          
+!!             puts "Invalid yml doesn't contain contest_list"
+!!             pp @yml_election
+!!             raise "Invalid YAML election. See console for details."
+!!         end
+           @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
+           @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest yml_contest}
+           @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
+         end
+         @election
+       end
+       
+       
+       def import_batch
+           @dist_id_map = {}
+           yaml_dir = Dir.new(@source)
+           yaml_dir.each do |yaml_file|
+             if yaml_file[yaml_file.length - 3..yaml_file.length] == 'yml'
+               new_file = File.new("#{@source}/#{yaml_file}", "r")
+               @yml_election = YAML.load(new_file)
+               ActiveRecord::Base.transaction do
+                 @dist_set = create_district_set
+                 if @yml_election["ballot_info"].nil?
+!!                 puts "No ballot information -- invalid yml"
+!!                 pp @yml_election
+!!                 raise "Invalid YAML election. See console for details."
+!!               end
+                  @election = Election.create(:display_name =>@yml_election["ballot_info"]["display_name"])
+                   if @yml_election["ballot_info"]["start_date"].nil?
+                         @election.start_date = Time.now
+                    else
+                      @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+                    end
+   
+                   @election.district_set = @dist_set
+                   @election.save
+                   if @yml_election["ballot_info"]["precinct_list"].nil?
+!!                     puts "Invalid yml doesn't contain precinct_list"
+!!                     pp @yml_election
+!!                     raise "Invalid YAML election. See console for details."
+                   elsif @yml_election["ballot_info"]["contest_list"].nil?          
+!!                     puts "Invalid yml doesn't contain contest_list"
+!!                     pp @yml_election
+!!                     raise "Invalid YAML election. See console for details."
+!!                 end
+                   @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
+                   @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest(yml_contest)}
+                   @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
+                   end
+                   @election
+             end
+           end
+       end
+   
+       def create_district_set
+         if ballot_config?
+           DistrictSet.find(0)
+         else
+           DistrictSet.create(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"])
+         end
+       end
+       
+   # load another question into Election object
+   # <tt>question::</tt>Hash contains single question from yaml
+       def load_question yml_question
+         if ballot_config?
+!!         dist = District.find(0)
+         else
+           if yml_question["district_ident"].nil? || @dist_id_map[yml_question["district_ident"]].nil?
+!!           puts "Error in yaml_import: invalid question"
+!!           pp yml_cont
+!!           raise "Invalid yaml in question. See console for details."
+!!         end
+           dist = @dist_id_map[yml_question["district_ident"]]
+         end
+         new_question = Question.create(:display_name =>yml_question["display_name"],
+                                      :question => yml_question["question"])
+         
+         #new_question.order = yml_question["order"] || 0
+         # TODO: add order support to question model
+         
+         @election.questions << new_question
+         new_question.save
+         dist.questions << new_question
+       end
+       
+   # load another contest into Election object
+   # <tt>contest::</tt>Hash contains single contest from yaml
+       def load_contest yml_cont
+         if @dist_id_map[yml_cont["district_ident"]].nil?
+           # the only time we can survive without district and precinct lists is with ballot_config.
+           if ballot_config?
+             dist = District.find(0)
+!!         else
+!!           puts "Error in yaml_import: invalid contest"
+!!           pp yml_cont
+!!           raise "Invalid yaml in contest. See console for details."
+!!         end
+         else
+           dist = @dist_id_map[yml_cont["district_ident"]]
+         end
+   
+         new_contest = Contest.create(:display_name =>yml_cont["display_name"],
+                                      :open_seat_count => 1, :voting_method_id => 0)
+                                      
+         if yml_cont.key? "voting_method"
+           new_contest.voting_method_id = VotingMethod.xmlToId(yml_cont["voting_method"])
+         else # default if none specified
+           new_contest.voting_method_id = VotingMethod::WINNER_TAKE_ALL
+         end
+         new_contest.position = yml_cont["display_order"] || 0
+         yml_cont["candidates"].each { |yml_cand| load_candidate yml_cand, new_contest }
+         @election.contests << new_contest
+         new_contest.save
+         dist.contests << new_contest
+        end
+       
+     # load another candidate
+     # <tt>cand::</tt>Hash containing a single candidate from yaml
+       def load_candidate y_cand, cont
+         new_cand = Candidate.create(:display_name => y_cand["display_name"])
+         party_name = y_cand["party_display_name"]
+   
+         party = Party.find_by_display_name(party_name)
+         if party.nil? 
+           party = Party.new(:display_name => party_name)
+         end
+         new_cand.party = party
+         
+         new_cand.order = y_cand["order"] || 0
+         cont.candidates << new_cand
+       end
+       
+   # load another precinct into Election object
+   # <tt>precinct::</tt>Hash contains a single precinct from yaml
+       def load_precinct yaml_prec
+   # First find or create the precinct
+         prec_disp_name = yaml_prec["display_name"]
+         new_precinct = Precinct.find_by_display_name(prec_disp_name)
+         if !new_precinct
+           new_precinct = Precinct.create(:display_name => prec_disp_name)
+         end
+         if !yaml_prec.key? "district_list"
+   # if so, just connect precinct to the built-in default district
+           District.find(0).precincts << new_precinct
+         else
+   # otherwise connect the new precinct to each of the districts in its district_list
+           load_districts yaml_prec["district_list"], new_precinct 
+         end
+       end
+     
+   #
+   # Find or create the districts.
+   #<tt>yaml_districts</tt>::district_list from yaml input
+   #<tt>precinct</tt>::Precinct object that includes those districts
+   #
+       def load_districts yaml_districts, precinct
+         if yaml_districts.nil?
+!!         puts "*** invalid Precinct on Yaml Import:"
+!!         pp yaml_prec 
+!!         raise "YAML error: invalid precinct. See console for details"
+!!       end
+         yaml_districts.each do |yaml_dist|
+           dist_disp_name = yaml_dist["display_name"]
+           new_district = District.find_by_display_name(dist_disp_name)
+           if !new_district
+             new_district = District.create(:display_name => dist_disp_name, :district_type_id => 1)
+           end
+   #
+   # Add this district to the district set being built, and to the precinct being built
+   #
+           @dist_set.districts << new_district
+           new_district.precincts << precinct
+   #
+   # For later linking, record which district "ident" got which District object
+   #
+           @dist_id_map[yaml_dist["ident"]] = new_district
+         end
+       end # def load_districts
+     end # class
+   end # module
+================================================================================
+app/models/voting_method.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: voting_methods
+   #
+   #  id           :integer         not null, primary key
+   #  display_name :string(255)
+   #  created_at   :datetime
+   #  updated_at   :datetime
+   #
+   
+   class VotingMethod < ActiveRecord::Base
+     
+     include ConstantCache
+   
+     cache_constants :key => :display_name
+   
+     def idToXml
+       self.display_name.downcase
+     end
+   
+     def VotingMethod.xmlToId(xml)
+       raise "illegal voting method #{xml}" unless const_get(xml.constant_name)
+       const_get(xml.constant_name).id
+     end
+     
+     def to_i
+       id
+     end
+     
+     def self.determine_default_voting_method(contest)
+!!     VotingMethod.find(contest.election.default_voting_method_id)
+!!   end
+!!   
+!! end
+================================================================================
+app/models/precinct.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: precincts
+   #
+   #  id           :integer         not null, primary key
+   #  display_name :string(255)
+   #  created_at   :datetime
+   #  updated_at   :datetime
+   #  ident        :string(255)
+   #
+   
+   class Precinct < ActiveRecord::Base
+     
+     has_and_belongs_to_many :districts
+     
+     attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
+     
+     validates_presence_of :ident
+     validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
+   
+     # Make sure that ident is not nil. If it is, create a unique one.
+     def before_validation
+       if self.blank? || self.ident.blank?
+         self.ident = "prec-#{ActiveSupport::SecureRandom.hex}"
+         self.save!
+       end
+     end
+   
+     def districts_for_election(election)
+       districts & election.district_set.districts
+     end
+     
+     # Return a list of DistrictSets tjat this Precinct belongs to. 
+     # In the real world, this should always be a list of length 1, even though the data model permits more
+     def district_sets
+!!     districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }
+!!   end
+!! end
+================================================================================
+app/ballots/default/ballot_config.rb
+================================================================================
+   #
+   # DefaultBallot is is used to layout and render the most basic ballot. It's the first one we implemented.
+   # The "include AbstractBallot" makes the DefaultBallot module sort of inherit form the AbstractBallot module. Any methods not definedf
+   # here are defined in AbstractBallot.
+   
+   
+   require 'ttv/abstract_ballot.rb'
+   require 'prawn'
+   
+   module DefaultBallot
+     include ::AbstractBallot
+     
+     class FlowItem
+   
+       ANY_WIDTH = 1
+       HPAD = 3
+       HPAD2 = 6
+       VPAD = 3
+       VPAD2 = 6
+   
+       def initialize(item, scanner)
+         @item = item
+         @scanner = scanner
+       end
+   
+       def reset_ballot_marks
+         @ballot_marks = []
+       end
+       
+       def ballot_marks
+         @ballot_marks || []
+       end
+       
+       def add_ballot_mark(contest, choice, page, location)
+         @ballot_marks.push(@scanner.create_ballot_mark contest, choice, page, location )
+       end
+       
+       def fits(config, rect)
+         # clever way to see if we fit, avoiding code duplication for measure vs. draw
+         # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
+         r = rect.clone
+         config.pdf.transaction do
+           draw(config, r)
+           config.pdf.rollback
+         end
+         r.height > 0
+       end
+   
+       def draw(config, rect)
+!!       # debug only code, never executed
+!!       top = rect.top
+!!       config.pdf.font("Helvetica", :size => 10, :style => :italic)
+!!       config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD ) do
+!!         config.pdf.move_down VPAD
+!!         config.pdf.text "FlowItem.draw"
+!!         rect.top -= config.pdf.bounds.height
+!!       end
+!!       config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
+!!       config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+!!     end
+   
+       def min_width
+         0
+       end
+   
+       def to_s
+!!       @item.to_s
+!!     end
+   
+       class Combo
+         def initialize(flow_items)
+           @flow_items = flow_items
+         end
+   
+         def fits(config, rect)
+           r = rect.clone
+           config.pdf.transaction do
+             @flow_items.each { |f|  f.draw config, r if r.height > 0 }
+             config.pdf.rollback
+           end
+           r.height > 0
+         end
+   
+         def min_width
+           @flow_items.map { |r| r.min_width }.max
+         end
+   
+         def draw(config, rect, &bloc)
+           reset_ballot_marks
+           @flow_items.each { |f| f.draw config, rect, &bloc }
+         end
+         
+         def reset_ballot_marks
+           @flow_items.each { |f| f.reset_ballot_marks }
+         end
+         
+         def ballot_marks
+           ret = []
+           @flow_items.each { |f| ret.concat f.ballot_marks }
+           ret
+         end
+   
+         def to_s
+!!         s = "Combo\n"
+!!         @flow_items.each { |f| s += f.to_s + "\n" }
+!!         s
+!!       end
+!!     end
+   
+       class Header < FlowItem
+         def min_width
+           ANY_WIDTH
+         end
+   
+         def draw(config, rect)
+           top = rect.top
+           config.pdf.font("Helvetica", :size => 10, :style => :bold )
+           config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD * 2) do
+             config.pdf.move_down VPAD
+             config.pdf.text @item, :leading => 1
+             rect.top -= config.pdf.bounds.height 
+           end
+           config.frame_item rect, top
+         end
+   
+       end
+   
+       class Question < FlowItem
+   
+         def min_width
+!!         return 300 if @item.question.length > 100
+!!         return ANY_WIDTH
+!!       end
+   
+         def draw(config, rect)
+!!         reset_ballot_marks
+!!         top = rect.top
+!!         config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 4) do
+!!           config.pdf.font "Helvetica", :size => 10, :style => :bold
+!!           config.pdf.move_down VPAD
+!!           config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
+!!           config.pdf.move_down VPAD
+!!           config.pdf.text config.short_instructions(@item), :leading => 1
+!!           config.pdf.move_down VPAD * 2
+!!           config.pdf.font "Helvetica", :size => 10
+!!           config.pdf.text config.et.get(@item, :question), :leading => 1 # question
+!!           rect.top -= config.pdf.bounds.height
+!!         end
+!!         rect.top -= 3
+!!         space, location = config.draw_checkbox rect, config.bt[:Yes]
+!!         add_ballot_mark @item, "Yes", config.pdf.page_number, location
+!!         rect.top -= 3
+!!         space, location = config.draw_checkbox  rect, config.bt[:No]
+!!         add_ballot_mark @item, "No", config.pdf.page_number, location
+!!         config.pdf.line_width 0.5
+!!         rect.top -= 3
+!!         config.frame_item rect, top
+!!       end
+!!     end
+   
+       class Contest < FlowItem
+   
+         NAME_WIDTH = 100
+         MAX_RANKED = 10
+         NEXT_COL_BOUNCE = 30
+   
+         def min_width
+           if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
+             super
+           else
+             100 + 3 * HPAD + [@item.candidates.count, MAX_RANKED].min * (HPAD + BallotConfig::CHECKBOX_WIDTH)
+           end
+         end
+   
+         def draw(config, rect, &bloc)
+           reset_ballot_marks
+           if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
+             draw_winner config, rect, &bloc
+           else
+             draw_ranked config, rect, &bloc
+           end
+         end
+   
+         def draw_winner(config, rect, &bloc)
+           top = rect.top
+           # HEADER
+           config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
+             config.pdf.font "Helvetica", :size => 10, :style => :bold
+             config.pdf.move_down VPAD
+             config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
+             config.pdf.move_down VPAD
+             config.pdf.text config.short_instructions(@item), :leading => 1
+             rect.top -= config.pdf.bounds.height
+           end
+           # CANDIDATES
+           candidates_list = @item.candidates
+           candidates_list.sort { |a,b| a.order <=> b.order}.each do |candidate|
+             if bloc && rect.height < NEXT_COL_BOUNCE
+!!             config.frame_item rect, top
+!!             rect = yield
+!!           end
+             rect.top -= VPAD * 2
+             space, location = config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
+             add_ballot_mark @item, candidate, config.pdf.page_number, location
+           end
+           @item.open_seat_count.times do
+             if bloc && rect.height < NEXT_COL_BOUNCE
+!!              config.frame_item rect, top
+!!              rect = yield
+!!            end
+             rect.top -= VPAD * 2
+             left, location = config.draw_checkbox rect, config.bt[:or_write_in]
+             add_ballot_mark @item, "Writein", config.pdf.page_number, location
+             config.pdf.dash 1
+             v = 16
+             config.pdf.stroke_line [rect.left + left, rect.top - v], 
+             [rect.right - 6, rect.top - v]
+             rect.top -= v
+             config.pdf.undash
+           end
+           rect.top -= 6 if @item.open_seat_count != 0
+           config.frame_item rect, top
+         end
+   
+         def draw_ranked(config, rect, &bloc)
+           top = rect.top
+           pdf = config.pdf
+           # title
+           pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
+             pdf.font "Helvetica", :size => 10, :style => :bold
+             pdf.move_down VPAD
+             pdf.text config.et.get(@item, :display_name), :leading => 1 #header
+             config.pdf.move_down VPAD
+             config.pdf.text config.short_instructions(@item), :leading => 1
+             rect.top -= pdf.bounds.height
+           end
+   
+           # Ordinals: 1st 2nd...
+           hpad4 = HPAD2 * 2
+           rect.top -= VPAD * 2
+           count = @item.candidates.count
+           checkbox_count = [@item.candidates.count, MAX_RANKED].min
+           height = 0
+           0.upto(checkbox_count - 1) do |i|
+             x = rect.left + HPAD2 + i * (BallotConfig::CHECKBOX_WIDTH + hpad4)
+             y = rect.top + VPAD 
+             pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
+               pdf.text(config.et.ordinalize(i + 1), :align => :center)
+               height = pdf.bounds.height
+             end
+           end
+           rect.top -= height;
+   
+           # checkboxes
+   
+           0.upto(count) do |i|  # candidates
+             if bloc && rect.height < NEXT_COL_BOUNCE
+!!             config.frame_item rect, top
+!!             rect = yield
+!!             rect.top -= HPAD2
+!!           end
+             0.upto(checkbox_count - 1) do |j|
+               x = rect.left + HPAD2 + j * (BallotConfig::CHECKBOX_WIDTH + hpad4)
+               y = rect.top
+               pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
+                 config.stroke_checkbox
+                 f = pdf.font "Helvetica", :size => 9
+                 pdf.move_down( (BallotConfig::CHECKBOX_HEIGHT - f.ascender) / 2)
+                 pdf.fill_color "999999"
+                 pdf.text( (j + 1).to_s, :align => :center)
+               end
+             end
+             pdf.fill_color "000000"
+             spacer = HPAD2 + checkbox_count * (BallotConfig::CHECKBOX_WIDTH + hpad4)
+             pdf.font "Helvetica", :size => 10
+             pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
+               if i < count
+                 pdf.text config.et.get(@item.candidates[i], :display_name) + "\n" + config.et.get( @item.candidates[i].party, :display_name)
+               else # writein
+                 pdf.text config.bt[:or_write_in]
+                 pdf.dash 1
+                 pdf.move_down 16
+                 config.pdf.stroke_line [0, 0], [rect.width - spacer - HPAD2, 0]
+                 pdf.undash
+                 pdf.move_down VPAD
+               end            
+               rect.top -= [pdf.bounds.height, BallotConfig::CHECKBOX_HEIGHT].max
+             end
+             pdf.move_down VPAD * 2
+             rect.top -= VPAD * 2
+           end
+           config.frame_item rect, top
+         end
+       end
+   
+     end
+   
+     class ContinuationBox
+       def initialize(pdf)
+         @pdf = pdf
+       end
+   
+       def height(config, rect, last_page = false)
+         r = rect.clone;
+         @pdf.transaction do
+           draw(config, r, last_page)
+           @pdf.rollback
+         end
+         rect.top - r.top
+       end
+   
+       def draw(config, rect, last_page)
+         top = rect.top
+         @pdf.font "Helvetica", :size => 10, :style => :bold
+         unless last_page
+           circle_width = 20
+           text_height = 0
+           text_width = rect.width - circle_width - 8
+           @pdf.bounding_box [rect.left+FlowItem::HPAD, rect.top], :width => text_width do
+             @pdf.move_down FlowItem::VPAD
+             @pdf.text config.bt[:Continue_voting_next_side], :align => :center
+             @pdf.move_down FlowItem::VPAD
+             text_height = @pdf.bounds.height
+           end
+           circle_top = rect.top - 6
+           @pdf.bounding_box [rect.left + text_width, circle_top ], :width => rect.width - text_width - 8 , :height => circle_width do
+             @pdf.circle_at [circle_width / 2, circle_width / 2], :radius => circle_width / 2
+             @pdf.fill_color "000000"
+             @pdf.fill_and_stroke
+             @pdf.stroke_color "FFFFFF"
+             @pdf.cap_style :round
+             @pdf.line_width 2
+             inset = 4
+             @pdf.stroke_line [inset, circle_width / 2], [ circle_width - inset, circle_width / 2]
+             @pdf.move_to [circle_width / 2, circle_width - inset]
+             @pdf.line_to [circle_width - inset, circle_width / 2]
+             @pdf.line_to [circle_width / 2, inset]
+             @pdf.stroke
+           end
+           rect.top -= text_height
+         else
+           @pdf.bounding_box [rect.left + FlowItem::HPAD, rect.top], :width => (rect.width - FlowItem::HPAD2) do
+             @pdf.move_down FlowItem::VPAD
+             @pdf.text config.bt[:Thank_you], :align => :center
+             @pdf.move_down FlowItem::VPAD
+             rect.top -= @pdf.bounds.height
+           end
+         end
+         @pdf.line_width 0.75
+         @pdf.stroke_color "000000"
+         @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+         @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+         @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
+       end
+     end
+   
+     class BallotConfig
+   
+       attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns, :scanner
+   
+       CHECKBOX_WIDTH = 22
+       CHECKBOX_HEIGHT = 10
+       HPAD = 3
+       HPAD2 = 6
+       VPAD = 3
+   
+       def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+         @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
+         @election = election
+         @lang = lang
+         @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
+         @election_translation = PDFBallotStyle.get_election_translation(election, lang)
+         @instruction_text = instruction_text
+         @state_seal = state_seal
+         @state_signature = state_signature
+         
+         @page_size = "LETTER"
+         @page_layout = :portrait
+         @left_margin = @right_margin = 18
+         @top_margin = @bottom_margin = 30
+         @pleaseVoteHeight = 30
+         @padding = 8
+         @columns = @columns || 3
+         @checkbox_orientation = @checkbox_orientation || :left 
+         @scanner = scanner
+         @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
+       end
+   
+       def setup(pdf, precinct)
+         @pdf = pdf
+         @precinct = precinct
+         if @lang == "zh"  # chinese fonts, 
+           pdf.font_families.update({
+           "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+                            :bold => "#{Rails.root}/fonts/Arial Unicode.ttf" },
+           "Courier" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf" }
+           })
+!!         @wrap = :character
+         else
+           pdf.font_families.update({
+             "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+                              :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
+             "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
+               })
+           @wrap = :space
+         end
+       end
+   
+       def load_text(filename)
+!!       IO.read "#{@file_root}/lang/#{@lang}/#{filename}"
+!!     end
+   
+       def image_path(filename)
+!!       full_path = "#{@file_root}/lang/#{@lang}/#{filename}"
+!!     end
+   
+       def load_image(filename)
+!!       return Prawn::Images::PNG.new(IO.read(image_path(filename))) if filename =~ /png$/
+!!       return Prawn::Images::JPG.new(IO.read(image_path(filename)))
+!!     end
+   
+       def ballot_translation
+         @ballot_translation
+       end     
+       alias bt ballot_translation
+   
+       def election_translation
+         @election_translation
+       end
+       alias et election_translation
+   
+       def create_continuation_box
+         ContinuationBox.new(@pdf)
+       end
+   
+       def create_columns(flow_rect)
+         AbstractBallot::Columns.new(@columns, flow_rect)
+       end
+   
+       def short_instructions(item)
+         if item.is_a?(Contest)
+           if item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
+             return bt[:Vote_for_1].sub("&1;", "1") if item.open_seat_count < 2
+             return bt[:Vote_for_many].sub("&1;", item.open_seat_count.to_s)
+           else
+             return bt[:Rank_candidates]
+           end
+!!       elsif item.is_a?(Question)
+!!         return bt[:Vote_yes_or_no]
+!!       else
+!!         raise "Unknown short instruction type #{item.class}"
+!!       end      
+!!     end
+       
+       def wide_style
+!!       # do narrow flow items continue flowing after wide ones?
+!!       return :continue # :stop for narrow items starting new column
+!!     end
+   
+       def debug_stroke_bounds #debug version, rainbow of colors
+!!       @stroke_colors = ["FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF"] unless @stroke_colors
+!!       old = @pdf.stroke_color
+!!       @pdf.stroke_color = @stroke_colors.shift
+!!       @pdf.dash(1)  if @pdf.bounds.height == 0
+!!       @pdf.stroke_rectangle @pdf.bounds.top_left, @pdf.bounds.width, [@pdf.bounds.height, 5].max
+!!       @pdf.undash
+!!       Rails.logger.info("bounds.height: #{@pdf.bounds.to_s}")
+!!       @stroke_colors.push @pdf.stroke_color
+!!       @pdf.stroke_color = old
+!!     end
+   
+       def debug_rect(r)
+!!       @pdf.bounding_box([r.left, r.top], :width => r.width, :height => r.height) do 
+!!         debug_stroke_bounds
+!!       end
+!!     end
+   
+       def stroke_checkbox(pt = [0,0])
+         @pdf.line_width 1.5
+         @pdf.fill_color "FFFFFF"
+         @pdf.stroke_color "000000"
+         @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+         @pdf.fill_and_stroke
+         @pdf.fill_color "000000"
+       end
+   
+       def draw_checkbox(rect, text)
+   #      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
+   #        stroke_checkbox
+   #      end
+         check_top_left, location = @scanner.align_checkbox(@pdf, [rect.left + FlowItem::HPAD2, rect.top])
+         stroke_checkbox check_top_left
+   #      @pdf.bounding_box check_top_left.dup, :width => CHECKBOX_WIDTH do
+   #        @pdf.fill_color "FF0000"
+   #        @pdf.rectangle [0,0], CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+   #        @pdf.fill_and_stroke
+   #        @pdf.fill_color "000000"
+   #      end
+         rect.top -= rect.top - check_top_left[1]
+   #      spacer = 2 * FlowItem::HPAD2 + CHECKBOX_WIDTH
+         spacer = check_top_left[0] - rect.left + CHECKBOX_WIDTH + FlowItem::HPAD2
+         @pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
+           @pdf.font "Helvetica", :size => 10
+           @pdf.text text
+           rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
+         end
+         return spacer, location  # returns left-hand side of text position
+       end
+   
+       def frame_item(rect, top)
+         @pdf.line_width 0.5
+         @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+         @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+         @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
+       end 
+   
+       def render_frame(flow_rect)
+         bar_width = 18
+         bar_height = 140
+         @scanner.render_grid(@pdf)
+         @scanner.render_ballot_marks(@pdf)
+         @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight + 35], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
+   
+           @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
+           @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
+           @pdf.font "Courier", :size => 14
+           @pdf.draw_text bt[:Sample_Ballot], :at => [16, 275], :rotate => 90
+           @pdf.draw_text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
+           @pdf.draw_text "12001040100040", :at => [16, 410], :rotate => 90
+           @pdf.draw_text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
+           flow_rect.inset bar_width + @padding, @pleaseVoteHeight
+         end
+       end
+   
+       def render_header(flow_rect)
+         @pdf.font "Helvetica", :size => 13,  :style => :bold
+         @pdf.bounding_box [flow_rect.left + @padding, flow_rect.top], 
+         :width => flow_rect.width - @padding do
+           @pdf.move_down 3
+           @pdf.text bt[:OFFICIAL_BALLOT]
+           @pdf.text et.strftime(@election.start_date, "%B %d, %Y")
+           @pdf.bounding_box [@pdf.bounds.width / 3,  @pdf.bounds.height], 
+           :width => @pdf.bounds.width * 2 / 3 do
+             @pdf.move_down 3
+             @pdf.text et.get(@election, :display_name), :align => :center
+             @pdf.text et.get(@precinct, :display_name), :align => :center
+             @pdf.move_down(@padding / 3)
+             flow_rect.top -= @pdf.bounds.height  
+           end
+         end
+         @pdf.stroke_color "000000"
+         @pdf.stroke_line [flow_rect.left, flow_rect.top], [flow_rect.right, flow_rect.top]
+       end
+   
+       def render_column_instructions(columns, page)
+         return if page != 1
+         rect = columns.next
+         top = rect.top
+         @pdf.font "Helvetica", :size => 9, :style => :bold
+         @pdf.bounding_box( [rect.left + @padding, rect.top], 
+                           :width => rect.width - @padding * 2) do
+           @pdf.move_down 3
+           @pdf.text @instruction_text
+           #@pdf.text load_text("instructions1.txt"), :wrap => @wrap 
+          
+   #        img = load_image "instructions2.png"
+   #        @pdf.image image_path("instructions2.png"), 
+   #        :width => [img.width * 72 / 96, @pdf.bounds.width].min
+   #        @pdf.move_down 3
+   #        @pdf.text load_text("instructions3.txt"), :wrap => @wrap
+         end
+         rect.top = rect.bottom
+         @pdf.line_width 0.5
+         @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+         @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+       end
+   
+       def page_complete(pagenum, last_page)
+         unless last_page
+           @pdf.font "Helvetica", :size => 14, :style => :bold
+           @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => @pdf.bounds.width do
+             @pdf.text bt[:Vote_Both_Sides], :align => :center
+           end
+           @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
+             @pdf.move_down 10
+             @pdf.text bt[:Vote_Both_Sides], :align => :center
+           end
+         end
+       end
+   
+       def create_flow_item(item)
+         case
+         when item.is_a?(Contest) then FlowItem::Contest.new(item, @scanner)
+         when item.is_a?(Question) then FlowItem::Question.new(item, @scanner)
+         when item.is_a?(String) then FlowItem::Header.new(item, @scanner)
+         when item.is_a?(Array) then FlowItem::Combo.new(item)
+         end
+       end
+   
+     end
+   
+   end
+================================================================================
+app/models/contest.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: contests
+   #
+   #  id               :integer         not null, primary key
+   #  display_name     :string(255)
+   #  open_seat_count  :integer
+   #  voting_method_id :integer
+   #  district_id      :integer
+   #  election_id      :integer
+   #  created_at       :datetime
+   #  updated_at       :datetime
+   #
+   
+   class Contest < ActiveRecord::Base
+     # requesting district
+     belongs_to  :district
+     
+     belongs_to :election
+     
+     belongs_to :voting_method
+     
+     has_many :candidates, :dependent => :destroy, :order => :display_name
+     
+     attr_accessible :display_name, :open_seat_count, :voting_method_id , :candidates_attributes, :election_id, :district_id, :position
+     
+     accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
+     
+     validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election_id
+     validates_numericality_of :open_seat_count
+     
+     def validate
+       osc = open_seat_count.to_i
+       errors.add(:open_seat_count, "must be more than 0") if osc < 1
+       errors.add(:open_seat_count, "must be less than 10") if osc > 10
+       errors.add(:voting_method_id, "is invalid") if !VotingMethod.exists?(voting_method_id)
+       errors.add(:district_id, "is invalid") if !District.exists?(district_id)
+       errors.add(:election_id, "is invalid") if !Election.exists?(election_id)
+     end
+     
+     def after_initialize
+       write_attribute(:open_seat_count, 1) if !open_seat_count
+       write_attribute(:voting_method_id, 0) if !voting_method_id
+     end
+     
+     def to_s
+!!     "CONTEST #{self.display_name}"
+!!   end
+   
+     
+     def self.contests_for_precinct_election(p, e)
+       d = p.districts_for_election(e)
+       e.contests.map do |c|
+         c if d.include?(c.district)      
+!!     end.flatten.compact
+!!   end
+!!   
+!! end
+================================================================================
+app/ttv/import_export.rb
+================================================================================
+   require 'rexml/document'
+   
+   module TTV
+     module ImportExport
+   
+       # imports an election from standard XML format
+       class Import
+         def initialize(source)
+           @source = source
+           @importIdDistrictMap = {}
+           @precinctsMasterList = {}
+           @election = nil
+         end
+   
+         def importQuestions(xmlQuestions)
+           questions = []
+           xmlQuestions.each do |xmlQuestion|
+             xmlText = xmlQuestion.get_elements('text')
+             text = xmlText.size > 0 ? xmlText[0].text : ""
+             text = text.rstrip.lstrip
+             question = Question.create(:display_name => xmlQuestion.attributes['display_name'],
+             :requesting_district_id => @importIdDistrictMap[xmlQuestion.attributes['district_idref']],
+             :election_id => @election.id,
+             :question => text );
+             questions.push(question)
+           end
+           questions
+         end
+   
+         def importCandidate(xmlCandidate)
+           party_name = xmlCandidate.attributes['party']
+     
+           party = Party.find_by_display_name(party_name)
+           if party.nil? 
+             party = Party.new(:display_name => party_name)
+           end
+           
+           #puts "XML Import: " + xmlCandidate.attributes['display_name'] + party.display_name
+           new_candidate = Candidate.new(:display_name => xmlCandidate.attributes['display_name'],
+                         :party_id => party.id)
+           new_candidate.party = party
+           new_candidate
+         end
+   
+         def importContests(xmlContests)
+           contests = []
+           xmlContests.each do |xmlContest|
+             contest = Contest.create(:display_name => xmlContest.attributes['display_name'],
+             :position => xmlContest.attributes['order'] || 0,
+             :open_seat_count => xmlContest.attributes['open_seat'],
+             :voting_method_id => VotingMethod.xmlToId(xmlContest.attributes['voting_method'] || 'winner'),
+             :district_id => @importIdDistrictMap[xmlContest.attributes['district_idref']],
+             :election_id => @election.id )
+             xmlContest.get_elements('candidates/candidate').each do | xmlCandidate |
+               contest.candidates << importCandidate(xmlCandidate)
+             end
+             contests.push(contest)
+           end
+           contests
+         end
+   
+         def createPrecinct(id, precinctsMasterList)
+           newPrecinct = Precinct.new()
+           newPrecinct.importId = id
+           precinctsMasterList[id] = newPrecinct
+         end
+   
+         def importDistrict(xmlDistrict, precinctsMasterList)
+           district = District.new(:display_name => xmlDistrict.attributes['display_name'], 
+                                   :district_type_id => DistrictType.xmlToId(xmlDistrict.attributes['type'] ))
+           importPrecincts = {}
+           xmlDistrict.get_elements('precinct').each do |xmlPrecinct|
+             id = xmlPrecinct.attributes['idref']
+             if precinctsMasterList[id]
+               importPrecincts[id] = precinctsMasterList[id]
+             else
+               importPrecincts[id] = createPrecinct(id, precinctsMasterList)
+             end
+           end
+           district.importId = xmlDistrict.attributes['id']
+           district.importPrecincts = importPrecincts
+           district
+         end
+   
+         # districts/precincts are REXML elements
+         def importDistrictSet(xmlDistricts, xmlPrecincts)
+           newSet = DistrictSet.new(:display_name => xmlDistricts.attributes['display_name'])
+           newDistricts = []
+           newPrecincts = {}
+           xmlDistricts.get_elements('district').each do |xmlDistrict|
+             newDistricts << importDistrict(xmlDistrict, newPrecincts)
+           end
+           xmlPrecincts.get_elements('precinct').each do |xmlPrecinct|
+             id = xmlPrecinct.attributes['id']
+             unless newPrecincts[id]
+!!             newPrecincts[id] = Precinct.new()
+!!             newPrecincts.importId = id
+!!           end
+             newPrecincts[id].display_name = xmlPrecinct.attributes['display_name']
+           end
+           # we have all new districts & precincts loaded, see if this district set is duplicate
+           # duplicate? is a heuristic
+           duplicates = DistrictSet.find_all_by_display_name(newSet.display_name)
+           duplicates.each do |dup|
+             if dup.districts.size == newDistricts.size && dup.precincts.size == newPrecincts.size
+               newDistricts.each do |district|
+                 match = dup.districts.detect { |item| item.display_name == district.display_name}
+                 next unless match
+                 @importIdDistrictMap[district.importId] = match.id
+               end
+               return dup
+             end
+           end
+           # duplicate not found, create the whole set
+           newSet.save!
+           newSet.reload
+           newPrecincts.each_value { |precinct| precinct.save! }
+           newDistricts.each do |district|
+             district.save!
+             district.importPrecincts.each_value { |precinct| district.precincts << precinct }
+             newSet.districts << district
+             @importIdDistrictMap[district.importId] = district.id
+           end
+           newSet
+         end
+   
+         def import
+             doc = REXML::Document.new @source
+             xmlElection = doc.root
+             raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election' 
+             ActiveRecord::Base.transaction do
+               district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
+               xmlElection.get_elements('precincts')[0])
+               @election = Election.create(:display_name => xmlElection.attributes['display_name'],
+               :start_date => xmlElection.attributes['start_date'],
+               :district_set_id => district_set.id)
+               contests = importContests(xmlElection.get_elements('body/contest'))
+               questions = importQuestions(xmlElection.get_elements('body/question'))
+             end 
+           @election
+        end
+        
+        
+         def import_batch
+          xml_dir = Dir.new(@source)
+          xml_dir.each do |xml_file|
+            if xml_file[xml_file.length - 3..xml_file.length] == 'xml' && xml_file.class == 'File'
+!!            file = File.new("#{@source}/#{xml_file}")
+!!            doc = REXML::Document.new(file)
+!!            xmlElection = doc.root
+!!            raise "Invalid XML: <election> is not the root. " unless xmlElection.name == 'election'
+!!            ActiveRecord::Base.transaction do
+!!              district_set = importDistrictSet(xmlElection.get_elements('districts')[0],
+!!              xmlElection.get_elements('precincts')[0])
+!!              @election = Election.create(:display_name => xmlElection.attributes['display_name'],
+!!              :start_date => xmlElection.attributes['start_date'],
+!!              :district_set_id => district_set.id)
+!!              contests = importContests(xmlElection.get_elements('body/contest'))
+!!              questions = importQuestions(xmlElection.get_elements('body/question'))
+!!            end 
+!!          end
+!!        end
+          @election
+       end
+      
+     end
+       
+     
+   
+       # exports the election as XML
+       class Export
+         def initialize(election)
+           @election = election
+           @xml = nil
+           
+           @ballot_config = @election.district_set == DistrictSet.find(0)
+         end
+   
+         def exportDistrict(district)
+           @xml.district :id => district.id, :display_name => district.display_name, :type => district.district_type.idToXml do 
+             district.precincts.each do | precinct |
+               @xml.precinct :idref => precinct.id
+             end
+           end
+         end
+   
+         def exportPrecinct(precinct)
+           @xml.precinct :id => precinct.id, :display_name => precinct.display_name        
+         end
+   
+         def exportDistrictSet(district_set)
+           @xml.districts :display_name => district_set.display_name do 
+             district_set.districts.each do |district|
+               exportDistrict(district)
+             end
+           end
+           @xml.precincts do
+             district_set.precincts.each do | precinct |
+               exportPrecinct(precinct)
+             end
+           end
+         end
+   
+         def exportCandidate(candidate)
+           #puts "XML export: " + candidate.display_name + " " + candidate.party.display_name
+           @xml.candidate :display_name => candidate.display_name,
+             :party => candidate.party.display_name
+         end
+   
+         def exportContest(contest)
+           @xml.contest :display_name => contest.display_name, 
+           :open_seat => contest.open_seat_count,
+           :voting_method => contest.voting_method.idToXml,
+           :district_idref => contest.district_id,
+           :order => contest.position do
+             @xml.candidates do
+               contest.candidates.each do |candidate|
+                 exportCandidate(candidate)
+               end 
+             end if contest.candidates.size != 0
+           end
+         end
+   
+         def exportQuestion(question)
+!!         @xml.question :display_name => question.display_name, :district_idref => question.requesting_district_id do
+!!           @xml.text do
+!!             @xml << question.question
+!!           end
+!!         end
+!!       end
+   
+         def export
+           @xml = Builder::XmlMarkup.new( { :skip_types => true, :indent => 2 })
+           @options = { :skip_types => true, :indent => 2, :skip_instruct => true, :builder => @xml}          
+           @xml.instruct!
+           @xml.election :display_name => @election.display_name, :start_date => @election.start_date do
+             exportDistrictSet(@election.district_set)
+             @xml.body do
+               @election.contests.each do |contest|
+                 exportContest(contest)
+               end
+               @election.questions.each do |question|
+!!               exportQuestion(question)
+!!             end
+!!           end
+!!         end
+           @xml.target!
+         end
+       end
+   
+       def ImportExport.export(election)
+         exporter = TTV::ImportExport::Export.new(election)
+         exporter.export
+       end
+   
+       def ImportExport.import(source)
+         begin
+           importer = TTV::ImportExport::Import.new(source)
+           importer.import();
+!!       rescue Exception => ex
+!!         raise ex
+!!       end
+!!     end
+!! 
+!!   end
+!! end
+================================================================================
+app/ttv/scanner.rb
+================================================================================
+   module TTV
+   
+     class BallotMark
+       def initialize(contest, choice, page, location)
+         @contest = contest
+         @page = page
+         @choice = choice
+         @location = location
+       end
+   
+       def to_json(*a)
+!!       x = { :contest => @contest.id,
+!!         :choice => ((@choice.instance_of? String) ? @choice : @choice.id ),
+!!         :page => @page,
+!!         :location => @location
+!!       }
+!!       x.to_json(*a)
+!!     end
+!! 
+!!   end
+   
+     class Scanner
+   
+       attr_accessor :ballot_marks
+   
+       def initialize
+         @hspace = 72 / 4  # 1/2 inch
+         @vspace = 72 / 4  # 1/2 inch
+         @bar_width = 18
+         @bar_height = 140
+         @ballot_marks = []
+       end
+   
+       def to_json(*a)
+!!       @ballot_marks.to_json(*a)
+!!     end
+   
+       def set_checkbox(width, height, orientation)
+         @check_width = width
+         @check_height = height
+         @orientation = orientation
+       end
+   
+       def create_ballot_mark(contest, choice, page, location )
+         BallotMark.new(contest, choice, page, location)
+       end
+   
+       def append_ballot_marks(marks)
+         @ballot_marks.concat(marks)
+       end
+   
+       def render_grid(pdf)
+         pdf.canvas do
+           pdf.fill_color = 'FFFF00'
+           x = ((pdf.bounds.right - pdf.bounds.left) / (@check_width + @hspace)).floor
+           y = ((pdf.bounds.top - pdf.bounds.bottom) / (@check_height + @vspace)).floor
+           x.times do |i|
+             y.times do |j|
+               my_x = (@check_width + @hspace) * i
+               my_y = pdf.bounds.top - (@check_height + @vspace) * j
+   #            pdf.rectangle([ my_x, my_y], @check_width, @check_height)
+             end
+           end
+           pdf.fill
+           pdf.fill_color = '000000'
+         end
+       end
+   
+       # our grid is aligned to top/left
+       # beware of this when trying to align the y axis  
+       def align_checkbox(pdf, point)
+         x_offset = pdf.bounds.absolute_left
+         y_offset = pdf.bounds.absolute_top - pdf.bounds.top
+         x = (point[0] + x_offset) / (@check_width + @hspace)
+         x_count = @orientations == :left ? x.ceil : x.floor
+         x = x.ceil * (@check_width + @hspace) - x_offset
+         y = (pdf.bounds.absolute_top - point[1] + y_offset) / (@check_height + @vspace)
+         y_count = y.ceil
+         y = pdf.bounds.absolute_top - (y.ceil * (@check_height + @vspace)) + y_offset
+         return [x, y], [x_count, y_count]
+       end
+   
+       def render_ballot_marks(pdf)
+         pdf.fill_color = "#000000"
+         pdf.rectangle [0, @bar_height], @bar_width, @bar_height
+         pdf.rectangle pdf.bounds.top_left, @bar_width, @bar_height
+         pdf.rectangle [pdf.bounds.right - @bar_width, @bar_height], @bar_width, @bar_height
+         pdf.rectangle [pdf.bounds.right - @bar_width, pdf.bounds.top], @bar_width, @bar_height
+         pdf.fill_and_stroke
+       end
+   
+     end
+   end
+================================================================================
+app/controllers/application_controller.rb
+================================================================================
+   # Filters added to this controller apply to all controllers in the application.
+   # Likewise, all the methods added will be available for all controllers.
+   
+   class ApplicationController < ActionController::Base
+     helper :all # include all helpers, all the time
+   
+     # See ActionController::RequestForgeryProtection for details
+     protect_from_forgery 
+   
+     # Scrub sensitive parameters from your log
+     filter_parameter_logging :password,:confirm_password
+     
+     helper_method :current_user, :pretty_date, :pluralize, :current_context
+     
+     before_filter :disable_etags
+     after_filter :flash_xhr
+     
+     rescue_from CanCan::AccessDenied do |exception|
+       flash[:error] = "Access Denied"
+       redirect_to root_url
+     end
+     
+     def disable_etags
+       # TODO remove this function when in production
+       fresh_when(:etag => rand)
+     end
+     
+     def current_context
+       @user_context ||= UserContext.new(session)
+     end
+     
+     private
+   
+     def pluralize(count, singular, plural = nil)
+!!     "#{count || 0} " + ((count == 1 || count == '1') ? singular : (plural || singular.pluralize))
+!!   end
+     
+     # displays flash errors for Ajax requests
+     def flash_xhr
+       return if ! (request.xhr? && Mime::Type.lookup(response.content_type) == :js)
+!!     headers['X-JSON'] = flash.to_json;
+!!     flash.discard
+!!   end
+     
+     def pretty_date(d)
+       return d.strftime("%A, %B %d %Y, %I:%M %p %Z") if d.respond_to? :strftime
+       return d.to_s unless d.nil?
+       return "unspecified date"
+     end
+     
+     
+     # 
+     # Authlogic authenticatoin methods
+     #
+     #authlogic
+     def current_user_session
+       return @current_user_session if defined?(@current_user_session)
+       @current_user_session = UserSession.find
+     end
+     
+     #authlogic
+     def current_user
+       return @current_user if defined?(@current_user)
+       @current_user = current_user_session && current_user_session.record
+     end
+     
+     #authlogic
+     def require_user
+       unless current_user
+         store_location
+         flash[:notice]    = "You must be logged in to access this page"
+         redirect_to new_user_session_url
+         return false
+       end
+     end
+   
+     #authlogic
+     def require_no_user
+       if current_user
+         store_location
+         flash[:notice]    = "You must be logged out to access this page"
+         redirect_to account_url
+         return false
+       end
+     end
+   
+     #authlogic
+     def store_location
+       session[:return_to] = request.request_uri
+     end
+   
+     #authlogic
+     def redirect_back_or_default(default)
+       redirect_to(session[:return_to] || default)
+       session[:return_to] = nil
+     end
+   
+   end
+================================================================================
+app/models/district_set.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: district_sets
+   #
+   #  id             :integer         not null, primary key
+   #  display_name   :string(255)
+   #  secondary_name :string(255)
+   #  created_at     :datetime
+   #  updated_at     :datetime
+   #
+   
+   class DistrictSet < ActiveRecord::Base
+     has_and_belongs_to_many :districts
+     has_many :elections
+     has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+       
+     # returns all precincts in this district set
+     def precincts
+       precinct_ids = connection.select_values( <<-eos
+         SELECT DISTINCT districts_precincts.precinct_id
+         FROM	districts_precincts, district_sets_districts
+         WHERE	district_sets_districts.district_set_id = #{self.id}
+         AND	district_sets_districts.district_id = districts_precincts.district_id
+       eos
+       )
+       Precinct.find(precinct_ids)
+     end
+     
+   end
+================================================================================
+app/helpers/district_types_helper.rb
+================================================================================
+   module DistrictTypesHelper
+   end
+================================================================================
+app/helpers/ballot_styles_helper.rb
+================================================================================
+   module BallotStylesHelper
+   end
+================================================================================
+app/helpers/user_sessions_helper.rb
+================================================================================
+   module UserSessionsHelper
+   end
+================================================================================
+app/helpers/districts_helper.rb
+================================================================================
+   module DistrictsHelper
+   end
+================================================================================
+app/ballots/aiga/ballot_config.rb
+================================================================================
+   require 'ttv/abstract_ballot'
+   require 'prawn'
+   
+   module AigaBallot
+     include DefaultBallot
+   
+   end
+================================================================================
+app/models/ballot_style_template.rb
+================================================================================
+   class BallotStyleTemplate < ActiveRecord::Base
+     validates_presence_of [:display_name,:instruction_text,:state_graphic], :on => :create, :message => "can't be blank"
+   end
+================================================================================
+app/helpers/district_sets_helper.rb
+================================================================================
+   module DistrictSetsHelper
+   end
+================================================================================
+app/models/ability.rb
+================================================================================
+   class Ability
+     
+     include CanCan::Ability
+     
+     def initialize(user)
+       
+       unless user
+         user =  User.new
+         user.roles << UserRole.new(:name => 'public')
+       end
+   
+       if user.role?(:root)
+          can :manage, :all
+        elsif user.role?(:standard)
+         can [:manage], [Election]
+         # can [:read, :create, :update, :destroy], [Election]
+         # can [:index], [Election]
+       elsif user.role?(:public)
+         can :read, [Election]
+         can [:create, :register], [User]
+       end
+     end
+   end
+================================================================================
+app/models/user_role.rb
+================================================================================
+   class UserRole < ActiveRecord::Base
+   
+     belongs_to :user
+     validates_inclusion_of :name, :in => %w{ root standard public}, :message => "Invalid Role"
+   end
+================================================================================
+app/models/language.rb
+================================================================================
+   class Language < ActiveRecord::Base
+   end
+================================================================================
+app/ttv/yaml_export.rb
+================================================================================
+   require 'yaml'
+   module TTV
+   
+     # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
+     class YAMLExport
+       attr_reader :election, :election_hash, :audit_header_hash
+     
+     # <tt>election::</tt> Election object to be exported
+       def initialize(election)
+         @elec = election
+       end
+     
+     # Do the whole export process. Main entry point. Returns Yaml object ready to be saved.
+     #
+       def do_export 
+         precinct_list_h = export_district_set(@elec)
+         contests_h = export_contests(@elec)
+         questions_h = export_questions(@elec)
+         @ballot_info = {"display_name" => @elec.display_name, 
+                    "start_date" => @elec.start_date,
+                    "contest_list" => contests_h,
+                    "question_list" => questions_h,
+                    "precinct_list" => precinct_list_h,
+                    "jurisdiction_display_name" =>  @elec.display_name,
+                    "number_of_precincts" => precinct_list_h.length
+                 }
+         @audit_header = {"type" => "ballot_config"} if ballot_config?
+         @election_hash = {"ballot_info" => @ballot_info,
+                     "audit_header" => @audit_header}
+        end
+    
+     # Determine whether the election being exported is of type ballot_config
+     #
+       def ballot_config?
+         @elec.district_set == DistrictSet.find(0)  
+       end
+    
+   #
+   # Convert questions to a hash which can be converted to yaml directly.
+   # <tt>election:</tt>  Election object
+   # returns: an array containing the questions which can be converted to yaml for export
+   
+       def export_questions(election)
+         questions_h = []
+         election.questions.each {|question|
+           new_question_h = {"display_name" => question.display_name,
+                             "question" => question.question,
+                             "district_ident" => @district_to_ident_map[question.requesting_district]}
+           questions_h << new_question_h
+         }
+         questions_h
+       end
+       
+   #
+   # Convert contests to a hash which can be converted to yaml directly.
+   # <tt>election:</tt>  Election object
+   # returns: an array containing the contests which can be converted to yaml for export
+   #
+       def export_contests(election)
+         contests_h = []
+         election.contests.each do |cont|
+           new_cont_h = {"display_name" => cont.display_name, 
+                         "candidates" => export_candidates(cont), 
+                         "district_ident" => @district_to_ident_map[cont.district],
+                         "ident" => "cont-#{cont.id}",
+                         "display_order" => cont.position}
+           contests_h << new_cont_h
+         end
+         contests_h
+       end
+     
+   #
+   # Convert the list of candidates for a contest to a hash
+   # <tt>contest::</tt>  Contest object
+   # returns: an array containing the candidates for this contest, ready to be ecported to yaml
+   #
+       def export_candidates(a_contest)
+         candidates_h = []
+         a_contest.candidates.each do |cand| 
+           candidates_h << {"display_name" => cand.display_name, "ident" => "cand-#{cand.id}", "party_display_name" => cand.party.display_name, "party_ident" => "party-#{cand.party.id}" }
+         end
+         candidates_h
+       end
+     
+   # 
+   # Note in the yaml format precinct_set is pivoted into a precinct_list, and each precinct has a list
+   # of districts. It's really the same information folded a different way.
+   # <tt>election::</tt> Election object
+   # returns:: an array with all the precincts corresponding to this election  
+       def export_district_set(election)
+   #
+   # Go through all the districts in the distrset and fill in two hashes.
+   # @district_to_ident_map[dist] = :dist_ident for each district that is mentioned in the districtsets associated with the election. (dist_ident
+   # precincts_already_processed[prec] = an array of all the district objects that are in the indicated precinct.
+   #
+         @district_to_ident_map = {}
+         precinct_to_distlist = {}
+         election.district_set.districts.each do |dist|
+           if !@district_to_ident_map[dist]
+             @district_to_ident_map[dist] = "dist-#{dist.id}"          
+             dist.precincts.each do |a_prec|
+               if !precinct_to_distlist[a_prec]
+                 precinct_to_distlist[a_prec] = [dist]
+               else
+                 precinct_to_distlist[a_prec] << dist
+               end
+             end
+           end
+         end
+   #
+   # Generate a hash (precinct_list_h) representing the precincts.
+   #
+         precinct_list_a = []
+         precinct_to_distlist.each do |prec, districts|
+           precinct_h = {}
+           precinct_h["display_name"] = prec.display_name
+           precinct_h["ident"] = "prec-#{prec.id}"
+           precinct_h["voting_places"] = [{"ballot_counters" => 2, "ident" => "vplace-xxx"}]
+           district_list_a = []
+           districts.each do |dist|
+             district_h = {"display_name" => dist.display_name, "ident" => @district_to_ident_map[dist]}
+             district_list_a << district_h
+           end
+           precinct_h["district_list"] = district_list_a
+           precinct_list_a << precinct_h
+         end
+         precinct_list_a
+       end
+     end
+   end
+   
+================================================================================
+app/helpers/elections_helper.rb
+================================================================================
+   module ElectionsHelper
+   end
+================================================================================
+app/helpers/candidates_helper.rb
+================================================================================
+   module CandidatesHelper
+   end
+================================================================================
+app/helpers/users_helper.rb
+================================================================================
+   module UsersHelper
+   end
+================================================================================
+app/models/district.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: districts
+   #
+   #  id               :integer         not null, primary key
+   #  district_type_id :integer
+   #  display_name     :string(255)
+   #  created_at       :datetime
+   #  updated_at       :datetime
+   #  ident            :string(255)
+   #
+   
+   class District < ActiveRecord::Base
+     has_and_belongs_to_many :district_sets
+     has_and_belongs_to_many :precincts
+   
+     has_many :contests, :order => :display_name
+     has_many :questions, :order => :display_name
+   
+     belongs_to :district_type
+     
+     attr_accessible :district_type, :display_name, :district_type_id, :ident
+     
+     attr_accessor :importId, :importPrecincts # for xml import
+     
+     validates_presence_of :display_name
+     
+     validates_presence_of :ident
+     validates_uniqueness_of :ident, :message => "Non-unique district ident attempted: {{value}}."
+   
+     # Make sure that ident is not nil. If it is, create a unique one.
+     def before_validation
+       if self.blank? || self.ident.blank?
+         self.ident = "dist-#{ActiveSupport::SecureRandom.hex}"
+         self.save!
+       end
+     end
+     
+     # we assume election has preloaded the contents/questions
+     def contestsForElection(election)
+       return election.contests.select { |c| c.district_id == self.id }
+   #    Contest.find_all_by_election_id_and_district_id(election.id, self.id)
+     end
+     
+     def questionsForElection(election)
+       return election.questions.select { |q| q.district_id == self.id }
+   #    Question.find_all_by_election_id_and_district_id(election.id, self.id)
+     end
+     
+   end
+================================================================================
+app/helpers/contests_helper.rb
+================================================================================
+   module ContestsHelper
+   end
+================================================================================
+app/helpers/parties_helper.rb
+================================================================================
+   module PartiesHelper
+   end
+================================================================================
+app/helpers/voting_methods_helper.rb
+================================================================================
+   module VotingMethodsHelper
+   end
+================================================================================
+app/helpers/ballot_style_templates_helper.rb
+================================================================================
+   module BallotStyleTemplatesHelper
+   end
+================================================================================
+app/models/medium.rb
+================================================================================
+   class Medium < ActiveRecord::Base
+   end
+================================================================================
+app/models/ballot_style.rb
+================================================================================
+   class BallotStyle < ActiveRecord::Base
+     
+   end
+================================================================================
+app/helpers/jurisdiction_helper.rb
+================================================================================
+   module JurisdictionHelper
+   end
+================================================================================
+app/helpers/questions_helper.rb
+================================================================================
+   module QuestionsHelper
+   end
+================================================================================
+app/models/party.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: parties
+   #
+   #  id           :integer         not null, primary key
+   #  display_name :string(255)
+   #  created_at   :datetime
+   #  updated_at   :datetime
+   #
+   
+   class Party < ActiveRecord::Base
+   
+     include ConstantCache
+   
+     cache_constants :key => :display_name
+   
+     def idToXml
+       self.display_name.downcase
+     end
+     
+     validates_presence_of :ident
+     validates_uniqueness_of :ident, :message => "Non-unique Party ident attempted: {{value}}."
+   
+     # Make sure that ident is not nil. If it is, create a unique one.
+     def before_validation
+       if self.blank? || self.ident.blank?
+         self.ident = "party-#{ActiveSupport::SecureRandom.hex}"
+         self.save!
+       end
+     end
+   
+     def Party.xmlToId(xml)
+       raise "unknown party #{xml}" unless const_get(xml.constant_name)
+       const_get(xml.constant_name).id
+     end
+   
+   end
+================================================================================
+app/models/district_type.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: district_types
+   #
+   #  id         :integer         not null, primary key
+   #  title      :string(255)
+   #  created_at :datetime
+   #  updated_at :datetime
+   #
+   
+   class DistrictType < ActiveRecord::Base
+     
+     include ConstantCache
+   
+     cache_constants :key => :title
+       
+     def DistrictType.xmlToId(xml)
+       raise "unknown district type #{xml}" unless const_get(xml.constant_name)
+       const_get(xml.constant_name).id
+     end
+     
+     def idToXml
+       self.title.downcase
+     end
+   end
+================================================================================
+app/models/candidate.rb
+================================================================================
+   # == Schema Information
+   # Schema version: 20100215144641
+   #
+   # Table name: candidates
+   #
+   #  id           :integer         not null, primary key
+   #  display_name :string(255)
+   #  party_id     :integer
+   #  contest_id   :integer
+   #  created_at   :datetime
+   #  updated_at   :datetime
+   #  ident        :string(255)
+   #
+   
+   class Candidate < ActiveRecord::Base
+     belongs_to :contest
+     belongs_to :party
+     
+     attr_accessible :order, :ident
+     
+     validates_presence_of :ident
+     validates_uniqueness_of :ident, :message => "Non-unique candidate ident attempted: {{value}}."
+   
+     # Make sure that ident is not nil. If it is, create a unique one.
+     def before_validation
+       if self.blank? || self.ident.blank?
+         self.ident = "cand-#{ActiveSupport::SecureRandom.hex}"
+         self.save!
+       end
+     end
+     
+   
+     attr_accessible :display_name, :party_id, :contest_id
+   
+     validates_presence_of :display_name
+     
+     # default values, should not be all republican/democrat
+     def after_initialize
+     #  write_attribute(:party_id, rand(3)) if !party_id
+     end
+     
+     def validate
+      # errors.add(:display_name , "must start with an A") unless display_name.start_with? "A"
+     end
+     
+   
+   end
+================================================================================
+app/helpers/media_helper.rb
+================================================================================
+   module MediaHelper
+   end
+================================================================================
+app/helpers/languages_helper.rb
+================================================================================
+   module LanguagesHelper
+   end
+================================================================================
+app/helpers/maintain_helper.rb
+================================================================================
+   module MaintainHelper
+   end

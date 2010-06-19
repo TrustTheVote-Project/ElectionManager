@@ -1,0 +1,6 @@
+     2.2: flog total
+     2.2: flog/method average
+
+     2.2: UserRole#none
+     1.1: validates_inclusion_of
+     1.1: belongs_to

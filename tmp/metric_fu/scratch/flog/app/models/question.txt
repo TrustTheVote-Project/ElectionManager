@@ -1,0 +1,20 @@
+    18.4: flog total
+     6.1: flog/method average
+
+    11.7: Question#questions_for_precinct_election
+     3.3: branch
+     2.9: assignment
+     1.9: requesting_district
+     1.8: questions
+     1.7: include?
+     1.6: map
+     1.4: flatten
+     1.2: districts_for_election
+     1.2: compact
+     5.5: Question#none
+     2.2: belongs_to
+     1.1: validates_numericality_of
+     1.1: attr_accessible
+     1.1: validates_presence_of
+     1.2: Question#to_s
+     1.2: display_name

@@ -1,0 +1,3296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta content='en' http-equiv='Content-Language' />
+    <title>metrics</title>
+    <style>
+    /*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+    /* --------------------------------------------------------------
+
+   buttons.css
+   * Gives you some great CSS-only buttons.
+
+   Created by Kevin Hale [particletree.com]
+   * particletree.com/features/rediscovering-the-button-element
+
+   See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+button {
+  display:block;
+  float:left;
+  margin:0 0.583em 0.667em 0;
+  padding:5px 10px 5px 7px;   /* Links */
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+
+  background-color:#f5f5f5;
+  font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size:100%;
+  line-height:130%;
+  text-decoration:none;
+  font-weight:bold;
+  color:#565656;
+  cursor:pointer;
+}
+button {
+  width:auto;
+  overflow:visible;
+  padding:4px 10px 3px 7px;   /* IE6 */
+}
+button[type] {
+  padding:4px 10px 4px 7px;   /* Firefox */
+  line-height:17px;           /* Safari */
+}
+*:first-child+html button[type] {
+  padding:4px 10px 3px 7px;   /* IE7 */
+}
+button img {
+  margin:0 3px -3px 0 !important;
+  padding:0;
+  border:none;
+  width:16px;
+  height:16px;
+  float:none;
+}
+
+
+/* Button colors
+-------------------------------------------------------------- */
+
+/* Standard */
+button:hover {
+  background-color:#dff4ff;
+  border:1px solid #c2e1ef;
+  color:#336699;
+}
+
+/* Positive */
+body .positive {
+  color:#529214;
+}
+button.positive:hover {
+  background-color:#E6EFC2;
+  border:1px solid #C6D880;
+  color:#529214;
+}
+
+/* Negative */
+body .negative {
+  color:#d12f19;
+}
+button.negative:hover {
+  background:#fbe3e4;
+  border:1px solid #fbc2c4;
+  color:#d12f19;
+}
+
+    html {
+  background-color: #e0e0e0; }
+
+body {
+  font-size: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #333333; }
+
+a {
+  color: #ed1556;
+  text-decoration: none; }
+  a:hover {
+    color: #ffffff;
+    background-color: #ed1556; }
+
+#header, #content, #footer {
+  margin: 0 auto;
+  background: #eeeeee;
+  padding: 0 2em;
+  z-index: 0;
+  position: relative;
+  font-size: 1em; }
+
+#header {
+  background: #ffffff; }
+  #header h1 {
+    font-weight: bold;
+    font-size: 1.5em; }
+  #header address.watermark {
+    position: absolute;
+    font-weight: bold;
+    right: 3em;
+    top: 0;
+    font-size: .75em;
+    color: #cccccc; }
+    #header address.watermark a {
+      color: #cccccc;
+      font-weight: bold;
+      font-size: 2em; }
+      #header address.watermark a:hover {
+        background: transparent;
+        color: #aaaaaa; }
+
+#content {
+  padding-top: 1em;
+  padding-bottom: 2em; }
+  #content strong {
+    font-weight: bold; }
+  #content em {
+    font-style: italic; }
+  #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+    color: #4e4e4e; }
+  #content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: .75em;
+    padding: .25em 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #c0c0c0; }
+  #content h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0 .2em; }
+  #content h3 {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: .25em 0; }
+  #content h4, #content h5, #content h6 {
+    font-weight: bold;
+    margin-top: .5em; }
+  #content code, #content pre, #content textarea, #content input {
+    font-family: Monaco, Deja Vu Sans Mono, Inconsolata, Consolas, monospace; }
+  #content form p {
+    margin-top: 1em;
+    position: relative; }
+    #content form p.checkbox label {
+      margin-top: 0 !important; }
+  #content form input.text, #content form textarea {
+    width: 30em;
+    padding: .2em .4em;
+    color: #4e4e4e; }
+  #content form input.text {
+    height: 1.4em; }
+  #content form label {
+    float: left;
+    display: block;
+    margin-top: .5em;
+    width: 8em;
+    margin-right: .75em; }
+  #content form .with_errors label {
+    background: red;
+    color: white;
+    position: relative;
+    top: -.7em; }
+  #content form .with_errors.required label {
+    position: static;
+    margin-right: .25em;
+    padding: 0 .2em; }
+  #content form .with_errors input, #content form .with_errors textarea {
+    border: 2px solid #f22;
+    background: #fee;
+    color: #222222; }
+  #content form .required label {
+    float: none;
+    display: block;
+    width: auto;
+    position: relative;
+    font-weight: bold;
+    margin-top: 1em;
+    text-indent: -.65em; }
+    #content form .required label:before {
+      content: "* ";
+      color: #ed1556; }
+  #content form .required input.text {
+    width: 25.6em;
+    font-size: 24px;
+    font-weight: bold; }
+  #content form .normal {
+    margin-top: 2em; }
+  #content form h2.notifier label {
+    float: none;
+    width: auto;
+    margin-right: 0; }
+    #content form h2.notifier label .warning {
+      font-size: .5em;
+      font-weight: normal;
+      color: #999999; }
+  #content form fieldset {
+    padding-bottom: 1em;
+    margin-left: 1.35em;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 1em; }
+    #content form fieldset h3 {
+      margin-top: 1em;
+      margin-bottom: 0; }
+    #content form fieldset p.normal {
+      margin-top: 1em; }
+    #content form fieldset p label {
+      width: 6.7em; }
+  #content form p.submit {
+    margin-top: 2em; }
+    #content form p.submit:after {
+      display: block;
+      clear: both;
+      float: none;
+      content: ".";
+      text-indent: -9999em;
+      text-align: left; }
+    #content form p.submit.destroy button,     #content form p.submit.manual-build button {
+      float: none;
+      display: inline; }
+    #content form p.submit.manual-build button {
+      margin-right: 0; }
+  #content #build form, #content #last_build form {
+    font-size: .75em; }
+    #content #build form p.submit,     #content #last_build form p.submit {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: .5em;
+      top: 1.25em; }
+  #content .blank_slate p,   #content .error p {
+    position: relative;
+    top: .3em; }
+  #content .blank_slate h1,   #content .error h1 {
+    border-width: 0;
+    margin: 0;
+    padding: 0; }
+    #content .blank_slate h1 button,     #content .error h1 button {
+      float: none;
+      border: 0 none;
+      background: transparent;
+      display: inline;
+      color: #ed1556;
+      padding: 0.25em 0;
+      margin: 0; }
+      #content .blank_slate h1 button:hover,       #content .error h1 button:hover {
+        background: #ed1556;
+        color: #ffffff; }
+  #content .error dt {
+    margin-top: 1.4em;
+    margin-bottom: .3em;
+    font-size: 1.75em;
+    font-family: Georgia, Times New Roman, serif; }
+  #content .error dd {
+    line-height: 1.4; }
+  #content .error .backtrace {
+    margin: 1em 0;
+    overflow: scroll;
+    height: 30em;
+    border: 1px solid #c0c0c0;
+    line-height: 1.6; }
+  #content #projects {
+    margin: 1em 0 2em;
+    border-top: 1px solid #c0c0c0; }
+    #content #projects li {
+      position: relative;
+      border-bottom: 1px solid #c0c0c0; }
+      #content #projects li.odd {
+        background: #e6e6e6; }
+      #content #projects li.building {
+        background: transparent url(/spinner.gif) no-repeat scroll right; }
+      #content #projects li a {
+        font-size: 2em;
+        padding: .25em;
+        line-height: 1.2;
+        font-weight: bold;
+        display: block; }
+        #content #projects li a.success {
+          color: #337022; }
+        #content #projects li a.failed {
+          color: #ff1100; }
+      #content #projects li .meta {
+        position: absolute;
+        right: .6em;
+        top: 1.5em;
+        font-size: 0.8em;
+        color: #999999;
+        text-align: right; }
+      #content #projects li.building .meta {
+        right: 1.6em; }
+      #content #projects li.success .meta {
+        color: #337022; }
+      #content #projects li.failed .meta {
+        color: #ff1100; }
+  #content #previous_builds li a {
+    display: block;
+    padding: .25em;
+    margin-bottom: .25em;
+    border-width: 1px;
+    border-style: solid; }
+    #content #previous_builds li a strong {
+      font-size: 1.3em; }
+    #content #previous_builds li a .attribution {
+      font-size: .9em; }
+  #content #projects li.success a,   #content #previous_builds li.success a {
+    background-color: #bbf8aa;
+    border-color: #99d688;
+    color: #337022; }
+    #content #projects li.success a .attribution,     #content #previous_builds li.success a .attribution {
+      color: #77b466; }
+    #content #projects li.success a:hover,     #content #previous_builds li.success a:hover {
+      background-color: #ddffcc; }
+  #content #projects li.failed a,   #content #previous_builds li.failed a {
+    background-color: #ffbbaa;
+    border-color: #dd9988;
+    color: #ff1100; }
+    #content #projects li.failed a .attribution,     #content #previous_builds li.failed a .attribution {
+      color: #bb7766; }
+    #content #projects li.failed a:hover,     #content #previous_builds li.failed a:hover {
+      background-color: #ffddcc; }
+  #content #build, #content #last_build {
+    position: relative; }
+    #content #build h1, #content #build blockquote,     #content #last_build h1, #content #last_build blockquote {
+      border-width: 0 1px;
+      border-style: solid; }
+    #content #build h1,     #content #last_build h1 {
+      border-top-width: 1px; }
+    #content #build blockquote,     #content #last_build blockquote {
+      bottom-bottom-width: 1px;
+      line-height: 1.4; }
+    #content #build.success h1, #content #build.success blockquote,     #content #last_build.success h1, #content #last_build.success blockquote {
+      background-color: #bbf8aa;
+      border-color: #99d688 #ccffbb #ccffbb #99d688; }
+    #content #build.success h1,     #content #last_build.success h1 {
+      color: #337022; }
+    #content #build.success .meta,     #content #last_build.success .meta {
+      color: #77b466; }
+    #content #build.failed h1, #content #build.failed blockquote,     #content #last_build.failed h1, #content #last_build.failed blockquote {
+      background-color: #ffbbaa;
+      border-color: #dd9988 #ffccbb #ffccbb #dd9988; }
+    #content #build.failed h1,     #content #last_build.failed h1 {
+      color: #ff1100; }
+    #content #build.failed .meta,     #content #last_build.failed .meta {
+      color: #bb7766; }
+    #content #build h1,     #content #last_build h1 {
+      margin-top: .5em;
+      margin-bottom: 0;
+      padding: .25em;
+      color: #337022; }
+    #content #build blockquote,     #content #last_build blockquote {
+      padding: .75em;
+      margin-bottom: 2em; }
+      #content #build blockquote .meta,       #content #last_build blockquote .meta {
+        margin-top: 1em;
+        display: block;
+        font-size: .9em; }
+    #content #build pre.output,     #content #last_build pre.output {
+      background: #111;
+      color: #fff;
+      padding: .5em;
+      overflow: auto;
+      max-height: 50em;
+      font-size: .825em; }
+      #content #build pre.output .color30,       #content #last_build pre.output .color30 {
+        color: #333; }
+      #content #build pre.output .color31,       #content #last_build pre.output .color31 {
+        color: #e33; }
+      #content #build pre.output .color32,       #content #last_build pre.output .color32 {
+        color: #3e3; }
+      #content #build pre.output .color33,       #content #last_build pre.output .color33 {
+        color: #ee3; }
+      #content #build pre.output .color34,       #content #last_build pre.output .color34 {
+        color: #33e; }
+      #content #build pre.output .color35,       #content #last_build pre.output .color35 {
+        color: #e3e; }
+      #content #build pre.output .color36,       #content #last_build pre.output .color36 {
+        color: #3ee; }
+      #content #build pre.output .color37,       #content #last_build pre.output .color37 {
+        color: #fff; }
+  #content #push_path {
+    display: block;
+    margin-top: 1em;
+    margin-left: 2em; }
+
+a.success {
+  color: #bbf8aa; }
+  a.success:hover {
+    background-color: #bbf8aa;
+    color: white; }
+a.failed {
+  color: #ffbbaa; }
+  a.failed:hover {
+    background-color: #ffbbaa;
+    color: white; }
+
+#footer {
+  padding: 1.5em 2.5em;
+  border-top: 1px solid #ccc;
+  font-size: .8em;
+  color: #666;
+  text-align: right; }
+  #footer strong {
+    font-weight: bold; }
+    
+    table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid #666;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+table tr.light {
+   background: #fff;
+}
+
+table tr.dark {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #FFFFC0;
+}
+
+table td, table th {
+  padding: 4px;
+  font-size: 11px;
+}
+table th {
+  text-align: center;
+  color: #337022;
+  background: #DDFFCC;
+  font-weight: bold;
+  border: #99D688 1px solid;
+}
+
+table td {
+  border: #d0d0d0 1px solid;
+}
+
+table td.score {
+  text-align: right;
+}
+
+.warning {
+  background: yellow;
+}
+.rcov_code td {
+  border-bottom: 1px solid #ddd ;
+  padding: 0;
+  margin: 0;
+}
+.rcov_code tr {
+  border: 0px;
+  padding:0px;
+  margin: 0px;
+}
+.rcov_code pre {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.rcov_run {}
+.rcov_not_run {
+  background-color: #d88;
+}
+.rcov_run a, .rcov_not_run a {
+  text-decoration: none;
+}
+.rcov_run a {
+  color: #333;
+}
+.rcov_not_run a {
+  color: #000;
+}
+.rcov_overflow {
+  overflow: auto;
+  font-size: 50%;
+}
+
+.bluff-tooltip {
+	background: #fff;
+	border: 1px solid #d1edf5;
+	padding: 8px 8px 6px;
+}
+.bluff-tooltip .color {
+	display: block;
+	height: 4px;
+	width: 30px;
+	margin: 0 0 4px;
+	overflow: hidden;
+}
+.bluff-tooltip .data {
+	font-weight: bold;
+}
+
+    </style>
+    <link REL="SHORTCUT ICON" HREF="/favicon.ico">
+    <script language="javascript" src="js-class.js" type="text/javascript"></script>
+    <script language="javascript" src="bluff-min.js" type="text/javascript"></script>
+    <script language="javascript" src="excanvas.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id='header'>
+      <h1><a href="/">metrics</a> | <a href="index.html">ElectionManager</a></h1>
+      <address class='watermark'>
+        built with
+        <a href='http://metric-fu.rubyforge.org/'>metric-fu</a>
+      </address>
+    </div>
+    <div id='content'>
+      <h3>Source Control Churn Results</h3>
+<p>Files that change a lot in your project may be bad a sign.
+  This task uses your source control log to identify those files.
+  </p>
+<table>
+  <tr>
+    <th>File Path</th>
+    <th>Times Changed</th>
+  </tr>
+  
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/config/routes.rb'>config/routes.rb</a></td>
+      <td>25</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/db/schema.rb'>db/schema.rb</a></td>
+      <td>25</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/precincts_controller.rb'>app/controllers/precincts_controller.rb</a></td>
+      <td>22</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/helpers/application_helper.rb'>app/helpers/application_helper.rb</a></td>
+      <td>19</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ttv/yaml_import.rb'>app/ttv/yaml_import.rb</a></td>
+      <td>19</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/contests/_contest_list.html.erb'>app/views/contests/_contest_list.html.erb</a></td>
+      <td>18</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/question_test.rb'>test/unit/question_test.rb</a></td>
+      <td>17</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/show.html.erb'>app/views/elections/show.html.erb</a></td>
+      <td>17</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_style_templates/edit.html.erb'>app/views/ballot_style_templates/edit.html.erb</a></td>
+      <td>16</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/elections_controller.rb'>app/controllers/elections_controller.rb</a></td>
+      <td>16</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/yaml_import_test.rb'>test/unit/yaml_import_test.rb</a></td>
+      <td>16</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/layouts/application.html.erb'>app/views/layouts/application.html.erb</a></td>
+      <td>16</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/contest_test.rb'>test/unit/contest_test.rb</a></td>
+      <td>15</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ttv/import_export.rb'>app/ttv/import_export.rb</a></td>
+      <td>15</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/test_helper.rb'>test/test_helper.rb</a></td>
+      <td>15</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/config/environment.rb'>config/environment.rb</a></td>
+      <td>14</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/election.rb'>app/models/election.rb</a></td>
+      <td>13</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/yaml_xml_equivalency_test.rb'>test/unit/yaml_xml_equivalency_test.rb</a></td>
+      <td>13</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/contests_controller.rb'>app/controllers/contests_controller.rb</a></td>
+      <td>12</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_style_templates/new.html.erb'>app/views/ballot_style_templates/new.html.erb</a></td>
+      <td>11</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/lib/tasks/ttv.rake'>lib/tasks/ttv.rake</a></td>
+      <td>11</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/manage_elections.feature'>features/manage_elections.feature</a></td>
+      <td>11</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/yaml_export_test.rb'>test/unit/yaml_export_test.rb</a></td>
+      <td>10</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/precincts/_precinct_list.html.erb'>app/views/precincts/_precinct_list.html.erb</a></td>
+      <td>9</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/ability.rb'>app/models/ability.rb</a></td>
+      <td>9</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/index.html.erb'>app/views/elections/index.html.erb</a></td>
+      <td>9</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/contests/_form.html.erb'>app/views/contests/_form.html.erb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/.gitignore'>.gitignore</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/precinct.rb'>app/models/precinct.rb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/public/stylesheets/web_app_theme_override.css'>public/stylesheets/web_app_theme_override.css</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/_form.html.erb'>app/views/elections/_form.html.erb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/shoulda_macros/ttv_contexts.rb'>test/shoulda_macros/ttv_contexts.rb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ttv/yaml_export.rb'>app/ttv/yaml_export.rb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/support/paths.rb'>features/support/paths.rb</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/README'>README</a></td>
+      <td>8</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/question.rb'>app/models/question.rb</a></td>
+      <td>7</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/question_complex_test.rb'>test/unit/question_complex_test.rb</a></td>
+      <td>7</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/_election_list.html.erb'>app/views/elections/_election_list.html.erb</a></td>
+      <td>7</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/config/environments/test.rb'>config/environments/test.rb</a></td>
+      <td>7</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/users_controller_test.rb'>test/functional/users_controller_test.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ttv/abstract_ballot.rb'>app/ttv/abstract_ballot.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/precinct_test.rb'>test/unit/precinct_test.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/user.rb'>app/models/user.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/application_controller.rb'>app/controllers/application_controller.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/questions_controller.rb'>app/controllers/questions_controller.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/maintain_controller.rb'>app/controllers/maintain_controller.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_style_templates/index.html.erb'>app/views/ballot_style_templates/index.html.erb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ballots/default/ballot_config.rb'>app/ballots/default/ballot_config.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/users_controller.rb'>app/controllers/users_controller.rb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_style_templates/show.html.erb'>app/views/ballot_style_templates/show.html.erb</a></td>
+      <td>6</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/step_definitions/election_steps.rb'>features/step_definitions/election_steps.rb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/TX_ballot_config.yml'>test/elections/TX_ballot_config.yml</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/_sidebar.html.erb'>app/views/elections/_sidebar.html.erb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/jurisdiction_controller.rb'>app/controllers/jurisdiction_controller.rb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/user_registration.feature'>features/user_registration.feature</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/districts/_form.html.erb'>app/views/districts/_form.html.erb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/application/index.html.erb'>app/views/application/index.html.erb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/contests/index.html.erb'>app/views/contests/index.html.erb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/fl/Baker 01.1.yml'>test/elections/fl/Baker 01.1.yml</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/change_jurisdiction.html.erb'>app/views/jurisdiction/change_jurisdiction.html.erb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/candidate.rb'>app/models/candidate.rb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/guest_user_test.rb'>test/unit/guest_user_test.rb</a></td>
+      <td>5</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/_form.html.erb'>app/views/jurisdiction/_form.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/elections_controller_test.rb'>test/functional/elections_controller_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/ballot_styles_controller.rb'>app/controllers/ballot_styles_controller.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/import_export_test.rb'>test/unit/import_export_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/Albany.yml'>test/elections/Albany.yml</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/step_definitions/user_steps.rb'>features/step_definitions/user_steps.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ballots/nh/ballot_config.rb'>app/ballots/nh/ballot_config.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/manage_context.feature'>features/manage_context.feature</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/user_context_test.rb'>test/unit/user_context_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/db/migrate/20100415031322_rename_question_requesting_district.rb'>db/migrate/20100415031322_rename_question_requesting_district.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/candidates/index.html.erb'>app/views/candidates/index.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/xml/101.26.yml'>test/elections/xml/101.26.yml</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/contests/show.html.erb'>app/views/contests/show.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/user_navigation.feature'>features/user_navigation.feature</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/user_context.rb'>app/models/user_context.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/display_elections.feature'>features/display_elections.feature</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/district_sets/_form.html.erb'>app/views/district_sets/_form.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/contest.rb'>app/models/contest.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/elections_access_test.rb'>test/functional/elections_access_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/user_role_test.rb'>test/unit/user_role_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/step_definitions/web_steps_ext.rb'>features/step_definitions/web_steps_ext.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/questions/new.html.erb'>app/views/questions/new.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/generated.yml'>test/elections/generated.yml</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/users_mock_controller_test.rb'>test/functional/users_mock_controller_test.rb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/show.html.erb'>app/views/jurisdiction/show.html.erb</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/xml/1.yml'>test/elections/xml/1.yml</a></td>
+      <td>4</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Odell.yml'>test/elections/nh/Odell.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dorchester.yml'>test/elections/nh/Dorchester.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sugar Hill.yml'>test/elections/nh/Sugar Hill.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Effingham.yml'>test/elections/nh/Effingham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Pittsfield.yml'>test/elections/nh/Pittsfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Franklin - Ward 1.yml'>test/elections/nh/Franklin - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Martin's Location.yml'>test/elections/nh/Martin's Location.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wakefield.yml'>test/elections/nh/Wakefield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/blueprints.rb'>test/blueprints.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hampton Falls.yml'>test/elections/nh/Hampton Falls.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newbury.yml'>test/elections/nh/Newbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Waterville Valley.yml'>test/elections/nh/Waterville Valley.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nottingham.yml'>test/elections/nh/Nottingham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Milford.yml'>test/elections/nh/Milford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Errol.yml'>test/elections/nh/Errol.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Weare.yml'>test/elections/nh/Weare.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Barnstead.yml'>test/elections/nh/Barnstead.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Windham.yml'>test/elections/nh/Windham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Canterbury.yml'>test/elections/nh/Canterbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Clarksville.yml'>test/elections/nh/Clarksville.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Londonderry.yml'>test/elections/nh/Londonderry.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New Ipswich.yml'>test/elections/nh/New Ipswich.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Claremont - Ward 3.yml'>test/elections/nh/Claremont - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/_election_list.html.erb'>app/views/jurisdiction/_election_list.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Keene - Ward 5.yml'>test/elections/nh/Keene - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Windsor.yml'>test/elections/nh/Windsor.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Franklin - Ward 3.yml'>test/elections/nh/Franklin - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Claremont - Ward 1.yml'>test/elections/nh/Claremont - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Randolph.yml'>test/elections/nh/Randolph.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Northwood.yml'>test/elections/nh/Northwood.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Mont Vernon.yml'>test/elections/nh/Mont Vernon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Keene - Ward 3.yml'>test/elections/nh/Keene - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hill.yml'>test/elections/nh/Hill.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/candidates/_form.html.erb'>app/views/candidates/_form.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Gilford.yml'>test/elections/nh/Gilford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Springfield.yml'>test/elections/nh/Springfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Salisbury.yml'>test/elections/nh/Salisbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bennington.yml'>test/elections/nh/Bennington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 2.yml'>test/elections/nh/Laconia - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Westmoreland.yml'>test/elections/nh/Westmoreland.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/db/samples/BestDaddy2009.xml'>db/samples/BestDaddy2009.xml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Greenland.yml'>test/elections/nh/Greenland.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bristol.yml'>test/elections/nh/Bristol.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rumney.yml'>test/elections/nh/Rumney.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wentworth.yml'>test/elections/nh/Wentworth.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Fremont.yml'>test/elections/nh/Fremont.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Andover.yml'>test/elections/nh/Andover.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Berlin - Ward 2.yml'>test/elections/nh/Berlin - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sullivan.yml'>test/elections/nh/Sullivan.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Benton.yml'>test/elections/nh/Benton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Pelham.yml'>test/elections/nh/Pelham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Ossipee.yml'>test/elections/nh/Ossipee.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 12.yml'>test/elections/nh/Manchester - Ward 12.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Temple.yml'>test/elections/nh/Temple.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bradford.yml'>test/elections/nh/Bradford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Durham.yml'>test/elections/nh/Durham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/voting_method.rb'>app/models/voting_method.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Francestown.yml'>test/elections/nh/Francestown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Amherst.yml'>test/elections/nh/Amherst.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 1.yml'>test/elections/nh/Manchester - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hooksett.yml'>test/elections/nh/Hooksett.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/party.rb'>app/models/party.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Colebrook.yml'>test/elections/nh/Colebrook.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/_sidebar.html.erb'>app/views/jurisdiction/_sidebar.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Stratford.yml'>test/elections/nh/Stratford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hampton.yml'>test/elections/nh/Hampton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 1.yml'>test/elections/nh/Concord - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Albany.yml'>test/elections/nh/Albany.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Unity.yml'>test/elections/nh/Unity.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 6.yml'>test/elections/nh/Dover - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/user_role.rb'>app/models/user_role.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 6.yml'>test/elections/nh/Manchester - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/ttv/pdf_ballot_style.rb'>app/ttv/pdf_ballot_style.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 4.yml'>test/elections/nh/Dover - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Chichester.yml'>test/elections/nh/Chichester.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Ellsworth.yml'>test/elections/nh/Ellsworth.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hampstead.yml'>test/elections/nh/Hampstead.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Swanzey.yml'>test/elections/nh/Swanzey.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Troy.yml'>test/elections/nh/Troy.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 4.yml'>test/elections/nh/Manchester - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Thompson & Meserve's Purchase.yml'>test/elections/nh/Thompson & Meserve's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New Boston.yml'>test/elections/nh/New Boston.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Second College Grant.yml'>test/elections/nh/Second College Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Low & Burbank's Grant.yml'>test/elections/nh/Low & Burbank's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Milton.yml'>test/elections/nh/Milton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Erving's Location.yml'>test/elections/nh/Erving's Location.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 4.yml'>test/elections/nh/Nashua - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Plainfield.yml'>test/elections/nh/Plainfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Portsmouth - Ward 5.yml'>test/elections/nh/Portsmouth - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bow.yml'>test/elections/nh/Bow.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 6.yml'>test/elections/nh/Rochester - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sutton.yml'>test/elections/nh/Sutton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 2.yml'>test/elections/nh/Nashua - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Somersworth - Ward 4.yml'>test/elections/nh/Somersworth - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Grafton.yml'>test/elections/nh/Grafton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 6.yml'>test/elections/nh/Concord - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Goffstown.yml'>test/elections/nh/Goffstown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Madbury.yml'>test/elections/nh/Madbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hancock.yml'>test/elections/nh/Hancock.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Portsmouth - Ward 3.yml'>test/elections/nh/Portsmouth - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Canaan.yml'>test/elections/nh/Canaan.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 4.yml'>test/elections/nh/Concord - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Somersworth - Ward 2.yml'>test/elections/nh/Somersworth - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/controllers/jurisd_elections_controller.rb'>app/controllers/jurisd_elections_controller.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lyman.yml'>test/elections/nh/Lyman.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Alstead.yml'>test/elections/nh/Alstead.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Kingston.yml'>test/elections/nh/Kingston.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Warren.yml'>test/elections/nh/Warren.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/district_sets/new.html.erb'>app/views/district_sets/new.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Mason.yml'>test/elections/nh/Mason.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rindge.yml'>test/elections/nh/Rindge.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hanover.yml'>test/elections/nh/Hanover.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Peterborough.yml'>test/elections/nh/Peterborough.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bean's Purchase.yml'>test/elections/nh/Bean's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wentworth's Location.yml'>test/elections/nh/Wentworth's Location.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hopkinton.yml'>test/elections/nh/Hopkinton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Tamworth.yml'>test/elections/nh/Tamworth.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 11.yml'>test/elections/nh/Manchester - Ward 11.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Monroe.yml'>test/elections/nh/Monroe.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Epping.yml'>test/elections/nh/Epping.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Acworth.yml'>test/elections/nh/Acworth.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Loudon.yml'>test/elections/nh/Loudon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lebanon - Ward 1.yml'>test/elections/nh/Lebanon - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Alton.yml'>test/elections/nh/Alton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hollis.yml'>test/elections/nh/Hollis.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 7.yml'>test/elections/nh/Concord - Ward 7.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Brentwood.yml'>test/elections/nh/Brentwood.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newton.yml'>test/elections/nh/Newton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 4.yml'>test/elections/nh/Laconia - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 5.yml'>test/elections/nh/Laconia - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Cornish.yml'>test/elections/nh/Cornish.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Eaton.yml'>test/elections/nh/Eaton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Seabrook.yml'>test/elections/nh/Seabrook.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dunbarton.yml'>test/elections/nh/Dunbarton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 10.yml'>test/elections/nh/Concord - Ward 10.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Danbury.yml'>test/elections/nh/Danbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Derry.yml'>test/elections/nh/Derry.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Winchester.yml'>test/elections/nh/Winchester.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Chandler's Purchase.yml'>test/elections/nh/Chandler's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Middleton.yml'>test/elections/nh/Middleton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 5.yml'>test/elections/nh/Nashua - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Strafford.yml'>test/elections/nh/Strafford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Kilkenny.yml'>test/elections/nh/Kilkenny.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Atkinson.yml'>test/elections/nh/Atkinson.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bethlehem.yml'>test/elections/nh/Bethlehem.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 5.yml'>test/elections/nh/Rochester - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wilton.yml'>test/elections/nh/Wilton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Webster.yml'>test/elections/nh/Webster.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Pinkham's Grant.yml'>test/elections/nh/Pinkham's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Piermont.yml'>test/elections/nh/Piermont.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bedford.yml'>test/elections/nh/Bedford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 9.yml'>test/elections/nh/Nashua - Ward 9.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Washington.yml'>test/elections/nh/Washington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hebron.yml'>test/elections/nh/Hebron.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bath.yml'>test/elections/nh/Bath.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 2.yml'>test/elections/nh/Manchester - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdictions/change.html.erb'>app/views/jurisdictions/change.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Keene - Ward 2.yml'>test/elections/nh/Keene - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Pembroke.yml'>test/elections/nh/Pembroke.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Gorham.yml'>test/elections/nh/Gorham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dixville.yml'>test/elections/nh/Dixville.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Charlestown.yml'>test/elections/nh/Charlestown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Goshen.yml'>test/elections/nh/Goshen.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sandwich.yml'>test/elections/nh/Sandwich.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Meredith.yml'>test/elections/nh/Meredith.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/unit/user_test.rb'>test/unit/user_test.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Cutt's Grant.yml'>test/elections/nh/Cutt's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Walpole.yml'>test/elections/nh/Walpole.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 9.yml'>test/elections/nh/Concord - Ward 9.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 6.yml'>test/elections/nh/Laconia - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Conway.yml'>test/elections/nh/Conway.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Cambridge.yml'>test/elections/nh/Cambridge.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lempster.yml'>test/elections/nh/Lempster.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Whitefield.yml'>test/elections/nh/Whitefield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Carroll.yml'>test/elections/nh/Carroll.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Livermore.yml'>test/elections/nh/Livermore.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lincoln.yml'>test/elections/nh/Lincoln.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 3.yml'>test/elections/nh/Manchester - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lee.yml'>test/elections/nh/Lee.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Claremont - Ward 2.yml'>test/elections/nh/Claremont - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisd_elections/_set_jurisdiction.html.erb'>app/views/jurisd_elections/_set_jurisdiction.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/district.rb'>app/models/district.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rye.yml'>test/elections/nh/Rye.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 7.yml'>test/elections/nh/Nashua - Ward 7.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Chester.yml'>test/elections/nh/Chester.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Surry.yml'>test/elections/nh/Surry.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 3.yml'>test/elections/nh/Dover - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bean's Grant.yml'>test/elections/nh/Bean's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sharon.yml'>test/elections/nh/Sharon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 1.yml'>test/elections/nh/Dover - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_style_templates/_form.html.erb'>app/views/ballot_style_templates/_form.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Croydon.yml'>test/elections/nh/Croydon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wolfeboro.yml'>test/elections/nh/Wolfeboro.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Moultonborough.yml'>test/elections/nh/Moultonborough.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Jaffrey.yml'>test/elections/nh/Jaffrey.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Green's Grant.yml'>test/elections/nh/Green's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/North Hampton.yml'>test/elections/nh/North Hampton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Shelburne.yml'>test/elections/nh/Shelburne.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Berlin - Ward 1.yml'>test/elections/nh/Berlin - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newport.yml'>test/elections/nh/Newport.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sargent's Purchase.yml'>test/elections/nh/Sargent's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Langdon.yml'>test/elections/nh/Langdon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Greenfield.yml'>test/elections/nh/Greenfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bartlett.yml'>test/elections/nh/Bartlett.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Portsmouth - Ward 2.yml'>test/elections/nh/Portsmouth - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/index.html.erb'>app/views/jurisdiction/index.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Somersworth - Ward 1.yml'>test/elections/nh/Somersworth - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Ashland.yml'>test/elections/nh/Ashland.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Brookline.yml'>test/elections/nh/Brookline.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/step_definitions/jurisdictions_steps.rb'>features/step_definitions/jurisdictions_steps.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Deering.yml'>test/elections/nh/Deering.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Tuftonboro.yml'>test/elections/nh/Tuftonboro.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nelson.yml'>test/elections/nh/Nelson.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisd_elections/list_elections.html.erb'>app/views/jurisd_elections/list_elections.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/candidates/show.html.erb'>app/views/candidates/show.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Northumberland.yml'>test/elections/nh/Northumberland.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Stoddard.yml'>test/elections/nh/Stoddard.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 7.yml'>test/elections/nh/Manchester - Ward 7.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 5.yml'>test/elections/nh/Manchester - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 3.yml'>test/elections/nh/Rochester - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Berlin - Ward 4.yml'>test/elections/nh/Berlin - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Plaistow.yml'>test/elections/nh/Plaistow.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lebanon - Ward 2.yml'>test/elections/nh/Lebanon - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Wilmot.yml'>test/elections/nh/Wilmot.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Stratham.yml'>test/elections/nh/Stratham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/shoulda_macros/ttv_macros.rb'>test/shoulda_macros/ttv_macros.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Candia.yml'>test/elections/nh/Candia.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Marlborough.yml'>test/elections/nh/Marlborough.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 3.yml'>test/elections/nh/Nashua - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Columbia.yml'>test/elections/nh/Columbia.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sunapee.yml'>test/elections/nh/Sunapee.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 5.yml'>test/elections/nh/Concord - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 1.yml'>test/elections/nh/Nashua - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dummer.yml'>test/elections/nh/Dummer.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Danville.yml'>test/elections/nh/Danville.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 3.yml'>test/elections/nh/Concord - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/db/seeds.rb'>db/seeds.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Exeter.yml'>test/elections/nh/Exeter.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rollinsford.yml'>test/elections/nh/Rollinsford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 9.yml'>test/elections/nh/Manchester - Ward 9.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 4.yml'>test/elections/nh/Rochester - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Tilton.yml'>test/elections/nh/Tilton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 8.yml'>test/elections/nh/Manchester - Ward 8.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 2.yml'>test/elections/nh/Rochester - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/new.html.erb'>app/views/jurisdiction/new.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 8.yml'>test/elections/nh/Nashua - Ward 8.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Nashua - Ward 6.yml'>test/elections/nh/Nashua - Ward 6.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/district_sets/edit.html.erb'>app/views/district_sets/edit.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New Castle.yml'>test/elections/nh/New Castle.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 8.yml'>test/elections/nh/Concord - Ward 8.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Richmond.yml'>test/elections/nh/Richmond.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Success.yml'>test/elections/nh/Success.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/unused/index.html.erb'>app/views/jurisdiction/unused/index.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Deerfield.yml'>test/elections/nh/Deerfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/ballot_config.yml'>test/elections/ballot_config.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Groton.yml'>test/elections/nh/Groton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Campton.yml'>test/elections/nh/Campton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Roxbury.yml'>test/elections/nh/Roxbury.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Jefferson.yml'>test/elections/nh/Jefferson.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Manchester - Ward 10.yml'>test/elections/nh/Manchester - Ward 10.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hadley's Purchase.yml'>test/elections/nh/Hadley's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Henniker.yml'>test/elections/nh/Henniker.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Stewartstown.yml'>test/elections/nh/Stewartstown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/edit.html.erb'>app/views/jurisdiction/edit.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lyme.yml'>test/elections/nh/Lyme.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lisbon.yml'>test/elections/nh/Lisbon.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Northfield.yml'>test/elections/nh/Northfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lancaster.yml'>test/elections/nh/Lancaster.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Easton.yml'>test/elections/nh/Easton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newmarket.yml'>test/elections/nh/Newmarket.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lebanon - Ward 3.yml'>test/elections/nh/Lebanon - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Lyndeborough.yml'>test/elections/nh/Lyndeborough.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Salem.yml'>test/elections/nh/Salem.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/district_sets/show.html.erb'>app/views/district_sets/show.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Belmont.yml'>test/elections/nh/Belmont.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hart's Location.yml'>test/elections/nh/Hart's Location.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/elections/new.html.erb'>app/views/elections/new.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/application/_admin_toolbox.html.erb'>app/views/application/_admin_toolbox.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Antrim.yml'>test/elections/nh/Antrim.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Center Harbor.yml'>test/elections/nh/Center Harbor.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Grantham.yml'>test/elections/nh/Grantham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hudson.yml'>test/elections/nh/Hudson.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Orford.yml'>test/elections/nh/Orford.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dalton.yml'>test/elections/nh/Dalton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/jurisdiction/unused/_sidebar.html.erb'>app/views/jurisdiction/unused/_sidebar.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Keene - Ward 1.yml'>test/elections/nh/Keene - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/db/seed/once/ballot_style_templates.yml'>db/seed/once/ballot_style_templates.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Greenville.yml'>test/elections/nh/Greenville.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Pittsburg.yml'>test/elections/nh/Pittsburg.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Plymouth.yml'>test/elections/nh/Plymouth.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Holderness.yml'>test/elections/nh/Holderness.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hinsdale.yml'>test/elections/nh/Hinsdale.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 3.yml'>test/elections/nh/Laconia - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/config/environments/cucumber.rb'>config/environments/cucumber.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Madison.yml'>test/elections/nh/Madison.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Warner.yml'>test/elections/nh/Warner.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Franklin - Ward 2.yml'>test/elections/nh/Franklin - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Gilmanton.yml'>test/elections/nh/Gilmanton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/manage_users.feature'>features/manage_users.feature</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Chatham.yml'>test/elections/nh/Chatham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/East Kingston.yml'>test/elections/nh/East Kingston.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Fitzwilliam.yml'>test/elections/nh/Fitzwilliam.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Millsfield.yml'>test/elections/nh/Millsfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/login_test.rb'>test/functional/login_test.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Atkinson & Gilmanton Academy Grant.yml'>test/elections/nh/Atkinson & Gilmanton Academy Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Somersworth - Ward 3.yml'>test/elections/nh/Somersworth - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Raymond.yml'>test/elections/nh/Raymond.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Haverhill.yml'>test/elections/nh/Haverhill.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New London.yml'>test/elections/nh/New London.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New Hampton.yml'>test/elections/nh/New Hampton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Keene - Ward 4.yml'>test/elections/nh/Keene - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Kensington.yml'>test/elections/nh/Kensington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Crawford's Purchase.yml'>test/elections/nh/Crawford's Purchase.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Enfield.yml'>test/elections/nh/Enfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Brookfield.yml'>test/elections/nh/Brookfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Farmington.yml'>test/elections/nh/Farmington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dix's Grant.yml'>test/elections/nh/Dix's Grant.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Boscawen.yml'>test/elections/nh/Boscawen.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Gilsum.yml'>test/elections/nh/Gilsum.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newfields.yml'>test/elections/nh/Newfields.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Auburn.yml'>test/elections/nh/Auburn.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Portsmouth - Ward 4.yml'>test/elections/nh/Portsmouth - Ward 4.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/functional/jurisd_elections_controller_test.rb'>test/functional/jurisd_elections_controller_test.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Landaff.yml'>test/elections/nh/Landaff.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Marlow.yml'>test/elections/nh/Marlow.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Berlin - Ward 3.yml'>test/elections/nh/Berlin - Ward 3.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Freedom.yml'>test/elections/nh/Freedom.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/views/ballot_styles/edit.html.erb'>app/views/ballot_styles/edit.html.erb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Laconia - Ward 1.yml'>test/elections/nh/Laconia - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Somersworth - Ward 5.yml'>test/elections/nh/Somersworth - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 2.yml'>test/elections/nh/Dover - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Milan.yml'>test/elections/nh/Milan.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Epsom.yml'>test/elections/nh/Epsom.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sanbornton.yml'>test/elections/nh/Sanbornton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Chesterfield.yml'>test/elections/nh/Chesterfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Jackson.yml'>test/elections/nh/Jackson.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dublin.yml'>test/elections/nh/Dublin.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Merrimack.yml'>test/elections/nh/Merrimack.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Bridgewater.yml'>test/elections/nh/Bridgewater.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Litchfield.yml'>test/elections/nh/Litchfield.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Woodstock.yml'>test/elections/nh/Woodstock.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Harrisville.yml'>test/elections/nh/Harrisville.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Rochester - Ward 1.yml'>test/elections/nh/Rochester - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Allenstown.yml'>test/elections/nh/Allenstown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hillsborough.yml'>test/elections/nh/Hillsborough.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/app/models/district_set.rb'>app/models/district_set.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Newington.yml'>test/elections/nh/Newington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Stark.yml'>test/elections/nh/Stark.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/support/pickle.rb'>features/support/pickle.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Barrington.yml'>test/elections/nh/Barrington.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/New Durham.yml'>test/elections/nh/New Durham.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Littleton.yml'>test/elections/nh/Littleton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Portsmouth - Ward 1.yml'>test/elections/nh/Portsmouth - Ward 1.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Franconia.yml'>test/elections/nh/Franconia.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Concord - Ward 2.yml'>test/elections/nh/Concord - Ward 2.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Sandown.yml'>test/elections/nh/Sandown.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/South Hampton.yml'>test/elections/nh/South Hampton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/features/support/env.rb'>features/support/env.rb</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/tiny.yml'>test/elections/tiny.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Thornton.yml'>test/elections/nh/Thornton.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Hale's Location.yml'>test/elections/nh/Hale's Location.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Orange.yml'>test/elections/nh/Orange.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Alexandria.yml'>test/elections/nh/Alexandria.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href='txmt://open/?url=file:///Users/tom/TrustTheVote/ElectionManager/test/elections/nh/Dover - Ward 5.yml'>test/elections/nh/Dover - Ward 5.yml</a></td>
+      <td>3</td>
+    </tr>
+    
+  
+</table>
+
+
+<p>Classes that change a lot in your project may be bad a sign.</p>
+<table>
+  <tr>
+    <th>File Path</th>
+    <th>Times Changed</th>
+  </tr>
+  
+  
+</table>
+
+
+
+<p>Methods that change a lot in your project may be bad a sign.</p>
+<table>
+  <tr>
+    <th>File Path</th>
+    <th>Times Changed</th>
+  </tr>
+  
+  
+</table>
+
+
+
+
+<p>Generated on Sat Jun 19 00:19:24 -0400 2010</p>	
+
+    </div>
+  </body>
+</html>

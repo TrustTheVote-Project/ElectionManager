@@ -15,3 +15,15 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 
+
+begin
+  require 'metric_fu'  
+  MetricFu::Configuration.run do |config|
+    config.rcov[:rcov_opts] << "-Itest"
+  end
+rescue MissingSourceFile  => e
+  puts "You need to install the metric_fu gem"
+  puts "rake gems:install RAILS_ENV=test"
+  puts "#{e.inspect}"
+  defined?(Rake) || throw(e)
+end
