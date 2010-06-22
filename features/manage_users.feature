@@ -10,6 +10,13 @@ Feature: Manage Users
     Then I should see "Access Denied"
     And I should be on the home page
 
+  Scenario: Restrict public users from navigating to the users page
+    Given I am a public user
+    When I go to the home page
+    Then I should be on the home page
+    And I should not see "View all users"
+    
+
   @allow-rescue @public_user
   Scenario: Restrict public users from editing users
     Given I am a public user
@@ -59,6 +66,23 @@ Feature: Manage Users
     And I should be on the home page
     And I should see "foo@example.com" within "#user-navigation"
     And I should see "Edit profile" within "#user-navigation"
+    
+  @standard_user
+  Scenario: Restrict standard users from navigating to the users page
+    Given I am a standard user
+    When I go to the home page
+    Then I should be on the home page
+    And I should not see "View all users"
+
+  @root_user
+  Scenario: Allow root users to navigate to the users page
+    Given I am a root user
+    When I go to the home page
+    Then I should be on the home page
+    And I should see "users"
+    When I follow "View all users"
+    Then I should be on the users page
+    And I should see "All Users" within ".content"
 
   @root_user
   Scenario: Allow root users to view users
