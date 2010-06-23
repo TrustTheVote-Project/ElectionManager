@@ -8,8 +8,8 @@
   <div class="content">            
     <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  User</h2>
     <div class="inner">
-      <% form_for :user, :url => users_path, :html => { :class => :form } do |f| -%>
-        <%= render :partial => "form", :locals => {:f => f} %>
+      <% form_for @user, :html => { :class => :form } do |f| -%>
+        <%= render "form", :f => f %>
       <% end -%>
     </div>
   </div>

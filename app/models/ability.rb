@@ -17,7 +17,7 @@ class Ability
       # can [:index], [Election]
     elsif user.role?(:public)
       can :read, [Election]
-      can [:create, :register], [User]
+      can [:register, :registration_create], [User]
     end
   end
 end

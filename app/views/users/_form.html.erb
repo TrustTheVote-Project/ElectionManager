@@ -15,6 +15,16 @@
       </div>
 <% end %>
 
+      <div class="group">
+      <% nc = 0; role_name = UserRole.display_names[nc]; 
+         f.fields_for :roles do |builder| %>
+           <%= builder.label :name, role_name.capitalize, :class => :label %>
+           <%= builder.check_box :name, {:default => '0', :class => 'check_box'}, role_name, '' %>
+           <br/>
+           <% nc += 1  %>
+      <% end %>    
+      </div>
+
 <div class="group navform wat-cf">
   <button class="button" type="submit">
     <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>

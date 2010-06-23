@@ -15,9 +15,11 @@
 #
 
 class User < ActiveRecord::Base
+  attr_accessible :email, :password, :password_confirmation, :roles_attributes
   
-  has_many :roles, :class_name => "UserRole"
-
+  has_many :roles, :class_name => "UserRole", :dependent => :destroy
+  accepts_nested_attributes_for :roles, :reject_if => lambda{ |role_name| role_name[:name].blank? }, :allow_destroy => true
+  
   def role?(role_name)
     # roles.map(&:name)  build an array of role names for this user.
     # include?(role_name.to_s)  check if the role_name param is in
@@ -25,7 +27,6 @@ class User < ActiveRecord::Base
     role_name && !roles.blank? && roles.map(&:name).include?(role_name.to_s)
   end
   
-  attr_accessible :email, :password, :password_confirmation
   
   acts_as_authentic do |c|
     c.merge_validates_length_of_password_field_options( { :minimum => 1, :too_short => "needs to be 1 chars"})
