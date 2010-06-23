@@ -105,19 +105,43 @@ Feature: Manage Users
 
 
   @root_user    
-  Scenario: Allo root users the ability to create new users
+  Scenario: Allow root users the ability to create new users
     Given I am a root user
     And I go to the new user page
     And I should not see "Register with TrustTheVote"
     When I fill in "Email" with "foo@example.com"
     When I fill in "Password" with "password1"
     When I fill in "Password Confirmation" with "password1"
-    And I press "Save"
+    # Doesn't hide the password fields, bummer
+    #Then the "Password" field should not contain "password1"
+    #And  the "Password Confirmation" field should not contain "password1"
+    When I press "Save"
     Then a user should exist with email: "foo@example.com"
     And I should be on the home page
     And I should see "Successfully created a new user" within "#flash .notice"
     
+  @root_user    
+  Scenario: Allow root users the ability to edit users
+    Given I am a root user
+    And a user exists with email: "foo@bar.com"
+    And I go to the user's edit page
+    Then user should exist with email: "foo@bar.com"
+    And the "Email" field should contain "foo@bar.com"
+    And I should not see "Password"
+    And I should not see "Password Confirmation"
+    When I fill in "Email" with "jack@bar.com"
+    Then the "Email" field should contain "jack@bar.com"
+    When I press "Save"
+    Then a user should exist with email: "jack@bar.com"
+    And I should be on the users page
+    And I should see "Update successful" within "#flash .notice"
     
 
+  @wip @standard_user  
+  Scenario: Allow standard users the ability to request a password change
 
+  @wip @root_user
+  Scenario: Allow root users the ability to request a password change
 
+  @wip @root_user
+  Scenario: Allow root users the ability to request a password change for another user

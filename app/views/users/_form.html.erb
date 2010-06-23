@@ -4,6 +4,16 @@
     <%= f.text_field :email, :class => 'text_field' %>
     <span class="description">User's email</span>
   </div>
+  <% if controller.action_name == 'new' %>'
+      <div class="group">
+        <%= f.label :password, "Password", :class => :label %>
+        <%= f.password_field :password, :class => 'text_field' %>
+      </div>
+      <div class="group">
+        <%= f.label :password_confirmation, "Password Confirmation", :class => :label %>
+        <%= f.password_field :password_confirmation, :class => 'text_field' %>
+      </div>
+<% end %>
 
 <div class="group navform wat-cf">
   <button class="button" type="submit">
