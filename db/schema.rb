@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20100625055022) do
     t.integer  "default_language"
     t.string   "state_signature_image"
     t.integer  "medium_id"
-    t.string   "instructions_pdf_file_name"
-    t.string   "instructions_pdf_content_type"
-    t.string   "instructions_pdf_file_size"
+    t.string   "instructions_image_file_name"
+    t.string   "instructions_image_content_type"
+    t.string   "instructions_image_file_size"
   end
 
   create_table "ballot_styles", :force => true do |t|
