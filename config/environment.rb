@@ -57,3 +57,5 @@ Rails::Initializer.run do |config|
     :secret      => '22acc6b566d2328b8d775d1ea25daef6814918c2216c90d292c09e7db2d76bba4285c44607f7d051a1255e1757a9639660d595130c0a05a72ceb23c60c9c5750' 
   }
 end
+
+Paperclip.options[:command_path] = "/usr/local/bin"
