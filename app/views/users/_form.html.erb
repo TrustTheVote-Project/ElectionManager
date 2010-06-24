@@ -19,7 +19,7 @@
       <%  f.fields_for :roles do |builder| %>
             <% cb_options = {:class => 'check_box'}
             cb_options.merge!(:checked => false) if builder.object.new_record? %>
-           <%= builder.label :name, builder.object.name, :class => :label %>
+           <%= builder.label :name, builder.object.name.capitalize, :class => :label %>
            <%= builder.check_box :name, cb_options, builder.object.name, '' %>
            <br/>
       <% end %>    

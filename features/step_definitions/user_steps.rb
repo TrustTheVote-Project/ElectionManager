@@ -70,7 +70,12 @@ end
   
 Then /^I should have a user with email: "([^\"]*)" and role: "([^\"]*)"$/ do |email, role|
   u =  User.find_by_email(email)
-  u || u.role?(role)
+  assert (u && u.role?(role))
+end
+
+Then /^I should not have a user with email: "([^\"]*)" and role: "([^\"]*)"$/ do |email, role|
+  u =  User.find_by_email(email)
+  assert !(u && u.role?(role))
 end
 
 def login(options = {})
