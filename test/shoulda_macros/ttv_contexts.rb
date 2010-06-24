@@ -2,7 +2,7 @@ class ActiveSupport::TestCase
   # WARNING: This doesn't work in side of another context??
   # must be at the top level of the test??
   def self.login_as(options={})
-    context 'with logged in user' do
+    context "with logged in user and roles \"#{options[:roles]}\" " do
       setup do
         # get all but the roles
         user_options = options.except(:roles)
