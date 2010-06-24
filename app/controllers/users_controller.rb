@@ -17,14 +17,20 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @role_names =  UserRole.display_names
-    @role_names.size.times do
-      @user.roles.build
+    # TODO: move this into a view_helper called in the _form.html.erb
+    UserRole.display_names.each do |name|
+      @user.roles.build(:name => name) unless @user.roles.find_by_name(name)
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    # TODO: move this into a view_helper called in the _form.html.erb
+    # Build role objects, not saved, for each role that is NOT already
+    # a user's role. Needed to generate check_boxes in view
+    UserRole.display_names.each do |name|
+      @user.roles.build(:name => name) unless @user.roles.find_by_name(name)
+    end
   end
   
   def registration_create
@@ -60,6 +66,14 @@ class UsersController < ApplicationController
   end
 
   def update
+    # TODO: fix this hack to get accepts_nested_attribute going
+    params[:user] && params[:user][:roles_attributes] && params[:user][:roles_attributes].each do |k, v|
+      # need to force the delete into the hash when a this user's
+      # current role is unchecked. accepts_nested_attribute needs this
+      # delete
+      v.merge!('_delete' => '1' ) if  v['id'] && v['name'].blank? 
+    end
+    
     # @user = current_user
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])

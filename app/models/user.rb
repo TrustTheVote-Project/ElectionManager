@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :roles_attributes
   
   has_many :roles, :class_name => "UserRole", :dependent => :destroy
-  accepts_nested_attributes_for :roles, :reject_if => lambda{ |role_name| role_name[:name].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :roles, :reject_if => proc{ |role_name| role_name[:name].blank? }, :allow_destroy => true
   
   def role?(role_name)
     # roles.map(&:name)  build an array of role names for this user.
