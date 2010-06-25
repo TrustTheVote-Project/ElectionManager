@@ -67,3 +67,60 @@ Feature: Manage Users
     And I should be on the home page
     And I should see "Successfully created a new user" within "#flash .notice"
 
+  # Pretty decent pickle examples, see ttv_pickle_example for more info
+
+  @root_user    
+  Scenario: Allow root users the remove a user's root role
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    And a user_role: "root" exists with name: "root", user: user "fred"
+    And a user_role: "standard_not_used" exists with name: "standard"
+    Then the user_role: "root" should be one of user: "fred"'s roles
+    Then the user_role: "standard_not_used" should not be one of user: "fred"'s roles
+    When I go to the user: "fred"'s edit page
+    Then the "Email" field should contain "fred@bar.com"
+    And the "Root" checkbox should be checked
+    And the "Standard" checkbox should not be checked
+    And I uncheck "Root"
+    And I press "Save"
+    Then a user should exist with email: "fred@bar.com"
+    Then I should not have a user with email: "fred@bar.com" and role: "role"
+    Then I should not have a user with email: "fred@bar.com" and role: "standard"
+    # NOTE: this doesn't work cuz the user role created no longer exists, wierd pickle bug?
+    #Then the user_role: "root" should not be one of user: "fred"'s roles
+    Then the user: "fred" should have 0 roles
+    Then the user_role: "standard_not_used" should not be one of user: "fred"'s roles
+
+  Scenario: Allow root users the remove a user's standard role
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    And a user_role: "root_not_used" exists with name: "root"
+    And a user_role: "standard_used" exists with name: "standard", user: user "fred"
+    Then the user_role: "standard_used" should be one of user: "fred"'s roles
+    Then the user_role: "root_not_used" should not be one of user: "fred"'s roles
+    When I go to the user: "fred"'s edit page
+    Then the "Email" field should contain "fred@bar.com"
+    And the "Root" checkbox should not be checked
+    And the "Standard" checkbox should be checked
+    And I uncheck "Standard"
+    And I press "Save"
+    Then I should not have a user with email: "fred@bar.com" and role: "role"
+    Then I should not have a user with email: "fred@bar.com" and role: "standard"
+
+
+  Scenario: Allow root users the remove a all of a user's roles
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    And a user_role: "root_used" exists with name: "root", user: user "fred"
+    And a user_role: "standard_used" exists with name: "standard", user: user "fred"
+    Then the user_role: "standard_used" should be one of user: "fred"'s roles
+    Then the user_role: "root_used" should be one of user: "fred"'s roles
+    When I go to the user: "fred"'s edit page
+    Then the "Email" field should contain "fred@bar.com"
+    And the "Root" checkbox should be checked
+    And the "Standard" checkbox should be checked
+    When I uncheck "Root"
+    And I uncheck "Standard"
+    And I press "Save"
+    Then I should not have a user with email: "fred@bar.com" and role: "role"
+    Then I should not have a user with email: "fred@bar.com" and role: "standard"
