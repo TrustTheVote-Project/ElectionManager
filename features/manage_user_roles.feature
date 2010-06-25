@@ -157,5 +157,6 @@ Feature: Manage Users
     And a user: "fred" exists with email: "fred@bar.com"
     When I go to the users page
     Then I should see "fred@bar.com" in the second row
-    Then I should not see "root" in the second row
-    Then I should not see "standard" in the second row
+    And I should not see "root" in the second row
+    And I should not see "standard" in the second row
+    And I should see "No Roles"

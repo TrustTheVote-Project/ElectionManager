@@ -21,6 +21,10 @@
         <%= @user.email %>
       </p>
       <p>
+        <b>Roles:</b>
+        <%= @user.roles.empty? ? "No Roles" : truncate(@user.roles.map(&:name).join(', '), 20) %>
+      </p>
+      <p>
         <b>Created:</b>
           <%= @user.created_at.to_date.to_formatted_s(:long)  %>
       </p>

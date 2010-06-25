@@ -23,7 +23,7 @@
             <%= link_to user.email, user_path(user) %>
           </td>
           <td>
-            <%= !user.roles.empty? && truncate(user.roles.map(&:name).join(', '), 20) %>
+            <%= user.roles.empty? ? "No Roles" : truncate(user.roles.map(&:name).join(', '), 20) %>
           </td>
           <td>
             <%= user.created_at.to_date.to_formatted_s(:long)  %>
