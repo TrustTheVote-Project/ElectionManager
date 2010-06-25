@@ -1,7 +1,7 @@
 <% content_for :title, "TrustTheVote registration"%>
 <h1>Register with TrustTheVote</h1>
 <%= render_error_messages @user , :verbose => false %>
-<% form_for(@user) do |f| %>
+<% form_for@user, :url => registration_create_url do |f| %>
   <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>

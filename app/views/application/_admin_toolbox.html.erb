@@ -1,13 +1,17 @@
-	<ul class=list>
-		<li><%=link_to "View all jurisdictions", district_sets_path %>    
-		<li><%=link_to "View all elections", elections_path %>
-		<li><%=link_to "View all districts", districts_path %>
-		<li><%=link_to "View all precincts", precincts_path %></li>
-		<li><%=link_to "View all contests", contests_path %>
-		<li><%=link_to "View all candidates", candidates_path %>
-		<li><%=link_to "View all questions", questions_path %>
-		<li><%=link_to "View all style templates", ballot_style_templates_path %>
-		<li><%=link_to "View all ballot styles", ballot_styles_path %>
-		<li><%=link_to "Maintainenace Tasks", maintain_path %></li>
+<ul class=list>
+  <% if can? :read, User %>
+    <li><%=link_to "View all users", users_path %>
+  <% end %>
+  <li><%=link_to "View all jurisdictions", district_sets_path %>    
+  <li><%=link_to "View all elections", elections_path %>
+  <li><%=link_to "View all districts", districts_path %>
+  <li><%=link_to "View all precincts", precincts_path %></li>
+  <li><%=link_to "View all contests", contests_path %>
+  <li><%=link_to "View all candidates", candidates_path %>
+  <li><%=link_to "View all questions", questions_path %>
+  <li><%=link_to "View all style templates", ballot_style_templates_path %>
+  <li><%=link_to "View all ballot styles", ballot_styles_path %>
+  <li><%=link_to "Maintainenace Tasks", maintain_path %></li>
 
-	</ul>
+</ul>
+

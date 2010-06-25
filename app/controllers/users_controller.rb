@@ -20,20 +20,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # @user = current_user
     @user = User.find(params[:id])
-    #    logger.info("User is #{@user}")
   end
-
-  def create
+  
+  def registration_create
     @user = User.new(params[:user])
-
-    # default role for new users is 'standard'
+    
     @user.roles << UserRole.new(:name => 'standard')
     
     if @user.save
       begin
-        Notifier.deliver_registration_confirmation(@user)
+        Notifier.deliver_registration_confirmation(@user) 
       rescue => ex
         flash[:error] = "Confirmation email not sent. #{ex.message}"
       end
@@ -41,17 +38,37 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       flash[:error] = "Failed to create a new user: " << @user.errors.full_messages.join(', ')
-      # redirect_to new_user_url
-      redirect_to request.referer
+      redirect_to register_user_url
+    end      
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    
+    if @user.save
+      flash[:notice] = 'Successfully created a new user.'
+      redirect_to root_url
+    else
+      flash[:error] = "Failed to create a new user: " << @user.errors.full_messages.join(', ')
+      redirect_to new_user_url
+      #redirect_to request.referer
     end
   end
 
   def update
+    # TODO: fix this hack to get accepts_nested_attribute going
+    params[:user] && params[:user][:roles_attributes] && params[:user][:roles_attributes].each do |k, v|
+      # need to force the delete into the hash when a this user's
+      # current role is unchecked. accepts_nested_attribute needs this
+      # delete
+      v.merge!('_delete' => '1' ) if  v['id'] && v['name'].blank? 
+    end
+    
     # @user = current_user
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Update successful.'
-      redirect_to root_url
+      redirect_to users_url
     else
       render :action => "edit" 
     end

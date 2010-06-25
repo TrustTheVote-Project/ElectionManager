@@ -8,29 +8,26 @@ class UsersControllerTest < ActionController::TestCase
     User.maintain_sessions = false    
   end
   # Lets start off with some plain ole TestUnit tests
-
+  
+  # Right now only root users can create other users
   test "should get new" do
     get :new
-    assert_response :success
-    assert assigns(:user).new_record?
-    assert_template 'new'
+
+    assert_redirected_to root_url
+    assert_equal "Access Denied", flash[:error]
+
   end
   
   test "should create user" do
     
-    # expect Notification
-    Notifier.expects(:deliver_registration_confirmation).with(instance_of(User))
-    
-    assert_difference('User.count') do
+    assert_no_difference('User.count') do
       # User.plan will return a hash of the attributes for the default
       # User blueprint
       post :create, :user => User.plan
     end
     
-    assert !assigns(:user).new_record?
-    assert assigns(:user).valid?
     assert_redirected_to root_url
-    assert_equal "Successfully created a new user.", flash[:notice]
+    assert_equal "Access Denied", flash[:error]
   end
 
   # Now we're gonna use Shoulda for testing
@@ -41,30 +38,30 @@ class UsersControllerTest < ActionController::TestCase
   self.login_as(:roles => %w{public}) do    
 
     # Allow guest/public users to get the registration page.
-    context "on GET to :new" do    
+    context "on GET to :register" do    
       setup do
         tmp_user = User.new
         User.expects(:new).returns(tmp_user)
-        get :new
+        get :register
       end
       
       should_assign_to :user
       should_respond_with :success
-      should_render_template :new
+      should_render_template :register
       should_not_set_the_flash
       
       should "create an unsaved user" do
         assert assigns(:user).new_record?
       end
-    end # NEW ACTION
+    end # REGISTER ACTION
     
     # Allow guest/public users to register a user
-    context "on POST to :create" do    
+    context "on POST to :registration_create" do    
       setup do
         # expect Notification
         Notifier.expects(:deliver_registration_confirmation).with(instance_of(User))
         assert_difference('User.count') do
-          post :create, :user => User.plan
+          post :registration_create, :user => User.plan
         end
       end
 
@@ -75,7 +72,7 @@ class UsersControllerTest < ActionController::TestCase
       should "create saved user" do
         assert !assigns(:user).new_record?
       end
-    end # CREATE ACTION
+    end # REGISTRATION_CREATE ACTION
 
     # RESTRICTED ACTIONS
     # OK, Now these actions should fail without a logged in user.
@@ -108,8 +105,6 @@ class UsersControllerTest < ActionController::TestCase
       should_redirect_to("Home page") { root_url }
       should_set_the_flash_to "Access Denied"
 
-      #should_redirect_to("Login page") { new_user_session_url }
-      #should_set_the_flash_to "You must be logged in to access this page"
     end # EDIT ACTION
     
     context "on PUT to :update" do    
@@ -131,14 +126,50 @@ class UsersControllerTest < ActionController::TestCase
       
       should_redirect_to("Home page") { root_url }
       should_set_the_flash_to "Access Denied"
-      
-      #should_redirect_to("Login page") { new_user_session_url }
-      #should_set_the_flash_to "You must be logged in to access this page"
+
     end # DESTROY ACTION
   end # END tests for public, not logged_in, users
   
   # These actions require a root user.
   self.login_as(:email => "logged_in_user@gmail.com", :roles => %w{root}) do
+    
+    # Allow guest/public users to get to the new user page/form.
+    context "on GET to :register" do    
+      setup do
+        tmp_user = User.new
+        User.expects(:new).returns(tmp_user)
+        get :new
+      end
+      
+      should_assign_to :user
+      should_respond_with :success
+      should_render_template :new
+      should_not_set_the_flash
+      
+      should "create an unsaved user" do
+        assert assigns(:user).new_record?
+      end
+      
+    end # NEW ACTION
+    
+    # Allow guest/public users to create users
+    context "on POST to :create" do    
+      setup do
+        # expect Notification
+        Notifier.expects(:deliver_registration_confirmation).never
+        assert_difference('User.count') do
+          post :create, :user => User.plan
+        end
+      end
+
+      should_assign_to :user
+      should_redirect_to("Home Page") { root_url }
+      
+      should "create an saved user" do
+        assert !assigns(:user).new_record?
+      end
+      
+    end #CREATE ACTION
 
     context "on GET to :show" do
       
@@ -152,7 +183,6 @@ class UsersControllerTest < ActionController::TestCase
       should_assign_to :user
       should_respond_with :success
       should_render_template :show
-      should_not_set_the_flash
       
       should "show user" do 
         assert_equal  assigns(:user), subject

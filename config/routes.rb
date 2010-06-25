@@ -39,6 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => 'user_sessions', :action => 'new'
   map.logout "logout", :controller => 'user_sessions', :action => 'destroy'
   map.register_user "register_user", :controller => 'users', :action => 'register'
+  map.registration_create "registration_create", :controller => 'users', :action => 'registration_create'
   map.maintain '/maintain/:action', :controller => 'maintain'
   map.root :controller => :jurisdictions , :action=>"current"
   
