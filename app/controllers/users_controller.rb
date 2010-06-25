@@ -17,20 +17,10 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    # TODO: move this into a view_helper called in the _form.html.erb
-    UserRole.display_names.each do |name|
-      @user.roles.build(:name => name) unless @user.roles.find_by_name(name)
-    end
   end
 
   def edit
     @user = User.find(params[:id])
-    # TODO: move this into a view_helper called in the _form.html.erb
-    # Build role objects, not saved, for each role that is NOT already
-    # a user's role. Needed to generate check_boxes in view
-    UserRole.display_names.each do |name|
-      @user.roles.build(:name => name) unless @user.roles.find_by_name(name)
-    end
   end
   
   def registration_create
