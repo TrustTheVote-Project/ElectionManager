@@ -124,3 +124,38 @@ Feature: Manage Users
     And I press "Save"
     Then I should not have a user with email: "fred@bar.com" and role: "role"
     Then I should not have a user with email: "fred@bar.com" and role: "standard"
+
+  @root_user    
+  Scenario: Allow root users the view a root user
+    # logged in as a root user
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    And a user_role: "root" exists with name: "root", user: user "fred"
+    And a user_role: "standard_not_used" exists with name: "standard"
+    When I go to the users page
+    Then I should see "fred@bar.com" in the second row
+    Then I should see "root" in the second row
+    Then I should not see "standard" in the second row
+
+  @root_user    
+  Scenario: Allow root users the view a user that is a root and standard user
+    # logged in as a root user
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    And a user_role: "root" exists with name: "root", user: user "fred"
+    And a user_role: "standard_not_used" exists with name: "standard", user: user "fred"
+    When I go to the users page
+    Then I should see "fred@bar.com" in the second row
+    Then I should see "root" in the second row
+    Then I should see "standard" in the second row
+
+
+  @root_user    
+  Scenario: Allow root users the view a user that has no roles
+    # logged in as a root user
+    Given I am a root user
+    And a user: "fred" exists with email: "fred@bar.com"
+    When I go to the users page
+    Then I should see "fred@bar.com" in the second row
+    Then I should not see "root" in the second row
+    Then I should not see "standard" in the second row
