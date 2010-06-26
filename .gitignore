@@ -16,4 +16,4 @@ public/system
 public/system/icons/*
 public/images/uploaded/*
 tmp/webrat-*
-tmp/metric_fu/*
+tmp/metric_fu/*/*
