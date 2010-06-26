@@ -1,6 +1,0 @@
-     1.6: flog total
-     1.6: flog/method average
-
-     1.6: DataLayer#audit_header_dummy
-     1.1: assignment
-     1.1: now

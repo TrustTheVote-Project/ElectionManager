@@ -1,5 +1,0 @@
-     1.0: flog total
-     1.0: flog/method average
-
-     1.0: BallotStyleTemplate#none
-     1.0: validates_presence_of
