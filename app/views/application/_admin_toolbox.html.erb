@@ -1,6 +1,6 @@
 <ul class=list>
   <% if can? :read, User %>
-    <li><%=link_to "View all users", users_path %>
+  <li><%=link_to "View all users", users_path %>
   <% end %>
   <li><%=link_to "View all jurisdictions", district_sets_path %>    
   <li><%=link_to "View all elections", elections_path %>
@@ -9,9 +9,13 @@
   <li><%=link_to "View all contests", contests_path %>
   <li><%=link_to "View all candidates", candidates_path %>
   <li><%=link_to "View all questions", questions_path %>
+  <% if can? :read, BallotStyleTemplate %>
   <li><%=link_to "View all style templates", ballot_style_templates_path %>
   <li><%=link_to "View all ballot styles", ballot_styles_path %>
+  <% end %>
+  <% if current_user && current_user.root? %>
   <li><%=link_to "Maintainenace Tasks", maintain_path %></li>
+  <% end %>
 
 </ul>
 

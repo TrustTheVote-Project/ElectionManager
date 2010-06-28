@@ -41,3 +41,24 @@ Feature: Display Header
 
 
   
+  @public_user @standard_user 
+  Scenario Outline: Hide admin functions from non root users
+    Given I am a user with a role of "<role>" and an email "<email>"
+    When I go to the home page
+    Then I should not see "View all users"
+    Then I should not see "View all style templates"
+    Then I should not see "View all ballot styles"
+    Then I should not see "Maintainenace Tasks"
+  Examples:
+    | role           | email              |
+    | standard       | larry@foo.com      |
+    | public         | curley@foo.com     |
+
+  @root_user
+  Scenario: Show admin functions to root users
+    Given I am a user with a role of "root" and an email "moe@example.com"
+    When I go to the home page
+    Then I should see "View all users"
+    Then I should see "View all style templates" 
+    Then I should see "View all ballot styles"
+    Then I should see "Maintainenace Tasks"
