@@ -15,8 +15,8 @@ class DistrictSet < ActiveRecord::Base
   has_many :elections
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
-  has_many :jurisdiction_users, :class_name => "JurisdictionUser"
-  has_many :users, :through => :jurisdiction_users
+  has_many :jurisdiction_memberships, :class_name => "JurisdictionMembership"
+  has_many :users, :through => :jurisdiction_memberships
   
   # returns all precincts in this district set
   def precincts

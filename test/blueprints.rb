@@ -96,11 +96,10 @@ Precinct.blueprint do
 #  districts { District.make }
 end
 
-
-JurisdictionUser.blueprint do
+JurisdictionMembership.blueprint do
   role { 'standard' }
 end
 
-JurisdictionUser.blueprint(:admin) do
+JurisdictionMembership.blueprint(:admin) do
   role { 'admin' }
 end

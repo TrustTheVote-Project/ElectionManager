@@ -1,4 +1,4 @@
-class JurisdictionUser < ActiveRecord::Base
+class JurisdictionMembership < ActiveRecord::Base
   
   ROLE_NAMES = %w{  standard admin }
   
