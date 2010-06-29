@@ -1,30 +1,30 @@
 require 'test_helper'
 
-class JurisdictionUserTest < ActiveSupport::TestCase
+class JurisdictionMembershipTest < ActiveSupport::TestCase
   
-  context "Creating Jurisdiction User relations: User " do
+  context "Creating Jurisdiction Memberships: User " do
     setup do
       @user =  User.make
       @juris =  DistrictSet.make
-      @juris_user = JurisdictionUser.make(:user =>@user, :district_set => @juris)
+      @juris_user = JurisdictionMembership.make(:user =>@user, :district_set => @juris)
       @juris_user.save
     end
 
     subject { @user }
-    should_have_many :jurisdiction_users 
-    should_have_many :jurisdictions, :through => :jurisdiction_users
+    should_have_many :jurisdiction_memberships
+    should_have_many :jurisdictions, :through => :jurisdiction_memberships
     
-    should "have only one jurisdiction user relation" do
-      assert_equal 1, subject.jurisdiction_users.count
+    should "have only one jurisdiction membership" do
+      assert_equal 1, subject.jurisdiction_memberships.count
     end
     should "have the correct number jurisdiction user relations" do
-      assert_equal @juris_user, subject.jurisdiction_users.first
+      assert_equal @juris_user, subject.jurisdiction_memberships.first
     end
     should "have a jurisdiction user relation with a  role of standard" do
-      assert_equal "standard", subject.jurisdiction_users.first.role
+      assert_equal "standard", subject.jurisdiction_memberships.first.role
     end
     should "be part of the correct jurisidiction" do
-      assert_equal @juris, subject.jurisdiction_users.first.district_set
+      assert_equal @juris, subject.jurisdiction_memberships.first.district_set
     end
   end
   
@@ -46,7 +46,7 @@ class JurisdictionUserTest < ActiveSupport::TestCase
       assert_equal @juris, subject.jurisdictions.first
     end
     should "be a standard member of this jurisdiction" do
-      assert_equal "standard", subject.jurisdiction_users.first.role
+      assert_equal "standard", subject.jurisdiction_memberships.first.role
       assert !subject.jurisdiction_admin?
       assert subject.jurisdiction_member?(@juris)
     end
@@ -71,18 +71,18 @@ class JurisdictionUserTest < ActiveSupport::TestCase
     end
     
     should "should have a user with a role of standard" do
-      assert_equal "standard", subject.jurisdiction_users.first.role
+      assert_equal "standard", subject.jurisdiction_memberships.first.role
     end
   end
 
   context "Assigning jurisdictions roles to users: " do
 
-    JurisdictionUser::ROLE_NAMES.each do |role_name|
+    JurisdictionMembership::ROLE_NAMES.each do |role_name|
       context "User " do 
         setup do
           @user =  User.make
           @juris =  DistrictSet.make
-          @juris_user = JurisdictionUser.make(:user =>@user, :district_set => @juris, :role => role_name)
+          @juris_user = JurisdictionMembership.make(:user =>@user, :district_set => @juris, :role => role_name)
           @juris_user.save
         end
         
@@ -93,7 +93,7 @@ class JurisdictionUserTest < ActiveSupport::TestCase
         end
 
         should "be a member of the jurisdiction with a role of #{role_name}" do
-          assert role_name, @user.jurisdiction_users.first.role
+          assert role_name, @user.jurisdiction_memberships.first.role
         end
         
         should "should" << (role_name == "admin" ? "": " not") << " be a jurisdiction admin" do

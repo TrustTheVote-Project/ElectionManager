@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   has_many :roles, :class_name => "UserRole", :dependent => :destroy
   accepts_nested_attributes_for :roles, :reject_if => proc{ |role_name| role_name[:name].blank? }, :allow_destroy => true
   
-  has_many :jurisdiction_users, :class_name => "JurisdictionUser"
-  has_many :jurisdictions, :through => :jurisdiction_users, :source => :district_set
+  has_many :jurisdiction_memberships
+  has_many :jurisdictions, :through => :jurisdiction_memberships, :source => :district_set
   
   def role?(role_name)
     # roles.map(&:name)  build an array of role names for this user.
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
   
   def jurisdiction_admin?
-    !jurisdictions.empty? && jurisdiction_users.map(&:role).include?('admin')
+    !jurisdictions.empty? && jurisdiction_memberships.map(&:role).include?('admin')
   end
 
   def jurisdiction_member?(jurisdiction)
