@@ -97,3 +97,10 @@ Precinct.blueprint do
 end
 
 
+JurisdictionUser.blueprint do
+  role { 'standard' }
+end
+
+JurisdictionUser.blueprint(:admin) do
+  role { 'admin' }
+end
