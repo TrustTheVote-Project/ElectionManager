@@ -25,6 +25,7 @@ Sham.define do
   
   login { Faker::Internet.user_name}
   description { Faker::Lorem.sentence }
+  question { Faker::Lorem.sentence }
 
   role_name(:unique => false) { %w{ root standard public }.rand }
   
@@ -66,9 +67,33 @@ DistrictSet.blueprint do
   secondary_name { "secondary name" + Sham.jurisdiction_name }
 end
 
+District.blueprint do
+  display_name
+#  district_set
+end
+
 Election.blueprint do
   display_name 
   district_set
   start_date  { Sham.date_time }
 end
+
+Contest.blueprint do
+  display_name
+  district
+  election
+end
+
+Question.blueprint do
+  display_name
+  requesting_district { District.make }
+  election
+  question
+end
+
+Precinct.blueprint do
+  display_name
+#  districts { District.make }
+end
+
 

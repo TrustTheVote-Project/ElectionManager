@@ -28,27 +28,27 @@ class UserContext
   end  
   
   def precinct
-    @precinct || @session[:precinct_id] && @precinct = Precinct.find(@session[:question_id])
+    @precinct || @session[:precinct_id] && @precinct = Precinct.find(@session[:precinct_id])
   end  
 
   def jurisdiction?
-    !@jurisdiction.nil?
+    !jurisdiction.nil?
   end
 
   def election?
-    !@election.nil?
+    !election.nil?
   end
 
   def contest?
-    !@contest.nil?
+    !contest.nil?
   end
   
   def question?
-    !@question.nil?
+    !question.nil?
   end
   
   def precinct?
-    !@precinct.nil?
+    !precinct.nil?
   end
 
   def contest= a_contest
@@ -71,7 +71,7 @@ class UserContext
     @contest, @question = nil, nil
     @session[:contest_id], @session[:question_id] = nil, nil
     
-    @session[:precint_id] = a_precinct ? a_precinct.id : nil
+    @session[:precinct_id] = a_precinct ? a_precinct.id : nil
     self.jurisdiction = a_precinct.district_sets[0]
     @precinct= a_precinct
   end

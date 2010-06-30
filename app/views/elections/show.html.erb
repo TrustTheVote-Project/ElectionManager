@@ -2,7 +2,7 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
       <li class="first">
-        <%= link_to "#{t("web-app-theme.list", :default => "List")}", elections_path %>
+        <%= link_to "#{t("web-app-theme.list", :default => "List")}", current_jurisdictions_path %>
       </li>
       <% if can? :create, Election %> 
       <li>

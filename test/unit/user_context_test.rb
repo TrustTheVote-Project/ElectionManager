@@ -19,7 +19,6 @@ class UserContextTest < ActiveSupport::TestCase
       setup do
         @jur = DistrictSet.make
         @uc.jurisdiction = @jur
-        
       end
       
       should "locate primary name" do
@@ -31,6 +30,53 @@ class UserContextTest < ActiveSupport::TestCase
       end
     end
     
+    context "Re-created UserContext" do
+      setup do
+        @sess = {}
+        @uc = UserContext.new(@sess)
+        @jur = DistrictSet.make
+        @elect = Election.make
+        @cont = Contest.make
+        @question = Question.make
+        @prec = Precinct.make
+      end
+      
+      should "know which was the current jurisdiction" do
+        @uc.jurisdiction = @jur
+        @other_uc = UserContext.new(@sess)
+        assert @jur, @other_uc.jurisdiction
+      end
+      
+      should "know that there was a current jurisdiction" do
+        @uc.jurisdiction = @jur
+        @other_uc = UserContext.new(@sess)
+        assert @other_uc.jurisdiction?
+      end
+
+      should "know that there was a current election" do
+        @uc.election = @elect
+        @other_uc = UserContext.new(@sess)
+        assert @other_uc.election?
+      end
+      
+      should "know that there was a current question" do
+        @uc.question = @question 
+        @other_uc = UserContext.new(@sess)
+        assert @other_uc.question?
+      end
+
+      should "know that there was a current contest" do
+        @uc.contest = @cont
+        @other_uc = UserContext.new(@sess)
+        assert @other_uc.contest?
+      end
+      
+     should "know that there was a current precinct" do
+        @uc.precinct = @prec
+        @other_uc = UserContext.new(@sess)
+        assert @other_uc.precinct?
+      end
+    end
   end   
   
 end
