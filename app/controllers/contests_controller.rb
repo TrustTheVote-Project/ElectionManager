@@ -12,6 +12,7 @@ class ContestsController < ApplicationController
 
   def new
     @contest = Contest.new(:election_id => params[:election_id], :district_id => params[:district_id])
+    session[:from_election] = request.referrer
     render :update do |page|
       editor_id = "#{dom_id(@contest.district)}_contests_new"
       page << "if (!$('#{editor_id}')) {"
@@ -39,7 +40,10 @@ class ContestsController < ApplicationController
          end
       end
     elsif success
-      redirect_to(@contest)
+      redirect_to election_path(@contest.election, :anchor=>"contests") if session[:from_election].include? "elections"
+      redirect_to(@contest) unless session[:from_election].include? "elections"
+      session[:from_election] = ""
+
     else
       render :action => "new"
     end
