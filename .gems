@@ -1,2 +1,9 @@
 authlogic
 prawn
+will_paginate --version '>= 2.3.11'
+tpitale-constant_cache --version '>= 0.1.2'
+rubyzip --version '>= 0.9.4'
+redgreen --version '>=1.2.2'
+searchlogic --version '>=2.4.14'
+cancan
+rails --version '=2.3.5'
