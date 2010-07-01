@@ -364,16 +364,14 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
+    def initialize(style, lang, election, scanner, instruction_text_url)
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
       @lang = lang
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
       @election_translation = PDFBallotStyle.get_election_translation(election, lang)
-      @instruction_text = instruction_text
-      @state_seal = state_seal
-      @state_signature = state_signature
-      
+      @instruction_text_url = instruction_text_url
+    
       @page_size = "LETTER"
       @page_layout = :portrait
       @left_margin = @right_margin = 18
@@ -560,19 +558,14 @@ module DefaultBallot
       @pdf.bounding_box( [rect.left + @padding, rect.top], 
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
-        @pdf.text @instruction_text
-        #@pdf.text load_text("instructions1.txt"), :wrap => @wrap 
-       
-#        img = load_image "instructions2.png"
-#        @pdf.image image_path("instructions2.png"), 
-#        :width => [img.width * 72 / 96, @pdf.bounds.width].min
-#        @pdf.move_down 3
-#        @pdf.text load_text("instructions3.txt"), :wrap => @wrap
+        unless @instruction_text_url.index("missing")
+          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600, :at =>[-6,+2] #need to move sizes into style template?
+        end
       end
       rect.top = rect.bottom
       @pdf.line_width 0.5
-      @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-      @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
+      #@pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+     # @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
     end
 
     def page_complete(pagenum, last_page)

@@ -4,7 +4,7 @@ module Paperclip
   # when the model saves, deletes when the model is destroyed, and processes
   # the file upon assignment.
   class Attachment
-    
+
     def self.default_options
       @default_options ||= {
         :url               => "/system/:attachment/:id/:style/:filename",
@@ -50,7 +50,7 @@ module Paperclip
 
       initialize_storage
     end
-    
+
     def styles
       unless @normalized_styles
         @normalized_styles = {}
@@ -60,7 +60,7 @@ module Paperclip
       end
       @normalized_styles
     end
-    
+
     def processors
       @processors.respond_to?(:call) ? @processors.call(instance) : @processors
     end
@@ -69,7 +69,7 @@ module Paperclip
     # errors, assigns attributes, and processes the file. It
     # also queues up the previous file for deletion, to be flushed away on
     # #save of its host.  In addition to form uploads, you can also assign
-    # another Paperclip attachment: 
+    # another Paperclip attachment:
     #   new_user.avatar = old_user.avatar
     def assign uploaded_file
       ensure_required_accessors!
@@ -87,7 +87,7 @@ module Paperclip
       return nil if uploaded_file.nil?
 
       @queued_for_write[:original]   = uploaded_file.to_tempfile
-      instance_write(:file_name,       uploaded_file.original_filename.strip.gsub(/[^A-Za-z\d\.\-_]+/, '_'))
+      instance_write(:file_name,       uploaded_file.original_filename.strip)
       instance_write(:content_type,    uploaded_file.content_type.to_s.strip)
       instance_write(:file_size,       uploaded_file.size.to_i)
       instance_write(:updated_at,      Time.now)
@@ -95,7 +95,7 @@ module Paperclip
       @dirty = true
 
       post_process
- 
+
       # Reset the file size if the original file was reprocessed.
       instance_write(:file_size, @queued_for_write[:original].size.to_i)
     ensure
@@ -179,8 +179,8 @@ module Paperclip
     def content_type
       instance_read(:content_type)
     end
-    
-    # Returns the last modified time of the file as originally assigned, and 
+
+    # Returns the last modified time of the file as originally assigned, and
     # lives in the <attachment>_updated_at attribute of the model.
     def updated_at
       time = instance_read(:updated_at)
@@ -207,7 +207,7 @@ module Paperclip
       new_original = Tempfile.new("paperclip-reprocess")
       new_original.binmode
       if old_original = to_file(:original)
-        new_original.write( old_original.read )
+        new_original.write( old_original.respond_to?(:get) ? old_original.get : old_original.read )
         new_original.rewind
 
         @queued_for_write = { :original => new_original }
@@ -220,7 +220,7 @@ module Paperclip
         true
       end
     end
-    
+
     # Returns true if a file has been assigned.
     def file?
       !original_filename.blank?
@@ -324,4 +324,3 @@ module Paperclip
 
   end
 end
-

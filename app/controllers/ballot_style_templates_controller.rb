@@ -1,4 +1,5 @@
 class BallotStyleTemplatesController < ApplicationController
+
   
   layout 'application'
   
@@ -28,12 +29,20 @@ class BallotStyleTemplatesController < ApplicationController
   # GET /ballot_style_templates/new.xml
   def new
     @ballot_style_template = BallotStyleTemplate.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @ballot_style_template }
+    
+    case params[:template]
+    when 'office_block'
+      render :template => 'ballot_style_templates/new_office_block_ballot_style_template'
+    when 'party_column'
+      render :template => 'ballot_style_templates/new_party_column_ballot_style_template'
     end
+    
+    # respond_to do |format|
+    #   format.html # new.html.erb
+    #   format.xml  { render :xml => @ballot_style_template }
+    # end
   end
+  
 
   # GET /ballot_style_templates/1/edit
   def edit
@@ -43,18 +52,19 @@ class BallotStyleTemplatesController < ApplicationController
   # POST /ballot_style_templates
   # POST /ballot_style_templates.xml
   def create
+
     @ballot_style_template = BallotStyleTemplate.new(params[:ballot_style_template])
 
     respond_to do |format|
-      if @ballot_style_template.save
-        flash[:notice] = 'BallotStyleTemplate was successfully created.'
-        format.html { redirect_to(@ballot_style_template) }
-        format.xml  { render :xml => @ballot_style_template, :status => :created, :location => @ballot_style_template }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
-      end
-    end
+         if @ballot_style_template.save
+           flash[:notice] = 'BallotStyleTemplate was successfully created.'
+           format.html { redirect_to(@ballot_style_template) }
+           format.xml  { render :xml => @ballot_style_template, :status => :created, :location => @ballot_style_template }
+         else
+           format.html { render :action => "new" }
+           format.xml  { render :xml => @ballot_style_template.errors, :status => :unprocessable_entity }
+         end
+       end
   end
 
   # PUT /ballot_style_templates/1
@@ -64,7 +74,7 @@ class BallotStyleTemplatesController < ApplicationController
 
     respond_to do |format|
       if @ballot_style_template.update_attributes(params[:ballot_style_template])
-        flash[:notice] = 'BallotStyleTemplate was successfully updated.'
+        flash[:notice] = 'Ballot Style Template was successfully updated.'
         format.html { redirect_to(@ballot_style_template) }
         format.xml  { head :ok }
       else

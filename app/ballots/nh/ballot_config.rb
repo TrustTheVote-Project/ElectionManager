@@ -132,10 +132,8 @@ module NhBallot
 
     attr_accessor :col_width
 
-    def initialize(style, lang, election, scanner, instruction_text, state_seal, state_signature)
-      @instruction_text = instruction_text
-      @state_seal = state_seal
-      @state_signature = state_signature
+    def initialize(style, lang, election, scanner, instruction_text_url)
+      @instruction_text = instruction_text_url
       @checkbox_orientation = :right
       @columns = 1
       super
@@ -186,25 +184,23 @@ module NhBallot
     def page_complete(pagenum, last_page)
       #unless last_page
         #BALLOT TITLE ON TOP LEFT BALLOT
-        @pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
-             @pdf.font "Helvetica", :size => 10, :style => :bold
-             @pdf.text ballot_translation[:Title_Text], :align => :center
-             state_signature = "#{RAILS_ROOT}/public/images/state_graphics/#{@state_signature}"
-             @pdf.image state_signature, :at => [20,@pdf.bounds.height - 55], :width => 100, :height => 30
-           @pdf.bounding_box [ 135 , @pdf.bounds.height - 45], :width => 150 do
-            state_seal = "#{RAILS_ROOT}/public/images/state_graphics/#{@state_seal}"
-            @pdf.image state_seal, :at => [0,@pdf.bounds.height + 40], :width => 80, :height => 80
-           end
-         end
+        #@pdf.bounding_box [ 20, @pdf.bounds.height], :width => 150 do
+         #    @pdf.font "Helvetica", :size => 10, :style => :bold
+         #    @pdf.text ballot_translation[:Title_Text], :align => :center
+         #  end
         #INSTRUCTIONS ON TOP OF BALLOT
-        @pdf.bounding_box [ 240 , @pdf.bounds.height], :width => 300 do
-          @pdf.font "Helvetica", :size => 14, :style => :bold
-          @pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
-          @pdf.font "Helvetica", :size => 8
+       # @pdf.bounding_box [ 240 , @pdf.bounds.height], :width => 300 do
+       #   @pdf.font "Helvetica", :size => 14, :style => :bold
+          #@pdf.text ballot_translation[:Instruction_To_Voters], :align => :center
+          #@pdf.font "Helvetica", :size => 8
           #@pdf.text ballot_translation[:Instruction_Text1], :align => :left
           #@pdf.text ballot_translation[:Instruction_Text2], :align => :left
-          @pdf.text @instruction_text
-        end
+         # @pdf.text @instruction_text
+        #end
+        unless @instruction_text_url.index("missing")
+           @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :fit => [700,90], :at =>[30,735] #need to move sizes into style template?
+         end
+          
         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
           @pdf.move_down 10
           @pdf.text bt[:Vote_Both_Sides], :align => :center

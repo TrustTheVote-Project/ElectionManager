@@ -16,8 +16,8 @@ class PaperclipTest < Test::Unit::TestCase
       should "execute the right command" do
         Paperclip.expects(:path_for_command).with("convert").returns("/usr/bin/convert")
         Paperclip.expects(:bit_bucket).returns("/dev/null")
-        Paperclip.expects(:"`").with("/usr/bin/convert one.jpg two.jpg 2>/dev/null")
-        Paperclip.run("convert", "one.jpg two.jpg")
+        Paperclip.expects(:"`").with("/usr/bin/convert 'one.jpg' 'two.jpg' 2>/dev/null")
+        Paperclip.run("convert", "one.jpg", "two.jpg")
       end
     end
   end
@@ -35,8 +35,8 @@ class PaperclipTest < Test::Unit::TestCase
     should "execute the right command" do
       Paperclip.expects(:path_for_command).with("convert").returns("convert")
       Paperclip.expects(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:"`").with("convert one.jpg two.jpg 2>/dev/null")
-      Paperclip.run("convert", "one.jpg two.jpg")
+      Paperclip.expects(:"`").with("convert 'one.jpg' 'two.jpg' 2>/dev/null")
+      Paperclip.run("convert", "one.jpg", "two.jpg")
     end
   end
 
@@ -45,8 +45,8 @@ class PaperclipTest < Test::Unit::TestCase
       Paperclip.options[:image_magick_path] = nil
       Paperclip.options[:command_path]      = nil
       Paperclip.stubs(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:log).with("this is the command 2>/dev/null")
-      Paperclip.expects(:"`").with("this is the command 2>/dev/null")
+      Paperclip.expects(:log).with("this 'is the command' 2>/dev/null")
+      Paperclip.expects(:"`").with("this 'is the command' 2>/dev/null")
       Paperclip.options[:log_command] = true
       Paperclip.run("this","is the command")
     end
@@ -55,11 +55,40 @@ class PaperclipTest < Test::Unit::TestCase
       Paperclip.options[:image_magick_path] = nil
       Paperclip.options[:command_path]      = nil
       Paperclip.stubs(:bit_bucket).returns("/dev/null")
-      Paperclip.expects(:log).with("this is the command 2>/dev/null").never
-      Paperclip.expects(:"`").with("this is the command 2>/dev/null")
+      Paperclip.expects(:log).with("this 'is the command' 2>/dev/null").never
+      Paperclip.expects(:"`").with("this 'is the command' 2>/dev/null")
       Paperclip.options[:log_command] = false
       Paperclip.run("this","is the command")
     end
+  end
+
+  context "Calling Paperclip.run when the command is not found" do
+    should "tell you the command isn't there if the shell returns 127" do
+      begin
+        assert_raises(Paperclip::CommandNotFoundError) do
+          `ruby -e 'exit 127'` # Stub $?.exitstatus to be 127, i.e. Command Not Found.
+          Paperclip.stubs(:"`").returns("")
+          Paperclip.run("command")
+        end
+      ensure
+        `ruby -e 'exit 0'` # Unstub $?.exitstatus
+      end
+    end
+    should "tell you the command isn't there if an ENOENT is raised" do
+      assert_raises(Paperclip::CommandNotFoundError) do
+        Paperclip.stubs(:"`").raises(Errno::ENOENT)
+        Paperclip.run("command")
+      end
+    end
+  end
+
+  should "prevent dangerous characters in the command via quoting" do
+    Paperclip.options[:image_magick_path] = nil
+    Paperclip.options[:command_path]      = nil
+    Paperclip.options[:log_command]       = false
+    Paperclip.options[:swallow_stderr]    = false
+    Paperclip.expects(:"`").with(%q[this 'is' 'jack'\''s' '`command`' 'line!'])
+    Paperclip.run("this", "is", "jack's", "`command`", "line!")
   end
 
   context "Paperclip.bit_bucket" do
@@ -67,7 +96,7 @@ class PaperclipTest < Test::Unit::TestCase
       setup do
         File.expects(:exists?).with("/dev/null").returns(false)
       end
-      
+
       should "return 'NUL'" do
         assert_equal "NUL", Paperclip.bit_bucket
       end
@@ -77,7 +106,7 @@ class PaperclipTest < Test::Unit::TestCase
       setup do
         File.expects(:exists?).with("/dev/null").returns(true)
       end
-      
+
       should "return '/dev/null'" do
         assert_equal "/dev/null", Paperclip.bit_bucket
       end
@@ -123,7 +152,7 @@ class PaperclipTest < Test::Unit::TestCase
       should "not assign the avatar on mass-set" do
         @dummy.attributes = { :other => "I'm set!",
                               :avatar => @file }
-        
+
         assert_equal "I'm set!", @dummy.other
         assert ! @dummy.avatar?
       end
@@ -131,7 +160,7 @@ class PaperclipTest < Test::Unit::TestCase
       should "still allow assigment on normal set" do
         @dummy.other  = "I'm set!"
         @dummy.avatar = @file
-        
+
         assert_equal "I'm set!", @dummy.other
         assert @dummy.avatar?
       end
@@ -216,6 +245,7 @@ class PaperclipTest < Test::Unit::TestCase
     def self.should_validate validation, options, valid_file, invalid_file
       context "with #{validation} validation and #{options.inspect} options" do
         setup do
+          rebuild_class
           Dummy.send(:"validates_attachment_#{validation}", :avatar, options)
           @dummy = Dummy.new
         end
@@ -226,11 +256,11 @@ class PaperclipTest < Test::Unit::TestCase
           end
           if validation == :presence
             should "have an error on the attachment" do
-              assert @dummy.errors.on(:avatar_file_name)
+              assert @dummy.errors[:avatar_file_name]
             end
           else
             should "not have an error on the attachment" do
-              assert_nil @dummy.errors.on(:avatar_file_name), @dummy.errors.full_messages.join(", ")
+              assert @dummy.errors.blank?, @dummy.errors.full_messages.join(", ")
             end
           end
         end
@@ -265,10 +295,10 @@ class PaperclipTest < Test::Unit::TestCase
       validation, options, valid_file, invalid_file = args
       valid_file   &&= File.open(File.join(FIXTURES_DIR, valid_file), "rb")
       invalid_file &&= File.open(File.join(FIXTURES_DIR, invalid_file), "rb")
-      
+
       should_validate validation, options, valid_file, invalid_file
     end
-    
+
     context "with size validation and less_than 10240 option" do
       context "and assigned an invalid file" do
         setup do
@@ -277,9 +307,9 @@ class PaperclipTest < Test::Unit::TestCase
           @dummy.avatar &&= File.open(File.join(FIXTURES_DIR, "12k.png"), "rb")
           @dummy.valid?
         end
-        
+
         should "have a file size min/max error message" do
-          assert_match %r/between 0 and 10240 bytes/, @dummy.errors.on(:avatar_file_size)
+          assert [@dummy.errors[:avatar_file_size]].flatten.any?{|error| error =~ %r/between 0 and 10240 bytes/ }
         end
       end
     end

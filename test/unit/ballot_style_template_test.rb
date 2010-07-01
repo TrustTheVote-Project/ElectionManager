@@ -3,7 +3,7 @@ require 'test_helper'
 class BallotStyleTemplateTest < ActiveSupport::TestCase
   context "basic insert test" do
      should "able to create new Ballot Style Template" do
-       bst = BallotStyleTemplate.new(:display_name => "test template", :instruction_text => "test ins text", :state_graphic => "test.png")
+       bst = BallotStyleTemplate.new(:display_name => "test template", :instructions_image_file_name => "test.png", :instructions_image_file_size => 20, :instructions_image_content_type => 'png')
        bst.save!
     end
    end

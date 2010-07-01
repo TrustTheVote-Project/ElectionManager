@@ -35,15 +35,15 @@ class PDFBallotStyle
     return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
   end
 
-  def self.get_ballot_config(style, lang, election, scanner, instruction_text, state_seal, state_signature)
-    begin
+  def self.get_ballot_config(style, lang, election, scanner, instruction_text_url)
+    #begin
       ballot_defining_module = style.camelize + "Ballot"
       mod = ballot_defining_module.constantize
-      mod::BallotConfig.new(style, lang, election, scanner, instruction_text, state_seal, state_signature)
-    rescue => ex
-      Rails.logger.error(ex)
-      raise "Unknown Ballot Style: #{style}"
-    end
+      mod::BallotConfig.new(style, lang, election, scanner, instruction_text_url)
+    #rescue => ex
+    #  Rails.logger.error(ex)
+    #  raise "Unknown Ballot Style: #{style}"
+    #end
   end
 end
 

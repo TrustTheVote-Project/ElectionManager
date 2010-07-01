@@ -2,9 +2,6 @@ default:
   id: 0
   display_name: (built-in default Ballot Style Template)
   default_voting_method: 0
-  instruction_text: example instuction text
-  state_graphic: new_hampshire_seal.png
-  state_signature_image: new_hampshire_signature.png
   ballot_style: 0
   default_language: 0
   medium_id: 0
