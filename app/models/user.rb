@@ -38,5 +38,12 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)  
   end
-
+  
+  # define boolean methods for each role.
+  # root? ,  standard?, public?, ...
+  UserRole::ROLE_NAMES.each do |role|
+    define_method("#{role}?".to_sym) do
+      !roles.empty? && roles.map(&:name).include?(role)      
+    end
+  end
 end
