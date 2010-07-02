@@ -9,4 +9,4 @@ cancan
 rails --version '=2.3.5'
 faker
 machinist  
-shoulda  
+thoughtbot-shoulda --source http://gems.github.com
