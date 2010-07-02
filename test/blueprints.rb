@@ -96,4 +96,6 @@ Precinct.blueprint do
 #  districts { District.make }
 end
 
+Language.blueprint do
+end
 
