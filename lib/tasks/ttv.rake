@@ -12,6 +12,41 @@ namespace :db do
 end
 
 namespace :ttv do
+  desc "Heroku creation and initial push"
+  task :heroku_create => :environment do
+    #Rake::Task['ttv:production_reset'].invoke
+    puts "check for previous heroku deployment"
+    if sh %{grep "git@heroku.com" #{RAILS_ROOT}/.git/config}.include? "heroku"
+      puts "previous heroku deployment detected. try rake ttv:heroku_update instead"
+    else
+      puts "create heroku instance with subdomain: #{ENV['subdomain']}"
+      sh %{heroku create #{ENV['subdomain']}}
+      if ENV['branch'].nil?
+        puts "deploying branch develop to Heroku"
+        sh %{git push heroku develop:refs/heads/master}
+      else
+        puts "deploying branch #{ENV['branch']} to Heroku"
+        sh %{git push heroku #{ENV['branch']}:refs/heads/master}
+      end
+      puts "running production reset on Heroku"
+      sh %{heroku rake ttv:production_reset}
+    end
+  end
+  
+  desc "Heroku update and reset"
+  task :heroku_update => :environment do
+    if ENV['branch'].nil?
+      puts "deploying branch develop to Heroku"
+      sh %{git push heroku develop:refs/heads/master}
+    else
+      puts "deploying branch #{ENV['branch']} to Heroku"
+      sh %{git push heroku #{ENV['branch']}:refs/heads/master}
+    end
+    puts "running production reset on Heroku"
+    sh %{heroku rake ttv:production_reset}  
+  end
+  
+  
   desc "Full Reset of DB for development"
   task :dev_reset => :environment do
     ENV['RAILS_ENV'] = 'development'

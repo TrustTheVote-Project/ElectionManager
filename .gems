@@ -7,3 +7,6 @@ redgreen --version '>=1.2.2'
 searchlogic --version '>=2.4.14'
 cancan
 rails --version '=2.3.5'
+faker
+machinist  
+thoughtbot-shoulda  
