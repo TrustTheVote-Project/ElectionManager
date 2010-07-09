@@ -23,4 +23,25 @@ class Test::Unit::TestCase
     end
   end
   
+  def create_pdf(title = "Test PDF", options={})
+    @pdf_title = title
+    @pdf_creator = "TrustTheVote"
+
+    options = { :page_layout => :portrait,
+      # LETTER
+      # width =  612.00 points
+      # length = 792.00  points
+      :page_size => "LETTER",
+      :left_margin => 18,
+      :right_margin => 18,
+      :top_margin => 30,
+      :bottom_margin => 30,
+      # :skip_page_creation => true,
+      :info => { :Creator => @pdf_creator,
+        :Title => @pdf_title
+      }}.merge(options)
+    
+    Prawn::Document.new(options)
+
+  end
 end

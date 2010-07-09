@@ -15,21 +15,9 @@ class BallotConfigTest < ActiveSupport::TestCase
           @style = "default"
 
           @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner, "missing")
-
-          @pdf = Prawn::Document.new(
-                                       :page_layout => :portrait,
-                                       :page_size => "LETTER",
-                                       :left_margin => 18,
-                                       :right_margin => 18,
-                                       :top_margin => 30,
-                                       :bottom_margin => 30,
-                                       # :skip_page_creation => true,
-                                       :info => { :Creator => "TrustTheVote",
-                                         :Title => "Test Scanner"
-                                       }
-                                       )
+          @pdf = create_pdf("Test Default Ballot")
           
-          @ballot_config.setup(@pdf, @p1)          
+          @ballot_config.setup(@pdf, @p1)
         end # end setup
         
         should "set the correct ballot directory " do

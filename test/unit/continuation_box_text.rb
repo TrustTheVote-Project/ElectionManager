@@ -15,18 +15,8 @@ class ContinuationBoxTest < ActiveSupport::TestCase
       
       @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner, "missing")
 
-      @prawn_doc = Prawn::Document.new(
-                                 :page_layout => :portrait,
-                                 :page_size => "LETTER",
-                                 :left_margin => 18,
-                                 :right_margin => 18,
-                                 :top_margin => 30,
-                                 :bottom_margin => 30,
-                                 # :skip_page_creation => true,
-                                 :info => { :Creator => "TrustTheVote",
-                                   :Title => "Continuation Box Test"
-                                 }
-                                 )
+      @prawn_doc = create_pdf("Continuation Box Test")
+      
       # TODO: ContinuationBox depends on a prawn document
       @c_box = DefaultBallot::ContinuationBox.new(@prawn_doc)
       @is_last_page = true

@@ -9,8 +9,8 @@ class AbstractBallotTest < ActiveSupport::TestCase
   context "AbstractBallot::" do
     
     setup do
-      meta_data = { :Creator => "TrustTheVote", :Title => "Test Page 1" }
-      @pdf = Prawn::Document.new(
+      meta_data = { :Creator => "TrustTheVote", :Title => "Abstract Ballot Test" }
+      @pdf = create_pdf("Abstract Ballot Test",
                                  :page_layout => :portrait,
                                  # LETTER
                                  # width =  612.00 points

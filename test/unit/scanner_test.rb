@@ -12,25 +12,14 @@ class ScannerTest < ActiveSupport::TestCase
       
       @c = ::DefaultBallot::BallotConfig.new('default', 'en', @election, @scanner, "missing")
       
-      @pdf = Prawn::Document.new(
-                                 :page_layout => :portrait,
-                                 :page_size => "LETTER",
-                                 :left_margin => 18,
-                                 :right_margin => 18,
-                                 :top_margin => 30,
-                                 :bottom_margin => 30,
-                                 # :skip_page_creation => true,
-                                 :info => { :Creator => "TrustTheVote",
-                                   :Title => "Test Scanner"
-                                 }
-                                 )
+      @pdf = create_pdf("Test Scanner")
       @c.setup(@pdf, @precinct)
       @renderer = ::AbstractBallot::Renderer.new(@election, @precinct, @c,'')
     end
     
     subject { @scanner}
     
-    should "dfo" do
+    should "create" do
       assert subject
     end
     
