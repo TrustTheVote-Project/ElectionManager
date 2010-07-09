@@ -41,10 +41,10 @@ class ScannerTest < ActiveSupport::TestCase
       flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
       
       columns = AbstractBallot::Columns.new(3, flow_rect)
-      puts "columns = #{columns.inspect}"
-      columns.column_rects.each do |column|
-        header.draw(@c, column)        
-      end
+      # puts "columns = #{columns.inspect}"
+      # columns.column_rects.each do |column|
+      #         header.draw(@c, column)        
+      #       end
 
       
       @pdf.render_file "header.pdf"
