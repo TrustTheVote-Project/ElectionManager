@@ -23,6 +23,25 @@ class ScannerTest < ActiveSupport::TestCase
       assert subject
     end
     
+    # align checkbox is just wierd magic/vodoo
+    should "align checkbox " do
+      HORIZ_PADDING = 6
+      top_left, location = subject.align_checkbox(@pdf, [@pdf.bounds.left + HORIZ_PADDING, @pdf.bounds.top])
+      # print_bounds @pdf.bounds
+    end
+
+    # TODO: doesn't seem to do anything??
+    should "render grid" do
+      subject.render_grid(@pdf)
+      @pdf.render_file("#{Rails.root}/tmp/scanner_render_grid.pdf")                
+    end
+    
+    # render the four filled in rectangles on the edges of the ballot
+    should "render ballot marks" do
+      subject.render_ballot_marks(@pdf)
+      @pdf.render_file("#{Rails.root}/tmp/scanner_render_ballot_marks.pdf")                
+    end
+    
     should "render header" do
 #      header = DefaultBallot::FlowItem::Header.new("Hey Header",
       #    @scanner)
@@ -36,15 +55,15 @@ class ScannerTest < ActiveSupport::TestCase
       #       end
 
       
-      @pdf.render_file "header.pdf"
+      @pdf.render_file "/tmp/scan_header.pdf"
     end
     
-    should "render grid" do
+    should "render ballot_marks" do
       subject.set_checkbox(22,10,:left)
       subject.render_grid @pdf
       subject.render_ballot_marks @pdf
       
-      @pdf.render_file "scanner_render_grid.pdf"
+      @pdf.render_file "/tmp/scanner_render_grid.pdf"
     end
 
     #     should "render it all " do

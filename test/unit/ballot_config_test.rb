@@ -8,16 +8,22 @@ class BallotConfigTest < ActiveSupport::TestCase
     context "Default::BallotConfig" do
       context "initialize " do
         setup do
+          
           @e1 = Election.find_by_display_name "Election 1"
           @p1 = Precinct.find_by_display_name "Precint 1"
           @scanner = TTV::Scanner.new
           @lang = 'en'
           @style = "default"
-
-          @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner, "missing")
+          image_instructions = 'images/test/instructions.jpg'
+          @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner,image_instructions)
+          
           @pdf = create_pdf("Test Default Ballot")
           
           @ballot_config.setup(@pdf, @p1)
+
+          # remove all the pdf in the tmp dir
+          # FileUtils.rm "#{Rails.root}/tmp/*.pdf", :force => true
+          
         end # end setup
         
         should "set the correct ballot directory " do
@@ -46,8 +52,6 @@ class BallotConfigTest < ActiveSupport::TestCase
             @ballot_config.load_text("fubar.yml")
           end
         end
-        
-
       
         # TODO: remove as it doesn't seem to be used?      
         should "load the image for language code #{@lang}" do
@@ -68,6 +72,7 @@ class BallotConfigTest < ActiveSupport::TestCase
 
         should "create a pdf continuation box" do
           assert_instance_of DefaultBallot::ContinuationBox, @ballot_config.create_continuation_box
+          @pdf.render_file("#{Rails.root}/tmp/continuation_box.pdf")
         end
         
         should "create 3 columns in the ballot" do
@@ -86,6 +91,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           assert_equal "Vote for up to 5", ballot_xlation
 
         end
+        
         should "create short instructions for a contest that is ranked" do
           contest = Contest.make(:voting_method => VotingMethod::RANKED)
           ballot_xlation = @ballot_config.short_instructions(contest)
@@ -96,14 +102,120 @@ class BallotConfigTest < ActiveSupport::TestCase
           assert_equal "Vote yes or no", @ballot_config.short_instructions(Question.make)
         end
         
-        should "create raise an exception when getting short instructions for any other item" do
+        should "raise an exception when getting short instructions for any other item" do
           assert_raise RuntimeError do
             @ballot_config.short_instructions(Election.make)
           end
         end
         
+        should "have a wide style of continue" do
+          assert_equal :continue, @ballot_config.wide_style 
+        end
+
+        should "create a checkbox outline " do
+          # in about the middle of the page
+          @ballot_config.stroke_checkbox([@pdf.bounds.top/2, @pdf.bounds.right/2])
+          @pdf.render_file("#{Rails.root}/tmp/stroke_checkbox.pdf")
+        end
+        
+        should "draw 3 checkboxes, one in each column" do
+          # bounding rect of pdf page
+          rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+
+          # split the page into 3 columns
+          three_columns = AbstractBallot::Columns.new(3, rect)
+
+          first_column = three_columns.next
+          @ballot_config.draw_checkbox(first_column, "This is a test checkbox in column 1")
+          
+          2.times do |column_num|
+            @ballot_config.draw_checkbox(three_columns.next, "This is a test checkbox in column #{column_num+2}")
+          end
+          @pdf.render_file("#{Rails.root}/tmp/draw_checkbox.pdf")
+        end
+
+        should "draw a frame item, rectangle with 3 sides " do
+          # should be a rectangle without a line on the bottom.
+          #
+          # 3 line from:
+          # [0, top-100] to [right -100, top -100] at top of rect
+          # [right -100, top -100] to [right -100, top - 400] on right of rect
+          # [0, top-100] to [0, top - 400] on left of rect
+          # top, left, bottom and right
+          rect = AbstractBallot::Rect.create(@pdf.bounds.top-100,0, 0, @pdf.bounds.right-100 )
+          @ballot_config.frame_item(rect, rect.height-300 )
+          @pdf.render_file("#{Rails.root}/tmp/frame_item.pdf")
+        end
+        
+        # - render the 4 filled in rectangles on the edges of the ballot
+        # - render a smaller box inside the page
+        # - draw text vertically on the left and right edges of the
+        # page. This text in contained in the ballot xlation file at
+        # app/ballots/default/lang/en/ballot.yml
+        # - draw some long, hard coded, numbers vertically on the left
+        # and right edges of the page
+        should "render a frame around the entire page" do
+          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          @ballot_config.render_frame flow_rect
+          @pdf.render_file("#{Rails.root}/tmp/render_frame.pdf")          
+        end
+        
+        should "render a header for this page" do
+          # should see a header with:
+          # - Official Ballot text in upper left
+          # - Today's Date under that
+          # - Election display name in the upper rigth
+          # - Precinct display name under that
+          # - Line directly underneath the above
+          
+          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          
+          # make sure the election has a start date
+          @e1.start_date = DateTime.now
+          
+          @ballot_config.render_header flow_rect
+          @pdf.render_file("#{Rails.root}/tmp/render_header.pdf")          
+        end
+
+        # render the column instruction image in the leftmost column
+        should "render column instructions" do
+          # bounding rect of pdf page
+          rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+
+          # split the page into 3 columns
+          three_columns = AbstractBallot::Columns.new(3, rect)
+          page = 1
+          @ballot_config.render_column_instructions(three_columns, page)
+          @pdf.render_file("#{Rails.root}/tmp/render_column_instructions.pdf")          
+          
+        end
+        
+        # render the column instruction image in the leftmost column
+        should "page complete will show \"Vote Both Sides\" if not the last page of the ballot " do
+          page_num = 33
+          last_page = false
+          @ballot_config.page_complete(page_num, last_page)
+          @pdf.render_file("#{Rails.root}/tmp/page_complete.pdf")                  
+        end
+
+        should "get the Content flow item for Contests" do
+          assert_instance_of DefaultBallot::FlowItem::Contest, @ballot_config.create_flow_item(Contest.new)
+        end
+        
+        should "get the Question flow item for Questions" do
+          assert_instance_of DefaultBallot::FlowItem::Question, @ballot_config.create_flow_item(Question.new)
+        end
+
+        should "get the Header flow item for Strings" do
+          assert_instance_of DefaultBallot::FlowItem::Header, @ballot_config.create_flow_item("Header Content String")
+        end
+        
+        should "get the Combo flow item for Arrays" do
+          assert_instance_of DefaultBallot::FlowItem::Combo, @ballot_config.create_flow_item([])
+        end
 
       end # end initialize context
+      
     end # end Default::BallotConfig context
     
   end # end setup_jurisdictions
