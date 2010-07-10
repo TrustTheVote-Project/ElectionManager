@@ -72,7 +72,7 @@ class BallotConfigTest < ActiveSupport::TestCase
 
         should "create a pdf continuation box" do
           assert_instance_of DefaultBallot::ContinuationBox, @ballot_config.create_continuation_box
-          @pdf.render_file("#{Rails.root}/tmp/continuation_box.pdf")
+          @pdf.render_file("#{Rails.root}/tmp/ballot_create_continuation_box.pdf")
         end
         
         should "create 3 columns in the ballot" do
@@ -115,7 +115,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         should "create a checkbox outline " do
           # in about the middle of the page
           @ballot_config.stroke_checkbox([@pdf.bounds.top/2, @pdf.bounds.right/2])
-          @pdf.render_file("#{Rails.root}/tmp/stroke_checkbox.pdf")
+          @pdf.render_file("#{Rails.root}/tmp/ballot_stroke_checkbox.pdf")
         end
         
         should "draw 3 checkboxes, one in each column" do
@@ -131,7 +131,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           2.times do |column_num|
             @ballot_config.draw_checkbox(three_columns.next, "This is a test checkbox in column #{column_num+2}")
           end
-          @pdf.render_file("#{Rails.root}/tmp/draw_checkbox.pdf")
+          @pdf.render_file("#{Rails.root}/tmp/ballot_draw_checkbox.pdf")
         end
 
         should "draw a frame item, rectangle with 3 sides " do
@@ -144,7 +144,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           # top, left, bottom and right
           rect = AbstractBallot::Rect.create(@pdf.bounds.top-100,0, 0, @pdf.bounds.right-100 )
           @ballot_config.frame_item(rect, rect.height-300 )
-          @pdf.render_file("#{Rails.root}/tmp/frame_item.pdf")
+          @pdf.render_file("#{Rails.root}/tmp/ballot_frame_item.pdf")
         end
         
         # - render the 4 filled in rectangles on the edges of the ballot
@@ -157,7 +157,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         should "render a frame around the entire page" do
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           @ballot_config.render_frame flow_rect
-          @pdf.render_file("#{Rails.root}/tmp/render_frame.pdf")          
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_frame.pdf")          
         end
         
         should "render a header for this page" do
@@ -174,7 +174,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           @e1.start_date = DateTime.now
           
           @ballot_config.render_header flow_rect
-          @pdf.render_file("#{Rails.root}/tmp/render_header.pdf")          
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
 
         # render the column instruction image in the leftmost column
@@ -186,7 +186,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           three_columns = AbstractBallot::Columns.new(3, rect)
           page = 1
           @ballot_config.render_column_instructions(three_columns, page)
-          @pdf.render_file("#{Rails.root}/tmp/render_column_instructions.pdf")          
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_column_instructions.pdf")          
           
         end
         
@@ -195,7 +195,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           page_num = 33
           last_page = false
           @ballot_config.page_complete(page_num, last_page)
-          @pdf.render_file("#{Rails.root}/tmp/page_complete.pdf")                  
+          @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")                  
         end
 
         should "get the Content flow item for Contests" do
