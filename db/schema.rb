@@ -10,7 +10,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20100629024114) do
-  
+
   create_table "ballot_style_templates", :force => true do |t|
     t.string   "display_name"
     t.integer  "default_voting_method"
@@ -100,16 +100,7 @@ ActiveRecord::Schema.define(:version => 20100629024114) do
     t.integer  "default_voting_method_id", :default => 0
   end
 
-<<<<<<< HEAD
-  create_table "jurisdiction_users", :force => true do |t|
-=======
-  create_table "images", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "jurisdiction_memberships", :force => true do |t|
->>>>>>> 30abd3b... changed user/jurisiction relationship name to JurisdictionMembership
     t.integer  "user_id"
     t.integer  "district_set_id"
     t.string   "role",            :default => "standard"
