@@ -15,6 +15,9 @@
   <% end %>
   <% if current_user && current_user.root? %>
   <li><%=link_to "Maintainenace Tasks", maintain_path %></li>
+    <% if current_context.jurisdiction? %>
+      <li><%= link_to "Import into Jurisdiction", import_jurisdiction_path(:id => current_context.jurisdiction.id) %></li>
+    <% end %>
   <% end %>
 
 </ul>

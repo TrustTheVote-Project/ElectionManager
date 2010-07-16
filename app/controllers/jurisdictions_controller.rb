@@ -25,4 +25,21 @@ class JurisdictionsController < ApplicationController
     redirect_to :action => :elections
   end
  
+  def import
+
+  end  
+ 
+  def audit
+    begin
+      if params[:import_file].nil? 
+        flash[:error] = "Import failed because file was not specified."
+        redirect_to :back
+        return
+      end
+      if params[:type] == "ballot_config"
+        flash[:error] = "Let's audit!"
+        return
+      end
+    end
+  end
 end
