@@ -20,11 +20,6 @@
   </div>
 
   <div class="group">
-    <%= f.label :state_graphic, t("activerecord.attributes.ballot_style_template.state_graphic", :default => "State graphic"), :class => :label %>
-    <%= f.text_field :state_graphic, :class => 'text_field' %>
-  </div>
-
-  <div class="group">
     <%= f.label :ballot_style, t("activerecord.attributes.ballot_style_template.ballot_style", :default => "Ballot style"), :class => :label %>
 	<%= f.collection_select(:ballot_style, BallotStyle.all, :id, :display_name)%>
     <span class="description">Ballot style for this template. Ex. 0, 1, 2</span>

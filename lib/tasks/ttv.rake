@@ -15,6 +15,9 @@ namespace :ttv do
   desc "Full Reset of DB for development"
   task :dev_reset => :environment do
     ENV['RAILS_ENV'] = 'development'
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:migrate'].invoke
     Rake::Task['db:reset'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['ttv:seed'].invoke

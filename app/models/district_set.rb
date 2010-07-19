@@ -14,7 +14,10 @@ class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
   has_many :elections
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-    
+  
+  has_many :jurisdiction_memberships, :class_name => "JurisdictionMembership"
+  has_many :users, :through => :jurisdiction_memberships
+  
   # returns all precincts in this district set
   def precincts
     precinct_ids = connection.select_values( <<-eos
