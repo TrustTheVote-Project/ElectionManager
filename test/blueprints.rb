@@ -99,3 +99,10 @@ end
 Language.blueprint do
 end
 
+JurisdictionMembership.blueprint do
+  role { 'standard' }
+end
+
+JurisdictionMembership.blueprint(:admin) do
+  role { 'admin' }
+end
