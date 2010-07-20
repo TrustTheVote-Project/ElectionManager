@@ -1,0 +1,3 @@
+[submodule "prawn"]
+	path = prawn
+	url = http://github.com/sandal/prawn.git
