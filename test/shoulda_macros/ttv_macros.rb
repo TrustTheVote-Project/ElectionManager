@@ -23,4 +23,41 @@ class Test::Unit::TestCase
     end
   end
   
+  def create_pdf(title = "Test PDF", options={})
+    @pdf_title = title
+    @pdf_creator = "TrustTheVote"
+
+    options = { :page_layout => :portrait,
+      # LETTER
+      # width =  612.00 points
+      # length = 792.00  points
+      :page_size => "LETTER",
+      :left_margin => 18,
+      :right_margin => 18,
+      :top_margin => 30,
+      :bottom_margin => 30,
+      # :skip_page_creation => true,
+      :info => { :Creator => @pdf_creator,
+        :Title => @pdf_title
+      }}.merge(options)
+    
+    Prawn::Document.new(options)
+
+  end
+  
+  def print_bounds(bounds)
+    puts "TGD: absolute top, left, bottom and right = #{bounds.absolute_top.inspect}, #{bounds.absolute_left.inspect}, #{bounds.absolute_bottom.inspect}, #{bounds.absolute_right.inspect}"
+    puts "TGD: top, left, bottom and right = #{bounds.top.inspect}, #{bounds.left.inspect}, #{bounds.bottom.inspect},  #{bounds.right.inspect}"
+  end
+  
+  def render_and_find_objects(pdf)
+    output = StringIO.new(pdf.render, 'r+')
+    @hash = PDF::Hash.new(output)
+    @pages = @hash.values.find {|obj| obj.is_a?(Hash) && obj[:Type] == :Pages}[:Kids]
+    @producer = @hash.values.map {|obj| obj[:Producer] if obj.is_a?(Hash) && obj[:Producer]}.first
+    @creator = @hash.values.map {|obj| obj[:Creator] if obj.is_a?(Hash) && obj[:Creator] }.first
+    @title = @hash.values.map {|obj| obj[:Title] if obj.is_a?(Hash) && obj[:Title] }.first
+    @text = @hash.values.find {|obj|obj.unfiltered_data if obj.is_a?(PDF::Reader::Stream) }
+  end
+
 end
