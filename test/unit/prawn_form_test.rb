@@ -23,22 +23,29 @@ class PrawnFormTest < ActiveSupport::TestCase
 
       render_and_find_objects(@pdf)
       
-      form, fields =  get_form()
+      form =  get_form()
+      puts "TGD: form = #{form.inspect}"
+
+      fields = get_fields(form)
+      puts "TGD: fields = #{fields.inspect}"
+
+      
+      textfield = fields.first
+      puts "TGD: textfield =  #{textfield.inspect}" 
+      
       assert_equal 9, form[:DR]
       assert_equal '/Helv 0 Tf 0 g', form[:DA]
 
-      assert_equal :Tx, fields[:FT]
-      assert_equal :Annot, fields[:Type]
-      assert_equal 0, fields[:Ff]
-      assert_equal 'fname', fields[:T]
-      assert_equal '/Helv 0 Tf 0 g', fields[:DA]
-      assert_equal :Widget, fields[:Subtype]
-      assert_equal 4, fields[:F]
+      assert_equal :Tx, textfield[:FT]
+      assert_equal :Annot, textfield[:Type]
+      assert_equal 0, textfield[:Ff]
+      assert_equal 'fname', textfield[:T]
+      assert_equal '/Helv 0 Tf 0 g', textfield[:DA]
+      assert_equal :Widget, textfield[:Subtype]
+      assert_equal 4, textfield[:F]
       # add origin to width and height
-      assert_equal [x,y,w+x,h+y], fields[:Rect]
+      assert_equal [x,y,w+x,h+y], textfield[:Rect]
       
-      puts "TGD: form is #{form.inspect}"
-      puts "TGD: fields =  #{fields.inspect}" 
       @pdf.render_file "#{Rails.root}/tmp/prawn_form_text_field.pdf"
     end
     

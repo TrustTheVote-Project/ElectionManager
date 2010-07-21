@@ -75,37 +75,29 @@ class Test::Unit::TestCase
     str
   end
   
-  # returns a 2 hashes
-  # form hash - Contents of the pdf obj referenced by the Acroform entry in the catalog
-  # fields hash - The 
+  # given a reference id return hash representation of it's object
+  def get_obj(ref_id)
+    @hash.each do |ref, obj|
+      return obj if ref.id == ref_id
+    end
+  end
+
+  # get the form, AcroForm
+  # return - Hash for form
+  # {:DR=>9, :Fields=>[#<PDF::Reader::Reference:0x105a66098 @id=7, @gen=0>], :DA=>"/Helv 0 Tf 0 g"}
   def get_form
-    return unless @hash
-    
-    acroform_ref = nil
-    @hash.each do |ref, obj|
-      if obj.is_a?(Hash) && obj[:AcroForm] 
-        acroform_ref = obj[:AcroForm]
-        break
-      end
+    acroform_ref = @hash.values.map {|obj| obj[:AcroForm] if obj.is_a?(Hash) && obj[:AcroForm] }.compact.first
+    get_obj(acroform_ref.id)
+  end
+  
+  # get all of a pdf forms fields
+  # form - hash for form, see get_form
+  # return - Array of hashes that represent each field in the form
+  # [{:Type=>:Annot, :Rect=>[100, 600, 600, 616], :BS=>{:Type=>:Border, :W=>1, :S=>:S}, :Ff=>0, :DA=>"/Helv 0 Tf 0 g", :T=>"fname", :FT=>:Tx, :Subtype=>:Widget, :MK=>{:BC=>[0, 0, 0]}, :F=>4}]
+  def get_fields(form)
+    form[:Fields].map do |ref|
+      field_hash = get_obj(ref.id)
     end
-    
-    acroform = nil
-    @hash.each do |ref, obj|
-      if acroform_ref == ref 
-        acroform = obj
-        break 
-      end
-    end
-    
-    fields_ref  = acroform[:Fields].first
-    fields = nil
-    @hash.each do |ref, obj|
-      if fields_ref == ref
-        fields = obj
-        break
-      end
-    end
-    [acroform, fields]
   end
   
 end
