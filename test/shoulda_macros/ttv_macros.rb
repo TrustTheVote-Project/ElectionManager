@@ -58,6 +58,54 @@ class Test::Unit::TestCase
     @creator = @hash.values.map {|obj| obj[:Creator] if obj.is_a?(Hash) && obj[:Creator] }.first
     @title = @hash.values.map {|obj| obj[:Title] if obj.is_a?(Hash) && obj[:Title] }.first
     @text = @hash.values.find {|obj|obj.unfiltered_data if obj.is_a?(PDF::Reader::Stream) }
+    @creator =  Iconv.iconv('UTF-8', "UTF-16", @creator).first
+    @producer =  Iconv.iconv('UTF-8', "UTF-16", @producer).first
+    @title =  Iconv.iconv('UTF-8', "UTF-16", @title).first
   end
-
+  
+  def pdf_hash(pdf)
+    output = StringIO.new(pdf.render, 'r+')
+    @hash = PDF::Hash.new(output)    
+    str = ""
+    @hash.each do |ref, obj|
+      str << "\nref = #{ref.inspect}"
+      str << "\nobj = #{obj.inspect}"
+      str << "\n" << '-'*15
+    end
+    str
+  end
+  
+  # returns a 2 hashes
+  # form hash - Contents of the pdf obj referenced by the Acroform entry in the catalog
+  # fields hash - The 
+  def get_form
+    return unless @hash
+    
+    acroform_ref = nil
+    @hash.each do |ref, obj|
+      if obj.is_a?(Hash) && obj[:AcroForm] 
+        acroform_ref = obj[:AcroForm]
+        break
+      end
+    end
+    
+    acroform = nil
+    @hash.each do |ref, obj|
+      if acroform_ref == ref 
+        acroform = obj
+        break 
+      end
+    end
+    
+    fields_ref  = acroform[:Fields].first
+    fields = nil
+    @hash.each do |ref, obj|
+      if fields_ref == ref
+        fields = obj
+        break
+      end
+    end
+    [acroform, fields]
+  end
+  
 end
