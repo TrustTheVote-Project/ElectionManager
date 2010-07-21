@@ -26,7 +26,8 @@ class JurisdictionsController < ApplicationController
   end
  
   def import
-
+    @alerts = nil
+    @objects = nil
   end  
  
   def audit
