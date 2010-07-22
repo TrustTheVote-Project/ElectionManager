@@ -5,35 +5,43 @@ module TTV
   class YAMLAudit
     attr_reader :yml_election, :objects, :alerts
 
-# <tt>source::</tt> File object for file containing yaml text
-# <tt>type::</tt> String object of ballot type (e.g., ballot_config)
+    # <tt>source::</tt> File object for file containing yaml text
+    # <tt>type::</tt> String object of ballot type (e.g., ballot_config)
     def initialize(source, type)
       @source = source
       @type = type
+      @alerts = [] # TTV::Alert errors and warnings to be addressed by user in audit review
+      @objects = [] # Model-backed objects to-be-created during audit process
+      @yml_election = YAML.load(@source)
+      
+      if @type == "ballot_config" and not ballot_config?
+        @alerts << TTV::Alert.new(:type => :not_ballot_config, :options => {:ignore => "Ignore", :abort => "Abort"}, :default => :ignore,
+                                  :message => "File is not a \"ballot_config\"")
+      end
     end
   
-#
-# Is the .yml being imported of type 'ballot_config"? Ballot_config's have less stringent
-# validation and get connected to the 'default built-in district' etc.
+    # Is the .yml being imported of type 'ballot_config"?
     def ballot_config?
       if @yml_election["audit_header"].nil?
-        # ALERT: (ignorable?) error, no audit header
+        # Report alert if none reported already
+        @alerts << TTV::Alert.new(:type => :no_audit_header, :options => {:ignore => "Ignore", :abort => "Abort"}, :default => :ignore,
+                                  :message => "File has no \"audit_header\" section") unless @alerts.find{|alert| alert.type == :no_audit_header}
         return false
       else
         return @yml_election["audit_header"]["type"] == "ballot_config"
       end
     end
 
-# Do the whole import process. Main entry point.
+    # Do the whole audit process. Main entry point.
     def import
       @dist_id_map = {}
-      @yml_election = YAML.load(@source)
       ActiveRecord::Base.transaction do
         @dist_set = create_district_set
         if @yml_election["ballot_info"].nil?
           puts "No ballot information -- invalid yml"
           pp @yml_election
-          raise "Invalid YAML election. See console for details."
+          @alerts << TTV::Alert.new(:type => :abort, :message => "YAML does not contain \"ballot_info\"")
+          raise "Invalid YAML file, no \"ballot_info\" section. See console for details."
         end
         @election = Election.new(:display_name => @yml_election["ballot_info"]["display_name"])
         if @yml_election["ballot_info"]["start_date"].nil?
@@ -42,28 +50,36 @@ module TTV
           @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
         end
         @election.district_set = @dist_set
+        
         # @election.save # Don't want to save during audit
         if @yml_election["ballot_info"]["precinct_list"].nil?
             puts "Invalid yml doesn't contain precinct_list"
             pp @yml_election
-            raise "Invalid YAML election. See console for details."
+            @alerts << TTV::Alert.new(:type => :abort, :message => "YAML does not contain \"precinct_list\"")
+            raise "Invalid YAML file, no \"precinct_list\""
         elsif @yml_election["ballot_info"]["contest_list"].nil?          
             puts "Invalid yml doesn't contain contest_list"
             pp @yml_election
-            raise "Invalid YAML election. See console for details."
+            @alerts << TTV::Alert.new(:type => :abort, :message => "YAML does not contain \"contest_list\"")
+            raise "Invalid YAML file, no \"contest_list\""
         end
         @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
         @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest yml_contest}
         @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
       end
-      @election
+      
+      @objects << @election
+      return {:objects => @objects, :alerts => @alerts}
     end
     
     def create_district_set
-      if ballot_config?
-        DistrictSet.find(0)
+      if @yml_election["ballot_info"]["jurisdiction_display_name"]
+        # Search for district set
+        district_set = DistrictSet.find_by_display_name(@yml_election["ballot_info"]["jurisdiction_display_name"])
+        # If not found, create new district set
+        DistrictSet.new(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"]) if district_set == nil
       else
-        DistrictSet.new(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"])
+        district_set = DistrictSet.need_default
       end
     end
     

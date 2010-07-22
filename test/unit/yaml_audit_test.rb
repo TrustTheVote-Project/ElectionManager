@@ -37,6 +37,38 @@ class YAMLAuditTest < ActiveSupport::TestCase
       
       new_precinct.before_validation
       assert new_precinct.ident
+      
+      # Find object by ident
+      assert_equal new_precinct, @objects.find{|obj| obj.ident == new_precinct.ident}
     end
   end
+  
+  context "two yaml audit objects, one with errors" do
+    setup do
+      @file = File.new("#{RAILS_ROOT}/test/elections/ballot_config.yml")
+      @audit = TTV::YAMLAudit.new(@file, "ballot_config")
+      
+      @alerty_file = File.new("#{RAILS_ROOT}/test/elections/dirty_ballot_config.yml")
+      @alerty_audit = TTV::YAMLAudit.new(@alerty_file, "ballot_config")
+    end
+    
+    should "load YAML from file into array" do
+      assert @audit.yml_election["audit_header"]
+      assert @alerty_audit.yml_election["audit_header"]
+    end
+    
+    should "detect as ballot config, record alert" do
+      assert @audit.ballot_config?
+      assert_equal false, @alerty_audit.ballot_config?
+      
+      assert @alerty_audit.alerts.find{|alert| alert.type == :not_ballot_config}
+      assert_equal nil, @audit.alerts.find{|alert| alert.type == :not_ballot_config}
+    end
+    
+    should "" do
+      
+    end
+    
+  end
+  
 end
