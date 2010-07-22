@@ -83,6 +83,11 @@ class YAMLAuditTest < ActiveSupport::TestCase
         # TODO: throw alert in this case
       end
       
+      should "list objects" do
+        puts @audit_objects
+        puts @alerty_audit_objects
+      end
+      
     end
     
   end

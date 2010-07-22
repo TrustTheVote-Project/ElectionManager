@@ -36,21 +36,16 @@ module TTV
     def import
       @dist_id_map = {}
       ActiveRecord::Base.transaction do
-        @dist_set = create_district_set
-=begin        
         if @yml_election["ballot_info"].nil?
           puts "No ballot information -- invalid yml"
           pp @yml_election
-          @alerts << TTV::Alert.new(:type => :abort, :message => "YAML does not contain \"ballot_info\"")
+          @alerts << TTV::Alert.new(:type => :abort, :message => "YAML does not contain \"ballot_info\"") # Redundant with raised alert?
           raise "Invalid YAML file, no \"ballot_info\" section. See console for details."
         end
-        @election = Election.new(:display_name => @yml_election["ballot_info"]["display_name"])
-        if @yml_election["ballot_info"]["start_date"].nil?
-             @election.start_date = Time.now
-        else
-          @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
-        end
-        @election.district_set = @dist_set
+        
+        @dist_set = create_district_set
+        
+        @election = create_election
         
         # @election.save # Don't want to save during audit
         if @yml_election["ballot_info"]["precinct_list"].nil?
@@ -67,11 +62,22 @@ module TTV
         @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
         @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest yml_contest}
         @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
-=end     
+     
       end
  
       #@objects << @election
       return {:objects => @objects, :alerts => @alerts}
+    end
+
+    def create_election
+        @election = Election.new(:display_name => @yml_election["ballot_info"]["display_name"])
+        if @yml_election["ballot_info"]["start_date"].nil?
+             @election.start_date = Time.now
+        else
+          @election.start_date = Date.parse(@yml_election["ballot_info"]["start_date"].to_s)
+        end
+        @election.district_set = @dist_set
+        return @election
     end
     
     def create_district_set
@@ -81,8 +87,8 @@ module TTV
         district_set = DistrictSet.find_by_display_name(@yml_election["ballot_info"]["jurisdiction_display_name"])
         # If not found, create new district set
         if district_set == nil
-          if ballot_config? # Oh no!
-            @alerts << TTV::Alert.new(:type => :no_audit_header, :options => {:ignore => "Ignore", :abort => "Abort"}, :default => :ignore,
+          if ballot_config? # TODO: write alert
+            @alerts << TTV::Alert.new(:type => :wrong_district_set, :options => {:ignore => "Ignore", :abort => "Abort"}, :default => :ignore,
                           :message => "File has no \"audit_header\" section") unless @alerts.find{|alert| alert.type == :no_audit_header}
           end
           district_set = DistrictSet.new(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"])
@@ -91,6 +97,7 @@ module TTV
       else
         district_set = DistrictSet.need_default
         @objects << district_set if district_set
+        district_set = DistrictSet.default unless district_set
       end
       return district_set
     end
@@ -125,7 +132,7 @@ module TTV
     def load_contest yml_cont
       if @dist_id_map[yml_cont["district_ident"]].nil?
         # the only time we can survive without district and precinct lists is with ballot_config.
-        if ballot_config?
+        if @type == "ballot_config"
           dist = District.find(0)
         else
           puts "Error in yaml_import: invalid contest"
@@ -155,19 +162,20 @@ module TTV
   # load another candidate
   # <tt>cand::</tt>Hash containing a single candidate from yaml
     def load_candidate y_cand, cont
-      candidate = Candidate.find_by_display_name_and_party(:display_name => y_cand["display_name"], :party => Party.find_by_display_name(y_cand["party_display_name"]))
-      if candidate.nil? 
-        candidate = candidate.new(:display_name => y_cand["display_name"])
-        @objects << party
-      end
-      
       party_name = y_cand["party_display_name"]
-
       party = Party.find_by_display_name(party_name)
+      
       if party.nil? 
         party = Party.new(:display_name => party_name)
         @objects << party
       end
+      
+      candidate = Candidate.find_by_display_name_and_party_id(y_cand["display_name"], party.id)
+      if candidate.nil? 
+        candidate = Candidate.new(:display_name => y_cand["display_name"])
+        @objects << candidate
+      end
+      
       candidate.party = party
       
       candidate.order = y_cand["order"] || 0

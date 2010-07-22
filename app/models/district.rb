@@ -29,6 +29,10 @@ class District < ActiveRecord::Base
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique district ident attempted: {{value}}."
 
+  cattr_accessor :default
+
+  @@default = nil
+
   # Make sure that ident is not nil. If it is, create a unique one.
   def before_validation
     if self.blank? || self.ident.blank?
@@ -47,5 +51,17 @@ class District < ActiveRecord::Base
     return election.questions.select { |q| q.district_id == self.id }
 #    Question.find_all_by_election_id_and_district_id(election.id, self.id)
   end
+
+  # returns nil if default is already set, new default DistrictSet if not set
+  def self.need_default
+    return nil if @@default
+    unless @@default
+      district_set = DistrictSet.need_default
+      district_set.save if district_set
+      district_set = DistrictSet.default unless district_set
+      return @@default = DistrictSet.new(:display_name => "Default District", :district_set => district_set)
+    end
+  end
   
+
 end
