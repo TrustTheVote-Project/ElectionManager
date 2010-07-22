@@ -10,7 +10,7 @@ audit_header:
 ballot_info:
   precinct_list: 
   - display_name: Acworth
-  jurisdiction_display_name: middleworld
+  jurisdiction_display_name: The Middle World
   display_name: General Election
   contest_list: 
   - order: 0

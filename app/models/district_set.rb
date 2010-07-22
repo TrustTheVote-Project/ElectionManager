@@ -15,6 +15,8 @@ class DistrictSet < ActiveRecord::Base
   has_many :elections
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
     
+  @@default = nil
+  
   # returns all precincts in this district set
   def precincts
     precinct_ids = connection.select_values( <<-eos
@@ -25,6 +27,12 @@ class DistrictSet < ActiveRecord::Base
     eos
     )
     Precinct.find(precinct_ids)
+  end
+  
+  # returns nil if default is already set, new default DistrictSet if not set
+  def self.need_default
+    return nil if @@default
+    return @@default = DistrictSet.new(:display_name => "Default Jurisdiction") unless @@default
   end
   
 end

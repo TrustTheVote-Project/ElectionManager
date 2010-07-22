@@ -65,7 +65,23 @@ class YAMLAuditTest < ActiveSupport::TestCase
       assert_equal nil, @audit.alerts.find{|alert| alert.type == :not_ballot_config}
     end
     
-    should "" do
+    context "after import is run" do
+      setup do
+        audit = @audit.import
+        @audit_objects = audit[:objects]
+        @audit_alerts = audit[:alerts]
+        
+        alerty_audit = @alerty_audit.import
+        @alerty_audit_objects = alerty_audit[:objects]
+        @alerty_audit_alerts = alerty_audit[:alerts]
+      end
+      
+      should "create new or default jurisdiction, throwing alert if new" do
+        assert @audit_objects.find {|o| o.is_a?(DistrictSet) and o.display_name == "The Middle World"}
+        # TODO: make "The Middle World" jurisdiction already exist and be the current_jurisdiction for testing
+        assert @alerty_audit_objects.find {|o| o.is_a?(DistrictSet) and o.display_name == "Default Jurisdiction"}
+        # TODO: throw alert in this case
+      end
       
     end
     

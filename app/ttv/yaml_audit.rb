@@ -37,6 +37,7 @@ module TTV
       @dist_id_map = {}
       ActiveRecord::Base.transaction do
         @dist_set = create_district_set
+=begin        
         if @yml_election["ballot_info"].nil?
           puts "No ballot information -- invalid yml"
           pp @yml_election
@@ -66,21 +67,32 @@ module TTV
         @yml_election["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}            
         @yml_election["ballot_info"]["contest_list"].each { |yml_contest| load_contest yml_contest}
         @yml_election["ballot_info"]["question_list"].each { |yml_question| load_question yml_question} unless @yml_election["ballot_info"]["question_list"].nil?
+=end     
       end
-      
-      @objects << @election
+ 
+      #@objects << @election
       return {:objects => @objects, :alerts => @alerts}
     end
     
     def create_district_set
+      # TODO: if ballot_config, there should be defined and this should go into a current_jurisdiction 
       if @yml_election["ballot_info"]["jurisdiction_display_name"]
         # Search for district set
         district_set = DistrictSet.find_by_display_name(@yml_election["ballot_info"]["jurisdiction_display_name"])
         # If not found, create new district set
-        DistrictSet.new(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"]) if district_set == nil
+        if district_set == nil
+          if ballot_config? # Oh no!
+            @alerts << TTV::Alert.new(:type => :no_audit_header, :options => {:ignore => "Ignore", :abort => "Abort"}, :default => :ignore,
+                          :message => "File has no \"audit_header\" section") unless @alerts.find{|alert| alert.type == :no_audit_header}
+          end
+          district_set = DistrictSet.new(:display_name => @yml_election["ballot_info"]["jurisdiction_display_name"])
+          @objects << district_set # District set is new
+        end
       else
         district_set = DistrictSet.need_default
+        @objects << district_set if district_set
       end
+      return district_set
     end
     
 # load another question into Election object
@@ -98,6 +110,7 @@ module TTV
       end
       new_question = Question.new(:display_name =>yml_question["display_name"],
                                    :question => yml_question["question"])
+      @objects << new_question
       
       #new_question.order = yml_question["order"] || 0
       # TODO: add order support to question model
@@ -125,6 +138,7 @@ module TTV
 
       new_contest = Contest.new(:display_name =>yml_cont["display_name"],
                                    :open_seat_count => 1, :voting_method_id => 0)
+      @objects << new_contest
                                    
       if yml_cont.key? "voting_method"
         new_contest.voting_method_id = VotingMethod.xmlToId(yml_cont["voting_method"])
@@ -141,17 +155,23 @@ module TTV
   # load another candidate
   # <tt>cand::</tt>Hash containing a single candidate from yaml
     def load_candidate y_cand, cont
-      new_cand = Candidate.new(:display_name => y_cand["display_name"])
+      candidate = Candidate.find_by_display_name_and_party(:display_name => y_cand["display_name"], :party => Party.find_by_display_name(y_cand["party_display_name"]))
+      if candidate.nil? 
+        candidate = candidate.new(:display_name => y_cand["display_name"])
+        @objects << party
+      end
+      
       party_name = y_cand["party_display_name"]
 
       party = Party.find_by_display_name(party_name)
       if party.nil? 
         party = Party.new(:display_name => party_name)
+        @objects << party
       end
-      new_cand.party = party
+      candidate.party = party
       
-      new_cand.order = y_cand["order"] || 0
-      cont.candidates << new_cand
+      candidate.order = y_cand["order"] || 0
+      cont.candidates << candidate
     end
     
 # load another precinct into Election object
