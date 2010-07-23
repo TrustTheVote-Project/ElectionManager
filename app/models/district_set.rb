@@ -33,8 +33,13 @@ class DistrictSet < ActiveRecord::Base
   
   # returns nil if default is already set, new default DistrictSet if not set
   def self.need_default
-    return nil if @@default
-    return @@default = DistrictSet.new(:display_name => "Default Jurisdiction") unless @@default
+    if @@default
+      return nil
+    else
+      new_set = DistrictSet.new(:display_name => "Default Jurisdiction")
+      # @@default = new_set # Breaks the return, somehow?
+      return new_set
+    end
   end
   
 end

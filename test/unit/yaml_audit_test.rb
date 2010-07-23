@@ -84,7 +84,9 @@ class YAMLAuditTest < ActiveSupport::TestCase
       end
       
       should "list objects" do
+        puts "Audit objects:"
         puts @audit_objects
+        puts "Alerty audit objects:"
         puts @alerty_audit_objects
       end
       

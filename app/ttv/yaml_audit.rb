@@ -102,8 +102,8 @@ module TTV
       return district_set
     end
     
-# load another question into Election object
-# <tt>question::</tt>Hash contains single question from yaml
+    # load another question into Election object
+    # <tt>question::</tt>Hash contains single question from yaml
     def load_question yml_question
       if ballot_config?
         dist = District.find(0)
@@ -127,8 +127,8 @@ module TTV
       dist.questions << new_question
     end
     
-# load another contest into Election object
-# <tt>contest::</tt>Hash contains single contest from yaml
+    # load another contest into Election object
+    # <tt>contest::</tt>Hash contains single contest from yaml
     def load_contest yml_cont
       if @dist_id_map[yml_cont["district_ident"]].nil?
         # the only time we can survive without district and precinct lists is with ballot_config.
@@ -159,8 +159,8 @@ module TTV
       dist.contests << new_contest
      end
     
-  # load another candidate
-  # <tt>cand::</tt>Hash containing a single candidate from yaml
+    # load another candidate
+    # <tt>cand::</tt>Hash containing a single candidate from yaml
     def load_candidate y_cand, cont
       party_name = y_cand["party_display_name"]
       party = Party.find_by_display_name(party_name)
@@ -182,29 +182,29 @@ module TTV
       cont.candidates << candidate
     end
     
-# load another precinct into Election object
-# <tt>precinct::</tt>Hash contains a single precinct from yaml
+    # load another precinct into Election object
+    # <tt>precinct::</tt>Hash contains a single precinct from yaml
     def load_precinct yaml_prec
-# First find or create the precinct
+      # First find or create the precinct
       prec_disp_name = yaml_prec["display_name"]
       new_precinct = Precinct.find_by_display_name(prec_disp_name)
       if !new_precinct
         new_precinct = Precinct.new(:display_name => prec_disp_name)
       end
       if !yaml_prec.key? "district_list"
-# if so, just connect precinct to the built-in default district
+        # if so, just connect precinct to the built-in default district
         District.find(0).precincts << new_precinct
       else
-# otherwise connect the new precinct to each of the districts in its district_list
+        # otherwise connect the new precinct to each of the districts in its district_list
         load_districts yaml_prec["district_list"], new_precinct 
       end
     end
   
-#
-# Find or create the districts.
-#<tt>yaml_districts</tt>::district_list from yaml input
-#<tt>precinct</tt>::Precinct object that includes those districts
-#
+    #
+    # Find or create the districts.
+    #<tt>yaml_districts</tt>::district_list from yaml input
+    #<tt>precinct</tt>::Precinct object that includes those districts
+    #
     def load_districts yaml_districts, precinct
       if yaml_districts.nil?
         puts "*** invalid Precinct on Yaml Import:"
@@ -217,14 +217,14 @@ module TTV
         if !new_district
           new_district = District.new(:display_name => dist_disp_name, :district_type_id => 1)
         end
-#
-# Add this district to the district set being built, and to the precinct being built
-#
+        #
+        # Add this district to the district set being built, and to the precinct being built
+        #
         @dist_set.districts << new_district
         new_district.precincts << precinct
-#
-# For later linking, record which district "ident" got which District object
-#
+        #
+        # For later linking, record which district "ident" got which District object
+        #
         @dist_id_map[yaml_dist["ident"]] = new_district
       end
     end # def load_districts
