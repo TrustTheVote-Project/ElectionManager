@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '>2.3.3' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '>=2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -17,20 +17,6 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  # config.gem "sqlite3-ruby", :lib => "sqlite3"
-  # config.gem "aws-s3", :lib => "aws/s3"
-
-  config.gem "authlogic"
-  config.gem "prawn", :version => '>= 0.7.2'
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
-  config.gem 'rubyzip', :version => '>= 0.9.4', :lib => 'zip/zip'
-  config.gem 'redgreen', :version => '>=1.2.2'
-  config.gem 'searchlogic', :version => '>=2.4.14'
-  config.gem 'cancan'
-  config.gem 'faker'
-  config.gem 'machinist'
-  config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
