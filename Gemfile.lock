@@ -1,0 +1,127 @@
+--- 
+dependencies: 
+  faker: 
+    group: 
+    - :test
+    version: ">= 0"
+  rails: 
+    group: 
+    - :default
+    version: = 2.3.5
+  searchlogic: 
+    group: 
+    - :default
+    version: ">= 2.4.14"
+  authlogic: 
+    group: 
+    - :default
+    version: ">= 0"
+  sqlite3-ruby: 
+    group: 
+    - :default
+    version: = 1.2.5
+    require: 
+    - sqlite3
+  prawn: 
+    group: 
+    - :default
+    version: ">= 0.7.2"
+  machinist: 
+    group: 
+    - :test
+    version: ">= 0"
+  tpitale-constant_cache: 
+    group: 
+    - :default
+    version: ">= 0.1.2"
+    require: 
+    - constant_cache
+  will_paginate: 
+    group: 
+    - :default
+    version: ~> 2.3.11
+  mocha: 
+    group: 
+    - :test
+    version: ">= 0"
+  redgreen: 
+    group: 
+    - :default
+    version: ">= 1.2.2"
+  pdf-reader: 
+    group: 
+    - :test
+    version: ">= 0"
+  thoughtbot-shoulda: 
+    group: 
+    - :test
+    version: ">= 2.10.2"
+    require: 
+    - shoulda
+  rubyzip: 
+    group: 
+    - :default
+    version: ">= 0.9.4"
+    require: 
+    - zip/zip
+  cancan: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- rake: 
+    version: 0.8.7
+- Ascii85: 
+    version: 1.0.0
+- activesupport: 
+    version: 2.3.5
+- rack: 
+    version: 1.0.1
+- actionpack: 
+    version: 2.3.5
+- actionmailer: 
+    version: 2.3.5
+- activerecord: 
+    version: 2.3.5
+- activeresource: 
+    version: 2.3.5
+- authlogic: 
+    version: 2.1.5
+- cancan: 
+    version: 1.2.0
+- faker: 
+    version: 0.3.1
+- machinist: 
+    version: 1.0.6
+- mocha: 
+    version: 0.9.8
+- pdf-reader: 
+    version: 0.8.5
+- prawn-core: 
+    version: 0.8.4
+- prawn-layout: 
+    version: 0.8.4
+- prawn-security: 
+    version: 0.8.4
+- prawn: 
+    version: 0.8.4
+- rails: 
+    version: 2.3.5
+- redgreen: 
+    version: 1.2.2
+- rubyzip: 
+    version: 0.9.4
+- searchlogic: 
+    version: 2.4.21
+- sqlite3-ruby: 
+    version: 1.2.5
+- thoughtbot-shoulda: 
+    version: 2.11.1
+- tpitale-constant_cache: 
+    version: 0.1.2
+- will_paginate: 
+    version: 2.3.14
+hash: 5b0b3ffb3d1d3fbfd00d37e1fdb529547fea55ac
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org
