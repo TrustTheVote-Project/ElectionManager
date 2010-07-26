@@ -18,7 +18,7 @@ group :development do
 end
 
 group :test do
-  gem 'thoughtbot-shoulda', '2.10.2',  :require => 'shoulda'
+  gem 'thoughtbot-shoulda', '>=2.10.2',  :require => 'shoulda'
   gem 'machinist'
   gem 'faker'
   gem 'mocha'
