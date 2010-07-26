@@ -18,11 +18,21 @@ group :development do
 end
 
 group :test do
-  gem 'thoughtbot-shoulda', '>=2.10.2',  :require => 'shoulda'
+  gem 'shoulda', '=2.10.3',  :require => 'shoulda'
   gem 'machinist'
   gem 'faker'
   gem 'mocha'
   gem 'pdf-reader'
+end
+
+group 'cucumber' do
+  gem 'machinist'
+  gem 'faker'
+  gem 'cucumber-rails',  '>=0.3.0',  :require => false
+  gem 'database_cleaner',  '>=0.5.0', :require => false
+  gem 'webrat',  '>=0.7.0', :require => false
+  gem 'pickle', :require => false
+
 end
 
 group :production do
