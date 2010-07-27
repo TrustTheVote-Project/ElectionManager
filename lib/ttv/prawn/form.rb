@@ -26,7 +26,70 @@ module TTV
           :Encoding => :WinAnsiEncoding }.merge(options)
         @resources = ref(options)
       end
+      
+      def draw_checkbox(name, opts={}, &block)
+        options = { :width => 100, :height => font.height+font.line_gap}.merge(opts)
+        x,y = map_to_absolute(options[:at])
 
+        field_dict = {
+          # type of field is a text field
+          :FT => :Btn,
+          :V => :Yes, # the name used in the appearance stream (AP),
+          # AP is located in this field's annotation
+          :Ff => 0
+        }
+        
+        # get the annotations for the current page
+        annots = nil
+        if !page.dictionary.data[:Annots]
+          # create a reference to an empty annotation dictionary if
+          # one doesn't exist
+          page.dictionary.data[:Annots] = state.store.ref([])
+        end
+
+        # page annotations
+        annots = self.deref(page.dictionary.data[:Annots])
+        
+        annotation_dict = {
+          # Indirect Object Reference to the page's annotations
+          # not sure if this is required?
+          :P => page.dictionary.data[:Annots],
+          :Type => :Annot,
+          # This is a Widget annotation
+          :Subtype => :Widget,
+          # Rectangle, defining the location of the annotation on
+          # the page in default userspace units.
+          :Rect => [x, y, x + options[:width] , y + options[:height]],
+          # Annotation Flag. see 8.4.2 Annotation Flags
+          # not invisible, not hidden, print annotation when page is printed,...
+          :F => 4,
+          # :Contents => "Some contents here",
+          # MK is the appearance character dictionary
+          # BC is the widget annotation's border color, (DeviceRGB)
+          #:MK => {:BC => [0, 0, 0]},
+          :MK => {},
+          # BS is the border style dictionary,(width and dash pattern)
+          # :W => 1 (width 1 point), :S => :S (solid), 
+          :BS => {:Type => :Border, :W => 1, :S => :S},
+          #
+          :AS => :Yes,
+          # Appearance stream
+          #:AP => { :N => { :Yes => cs_on, :Off => cs_off}}
+        }
+
+        dict = field_dict.merge(annotation_dict)
+
+        # allow one to add to the dictionary in the block
+        yield dict  if block_given?
+        
+        #   puts "TGD: state.store.ref(dict).to_s = #{state.store.ref(dict).to_s.inspect}"
+        dict_ref = state.store.ref(dict)
+        @fields << dict_ref
+
+        # save this field/annotation in this current page's annotation dictionary
+        annots << dict_ref
+      end
+      
       def draw_text_field(name, opts={}, &block )
         options = { :width => 100, :height => font.height+font.line_gap}.merge(opts)
         x,y = map_to_absolute(options[:at])
@@ -100,7 +163,7 @@ module TTV
 
       end # text_field
 
-
+      
       def show_obj_store()
         out = ""
         out << "Prawn::Core::ObjectStore\n"
