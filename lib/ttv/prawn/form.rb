@@ -37,7 +37,7 @@ module TTV
           # (partial) field name
           :T => ::Prawn::Core::LiteralString.new(name),
           # default appearance, font, size, color, and so forth
-          #:DA => ::Prawn::Core::LiteralString.new("/Helv 0 Tf 0 g"),
+          # :DA => ::Prawn::Core::LiteralString.new("/Helv 0 Tf 0 g"),
           # field flag: not read only, not required, can be exported
           :Ff => 0,
         }
@@ -47,12 +47,26 @@ module TTV
           field_dict[:V] = ::Prawn::Core::LiteralString.new(options[:default])
         end
         
+        # get the annotations for the current page
+        annots = nil
+        if !page.dictionary.data[:Annots]
+          # create a reference to an empty annotation dictionary if
+          # one doesn't exist
+          page.dictionary.data[:Annots] = state.store.ref([])
+        end
+
+        # page annotations
+        annots = self.deref(page.dictionary.data[:Annots])
+        
         # The PDF object for this text box can also be used as
         # Annotation dictionary.
         # If any form field only has one annotation then it can be
         # used to represent both a field and and annotation      
         # sect 8.4.5 Widget Annotations
         annotation_dict = {
+          # Indirect Object Reference to the page's annotations
+          # not sure if this is required?
+          :P => page.dictionary.data[:Annots],
           :Type => :Annot,
           # This is a Widget annotation
           :Subtype => :Widget,
@@ -66,6 +80,7 @@ module TTV
           # MK is the appearance character dictionary
           # BC is the widget annotation's border color, (DeviceRGB)
           #:MK => {:BC => [0, 0, 0]},
+          :MK => {},
           # BS is the border style dictionary,(width and dash pattern)
           # :W => 1 (width 1 point), :S => :S (solid), 
           :BS => {:Type => :Border, :W => 1, :S => :S},
@@ -76,14 +91,12 @@ module TTV
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-#        puts "TGD: state.store.ref(dict).to_s = #{state.store.ref(dict).to_s.inspect}"
+        #   puts "TGD: state.store.ref(dict).to_s = #{state.store.ref(dict).to_s.inspect}"
         dict_ref = state.store.ref(dict)
         @fields << dict_ref
-        
-        # add annotations to the current page
-        page.dictionary.data[:Annots] ||= []
-        page.dictionary.data[:Annots] << dict_ref
-        
+
+        # save this field/annotation in this current page's annotation dictionary
+        annots << dict_ref
 
       end # text_field
 
