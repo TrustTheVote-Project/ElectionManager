@@ -59,6 +59,30 @@ class PrawnFormTest < ActiveSupport::TestCase
 
     end
     
+    should "be able to add one checkbox" do
+      
+      x = 100; y = 600; w = 300; h = 100
+      tbox_content = "My Check Box"
+      partial_name = "Partial Checkbox Field Name"
+      
+      @pdf.form do
+        
+        # create a box around the label and text field
+        bounding_box([x,y], :width => w, :height => h) do
+          stroke_bounds
+          top = 0;
+          left = 0
+          
+          label = "CheckBox 1: "
+          draw_text(label, :at =>[left, top])
+          draw_checkbox(partial_name, :at => [ width_of(label), top], :width => 100)
+          
+        end
+      end
+      
+      @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_one_checkbox.pdf"
+    end
+    
     should "be able to add one text field " do
       
       # text box origin(x,y), width and height
