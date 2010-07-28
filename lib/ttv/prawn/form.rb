@@ -53,7 +53,8 @@ module TTV
         annotation_dict = {
           # Indirect Object Reference to the page's annotations
           # not sure if this is required?
-          :P => page.dictionary.data[:Annots],
+          # NOTE: This breaks the iText RUPS parser when it's included!!
+          # :P => page.dictionary.data[:Annots],
           :Type => :Annot,
           # This is a Widget annotation
           :Subtype => :Widget,
@@ -129,7 +130,8 @@ module TTV
         annotation_dict = {
           # Indirect Object Reference to the page's annotations
           # not sure if this is required?
-          :P => page.dictionary.data[:Annots],
+          # NOTE: This breaks the iText RUPS parser when it's included!!
+          #:P => page.dictionary.data[:Annots],
           :Type => :Annot,
           # This is a Widget annotation
           :Subtype => :Widget,
