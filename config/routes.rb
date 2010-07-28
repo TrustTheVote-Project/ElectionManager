@@ -9,7 +9,9 @@ ActionController::Routing::Routes.draw do |map|
     :collection => {:current => :get,
                     :change => :get},
     :member => { :set => :get,
-                 :elections => :get}
+                 :elections => :get,
+                 :import => :get,
+                 :audit => :put}
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates, :member => { :move => :put }

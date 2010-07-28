@@ -15,7 +15,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation, :roles_attributes
+  attr_accessible :email, :password, :password_confirmation, :roles_attributes, :jurisdiction_memeberships
   
   has_many :roles, :class_name => "UserRole", :dependent => :destroy
   accepts_nested_attributes_for :roles, :reject_if => proc{ |role_name| role_name[:name].blank? }, :allow_destroy => true
@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
 
   def jurisdiction_member?(jurisdiction)
     jurisdiction && jurisdictions.include?(jurisdiction)
+  end
+  
+  def current_jurisdiction_admin?(current_jurisdiction)
+    !jurisdictions.empty? && (jurisdictions.detect{|o| o.id == current_jurisdiction.id})# o.id == current_context.jurisdiction.id}#.(&:role).include?('admin') 
   end
   
 end
