@@ -131,7 +131,7 @@ class PrawnFormTest < ActiveSupport::TestCase
           top = top + (font.height * 2)
           label = "Text Box 2: "
           draw_text(label, :at =>[left, top])
-          draw_text_field(partial_name, :at => [ width_of(label), top], :width => 100, :default => "Hey Joe") do |dict|
+          draw_text_field(partial_name << "2", :at => [ width_of(label), top], :width => 100, :default => "Hey Joe") do |dict|
             dict[:MK] =  {:BC => [0,0.5,0]}
           end
           
