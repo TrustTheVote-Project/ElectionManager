@@ -1,0 +1,21 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", jurisdictions_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_jurisdiction_path %></li>
+      <li><%= link_to "#{t("web-app-theme.import", :default => "Import")}", import_jurisdiction_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.audit", :default => "Audit")}", audit_jurisdiction_path %></li>
+
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title">Import <%= t("web-app-theme.audit", :default => "Audit")%> report</h2>
+    <div class="inner">
+
+      TODO: Display each object in @alert's display_text and options.
+
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
