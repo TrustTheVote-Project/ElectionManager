@@ -10,12 +10,12 @@
 
 <p>
   <b>District:</b>
-  <%=h @question.district_id %>
+  <%=h @question.requesting_district.display_name %>
 </p>
 
 <p>
   <b>Election:</b>
-  <%=h @question.election_id %>
+  <%=h @question.election.display_name %>
 </p>
 
 
