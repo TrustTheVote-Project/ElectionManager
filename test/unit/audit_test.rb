@@ -8,13 +8,13 @@ class AuditTest < ActiveSupport::TestCase
       @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")
       @hash_to_audit = YAML.load(@file) # Can be done in jurisdictions_controller, when file type is YAML
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
-      audit_obj = TTV::Audit.new(@hash_to_audit, [], @jurisdiction)
+      audit_obj = TTV::Audit.new(@hash_to_audit, [], @jurisdiction) # contexrt hash for third 
       @hash = audit_obj.hash
       @alerts = audit_obj.alerts
     end
     
     should "not be changed" do
-      assert_equal @hash_to_audit, @hash
+      assert_equal @hash_to_audit, @hash # 2 run the audit, check that the alerts come out
     end
     
     should "throw an alert for not defining a valid jurisdiction" do

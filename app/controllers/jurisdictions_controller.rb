@@ -51,7 +51,7 @@ class JurisdictionsController < ApplicationController
 
   end
 
-  def process
+  def do_import
     
   end
 
