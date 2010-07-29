@@ -6,6 +6,7 @@ tmp/pids
 tmp/sessions
 tmp/sockets
 test/tmp/*.pdf
+tmp/*.pdf
 .DS_Store
 .loadpath
 *~
