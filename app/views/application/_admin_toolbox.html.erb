@@ -16,7 +16,7 @@
   <% if current_user && current_user.root? %>
   <li><%=link_to "Maintenance Tasks", maintain_path %></li>
   <% end %>
-  <% if current_context.jurisdiction? && current_user && (current_user.current_jurisdiction_admin?(current_context.jurisdiction) || current_user.root?) %>
+  <% if current_user && current_context.jurisdiction && (current_user.current_jurisdiction_admin?(current_context.jurisdiction) || current_user.root?) %>
   <li><%= link_to "Import into Jurisdiction", import_jurisdiction_path(:id => current_context.jurisdiction.id) %></li>
   <% end %>
 

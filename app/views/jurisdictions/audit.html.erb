@@ -12,7 +12,18 @@
     <h2 class="title">Import <%= t("web-app-theme.audit", :default => "Audit")%> report</h2>
     <div class="inner">
 
-      TODO: Display each object in @alert's display_text and options.
+		<% form_tag ({:action => 'process'}, {:method => 'put'}) do %>
+    <% @alerts.each { |alert|  %>
+    <%= alert.message %>
+    <select name="<%= alert.type.to_s %>">
+      <% alert.options.each { |option| %>
+        <option value="test"><%= option %></option>
+      <% } %>
+    </select>
+    <br/>
+    <input type="submit" value="Submit" />
+    <% } %>
+    <% end %>
 
     </div>
   </div>

@@ -25,10 +25,6 @@ class JurisdictionsController < ApplicationController
     redirect_to :action => :elections
   end
  
-  def import
-
-  end  
- 
   def audit
     begin
       if params[:import_file].nil? 
@@ -36,10 +32,27 @@ class JurisdictionsController < ApplicationController
         redirect_to :back
         return
       end
-      if params[:type] == "ballot_config"
-        flash[:error] = "Let's audit!"
+      
+      begin
+        @import_obj = YAML.load(params[:import_file])
+      rescue
+        # Not of type YAML. Try XML.
+        flash[:error] = 'Ballot is not YAML.'
         return
       end
+      audit = TTV::Audit.new(@import_obj, [], current_context.jurisdiction)
+      @hash = audit.hash
+      @alerts = audit.alerts
+      render
     end
   end
+  
+  def import
+
+  end
+
+  def process
+    
+  end
+
 end

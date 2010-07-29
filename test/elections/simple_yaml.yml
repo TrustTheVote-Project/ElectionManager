@@ -1,0 +1,10 @@
+--- 
+audit_header: 
+  type: not_a_ballot_config
+ballot_info: 
+  precinct_list: 
+  - display_name: "The Only Precinct"
+    display_order: 0
+    district_list: 
+    - ident: DIST-0
+      display_name: The Only District
