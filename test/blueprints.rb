@@ -96,6 +96,9 @@ Precinct.blueprint do
 #  districts { District.make }
 end
 
+Language.blueprint do
+end
+
 JurisdictionMembership.blueprint do
   role { 'standard' }
 end
