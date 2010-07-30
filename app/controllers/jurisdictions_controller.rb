@@ -27,22 +27,29 @@ class JurisdictionsController < ApplicationController
  
   def audit
     begin
-      if params[:import_file].nil? 
+      if session[:import_hash].nil? and params[:import_file].nil? 
         flash[:error] = "Import failed because file was not specified."
         redirect_to :back
         return
       end
       
-      begin
-        @import_obj = YAML.load(params[:import_file])
-      rescue
-        # Not of type YAML. Try XML.
-        flash[:error] = 'Ballot is not YAML.'
-        return
+      if params[:import_file]
+        session[:import_hash] = nil
+        session[:import_alerts] = nil
+        begin
+          @import_obj = YAML.load(params[:import_file])
+        rescue
+          # Not of type YAML. Try XML.
+          flash[:error] = 'Ballot is not YAML.'
+          return
+        end
       end
-      audit = TTV::Audit.new(@import_obj, [], current_context.jurisdiction)
-      @hash = audit.hash
-      @alerts = audit.alerts
+      
+      audit = TTV::Audit.new(@import_obj, [], current_context.jurisdiction) unless session[:import_alerts]
+      audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
+      session[:import_hash] = audit.hash
+      session[:import_alerts] = audit.alerts
+      @alerts = session[:import_alerts]
       render
     end
   end
@@ -52,7 +59,22 @@ class JurisdictionsController < ApplicationController
   end
 
   def do_import
+    # Apply params choices to session[:import_alerts]
+    session[:import_alerts].each { |alert| 
+      choice = params.find{|param| param[0] == alert.type.to_s}
+      alert.choice = choice[1].to_sym if choice
+    }
     
+    if session[:import_alerts].size == 0
+      TTV::HashImport.new(@session[:import_hash])
+      flash[:notice] = "Import successful."
+      render
+    else
+      redirect_to :action => :audit # Fails because needs to be PUT
+    end
+    
+
+
   end
 
 end

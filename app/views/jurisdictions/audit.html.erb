@@ -12,12 +12,12 @@
     <h2 class="title">Import <%= t("web-app-theme.audit", :default => "Audit")%> report</h2>
     <div class="inner">
 
-		<% form_tag ({:action => 'process'}, {:method => 'put'}) do %>
+		<% form_tag ({:action => 'do_import'}, {:method => 'put'}) do %>
     <% @alerts.each { |alert|  %>
     <%= alert.message %>
     <select name="<%= alert.type.to_s %>">
       <% alert.options.each { |option| %>
-        <option value="test"><%= option %></option>
+        <option value="<%= option[0] %>"><%= option[1] %></option>
       <% } %>
     </select>
     <br/>
