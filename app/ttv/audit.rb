@@ -12,12 +12,6 @@ module TTV
       @jurisdiction = current_jurisdiction
       @ready_for_import = false
       
-      apply_alerts
-      audit
-      
-      if @alerts.size == 0
-        @ready_for_import = true
-      end
     end
     
     # Applies transforms to @hash based on alerts
@@ -39,6 +33,9 @@ module TTV
         else
           raise "No current jurisdiction and no jurisdiction in YAML file. Choose a jurisdiction before importing."
         end
+      end
+      if @alerts.size == 0
+        @ready_for_import = true
       end
     end
   end

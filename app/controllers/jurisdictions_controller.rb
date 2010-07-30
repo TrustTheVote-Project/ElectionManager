@@ -47,6 +47,8 @@ class JurisdictionsController < ApplicationController
       
       audit = TTV::Audit.new(@import_obj, [], current_context.jurisdiction) unless session[:import_alerts]
       audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
+      audit.apply_alerts
+      audit.audit
       session[:import_hash] = audit.hash
       session[:import_alerts] = audit.alerts
       @alerts = session[:import_alerts]
@@ -66,7 +68,8 @@ class JurisdictionsController < ApplicationController
     }
     
     if session[:import_alerts].size == 0
-      TTV::HashImport.new(@session[:import_hash])
+      import_obj = TTV::HashImport.new(@session[:import_hash])
+      import_obj.import
       flash[:notice] = "Import successful."
       render
     else

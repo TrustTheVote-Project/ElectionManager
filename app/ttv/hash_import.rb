@@ -10,7 +10,6 @@ module TTV
       @hash = hash
       @jurisdiction = nil
       @dist_id_map = {}
-      import
     end
     
     def import
