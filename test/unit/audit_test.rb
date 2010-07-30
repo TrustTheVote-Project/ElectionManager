@@ -13,10 +13,10 @@ class AuditTest < ActiveSupport::TestCase
     end
     
     should "not be changed" do
-      assert_equal @hash_to_audit, @audit_obj.hash # 2 run the audit, check that the alerts come out
+      assert_equal @hash_to_audit, @audit_obj.hash
     end
     
-    should "throw an alert for not defining a valid jurisdiction" do
+    should "store an alert for not defining a valid jurisdiction" do
       assert @audit_obj.alerts[0]
       assert_equal :use_current, @audit_obj.alerts[0].default_option
     end
@@ -24,13 +24,12 @@ class AuditTest < ActiveSupport::TestCase
     context "with an alert option response" do
       setup do
         @audit_obj.alerts[0].choice = :use_current
-        @audit_obj = TTV::Audit.new(@audit_obj.hash, @audit_obj.alerts, @jurisdiction)
         @audit_obj.apply_alerts
         @audit_obj.audit
       end
       
       should "have a fixed hash, have no alerts left, be ready for import" do
-        assert_equal 0, @audit_obj.alerts.size
+        assert_equal 0, @audit_obj.alerts.size # assert empty
         assert @audit_obj.ready_for_import
 
         assert_equal "District Set", @audit_obj.hash["ballot_info"]["jurisdiction_display_name"]
@@ -38,7 +37,7 @@ class AuditTest < ActiveSupport::TestCase
       
       context "after an import" do
         setup do
-          @import_obj = TTV::HashImport.new(@audit_obj.hash)
+          @import_obj = TTV::HashImport.new(@audit_obj.hash) # ImportEDH
           @import_obj.import
         end
         

@@ -49,10 +49,9 @@ class JurisdictionsController < ApplicationController
       audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
       audit.apply_alerts
       audit.audit
-      session[:import_hash] = audit.hash
+      session[:import_hash] = audit.hash # TODO: put in database, pass id through session
       session[:import_alerts] = audit.alerts
       @alerts = session[:import_alerts]
-      render
     end
   end
   
