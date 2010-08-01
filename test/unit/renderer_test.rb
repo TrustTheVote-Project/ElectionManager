@@ -101,7 +101,7 @@ class RendererTest < ActiveSupport::TestCase
       
       # setup
       @renderer.init_flow_items
-      @renderer.instance_variable_set(:@pagenum, 1)
+      @renderer.instance_variable_set(:@pagenum, 0)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
       
@@ -112,7 +112,7 @@ class RendererTest < ActiveSupport::TestCase
       # within2 points
       assert_instance_of AbstractBallot::Rect, flow_rect
       # check_rect(rectangle, delta, width, height, top, left, bottom,right)
-      assert check_rect(flow_rect, 2.0, 524.0, 637.7, 668.7, 26, 30, 550.0)
+      assert check_rect(flow_rect, 2.0, 524.0, 568.0, 633.0, 26, 65, 550.0)
       
       # should have 3 columns on the page
       assert_instance_of AbstractBallot::Columns, columns
@@ -130,6 +130,8 @@ class RendererTest < ActiveSupport::TestCase
 
       # draw a red line around the current column
       draw_rect(pdf, curr_column)
+      draw_rect(pdf, flow_rect, '00ff00')
+      draw_rect(pdf, column_rects.last)
       
       pdf.render_file("#{Rails.root}/tmp/renderer_start_page.pdf")                  
     end
@@ -225,8 +227,8 @@ class RendererTest < ActiveSupport::TestCase
     true
   end
   
-  def draw_rect(pdf, rect)
-    pdf.stroke_color 'ff0000' #"FFFFFF"
+  def draw_rect(pdf, rect, color='ff0000')
+    pdf.stroke_color color #"FFFFFF"
     pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
     pdf.stroke_line([rect.left, rect.top], [rect.left, rect.bottom])
     pdf.stroke_line([rect.left, rect.bottom], [rect.right, rect.bottom])
