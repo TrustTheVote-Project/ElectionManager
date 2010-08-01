@@ -591,8 +591,9 @@ module DefaultBallot
       when item.is_a?(Array) then FlowItem::Combo.new(item)
       end
     end
+    
     def instructions?
-     !@instructions_text_url.blank? && !@instructions_text_url.include?('missing')
+     !@instruction_text_url.blank? && !@instruction_text_url.include?('missing')
     end
   end
 
