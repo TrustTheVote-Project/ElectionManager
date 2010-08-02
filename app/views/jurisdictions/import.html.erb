@@ -10,7 +10,7 @@
   <div class="content">            
     <h2 class="title"><%= t("web-app-theme.import", :default => "Import")%> into Jurisdiction</h2>
     <div class="inner">
-			<% form_tag ({:action => 'audit'}, {:method => 'put', :multipart => true}) do %>
+			<% form_tag ({:action => 'import_file'}, {:method => 'put', :multipart => true}) do %>
 				Choose file: <%= file_field_tag "import_file", :accept => "text/yml, text/xml, text/yaml" %>
 				<br>Type: 
 					<%= select_tag :type, options_for_select([["Ballot Config", :ballot_config], ["Something Else", :something_else]], :ballot_config) %>

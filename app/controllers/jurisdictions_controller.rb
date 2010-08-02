@@ -25,6 +25,10 @@ class JurisdictionsController < ApplicationController
     redirect_to :action => :elections
   end
   
+  def import
+    
+  end
+  
   # 1. Receives file
   # 2. Checks XML vs. YAML
   # 3. Converts to EDH
@@ -39,10 +43,9 @@ class JurisdictionsController < ApplicationController
       end
       
       if params[:import_file]
-        session[:import_hash] = nil
-        session[:import_alerts] = nil
+        session[:audit_obj] = nil
         begin
-          @import_obj = YAML.load(params[:import_file])
+          edh_to_audit = YAML.load(params[:import_file])
         rescue
           # Not of type YAML. Try XML.
           flash[:error] = 'Ballot is not YAML.'
@@ -50,20 +53,25 @@ class JurisdictionsController < ApplicationController
         end
       end
       
-      audit = TTV::Audit.new(@import_obj, [], current_context.jurisdiction) unless session[:import_alerts]
-      audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
-      audit.apply_alerts
-      audit.audit
-      session[:import_hash] = audit.hash # TODO: put in database, pass id through session
-      session[:import_alerts] = audit.alerts
-      @alerts = session[:import_alerts]
+      audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
+      audit_obj.save!
+      session[:audit_id] = audit_obj.id
+      #audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
+      #audit.apply_alerts
+      audit_obj.audit
+      
+      if audit_obj.alerts.length == 0
+        redirect_to :action => :do_import
+      else
+        redirect_to :action => :interactive_audit
+      end
     end
   end
   
   # Get Audit object from DB (stored as params[:audit_id])
   # Display Audit object's Alerts
   def interactive_audit
-    
+    @alerts = Audit.find(session[:audit_id]).alerts
   end
   
   # Get Audit object from DB (stored as params[:audit_id])

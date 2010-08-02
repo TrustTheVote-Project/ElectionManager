@@ -2,7 +2,7 @@ require 'yaml'
 
 module TTV
   # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
-  class HashImport
+  class ImportEDH
     attr_reader :hash, :election
 
     # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.

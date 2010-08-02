@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
                     :change => :get},
     :member => { :set => :get,
                  :elections => :get,
+                 :import => :get,
                  :import_file => :put,
                  :interactive_audit => :get,
                  :apply_audit => :get,

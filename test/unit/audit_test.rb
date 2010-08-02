@@ -7,10 +7,17 @@ class AuditTest < ActiveSupport::TestCase
   context "An audit object" do
     setup do
       @hash = {:a => 2, :b => 3, :c => 4}
+      @alert = Alert.new({:message => "No jurisdiction name specified.", :alert_type => :no_jurisdiction, :options => 
+            {:use_current => "Use current jurisdiction test", :abort => "Abort import"}, :default_option => :use_current})
     end
     
     should "be instantiated with a hash" do
       audit_obj = Audit.new(:election_data_hash => @hash)
+    end
+    
+    should "associate with an alert" do
+      audit_obj = Audit.new(:election_data_hash => @hash)
+      audit_obj.alerts << @alert
     end
     
     
@@ -22,12 +29,12 @@ class AuditTest < ActiveSupport::TestCase
       @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")
       @hash_to_audit = YAML.load(@file) # Can be done in jurisdictions_controller, when file type is YAML
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
-      @audit_obj = TTV::Audit.new(@hash_to_audit, [], @jurisdiction) # contexrt hash for third
+      @audit_obj = Audit.new(:election_data_hash => @hash_to_audit, :district_set => @jurisdiction) # contexrt hash for third
       @audit_obj.audit
     end
     
     should "not be changed" do
-      assert_equal @hash_to_audit, @audit_obj.hash
+      assert_equal @hash_to_audit, @audit_obj.election_data_hash
     end
     
     should "store an alert for not defining a valid jurisdiction" do
@@ -44,14 +51,13 @@ class AuditTest < ActiveSupport::TestCase
       
       should "have a fixed hash, have no alerts left, be ready for import" do
         assert_equal 0, @audit_obj.alerts.size # assert empty
-        assert @audit_obj.ready_for_import
 
-        assert_equal "District Set", @audit_obj.hash["ballot_info"]["jurisdiction_display_name"]
+        assert_equal "District Set", @audit_obj.election_data_hash["ballot_info"]["jurisdiction_display_name"]
       end
       
       context "after an import" do
         setup do
-          @import_obj = TTV::HashImport.new(@audit_obj.hash) # ImportEDH
+          @import_obj = TTV::ImportEDH.new(@audit_obj.election_data_hash) # ImportEDH
           @import_obj.import
         end
         
