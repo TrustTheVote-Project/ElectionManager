@@ -634,6 +634,11 @@ module DefaultBallot
     def instructions?
      !@instruction_text_url.blank? && !@instruction_text_url.include?('missing')
     end
+    
+    def continuation_box?
+      # TODO: this should be an option set in the ballot style template
+      false
+    end
   end
 
 end

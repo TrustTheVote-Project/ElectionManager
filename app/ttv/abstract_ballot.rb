@@ -1,15 +1,15 @@
 require 'prawn'
 
 module AbstractBallot
-    
+  
   def self.create(election, precinct, style='default', lang='en', instruction_text_url='none',destination = nil)
-#      Prawn.debug = true
+    #      Prawn.debug = true
     scanner = TTV::Scanner.new()
     config = PDFBallotStyle.get_ballot_config(style, lang, election, scanner, instruction_text_url)
     renderer = Renderer.new(election, precinct, config, destination)
     renderer.render
     raise ArgumentError, "Translation to #{TTV::Translate.human_language(lang)} has not been done. Translate, then try again." if config.et.dirty?
-#      config.bt.save
+    #      config.bt.save
     renderer.to_s
   end
 
@@ -144,7 +144,7 @@ module AbstractBallot
       column_width = flow_rect.width / ( col_count * 1.0)
       col_count.times do |x|
         @column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
-        column_width, flow_rect.height)
+                                          column_width, flow_rect.height)
       end
       @next = @column_rects.first
     end
@@ -236,17 +236,17 @@ module AbstractBallot
 
     def render
       @pdf = Prawn::Document.new(
-      :page_layout => @c.page_layout,
-      :page_size => @c.page_size, 
-      :left_margin => @c.left_margin,
-      :right_margin => @c.right_margin,
-      :top_margin => @c.top_margin,
-      :bottom_margin => @c.bottom_margin,
-      :skip_page_creation => true,
-      :info => { :Creator => "TrustTheVote",
-        :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
-      }
-      )
+                                 :page_layout => @c.page_layout,
+                                 :page_size => @c.page_size, 
+                                 :left_margin => @c.left_margin,
+                                 :right_margin => @c.right_margin,
+                                 :top_margin => @c.top_margin,
+                                 :bottom_margin => @c.bottom_margin,
+                                 :skip_page_creation => true,
+                                 :info => { :Creator => "TrustTheVote",
+                                   :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+                                 }
+                                 )
       @c.setup(@pdf, @precinct)
 
       init_flow_items
@@ -278,21 +278,24 @@ module AbstractBallot
 
     def end_page(last_page)
       return if @page == nil
-      continuation_col = @page[:last_column]
-      return if continuation_col == nil
-      continuation_box = @page[:continuation_box]
-      columns = @page[:columns]
-      if (continuation_col.height < 
-        continuation_box.height(@c, continuation_col, @flow_items.size != 0) )
-        if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
-          continuation_col = columns.last
+      if @c.continuation_box?
+
+        continuation_col = @page[:last_column]
+        return if continuation_col == nil
+        continuation_box = @page[:continuation_box]
+        columns = @page[:columns]
+        if (continuation_col.height < 
+            continuation_box.height(@c, continuation_col, @flow_items.size != 0) )
+          if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
+            continuation_col = columns.last
+          end
         end
+        continuation_box.draw(@c, continuation_col, last_page)
       end
-      continuation_box.draw(@c, continuation_col, last_page)
       @c.page_complete(@pagenum, last_page)
       @page = nil
       if last_page
-#        puts @c.scanner.to_json
+        #        puts @c.scanner.to_json
       end
     end
 
