@@ -18,6 +18,9 @@ module TTV
     end
     
     def load_jurisdiction
+      puts "thisisjuris"
+      puts @hash
+      puts @hash["ballot_info"]["jurisdiction_display_name"] + "thisisjuris"
       @jurisdiction = DistrictSet.find_or_create_by_display_name(@hash["ballot_info"]["jurisdiction_display_name"])
     end
     

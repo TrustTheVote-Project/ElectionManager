@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
                  :import => :get,
                  :import_file => :put,
                  :interactive_audit => :get,
-                 :apply_audit => :get,
+                 :apply_audit => :put,
                  :do_import => :get}
   
   map.resources :candidates, :except => [:create]

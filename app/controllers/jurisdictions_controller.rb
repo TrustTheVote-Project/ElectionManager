@@ -60,7 +60,7 @@ class JurisdictionsController < ApplicationController
       #audit.apply_alerts
       audit_obj.audit
       
-      if audit_obj.alerts.length == 0
+      if audit_obj.alerts.size == 0
         redirect_to :action => :do_import
       else
         redirect_to :action => :interactive_audit
@@ -78,24 +78,26 @@ class JurisdictionsController < ApplicationController
   # audit.apply_alerts
   # audit, good: do_import, alerts: int_audit
   def apply_audit
-    # Apply params choices to session[:import_alerts]
-    session[:import_alerts].each { |alert| 
-      choice = params.find{|param| param[0] == alert.type.to_s}
-      alert.choice = choice[1].to_sym if choice
+    audit_obj = Audit.find(session[:audit_id])
+    audit_obj.alerts.each { |alert| 
+      choice = params.find{|param| param[0] == alert.alert_type}
+      alert.choice = choice[1] if choice
     }
     
-    if session[:import_alerts].size == 0
-      redirect to :action => :do_import
+    audit_obj.apply_alerts
+    
+    if audit_obj.alerts.size == 0
+      redirect_to :action => :do_import
     else
-      redirect_to :action => :audit # Fails because needs to be PUT
+      redirect_to :action => :interactive_audit
     end
   end
   
   # Get audit obj from session
   def do_import
-    import_obj = TTV::HashImport.new(@session[:import_hash])
+    import_obj = TTV::ImportEDH.new(Audit.find(session[:audit_id]).election_data_hash)
     import_obj.import
     flash[:notice] = "Import successful."
-    render
+    redirect_to :action => :import
   end
 end

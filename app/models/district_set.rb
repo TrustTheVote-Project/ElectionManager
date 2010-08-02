@@ -13,6 +13,7 @@
 class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
   has_many :elections
+  has_many :audits
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   has_many :jurisdiction_memberships, :class_name => "JurisdictionMembership"
