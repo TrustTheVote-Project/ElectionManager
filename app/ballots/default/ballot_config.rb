@@ -564,7 +564,7 @@ module DefaultBallot
         @pdf.draw_text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
         # need to add 5 points to the bottom of the flow_rect to get
         # it align with the bottom of the frame?
-        flow_rect.inset bar_width + @padding, (@pleaseVoteHeight*2)+5
+        flow_rect.inset bar_width + @padding, (@pleaseVoteHeight*2)+VPAD
       end
     end
 
@@ -597,7 +597,10 @@ module DefaultBallot
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
         unless @instruction_text_url.index("missing")
-          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600, :at =>[-6,+2] #need to move sizes into style template?
+#          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}",
+          #          :width => 172, :height=> 600, :at =>[-6,+2]
+          @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600 - (@pleaseVoteHeight+VPAD), :at =>[-6,+2]          
+          #  #need to move sizes into style template?
         end
       end
       rect.top = rect.bottom
