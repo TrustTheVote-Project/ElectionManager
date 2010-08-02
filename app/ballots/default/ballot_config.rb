@@ -219,8 +219,9 @@ module DefaultBallot
           add_ballot_mark @item, "Writein", config.pdf.page_number, location
           config.pdf.dash 1
           v = 16
-          config.pdf.stroke_line [rect.left + left, rect.top - v], 
-          [rect.right - 6, rect.top - v]
+          config.pdf.stroke_line [rect.left + left/2, rect.top - v], [rect.right - 6, rect.top - v]
+          v *= 2
+          config.pdf.stroke_line [rect.left + left/2, rect.top - v], [rect.right - 6, rect.top - v]
           rect.top -= v
           config.pdf.undash
         end
