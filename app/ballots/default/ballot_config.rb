@@ -128,7 +128,7 @@ module DefaultBallot
     class Question < FlowItem
 
       def min_width
-        return 300 if @item.question.length > 100
+        #return 300 if @item.question.length > 100
         return ANY_WIDTH
       end
 
@@ -147,10 +147,12 @@ module DefaultBallot
           rect.top -= config.pdf.bounds.height
         end
         rect.top -= 3
-        space, location = config.draw_checkbox rect, config.bt[:Yes]
+        #space, location = config.draw_checkbox rect, config.bt[:Yes]
+        space, location = config.draw_checkoval rect, config.bt[:Yes]
         add_ballot_mark @item, "Yes", config.pdf.page_number, location
         rect.top -= 3
-        space, location = config.draw_checkbox  rect, config.bt[:No]
+        #space, location = config.draw_checkbox  rect, config.bt[:No]
+        space, location = config.draw_checkoval  rect, config.bt[:No]
         add_ballot_mark @item, "No", config.pdf.page_number, location
         config.pdf.line_width 0.5
         rect.top -= 3
@@ -200,7 +202,10 @@ module DefaultBallot
             rect = yield
           end
           rect.top -= VPAD * 2
-          space, location = config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
+#          space, location = config.draw_checkbox rect,
+          #          config.et.get(candidate, :display_name) + "\n" +
+          #          config.et.get(candidate.party, :display_name)
+          space, location = config.draw_checkoval rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
           add_ballot_mark @item, candidate, config.pdf.page_number, location
         end
         @item.open_seat_count.times do
@@ -209,7 +214,8 @@ module DefaultBallot
              rect = yield
            end
           rect.top -= VPAD * 2
-          left, location = config.draw_checkbox rect, config.bt[:or_write_in]
+          #left, location = config.draw_checkbox rect, config.bt[:or_write_in]
+          left, location = config.draw_checkoval rect, config.bt[:or_write_in]
           add_ballot_mark @item, "Writein", config.pdf.page_number, location
           config.pdf.dash 1
           v = 16
@@ -360,6 +366,9 @@ module DefaultBallot
 
     CHECKBOX_WIDTH = 22
     CHECKBOX_HEIGHT = 10
+    OVAL_WIDTH = 17
+    OVAL_HEIGHT = 10
+    OVAL_ROUNDING = 5
     HPAD = 3
     HPAD2 = 6
     VPAD = 3
@@ -378,7 +387,9 @@ module DefaultBallot
       @top_margin = @bottom_margin = 30
       @pleaseVoteHeight = 30
       @padding = 8
-      @columns = @columns || 3
+      #@instruction = !@instruction_text_url.blank? && !@instruction_text_url.include?('missing')
+      #@columns = @instruction ? 3 : 2
+      @columns = 3
       @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
       @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
@@ -472,16 +483,40 @@ module DefaultBallot
         debug_stroke_bounds
       end
     end
-
+    
     def stroke_checkbox(pt = [0,0])
       @pdf.line_width 1.5
       @pdf.fill_color "FFFFFF"
       @pdf.stroke_color "000000"
-      @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+      @pdf.rectangle(pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT)
       @pdf.fill_and_stroke
       @pdf.fill_color "000000"
     end
-
+    
+    def stroke_checkoval(pt = [0,0])
+      @pdf.line_width 0.8
+      @pdf.fill_color "FFFFFF"
+      @pdf.stroke_color "000000"
+      @pdf.rounded_rectangle pt, OVAL_WIDTH, OVAL_HEIGHT, OVAL_ROUNDING
+      @pdf.fill_and_stroke
+      @pdf.fill_color "000000"
+    end
+    
+    def draw_checkoval(rect, text)
+      check_top_left, location = @scanner.align_checkbox(@pdf, [rect.left + FlowItem::HPAD2, rect.top])
+      stroke_checkoval check_top_left
+      rect.top -= rect.top - check_top_left[1]
+      spacer = check_top_left[0] - rect.left + OVAL_WIDTH +  FlowItem::HPAD2
+      #spacer = check_top_left[0] - rect.left + CHECKBOX_WIDTH + FlowItem::HPAD2
+      @pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
+        @pdf.font "Helvetica", :size => 10
+        @pdf.text text
+        rect.top -= [@pdf.bounds.height, OVAL_HEIGHT].max
+        #rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
+      end
+      return spacer, location  # returns left-hand side of text position
+    end
+    
     def draw_checkbox(rect, text)
 #      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
 #        stroke_checkbox
