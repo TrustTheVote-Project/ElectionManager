@@ -29,7 +29,7 @@ class AuditTest < ActiveSupport::TestCase
       @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")
       @hash_to_audit = YAML.load(@file) # Can be done in jurisdictions_controller, when file type is YAML
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
-      @audit_obj = Audit.new(:election_data_hash => @hash_to_audit, :district_set => @jurisdiction) # contexrt hash for third
+      @audit_obj = Audit.new(:election_data_hash => @hash_to_audit, :district_set => @jurisdiction)
       @audit_obj.audit
     end
     
@@ -67,9 +67,9 @@ class AuditTest < ActiveSupport::TestCase
           
           assert precinct, district
           
-          assert_equal precinct.districts[0], district
+          assert_equal district, precinct.districts[0]
           
-          assert_equal district.district_sets[0].display_name, @jurisdiction.display_name
+          assert_equal @jurisdiction.display_name, district.district_sets[0].display_name
         end
       end
       
