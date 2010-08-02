@@ -24,8 +24,13 @@ class JurisdictionsController < ApplicationController
     current_context.jurisdiction = DistrictSet.find(params[:id])
     redirect_to :action => :elections
   end
- 
-  def audit
+  
+  # 1. Receives file
+  # 2. Checks XML vs. YAML
+  # 3. Converts to EDH
+  # 4. create Audit.new(EDH) --> id
+  # 5. audit, good: do_import, alerts: int_audit
+  def import_file
     begin
       if session[:import_hash].nil? and params[:import_file].nil? 
         flash[:error] = "Import failed because file was not specified."
@@ -55,11 +60,16 @@ class JurisdictionsController < ApplicationController
     end
   end
   
-  def import
-
+  # Get Audit object from DB (stored as params[:audit_id])
+  # Display Audit object's Alerts
+  def interactive_audit
+    
   end
-
-  def do_import
+  
+  # Get Audit object from DB (stored as params[:audit_id])
+  # audit.apply_alerts
+  # audit, good: do_import, alerts: int_audit
+  def apply_audit
     # Apply params choices to session[:import_alerts]
     session[:import_alerts].each { |alert| 
       choice = params.find{|param| param[0] == alert.type.to_s}
@@ -67,16 +77,17 @@ class JurisdictionsController < ApplicationController
     }
     
     if session[:import_alerts].size == 0
-      import_obj = TTV::HashImport.new(@session[:import_hash])
-      import_obj.import
-      flash[:notice] = "Import successful."
-      render
+      redirect to :action => :do_import
     else
       redirect_to :action => :audit # Fails because needs to be PUT
     end
-    
-
-
   end
-
+  
+  # Get audit obj from session
+  def do_import
+    import_obj = TTV::HashImport.new(@session[:import_hash])
+    import_obj.import
+    flash[:notice] = "Import successful."
+    render
+  end
 end

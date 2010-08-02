@@ -10,9 +10,10 @@ ActionController::Routing::Routes.draw do |map|
                     :change => :get},
     :member => { :set => :get,
                  :elections => :get,
-                 :import => :get,
-                 :audit => :put,
-                 :do_import => :put}
+                 :import_file => :put,
+                 :interactive_audit => :get,
+                 :apply_audit => :get,
+                 :do_import => :get}
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates, :member => { :move => :put }

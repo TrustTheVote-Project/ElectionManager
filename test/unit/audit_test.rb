@@ -3,6 +3,20 @@ require 'ttv/alert'
 require 'ttv/audit'
 
 class AuditTest < ActiveSupport::TestCase
+  
+  context "An audit object" do
+    setup do
+      @hash = {:a => 2, :b => 3, :c => 4}
+    end
+    
+    should "be instantiated with a hash" do
+      audit_obj = Audit.new(:election_data_hash => @hash)
+    end
+    
+    
+    
+  end
+  
   context "An audited hash" do
     setup do
       @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")

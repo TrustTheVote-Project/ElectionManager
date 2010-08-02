@@ -2,12 +2,31 @@ require 'test_helper'
 require 'ttv/alert'
 
 class AlertTest < ActiveSupport::TestCase
+  context "An alert model object" do
+    setup do
+      @alert = Alert.new({:message => "No jurisdiction name specified.", :type => :no_jurisdiction, :options => 
+            {:use_current => "Use current jurisdiction test", :abort => "Abort import"}, :default_option => :use_current})
+    end
+    
+    should "be valid" do
+      assert @alert
+    end
+    
+    should "return values" do
+      assert_equal "No jurisdiction name specified.", @alert.message
+      assert_equal "Use current jurisdiction test", @alert.options[:use_current]
+      assert_equal :no_jurisdiction, @alert.type
+    end
+  end
+  
+  
   context "An empty alert object" do
     setup do
-      @alert = TTV::Alert.new(:type => :not_ballot_config)
+      @alert = Alert.new({:type => :not_ballot_config})
     end
     
     should "instantiate with a type" do
+      #@alert.type = :not_ballot_config
       assert_equal :not_ballot_config, @alert.type
     end
     
@@ -29,7 +48,7 @@ class AlertTest < ActiveSupport::TestCase
     
     should "print the message when converted to string" do
       @alert.message = "This file contians jurisdiction \"Wrong Jurisdiction\""
-      assert_equal "This file contians jurisdiction \"Wrong Jurisdiction\"", @alert.to_s
+      assert_equal "This file contians jurisdiction \"Wrong Jurisdiction\"", @alert.message
     end
     
   end
