@@ -12,10 +12,15 @@
     <div class="inner">
 			<% form_tag ({:action => 'import_file'}, {:method => 'put', :multipart => true}) do %>
 				Choose file: <%= file_field_tag "import_file", :accept => "text/yml, text/xml, text/yaml" %>
-				<br>Type: 
+				<br><br>Type: 
 					<%= select_tag :type, options_for_select([["Ballot Config", :ballot_config], ["Something Else", :something_else]], :ballot_config) %>
-        <br>	
-					<%= submit_tag "Submit" %>
+        <br /> <br />
+        <div class="group navform wat-cf">
+          <button class="button" type="submit">
+            <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Submit")}") %> <%= t("web-app-theme.save", :default => "Submit") %>
+          </button>  
+          <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", :back, :class => "button" %> 
+        </div>
 			<% end %>	
     </div>
   </div>

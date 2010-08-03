@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: parties
 #
@@ -7,6 +7,7 @@
 #  display_name :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  ident        :string(255)
 #
 
 class Party < ActiveRecord::Base

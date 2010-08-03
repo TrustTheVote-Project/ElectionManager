@@ -1,13 +1,18 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: district_sets
 #
-#  id             :integer         not null, primary key
-#  display_name   :string(255)
-#  secondary_name :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id                :integer         not null, primary key
+#  display_name      :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  secondary_name    :string(255)
+#  icon_file_name    :string(255)
+#  icon_content_type :string(255)
+#  icon_file_size    :integer
+#  icon_updated_at   :datetime
+#  descriptive_text  :string(255)
 #
 
 class DistrictSet < ActiveRecord::Base

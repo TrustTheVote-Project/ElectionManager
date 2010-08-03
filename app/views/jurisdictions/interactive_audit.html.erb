@@ -14,15 +14,22 @@
 
 		<% form_tag ({:action => 'apply_audit'}, :method => :put) do %>
     <% @alerts.each { |alert|  %>
-    <%= alert.message %>
+    <div class="group">
+    <label class="label"><%= alert.message %></label>
     <select name="<%= alert.alert_type %>">
       <% alert.options.each { |option| %>
-        <option value="<%= option[0] %>"><%= option[1] %></option>
+        <option <%= "selected=\"selected\" " if option[0] == alert.default_option %>value="<%= option[0] %>"><%= option[1] %></option>
       <% } %>
     </select>
-    <br/>
-    <input type="submit" value="Submit" />
+    <br/><br/>
+    </div>
     <% } %>
+    <div class="group navform wat-cf">
+      <button class="button" type="submit">
+        <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+      </button>  
+      <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", :back, :class => "button" %> 
+    </div>
     <% end %>
 
     </div>

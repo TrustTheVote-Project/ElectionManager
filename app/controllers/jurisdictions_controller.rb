@@ -43,7 +43,7 @@ class JurisdictionsController < ApplicationController
       end
       
       if params[:import_file]
-        session[:audit_obj] = nil
+        session[:audit_id] = nil
         begin
           edh_to_audit = YAML.load(params[:import_file])
         rescue
@@ -56,11 +56,9 @@ class JurisdictionsController < ApplicationController
       audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
       audit_obj.save!
       session[:audit_id] = audit_obj.id
-      #audit = TTV::Audit.new(session[:import_hash], session[:import_alerts], current_context.jurisdiction) if session[:import_alerts] && session[:import_hash]
-      #audit.apply_alerts
       audit_obj.audit
       
-      if audit_obj.alerts.size == 0
+      if audit_obj.ready_for_import?
         redirect_to :action => :do_import
       else
         redirect_to :action => :interactive_audit
@@ -68,15 +66,15 @@ class JurisdictionsController < ApplicationController
     end
   end
   
-  # Get Audit object from DB (stored as params[:audit_id])
-  # Display Audit object's Alerts
+  # 1. Get Audit object from DB (stored as params[:audit_id])
+  # 2. Display Audit object's Alerts
   def interactive_audit
     @alerts = Audit.find(session[:audit_id]).alerts
   end
   
-  # Get Audit object from DB (stored as params[:audit_id])
-  # audit.apply_alerts
-  # audit, good: do_import, alerts: int_audit
+  # 1. Get Audit object from DB (stored as params[:audit_id])
+  # 2. audit.apply_alerts
+  # 3. audit, good: do_import, alerts: int_audit
   def apply_audit
     audit_obj = Audit.find(session[:audit_id])
     audit_obj.alerts.each { |alert| 
@@ -86,14 +84,17 @@ class JurisdictionsController < ApplicationController
     
     audit_obj.apply_alerts
     
-    if audit_obj.alerts.size == 0
+    audit_obj.audit
+    
+    if audit_obj.ready_for_import?
       redirect_to :action => :do_import
     else
       redirect_to :action => :interactive_audit
     end
   end
   
-  # Get audit obj from session
+  # 1. Get Audit object from DB (stored as params[:audit_id])
+  # 2. Import from Audit's EDH
   def do_import
     import_obj = TTV::ImportEDH.new(Audit.find(session[:audit_id]).election_data_hash)
     import_obj.import

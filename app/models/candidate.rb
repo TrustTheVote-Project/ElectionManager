@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: candidates
 #
@@ -10,6 +10,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  ident        :string(255)
+#  order        :integer         default(0)
 #
 
 class Candidate < ActiveRecord::Base
