@@ -28,16 +28,25 @@ module TTV
       end
       
       def draw_checkbox(name, opts={}, &block)
-        options = { :width => 100, :height => font.height+font.line_gap}.merge(opts)
+        options = { :width => 10, :height => 10}.merge(opts)
         x,y = map_to_absolute(options[:at])
+
+        unchecked_box_ref = check_box(options[:width], options[:height], false)
+        checked_box_ref = check_box(options[:width], options[:height])
+
+        #puts "TGD: unchecked_box_ref is #{unchecked_box_ref}"
+        #puts "TGD: checked_box_ref is #{checked_box_ref}"
 
         field_dict = {
           # type of field is a text field
           :FT => :Btn,
-          :V => :Yes, # the name used in the appearance stream (AP),
+          :T => ::Prawn::Core::LiteralString.new(name),
+          :V => :Off, # the name used in the appearance stream (AP),
           # AP is located in this field's annotation
           :Ff => 0
         }
+
+        # TODO: use prawn annotate method
         
         # get the annotations for the current page
         annots = nil
@@ -68,14 +77,14 @@ module TTV
           # MK is the appearance character dictionary
           # BC is the widget annotation's border color, (DeviceRGB)
           #:MK => {:BC => [0, 0, 0]},
-          :MK => {},
+          :MK => {:BC =>[0.0], :BG=>[1.0]},
           # BS is the border style dictionary,(width and dash pattern)
           # :W => 1 (width 1 point), :S => :S (solid), 
-          :BS => {:Type => :Border, :W => 1, :S => :S},
+          #:BS => {:Type => :Border, :W => 1, :S => :S},
           #
-          :AS => :Yes,
+          :AS => :Off,
           # Appearance stream
-          #:AP => { :N => { :Yes => cs_on, :Off => cs_off}}
+          :AP => { :N => { :Yes => checked_box_ref, :Off => unchecked_box_ref}}
         }
 
         dict = field_dict.merge(annotation_dict)
@@ -83,8 +92,10 @@ module TTV
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-        #   puts "TGD: state.store.ref(dict).to_s = #{state.store.ref(dict).to_s.inspect}"
         dict_ref = state.store.ref(dict)
+        # The COS object, PDF object, reference. ex: 9 0 R
+        # puts "dict_ref = #{dict_ref}"
+        
         @fields << dict_ref
 
         # save this field/annotation in this current page's annotation dictionary
@@ -184,6 +195,89 @@ module TTV
         out
       end
 
+      def abs_rectangle(point, width, height)
+        # Prawn::Graphics.rectangle((point, width, height)
+        # maps the x and y, which I don't want!!
+        #x,y = map_to_absolute(point)
+        x, y = point.flatten
+        add_content("%.3f %.3f %.3f %.3f re" % [ x, y, width, height ])
+      end
+      
+      #   pdf.abs_line [100,100], [200,250]
+      #   pdf.abs_line(100,100,200,250)      
+      def abs_line(*points)
+        x0, y0, x1, y1 = points.flatten
+        abs_move_to(x0, y0)
+        abs_line_to(x1, y1)
+      end
+      
+      #   pdf.abs_move_to [100,50]
+      #   pdf.abs_move_to(100,50)
+      def abs_move_to(*point)
+        x,y = point.flatten
+        add_content("%.3f %.3f m" % [ x, y ])  
+      end
+      
+      #   pdf.abs_line_to [50,50]
+      #   pdf.line_to(50,50)
+      def abs_line_to(*point)
+        x, y = point.flatten
+        add_content("%.3f %.3f l" % [ x, y ])
+      end
+
+      def create_xobject_stamp(name, options = {}, &block)
+        
+        xobject_form_ref = create_xobject_form(options)
+        state.page.stamp_stream(xobject_form_ref, &block)
+        state.page.xobjects.merge!(name => xobject_form_ref)
+        xobject_form_ref
+
+      end
+      
+      def create_xobject_form(options={ })
+        opts  = { :x => 0, :y => 0, :width => 20, :height => 20}.merge(options)
+        xobject_form = ref!(:Type    => :XObject,
+                            :Subtype => :Form,
+                            :BBox    => [ opts[:x], opts[:y], opts[:width], opts[:height]])
+      end
+      
+      def check_box(width, height, checked = true)
+        box = if checked
+                # create_stamp makes the with and height the same of the page
+                # width and height. Not right for this.
+                #create_stamp("checked_box") do
+                checked_box_ref = create_xobject_stamp("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
+            abs_rectangle([0, 0], width, height)          
+            stroke
+            abs_line(0,0,width,height)
+            stroke
+            abs_line(0,height,width,0)
+            stroke
+            #abs_rectangle([5, 5], 10, 10)          
+            #fill
+            # canvas has a different coordinate system, origin is at
+            # top left not bottom left
+            #           canvas do
+            #             box_width = box_height = 20
+            #             rectangle([0, 0+box_height], box_width, box_height)
+            #             stroke
+            #             box_width = box_height = 10
+            #             rectangle([5, 5+box_height], box_width, box_height)
+            #             fill
+            #           end
+          end
+
+              else
+                create_xobject_stamp("unchecked_box",:x => 0, :y => 0, :width => width, :height => height) do
+            # this draws a rect at x = 18 and y = 10?
+            #rectangle([0, 0], 20, 20)
+            abs_rectangle([0, 0], width, height)
+            stroke
+          end
+              end
+      end
+      
+      
     end # Form
   end # Prawn
 end # TTV
