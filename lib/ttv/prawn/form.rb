@@ -34,39 +34,21 @@ module TTV
         unchecked_box_ref = check_box(options[:width], options[:height], false)
         checked_box_ref = check_box(options[:width], options[:height])
 
-        #puts "TGD: unchecked_box_ref is #{unchecked_box_ref}"
-        #puts "TGD: checked_box_ref is #{checked_box_ref}"
-
         field_dict = {
           # type of field is a text field
           :FT => :Btn,
           :T => ::Prawn::LiteralString.new(name),
+          # TODO: Make not be required?
           :V => :Off, # the name used in the appearance stream (AP),
-          # AP is located in this field's annotation
           :Ff => 0
         }
 
-        # TODO: use prawn annotate method
-        
-        # get the annotations for the current page
-        annots = nil
-        if !page.dictionary.data[:Annots]
-          # create a reference to an empty annotation dictionary if
-          # one doesn't exist
-          page.dictionary.data[:Annots] = store.ref([])
-        end
-
-        # page annotations
-        #annots = self.deref(page.dictionary.data[:Annots])
-        annots = page.dictionary.data[:Annots].data
-
         annotation_dict = {
-          # Indirect Object Reference to the page's annotations
-          # not sure if this is required?
-          # NOTE: This breaks the iText RUPS parser when it's included!!
+          # NOTE: This breaks the iText RUPS parser when it's
+          # included!!
+          # Guess we don't need to point to this annotation's parent
           # :P => page.dictionary.data[:Annots],
           :Type => :Annot,
-          # This is a Widget annotation
           :Subtype => :Widget,
           # Rectangle, defining the location of the annotation on
           # the page in default userspace units.
@@ -74,35 +56,28 @@ module TTV
           # Annotation Flag. see 8.4.2 Annotation Flags
           # not invisible, not hidden, print annotation when page is printed,...
           :F => 4,
-          # :Contents => "Some contents here",
           # MK is the appearance character dictionary
           # BC is the widget annotation's border color, (DeviceRGB)
-          #:MK => {:BC => [0, 0, 0]},
           :MK => {:BC =>[0.0], :BG=>[1.0]},
           # BS is the border style dictionary,(width and dash pattern)
           # :W => 1 (width 1 point), :S => :S (solid), 
           #:BS => {:Type => :Border, :W => 1, :S => :S},
-          #
-          :AS => :Off,
+          :AS => :Off, # default state for button
           # Appearance stream
           :AP => { :N => { :Yes => checked_box_ref, :Off => unchecked_box_ref}}
         }
-
+        
+        # We can have one dictionary for both the field and the widget annotation
         dict = field_dict.merge(annotation_dict)
 
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-        dict_ref = store.ref(dict)
-        # The COS object, PDF object, reference. ex: 9 0 R
-        # puts "dict_ref = #{dict_ref}"
-        
-        @fields << dict_ref
-
-        # save this field/annotation in this current page's annotation dictionary
-        annots << dict_ref
-
+        # Add this annotation to the current page's set of annotatations
+        # Add this field to this document's set of fields
+        @fields << annotate_redirect(dict)
       end
+      
       
       def draw_text_field(name, opts={}, &block )
         options = { :width => 100, :height => font.height+font.line_gap}.merge(opts)
@@ -118,23 +93,6 @@ module TTV
           # field flag: not read only, not required, can be exported
           :Ff => 0,
         }
-        
-        if options[:default]
-          # field's value
-          field_dict[:V] = ::Prawn::LiteralString.new(options[:default])
-        end
-        
-        # get the annotations for the current page
-        #annots = nil
-        if !page.dictionary.data[:Annots]
-          # create a reference to an empty annotation dictionary if
-          # one doesn't exist
-          page.dictionary.data[:Annots] = store.ref([])
-        end
-
-        # page annotations
-        #annots = self.deref(page.dictionary.data[:Annots])
-        annots = page.dictionary.data[:Annots].data
         
         # The PDF object for this text box can also be used as
         # Annotation dictionary.
@@ -170,13 +128,10 @@ module TTV
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-        #   puts "TGD: store.ref(dict).to_s = #{store.ref(dict).to_s.inspect}"
-        dict_ref = store.ref(dict)
-        @fields << dict_ref
-
-        # save this field/annotation in this current page's annotation dictionary
-        annots << dict_ref
-
+        # Add this annotation to the current page's set of annotatations
+        # Add this field to this document's set of fields
+        @fields << annotate_redirect(dict)
+        
       end # text_field
 
       
@@ -197,7 +152,8 @@ module TTV
         end
         out
       end
-
+      
+      # TODO: refactor abs_xxx methods into own module, something like canvas?
       def abs_rectangle(point, width, height)
         # Prawn::Graphics.rectangle((point, width, height)
         # maps the x and y, which I don't want!!
@@ -227,7 +183,8 @@ module TTV
         x, y = point.flatten
         add_content("%.3f %.3f l" % [ x, y ])
       end
-
+      
+      # TODO: refactor out into an XObject Form module
       def create_xobject_stamp(name, options = {}, &block)
         
         xobject_form_ref = create_xobject_form(options)
