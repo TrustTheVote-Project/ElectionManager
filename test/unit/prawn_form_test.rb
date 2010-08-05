@@ -68,7 +68,7 @@ class PrawnFormTest < ActiveSupport::TestCase
         
         # create a box around the label and text field
         bounding_box([x,y], :width => w, :height => h) do
-         # stroke_bounds
+          # stroke_bounds
           top = 0;
           left = 0
           
@@ -110,7 +110,7 @@ class PrawnFormTest < ActiveSupport::TestCase
       
       @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_one_text_field.pdf"
     end
-        should "be able to add multiple texts field " do
+    should "be able to add multiple texts field " do
       
       # text box origin(x,y), width and height
       
