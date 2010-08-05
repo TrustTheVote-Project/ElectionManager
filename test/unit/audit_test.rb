@@ -26,7 +26,7 @@ class AuditTest < ActiveSupport::TestCase
   
   context "An audited hash" do
     setup do
-      @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")
+      @file = File.new("#{RAILS_ROOT}/test/elections/import_refactor/simple_yaml.yml")
       @hash_to_audit = YAML.load(@file) # Can be done in jurisdictions_controller, when file type is YAML
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
       @audit_obj = Audit.new(:election_data_hash => @hash_to_audit, :district_set => @jurisdiction)
@@ -39,12 +39,12 @@ class AuditTest < ActiveSupport::TestCase
     
     should "store an alert for not defining a valid jurisdiction" do
       assert @audit_obj.alerts[0]
-      assert_equal :use_current, @audit_obj.alerts[0].default_option
+      assert_equal "use_current", @audit_obj.alerts[0].default_option
     end
     
     context "with an alert option response" do
       setup do
-        @audit_obj.alerts[0].choice = :use_current
+        @audit_obj.alerts[0].choice = "use_current"
         @audit_obj.apply_alerts
         @audit_obj.audit
       end

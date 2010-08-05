@@ -25,10 +25,6 @@ class JurisdictionsController < ApplicationController
     redirect_to :action => :elections
   end
   
-  def import
-    
-  end
-  
   # 1. Receives file
   # 2. Checks XML vs. YAML
   # 3. Converts to EDH

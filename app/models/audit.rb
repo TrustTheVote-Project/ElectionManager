@@ -12,7 +12,7 @@
 #
 
 class Audit < ActiveRecord::Base
-  serialize :election_data_hash
+  serialize :election_data_hash # TODO: find maximum size for serialize
   attr_accessible :display_name, :election_data_hash, :district_set, :district_set_id
   
   has_many :alerts
@@ -42,7 +42,7 @@ class Audit < ActiveRecord::Base
     end
   end
   
-  def ready_for_import?
+  def ready_for_import? # TODO: add check for whether audit's been done
     return alerts.size == 0
   end
 
