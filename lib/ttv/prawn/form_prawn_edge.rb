@@ -13,8 +13,8 @@ module TTV
         @fields = []
         instance_eval(&block) if block_given?
         
-        data = store.root.data
-        data[:AcroForm] = store.ref(:Fields => (@fields || fields),
+        data = state.store.root.data
+        data[:AcroForm] = state.store.ref(:Fields => (@fields || fields),
                                           :DR => (@resources || resources)
                                           )
       end
@@ -40,7 +40,7 @@ module TTV
         field_dict = {
           # type of field is a text field
           :FT => :Btn,
-          :T => ::Prawn::LiteralString.new(name),
+          :T => ::Prawn::Core::LiteralString.new(name),
           :V => :Off, # the name used in the appearance stream (AP),
           # AP is located in this field's annotation
           :Ff => 0
@@ -53,13 +53,12 @@ module TTV
         if !page.dictionary.data[:Annots]
           # create a reference to an empty annotation dictionary if
           # one doesn't exist
-          page.dictionary.data[:Annots] = store.ref([])
+          page.dictionary.data[:Annots] = state.store.ref([])
         end
 
         # page annotations
-        #annots = self.deref(page.dictionary.data[:Annots])
-        annots = page.dictionary.data[:Annots].data
-
+        annots = self.deref(page.dictionary.data[:Annots])
+        
         annotation_dict = {
           # Indirect Object Reference to the page's annotations
           # not sure if this is required?
@@ -93,7 +92,7 @@ module TTV
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-        dict_ref = store.ref(dict)
+        dict_ref = state.store.ref(dict)
         # The COS object, PDF object, reference. ex: 9 0 R
         # puts "dict_ref = #{dict_ref}"
         
@@ -101,7 +100,6 @@ module TTV
 
         # save this field/annotation in this current page's annotation dictionary
         annots << dict_ref
-
       end
       
       def draw_text_field(name, opts={}, &block )
@@ -112,29 +110,28 @@ module TTV
           # type of field is a text field
           :FT => :Tx,
           # (partial) field name
-          :T => ::Prawn::LiteralString.new(name),
+          :T => ::Prawn::Core::LiteralString.new(name),
           # default appearance, font, size, color, and so forth
-          # :DA => ::Prawn::LiteralString.new("/Helv 0 Tf 0 g"),
+          # :DA => ::Prawn::Core::LiteralString.new("/Helv 0 Tf 0 g"),
           # field flag: not read only, not required, can be exported
           :Ff => 0,
         }
         
         if options[:default]
           # field's value
-          field_dict[:V] = ::Prawn::LiteralString.new(options[:default])
+          field_dict[:V] = ::Prawn::Core::LiteralString.new(options[:default])
         end
         
         # get the annotations for the current page
-        #annots = nil
+        annots = nil
         if !page.dictionary.data[:Annots]
           # create a reference to an empty annotation dictionary if
           # one doesn't exist
-          page.dictionary.data[:Annots] = store.ref([])
+          page.dictionary.data[:Annots] = state.store.ref([])
         end
 
         # page annotations
-        #annots = self.deref(page.dictionary.data[:Annots])
-        annots = page.dictionary.data[:Annots].data
+        annots = self.deref(page.dictionary.data[:Annots])
         
         # The PDF object for this text box can also be used as
         # Annotation dictionary.
@@ -170,8 +167,8 @@ module TTV
         # allow one to add to the dictionary in the block
         yield dict  if block_given?
         
-        #   puts "TGD: store.ref(dict).to_s = #{store.ref(dict).to_s.inspect}"
-        dict_ref = store.ref(dict)
+        #   puts "TGD: state.store.ref(dict).to_s = #{state.store.ref(dict).to_s.inspect}"
+        dict_ref = state.store.ref(dict)
         @fields << dict_ref
 
         # save this field/annotation in this current page's annotation dictionary
@@ -183,13 +180,13 @@ module TTV
       def show_obj_store()
         out = ""
         out << "Prawn::Core::ObjectStore\n"
-        out << "\nIdentifiers: #{store.instance_variable_get(:@identifiers).inspect}"
-        out << "\nRoot/Catalog: #{store.root}"
-        out << "\nInfo:  #{store.info}"
-        out << "\nPages:  #{store.pages}"
+        out << "\nIdentifiers: #{state.store.instance_variable_get(:@identifiers).inspect}"
+        out << "\nRoot/Catalog: #{state.store.root}"
+        out << "\nInfo:  #{state.store.info}"
+        out << "\nPages:  #{state.store.pages}"
         out << "\n  -------------"
         # show me the all the objects in the store
-        store.each do |obj|
+        state.store.each do |obj|
           out << "\n"
           out << "Object Reference = #{obj}\n"
           out << "#{obj.object}\n"
@@ -231,8 +228,8 @@ module TTV
       def create_xobject_stamp(name, options = {}, &block)
         
         xobject_form_ref = create_xobject_form(options)
-        page.stamp_stream(xobject_form_ref, &block)
-        page.xobjects.merge!(name => xobject_form_ref)
+        state.page.stamp_stream(xobject_form_ref, &block)
+        state.page.xobjects.merge!(name => xobject_form_ref)
         xobject_form_ref
 
       end

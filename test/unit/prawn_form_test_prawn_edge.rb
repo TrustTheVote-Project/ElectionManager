@@ -58,7 +58,7 @@ class PrawnFormTest < ActiveSupport::TestCase
       assert_equal :Ariel, resources[:BaseFont]
 
     end
-
+    
     should "be able to add one checkbox" do
       
       x = 100; y = 600; w = 300; h = 100
@@ -110,7 +110,8 @@ class PrawnFormTest < ActiveSupport::TestCase
       
       @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_one_text_field.pdf"
     end
-        should "be able to add multiple texts field " do
+    
+    should "be able to add multiple texts field " do
       
       # text box origin(x,y), width and height
       
@@ -141,7 +142,75 @@ class PrawnFormTest < ActiveSupport::TestCase
       
       @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_mult_text_field.pdf"
     end
+    
+    should "be able to add a text field " do
+      return true
+      # text box origin(x,y), width and height
+      
+      x = 100; y = 600; w = 300; h = 100
+      tbox_content = "My Text Box"
+      partial_name = "Partial Field Name"
+      
+      @pdf.form do
+        # create a box around the label and text field
+        bounding_box([x,y], :width => w, :height => h) do
+          stroke_bounds
+          top = 0;
+          left = 0
+          
+          label = "Text Box 1: "
+          draw_text(label, :at =>[left, top])
+          draw_text_field(partial_name, :at => [ width_of(label), top], :width => 100, :default => tbox_content) 
+          
+          top = top + (font.height * 2)
+          label = "Text Box 2: "
+          draw_text(label, :at =>[left, top])
+          draw_text_field(partial_name, :at => [ width_of(label), top], :width => 100, :default => "Hey Joe") do |dict|
+            dict[:MK] =  {:BC => [0,0.5,0]}
+          end
+        end
+        @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_mult_text_field.pdf"
+      end
+      
+      # use PDF:Reader to get PDF contents
+      render_and_find_objects(@pdf)
+      form =  get_form()
+      # get the first field created above
+      textfield =  get_obj(form[:Fields].first)
+      #puts "TGD: form[:Fields]= #{form[:Fields].inspect}"
+      #puts "TGD: field = #{textfield.inspect}"
+      
+      # Text Field dictionary
+      # field type
+      assert_equal :Tx, textfield[:FT]
+      # (partial) field name
+      assert_equal partial_name, textfield[:T]
+      # field flag, not read only, not required, can be exported
+      assert_equal 0, textfield[:Ff]
+      # field's value
+      assert_equal tbox_content, textfield[:V]
+      # default appearance
+      #assert_equal '/Helv 0 Tf 0 g', textfield[:DA]
 
+      # Annotation dictionary
+      # Dictionary is an annotation
+      assert_equal :Annot, textfield[:Type]
+      # a Widget annotation directory
+      assert_equal :Widget, textfield[:Subtype]
+      # at this location in user space, which includes the page's
+      # margins offset
+      #assert_equal [178,610,278,626], textfield[:Rect]
+      # the border color is white ([0,0,0]) [R,G,B]
+      #assert_equal [0,0,0], textfield[:MK][:BC]
+      # the border style is solid 
+      assert_equal :S, textfield[:BS][:S]
+      # the border style is 1 point wide
+      assert_equal 1, textfield[:BS][:W]
+      # Annotation flag
+      assert_equal 4, textfield[:F]
+
+      @pdf.render_file "#{Rails.root}/tmp/prawn_form_draw_text_field.pdf"
+    end
     
   end # end context
 end
