@@ -2,6 +2,10 @@ module TTV
   module Prawn
     module Form
       
+      # This module redefines some drawing primitives, such as rectangle,
+      # circle_at and move_to. Prawn::Graphics builds in offsets to these.
+      include TTV::Prawn::Graphics
+      
       attr_reader :resources, :fields
       
       def test_method
@@ -232,78 +236,6 @@ module TTV
         out
       end
       
-      # TODO: refactor abs_xxx methods into own module, something like canvas?
-      def abs_rectangle(point, width, height)
-        # Prawn::Graphics.rectangle((point, width, height)
-        # maps the x and y, which I don't want!!
-        #x,y = map_to_absolute(point)
-        x, y = point.flatten
-        add_content("%.3f %.3f %.3f %.3f re" % [ x, y, width, height ])
-      end
-      
-      #   pdf.abs_line [100,100], [200,250]
-      #   pdf.abs_line(100,100,200,250)      
-      def abs_line(*points)
-        x0, y0, x1, y1 = points.flatten
-        abs_move_to(x0, y0)
-        abs_line_to(x1, y1)
-      end
-      
-      #   pdf.abs_move_to [100,50]
-      #   pdf.abs_move_to(100,50)
-      def abs_move_to(*point)
-        x,y = point.flatten
-        add_content("%.3f %.3f m" % [ x, y ])  
-      end
-      
-      #   pdf.abs_line_to [50,50]
-      #   pdf.line_to(50,50)
-      def abs_line_to(*point)
-        x, y = point.flatten
-        add_content("%.3f %.3f l" % [ x, y ])
-      end
-      
-      def abs_circle_at(point, options)
-        x,y = point
-        abs_ellipse_at [x, y], options[:radius]
-      end
-
-      KAPPA = 4.0 * ((Math.sqrt(2) - 1.0) / 3.0)      
-      def abs_ellipse_at(point, r1, r2 = r1)
-        x, y = point
-        l1 = r1 * KAPPA
-        l2 = r2 * KAPPA
-        
-        abs_move_to(x + r1, y)
-        
-        # Upper right hand corner
-        abs_curve_to [x,  y + r2],
-        :bounds => [[x + r1, y + l1], [x + l2, y + r2]]
-        
-        # Upper left hand corner
-        abs_curve_to [x - r1, y],
-        :bounds => [[x - l2, y + r2], [x - r1, y + l1]]
-        
-        # Lower left hand corner
-        abs_curve_to [x, y - r2],
-        :bounds => [[x - r1, y - l1], [x - l2, y - r2]]
-        
-        # Lower right hand corner
-        abs_curve_to [x + r1, y],
-        :bounds => [[x + l2, y - r2], [x + r1, y - l1]]
-        
-        abs_move_to(x, y)
-      end
-
-      def abs_curve_to(dest, options={ })
-        options[:bounds] or raise Prawn::Errors::InvalidGraphicsPath,
-        "Bounding points for bezier curve must be specified "+
-          "as :bounds => [[x1,y1],[x2,y2]]"
-
-        curve_points = (options[:bounds] << dest).map { |e| e }
-        add_content("%.3f %.3f %.3f %.3f %.3f %.3f c" %
-                    curve_points.flatten )
-      end
       # TODO: refactor out into an XObject Form module
       def create_xobject_stamp(name, options = {}, &block)
         
@@ -327,21 +259,19 @@ module TTV
         selected_radius = width/2-2
         if selected
           button = create_xobject_stamp("#{name}_radio_selected",:x => 0, :y => 0, :width => width, :height => height) do
-            
-            abs_circle_at([width/2, height/2], :radius => radius)
+            circle_at([width/2, height/2], :radius => radius)
             stroke
-            abs_circle_at([width/2, height/2], :radius => selected_radius)
+            circle_at([width/2, height/2], :radius => selected_radius)
             fill
           end
         else
           button = create_xobject_stamp("#{name}_radio_unselected",:x => 0, :y => 0, :width => width, :height => height) do
-            abs_circle_at([width/2, height/2],:radius => radius)
+            circle_at([width/2, height/2],:radius => radius)
             stroke
             end
         end
         button
       end
-      
       
       def check_box(width, height, checked = true)
         box = if checked
@@ -349,14 +279,14 @@ module TTV
                 # width and height. Not right for this.
                 #create_stamp("checked_box") do
                 checked_box_ref = create_xobject_stamp("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
-            abs_rectangle([0, 0], width, height)          
+            rectangle([0, 0], width, height)          
             stroke
-            abs_line(0,0,width,height)
+            
+            line(0,0,width,height)
             stroke
-            abs_line(0,height,width,0)
+
+            line(0,height,width,0)
             stroke
-            #abs_rectangle([5, 5], 10, 10)          
-            #fill
             # canvas has a different coordinate system, origin is at
             # top left not bottom left
             #           canvas do
@@ -372,8 +302,7 @@ module TTV
               else
                 create_xobject_stamp("unchecked_box",:x => 0, :y => 0, :width => width, :height => height) do
             # this draws a rect at x = 18 and y = 10?
-            #rectangle([0, 0], 20, 20)
-            abs_rectangle([0, 0], width, height)
+            rectangle([0, 0], width, height)
             stroke
           end
               end
