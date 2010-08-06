@@ -9,7 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629024114) do
+ActiveRecord::Schema.define(:version => 20100802153118) do
+
+  create_table "alerts", :force => true do |t|
+    t.string   "display_name"
+    t.string   "alert_type"
+    t.string   "message"
+    t.text     "objects"
+    t.text     "options"
+    t.text     "choice"
+    t.text     "default_option"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "audit_id"
+  end
+
+  create_table "audits", :force => true do |t|
+    t.string   "display_name"
+    t.text     "election_data_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "district_set_id"
+  end
 
   create_table "ballot_style_templates", :force => true do |t|
     t.string   "display_name"

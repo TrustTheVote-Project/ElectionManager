@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: contests
 #
@@ -11,6 +11,7 @@
 #  election_id      :integer
 #  created_at       :datetime
 #  updated_at       :datetime
+#  position         :integer         default(0)
 #
 
 class Contest < ActiveRecord::Base

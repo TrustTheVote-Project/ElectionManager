@@ -1,0 +1,20 @@
+# == Schema Information
+# Schema version: 20100802153118
+#
+# Table name: audits
+#
+#  id                 :integer         not null, primary key
+#  display_name       :string(255)
+#  election_data_hash :text
+#  created_at         :datetime
+#  updated_at         :datetime
+#  district_set_id    :integer
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value

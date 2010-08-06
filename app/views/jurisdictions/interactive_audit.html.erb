@@ -1,0 +1,39 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", jurisdictions_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_jurisdiction_path %></li>
+      <li><%= link_to "#{t("web-app-theme.import", :default => "Import")}", import_jurisdiction_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.audit", :default => "Audit")}", interactive_audit_jurisdiction_path %></li>
+
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title">Import <%= t("web-app-theme.audit", :default => "Audit")%> report</h2>
+    <div class="inner">
+
+		<% form_tag ({:action => 'apply_audit'}, :method => :put) do %>
+    <% @alerts.each { |alert|  %>
+    <div class="group">
+    <label class="label"><%= alert.message %></label>
+    <select name="<%= alert.alert_type %>">
+      <% alert.options.each { |option| %>
+        <option <%= "selected=\"selected\" " if option[0] == alert.default_option %>value="<%= option[0] %>"><%= option[1] %></option>
+      <% } %>
+    </select>
+    <br/><br/>
+    </div>
+    <% } %>
+    <div class="group navform wat-cf">
+      <button class="button" type="submit">
+        <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+      </button>  
+      <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", :back, :class => "button" %> 
+    </div>
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,4 +1,19 @@
 # == Schema Information
+# Schema version: 20100802153118
+#
+# Table name: elections
+#
+#  id                       :integer         not null, primary key
+#  display_name             :string(255)
+#  district_set_id          :integer
+#  start_date               :datetime
+#  created_at               :datetime
+#  updated_at               :datetime
+#  ballot_style_template_id :integer         default(0)
+#  default_voting_method_id :integer         default(0)
+#
+
+# == Schema Information
 # Schema version: 20100215144641
 #
 # Table name: elections

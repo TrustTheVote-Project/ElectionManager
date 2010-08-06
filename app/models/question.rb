@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: questions
 #
-#  id           :integer         not null, primary key
-#  display_name :string(255)
-#  question     :text
-#  district_id  :integer
-#  election_id  :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                     :integer         not null, primary key
+#  display_name           :string(255)
+#  question               :text
+#  election_id            :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#  requesting_district_id :integer
 #
 
 class Question < ActiveRecord::Base

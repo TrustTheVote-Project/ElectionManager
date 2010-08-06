@@ -1,18 +1,24 @@
 # == Schema Information
-# Schema version: 20100215144641
+# Schema version: 20100802153118
 #
 # Table name: district_sets
 #
-#  id             :integer         not null, primary key
-#  display_name   :string(255)
-#  secondary_name :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id                :integer         not null, primary key
+#  display_name      :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  secondary_name    :string(255)
+#  icon_file_name    :string(255)
+#  icon_content_type :string(255)
+#  icon_file_size    :integer
+#  icon_updated_at   :datetime
+#  descriptive_text  :string(255)
 #
 
 class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
   has_many :elections
+  has_many :audits
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   has_many :jurisdiction_memberships, :class_name => "JurisdictionMembership"
