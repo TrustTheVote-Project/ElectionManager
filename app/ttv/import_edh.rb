@@ -14,6 +14,11 @@ module TTV
     
     def import
       load_jurisdiction
+      import_precincts # Generate precinct ident map
+      import_districts # Use precinct ident map, generate district ident map
+      import_candidates
+      import_contests  # Use district ident map
+      
       @hash["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}
     end
     
@@ -31,6 +36,8 @@ module TTV
       if precinct.key? "district_list"
         load_districts precinct["district_list"], new_precinct 
       end
+      
+      # For later lookups during district import, map precinct "ident" to object
     end
     
     # find or create a list of districts.

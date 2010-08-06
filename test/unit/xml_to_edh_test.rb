@@ -5,7 +5,7 @@ class XMLToEDHTest < ActiveSupport::TestCase
   
   context "An XML file and conversion object" do
     setup do
-      @file = File.new("#{RAILS_ROOT}/test/elections/simple_xml.xml")
+      @file = File.new("#{RAILS_ROOT}/test/elections/refactored/simple_xml.xml")
       @converter = TTV::XMLToEDH.new(@file)
     end
     

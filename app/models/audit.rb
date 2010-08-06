@@ -32,18 +32,50 @@ class Audit < ActiveRecord::Base
 
   # Audits election_data_hash (without touching it), producing more @alerts
   def audit
-    if not election_data_hash["ballot_info"]["jurisdiction_display_name"]
-      if district_set
-        alerts << Alert.new(:message => "No jurisdiction name specified.", :alert_type => "no_jurisdiction", :options => 
-          {"use_current" => "Use current jurisdiction #{district_set.display_name}", "abort" => "Abort import"}, :default_option => "use_current")
-      else
-        raise "No current jurisdiction and no jurisdiction in YAML file. Choose a jurisdiction before importing."
+    @audit_in_progress = true
+    
+    audit_jurisdictions # Collect IDs of new jurisdictions and EM-imported jurisdictions
+    audit_precincts # Collect IDs (so we know which ones are valid for districts)
+    audit_districts 
+    audit_candidates
+    audit_contests
+    
+    @audit_in_progress = false
+    @audited = true
+  end
+  
+  def audit_jurisdictions
+    # For each jurisdiction in election_data_hash["ballot_info"]["jurisdictions"], store ident
+    
+    # For each jurisdiction in EM DistrictSets.all.each { |district_set| # store ident }
+  end
+  
+  def audit_precincts
+    # For each precinct in election_data_hash["ballot_info"]["precincts"], store ident with display_name
+      # After district audit, look for unattached precincts
+  end
+  
+  def audit_candidates
+    
+  end
+  
+  def audit_contests
+    
+  end
+  
+  def audit_districts
+    puts election_data_hash.to_yaml
+    election_data_hash["body"]["districts"].each{ |district|
+      puts district.to_yaml if district
+      if district && !district["jurisdiction_identref"]
+        alerts << Alert.new(:message => "No jurisdiction specified for district #{district["display_name"]}", :alert_type => "no_jurisdiction", :object => district["ident"].to_s, :options => 
+          {"use_current" => "Use current jurisdiction #{district_set.display_name}", "import" => "Import without a jurisdiction", "abort" => "Abort import"}, :default_option => "use_current")
       end
-    end
+    }
   end
   
   def ready_for_import? # TODO: add check for whether audit's been done
-    return alerts.size == 0
+    return ((alerts.size == 0) && !@audit_in_progress && @audited)
   end
 
 end
