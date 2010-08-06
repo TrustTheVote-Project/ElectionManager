@@ -1,3 +1,5 @@
+#require 'lib/ttv/prawn/form_xobject'
+
 module TTV
   module Prawn
     module Form
@@ -7,10 +9,6 @@ module TTV
       include TTV::Prawn::Graphics
       
       attr_reader :resources, :fields
-      
-      def test_method
-        "This worked"
-      end
       
       def form(options={}, &block )
 
@@ -59,15 +57,6 @@ module TTV
 
         # add this radio button group to the list of this document's fields
         @fields << radio_button_ref
-      end
-      
-      def deref(obj)
-        obj.is_a?(Prawn::Core::Reference) ? obj.data : obj
-      end
-      
-      def get_obj(ref)
-        obj = store[ref.identifier]
-        deref(obj)
       end
       
       def draw_radiobutton(name, opts={}, &block)
@@ -216,69 +205,38 @@ module TTV
         @fields << annotate_redirect(dict)
         
       end # text_field
-
       
-      def show_obj_store()
-        out = ""
-        out << "Prawn::Core::ObjectStore\n"
-        out << "\nIdentifiers: #{store.instance_variable_get(:@identifiers).inspect}"
-        out << "\nRoot/Catalog: #{store.root}"
-        out << "\nInfo:  #{store.info}"
-        out << "\nPages:  #{store.pages}"
-        out << "\n  -------------"
-        # show me the all the objects in the store
-        store.each do |obj|
-          out << "\n"
-          out << "Object Reference = #{obj}\n"
-          out << "#{obj.object}\n"
-          out << "\n  -------------"
-        end
-        out
-      end
-      
-      # TODO: refactor out into an XObject Form module
-      def create_xobject_stamp(name, options = {}, &block)
-        
-        xobject_form_ref = create_xobject_form(options)
-        page.stamp_stream(xobject_form_ref, &block)
-        #page.xobjects.merge!(name => xobject_form_ref)
-        xobject_form_ref
-
-      end
-      
-      def create_xobject_form(options={ })
-        opts  = { :x => 0, :y => 0, :width => 20, :height => 20}.merge(options)
-        xobject_form = ref!(:Type    => :XObject,
-                            :Subtype => :Form,
-                            :BBox    => [ opts[:x], opts[:y], opts[:width], opts[:height]])
-      end
-
+      # TODO: pass two code blocks containing PDF path contstructor
+      # operators.
+      # Ex:
+      # lambda { |x,y, w,h| rectangle([0, 0], width, height); stroke }
       def radio_button(name,width, height, selected=true)
         button = nil
         radius = width/2
         selected_radius = width/2-2
         if selected
-          button = create_xobject_stamp("#{name}_radio_selected",:x => 0, :y => 0, :width => width, :height => height) do
+          button = form_xobject("#{name}_radio_selected",:x => 0, :y => 0, :width => width, :height => height) do
             circle_at([width/2, height/2], :radius => radius)
             stroke
             circle_at([width/2, height/2], :radius => selected_radius)
             fill
           end
         else
-          button = create_xobject_stamp("#{name}_radio_unselected",:x => 0, :y => 0, :width => width, :height => height) do
+          button = form_xobject("#{name}_radio_unselected",:x => 0, :y => 0, :width => width, :height => height) do
             circle_at([width/2, height/2],:radius => radius)
             stroke
             end
         end
         button
       end
-      
+
       def check_box(width, height, checked = true)
-        box = if checked
-                # create_stamp makes the with and height the same of the page
-                # width and height. Not right for this.
-                #create_stamp("checked_box") do
-                checked_box_ref = create_xobject_stamp("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
+        box = nil
+        if checked
+          # create_stamp makes the with and height the same of the page
+          # width and height. Not right for this.
+          #create_stamp("checked_box") do
+          box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
             rectangle([0, 0], width, height)          
             stroke
             
@@ -298,14 +256,43 @@ module TTV
             #             fill
             #           end
           end
-
-              else
-                create_xobject_stamp("unchecked_box",:x => 0, :y => 0, :width => width, :height => height) do
+          
+        else
+          box = form_xobject("unchecked_box",:x => 0, :y => 0, :width => width, :height => height) do
             # this draws a rect at x = 18 and y = 10?
             rectangle([0, 0], width, height)
             stroke
           end
-              end
+        end
+        box 
+      end
+
+      # TODO: Move these into a Util module
+      def deref(obj)
+        obj.is_a?(Prawn::Core::Reference) ? obj.data : obj
+      end
+      
+      def get_obj(ref)
+        obj = store[ref.identifier]
+        deref(obj)
+      end
+      
+      def show_obj_store()
+        out = ""
+        out << "Prawn::Core::ObjectStore\n"
+        out << "\nIdentifiers: #{store.instance_variable_get(:@identifiers).inspect}"
+        out << "\nRoot/Catalog: #{store.root}"
+        out << "\nInfo:  #{store.info}"
+        out << "\nPages:  #{store.pages}"
+        out << "\n  -------------"
+        # show me the all the objects in the store
+        store.each do |obj|
+          out << "\n"
+          out << "Object Reference = #{obj}\n"
+          out << "#{obj.object}\n"
+          out << "\n  -------------"
+        end
+        out
       end
       
       

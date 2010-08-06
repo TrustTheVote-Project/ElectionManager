@@ -8,11 +8,6 @@ class PrawnFormTest < ActiveSupport::TestCase
       @pdf =  create_pdf("Test Form Text Field")
     end
 
-    should "extend Prawn::Document " do
-      assert @pdf
-      assert_equal "This worked", @pdf.test_method
-    end
-    
     should "generate an empty form" do
       # generate an empty form
       @pdf.form
