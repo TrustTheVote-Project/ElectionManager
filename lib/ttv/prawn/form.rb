@@ -27,6 +27,85 @@ module TTV
         @resources = ref(options)
       end
       
+      def draw_radio_group(name, opts={}, &block)
+        options = { :width => 10, :height => 10}.merge(opts)
+        x,y = map_to_absolute(options[:at])
+        
+        field_dict = {
+          :FT => :Btn, # type of field is a button
+          :T => ::Prawn::LiteralString.new(name),
+          :V => :Off, # Name of default state for each radio button.
+          :Ff => 32768, # Set of radio buttons
+          # references to widget annotations that represent each radio button
+          :Kids => []  
+        }
+
+        # fills the :Kids array with a set of annotations, each
+        # annotaton represents one radio button
+        yield field_dict if block_given?
+        
+        # get a reference to this radio button group
+        radio_button_ref = ref!(field_dict)
+
+        # create a reference in each radio button annotaton back to
+        # this radio button group
+        field_dict[:Kids].each do |annotation_ref|
+          annotation_ref.data.merge!(:Parent => radio_button_ref)
+        end
+
+        # add this radio button group to the list of this document's fields
+        @fields << radio_button_ref
+      end
+      
+      def deref(obj)
+        obj.is_a?(Prawn::Core::Reference) ? obj.data : obj
+      end
+      
+      def get_obj(ref)
+        obj = store[ref.identifier]
+        deref(obj)
+      end
+      
+      def draw_radiobutton(name, opts={}, &block)
+        options = { :width => 10, :height => 10, :selected => false}.merge(opts)
+        x,y = map_to_absolute(options[:at])
+        
+        #def radio_button(name, width, height, selected= true)
+        selected_button_ref = radio_button(name, options[:width], options[:height])
+        un_selected_button_ref = radio_button(name, options[:width], options[:height], false)
+        
+        # name of the xobject used to draw the on/selected state
+        selected_xobj_name = name.capitalize.to_sym
+        
+        annotation_dict = {
+          # NOTE: This breaks the iText RUPS parser when it's
+          # included!!
+          # Guess we don't need to point to this annotation's parent
+          # :P => page.dictionary.data[:Annots],
+          :Type => :Annot,
+          :Subtype => :Widget,
+          # Rectangle, defining the location of the annotation on
+          # the page in default userspace units.
+          :Rect => [x, y, x + options[:width] , y + options[:height]],
+          # Annotation Flag. see 8.4.2 Annotation Flags
+          # not invisible, not hidden, print annotation when page is printed,...
+          :F => 4,
+          # MK is the appearance character dictionary
+          # BC is the widget annotation's border color, (DeviceRGB)
+          :MK => {:BC =>[0.0], :BG=>[1.0]},
+          # BS is the border style dictionary,(width and dash pattern)
+          # :W => 1 (width 1 point), :S => :S (solid), 
+          #:BS => {:Type => :Border, :W => 1, :S => :S},
+           # default state for button
+          :AS => options[:selected] ? selected_xobj_name : :Off,
+          # Appearance stream
+          :AP => { :N => { selected_xobj_name => selected_button_ref, :Off => un_selected_button_ref}}
+        }
+        # Add this annotation to the current page's set of annotatations
+
+        annotate_redirect(annotation_dict)
+      end
+      
       def draw_checkbox(name, opts={}, &block)
         options = { :width => 10, :height => 10}.merge(opts)
         x,y = map_to_absolute(options[:at])
@@ -184,12 +263,53 @@ module TTV
         add_content("%.3f %.3f l" % [ x, y ])
       end
       
+      def abs_circle_at(point, options)
+        x,y = point
+        abs_ellipse_at [x, y], options[:radius]
+      end
+
+      KAPPA = 4.0 * ((Math.sqrt(2) - 1.0) / 3.0)      
+      def abs_ellipse_at(point, r1, r2 = r1)
+        x, y = point
+        l1 = r1 * KAPPA
+        l2 = r2 * KAPPA
+        
+        abs_move_to(x + r1, y)
+        
+        # Upper right hand corner
+        abs_curve_to [x,  y + r2],
+        :bounds => [[x + r1, y + l1], [x + l2, y + r2]]
+        
+        # Upper left hand corner
+        abs_curve_to [x - r1, y],
+        :bounds => [[x - l2, y + r2], [x - r1, y + l1]]
+        
+        # Lower left hand corner
+        abs_curve_to [x, y - r2],
+        :bounds => [[x - r1, y - l1], [x - l2, y - r2]]
+        
+        # Lower right hand corner
+        abs_curve_to [x + r1, y],
+        :bounds => [[x + l2, y - r2], [x + r1, y - l1]]
+        
+        abs_move_to(x, y)
+      end
+
+      def abs_curve_to(dest, options={ })
+        options[:bounds] or raise Prawn::Errors::InvalidGraphicsPath,
+        "Bounding points for bezier curve must be specified "+
+          "as :bounds => [[x1,y1],[x2,y2]]"
+
+        curve_points = (options[:bounds] << dest).map { |e| e }
+        add_content("%.3f %.3f %.3f %.3f %.3f %.3f c" %
+                    curve_points.flatten )
+      end
       # TODO: refactor out into an XObject Form module
       def create_xobject_stamp(name, options = {}, &block)
         
         xobject_form_ref = create_xobject_form(options)
         page.stamp_stream(xobject_form_ref, &block)
-        page.xobjects.merge!(name => xobject_form_ref)
+        #page.xobjects.merge!(name => xobject_form_ref)
         xobject_form_ref
 
       end
@@ -200,6 +320,28 @@ module TTV
                             :Subtype => :Form,
                             :BBox    => [ opts[:x], opts[:y], opts[:width], opts[:height]])
       end
+
+      def radio_button(name,width, height, selected=true)
+        button = nil
+        radius = width/2
+        selected_radius = width/2-2
+        if selected
+          button = create_xobject_stamp("#{name}_radio_selected",:x => 0, :y => 0, :width => width, :height => height) do
+            
+            abs_circle_at([width/2, height/2], :radius => radius)
+            stroke
+            abs_circle_at([width/2, height/2], :radius => selected_radius)
+            fill
+          end
+        else
+          button = create_xobject_stamp("#{name}_radio_unselected",:x => 0, :y => 0, :width => width, :height => height) do
+            abs_circle_at([width/2, height/2],:radius => radius)
+            stroke
+            end
+        end
+        button
+      end
+      
       
       def check_box(width, height, checked = true)
         box = if checked
