@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ballot>
+  <audit_header file_id="9F023408009B11DF924800163E3DE33F" create_date="2010-01-13 23:30:23" type="jurisdiction_slate" operator="Pito Salas" hardware="TTV Tabulator TAB02" software="TTV Tabulator 0.1 JUL-1-2008" />
+  <body>
+    <districts display_name="State of New Hampshire" type="state" ident="1" jurisdiction_identref="1">
+      <precincts identref="1"/>
+      <precincts identref="2"/>
+    </districts>
+    <districts/>
+    <precincts display_name="State of New Hampshire" ident="1"/>
+    <precincts display_name="Bedford County" ident="2"/>
+    <elections display_name="New Hampshire General Election" start_date="2010-11-04 08:00:00 -0700">
+			<contests display_name="County Attorney" district_identref="1" voting_method="winner_take_all">
+				<candidates identref="1"/>
+				<candidates identref="2"/>
+			</contests>
+      <contests/>
+    </elections>
+    <elections/>
+    <candidates ident="1" party="democrat" display_name="Marguerite Lefebvre Wageling"/>
+    <candidates ident="2" party="republican" display_name="Marguerite Lefebvre Wageling"/>
+    <jurisdictions ident="1" display_name="New Hampshire"/>
+    <jurisdictions/>
+  </body>
+</ballot>
