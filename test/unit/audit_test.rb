@@ -26,7 +26,7 @@ class AuditTest < ActiveSupport::TestCase
   
   context "An audited hash" do
     setup do
-      @file = File.new("#{RAILS_ROOT}/test/elections/simple_yaml.yml")
+      @file = File.new("#{RAILS_ROOT}/test/elections/refactored/simple_yaml.yml")
       @hash_to_audit = YAML.load(@file) # Can be done in jurisdictions_controller, when file type is YAML
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
       @audit_obj = Audit.new(:election_data_hash => @hash_to_audit, :district_set => @jurisdiction)
