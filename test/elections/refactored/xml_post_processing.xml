@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ballot>
+<ttv_object schema_version="0.1">
   <audit_header file_id="9F023408009B11DF924800163E3DE33F" create_date="2010-01-13 23:30:23" type="jurisdiction_slate" operator="Pito Salas" hardware="TTV Tabulator TAB02" software="TTV Tabulator 0.1 JUL-1-2008" />
   <body>
     <districts display_name="State of New Hampshire" type="state" ident="1" jurisdiction_identref="1">
@@ -22,4 +22,4 @@
     <jurisdictions ident="1" display_name="New Hampshire"/>
     <jurisdictions/>
   </body>
-</ballot>
+</ttv_object>
