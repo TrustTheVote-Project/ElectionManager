@@ -5,6 +5,7 @@ audit_header:
   operator: Pito Salas
   hardware: TTV Tabulator TAB02
   software: TTV Tabulator 0.1 JUL-1-2008
+  schema_version: 0.1
 
 body:
   elections:

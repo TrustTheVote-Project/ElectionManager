@@ -23,7 +23,7 @@ class Audit < ActiveRecord::Base
   def apply_alerts
     alerts.each{ |alert|
       if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
-        election_data_hash["ballot_info"]["jurisdiction_display_name"] = district_set.display_name
+        election_data_hash["body"]["districts"][0]["jurisdiction_identref"] = district_set.display_name
         self.save!
         alerts.delete(alert)
       end
@@ -64,9 +64,7 @@ class Audit < ActiveRecord::Base
   end
   
   def audit_districts
-    puts election_data_hash.to_yaml
     election_data_hash["body"]["districts"].each{ |district|
-      puts district.to_yaml if district
       if district && !district["jurisdiction_identref"]
         alerts << Alert.new(:message => "No jurisdiction specified for district #{district["display_name"]}", :alert_type => "no_jurisdiction", :object => district["ident"].to_s, :options => 
           {"use_current" => "Use current jurisdiction #{district_set.display_name}", "import" => "Import without a jurisdiction", "abort" => "Abort import"}, :default_option => "use_current")
