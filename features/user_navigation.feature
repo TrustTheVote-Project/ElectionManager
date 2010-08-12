@@ -61,4 +61,4 @@ Feature: Display Header
     Then I should see "View all users"
     Then I should see "View all style templates" 
     Then I should see "View all ballot styles"
-    Then I should see "Maintainenace Tasks"
+    Then I should see "Maintenance Tasks"

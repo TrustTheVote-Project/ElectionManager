@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       # need to force the delete into the hash when a this user's
       # current role is unchecked. accepts_nested_attribute needs this
       # delete
-      v.merge!('_delete' => '1' ) if  v['id'] && v['name'].blank? 
+      v.merge!('_destroy' => '1' ) if  v['id'] && v['name'].blank?
     end
     
     # @user = current_user

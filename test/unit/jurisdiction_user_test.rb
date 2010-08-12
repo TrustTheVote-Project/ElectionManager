@@ -88,7 +88,7 @@ class JurisdictionMembershipTest < ActiveSupport::TestCase
         
         setup { @user }
         
-        should "be a member of the jurisdiction assigned" do
+        should "(#{role_name}) be a member of the jurisdiction assigned" do
           assert @user.jurisdiction_member?(@juris)
         end
 
@@ -96,10 +96,6 @@ class JurisdictionMembershipTest < ActiveSupport::TestCase
           assert role_name, @user.jurisdiction_memberships.first.role
         end
         
-        should "should" << (role_name == "admin" ? "": " not") << " be a jurisdiction admin" do
-          assert (role_name == 'admin' ? @user.jurisdiction_admin? : !@user.jurisdiction_admin?)
-        end
-
         should "should" << (role_name == "admin" ? "": " not") << " be a jurisdiction admin" do
           assert (role_name == 'admin' ? @user.jurisdiction_admin? : !@user.jurisdiction_admin?)
         end

@@ -130,7 +130,7 @@ module TTV
       end
       
       def get(object, property)
-        key = "#{object.class.name}-#{object.id}.#{property}"
+        key = "#{object.class.name}-#{object.object_id}.#{property}"
         return @yaml[key] if @yaml.has_key? key
         if @lang == DEFAULT_LANGUAGE
           @yaml[key] = object.send property
