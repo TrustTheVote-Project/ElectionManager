@@ -30,8 +30,15 @@ class RendererTest < ActiveSupport::TestCase
       # Create 3 contests for this election
       pos = 0;
       ["State Rep", "Attorney General","Governor"].each do |contest_name|
-        add_contest(contest_name, e1, pos)
+        contest = Contest.make(:display_name => contest_name,
+                               :voting_method => VotingMethod::WINNER_TAKE_ALL,
+                               :district => e1.district_set.districts.first,
+                               :election => e1, :position => pos)
         pos += 1
+        [:democrat, :republican, :independent].each do |party_sym|
+          party = Party.make(party_sym)
+          Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => contest)
+        end
       end
       
       scanner = TTV::Scanner.new
@@ -202,17 +209,7 @@ class RendererTest < ActiveSupport::TestCase
       pdf.render_file("#{Rails.root}/tmp/renderer_render.pdf")                  
     end
   end # end AbstractBallot::Renderer context
-  
-  def add_contest(name, election, pos)
-    contest = Contest.new(:display_name => name)
-    contest.voting_method = VotingMethod::WINNER_TAKE_ALL
-    contest.district = election.district_set.districts.first
-    contest.election = election
-    contest.position = pos += 1
-    contest.save
-    #      puts "TGD: Contest created : contest = #{contest.inspect}"
-  end
-  
+
   def check_rect(rect, delta, w, h, top, left, bottom, right)
     assert_equal  w, rect.width
     assert_in_delta  h, rect.height, delta

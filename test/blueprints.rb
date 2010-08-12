@@ -32,6 +32,7 @@ Sham.define do
   jurisdiction_name(:unique => false) { %w{Northern MiddleSex Southern}.rand }
 
   display_name(:unique => false) { Faker::Lorem.words(1).first }
+  ident { Faker::Lorem.words(1).first }
   
 end
 
@@ -84,6 +85,11 @@ Contest.blueprint do
   election
 end
 
+Candidate.blueprint do
+  # contest
+  # party 
+end
+
 Question.blueprint do
   display_name
   requesting_district { District.make }
@@ -106,3 +112,20 @@ end
 JurisdictionMembership.blueprint(:admin) do
   role { 'admin' }
 end
+
+Party.blueprint do
+
+end
+
+Party.blueprint(:democrat) do
+  display_name { 'Democrat'}
+end
+
+Party.blueprint(:republican) do
+  display_name { 'Republican'}
+end
+
+Party.blueprint(:independent) do
+  display_name { 'Independent'}
+end
+
