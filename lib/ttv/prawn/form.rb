@@ -267,34 +267,6 @@ module TTV
         box 
       end
 
-      # TODO: Move these into a Util module
-      def deref(obj)
-        obj.is_a?(Prawn::Core::Reference) ? obj.data : obj
-      end
-      
-      def get_obj(ref)
-        obj = store[ref.identifier]
-        deref(obj)
-      end
-      
-      def show_obj_store()
-        out = ""
-        out << "Prawn::Core::ObjectStore\n"
-        out << "\nIdentifiers: #{store.instance_variable_get(:@identifiers).inspect}"
-        out << "\nRoot/Catalog: #{store.root}"
-        out << "\nInfo:  #{store.info}"
-        out << "\nPages:  #{store.pages}"
-        out << "\n  -------------"
-        # show me the all the objects in the store
-        store.each do |obj|
-          out << "\n"
-          out << "Object Reference = #{obj}\n"
-          out << "#{obj.object}\n"
-          out << "\n  -------------"
-        end
-        out
-      end
-      
       
     end # Form
   end # Prawn

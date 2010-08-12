@@ -10,6 +10,7 @@ require 'redgreen'
 require 'mocha'
 require "authlogic/test_case"
 require "pdf/reader"
+require 'ttv/prawn/util'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
