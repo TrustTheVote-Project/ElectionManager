@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'ballots/default/ballot_config.rb'
+require 'ballots/default/ballot_config'
 
 class ScannerTest < ActiveSupport::TestCase
   context "Scanner creation" do
@@ -33,6 +33,11 @@ class ScannerTest < ActiveSupport::TestCase
     # TODO: doesn't seem to do anything??
     should "render grid" do
       subject.render_grid(@pdf)
+      util = TTV::Prawn::Util.new(@pdf)
+      assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 1.000 0.000 scn\nf\n0.000 0.000 0.000 scn\n", util.page_contents[0]
+      
+      #puts "object_store = #{util.show_obj_store}"
+      
       @pdf.render_file("#{Rails.root}/tmp/scanner_render_grid.pdf")                
     end
     
