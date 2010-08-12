@@ -526,7 +526,9 @@ module DefaultBallot
         @pdf.draw_text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
         @pdf.draw_text "12001040100040", :at => [16, 410], :rotate => 90
         @pdf.draw_text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
-        flow_rect.inset bar_width + @padding, @pleaseVoteHeight
+        # need to add 5 points to the bottom of the flow_rect to get
+        # it align with the bottom of the frame?
+        flow_rect.inset bar_width + @padding, (@pleaseVoteHeight*2)+5
       end
     end
 
@@ -589,7 +591,10 @@ module DefaultBallot
       when item.is_a?(Array) then FlowItem::Combo.new(item)
       end
     end
-
+    
+    def instructions?
+     !@instruction_text_url.blank? && !@instruction_text_url.include?('missing')
+    end
   end
 
 end

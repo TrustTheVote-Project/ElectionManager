@@ -212,7 +212,7 @@ module AbstractBallot
     def init_flow_items
       @flow_items = []
       @precinct.districts(@election.district_set).each do |district|
-        header_item = @c.create_flow_item @c.et.get(district, :display_name)
+        header_item = @c.create_flow_item @c.et.get(district, :display_name)        
         #        @flow_items.push(@c.create_flow_item(district.display_name))
         contest_list = district.contestsForElection(@election)
         contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
@@ -268,7 +268,8 @@ module AbstractBallot
       # make space for continuation box
       continuation_box = @c.create_continuation_box
       columns.last.bottom += continuation_box.height(@c, columns.last, true)
-      @c.render_column_instructions(columns, @pagenum)
+      
+      @c.render_column_instructions(columns, @pagenum) if @c.instructions?
       curr_column = columns.next
 
       @page = { :continuation_box => continuation_box, :columns => columns, :last_column => curr_column }

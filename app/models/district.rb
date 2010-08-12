@@ -44,7 +44,7 @@ class District < ActiveRecord::Base
   end
   
   def questionsForElection(election)
-    return election.questions.select { |q| q.district_id == self.id }
+    return election.questions.select { |q| q.requesting_district.id == self.id }
 #    Question.find_all_by_election_id_and_district_id(election.id, self.id)
   end
   
