@@ -174,6 +174,20 @@ class BallotConfigTest < ActiveSupport::TestCase
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_frame.pdf")          
         end
         
+        should "render a header with an old date for this page" do
+          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          
+          # make sure the election has a start date
+          @e1.start_date = DateTime.new(2009, 11,3)
+          
+          @ballot_config.render_header flow_rect
+          
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4e6f76656d6265722030322c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
+
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
+        end
+        
         should "render a header for this page" do
           # should see a header with:
           # - Official Ballot text in upper left
@@ -185,14 +199,12 @@ class BallotConfigTest < ActiveSupport::TestCase
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           
           # make sure the election has a start date
-          @e1.start_date = DateTime.now
+          @e1.start_date = DateTime.new(2009, 7, 25)
           
           @ballot_config.render_header flow_rect
           
           util = TTV::Prawn::Util.new(@pdf)
-          # This will fail because the date the ballot is rendered is
-          # in the header
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4175677573742031322c2032303130> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0], "TODO: will probably fail because the date is in the header"
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4a756c792032342c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
 
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
