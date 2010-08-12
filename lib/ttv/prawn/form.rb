@@ -216,14 +216,14 @@ module TTV
         selected_radius = width/2-2
         if selected
           button = form_xobject("#{name}_radio_selected",:x => 0, :y => 0, :width => width, :height => height) do
-            circle_at([width/2, height/2], :radius => radius)
+            ttv_circle_at([width/2, height/2], :radius => radius)
             stroke
-            circle_at([width/2, height/2], :radius => selected_radius)
+            ttv_circle_at([width/2, height/2], :radius => selected_radius)
             fill
           end
         else
           button = form_xobject("#{name}_radio_unselected",:x => 0, :y => 0, :width => width, :height => height) do
-            circle_at([width/2, height/2],:radius => radius)
+            ttv_circle_at([width/2, height/2],:radius => radius)
             stroke
             end
         end
@@ -237,13 +237,13 @@ module TTV
           # width and height. Not right for this.
           #create_stamp("checked_box") do
           box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
-            rectangle([0, 0], width, height)          
+            ttv_rectangle([0, 0], width, height)          
             stroke
             
-            line(0,0,width,height)
+            ttv_line(0,0,width,height)
             stroke
 
-            line(0,height,width,0)
+            ttv_line(0,height,width,0)
             stroke
             # canvas has a different coordinate system, origin is at
             # top left not bottom left
@@ -260,7 +260,7 @@ module TTV
         else
           box = form_xobject("unchecked_box",:x => 0, :y => 0, :width => width, :height => height) do
             # this draws a rect at x = 18 and y = 10?
-            rectangle([0, 0], width, height)
+            ttv_rectangle([0, 0], width, height)
             stroke
           end
         end
