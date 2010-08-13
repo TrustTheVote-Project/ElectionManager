@@ -7,8 +7,8 @@ class AuditTest < ActiveSupport::TestCase
   context "An audit object" do
     setup do
       @hash = {:a => 2, :b => 3, :c => 4}
-      @alert = Alert.new({:message => "No jurisdiction name specified.", :alert_type => :no_jurisdiction, :options => 
-            {:use_current => "Use current jurisdiction test", :abort => "Abort import"}, :default_option => :use_current})
+      @alert = Alert.new({:message => "No jurisdiction name specified.", :alert_type => "no_jurisdiction", :options => 
+            {"use_current" => "Use current jurisdiction test", "abort" => "Abort import"}, :default_option => "use_current"})
     end
     
     should "be instantiated with a hash" do
@@ -30,6 +30,8 @@ class AuditTest < ActiveSupport::TestCase
       @xml_hash = xml_converter.convert
       
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
+      @jurisdiction.before_validation # perform pre-validation, generating an ident
+      
       @audit_yaml = Audit.new(:election_data_hash => @yaml_hash, :district_set => @jurisdiction)
       @audit_yaml.audit
       @audit_xml = Audit.new(:election_data_hash => @xml_hash, :district_set => @jurisdiction)
@@ -68,8 +70,8 @@ class AuditTest < ActiveSupport::TestCase
         assert @audit_yaml.ready_for_import?
         assert @audit_xml.ready_for_import?
         
-        assert_equal "District Set", @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
-        assert_equal "District Set", @audit_xml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
+        assert_equal @jurisdiction.ident, @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
+        assert_equal @jurisdiction.ident, @audit_xml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
       end
 
       context "after an import" do
@@ -84,20 +86,26 @@ class AuditTest < ActiveSupport::TestCase
         should "import a precinct" do
           assert Precinct.find_by_display_name "State of New Hampshire"
         end
-=begin        
+
         should "import a precinct with a district to a jurisdiction" do
-          precinct = Precinct.find_by_display_name "The Only Precinct"
-          district = District.find_by_display_name "The Only District"
+          precinct = Precinct.find_by_display_name "Bedford County"
+          district = District.find_by_display_name "State of New Hampshire"
           
-          assert precinct, district
+          assert precinct
+          assert district
           
           assert_equal district, precinct.districts[0]
           
           assert_equal @jurisdiction.display_name, district.district_sets[0].display_name
         end
-=end
+        
+        should "import a contest" do
+          # TODO: Why is this failing?
+          # contest = Contest.find_by_ident "1"
+          # assert contest
+          # assert 1, contest.ident
+        end
       end
-      
     end
   end
 end

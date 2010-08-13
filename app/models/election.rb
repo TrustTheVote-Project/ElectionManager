@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: elections
 #
@@ -11,6 +11,7 @@
 #  updated_at               :datetime
 #  ballot_style_template_id :integer         default(0)
 #  default_voting_method_id :integer         default(0)
+#  ident                    :string(255)
 #
 
 # == Schema Information
@@ -51,6 +52,18 @@ class Election < ActiveRecord::Base
     def validate 
        errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
     end
+    
+    #validates_presence_of :ident
+    #validates_uniqueness_of :ident, :message => "Non-unique election ident attempted: {{value}}."
+  
+    # Make sure that ident is not nil. If it is, create a unique one.
+=begin    def before_validation
+      if self.blank? || self.ident.blank?
+        self.ident = "elec-#{ActiveSupport::SecureRandom.hex}"
+        self.save!
+      end
+    end
+=end    
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
     def to_xml( options = {}, &block )

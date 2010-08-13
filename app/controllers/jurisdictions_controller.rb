@@ -40,15 +40,13 @@ class JurisdictionsController < ApplicationController
       
       if params[:import_file]
         session[:audit_id] = nil
-        begin
+        if params[:type] == "yaml"
           edh_to_audit = YAML.load(params[:import_file])
-        rescue
-          # Not of type YAML. Try XML.
-          flash[:error] = 'Ballot is not YAML.'
-          return
+        elsif params[:type] == "xml"
+          converter = TTV::XMLToEDH.new(params[:import_file])
+          edh_to_audit = converter.convert
         end
       end
-      
       audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
       audit_obj.save!
       session[:audit_id] = audit_obj.id

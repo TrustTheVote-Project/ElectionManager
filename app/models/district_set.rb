@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: district_sets
 #
@@ -13,6 +13,7 @@
 #  icon_file_size    :integer
 #  icon_updated_at   :datetime
 #  descriptive_text  :string(255)
+#  ident             :string(255)
 #
 
 class DistrictSet < ActiveRecord::Base
@@ -36,4 +37,14 @@ class DistrictSet < ActiveRecord::Base
     Precinct.find(precinct_ids)
   end
   
+  validates_presence_of :ident
+  validates_uniqueness_of :ident, :message => "Non-unique jurisdiction ident attempted: {{value}}."
+
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "juris-#{ActiveSupport::SecureRandom.hex}"
+      self.save!
+    end
+  end
 end
