@@ -9,8 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100816182113) do
-
+ActiveRecord::Schema.define(:version => 20100802153118) do
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
     t.string   "alert_type"
@@ -152,6 +151,14 @@ ActiveRecord::Schema.define(:version => 20100816182113) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ident"
+  end
+
+  create_table "precinct_splits", :force => true do |t|
+    t.string   "display_name"
+    t.integer  "precinct_id"
+    t.integer  "district_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "precincts", :force => true do |t|

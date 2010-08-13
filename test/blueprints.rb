@@ -102,6 +102,10 @@ Precinct.blueprint do
 #  districts { District.make }
 end
 
+PrecinctSplit.blueprint do
+  display_name
+end
+
 Language.blueprint do
 end
 
