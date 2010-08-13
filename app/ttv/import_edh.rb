@@ -11,6 +11,7 @@ module TTV
       @jurisdictions = []
     end
     
+    # Performs the import of all items contained within <tt>hash</tt>.
     def import
       @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris }
       @hash["body"]["districts"].each { |dist| load_district dist}
@@ -20,25 +21,30 @@ module TTV
       @hash["body"]["elections"].each { |elec| load_election elec}
     end
     
+    # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
     end
     
+    # Loads an EDH formatted district into EM
     def load_district district
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :type => DistrictType.find_or_create_by_title(district["type"]))
       new_district.district_sets << DistrictSet.find_by_ident(district["jurisdiction_identref"])
     end
 
+    # Loads an EDH formatted precinct into EM
     def load_precinct precinct
       new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], :ident => precinct["ident"])
       precinct["districts"].each{|dist| new_precinct.districts << District.find_by_ident(dist["identref"])} if precinct["districts"]
       new_precinct.save!
     end
     
+    # Loads an EDH formatted candidate into EM
     def load_candidate candidate
       new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party => Party.find_or_create_by_display_name(candidate["party"]))
     end
-
+    
+    # Loads an EDH formatted contest into EM
     def load_contest contest
       new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :district => District.find_by_ident(contest["district_identref"]))
       contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["identref"])} if contest["candidates"]
@@ -46,6 +52,7 @@ module TTV
       # new_contest.save!
     end
 
+    # Loads an EDH formatted election into EM
     def load_election election
       new_election = Election.find_or_create_by_ident(:display_name => election["display_name"], :ident => election["ident"])
       # TODO: Throws validation errors:
