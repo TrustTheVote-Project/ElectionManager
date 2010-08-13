@@ -49,6 +49,18 @@ module TTV
       def self.show_bounds_coordinates(bounds)
         puts "Bounds coordinates \"t, r, b, l\" = #{bounds_coordinates(bounds).join(', ').inspect}"
       end
+
+      def self.stroke_rect(pdf, rect, color='ff000')
+        pdf.stroke_color(color) #"FFFFFF"
+        pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
+        pdf.stroke_line([rect.left, rect.top], [rect.left, rect.bottom])
+        pdf.stroke_line([rect.left, rect.bottom], [rect.right, rect.bottom])
+        pdf.stroke_line([rect.right, rect.bottom], [rect.right, rect.top])
+        
+        # doesn't pick up stroke color, oh well
+        # pdf.rectangle([rect.left, rect.top], rect.width, rect.height)
+      end
+      
       def show_obj_store()
         out = ""
         out << "Prawn::Core::ObjectStore\n"

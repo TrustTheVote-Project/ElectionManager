@@ -27,6 +27,7 @@ module DefaultBallot
           #TTV::Prawn::Util.show_bounds_coordinates(config.pdf.bounds)
           
           config.pdf.move_down VPAD
+          # The @item is always just a Ruby String
           config.pdf.text @item, :leading => 1
 
           # bounding box is increased the height of header text, 14.87 pts
