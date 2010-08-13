@@ -3,7 +3,7 @@ require 'yaml'
 require 'xml'
 
 class ImportYAMLXMLRefactorTest < ActiveSupport::TestCase
-  
+=begin  
   context "A hash-converted XML and YAML file" do
     setup do
       @xml = File.new("#{RAILS_ROOT}/test/elections/refactored/xml_pre_processing_alerts.xml")
@@ -22,4 +22,5 @@ class ImportYAMLXMLRefactorTest < ActiveSupport::TestCase
       puts YAML.dump @hash_from_yaml
     end
   end
+=end
 end
