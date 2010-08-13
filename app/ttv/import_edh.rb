@@ -9,45 +9,49 @@ module TTV
     def initialize(hash)
       @hash = hash
       @jurisdictions = []
-      @precinct_id_map = {}
     end
     
     def import
       @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris }
-      @hash["body"]["precincts"].each { |prec| load_precinct prec}
       @hash["body"]["districts"].each { |dist| load_district dist}
+      @hash["body"]["precincts"].each { |prec| load_precinct prec}
       @hash["body"]["candidates"].each { |cand| load_candidate cand}
-      @hash["body"]["candidates"].each { |elec| load_election elec}
+      @hash["body"]["contests"].each { |cont| load_contest cont}
+      @hash["body"]["elections"].each { |elec| load_election elec}
     end
     
     def load_jurisdiction jurisdiction
-      @jurisdictions << DistrictSet.find_or_create_by_display_name(jurisdiction["display_name"])
-    end
-    
-    # load a single precinct into ElectionManager
-    # <tt>precinct::</tt> hash representing a single precinct
-    def load_precinct precinct
-      # First find or create the precinct
-      new_precinct = Precinct.find_or_create_by_display_name(precinct["display_name"])
-      
-      # For later lookups during district import, map precinct "ident" to object
-      @precinct_id_map[precinct["ident"]] = new_precinct
+      new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
     end
     
     def load_district district
-      # Use precinct ident map, generate district ident map
+      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :type => DistrictType.find_or_create_by_title(district["type"]))
+      new_district.district_sets << DistrictSet.find_by_ident(district["jurisdiction_identref"])
+    end
+
+    def load_precinct precinct
+      new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], :ident => precinct["ident"])
+      precinct["districts"].each{|dist| new_precinct.districts << District.find_by_ident(dist["identref"])} if precinct["districts"]
+      new_precinct.save!
     end
     
     def load_candidate candidate
-      
+      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party => Party.find_or_create_by_display_name(candidate["party"]))
+    end
+
+    def load_contest contest
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :district => District.find_by_ident(contest["district_identref"]))
+      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["identref"])} if contest["candidates"]
+      # TODO: Throws validation errors:
+      # new_contest.save!
     end
 
     def load_election election
-      
+      new_election = Election.find_or_create_by_ident(:display_name => election["display_name"], :ident => election["ident"])
+      # TODO: Throws validation errors:
+      # election["contests"].each{ |cont| new_election.contests << Contest.find_by_ident(cont["identref"])} if election["contests"]
+      # new_election.save!
     end
     
-    def load_contest contest
-      # Use district ident map
-    end
   end
 end

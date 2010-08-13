@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: audits
 #
@@ -23,11 +23,13 @@ class Audit < ActiveRecord::Base
   def apply_alerts
     alerts.each{ |alert|
       if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
-        election_data_hash["body"]["districts"][0]["jurisdiction_identref"] = district_set.display_name
-        self.save!
+        district_set.before_validation # Make sure it has an ident
+        election_data_hash["body"]["districts"][0]["jurisdiction_identref"] = district_set.ident
         alerts.delete(alert)
       end
     }
+    
+    self.save!
   end
 
   # Audits election_data_hash (without touching it), producing more @alerts
@@ -72,8 +74,7 @@ class Audit < ActiveRecord::Base
     }
   end
   
-  def ready_for_import? # TODO: add check for whether audit's been done
+  def ready_for_import?
     return ((alerts.size == 0) && !@audit_in_progress && @audited)
   end
-
 end

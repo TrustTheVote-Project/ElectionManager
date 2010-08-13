@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: precincts
 #

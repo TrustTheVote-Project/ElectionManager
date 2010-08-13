@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: questions
 #
@@ -10,6 +10,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  requesting_district_id :integer
+#  ident                  :string(255)
 #
 
 class Question < ActiveRecord::Base
@@ -33,4 +34,15 @@ class Question < ActiveRecord::Base
     end.flatten.compact
   end
   
+  #validates_presence_of :ident
+  #validates_uniqueness_of :ident, :message => "Non-unique question ident attempted: {{value}}."
+
+  # Make sure that ident is not nil. If it is, create a unique one.
+=begin  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "qstn-#{ActiveSupport::SecureRandom.hex}"
+      self.save!
+    end
+  end
+=end
 end
