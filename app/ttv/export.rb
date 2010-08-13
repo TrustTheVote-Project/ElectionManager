@@ -1,46 +1,33 @@
 require 'yaml'
 module TTV
 
-  # Export Yaml-based election using standard formats, and convert as needed to Election and related objects.
+  # Contains methods to export stored ElectionManager data as YAML, XML
   class Export
-    attr_reader :election, :election_hash, :audit_header_hash
+    attr_reader :election_data_hash, :audit_header_hash
   
-  # <tt>election::</tt> Election object to be exported
-    def initialize(election)
-      @elec = election
+    # Create export object. 
+    def initialize
     end
   
-  # Do the whole export process. Main entry point. Returns Yaml object ready to be saved.
-  #
-    def do_export 
-      precinct_list_h = export_district_set(@elec)
-      contests_h = export_contests(@elec)
-      questions_h = export_questions(@elec)
-      @ballot_info = {"display_name" => @elec.display_name, 
-                 "start_date" => @elec.start_date,
-                 "contest_list" => contests_h,
-                 "question_list" => questions_h,
-                 "precinct_list" => precinct_list_h,
-                 "jurisdiction_display_name" =>  @elec.display_name,
-                 "number_of_precincts" => precinct_list_h.length
-              }
-      @audit_header = {"type" => "ballot_config"} if ballot_config?
-      @election_hash = {"ballot_info" => @ballot_info,
-                  "audit_header" => @audit_header}
+    # Construct election data hash for a particular jurisdiction
+    def export_jurisdiction jurisdiction
+      @election_data_hash = {"body" => {}, "audit_header" => {}}
+      @election_data_hash["body"]["jurisdictions"] = [jurisdiction_hash jurisdiction]
+      @election_data_hash["body"]["districts"] = districts_from_jurisdictions_array @election_data_hash["body"]["jurisdictions"] 
+      @election_data_hash["body"]["precincts"] = precincts_from_districts_array @election_data_hash["body"]["districts"]
+      @election_data_hash["body"]["elections"] = elections_from_jurisdictions_array @election_data_hash["body"]["jurisdictions"]
+      @election_data_hash["body"]["contests"] = contests_from_elections_array @election_data_hash["body"]["elections"]
+      @election_data_hash["body"]["questions"] = questions_from_elections_array @election_data_hash["body"]["elections"]
+      @election_data_hash["body"]["candidates"] = candidates_from_contests_array @election_data_hash["body"]["contests"]
+      
+      @election_data_hash["audit_header"] = {"schema_version" => 0.1, "create_date" => Time.now.inspect,
+                       "type" => "jurisdiction_slate", "operator" => "Pito Salas"}
      end
- 
-  # Determine whether the election being exported is of type ballot_config
-  #
-    def ballot_config?
-      @elec.district_set == DistrictSet.find(0)  
-    end
- 
-#
-# Convert questions to a hash which can be converted to yaml directly.
-# <tt>election:</tt>  Election object
-# returns: an array containing the questions which can be converted to yaml for export
-
-    def export_questions(election)
+    
+    # Convert questions to an array of EDH elements
+    # <tt>elections:</tt> an array of elections in EDH format
+    # returns: an array containing the questions in EDH format
+    def export_questions_from_elections_array elections
       questions_h = []
       election.questions.each {|question|
         new_question_h = {"display_name" => question.display_name,
