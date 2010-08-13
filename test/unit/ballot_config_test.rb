@@ -1,6 +1,5 @@
 require 'test_helper'
-require 'ballots/default/ballot_config.rb'
-
+require 'ballots/default/ballot_config'
 
 class BallotConfigTest < ActiveSupport::TestCase
   setup_jurisdictions do  
@@ -245,10 +244,6 @@ class BallotConfigTest < ActiveSupport::TestCase
 
         should "get the Header flow item for Strings" do
           assert_instance_of DefaultBallot::FlowItem::Header, @ballot_config.create_flow_item("Header Content String")
-        end
-        
-        should "get the Combo flow item for Arrays" do
-          assert_instance_of DefaultBallot::FlowItem::Combo, @ballot_config.create_flow_item([])
         end
 
       end # end initialize context

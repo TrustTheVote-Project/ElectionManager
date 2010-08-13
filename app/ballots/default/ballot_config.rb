@@ -7,6 +7,9 @@
 require 'ttv/abstract_ballot.rb'
 require 'prawn'
 
+require 'ballots/default/combo_flow'
+require 'ballots/default/header_flow'
+
 module DefaultBallot
   include ::AbstractBallot
   
@@ -65,64 +68,6 @@ module DefaultBallot
 
     def to_s
       @item.to_s
-    end
-
-    class Combo
-      def initialize(flow_items)
-        @flow_items = flow_items
-      end
-
-      def fits(config, rect)
-        r = rect.clone
-        config.pdf.transaction do
-          @flow_items.each { |f|  f.draw config, r if r.height > 0 }
-          config.pdf.rollback
-        end
-        r.height > 0
-      end
-
-      def min_width
-        @flow_items.map { |r| r.min_width }.max
-      end
-
-      def draw(config, rect, &bloc)
-        reset_ballot_marks
-        @flow_items.each { |f| f.draw config, rect, &bloc }
-      end
-      
-      def reset_ballot_marks
-        @flow_items.each { |f| f.reset_ballot_marks }
-      end
-      
-      def ballot_marks
-        ret = []
-        @flow_items.each { |f| ret.concat f.ballot_marks }
-        ret
-      end
-
-      def to_s
-        s = "Combo\n"
-        @flow_items.each { |f| s += f.to_s + "\n" }
-        s
-      end
-    end
-
-    class Header < FlowItem
-      def min_width
-        ANY_WIDTH
-      end
-
-      def draw(config, rect)
-        top = rect.top
-        config.pdf.font("Helvetica", :size => 10, :style => :bold )
-        config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD * 2) do
-          config.pdf.move_down VPAD
-          config.pdf.text @item, :leading => 1
-          rect.top -= config.pdf.bounds.height 
-        end
-        config.frame_item rect, top
-      end
-
     end
 
     class Question < FlowItem

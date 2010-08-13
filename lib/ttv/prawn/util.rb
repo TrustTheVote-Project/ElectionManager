@@ -40,7 +40,15 @@ module TTV
           page[:Contents].stream
         end
       end
-      
+
+      def self.bounds_coordinates(bounds)
+        ArgumentError unless bounds.is_a? ::Prawn::Document::BoundingBox
+        [bounds.top, bounds.right, bounds.bottom, bounds.left]
+      end
+
+      def self.show_bounds_coordinates(bounds)
+        puts "Bounds coordinates \"t, r, b, l\" = #{bounds_coordinates(bounds).join(', ').inspect}"
+      end
       def show_obj_store()
         out = ""
         out << "Prawn::Core::ObjectStore\n"

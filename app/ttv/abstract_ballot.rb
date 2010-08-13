@@ -30,7 +30,7 @@ module AbstractBallot
   end
 
   class Rect
-    attr_accessor :top, :left, :bottom, :right
+    attr_accessor :top, :left, :bottom, :right, :original_top
 
     def initialize(top, left, bottom, right)
       @top, @left, @bottom , @right = top, left, bottom, right
