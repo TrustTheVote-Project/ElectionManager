@@ -1,0 +1,136 @@
+%PDF-1.3
+%ÿÿÿÿ
+1 0 obj
+<< /Producer (Prawn)
+/Creator (TrustTheVote)
+/Title (Test Form Text Field)
+>>
+endobj
+2 0 obj
+<< /Count 1
+/Kids [5 0 R]
+/Type /Pages
+>>
+endobj
+3 0 obj
+<< /Pages 2 0 R
+/AcroForm 11 0 R
+/Type /Catalog
+>>
+endobj
+4 0 obj
+<< /Length 295
+>>
+stream
+/DeviceRGB cs
+0.000 0.000 0.000 scn
+/DeviceRGB CS
+0.000 0.000 0.000 SCN
+q
+118.000 530.000 300.000 100.000 re
+S
+
+BT
+118 530.0 Td
+/F1.0 12 Tf
+[<54> 120 <65> 30 <787420426f> 30 <7820313a> 50 <20>] TJ
+ET
+
+
+BT
+118 557.744 Td
+/F1.0 12 Tf
+[<54> 120 <65> 30 <787420426f> 30 <7820323a> 50 <20>] TJ
+ET
+
+Q
+
+endstream
+endobj
+5 0 obj
+<< /Parent 2 0 R
+/Resources << /Font << /F1.0 6 0 R
+>>
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+>>
+/MediaBox [0 0 612.0 792.0]
+/Annots 7 0 R
+/Contents 4 0 R
+/Type /Page
+>>
+endobj
+6 0 obj
+<< /BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+[8 0 R 9 0 R]
+endobj
+8 0 obj
+<< /Ff 0
+/FT /Tx
+/BS << /W 1
+/S /S
+/Type /Border
+>>
+/Subtype /Widget
+/T (Partial Field Name)
+/Rect [182.032 530.0 282.032 546.644]
+/F 4
+/MK << >>
+/Type /Annot
+>>
+endobj
+9 0 obj
+<< /Ff 0
+/FT /Tx
+/BS << /W 1
+/S /S
+/Type /Border
+>>
+/Subtype /Widget
+/T (Partial Field Name2)
+/Rect [182.032 557.744 282.032 574.388]
+/F 4
+/MK << /BC [0 0.5 0]
+>>
+/Type /Annot
+>>
+endobj
+10 0 obj
+<< /BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+11 0 obj
+<< /Fields [8 0 R 9 0 R]
+/DR 10
+>>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000108 00000 n 
+0000000165 00000 n 
+0000000231 00000 n 
+0000000577 00000 n 
+0000000769 00000 n 
+0000000866 00000 n 
+0000000895 00000 n 
+0000001072 00000 n 
+0000001266 00000 n 
+0000001364 00000 n 
+trailer
+<< /Size 12
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+1415
+%%EOF

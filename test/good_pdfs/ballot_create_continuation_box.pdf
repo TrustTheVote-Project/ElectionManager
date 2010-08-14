@@ -1,0 +1,57 @@
+%PDF-1.3
+%ÿÿÿÿ
+1 0 obj
+<< /Producer (Prawn)
+/Creator (TrustTheVote)
+/Title (Test Default Ballot)
+>>
+endobj
+2 0 obj
+<< /Count 1
+/Kids [5 0 R]
+/Type /Pages
+>>
+endobj
+3 0 obj
+<< /Pages 2 0 R
+/Type /Catalog
+>>
+endobj
+4 0 obj
+<< /Length 76
+>>
+stream
+/DeviceRGB cs
+0.000 0.000 0.000 scn
+/DeviceRGB CS
+0.000 0.000 0.000 SCN
+q
+Q
+
+endstream
+endobj
+5 0 obj
+<< /Parent 2 0 R
+/Resources << /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+>>
+/MediaBox [0 0 612.0 792.0]
+/Contents 4 0 R
+/Type /Page
+>>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000107 00000 n 
+0000000164 00000 n 
+0000000213 00000 n 
+0000000339 00000 n 
+trailer
+<< /Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+493
+%%EOF
