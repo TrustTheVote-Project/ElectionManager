@@ -13,7 +13,7 @@
 class Precinct < ActiveRecord::Base
   
 #  has_and_belongs_to_many :districts
-  has_many :districts, :through => :precinct_splits
+  has_many :district_sets, :through => :precinct_splits
   has_many :precinct_splits
   
   attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
@@ -35,7 +35,7 @@ class Precinct < ActiveRecord::Base
   
   # Return a list of DistrictSets tjat this Precinct belongs to. 
   # In the real world, this should always be a list of length 1, even though the data model permits more
-  def district_sets
-    districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }
-  end
+#  def district_sets
+#    districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }
+#  end
 end

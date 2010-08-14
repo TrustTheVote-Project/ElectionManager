@@ -9,7 +9,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100802153118) do
+ActiveRecord::Schema.define(:version => 20100813212424) do
+
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
     t.string   "alert_type"
@@ -72,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position",         :default => 0
-    t.string   "ident"
   end
 
   create_table "district_sets", :force => true do |t|
@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.string   "descriptive_text"
-    t.string   "ident"
   end
 
   create_table "district_sets_districts", :id => false, :force => true do |t|
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.datetime "updated_at"
     t.integer  "ballot_style_template_id", :default => 0
     t.integer  "default_voting_method_id", :default => 0
-    t.string   "ident"
   end
 
   create_table "jurisdiction_memberships", :force => true do |t|
@@ -174,7 +172,6 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "requesting_district_id"
-    t.string   "ident"
   end
 
   create_table "sessions", :force => true do |t|
