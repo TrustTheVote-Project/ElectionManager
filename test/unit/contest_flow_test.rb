@@ -1,6 +1,5 @@
 require 'test_helper'
-require 'ballots/default/ballot_config'
-#require 'ballots/default/contest_flow'
+require 'ballots/default/contest_flow'
 
 class ContestFlowTest < ActiveSupport::TestCase
   
