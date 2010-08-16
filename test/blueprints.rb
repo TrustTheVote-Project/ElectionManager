@@ -116,6 +116,8 @@ end
 # NOTE: DistrictType, Party and VotingMethod are using the
 # ConstantCache and loaded as seed data.
 
+# TODO: remove these blueprints, they are loaded as seed data.
+# Party::DEMOCRATIC, Party::REPUBLICAN, Party::INDEPENDENT
 Party.blueprint do
 
 end
