@@ -167,11 +167,11 @@ end
 #   display_name { "Ranked"}
 # end
 
- BallotStyleTemplate.blueprint do
+BallotStyleTemplate.blueprint do
    display_name
    default_voting_method { VotingMethod::WINNER_TAKE_ALL }
    ballot_style { :office_block }
    default_language { :english }
-   medium_id { 0}
-  
+  medium_id { 0}
+  pdf_form { false}
  end
