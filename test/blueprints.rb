@@ -113,6 +113,9 @@ JurisdictionMembership.blueprint(:admin) do
   role { 'admin' }
 end
 
+# NOTE: DistrictType, Party and VotingMethod are using the
+# ConstantCache and loaded as seed data.
+
 Party.blueprint do
 
 end
@@ -129,3 +132,44 @@ Party.blueprint(:independent) do
   display_name { 'Independent'}
 end
 
+# NOTE: commented out blueprints because they are seed data
+
+# BallotStyle.blueprint do
+#   display_name
+# end
+
+# BallotStyle.blueprint(:office_block) do
+#   display_name { "Office Block"}
+#   ballot_style_code { "default"}
+# end
+
+# BallotStyle.blueprint(:party_column) do
+#   display_name { "Party Column"}
+#   # TODO: rename this to party_column ?
+#   ballot_style_code { "nh"}
+# end
+
+#  Language.blueprint(:english) do
+#    display_name { "English"}
+#    code { "en" }
+#  end
+
+#  VotingMethod.blueprint do
+
+#  end
+#  VotingMethod.blueprint(:winner_take_all) do
+#    display_name { "Winner Take All"}
+#  end
+
+# VotingMethod.blueprint(:ranked) do
+#   display_name { "Ranked"}
+# end
+
+ BallotStyleTemplate.blueprint do
+   display_name
+   default_voting_method { VotingMethod::WINNER_TAKE_ALL }
+   ballot_style { :office_block }
+   default_language { :english }
+   medium_id { 0}
+  
+ end
