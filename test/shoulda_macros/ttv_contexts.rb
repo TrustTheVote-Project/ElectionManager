@@ -44,16 +44,24 @@ class ActiveSupport::TestCase
   def self.setup_precincts
     context "valid precincts" do
       setup do
-        # create a precint within 4 Districts
-        @p1 = Precinct.create!(:display_name => "Precint 1")
+        # create a precinct within 4 Districts
+        puts "create a district "
+        @p1 = Precinct.create!(:display_name => "Precinct 1")
+        @p1split = PrecinctSplit.make
+        @ds1 = DistrictSet.make
+        @p1split.district_set = @ds1
         (0..3).each do |i|
-          @p1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
+          @ds1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
         end
         
-        # create another precint with another set of 4 Districts
-        @p2 = Precinct.create!(:display_name => "Precint 2")      
+        # create another precinct with a set of 5 Districts
+        @p2 = Precinct.create!(:display_name => "Precinct 2")
+        @p2split = PrecinctSplit.make
+        @ds2 = DistrictSet.make
+        @p2split.district_set = @ds2
+
         (4..7).each do |i|
-          @p2.districts << District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
+          @ds2.districts << District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
         end
 
         # create a set of districts that are not associated with any precincts

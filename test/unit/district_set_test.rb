@@ -7,7 +7,6 @@ class DistrictSetTest < ActiveSupport::TestCase
     end
      should 'be able to create a district set' do
        assert @district_set.save
-       puts "TGD: district_set = #{@district_set.inspect}"
        assert_equal "District Set", @district_set.display_name
        assert_equal "It's a district!", @district_set.secondary_name
      end
