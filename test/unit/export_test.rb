@@ -24,48 +24,52 @@ class ExportTest < ActiveSupport::TestCase
     should "have imported correctly" do
       precinct = Precinct.find_by_display_name "Bedford County"
       district = District.find_by_display_name "State of New Hampshire"
+      jurisdiction = DistrictSet.find_by_display_name "New Hampshire"
       assert precinct
       assert district
       assert_equal district, precinct.districts[0]
-      assert_equal @jurisdiction.display_name, district.district_sets[0].display_name
+      assert_equal jurisdiction.display_name, district.district_sets[0].display_name
     end
     
-    context "exported YAML and XML" do
+    context "having exported YAML and XML" do
       setup do
-        exporter = TTV::Export.new
-        @yaml_export = exporter.export_jurisdiction(@jurisdiction, :yaml)
-        @yaml_exported_hash = YAML.load(@yaml_export)
+        jurisdiction = DistrictSet.find_by_display_name("New Hampshire")
+        @exporter = TTV::Export.new
+        @yaml_export = @exporter.export_jurisdiction(jurisdiction, :yaml)
+        #@yaml_exported_hash = YAML.load(@yaml_export)
 
-        exporter = TTV::Export.new
-        @xml_export = exporter.export_jurisdiction(@jurisdiction, :xml)
-        xml_converter = TTV::XMLToEDH.new(@xml_export)
-        @xml_hash = xml_converter.convert
-        @xml_exported_hash = YAML.load(@xml_export)  
+        @xml = @exporter.export_jurisdiction(jurisdiction, :xml)
+        # Needs massaging see http://gist.github.com/531530
+        # xml_converter = TTV::XMLToEDH.new(@xml)
+        # @xml_export = xml_converter.convert # Convert to hash  
       end
       
-      should "export loadable YAML/XML" do
-        assert @yaml_exported_hash
-        assert @xml_exported_hash
+      should "export readable YAML" do
+        assert @yaml_export
       end
       
-      should "contain the same data as the original hashes" do
-        assert_equal 1, @yaml_export_hash['body']['jurisdictions'].size
-        assert_equal 1, @xml_export_hash['body']['jurisdictions'].size
-        assert_equal "State of New Hampshire", @yaml_export_hash['body']['districts'][0]['display_name']
-        assert_equal "State of New Hampshire", @xml_export_hash['body']['districts'][0]['display_name']
-
-      end
-    end
-    
-    context "having exported XML" do
-      setup do
+      should "export specified jurisdiction" do
+        assert_equal 1, @yaml_export['body']['jurisdictions'].size
+        assert_equal "New Hampshire", @yaml_export['body']['jurisdictions'][0]['display_name']
+        assert_equal "1", @yaml_export['body']['jurisdictions'][0]['ident']
       end
       
-      should "export loadable XML" do
+      should "export districts" do
+        assert_equal "State of New Hampshire", @yaml_export['body']['districts'][0]['display_name']
+        assert_equal "1", @yaml_export['body']['districts'][0]['ident']
+        assert_equal "1", @yaml_export['body']['districts'][0]['jurisdiction_identref']
       end
       
-      should "contain similar data" do
+      should "export precincts" do
+        precinct_1 = @yaml_export['body']['precincts'].detect{|precinct| precinct['ident'] == "1"}
+        
+        assert_equal "State of New Hampshire", precinct_1['display_name']
       end
+      
+      should "export elections" do
+        
+      end
+      
     end
   end
 end
