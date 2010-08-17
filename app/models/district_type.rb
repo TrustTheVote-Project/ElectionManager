@@ -11,10 +11,12 @@
 
 class DistrictType < ActiveRecord::Base
   
-  include ConstantCache
+  #include ConstantCache
 
-  cache_constants :key => :title
-    
+  #cache_constants :key => :title
+  
+  attr_accessible :title
+  
   def DistrictType.xmlToId(xml)
     raise "unknown district type #{xml}" unless const_get(xml.constant_name)
     const_get(xml.constant_name).id

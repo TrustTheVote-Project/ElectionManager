@@ -77,26 +77,84 @@ class AuditTest < ActiveSupport::TestCase
       context "after an import" do
         setup do
           @import_yaml = TTV::ImportEDH.new(@audit_yaml.election_data_hash) # ImportEDH
-          @import_yaml.import
+          #@import_yaml.import
           
           @import_xml = TTV::ImportEDH.new(@audit_xml.election_data_hash) # ImportEDH
-          @import_xml.import
+          #@import_xml.import
         end
-      
-        should "import a precinct" do
-          assert Precinct.find_by_display_name "State of New Hampshire"
+        
+        should "load and save jurisdictions" do
+          @import_yaml.load_jurisdictions
+          jurisdiction = DistrictSet.find_by_display_name("New Hampshire")
+          assert jurisdiction
+          assert_equal "1", jurisdiction.ident
+        end
+        
+        should "load and save districts" do
+          @import_yaml.load_jurisdictions
+          @import_yaml.load_districts
+          district = District.find_by_display_name "State of New Hampshire"
+          assert district
+          assert_equal "1", district.ident
+          # Store newly created district type
+          assert_equal "state", DistrictType.find_by_id(district.district_type_id).title
+        end
+        
+        should "load and save precincts" do
+          @import_yaml.load_jurisdictions
+          @import_yaml.load_districts
+          @import_yaml.load_precincts
+          precinct_1 = Precinct.find_by_display_name "State of New Hampshire"
+          precinct_2 = Precinct.find_by_display_name "Bedford County"
+          assert precinct_1, precinct_2
+          assert_equal "1", precinct_1.ident
+          assert_equal District.find_by_display_name("State of New Hampshire"), precinct_1.districts[0]
+        end
+        
+        should "load and save candidates" do
+          @import_yaml.load_candidates
+          candidate_1 = Candidate.find_by_ident "1"
+          candidate_2 = Candidate.find_by_ident "2"
+          assert candidate_1, candidate_2
+          assert_equal "democrat", candidate_1.party.display_name
+          assert_equal "republican", candidate_2.party.display_name
+        end
+        
+        should "load and save contests" do
+          @import_yaml.load_jurisdictions
+          @import_yaml.load_districts
+          @import_yaml.load_candidates
+          @import_yaml.load_contests
+          contest = Contest.find_by_display_name "County Attorney"
+          assert contest
+          assert_equal "1", contest.ident
+          assert_equal "Marguerite Lefebvre Wageling", contest.candidates[0].display_name
+          # assert_equal "winner_take_all", contest.voting_method.display_name 
         end
 
-        should "import a precinct with a district to a jurisdiction" do
-          precinct = Precinct.find_by_display_name "Bedford County"
-          district = District.find_by_display_name "State of New Hampshire"
+        should "load and save elections" do
+          @import_yaml.load_jurisdictions
+          @import_yaml.load_districts
+          @import_yaml.load_precincts
+          @import_yaml.load_candidates
+          @import_yaml.load_contests
+          @import_yaml.load_elections
           
-          assert precinct
-          assert district
+          election = Election.find_by_display_name "New Hampshire General Election"
+          assert election
+          assert_equal "1", election.contests[0].ident
+          assert_equal "1", election.district_set.ident
+        end
+        
+        should "import all items (XML source)" do
+          @import_xml.import
           
-          assert_equal district, precinct.districts[0]
-          
-          assert_equal @jurisdiction.display_name, district.district_sets[0].display_name
+          assert District.find_by_display_name "State of New Hampshire"
+          assert Contest.find_by_display_name "County Attorney"
+          assert Candidate.find_by_ident "1"
+          assert Precinct.find_by_display_name "State of New Hampshire"
+          assert DistrictSet.find_by_display_name "New Hampshire"
+          assert Election.find_by_display_name "New Hampshire General Election"
         end
         
         should "import a contest" do

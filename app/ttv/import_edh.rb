@@ -13,23 +13,56 @@ module TTV
     
     # Performs the import of all items contained within <tt>hash</tt>.
     def import
+      load_jurisdictions
+      load_districts
+      load_precincts
+      load_candidates
+      load_contests
+      load_elections
+    end
+    
+    # Imports all jurisdictions contained in the EDH
+    def load_jurisdictions
       @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris }
+    end
+    
+    # Imports all districts contained in the EDH
+    def load_districts
       @hash["body"]["districts"].each { |dist| load_district dist}
+    end
+    
+    # Imports all precincts contained in the EDH
+    def load_precincts
       @hash["body"]["precincts"].each { |prec| load_precinct prec}
+    end
+    
+    # Imports all candidates contained in the EDH
+    def load_candidates
       @hash["body"]["candidates"].each { |cand| load_candidate cand}
+    end  
+    
+    # Imports all contests contained in the EDH
+    def load_contests
       @hash["body"]["contests"].each { |cont| load_contest cont}
+    end
+    
+    # Imports all elections contained in the EDH
+    def load_elections
       @hash["body"]["elections"].each { |elec| load_election elec}
     end
     
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
+      new_jurisdiction.save!
+      # This is a test
     end
     
     # Loads an EDH formatted district into EM
     def load_district district
-      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :type => DistrictType.find_or_create_by_title(district["type"]))
+      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => DistrictType.find_or_create_by_title(district["type"]))
       new_district.district_sets << DistrictSet.find_by_ident(district["jurisdiction_identref"])
+      new_district.save!
     end
 
     # Loads an EDH formatted precinct into EM
@@ -41,23 +74,22 @@ module TTV
     
     # Loads an EDH formatted candidate into EM
     def load_candidate candidate
-      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party => Party.find_or_create_by_display_name(candidate["party"]))
+      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party_id => Party.find_or_create_by_display_name(candidate["party"]).id)
+      new_candidate.save! 
     end
     
     # Loads an EDH formatted contest into EM
     def load_contest contest
-      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :district => District.find_by_ident(contest["district_identref"]))
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :voting_method_id => 0, :district_id => District.find_by_ident(contest["district_identref"]).id)
       contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["identref"])} if contest["candidates"]
-      # TODO: Throws validation errors:
-      # new_contest.save!
+      new_contest.save!
     end
 
     # Loads an EDH formatted election into EM
     def load_election election
-      new_election = Election.find_or_create_by_ident(:display_name => election["display_name"], :ident => election["ident"])
-      # TODO: Throws validation errors:
-      # election["contests"].each{ |cont| new_election.contests << Contest.find_by_ident(cont["identref"])} if election["contests"]
-      # new_election.save!
+      new_election = Election.find_or_create_by_display_name(:display_name => election["display_name"], :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_identref"]).id)
+      election["contests"].each{ |cont| new_election.contests << Contest.find_by_ident(cont["identref"])} if election["contests"]
+      new_election.save!
     end
     
   end
