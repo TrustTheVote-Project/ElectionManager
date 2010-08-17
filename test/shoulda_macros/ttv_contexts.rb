@@ -45,7 +45,7 @@ class ActiveSupport::TestCase
     context "valid precincts" do
       setup do
         # create a precinct within 4 Districts
-        puts "create a district "
+        puts "***** ttv_context: setup_precincts - valid precincts..."
         @p1 = Precinct.create!(:display_name => "Precinct 1")
         @p1split = PrecinctSplit.make
         @ds1 = DistrictSet.make

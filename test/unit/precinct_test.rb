@@ -4,10 +4,10 @@ class PrecinctTest < ActiveSupport::TestCase
   context "basic test" do
     
     setup do
-      Precinct.create(:display_name => "precinct1")
+      @a_precinct = Precinct.create(:display_name => "precinct1")
     end
     
-    subject { Precinct.last}
+    subject { @a_precinct }
     should_create :precinct
     should_change("the number of precincts", :by => 1) { Precinct.count}    
     #    should_have_and_belong_to_many :districts
@@ -26,9 +26,10 @@ class PrecinctTest < ActiveSupport::TestCase
   
   setup_precincts do
     subject { Precinct.find_by_display_name "Precinct 1"}
-    puts subject.inspect
+    puts "***** setup precincts"
     
     should "have a couple of districts" do
+      puts "**** inside should have a couple of districts"
       assert_equal 4,  subject.precinct_splits[0].district_set.districts.count
        (0..3).each do |i|
         assert_equal "District #{i}", subject.precinct_split[0].district_set.districts.find_by_display_name("District #{i}").display_name
