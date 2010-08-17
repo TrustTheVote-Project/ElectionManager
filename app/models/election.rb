@@ -152,14 +152,11 @@ class Election < ActiveRecord::Base
   end
     
     def render_ballot(election, precinct, ballot_style_template)
-      style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
-      lang = Language.find(ballot_style_template.default_language).code
-      instruction_text_url = ballot_style_template.instructions_image.url
       medium_id = ballot_style_template.medium_id
       title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
       
       if medium_id == 0
-        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text_url)
+        pdfBallot = AbstractBallot.create(election, precinct, ballot_style_template)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
       else
         new_ballot = {:title => title, :medium_id => medium_id}
