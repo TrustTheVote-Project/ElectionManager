@@ -157,8 +157,16 @@ class AuditTest < ActiveSupport::TestCase
           assert Election.find_by_display_name "New Hampshire General Election"
         end
         
-        should "not fail adding a District Set object to an Election" do
-          new_district_set = DistrictSet.find_or_create_by_display_name("District 1")
+        should "not fail adding a District Set object to an Election by ID" do
+          new_district_set_1 = DistrictSet.find_or_create_by_display_name("District 1")
+          new_district_set_1.save!
+          new_election_1 = Election.find_or_create_by_display_name(:display_name => "Election 1", :district_set_id => new_district_set_1.id)
+          new_election_1.save!
+          assert_valid new_election_1
+        end  
+          
+        should "not fail adding a District Set object to an Election by object" do
+          new_district_set = DistrictSet.find_or_create_by_display_name("District 2")
           new_district_set.save!
           new_election = Election.find_or_create_by_display_name(:display_name => "Election 1", :district_set => new_district_set)
           new_election.save!
