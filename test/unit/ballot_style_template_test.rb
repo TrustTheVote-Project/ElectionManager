@@ -29,7 +29,17 @@ class BallotStyleTemplateTest < ActiveSupport::TestCase
       #    assert_equal VotingMethod::WINNER_TAKE_ALL, @bst.default_voting_method
     end
   end
-
+  
+  context "template with instructions file attachment" do
+    setup do
+      @bst = BallotStyleTemplate.make(:display_name => "test template", :instructions_image_file_name => "test.png", :instructions_image_file_size => 20, :instructions_image_content_type => 'png')
+      
+    end
+    should "have an instructions url" do
+      assert_equal "/system/instructions_images/1/original/test.png", @bst.instructions_image.url
+    end
+  end
+  
   context "basic insert test" do
     should "able to create new Ballot Style Template" do
       bst = BallotStyleTemplate.new(:display_name => "test template", :instructions_image_file_name => "test.png", :instructions_image_file_size => 20, :instructions_image_content_type => 'png')

@@ -27,13 +27,21 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election, scanner, instruction_text_url)
+#    def initialize(style, lang, election, scanner,
+    #    instruction_text_url)
+    def initialize(election, template)
+
+      style = BallotStyle.find(template.ballot_style).ballot_style_code
+      @lang = Language.find(template.default_language).code
+      @instruction_text_url = template.instructions_image.url
+      @scanner = TTV::Scanner.new
+      
+      # @form_enabled = template.pdf_form?
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
-      @lang = lang
-      @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
-      @election_translation = PDFBallotStyle.get_election_translation(election, lang)
-      @instruction_text_url = instruction_text_url
+      @ballot_translation = PDFBallotStyle.get_ballot_translation(style, @lang)
+      @election_translation = PDFBallotStyle.get_election_translation(election, @lang)
+      #@instruction_text_url = instruction_text_url
       
       @page_size = "LETTER"
       @page_layout = :portrait
@@ -208,7 +216,7 @@ module DefaultBallot
       @pdf.bounding_box( [rect.left + @padding, rect.top], 
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
-        unless @instruction_text_url.index("missing")
+        if instructions?
           @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600, :at =>[-6,+2] #need to move sizes into style template?
         end
       end

@@ -136,25 +136,25 @@ end
 
 # NOTE: commented out blueprints because they are seed data
 
-# BallotStyle.blueprint do
-#   display_name
-# end
+BallotStyle.blueprint do
+  display_name
+end
 
-# BallotStyle.blueprint(:office_block) do
-#   display_name { "Office Block"}
-#   ballot_style_code { "default"}
-# end
+BallotStyle.blueprint(:office_block) do
+  display_name { "Office Block"}
+  ballot_style_code { "default"}
+end
 
-# BallotStyle.blueprint(:party_column) do
-#   display_name { "Party Column"}
-#   # TODO: rename this to party_column ?
-#   ballot_style_code { "nh"}
-# end
+BallotStyle.blueprint(:party_column) do
+   display_name { "Party Column"}
+  # TODO: rename this to party_column ?
+   ballot_style_code { "nh"}
+ end
 
-#  Language.blueprint(:english) do
-#    display_name { "English"}
-#    code { "en" }
-#  end
+  Language.blueprint(:english) do
+    display_name { "English"}
+    code { "en" }
+  end
 
 #  VotingMethod.blueprint do
 
@@ -170,8 +170,9 @@ end
 BallotStyleTemplate.blueprint do
    display_name
    default_voting_method { VotingMethod::WINNER_TAKE_ALL }
-   ballot_style { :office_block }
-   default_language { :english }
+   ballot_style { BallotStyle.make(:office_block).id}
+  default_language { Language.make(:english).id }
+#  instructions_image.urlimage_instructions { 'missing' }
   medium_id { 0}
   pdf_form { false}
  end

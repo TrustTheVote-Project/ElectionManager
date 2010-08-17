@@ -10,11 +10,14 @@ class BallotConfigTest < ActiveSupport::TestCase
           
           @e1 = Election.find_by_display_name "Election 1"
           @p1 = Precinct.find_by_display_name "Precint 1"
-          @scanner = TTV::Scanner.new
-          @lang = 'en'
-          @style = "default"
-          image_instructions = 'images/test/instructions.jpg'
-          @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner,image_instructions)
+          
+          # TODO: create a test for ballot_instructions, it's
+          # commented out below
+          # @template = BallotStyleTemplate.make(:display_name => "test template", :instructions_image_file_name => "instructions.jpg", :instructions_image_file_size => 182537, :instructions_image_content_type => 'jpg')
+          
+          @template = BallotStyleTemplate.make(:display_name => "test template")
+          
+          @ballot_config = DefaultBallot::BallotConfig.new( @e1, @template)
           
           @pdf = create_pdf("Test Default Ballot")
           
@@ -26,7 +29,8 @@ class BallotConfigTest < ActiveSupport::TestCase
         end # end setup
         
         should "set the correct ballot directory " do
-          assert_equal  "#{Rails.root}/app/ballots/#{@style}", @ballot_config.instance_variable_get(:@file_root) 
+          style = BallotStyle.find(@template.ballot_style).ballot_style_code
+          assert_equal  "#{Rails.root}/app/ballots/#{style}", @ballot_config.instance_variable_get(:@file_root) 
         end
         
         should "set the correct ballot translation" do
@@ -42,7 +46,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
 
         #TODO: load_test method doesn't seem to be used anywhere
-        should "load the ballot file for the language code #{@lang}" do
+        should "load the ballot file for the language code \"en\"" do
           assert_nothing_raised do
             @ballot_config.load_text("ballot.yml")
           end
@@ -53,7 +57,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
       
         # TODO: remove as it doesn't seem to be used?      
-        should "load the image for language code #{@lang}" do
+        should "load the image for language code \"en\"" do
           assert_nothing_raised do
             @ballot_config.load_image("instructions2.png")          
           end
@@ -179,9 +183,8 @@ class BallotConfigTest < ActiveSupport::TestCase
 
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
-
         # render the column instruction image in the leftmost column
-        should "render column instructions" do
+        should "not render column instructions" do
           # bounding rect of pdf page
           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
 
@@ -189,21 +192,42 @@ class BallotConfigTest < ActiveSupport::TestCase
           three_columns = AbstractBallot::Columns.new(3, rect)
           page = 1
           @ballot_config.render_column_instructions(three_columns, page)
-          util = TTV::Prawn::Util.new(@pdf)
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nq\n172.000 0 0 600.000 20.000 161.000 cm\n/I1 Do\nQ\n0.5 w\n", util.page_contents[0]
-          @pdf.render_file("#{Rails.root}/tmp/ballot_render_column_instructions.pdf")          
           
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n0.5 w\n", util.page_contents[0]
+          
+          @pdf.render_file("#{Rails.root}/tmp/ballot_not_render_column_instructions.pdf")
+
         end
+
+#         # render the column instruction image in the leftmost column
+#         should "render column instructions" do
+#           # bounding rect of pdf page
+#           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+
+#           # split the page into 3 columns
+#           three_columns = AbstractBallot::Columns.new(3, rect)
+#           page = 1
+#           @ballot_config.render_column_instructions(three_columns, page)
+#           util = TTV::Prawn::Util.new(@pdf)
+#           assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nq\n172.000 0 0 600.000 20.000 161.000 cm\n/I1 Do\nQ\n0.5 w\n", util.page_contents[0]
+#           @pdf.render_file("#{Rails.root}/tmp/ballot_render_column_instructions.pdf")          
+          
+#         end
         
         # render the column instruction image in the leftmost column
         should "page complete will show \"Vote Both Sides\" if not the last page of the ballot " do
           page_num = 33
           last_page = false
           @ballot_config.page_complete(page_num, last_page)
+
           util = TTV::Prawn::Util.new(@pdf)
           #assert_equal 'foo', util.page_contents[0]
           assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n252.90653125 751.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n252.90653125 39.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n", util.page_contents[0]
-          @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")                  
+
+          @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")   
+
+
         end
 
         should "get the Content flow item for Contests" do

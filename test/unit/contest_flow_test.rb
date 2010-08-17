@@ -22,7 +22,9 @@ class ContestFlowTest < ActiveSupport::TestCase
         Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => @contest)
       end
       
-      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
+      @template = BallotStyleTemplate.make(:display_name => "test template")
+      @ballot_config = DefaultBallot::BallotConfig.new( election, @template)
+      
       @ballot_config.setup(create_pdf("Test Contest Flow"), nil) # don't need the 2nd arg precinct
       @pdf = @ballot_config.pdf
       # TODO: remove all the circular dependencies, ballot config

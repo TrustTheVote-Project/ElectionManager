@@ -4,16 +4,20 @@ require 'ballots/default/ballot_config'
 class ScannerTest < ActiveSupport::TestCase
   context "Scanner creation" do
     setup do
-      @scanner = TTV::Scanner.new
+
       # @election = Election.make
       # @precinct = Precinct.make
       @election = TTV::ImportExport.import(File.new( RAILS_ROOT + "/test/elections/contests_mix.xml"))
       @precinct = @election.district_set.precincts.first
-      
-      @c = ::DefaultBallot::BallotConfig.new('default', 'en', @election, @scanner, "missing")
+       @template = BallotStyleTemplate.make(:display_name => "test template")
+      @c = DefaultBallot::BallotConfig.new( @election, @template)     
+#      @c = ::DefaultBallot::BallotConfig.new('default', 'en', @election, @scanner, "missing")
       
       @pdf = create_pdf("Test Scanner")
       @c.setup(@pdf, @precinct)
+      
+      @scanner = @c.scanner
+      
       @renderer = ::AbstractBallot::Renderer.new(@election, @precinct, @c,'')
     end
     

@@ -11,7 +11,9 @@ class HeaderFlowTest < ActiveSupport::TestCase
       # TODO: remove this very circular dependency, header flow item
       # depending on ballot config ...
       election = Election.make
-      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
+      @template = BallotStyleTemplate.make(:display_name => "test template")
+      @ballot_config = DefaultBallot::BallotConfig.new( election, @template)
+      
       @ballot_config.setup(create_pdf("Test Header Flow"), nil)
       @pdf = @ballot_config.pdf
       

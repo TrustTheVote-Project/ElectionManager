@@ -89,7 +89,7 @@ class PDFBallotStyleTest < ActiveSupport::TestCase
         module ::DummyBallot
           class BallotConfig
             attr_accessor :dummy
-            def initialize(style, lang, election, scanner, instruction_text_url)
+            def initialize(election, template)
               @dummy = "got the dummy"
             end
           end
@@ -97,8 +97,8 @@ class PDFBallotStyleTest < ActiveSupport::TestCase
 
         # get this dummy ballot class in the DummyBallot module
         setup do
-          @style = "dummy"
-          @ballot_config_class = PDFBallotStyle.get_ballot_config(@style, nil, nil, nil,nil)
+          bs = BallotStyle.make(:ballot_style_code => "dummy")
+          @ballot_config_class = PDFBallotStyle.get_ballot_config( Election.make,BallotStyleTemplate.make(:display_name => "test template", :ballot_style => bs.id))
         end
 
         should "have the correct BallotConfig class" do
@@ -114,9 +114,9 @@ class PDFBallotStyleTest < ActiveSupport::TestCase
           
           # mock scanner set_checkbox method just to get the test to pass
           scanner = TTV::Scanner.new
-          scanner.expects(:set_checkbox)
+          #scanner.expects(:set_checkbox)
           
-          @ballot_config_class = PDFBallotStyle.get_ballot_config(@style, "en", Election.make, scanner, nil)
+          @ballot_config_class = PDFBallotStyle.get_ballot_config( Election.make,BallotStyleTemplate.make(:display_name => "test template"))
         end
         
         should "have the correct DefaultBallot::BallotConfig class" do

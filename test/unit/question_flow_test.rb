@@ -15,7 +15,9 @@ class QuestionFlowTest < ActiveSupport::TestCase
                                 :question => 'This proposed law would ')
       
       
-      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
+      @template = BallotStyleTemplate.make(:display_name => "test template")
+      @ballot_config = DefaultBallot::BallotConfig.new( election, @template)
+
       @ballot_config.setup(create_pdf("Test Question Flow"), nil) # don't need the 2nd arg precinct
       @pdf = @ballot_config.pdf
       # TODO: remove all the circular dependencies, ballot config

@@ -47,7 +47,9 @@ class RendererTest < ActiveSupport::TestCase
                     :question => 'This proposed law would prohibit any dog racing or racing meeting in Massachusetts where any form of betting or wagering on the speed or ability of dogs occurs. The State Racing Commission would be prohibited from accepting or approving any application or request for racing dates for dog racing. Any person violating the proposed law could be required to pay a civil penalty of not less than $20,000 to the Commission. The penalty would be used for the Commission\'s administrative purposes, subject to appropriation by the state Legislature. All existing parts of the chapter of the state\'s General Laws concerning dog and horse racing meetings would be interpreted as if they did not refer to dogs. These changes would take effect January 1, 2010. The proposed law states that if any of its parts were declared invalid, the other parts would stay in effect.' )
       
       scanner = TTV::Scanner.new
-      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', e1, scanner, "missing")
+      @template = BallotStyleTemplate.make(:display_name => "test template")
+      @ballot_config = DefaultBallot::BallotConfig.new( e1, @template)
+
       @pdf = create_pdf("Test Renderer")
       @ballot_config.setup(@pdf, p1)
 
