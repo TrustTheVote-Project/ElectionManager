@@ -41,10 +41,6 @@ module TTV
       @orientation = orientation
     end
 
-    def create_ballot_mark(contest, choice, page, location )
-      BallotMark.new(contest, choice, page, location)
-    end
-
     def append_ballot_marks(marks)
       @ballot_marks.concat(marks)
     end

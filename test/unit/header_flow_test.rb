@@ -8,16 +8,16 @@ class HeaderFlowTest < ActiveSupport::TestCase
       scanner = TTV::Scanner.new
       @header_text = "Some Header Text"
       
-      # TODO: remove dependency on scanner. It's never used for the
-      # header flow!
-      @header = DefaultBallot::FlowItem::Header.new(@header_text, scanner)
-
       # TODO: remove this very circular dependency, header flow item
       # depending on ballot config ...
       election = Election.make
       @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
-      @ballot_config.setup(create_pdf("Test Default Ballot"), nil)
+      @ballot_config.setup(create_pdf("Test Header Flow"), nil)
       @pdf = @ballot_config.pdf
+      
+      # TODO: remove dependency on scanner. It's never used for the
+      # header flow!
+      @header = DefaultBallot::FlowItem::Header.new(@pdf, @header_text, scanner)
       
     end
     

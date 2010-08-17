@@ -50,7 +50,7 @@ class ScannerTest < ActiveSupport::TestCase
     should "render header" do
 #      header = DefaultBallot::FlowItem::Header.new("Hey Header",
       #    @scanner)
-      header = DefaultBallot::FlowItem::Header.new("Hey Header", nil)
+      header = DefaultBallot::FlowItem::Header.new(@pdf, "Hey Header", nil)
       flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
       
       columns = AbstractBallot::Columns.new(3, flow_rect)

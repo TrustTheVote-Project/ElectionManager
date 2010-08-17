@@ -12,6 +12,7 @@ class ComboFlowTest < ActiveSupport::TestCase
         @style = "default"
         image_instructions = 'images/test/instructions.jpg'
         @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner,image_instructions)
+        @ballot_config.setup(create_pdf("Test Combo Flow"),nil)
         
       end
       

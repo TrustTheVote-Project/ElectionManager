@@ -5,6 +5,15 @@ module DefaultBallot
     
     # TODO: change from inner class to class within the Flow module
     class Header < FlowItem
+      
+      def initialize(pdf, text, scanner, options={ })
+        raise ArgumentError, "pdf should be a Prawn::Document" unless pdf.is_a?(::Prawn::Document)
+        raise ArgumentError, "text should be a String" unless text.is_a?(String)
+        @pdf = pdf
+        @text = text
+        super(@text, scanner)
+      end
+
       def min_width
         ANY_WIDTH
       end
@@ -28,7 +37,7 @@ module DefaultBallot
           
           config.pdf.move_down VPAD
           # The @item is always just a Ruby String
-          config.pdf.text @item, :leading => 1
+          config.pdf.text @text, :leading => 1
 
           # bounding box is increased the height of header text, 14.87 pts
           # Bounds coordinates "t, r, b, l" = "14.87, 194, 0, 0"

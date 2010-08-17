@@ -22,10 +22,6 @@ module DefaultBallot
       @ballot_marks || []
     end
     
-    def add_ballot_mark(contest, choice, page, location)
-      @ballot_marks.push(@scanner.create_ballot_mark contest, choice, page, location )
-    end
-    
     def fits(config, rect)
       # clever way to see if we fit, avoiding code duplication for measure vs. draw
       # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
@@ -35,19 +31,6 @@ module DefaultBallot
         config.pdf.rollback
       end
       r.height > 0
-    end
-
-    def draw(config, rect)
-      # debug only code, never executed
-      top = rect.top
-      config.pdf.font("Helvetica", :size => 10, :style => :italic)
-      config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD ) do
-        config.pdf.move_down VPAD
-        config.pdf.text "FlowItem.draw"
-        rect.top -= config.pdf.bounds.height
-      end
-      config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
-      config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
     end
 
     def min_width

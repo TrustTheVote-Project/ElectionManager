@@ -14,6 +14,10 @@ class QuestionFlowTest < ActiveSupport::TestCase
                                 :requesting_district => District.make(:display_name => "District 1"),
                                 :question => 'This proposed law would ')
       
+      
+      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
+      @ballot_config.setup(create_pdf("Test Question Flow"), nil) # don't need the 2nd arg precinct
+      @pdf = @ballot_config.pdf
       # TODO: remove all the circular dependencies, ballot config
       # depends on Question flow which depends on ballot config.
       # Question.
@@ -21,12 +25,8 @@ class QuestionFlowTest < ActiveSupport::TestCase
       # enclosing column?
       # TODO: remove dependency on scanner. It's never used for the
       # flow!
-      @question_flow = DefaultBallot::FlowItem::Question.new(@question, scanner)
+      @question_flow = DefaultBallot::FlowItem::Question.new(@pdf, @question, scanner)
       @question_flow_height = 114
-      
-      @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
-      @ballot_config.setup(create_pdf("Test Question Flow"), nil) # don't need the 2nd arg precinct
-      @pdf = @ballot_config.pdf
       
     end
     

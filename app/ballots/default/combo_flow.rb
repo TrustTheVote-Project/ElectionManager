@@ -2,7 +2,9 @@ module DefaultBallot
   class FlowItem
     class Combo 
       
-      def initialize(flow_items)
+      def initialize(pdf, flow_items, options={ })
+        raise ArgumentError, "pdf should be a Prawn::Document" unless pdf.is_a?(::Prawn::Document)
+        raise ArgumentError, "flow_items should be a Array" unless flow_items.is_a?(Array)
         @flow_items = flow_items
       end
 

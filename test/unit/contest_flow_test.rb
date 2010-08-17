@@ -21,16 +21,14 @@ class ContestFlowTest < ActiveSupport::TestCase
         party = Party.make(party_sym)
         Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => @contest)
       end
-
-      # TODO: remove all the circular dependencies, ballot config
-      # TODO: remove dependency on scanner. It's never used for the
-      # flow!
-      @contest_flow = DefaultBallot::FlowItem::Contest.new(@contest, scanner)
       
       @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
       @ballot_config.setup(create_pdf("Test Contest Flow"), nil) # don't need the 2nd arg precinct
       @pdf = @ballot_config.pdf
-      
+      # TODO: remove all the circular dependencies, ballot config
+      # TODO: remove dependency on scanner. It's never used for the
+      # flow!
+      @contest_flow = DefaultBallot::FlowItem::Contest.new(@pdf, @contest, scanner)      
     end
     
     should "create a contest flow" do
