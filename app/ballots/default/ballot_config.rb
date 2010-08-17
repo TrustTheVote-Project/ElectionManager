@@ -23,7 +23,7 @@ module DefaultBallot
     VPAD = 3
     VPAD2 = 6
 
-    def initialize(item, scanner)
+    def initialize(item, scanner, options={})
       @item = item
       @scanner = scanner
     end

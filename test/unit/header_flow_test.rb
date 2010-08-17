@@ -49,10 +49,6 @@ class HeaderFlowTest < ActiveSupport::TestCase
         
         @header.draw(@ballot_config, @enclosing_column_rect)
 
-        # should have moved the top on the enclosing rectangle down by
-        # height of the header text.
-        assert_in_delta @enclosing_column_rect.original_top - 15, @enclosing_column_rect.top, 1.0
-        
         @pdf.render_file("#{Rails.root}/tmp/header_flow1.pdf")
         
         util = TTV::Prawn::Util.new(@pdf)
@@ -60,6 +56,24 @@ class HeaderFlowTest < ActiveSupport::TestCase
         assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n71 519.72 Td\n/F1.0 10 Tf\n[<536f6d65204865616465722054> 74.21875 <657874>] TJ\nET\n\n0.5 w\n68.000 515.130 m\n268.000 515.130 l\nS\n268.000 515.130 m\n268.000 530.000 l\nS\n68.000 515.130 m\n68.000 530.000 l\nS\nQ\n", util.page_contents[0]
 
       end
+      
+      should "be able to fit the header" do
+        assert @header.fits(@ballot_config, @enclosing_column_rect)
+      end
     end
+    
+    context "with a small enclosing column" do
+      setup do
+        # length is 10 pts, width is 200 pts
+        top = 500; left = 50; bottom = 490; right = 250
+        @enclosing_column_rect = AbstractBallot::Rect.new(top, left, bottom, right)
+      end
+      
+      should "not be able to fit the header" do
+        assert !@header.fits(@ballot_config, @enclosing_column_rect)
+      end
+      
+    end
+
   end
 end

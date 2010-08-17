@@ -10,9 +10,9 @@ class QuestionFlowTest < ActiveSupport::TestCase
       election = Election.make(:display_name => "Election 1")
       
       @question = Question.make(:display_name => "Dog Racing",
-                    :election => election,
-                    :requesting_district => District.make(:display_name => "District 1"),
-                    :question => 'This proposed law would ')
+                                :election => election,
+                                :requesting_district => District.make(:display_name => "District 1"),
+                                :question => 'This proposed law would ')
       
       # TODO: remove all the circular dependencies, ballot config
       # depends on Question flow which depends on ballot config.
@@ -22,6 +22,7 @@ class QuestionFlowTest < ActiveSupport::TestCase
       # TODO: remove dependency on scanner. It's never used for the
       # flow!
       @question_flow = DefaultBallot::FlowItem::Question.new(@question, scanner)
+      @question_flow_height = 114
       
       @ballot_config = DefaultBallot::BallotConfig.new('default', 'en', election, scanner, "missing")
       @ballot_config.setup(create_pdf("Test Question Flow"), nil) # don't need the 2nd arg precinct
@@ -48,10 +49,10 @@ class QuestionFlowTest < ActiveSupport::TestCase
       should "decrease the height of enclosing column when drawn" do
         @question_flow.draw(@ballot_config, @enclosing_column_rect)
         # should have moved the top on the enclosing rectangle down
-        assert_in_delta @enclosing_column_rect.original_top - 114, @enclosing_column_rect.top, 1.0
+        assert_in_delta @enclosing_column_rect.original_top - @question_flow_height, @enclosing_column_rect.top, 1.0
       end
 
-       should "draw a question flow with the correct page contents" do
+      should "draw a question flow with the correct page contents" do
 
         @question_flow.draw(@ballot_config, @enclosing_column_rect)
         
@@ -61,11 +62,27 @@ class QuestionFlowTest < ActiveSupport::TestCase
         # Scanner#align_checkbox
         @pdf.render_file("#{Rails.root}/tmp/question_flow1.pdf")
         
-         util = TTV::Prawn::Util.new(@pdf)
-         assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 0.000 0.000 SCN\n68.000 530.000 m\n268.000 530.000 l\nS\n68.000 530.000 m\n68.000 130.000 l\nS\n68.000 130.000 m\n268.000 130.000 l\nS\n268.000 130.000 m\n268.000 530.000 l\nS\n\nBT\n70 519.72 Td\n/F1.0 10 Tf\n<446f6720526163696e67> Tj\nET\n\n\nBT\n70 504.85 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520796573206f72206e6f>] TJ\nET\n\n\nBT\n70 486.98 Td\n/F2.0 10 Tf\n<546869732070726f706f736564206c617720776f756c64> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 448.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68 450.72 Td\n/F2.0 10 Tf\n<596573> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 420.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68 422.72 Td\n/F2.0 10 Tf\n<4e6f> Tj\nET\n\n0.5 w\n0.5 w\n68.000 416.320 m\n268.000 416.320 l\nS\n268.000 416.320 m\n268.000 530.000 l\nS\n68.000 416.320 m\n68.000 530.000 l\nS\nQ\n", util.page_contents[0]
+        util = TTV::Prawn::Util.new(@pdf)
+        assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 0.000 0.000 SCN\n68.000 530.000 m\n268.000 530.000 l\nS\n68.000 530.000 m\n68.000 130.000 l\nS\n68.000 130.000 m\n268.000 130.000 l\nS\n268.000 130.000 m\n268.000 530.000 l\nS\n\nBT\n70 519.72 Td\n/F1.0 10 Tf\n<446f6720526163696e67> Tj\nET\n\n\nBT\n70 504.85 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520796573206f72206e6f>] TJ\nET\n\n\nBT\n70 486.98 Td\n/F2.0 10 Tf\n<546869732070726f706f736564206c617720776f756c64> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 448.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68 450.72 Td\n/F2.0 10 Tf\n<596573> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 420.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68 422.72 Td\n/F2.0 10 Tf\n<4e6f> Tj\nET\n\n0.5 w\n0.5 w\n68.000 416.320 m\n268.000 416.320 l\nS\n268.000 416.320 m\n268.000 530.000 l\nS\n68.000 416.320 m\n68.000 530.000 l\nS\nQ\n", util.page_contents[0]
 
 
-       end
+      end
     end
+    
+    context "with a small enclosing column" do
+      setup do
+        # length is 10 pts, width is 200 pts
+        top = 500; left = 50
+        # enclosing column is 1pt shorter than the question flow height
+        bottom = top - (@question_flow_height-1)
+        right = 250
+        @enclosing_column_rect = AbstractBallot::Rect.new(top, left, bottom, right)
+      end
+      
+      should "not be able to fit the question" do
+        assert !@question_flow.fits(@ballot_config, @enclosing_column_rect)
+      end
+    end
+
   end
 end
