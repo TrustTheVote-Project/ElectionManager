@@ -38,8 +38,8 @@ class DistrictSet < ActiveRecord::Base
     Precinct.find(precinct_ids)
   end
   
-  validates_presence_of :ident
-  validates_uniqueness_of :ident, :message => "Non-unique jurisdiction ident attempted: {{value}}."
+  # validates_presence_of :ident
+  # validates_uniqueness_of :ident, :message => "Non-unique jurisdiction ident attempted: {{value}}."
 
   # Make sure that ident is not nil. If it is, create a unique one.
   def before_validation

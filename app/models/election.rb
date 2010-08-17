@@ -31,6 +31,8 @@ class Election < ActiveRecord::Base
     has_many :contests, :order => :position, :dependent => :destroy
     has_many :questions, :order => :display_name, :dependent => :destroy
     
+    attr_accessible :ident, :display_name, :district_set_id
+    
     validates_presence_of :display_name
     belongs_to :district_set
     
