@@ -34,7 +34,7 @@ module DefaultBallot
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
       @election_translation = PDFBallotStyle.get_election_translation(election, lang)
       @instruction_text_url = instruction_text_url
-    
+      
       @page_size = "LETTER"
       @page_layout = :portrait
       @left_margin = @right_margin = 18
@@ -96,21 +96,6 @@ module DefaultBallot
 
     def create_columns(flow_rect)
       AbstractBallot::Columns.new(@columns, flow_rect)
-    end
-
-    def short_instructions(item)
-      if item.is_a?(Contest)
-        if item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
-          return bt[:Vote_for_1].sub("&1;", "1") if item.open_seat_count < 2
-          return bt[:Vote_for_many].sub("&1;", item.open_seat_count.to_s)
-        else
-          return bt[:Rank_candidates]
-        end
-      elsif item.is_a?(Question)
-        return bt[:Vote_yes_or_no]
-      else
-        raise "Unknown short instruction type #{item.class}"
-      end      
     end
     
     def wide_style

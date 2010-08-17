@@ -9,6 +9,7 @@ module DefaultBallot
       NEXT_COL_BOUNCE = 30
       
       def initialize(pdf, contest, scanner, options={ })
+        opts = { :form_enabled => false}.merge(options)
         raise ArgumentError, "pdf should be a Prawn::Document" unless pdf.is_a?(::Prawn::Document)
         raise ArgumentError, "contest shoulbe be Contest" unless contest.is_a?(::Contest)
         @pdf = pdf

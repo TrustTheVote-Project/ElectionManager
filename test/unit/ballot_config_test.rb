@@ -80,34 +80,6 @@ class BallotConfigTest < ActiveSupport::TestCase
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           assert_instance_of AbstractBallot::Columns, @ballot_config.create_columns(flow_rect)
         end
-
-        should "create short instructions for a contest that is winner take all" do
-          contest = Contest.make(:voting_method => VotingMethod::WINNER_TAKE_ALL)
-          contest.open_seat_count = 1
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Vote for 1", ballot_xlation
-
-          contest.open_seat_count = 5
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Vote for up to 5", ballot_xlation
-
-        end
-        
-        should "create short instructions for a contest that is ranked" do
-          contest = Contest.make(:voting_method => VotingMethod::RANKED)
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Rank the candidates", ballot_xlation
-        end
-        
-        should "create short instructions for a question" do
-          assert_equal "Vote yes or no", @ballot_config.short_instructions(Question.make)
-        end
-        
-        should "raise an exception when getting short instructions for any other item" do
-          assert_raise RuntimeError do
-            @ballot_config.short_instructions(Election.make)
-          end
-        end
         
         should "have a wide style of continue" do
           assert_equal :continue, @ballot_config.wide_style 
