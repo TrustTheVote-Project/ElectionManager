@@ -44,28 +44,16 @@ class ActiveSupport::TestCase
   def self.setup_precincts
     context "valid precincts" do
       setup do
-        # create a precinct within 4 Districts
-        puts "***** ttv_context: setup_precincts - valid precincts..."
-        @p1 = Precinct.create!(:display_name => "Precinct 1")
-        @p1split = PrecinctSplit.make
-        @ds1 = DistrictSet.make
-        @p1split.district_set = @ds1
-        (0..3).each do |i|
-          @ds1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-        end
-        
-        # create another precinct with a set of 5 Districts
-        @p2 = Precinct.create!(:display_name => "Precinct 2")
-        @p2split = PrecinctSplit.make
-        @ds2 = DistrictSet.make
-        @p2split.district_set = @ds2
+        # create a precinct with one precinct split
+        setup_precinct "Precinct 1", 1
+        @p1 = @prec_new
 
-        (4..7).each do |i|
-          @ds2.districts << District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-        end
+        # create another precinct with 3 precinct splits
+        setup_precinct "Precinct 2", 3
+        @p2 = @prec_new
 
         # create a set of districts that are not associated with any precincts
-        (8..11).each do |i|
+        (9..11).each do |i|
           District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
         end
       end # end setup
@@ -75,6 +63,9 @@ class ActiveSupport::TestCase
     end #end context
   end # end setup_precincts method
   
+
+  
+# todo old style jurisdictions. needs to become depracated
   def self.setup_jurisdictions
     setup_precincts do
 
