@@ -14,7 +14,7 @@
 
 class Question < ActiveRecord::Base
   
-  belongs_to  :requesting_district, :class_name => 'District'
+  belongs_to :requesting_district, :class_name => 'District'
   belongs_to :election
 
   attr_accessible :display_name, :question, :district_id , :election_id

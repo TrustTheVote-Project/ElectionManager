@@ -28,12 +28,28 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
+  
+  def collect_districts
+    district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
+  end
 
+#  def districts_for_election(election)
+#    districts & election.district_set.districts
+#  end
+
+# Is this precinct a split precinct?
+  def split?
+    precinct_splits.size != 1
+  end
+
+# For now we are assuming one PrecinctSplit per Precinct.
   def districts_for_election(election)
-    districts & election.district_set.districts
+    prec_districts = collect_districts
+    district_list.districts & election.contests
   end
   
-  # Return a list of DistrictSets tjat this Precinct belongs to. 
+# TODO: fix for split precincts
+  # Return a list of DistrictSets that this Precinct belongs to. 
   # In the real world, this should always be a list of length 1, even though the data model permits more
 #  def district_sets
 #    districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }

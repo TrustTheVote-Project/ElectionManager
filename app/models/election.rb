@@ -43,13 +43,17 @@ class Election < ActiveRecord::Base
       return s
     end
     
-    def districts
-      @districts = district_set.districts if (!@districts)
-      @districts  
-    end
+#    def districts
+#      @districts = district_set.districts if (!@districts)
+#      @districts  
+#    end
 
-    def validate 
-       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
+#    def validate 
+#       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
+#    end
+
+    def collect_districts
+#TODO      district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
     end
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
