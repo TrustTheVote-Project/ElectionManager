@@ -8,6 +8,24 @@ class PrawnFormTest < ActiveSupport::TestCase
       @pdf =  create_pdf("Test Form Text Field")
     end
 
+    should "extend the Prawn::Document" do
+      public_methods = @pdf.public_methods(false)
+      TTV::Prawn::Form.instance_methods(false).each do |instance_method|
+        assert_contains public_methods, instance_method
+      end
+    end
+    
+    should "not be form enabled until form method is called" do
+      assert !@pdf.form_enabled
+      assert !@pdf.form?
+    end
+    
+    should "be form enabled after form method is called" do
+      @pdf.form
+      assert @pdf.form_enabled
+      assert @pdf.form?
+    end
+
     should "generate an empty form" do
       # generate an empty form
       @pdf.form

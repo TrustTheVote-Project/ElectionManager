@@ -9,11 +9,25 @@ module TTV
       include TTV::Prawn::Graphics
       
       attr_reader :resources, :fields
+      attr_accessor :form_enabled
+
+      def form?
+        @form_enabled
+      end
       
       def form(options={}, &block )
-
+        
+        @form_enabled = true
+        
         @fields = []
-        instance_eval(&block) if block_given?
+        
+        if block_given?
+          # if the block param has no arguments then eval it with the
+          # scope of this Prawn::Document object.
+          # otherwise yield, block.call(..), with the arg this
+          # Prawn::Document object.
+          block.arity < 1 ? instance_eval(&block) : block.call(self)
+        end
         
         data = store.root.data
         data[:AcroForm] = store.ref(:Fields => (@fields || fields),
@@ -239,7 +253,6 @@ module TTV
           box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
             ttv_rectangle([0, 0], width, height)          
             stroke
-            
             ttv_line(0,0,width,height)
             stroke
 

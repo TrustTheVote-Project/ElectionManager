@@ -36,7 +36,8 @@ module DefaultBallot
       @instruction_text_url = template.instructions_image.url
       @scanner = TTV::Scanner.new
       
-      # @form_enabled = template.pdf_form?
+      @template = template
+      
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
       @ballot_translation = PDFBallotStyle.get_ballot_translation(style, @lang)
@@ -53,10 +54,13 @@ module DefaultBallot
       @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
       @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
+      @checkbox_id = 0 # used to id form checkboxes
     end
 
     def setup(pdf, precinct)
       @pdf = pdf
+      @pdf.form if @template.pdf_form
+      
       @precinct = precinct
       if @lang == "zh"  # chinese fonts, 
         pdf.font_families.update({
@@ -129,15 +133,24 @@ module DefaultBallot
       end
     end
 
-    def stroke_checkbox(pt = [0,0])
+    def stroke_checkbox(pt = [0,0], name="")
       @pdf.line_width 1.5
       @pdf.fill_color "FFFFFF"
       @pdf.stroke_color "000000"
-      @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
-      @pdf.fill_and_stroke
+      
+      if @pdf.form?
+        @checkbox_id += 1
+        form_pt = [pt[0], pt[1]-CHECKBOX_HEIGHT]
+        @pdf.draw_checkbox("#{@checkbox_id}", :at => form_pt, :width => CHECKBOX_WIDTH,:height =>CHECKBOX_HEIGHT)
+      else
+        @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+        @pdf.fill_and_stroke
+      end
+      
       @pdf.fill_color "000000"
-    end
 
+    end
+    
     def draw_checkbox(rect, text)
 #      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
 #        stroke_checkbox
