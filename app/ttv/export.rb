@@ -70,6 +70,7 @@ module TTV
           return_array << return_precinct
         }
       }
+      return_array
     end
   end
 end
