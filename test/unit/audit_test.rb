@@ -168,9 +168,11 @@ class AuditTest < ActiveSupport::TestCase
         should "not fail adding a District Set object to an Election by object" do
           new_district_set = DistrictSet.find_or_create_by_display_name("District 2")
           new_district_set.save!
-          new_election = Election.find_or_create_by_display_name(:display_name => "Election 1", :district_set => new_district_set)
+          new_election = Election.find_or_create_by_display_name(:display_name => "Election 1")
+          new_election.district_set = new_district_set
           new_election.save!
           assert_valid new_election
+          assert_equal new_district_set, new_election.district_set
         end
         
         should "import a contest" do
