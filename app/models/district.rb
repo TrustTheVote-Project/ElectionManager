@@ -13,7 +13,7 @@
 
 class District < ActiveRecord::Base
   has_and_belongs_to_many :district_sets
-  has_and_belongs_to_many :precincts
+#  has_and_belongs_to_many :precincts
 
   has_many :contests, :order => :display_name
   has_many :questions, :order => :display_name
