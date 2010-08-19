@@ -13,7 +13,7 @@
 class Precinct < ActiveRecord::Base
   
 #  has_and_belongs_to_many :districts
-  has_many :district_sets, :through => :precinct_splits
+#  has_many :district_sets, :through => :precinct_splits
   has_many :precinct_splits
   
   attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
@@ -30,7 +30,7 @@ class Precinct < ActiveRecord::Base
   end
   
   def collect_districts
-    district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
+    precinct_splits.reduce([]) { |coll, ps| coll |= ps.district_set.districts}
   end
 
 #  def districts_for_election(election)

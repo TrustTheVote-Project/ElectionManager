@@ -1,31 +1,3 @@
-# == Schema Information
-# Schema version: 20100813053101
-#
-# Table name: elections
-#
-#  id                       :integer         not null, primary key
-#  display_name             :string(255)
-#  district_set_id          :integer
-#  start_date               :datetime
-#  created_at               :datetime
-#  updated_at               :datetime
-#  ballot_style_template_id :integer         default(0)
-#  default_voting_method_id :integer         default(0)
-#  ident                    :string(255)
-#
-
-# == Schema Information
-# Schema version: 20100215144641
-#
-# Table name: elections
-#
-#  id              :integer         not null, primary key
-#  display_name    :string(255)
-#  district_set_id :integer
-#  start_date      :datetime
-#  created_at      :datetime
-#  updated_at      :datetime
-#
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
     has_many :contests, :order => :position, :dependent => :destroy
@@ -58,18 +30,6 @@ class Election < ActiveRecord::Base
     def collect_districts
 #TODO      district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
     end
-    
-    #validates_presence_of :ident
-    #validates_uniqueness_of :ident, :message => "Non-unique election ident attempted: {{value}}."
-  
-    # Make sure that ident is not nil. If it is, create a unique one.
-=begin    def before_validation
-      if self.blank? || self.ident.blank?
-        self.ident = "elec-#{ActiveSupport::SecureRandom.hex}"
-        self.save!
-      end
-    end
-=end    
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
     def to_xml( options = {}, &block )

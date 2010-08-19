@@ -1,20 +1,3 @@
-# == Schema Information
-# Schema version: 20100813053101
-#
-# Table name: contests
-#
-#  id               :integer         not null, primary key
-#  display_name     :string(255)
-#  open_seat_count  :integer
-#  voting_method_id :integer
-#  district_id      :integer
-#  election_id      :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  position         :integer         default(0)
-#  ident            :string(255)
-#
-
 class Contest < ActiveRecord::Base
   # requesting district
   belongs_to  :district
@@ -29,7 +12,7 @@ class Contest < ActiveRecord::Base
   
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   
-  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id
+  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election_id
   validates_numericality_of :open_seat_count
   
   def validate
@@ -58,15 +41,4 @@ class Contest < ActiveRecord::Base
     end.flatten.compact
   end
   
-  #validates_presence_of :ident
-  #validates_uniqueness_of :ident, :message => "Non-unique contest ident attempted: {{value}}."
-
-  # Make sure that ident is not nil. If it is, create a unique one.
-=begin  def before_validation
-    if self.blank? || self.ident.blank?
-      self.ident = "cont-#{ActiveSupport::SecureRandom.hex}"
-      self.save!
-    end
-  end
-=end
 end
