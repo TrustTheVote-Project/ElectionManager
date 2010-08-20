@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100802153118) do
+ActiveRecord::Schema.define(:version => 20100818220632) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -106,11 +106,6 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.string   "ident"
   end
 
-  create_table "districts_precincts", :id => false, :force => true do |t|
-    t.integer "precinct_id"
-    t.integer "district_id"
-  end
-
   create_table "elections", :force => true do |t|
     t.string   "display_name"
     t.integer  "district_set_id"
@@ -148,6 +143,14 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ident"
+  end
+
+  create_table "precinct_splits", :force => true do |t|
+    t.string   "display_name"
+    t.integer  "precinct_id"
+    t.integer  "district_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "precincts", :force => true do |t|

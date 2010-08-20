@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="yes"?>
+<vip_object schemaVersion="2.1">
+  <source id="0">
+    <name>State of Virginia</name>
+    <vip_id>51</vip_id>
+    <datetime>2010-05-25T10:14:48.850</datetime>
+    <description>The state of Virginia is the official source of election information in Virginia. This feed provides information on election dates, offices, candidates, and precinct boundaries.</description>
+    <organization_url>www.sbe.virginia.gov/</organization_url>
+  </source>
+  <locality id="51103">
+    <name>LANCASTER COUNTY</name>
+    <state_id>51</state_id>
+    <type>COUNTY</type>
+  </locality>
+  <precinct id="503533">
+    <name>201 - ATLANTIC</name>
+    <locality_id>51003</locality_id>
+    <polling_location_id>100000001</polling_location_id>
+  </precinct>
+</vip_object>
+  

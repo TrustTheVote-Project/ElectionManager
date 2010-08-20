@@ -1,31 +1,10 @@
-# == Schema Information
-# Schema version: 20100802153118
-#
-# Table name: contests
-#
-#  id               :integer         not null, primary key
-#  display_name     :string(255)
-#  open_seat_count  :integer
-#  voting_method_id :integer
-#  district_id      :integer
-#  election_id      :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  position         :integer         default(0)
-#
-
 class Contest < ActiveRecord::Base
   # requesting district
   belongs_to  :district
-  
   belongs_to :election
-  
   belongs_to :voting_method
-  
   has_many :candidates, :dependent => :destroy, :order => :display_name
-  
   attr_accessible :display_name, :open_seat_count, :voting_method_id , :candidates_attributes, :election_id, :district_id, :position
-  
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   
   validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election_id

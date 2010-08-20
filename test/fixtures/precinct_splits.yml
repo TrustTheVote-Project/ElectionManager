@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  display_name: MyString
+  precinct_id: 1
+  district_set_id: 1
+
+two:
+  display_name: MyString
+  precinct_id: 1
+  district_set_id: 1

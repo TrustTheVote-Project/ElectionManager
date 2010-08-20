@@ -9,18 +9,15 @@ class BallotConfigTest < ActiveSupport::TestCase
       context "initialize " do
         setup do
           
-          @e1 = Election.find_by_display_name "Election 1"
-          @p1 = Precinct.find_by_display_name "Precint 1"
+#         @p1 = Precinct.find_by_display_name "Precinct 1"
           @scanner = TTV::Scanner.new
           @lang = 'en'
           @style = "default"
           image_instructions = 'images/test/instructions.jpg'
           @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner,image_instructions)
-          
-          @pdf = create_pdf("Test Default Ballot")
-          
+         
+          @pdf = create_pdf("Test Default Ballot")          
           @ballot_config.setup(@pdf, @p1)
-
           # remove all the pdf in the tmp dir
           # FileUtils.rm "#{Rails.root}/tmp/*.pdf", :force => true
           
@@ -56,7 +53,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         # TODO: remove as it doesn't seem to be used?      
         should "load the image for language code #{@lang}" do
           assert_nothing_raised do
-            @ballot_config.load_image("instructions2.png")          
+            @ballot_cohnfig.load_image("instructions2.png")          
           end
         end
         

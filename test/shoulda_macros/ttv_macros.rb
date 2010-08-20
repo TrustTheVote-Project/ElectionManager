@@ -99,5 +99,4 @@ class Test::Unit::TestCase
       field_hash = get_obj(ref.id)
     end
   end
-  
 end

@@ -41,25 +41,17 @@ class ActiveSupport::TestCase
     
   end # end setup_users
   
+# Set up a series of Precincts, PrecinctSplits, DistrictSets and Districts
   def self.setup_precincts
     context "valid precincts" do
       setup do
-        # create a precint within 4 Districts
-        @p1 = Precinct.create!(:display_name => "Precint 1")
-        (0..3).each do |i|
-          @p1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-        end
-        
-        # create another precint with another set of 4 Districts
-        @p2 = Precinct.create!(:display_name => "Precint 2")      
-        (4..7).each do |i|
-          @p2.districts << District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-        end
+        # create a precinct with one precinct split
+        setup_precinct "Precinct 1", 1
+        @p1 = @prec_new
 
-        # create a set of districts that are not associated with any precincts
-        (8..11).each do |i|
-          District.create!(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-        end
+        # create another precinct with 3 precinct splits
+        setup_precinct "Precinct 2", 3
+        @p2 = @prec_new
       end # end setup
       
       yield
@@ -67,24 +59,16 @@ class ActiveSupport::TestCase
     end #end context
   end # end setup_precincts method
   
+    
+# todo old style jurisdictions. needs to become depracated
   def self.setup_jurisdictions
     setup_precincts do
-
       context "valid jurisdictions and elections" do
         setup do
           # create a district set with only the first 2 districts in the
           # first precinct
-          ds1  = DistrictSet.create!(:display_name => "District Set 1")
-          ds1.districts << District.find_by_display_name("District 0")
-          ds1.districts << District.find_by_display_name("District 1")
-          ds1.save!
-          
-          # create another district set that is associated first 2 districts
-          # in the second precinct
-          ds2  = DistrictSet.create!(:display_name => "District Set 2")
-          ds2.districts << District.find_by_display_name("District 4")
-          ds2.districts << District.find_by_display_name("District 5")
-          ds2.save!
+          ds1 = setup_districtset "DistrictSet A", 0, 3
+          ds2 = setup_districtset "DistrictSet B", 4, 5
 
           # create 2 elections each associated with a district set
           @e1 = Election.create!(:display_name => "Election 1", :district_set => ds1)
@@ -105,12 +89,12 @@ class ActiveSupport::TestCase
       context 'valid contest requesters' do
         
         setup do
-        # Create contests that where requested by district 0
+        # Create contests that where requested by district
 
          open_seat_count = 2
          voting_method = VotingMethod::WINNER_TAKE_ALL
         
-          d0 =  District.find_by_display_name("District 0")
+          d0 =  District.find_by_display_name("DistrictSet A District 0")
 
           4.times do |i|
             c = Contest.new(:display_name => "Contest #{i}", :open_seat_count => open_seat_count)
