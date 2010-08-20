@@ -54,7 +54,6 @@ module DefaultBallot
       @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
       @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
-      @checkbox_id = 0 # used to id form checkboxes
     end
 
     def setup(pdf, precinct)
@@ -137,18 +136,43 @@ module DefaultBallot
       @pdf.line_width 1.5
       @pdf.fill_color "FFFFFF"
       @pdf.stroke_color "000000"
+      @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+      @pdf.fill_and_stroke
+      @pdf.fill_color "000000"
+    end
+    
+    
+    # drow the checkbox to the left of the text.
+    def xxdraw_checkbox(rect, text)
+      # rect is either an enclosing column or combo box flow.
       
-      if @pdf.form?
-        @checkbox_id += 1
-        form_pt = [pt[0], pt[1]-CHECKBOX_HEIGHT]
-        @pdf.draw_checkbox("#{@checkbox_id}", :at => form_pt, :width => CHECKBOX_WIDTH,:height =>CHECKBOX_HEIGHT)
-      else
-        @pdf.rectangle pt, CHECKBOX_WIDTH, CHECKBOX_HEIGHT
-        @pdf.fill_and_stroke
+      # draw the checkbox in a bounding box within the rect.
+      #      x = rect.left + (FlowItem::HPAD2*2)
+      x = rect.left + FlowItem::HPAD2*2
+      y = rect.top
+      puts "x, y = #{x}, #{y}"
+      
+      # space btw the checkbox and the text. "<checkbox><horiz_space><text>"
+      horiz_space = CHECKBOX_WIDTH + (FlowItem::HPAD2*2)
+      
+      @pdf.bounding_box [x, y], :width => rect.width - horiz_space do
+        puts "draw_checkbox bounds is "
+        TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
+        @pdf.form? ? stroke_checkbox([0,0]) : stroke_checkbox([x,y]) 
       end
       
-      @pdf.fill_color "000000"
-
+      
+      # draw the text in a bounding box to the rigth of the checkbox. 
+      @pdf.bounding_box [rect.left + horiz_space, rect.top], :width => rect.width - horiz_space do
+        @pdf.font "Helvetica", :size => 10
+        @pdf.text text
+        # this will decrease the enclosing column/combo box top by
+        # height of text bounding box or checkbox height
+        rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
+      end      
+      
+      location  = [1,5] # dummy location to make things work
+      return horiz_space, location
     end
     
     def draw_checkbox(rect, text)
