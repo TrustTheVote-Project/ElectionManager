@@ -89,12 +89,12 @@ class ActiveSupport::TestCase
       context 'valid contest requesters' do
         
         setup do
-        # Create contests that where requested by district 0
+        # Create contests that where requested by district
 
          open_seat_count = 2
          voting_method = VotingMethod::WINNER_TAKE_ALL
         
-          d0 =  District.find_by_display_name("District 0")
+          d0 =  District.find_by_display_name("DistrictSet A District 0")
 
           4.times do |i|
             c = Contest.new(:display_name => "Contest #{i}", :open_seat_count => open_seat_count)

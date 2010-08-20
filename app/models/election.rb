@@ -25,6 +25,26 @@ class Election < ActiveRecord::Base
 #       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
 #    end
 
+    def each_ballot param=nil
+      cont_list = contests
+      quest_list = questions
+      if param.class == Precinct
+        prec_splits = param.precinct_splits
+      else
+        raise ArgumentError, "Invalid parameter for Election.each_ballot"
+      end
+      prec_splits.each do 
+        |split|
+          result_cont_list = cont_list.reduce([]) do
+            |memo, cont| memo |= (split.district_set.districts.member?(cont.district)) ? [cont] : []
+          end
+          result_quest_list = quest_list.reduce([]) do
+            |memo, quest| memo |= (split.district_set.districts.member?(quest.requesting_district)) ? [quest] : []
+          end
+          yield result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
+      end
+    end
+
     def collect_districts
 #TODO      district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
     end
@@ -89,7 +109,7 @@ class Election < ActiveRecord::Base
     return equal
   end
 
-  #
+  # TODO: equal_districts? and friends should be moved out of Election, maybe in its owbs class or module?
   # Contains assertions that certify the election objects election1 and 
   # election2 contain equivalent precincts and associated districts
   #
@@ -163,7 +183,21 @@ class Election < ActiveRecord::Base
         #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
         
       return ballot_array
-    end
+   end
+  
+#
+# Handy verbose to_s for Elections. Feel free to add useful stuff as needed.
+#
+  def to_s
+    s = "E: #{display_name}\n"
+    contests.each do |c|
+      s = s += "   * c: #{c.display_name} (d: #{c.district.display_name})"
+    end      
     
+    questions.each do |q|
+      s = s += "   * c: #{q.display_name} (d: #{q.requesting_district.display_name})"
+    end
+    return s
+  end
 
 end
