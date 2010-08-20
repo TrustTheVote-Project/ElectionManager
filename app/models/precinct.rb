@@ -1,15 +1,3 @@
-# == Schema Information
-# Schema version: 20100813053101
-#
-# Table name: precincts
-#
-#  id           :integer         not null, primary key
-#  display_name :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  ident        :string(255)
-#
-
 class Precinct < ActiveRecord::Base
   
 #  has_and_belongs_to_many :districts
@@ -46,6 +34,15 @@ class Precinct < ActiveRecord::Base
   def districts_for_election(election)
     prec_districts = collect_districts
     district_list.districts & election.contests
+  end
+  
+# Nice to_s
+  def to_s
+    s = "P: #{display_name}\n"
+    precinct_splits.each do |ps|
+      s += "  * s: #{ps.to_s}\n"
+    end
+    return s
   end
   
 # TODO: fix for split precincts

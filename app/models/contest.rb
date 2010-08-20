@@ -3,9 +3,7 @@ class Contest < ActiveRecord::Base
   belongs_to  :district
   
   belongs_to :election
-  
   belongs_to :voting_method
-  
   has_many :candidates, :dependent => :destroy, :order => :display_name
   
   attr_accessible :display_name, :open_seat_count, :voting_method_id , :candidates_attributes, :election_id, :district_id, :position, :ident
