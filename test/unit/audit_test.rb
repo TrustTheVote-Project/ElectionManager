@@ -183,13 +183,6 @@ class AuditTest < ActiveSupport::TestCase
           assert_valid new_election
           assert_equal new_district_set, new_election.district_set
         end
-        
-        should "import a contest" do
-          # TODO: Why is this failing?
-          # contest = Contest.find_by_ident "1"
-          # assert contest
-          # assert 1, contest.ident
-        end
       end
     end
   end
