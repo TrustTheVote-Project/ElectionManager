@@ -143,6 +143,8 @@ class AuditTest < ActiveSupport::TestCase
           
           election = Election.find_by_display_name "New Hampshire General Election"
           assert election
+          assert_equal "1", election.ident
+          assert election.start_date
           assert_equal "1", election.contests[0].ident
           assert_equal "1", election.district_set.ident
         end

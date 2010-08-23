@@ -21,6 +21,7 @@ class ExportTest < ActiveSupport::TestCase
       import_xml.import
     end
     
+    
     should "have imported correctly" do
       precinct = Precinct.find_by_display_name "Bedford County"
       district = District.find_by_display_name "State of New Hampshire"
@@ -39,37 +40,99 @@ class ExportTest < ActiveSupport::TestCase
         #@yaml_exported_hash = YAML.load(@yaml_export)
 
         @xml = @exporter.export_jurisdiction(jurisdiction, :xml)
-        # Needs massaging see http://gist.github.com/531530
-        # xml_converter = TTV::XMLToEDH.new(@xml)
-        # @xml_export = xml_converter.convert # Convert to hash  
+        
+        xml_converter = TTV::XMLToEDH.new(@xml)
+        @xml_export = xml_converter.convert # Convert to hash
       end
       
-      should "export readable YAML" do
+      should "export YAML, XML" do
         assert @yaml_export
+        assert @xml_export
       end
       
       should "export specified jurisdiction" do
         assert_equal 1, @yaml_export['body']['jurisdictions'].size
         assert_equal "New Hampshire", @yaml_export['body']['jurisdictions'][0]['display_name']
         assert_equal "1", @yaml_export['body']['jurisdictions'][0]['ident']
+        
+        assert_equal 1, @xml_export['body']['jurisdictions'].size
+        assert_equal "New Hampshire", @xml_export['body']['jurisdictions'][0]['display_name']
+        assert_equal "1", @xml_export['body']['jurisdictions'][0]['ident']
       end
       
       should "export districts" do
         assert_equal "State of New Hampshire", @yaml_export['body']['districts'][0]['display_name']
         assert_equal "1", @yaml_export['body']['districts'][0]['ident']
-        assert_equal "1", @yaml_export['body']['districts'][0]['jurisdiction_identref']
+        assert_equal "1", @yaml_export['body']['districts'][0]['jurisdictions'][0]['identref']
+
+        assert_equal "State of New Hampshire", @xml_export['body']['districts'][0]['display_name']
+        assert_equal "1", @xml_export['body']['districts'][0]['ident']
+        assert_equal "1", @xml_export['body']['districts'][0]['jurisdictions'][0]['identref']
       end
       
       should "export precincts" do
         precinct_1 = @yaml_export['body']['precincts'].detect{|precinct| precinct['ident'] == "1"}
+        assert_equal "State of New Hampshire", precinct_1['display_name']
         
+        precinct_1 = @xml_export['body']['precincts'].detect{|precinct| precinct['ident'] == "1"}
         assert_equal "State of New Hampshire", precinct_1['display_name']
       end
       
       should "export elections" do
+        assert_equal "New Hampshire General Election", @yaml_export['body']['elections'][0]['display_name']
+        assert_equal "1", @yaml_export['body']['elections'][0]['ident']
+        assert @yaml_export['body']['elections'][0]['start_date']
+        assert_equal "1", @yaml_export['body']['elections'][0]['contests'][0]['identref']
+        assert_equal "1", @yaml_export['body']['elections'][0]['jurisdiction_identref']
         
+        assert_equal "New Hampshire General Election", @xml_export['body']['elections'][0]['display_name']
+        assert_equal "1", @xml_export['body']['elections'][0]['ident']
+        assert @xml_export['body']['elections'][0]['start_date']
+        assert_equal "1", @xml_export['body']['elections'][0]['contests'][0]['identref']
+        assert_equal "1", @xml_export['body']['elections'][0]['jurisdiction_identref']
       end
       
+      should "export contests" do
+        assert_equal "County Attorney", @yaml_export['body']['contests'][0]['display_name']
+        assert_equal "1", @yaml_export['body']['contests'][0]['ident']
+        assert_equal "Winner Take All", @yaml_export['body']['contests'][0]['voting_method']
+        assert @yaml_export['body']['contests'][0]['candidates'].find {|candidate| candidate['identref'] == "1" }
+        assert @yaml_export['body']['contests'][0]['candidates'].find {|candidate| candidate['identref'] == "2" }
+        assert_equal "1", @yaml_export['body']['contests'][0]['district_identref']
+        
+        assert_equal "County Attorney", @xml_export['body']['contests'][0]['display_name']
+        assert_equal "1", @xml_export['body']['contests'][0]['ident']
+        assert_equal "Winner Take All", @xml_export['body']['contests'][0]['voting_method']
+        assert @xml_export['body']['contests'][0]['candidates'].find {|candidate| candidate['identref'] == "1" }
+        assert @xml_export['body']['contests'][0]['candidates'].find {|candidate| candidate['identref'] == "2" }
+        assert_equal "1", @xml_export['body']['contests'][0]['district_identref']
+      end
+      
+      should "export candidates" do
+        candidate_1 = @xml_export['body']['candidates'].find { |candidate| candidate['ident'] == "1"}
+        assert candidate_1
+        assert_equal "1", candidate_1['ident']
+        assert_equal "Marguerite Lefebvre Wageling", candidate_1['display_name']
+        assert_equal "democrat", candidate_1['party']
+        
+        candidate_2 = @xml_export['body']['candidates'].find { |candidate| candidate['ident'] == "2"}
+        assert candidate_2
+        assert_equal "2", candidate_2['ident']
+        assert_equal "Marguerite Lefebvre Wageling", candidate_2['display_name']
+        assert_equal "republican", candidate_2['party']
+        
+        candidate_1 = @yaml_export['body']['candidates'].find { |candidate| candidate['ident'] == "1"}
+        assert candidate_1
+        assert_equal "1", candidate_1['ident']
+        assert_equal "Marguerite Lefebvre Wageling", candidate_1['display_name']
+        assert_equal "democrat", candidate_1['party']
+        
+        candidate_2 = @yaml_export['body']['candidates'].find { |candidate| candidate['ident'] == "2"}
+        assert candidate_2
+        assert_equal "2", candidate_2['ident']
+        assert_equal "Marguerite Lefebvre Wageling", candidate_2['display_name']
+        assert_equal "republican", candidate_2['party']
+      end
     end
   end
 end

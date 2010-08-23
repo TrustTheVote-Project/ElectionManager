@@ -78,7 +78,7 @@ module TTV
     # Loads an EDH formatted precinct into EM
     def load_precinct precinct
       new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], :ident => precinct["ident"])
-      precinct["districts"].each{|dist| new_precinct.districts << District.find_by_ident(dist["identref"])} if precinct["districts"]
+      precinct["districts"].each{|dist| new_precinct.districts << District.find_by_ident(dist["identref"]) if !new_precinct.districts.include? District.find_by_ident(dist["identref"])} if precinct["districts"]
       new_precinct.save!
     end
     
@@ -103,7 +103,7 @@ module TTV
 
     # Loads an EDH formatted election into EM
     def load_election election
-      new_election = Election.find_or_create_by_display_name(:display_name => election["display_name"], :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_identref"]).id)
+      new_election = Election.find_or_create_by_ident(:display_name => election["display_name"], :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_identref"]).id, :ident => election["ident"], :start_date => election["start_date"])
       election["contests"].each{ |cont| new_election.contests << Contest.find_by_ident(cont["identref"])} if election["contests"]
       new_election.save!
     end

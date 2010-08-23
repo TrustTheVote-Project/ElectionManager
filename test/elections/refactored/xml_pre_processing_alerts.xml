@@ -9,7 +9,7 @@
     <precinct display_name="Bedford County" ident="2">
       <district identref="1"/>
     </precinct>
-    <election display_name="New Hampshire General Election" start_date="2010-11-04 08:00:00 -0700" jurisdiction_identref="1">
+    <election display_name="New Hampshire General Election" start_date="2010-11-04 08:00:00 -0700" jurisdiction_identref="1" ident="1">
 			<contest identref="1"/>
     </election>
     <contest display_name="County Attorney" district_identref="1" voting_method="Winner Take All" ident="1">
