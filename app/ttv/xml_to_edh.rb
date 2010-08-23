@@ -20,25 +20,31 @@ module TTV
       # into an Election Data Hash. To use an unmodified Hash.from_xml function for this,
       # we currently use a few hack-y steps.
       # Step 1: Add "empty" elements for each object-type which has only one item included.
-      #   This is done to nudge Hash.from_xml into treating these elements as members of a list.
+      #   This is done to nudge Hash.from_xml into treating these elements as members of an array.
       @xml_body = @xml_root.get_elements('body')[0] 
       @xml_body.add_element('contest') if @xml_body.get_elements('contest').size == 1
-      @xml_body.add_element('precinct') if @xml_body.get_elements('precinct').size == 1
       @xml_body.add_element('candidate') if @xml_body.get_elements('candidate').size == 1
       @xml_body.add_element('jurisdiction') if @xml_body.get_elements('jurisdiction').size == 1
 
-      #   Add empty elements for districts/precincts
+      #   Add empty elements for districts' jurisdiction references
       districts = @xml_body.get_elements('district')         
       if districts != nil
         @xml_body.add_element('district') if districts.size == 1
         districts.each {|district| add_empties_to_district district}
       end
       
-      #   Process elections/contests/candidates
+      #   Add empty elements for elections' contest references
       elections = @xml_body.get_elements('election')
       if elections != nil
         @xml_body.add_element('election') if elections.size == 1
         elections.each {|election| add_empties_to_election election}
+      end
+
+      #   Add empty elements for precincts' district references
+      precincts = @xml_body.get_elements('precinct')
+      if precincts != nil
+        @xml_body.add_element('precinct') if precincts.size == 1
+        precincts.each {|precinct| add_empties_to_precinct precinct}
       end
       
       # Step 2: Convert to Hash
@@ -55,7 +61,9 @@ module TTV
       return @election_data_hash
     end
 
-    # TODO: DRY these functions
+    # TODO: DRY these add_empties_to functions
+    
+    # Adds empty element to election/contests to force conversion as array when necessary
     def add_empties_to_election election
       contests = election.get_elements('contest')
       if contests != nil # size > 0
@@ -63,7 +71,8 @@ module TTV
         contests.each {|contest| add_empties_to_contest contest}
       end
     end
-      
+    
+    # Adds empty element to contest/candidates to force conversion as array when necessary
     def add_empties_to_contest contest
       candidates = contest.get_elements('candidate')
       if candidates != nil # size > 0
@@ -71,10 +80,19 @@ module TTV
       end
     end
     
+    # Adds empty element to district/jurisdictions to force conversion as array when necessary
     def add_empties_to_district district
-      precincts = district.get_elements('precinct')
-      if precincts != nil # size > 0
-        district.add_element('precinct') if precincts.size == 1
+      jurisdictions = district.get_elements('jurisdiction')
+      if jurisdictions != nil # size > 0
+        district.add_element('jurisdiction') if jurisdictions.size == 1
+      end
+    end
+
+    # Adds empty element to precinct/districts to force conversion as array when necessary
+    def add_empties_to_precinct precinct
+      districts = precinct.get_elements('district')
+      if districts != nil # size > 0
+        precinct.add_element('district') if districts.size == 1
       end
     end
     

@@ -60,8 +60,18 @@ module TTV
     
     # Loads an EDH formatted district into EM
     def load_district district
-      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => DistrictType.find_or_create_by_title(district["type"]))
-      new_district.district_sets << DistrictSet.find_by_ident(district["jurisdiction_identref"])
+      if district["type"] and DistrictType.find_by_title(district["type"])
+        district_type = DistrictType.find_by_title(district["type"])
+      else
+        district_type = 0 # Built-in default district type. TODO: Other better default in db/seed/once/district_types.yml?
+      end
+      
+      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
+      
+      district["jurisdictions"].each { |jurisdiction|
+        new_district.district_sets << DistrictSet.find_by_ident(jurisdiction["identref"])
+      }
+      
       new_district.save!
     end
 
@@ -80,7 +90,13 @@ module TTV
     
     # Loads an EDH formatted contest into EM
     def load_contest contest
-      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :voting_method_id => 0, :district_id => District.find_by_ident(contest["district_identref"]).id)
+      if contest["voting_method"] and VotingMethod.find_by_display_name(contest["voting_method"])
+        voting_method_id = VotingMethod.find_by_display_name(contest["voting_method"]) 
+      else
+        voting_method_id = 0
+      end
+      
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :voting_method_id => voting_method_id, :district_id => District.find_by_ident(contest["district_identref"]).id)
       contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["identref"])} if contest["candidates"]
       new_contest.save!
     end

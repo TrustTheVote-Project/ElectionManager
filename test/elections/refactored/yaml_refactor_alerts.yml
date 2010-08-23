@@ -21,7 +21,7 @@ body:
     - identref: 1
     - identref: 2
     district_identref: 1
-    voting_method: winner_take_all
+    voting_method: Winner Take All
   precincts:
   - display_name: State of New Hampshire
     ident: 1
@@ -33,9 +33,10 @@ body:
     - identref: 1
   districts:
   - display_name: State of New Hampshire
-    type: state
+    type: State
     ident: 1
-    # jurisdiction_identref: 1
+    # jurisdictions:
+    # - identref: 1
   candidates:
   - display_name: Marguerite Lefebvre Wageling
     party: democrat

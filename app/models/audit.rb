@@ -24,7 +24,8 @@ class Audit < ActiveRecord::Base
     alerts.each{ |alert|
       if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
         district_set.before_validation # Make sure it has an ident
-        election_data_hash["body"]["districts"][0]["jurisdiction_identref"] = district_set.ident
+        jurisdiction_list = [{"identref" => district_set.ident}]
+        election_data_hash["body"]["districts"][0]["jurisdictions"] = jurisdiction_list
         alerts.delete(alert)
       end
     }
@@ -67,7 +68,7 @@ class Audit < ActiveRecord::Base
   
   def audit_districts
     election_data_hash["body"]["districts"].each{ |district|
-      if district && !district["jurisdiction_identref"]
+      if district && (!district["jurisdictions"] || !district["jurisdictions"][0] || !district["jurisdictions"][0]["identref"]) 
         alerts << Alert.new(:message => "No jurisdiction specified for district #{district["display_name"]}", :alert_type => "no_jurisdiction", :object => district["ident"].to_s, :options => 
           {"use_current" => "Use current jurisdiction #{district_set.display_name}", "import" => "Import without a jurisdiction", "abort" => "Abort import"}, :default_option => "use_current")
       end

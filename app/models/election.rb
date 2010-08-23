@@ -14,18 +14,6 @@
 #  ident                    :string(255)
 #
 
-# == Schema Information
-# Schema version: 20100215144641
-#
-# Table name: elections
-#
-#  id              :integer         not null, primary key
-#  display_name    :string(255)
-#  district_set_id :integer
-#  start_date      :datetime
-#  created_at      :datetime
-#  updated_at      :datetime
-#
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
     has_many :contests, :order => :position, :dependent => :destroy
