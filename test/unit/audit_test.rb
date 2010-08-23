@@ -1,6 +1,4 @@
 require 'test_helper'
-require 'ttv/alert'
-require 'ttv/audit'
 
 class AuditTest < ActiveSupport::TestCase
   
