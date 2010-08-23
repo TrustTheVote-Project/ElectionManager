@@ -11,9 +11,9 @@
 
 class DistrictType < ActiveRecord::Base
   
-  #include ConstantCache
+  include ConstantCache
 
-  #cache_constants :key => :title
+  cache_constants :key => :title
   
   attr_accessible :title
   
