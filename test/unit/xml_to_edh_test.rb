@@ -10,13 +10,15 @@ class XMLToEDHTest < ActiveSupport::TestCase
       @converter = TTV::XMLToEDH.new(@file)
       @election_data_hash = @converter.convert
       @xml_root = @converter.xml_root
-      # puts YAML.dump @election_data_hash
     end
     
     should "pluralize element names" do
       assert @election_data_hash['body']['districts']
+      assert @election_data_hash['body']['districts'][0]['jurisdictions']
       assert @election_data_hash['body']['precincts']
+      assert @election_data_hash['body']['precincts'][0]['districts']
       assert @election_data_hash['body']['elections']
+      assert @election_data_hash['body']['elections'][0]['contests']
       assert @election_data_hash['body']['candidates']
       assert @election_data_hash['body']['jurisdictions']
       assert @election_data_hash['body']['contests']
@@ -24,8 +26,10 @@ class XMLToEDHTest < ActiveSupport::TestCase
   
     should "add empty elements for singleton elements" do
       assert @xml_root.get_elements('body/district').size > 1
+      assert @xml_root.get_elements('body/district')[0].get_elements('jurisdiction').size > 1
       assert @xml_root.get_elements('body/contest').size > 1
       assert @xml_root.get_elements('body/precinct').size > 1
+      assert @xml_root.get_elements('body/precinct')[0].get_elements('district').size > 1
       assert @xml_root.get_elements('body/election').size > 1
       assert @xml_root.get_elements('body/election')[0].get_elements('contest').size > 1
       assert @xml_root.get_elements('body/candidate').size > 1
@@ -33,14 +37,16 @@ class XMLToEDHTest < ActiveSupport::TestCase
     end
     
     should "remove empty elements after hash conversion" do
+      # Test a couple, function applies to all items in hash, recursively
       assert_equal 1, @election_data_hash['body']['jurisdictions'].size
       assert_equal 1, @election_data_hash['body']['elections'][0]['contests'].size
     end
   end
   
-  
   # This was an experiment using container tags and the "array" field to force
   # Hash.from_xml to make single items be placed in arrays.
+  # No longer applicable
+=begin
   context "An XML file with 'type=array's" do
     should "convert singleton fields to array elements" do
       @file = File.new("#{RAILS_ROOT}/test/elections/refactored/xml_arrays.xml")
@@ -72,5 +78,6 @@ class XMLToEDHTest < ActiveSupport::TestCase
       
       # puts YAML.dump @hash      
     end
-  end 
+  end
+=end
 end 

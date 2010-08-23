@@ -70,8 +70,8 @@ class AuditTest < ActiveSupport::TestCase
         assert @audit_yaml.ready_for_import?
         assert @audit_xml.ready_for_import?
         
-        assert_equal @jurisdiction.ident, @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
-        assert_equal @jurisdiction.ident, @audit_xml.election_data_hash["body"]["districts"][0]["jurisdiction_identref"]
+        assert_equal @jurisdiction.ident, @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdictions"][0]["identref"]
+        assert_equal @jurisdiction.ident, @audit_xml.election_data_hash["body"]["districts"][0]["jurisdictions"][0]["identref"]
       end
 
       context "after an import" do
@@ -96,8 +96,9 @@ class AuditTest < ActiveSupport::TestCase
           district = District.find_by_display_name "State of New Hampshire"
           assert district
           assert_equal "1", district.ident
-          # Store newly created district type
-          assert_equal "state", DistrictType.find_by_id(district.district_type_id).title
+          assert_equal @jurisdiction, district.district_sets[0]
+          # Store found district type
+          assert_equal "State", DistrictType.find_by_id(district.district_type_id).title
         end
         
         should "load and save precincts" do
@@ -129,7 +130,7 @@ class AuditTest < ActiveSupport::TestCase
           assert contest
           assert_equal "1", contest.ident
           assert_equal "Marguerite Lefebvre Wageling", contest.candidates[0].display_name
-          # assert_equal "winner_take_all", contest.voting_method.display_name 
+          assert_equal "Winner Take All", contest.voting_method.display_name 
         end
 
         should "load and save elections" do
