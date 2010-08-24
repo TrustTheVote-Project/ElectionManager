@@ -45,9 +45,21 @@ module TTV
         ArgumentError unless bounds.is_a? ::Prawn::Document::BoundingBox
         [bounds.top, bounds.right, bounds.bottom, bounds.left]
       end
+      
+      def self.bounds_abs_coordinates(bounds)
+        ArgumentError unless bounds.is_a? ::Prawn::Document::BoundingBox
+        [bounds.absolute_top, bounds.absolute_right, bounds.absolute_bottom, bounds.absolute_left]
+      end
 
+      def self.show_abs_bounds_coordinates(bounds)
+        puts "Absolute Bounds coordinates \"t, r, b, l\" = #{bounds_abs_coordinates(bounds).join(', ').inspect}"
+      end
       def self.show_bounds_coordinates(bounds)
         puts "Bounds coordinates \"t, r, b, l\" = #{bounds_coordinates(bounds).join(', ').inspect}"
+      end
+
+      def self.show_rect_coordinates(rect)
+        puts "Rectangle coordinates \"t, r, b, l\" = #{rect.top}, #{rect.right}, #{rect.bottom},#{rect.left}"
       end
 
       def self.stroke_rect(pdf, rect, color='ff000')

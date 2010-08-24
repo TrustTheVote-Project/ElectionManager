@@ -17,7 +17,7 @@ class PrawnCheckboxTest < ActiveSupport::TestCase
         
         # create a box around the label and text field
         bounding_box([x,y], :width => w, :height => h) do
-          # stroke_bounds
+          stroke_bounds
           top = 0;
           left = 0
           

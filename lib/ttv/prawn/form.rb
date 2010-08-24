@@ -116,7 +116,14 @@ module TTV
       def draw_checkbox(name, opts={}, &block)
         options = { :width => 10, :height => 10}.merge(opts)
         x,y = map_to_absolute(options[:at])
-
+        #puts "TTV::Prawn::Form#draw_checkbox"
+        #TTV::Prawn::Util.show_bounds_coordinates(bounds)    
+        #TTV::Prawn::Util.show_abs_bounds_coordinates(bounds)
+        # puts "TGD: annot t, l, w, h = #{[y,x, x + options[:width] , y + options[:height]].inspect}"
+        # stroke_color("00FF00") #"FFFFFF"
+#         stroke_line([x, y], [x+ options[:width], y])
+#         stroke_line([x, y], [x, y+ options[:height]])
+        
         unchecked_box_ref = check_box(options[:width], options[:height], false)
         checked_box_ref = check_box(options[:width], options[:height])
 
@@ -128,7 +135,7 @@ module TTV
           :V => :Off, # the name used in the appearance stream (AP),
           :Ff => 0
         }
-
+        
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
@@ -250,7 +257,7 @@ module TTV
           # create_stamp makes the with and height the same of the page
           # width and height. Not right for this.
           #create_stamp("checked_box") do
-          box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
+          box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do
             ttv_rectangle([0, 0], width, height)          
             stroke
             ttv_line(0,0,width,height)

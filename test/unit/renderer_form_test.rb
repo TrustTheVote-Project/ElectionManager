@@ -3,7 +3,7 @@ require 'ballots/default/ballot_config.rb'
 
 class RendererTest < ActiveSupport::TestCase
   
-  context "AbstractBallot::Renderer " do
+  context "AbstractBallot::Renderer with pdf form elements" do
     
     setup do
       
@@ -29,11 +29,12 @@ class RendererTest < ActiveSupport::TestCase
       
       # Create 3 contests for this election
       pos = 0;
-      ["State Rep", "Attorney General","Governor"].each do |contest_name|
+      ["FOO", "State Rep", "Attorney General","Governor"].each do |contest_name|
         contest = Contest.make(:display_name => contest_name,
                                :voting_method => VotingMethod::WINNER_TAKE_ALL,
                                :district => e1.district_set.districts.first,
                                :election => e1, :position => pos)
+        
         pos += 1
         [:democrat, :republican, :independent].each do |party_sym|
           party = Party.make(party_sym)
@@ -41,12 +42,14 @@ class RendererTest < ActiveSupport::TestCase
         end
       end
       
-#       Question.make(:display_name => "Dog Racing",
-#                     :election => e1,
-#                     :requesting_district => e1.district_set.districts.first,
-#                     :question => 'This proposed law would prohibit any dog racing or racing meeting in Massachusetts where any form of betting or wagering on the speed or ability of dogs occurs. The State Racing Commission would be prohibited from accepting or approving any application or request for racing dates for dog racing. Any person violating the proposed law could be required to pay a civil penalty of not less than $20,000 to the Commission. The penalty would be used for the Commission\'s administrative purposes, subject to appropriation by the state Legislature. All existing parts of the chapter of the state\'s General Laws concerning dog and horse racing meetings would be interpreted as if they did not refer to dogs. These changes would take effect January 1, 2010. The proposed law states that if any of its parts were declared invalid, the other parts would stay in effect.' )
+      Question.make(:display_name => "Dog Racing",
+                    :election => e1,
+                    :requesting_district => e1.district_set.districts.first,
+                    :question => 'This proposed law would prohibit any dog racing or racing meeting in Massachusetts where any form of betting or wagering on the speed or ability of dogs occurs. The State Racing Commission would be prohibited from accepting or approving any application or request for racing dates for dog racing. Any person violating the proposed law could be required to pay a civil penalty of not less than $20,000 to the Commission. The penalty would be used for the Commission\'s administrative purposes, subject to appropriation by the state Legislature. All existing parts of the chapter of the state\'s General Laws concerning dog and horse racing meetings would be interpreted as if they did not refer to dogs. These changes would take effect January 1, 2010. The proposed law states that if any of its parts were declared invalid, the other parts would stay in effect.' )
       
       scanner = TTV::Scanner.new
+      
+      # This will create a pdf form
       @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form=> true)
       @ballot_config = DefaultBallot::BallotConfig.new( e1, @template)
 
@@ -56,7 +59,6 @@ class RendererTest < ActiveSupport::TestCase
       destination = nil
       
       @renderer = AbstractBallot::Renderer.new(e1, p1, @ballot_config, destination)
-      
       
     end
     
@@ -80,25 +82,4 @@ class RendererTest < ActiveSupport::TestCase
     end
   end # end AbstractBallot::Renderer context
 
-  def check_rect(rect, delta, w, h, top, left, bottom, right)
-    assert_equal  w, rect.width
-    assert_in_delta  h, rect.height, delta
-    
-    assert_in_delta  top, rect.top, delta
-    assert_equal  left, rect.left
-    assert_equal  bottom, rect.bottom
-    assert_in_delta  right, rect.right, delta
-    
-    true
-  end
-  
-  def draw_rect(pdf, rect, color='ff0000')
-    pdf.stroke_color(color) #"FFFFFF"
-    pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-    pdf.stroke_line([rect.left, rect.top], [rect.left, rect.bottom])
-    pdf.stroke_line([rect.left, rect.bottom], [rect.right, rect.bottom])
-    pdf.stroke_line([rect.right, rect.bottom], [rect.right, rect.top])
-    
-    # pdf.rectangle([rect.left, rect.top], rect.width, rect.height)
-  end
 end 
