@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+# == Schema Information
+# Schema version: 20100813053101
+#
+# Table name: elections
+#
+#  id                       :integer         not null, primary key
+#  display_name             :string(255)
+#  district_set_id          :integer
+#  start_date               :datetime
+#  created_at               :datetime
+#  updated_at               :datetime
+#  ballot_style_template_id :integer         default(0)
+#  default_voting_method_id :integer         default(0)
+#  ident                    :string(255)
+#
+
+=======
+>>>>>>> splits-basic-tgd
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
     has_many :contests, :order => :position, :dependent => :destroy
@@ -211,6 +230,7 @@ class Election < ActiveRecord::Base
     questions.each do |q|
       s = s += "   * c: #{q.display_name} (d: #{q.requesting_district.display_name})"
     end
-    
+    return s
+  end
 
 end

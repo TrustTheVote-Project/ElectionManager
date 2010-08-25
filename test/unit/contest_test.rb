@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ContestTest < ActiveSupport::TestCase
 
-  context 'initialization' do
+  context 'Contest class' do
     
     setup do
       @election =  create_election_first
@@ -31,7 +31,7 @@ class ContestTest < ActiveSupport::TestCase
     end
   end
 
-  context " with an existing contest" do
+  context "An existing contest" do
 
     setup do
       create_contest
@@ -70,19 +70,11 @@ class ContestTest < ActiveSupport::TestCase
     
     should "find contests by precinct name" do
       precinct = Precinct.find_by_display_name "Chelmsford Precinct 3"
-      contests  = Contest.district_precincts_display_name_is("Chelmsford Precinct 3")
-      contests  = Contest.district_precincts_display_name_is(precinct.display_name)
-      assert_equal 1, contests.size
+      prec_districts = precinct.collect_districts
+      district = Contest.display_name_is("State Representative")[0].district
+      assert prec_districts.member? district
     end
     
-    should "find contests by precinct and election" do
-      
-      precinct = Precinct.find_by_display_name "Chelmsford Precinct 3"
-      contests  = Contest.election_district_set_districts_precincts_id_is(precinct.id)
-      assert_equal 1, contests.size
-      assert_equal Contest.first.display_name, contests.first.display_name
-    end
-
   end
   
   # TODO: Should be replaced by factories, factory-girl or machinist
@@ -97,38 +89,31 @@ class ContestTest < ActiveSupport::TestCase
     contest.district =  election.district_set.districts.first
     contest.election =  election
     contest.save!
-    contest
-    
+    return contest
   end
 
   def create_election_first
-
-    district = District.create!(:display_name => "Second Middlesex", :district_type => DistrictType::COUNTY)
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 3")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 5")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 7")
-    district.save!
     
-    district_set = DistrictSet.create!(:display_name => "Middlesex County")
-    district_set.districts << district
-    district_set.save!
-    
-    voting_method = VotingMethod.create!(:display_name =>"Winner Take All")
-    election = Election.create!(:display_name => "2008 Massachusetts State", :district_set => district_set)
+    prec_1 = setup_precinct "Chelmsford Precinct 3", 4
+    prec_2 = setup_precinct "Chelmsford Precinct 5", 2
+    prec_3 = setup_precinct "Chelmsford Precinct 7", 3
 
+
+    all_dist = prec_1.collect_districts | prec_2.collect_districts | prec_3.collect_districts
+    district_set = DistrictSet.new(:display_name =>"MiddleSex County")
+    district_set.districts << all_dist
+    Election.create!(:display_name => "2008 Massachusetts State", :district_set => district_set)
   end
   
   def create_election_last
-    district = District.create(:display_name => "State House District 13")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 77")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 99")
-    district.precincts << Precinct.create!(:display_name => "Chelmsford Precinct 88")
-    district.save!
+    prec_4 = setup_precinct "Chelmsford Precinct 77", 4
+    prec_5 = setup_precinct "Chelmsford Precinct 99", 4
+    prec_6 = setup_precinct "Chelmsford Precinct 88", 4
 
-    district_set = DistrictSet.create(:display_name => "Suffolk County")
-    district_set.districts << district
-    district_set.save!
-    election = Election.create(:display_name => "2012 County", :district_set => district_set)     
+    all_dist = prec_4.collect_districts | prec_5.collect_districts | prec_6.collect_districts
+    district_set = DistrictSet.new(:display_name => "Suffolk County")
+    district_set.districts << all_dist
+    Election.create(:display_name => "2012 County", :district_set => district_set)     
   end
   
 end

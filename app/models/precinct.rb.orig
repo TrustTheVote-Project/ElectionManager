@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+# == Schema Information
+# Schema version: 20100813053101
+#
+# Table name: precincts
+#
+#  id           :integer         not null, primary key
+#  display_name :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  ident        :string(255)
+#
+
+=======
+>>>>>>> splits-basic-tgd
 class Precinct < ActiveRecord::Base
   
 #  has_and_belongs_to_many :districts
