@@ -67,10 +67,10 @@ module TTV
       end
       
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
-      
-      district["jurisdictions"].each { |jurisdiction|
-        new_district.district_sets << DistrictSet.find_by_ident(jurisdiction["identref"])
-      }
+# TODO: When district gets a link back to jurisdiction, this test can be reinstated.      
+#      district["jurisdiction_ident"].each { |jurisdiction|
+#        new_district.district_sets << DistrictSet.find_by_ident(jurisdiction["identref"])
+#      }
       
       new_district.save!
     end

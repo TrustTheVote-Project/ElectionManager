@@ -6,7 +6,6 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 
 require 'test_help'
 require 'shoulda'
-require 'redgreen'
 require 'mocha'
 require "authlogic/test_case"
 require "pdf/reader"

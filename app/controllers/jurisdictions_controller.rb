@@ -57,6 +57,10 @@ class JurisdictionsController < ApplicationController
       else
         redirect_to :action => :interactive_audit
       end
+    rescue Exception => exc
+       logger.error("Message for the log file #{exc.message}")
+       flash[:error] = "Failed to import file: #{exc.message}"
+       redirect_to :back
     end
   end
   
@@ -74,10 +78,8 @@ class JurisdictionsController < ApplicationController
     audit_obj.alerts.each { |alert| 
       choice = params.find{|param| param[0] == alert.alert_type}
       alert.choice = choice[1] if choice
-    }
-    
-    audit_obj.apply_alerts
-    
+    }    
+    audit_obj.apply_alerts    
     audit_obj.audit
     
     if audit_obj.ready_for_import?
