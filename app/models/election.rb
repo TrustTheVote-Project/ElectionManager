@@ -211,6 +211,5 @@ class Election < ActiveRecord::Base
     questions.each do |q|
       s = s += "   * c: #{q.display_name} (d: #{q.requesting_district.display_name})"
     end
-    
-
+  end
 end

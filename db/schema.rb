@@ -9,11 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20100813053101) do
-=======
 ActiveRecord::Schema.define(:version => 20100818220632) do
->>>>>>> splits-basic-tgd
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
