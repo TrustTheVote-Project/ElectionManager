@@ -1,4 +1,5 @@
 require 'test_helper'
+#require 'apply_alerts'
 
 class AuditTest < ActiveSupport::TestCase
   
@@ -68,8 +69,8 @@ class AuditTest < ActiveSupport::TestCase
         assert @audit_yaml.ready_for_import?
         assert @audit_xml.ready_for_import?
         
-        assert_equal @jurisdiction.ident, @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdictions"][0]["identref"]
-        assert_equal @jurisdiction.ident, @audit_xml.election_data_hash["body"]["districts"][0]["jurisdictions"][0]["identref"]
+        assert_equal @jurisdiction.ident, @audit_yaml.election_data_hash["body"]["districts"][0]["jurisdiction_ident"]
+        assert_equal @jurisdiction.ident, @audit_xml.election_data_hash["body"]["districts"][0]["jurisdiction_ident"]
       end
 
       context "after an import" do
@@ -94,7 +95,7 @@ class AuditTest < ActiveSupport::TestCase
           district = District.find_by_display_name "State of New Hampshire"
           assert district
           assert_equal "1", district.ident
-          assert_equal @jurisdiction, district.district_sets[0]
+#          assert_equal @jurisdiction, district.district_sets[0]
           # Store found district type
           assert_equal "State", DistrictType.find_by_id(district.district_type_id).title
         end

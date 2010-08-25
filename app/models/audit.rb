@@ -1,16 +1,3 @@
-# == Schema Information
-# Schema version: 20100813053101
-#
-# Table name: audits
-#
-#  id                 :integer         not null, primary key
-#  display_name       :string(255)
-#  election_data_hash :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  district_set_id    :integer
-#
-
 class Audit < ActiveRecord::Base
   serialize :election_data_hash # TODO: find maximum size for serialize
   attr_accessible :display_name, :election_data_hash, :district_set, :district_set_id
@@ -19,24 +6,10 @@ class Audit < ActiveRecord::Base
   
   belongs_to :district_set
 
-  # Applies transforms to @hash based on alerts
-  def apply_alerts
-    alerts.each{ |alert|
-      if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
-        district_set.before_validation # Make sure it has an ident
-        jurisdiction_list = [{"identref" => district_set.ident}]
-        election_data_hash["body"]["districts"][0]["jurisdictions"] = jurisdiction_list
-        alerts.delete(alert)
-      end
-    }
-    
-    self.save!
-  end
-
   # Audits election_data_hash (without touching it), producing more @alerts
   def audit
     @audit_in_progress = true
-    
+    audit_sanity_check # See if the file looks anything like what we want
     audit_jurisdictions # Collect IDs of new jurisdictions and EM-imported jurisdictions
     audit_precincts # Collect IDs (so we know which ones are valid for districts)
     audit_districts 
@@ -45,6 +18,16 @@ class Audit < ActiveRecord::Base
     
     @audit_in_progress = false
     @audited = true
+  end
+
+  # See if the file looks anything like what we are expecting
+  def audit_sanity_check
+    unless election_data_hash.has_key?("body") && election_data_hash["body"].has_key?("districts")
+      raise ArgumentError, "Invalid format. No Body or Districts tag"
+    end
+    unless election_data_hash["body"]["districts"].reduce(true) { |memo, dist| dist.has_key?("ident") ? memo : false }
+      raise ArgumentError, "Invalid format. All districts require a district_ident"
+    end
   end
   
   def audit_jurisdictions
@@ -67,13 +50,36 @@ class Audit < ActiveRecord::Base
   end
   
   def audit_districts
-    election_data_hash["body"]["districts"].each{ |district|
-      if district && (!district["jurisdictions"] || !district["jurisdictions"][0] || !district["jurisdictions"][0]["identref"]) 
-        alerts << Alert.new(:message => "No jurisdiction specified for district #{district["display_name"]}", :alert_type => "no_jurisdiction", :object => district["ident"].to_s, :options => 
-          {"use_current" => "Use current jurisdiction #{district_set.display_name}", "import" => "Import without a jurisdiction", "abort" => "Abort import"}, :default_option => "use_current")
+    election_data_hash["body"]["districts"].each_index do 
+      |dist_index|
+      district = election_data_hash["body"]["districts"][dist_index]
+      if district && (!district["jurisdiction_ident"]) 
+        alerts << Alert.new(:message => "No Jurisdiction specified for district '#{district["display_name"]}'. What would you like to do? ", 
+                            :alert_type => "no_jurisdiction", 
+                            :objects => dist_index, 
+                            :options => 
+                              {"use_current" => "Use current #{district_set.display_name}", 
+                               "import" => "Import without a Jurisdiction", 
+                                "abort" => "Abort import"}, 
+                            :default_option => "use_current")
       end
-    }
+    end
   end
+  
+  # Applies transforms to @hash based on alerts
+  def apply_alerts
+    alerts.each{ |alert|
+      if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
+        # Make sure it has an ident
+        district_set.before_validation
+        election_data_hash["body"]["districts"][alert.objects]["jurisdiction_ident"] = district_set.ident
+        alerts.delete(alert)
+      end
+    }  
+    self.save!
+  end
+
+  
   
   def ready_for_import?
     return ((alerts.size == 0) && !@audit_in_progress && @audited)

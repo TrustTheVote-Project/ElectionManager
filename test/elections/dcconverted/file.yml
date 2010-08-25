@@ -1,0 +1,361 @@
+--- 
+body: 
+  districts: 
+  - ident: 10
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 6
+  - ident: 2
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
+  - ident: 1
+    type: COND
+    display_name: 1ST CONGRESSIONAL DIST-DEM
+  - ident: 30-SMD 01-ANC 6C
+    type: SMD
+    display_name: SMD 01-ANC 6C
+  - ident: 30-SMD 02-ANC 6C
+    type: SMD
+    display_name: SMD 02-ANC 6C
+  - ident: 30-SMD 03-ANC 6C
+    type: SMD
+    display_name: SMD 03-ANC 6C
+  - ident: 30-SMD 09-ANC 6C
+    type: SMD
+    display_name: SMD 09-ANC 6C
+  - ident: 10
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 2
+  - ident: 2
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
+  - ident: 1
+    type: COND
+    display_name: 1ST CONGRESSIONAL DIST-DEM
+  - ident: 30-SMD 01-ANC 2A
+    type: SMD
+    display_name: SMD 01-ANC 2A
+  - ident: 30-SMD 05-ANC 2A
+    type: SMD
+    display_name: SMD 05-ANC 2A
+  - ident: 30-SMD 06-ANC 2A
+    type: SMD
+    display_name: SMD 06-ANC 2A
+  - ident: 10
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 2
+  - ident: 2
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
+  - ident: 1
+    type: COND
+    display_name: 1ST CONGRESSIONAL DIST-DEM
+  - ident: 30-SMD 03-ANC 2A
+    type: SMD
+    display_name: SMD 03-ANC 2A
+  - ident: 30-SMD 04-ANC 2A
+    type: SMD
+    display_name: SMD 04-ANC 2A
+  - ident: 30-SMD 05-ANC 2A
+    type: SMD
+    display_name: SMD 05-ANC 2A
+  - ident: 30-SMD 06-ANC 2A
+    type: SMD
+    display_name: SMD 06-ANC 2A
+  - ident: 10
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 2
+  - ident: 2
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
+  - ident: 1
+    type: COND
+    display_name: 1ST CONGRESSIONAL DIST-DEM
+  - ident: 30-SMD 02-ANC 2A
+    type: SMD
+    display_name: SMD 02-ANC 2A
+  - ident: 30-SMD 03-ANC 2A
+    type: SMD
+    display_name: SMD 03-ANC 2A
+  - ident: 30-SMD 06-ANC 2A
+    type: SMD
+    display_name: SMD 06-ANC 2A
+  - ident: 30-SMD 06-ANC 2B
+    type: SMD
+    display_name: SMD 06-ANC 2B
+  - ident: 10
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 2
+  - ident: 2
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
+  - ident: 1
+    type: COND
+    display_name: 1ST CONGRESSIONAL DIST-DEM
+  - ident: 30-SMD 02-ANC 2E
+    type: SMD
+    display_name: SMD 02-ANC 2E
+  - ident: 30-SMD 05-ANC 2E
+    type: SMD
+    display_name: SMD 05-ANC 2E
+  - ident: 30-SMD 06-ANC 2E
+    type: SMD
+    display_name: SMD 06-ANC 2E
+  - ident: 30-SMD 07-ANC 2E
+    type: SMD
+    display_name: SMD 07-ANC 2E
+  district_sets: 
+  - district_set: 
+      districts: 
+      - 30-SMD 01-ANC 6C
+      - 10
+      - 2
+      - 1
+      ident: 0-30-SMD 01-ANC 6C
+  - district_set: 
+      districts: 
+      - 30-SMD 02-ANC 6C
+      - 10
+      - 2
+      - 1
+      ident: 1-30-SMD 02-ANC 6C
+  - district_set: 
+      districts: 
+      - 30-SMD 03-ANC 6C
+      - 10
+      - 2
+      - 1
+      ident: 2-30-SMD 03-ANC 6C
+  - district_set: 
+      districts: 
+      - 30-SMD 09-ANC 6C
+      - 10
+      - 2
+      - 1
+      ident: 3-30-SMD 09-ANC 6C
+  - district_set: 
+      districts: 
+      - 30-SMD 09-ANC 6C
+      - 10
+      - 2
+      - 1
+      ident: 0-30-SMD 09-ANC 6C
+  - district_set: 
+      districts: 
+      - 30-SMD 01-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 1-30-SMD 01-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 05-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 2-30-SMD 05-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 3-30-SMD 06-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 0-30-SMD 06-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 03-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 1-30-SMD 03-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 04-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 2-30-SMD 04-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 05-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 3-30-SMD 05-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 4-30-SMD 06-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 0-30-SMD 06-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 02-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 1-30-SMD 02-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 03-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 2-30-SMD 03-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2A
+      - 10
+      - 2
+      - 1
+      ident: 3-30-SMD 06-ANC 2A
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2B
+      - 10
+      - 2
+      - 1
+      ident: 4-30-SMD 06-ANC 2B
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2B
+      - 10
+      - 2
+      - 1
+      ident: 0-30-SMD 06-ANC 2B
+  - district_set: 
+      districts: 
+      - 30-SMD 02-ANC 2E
+      - 10
+      - 2
+      - 1
+      ident: 1-30-SMD 02-ANC 2E
+  - district_set: 
+      districts: 
+      - 30-SMD 05-ANC 2E
+      - 10
+      - 2
+      - 1
+      ident: 2-30-SMD 05-ANC 2E
+  - district_set: 
+      districts: 
+      - 30-SMD 06-ANC 2E
+      - 10
+      - 2
+      - 1
+      ident: 3-30-SMD 06-ANC 2E
+  - district_set: 
+      districts: 
+      - 30-SMD 07-ANC 2E
+      - 10
+      - 2
+      - 1
+      ident: 4-30-SMD 07-ANC 2E
+  precincts: 
+  - precinct: 
+      ident: 1
+      display_name: PRECINCT 1
+  - precinct: 
+      ident: 2
+      display_name: PRECINCT 2
+  - precinct: 
+      ident: 3
+      display_name: PRECINCT 3
+  - precinct: 
+      ident: 4
+      display_name: PRECINCT 4
+  - precinct: 
+      ident: 5
+      display_name: PRECINCT 5
+  splits: 
+  - precinct_split: 
+      district_set_ident: 0-30-SMD 01-ANC 6C
+      precinct_ident: 1
+  - precinct_split: 
+      district_set_ident: 1-30-SMD 02-ANC 6C
+      precinct_ident: 1
+  - precinct_split: 
+      district_set_ident: 2-30-SMD 03-ANC 6C
+      precinct_ident: 1
+  - precinct_split: 
+      district_set_ident: 3-30-SMD 09-ANC 6C
+      precinct_ident: 1
+  - precinct_split: 
+      district_set_ident: 0-30-SMD 09-ANC 6C
+      precinct_ident: 2
+  - precinct_split: 
+      district_set_ident: 1-30-SMD 01-ANC 2A
+      precinct_ident: 2
+  - precinct_split: 
+      district_set_ident: 2-30-SMD 05-ANC 2A
+      precinct_ident: 2
+  - precinct_split: 
+      district_set_ident: 3-30-SMD 06-ANC 2A
+      precinct_ident: 2
+  - precinct_split: 
+      district_set_ident: 0-30-SMD 06-ANC 2A
+      precinct_ident: 3
+  - precinct_split: 
+      district_set_ident: 1-30-SMD 03-ANC 2A
+      precinct_ident: 3
+  - precinct_split: 
+      district_set_ident: 2-30-SMD 04-ANC 2A
+      precinct_ident: 3
+  - precinct_split: 
+      district_set_ident: 3-30-SMD 05-ANC 2A
+      precinct_ident: 3
+  - precinct_split: 
+      district_set_ident: 4-30-SMD 06-ANC 2A
+      precinct_ident: 3
+  - precinct_split: 
+      district_set_ident: 0-30-SMD 06-ANC 2A
+      precinct_ident: 4
+  - precinct_split: 
+      district_set_ident: 1-30-SMD 02-ANC 2A
+      precinct_ident: 4
+  - precinct_split: 
+      district_set_ident: 2-30-SMD 03-ANC 2A
+      precinct_ident: 4
+  - precinct_split: 
+      district_set_ident: 3-30-SMD 06-ANC 2A
+      precinct_ident: 4
+  - precinct_split: 
+      district_set_ident: 4-30-SMD 06-ANC 2B
+      precinct_ident: 4
+  - precinct_split: 
+      district_set_ident: 0-30-SMD 06-ANC 2B
+      precinct_ident: 5
+  - precinct_split: 
+      district_set_ident: 1-30-SMD 02-ANC 2E
+      precinct_ident: 5
+  - precinct_split: 
+      district_set_ident: 2-30-SMD 05-ANC 2E
+      precinct_ident: 5
+  - precinct_split: 
+      district_set_ident: 3-30-SMD 06-ANC 2E
+      precinct_ident: 5
+  - precinct_split: 
+      district_set_ident: 4-30-SMD 07-ANC 2E
+      precinct_ident: 5
+audit_header: 
+  schema_version: "0.1"
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-08-25T14:20:27-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
