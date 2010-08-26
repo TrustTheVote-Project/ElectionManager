@@ -12,6 +12,7 @@ class Contest < ActiveRecord::Base
   
   validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election_id
   validates_numericality_of :open_seat_count
+  validates_associated :district, :election
   
   def validate
     osc = open_seat_count.to_i

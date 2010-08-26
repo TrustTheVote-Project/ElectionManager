@@ -50,7 +50,7 @@ module TTV
     def load_elections
       @hash["body"]["elections"].each { |elec| load_election elec}
     end
-    
+        
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
@@ -63,7 +63,7 @@ module TTV
       if district["type"] and DistrictType.find_by_title(district["type"])
         district_type = DistrictType.find_by_title(district["type"])
       else
-        district_type = 0 # Built-in default district type. TODO: Other better default in db/seed/once/district_types.yml?
+        district_type = 0 # Built-in defaultult district type. TODO: Other better default in db/seed/once/district_types.yml?
       end
       
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
@@ -77,8 +77,8 @@ module TTV
 
     # Loads an EDH formatted precinct into EM
     def load_precinct precinct
-      new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], :ident => precinct["ident"])
-      precinct["districts"].each{|dist| new_precinct.districts << District.find_by_ident(dist["identref"]) if !new_precinct.districts.include? District.find_by_ident(dist["identref"])} if precinct["districts"]
+      new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], 
+                                                      :ident => precinct["ident"])
       new_precinct.save!
     end
     
@@ -95,18 +95,23 @@ module TTV
       else
         voting_method_id = 0
       end
-      
-      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], :ident => contest["ident"], :voting_method_id => voting_method_id, :district_id => District.find_by_ident(contest["district_identref"]).id)
-      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["identref"])} if contest["candidates"]
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
+                                                    :ident => contest["ident"], 
+                                                    :voting_method_id => voting_method_id, 
+                                                    :district => District.find_by_ident(contest["district_ident"]))
+      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
+      new_contest.election = Election.find_by_ident(contest["election_ident"])
       new_contest.save!
     end
 
     # Loads an EDH formatted election into EM
     def load_election election
-      new_election = Election.find_or_create_by_ident(:display_name => election["display_name"], :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_identref"]).id, :ident => election["ident"], :start_date => election["start_date"])
-      election["contests"].each{ |cont| new_election.contests << Contest.find_by_ident(cont["identref"])} if election["contests"]
+      new_election = Election.find_or_create_by_ident(
+          :display_name => election["display_name"], 
+          :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_ident"]).id, 
+          :ident => election["ident"], 
+          :start_date => election["start_date"])      
       new_election.save!
-    end
-    
+    end      
   end
 end

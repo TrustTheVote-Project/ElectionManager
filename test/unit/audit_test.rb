@@ -1,5 +1,5 @@
 require 'test_helper'
-#require 'apply_alerts'
+require 'ap'
 
 class AuditTest < ActiveSupport::TestCase
   
@@ -20,39 +20,47 @@ class AuditTest < ActiveSupport::TestCase
     end
   end
   
-  context "An audited hash" do
+  context "A test hash" do
     setup do
       @yaml = File.new("#{RAILS_ROOT}/test/elections/refactored/yaml_refactor_alerts.yml")
       @xml = File.new("#{RAILS_ROOT}/test/elections/refactored/xml_pre_processing_alerts.xml")
       @yaml_hash = YAML.load(@yaml) # Can be done in jurisdictions_controller, when file type is YAML
+      
+# TODO: In addition to XMLToEDH we need a YMLToEDH (although the latter will do next to nothing!)
       xml_converter = TTV::XMLToEDH.new(@xml)
       @xml_hash = xml_converter.convert
-      
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
       @jurisdiction.before_validation # perform pre-validation, generating an ident
       
       @audit_yaml = Audit.new(:election_data_hash => @yaml_hash, :district_set => @jurisdiction)
-      @audit_yaml.audit
       @audit_xml = Audit.new(:election_data_hash => @xml_hash, :district_set => @jurisdiction)
-      @audit_xml.audit
     end
     
-    should "have completed auditing" do
-      assert !@audit_yaml.ready_for_import?
+    should "be successfully built from xml" do
+      assert @audit_xml.audit
       assert !@audit_xml.ready_for_import?
     end
     
+    should "be successfully built from yml" do
+      assert @audit_yaml.audit
+      assert !@audit_yaml.ready_for_import?
+    end
+
     should "store an alert for not defining a valid jurisdiction" do
+      assert @audit_yaml.audit
       assert @audit_yaml.alerts[0]
       assert_equal "use_current", @audit_yaml.alerts[0].default_option
       
+      assert @audit_xml.audit
       assert @audit_xml.alerts[0]
       assert_equal "use_current", @audit_xml.alerts[0].default_option
     end
 
     context "with an alert option response" do
       setup do
+        @audit_yaml.audit
         @audit_yaml.alerts[0].choice = "use_current"
+        @audit_xml.audit
         @audit_xml.alerts[0].choice = "use_current"
 
         @audit_yaml.apply_alerts
@@ -94,9 +102,7 @@ class AuditTest < ActiveSupport::TestCase
           @import_yaml.load_districts
           district = District.find_by_display_name "State of New Hampshire"
           assert district
-          assert_equal "1", district.ident
-#          assert_equal @jurisdiction, district.district_sets[0]
-          # Store found district type
+          assert_equal "222", district.ident
           assert_equal "State", DistrictType.find_by_id(district.district_type_id).title
         end
         
@@ -108,7 +114,7 @@ class AuditTest < ActiveSupport::TestCase
           precinct_2 = Precinct.find_by_display_name "Bedford County"
           assert precinct_1, precinct_2
           assert_equal "1", precinct_1.ident
-          assert_equal District.find_by_display_name("State of New Hampshire"), precinct_1.districts[0]
+          assert District.find_by_display_name("State of New Hampshire")
         end
         
         should "load and save candidates" do
@@ -144,19 +150,18 @@ class AuditTest < ActiveSupport::TestCase
           assert election
           assert_equal "1", election.ident
           assert election.start_date
-          assert_equal "1", election.contests[0].ident
           assert_equal "1", election.district_set.ident
         end
         
         should "import all items (XML source)" do
           @import_xml.import
           
-          assert District.find_by_display_name "State of New Hampshire"
-          assert Contest.find_by_display_name "County Attorney"
-          assert Candidate.find_by_ident "1"
+          assert District.find_by_display_name "State of New Hampshire", "Can't find District"
+          assert Contest.find_by_display_name "County Attorney", "Can't find Contest"
+          assert Candidate.find_by_ident "1", "Can't find Candidate"
           assert Precinct.find_by_display_name "State of New Hampshire"
-          assert DistrictSet.find_by_display_name "New Hampshire"
-          assert Election.find_by_display_name "New Hampshire General Election"
+          assert DistrictSet.find_by_display_name "New Hampshire", "Can't find DistrictSet/Jurisdiction"
+          assert Election.find_by_display_name "New Hampshire General Election", "Can't find Election"
         end
         
         should "not fail adding a District Set object to an Election by ID" do
@@ -165,7 +170,7 @@ class AuditTest < ActiveSupport::TestCase
           new_election_1 = Election.find_or_create_by_display_name(:display_name => "Election 1", :district_set_id => new_district_set_1.id)
           new_election_1.save!
           assert_valid new_election_1
-        end  
+        end
           
         should "not fail adding a District Set object to an Election by object" do
           new_district_set = DistrictSet.find_or_create_by_display_name("District 2")

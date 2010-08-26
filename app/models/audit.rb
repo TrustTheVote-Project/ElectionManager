@@ -26,7 +26,7 @@ class Audit < ActiveRecord::Base
       raise ArgumentError, "Invalid format. No Body or Districts tag"
     end
     unless election_data_hash["body"]["districts"].reduce(true) { |memo, dist| dist.has_key?("ident") ? memo : false }
-      raise ArgumentError, "Invalid format. All districts require a district_ident"
+      raise ArgumentError, "Invalid format. All districts require a dent"
     end
   end
   
