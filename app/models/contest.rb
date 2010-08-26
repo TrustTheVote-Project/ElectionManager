@@ -4,19 +4,18 @@ class Contest < ActiveRecord::Base
   belongs_to :election
   belongs_to :voting_method
   has_many :candidates, :dependent => :destroy, :order => :display_name
-  attr_accessible :display_name, :open_seat_count, :voting_method_id , :candidates_attributes, :election_id, :district_id, :position
+  attr_accessible :display_name, :open_seat_count, :voting_method_id , :candidates_attributes, :election_id, :district, :position, :ident
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   
-  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id
+  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district
   validates_numericality_of :open_seat_count
+  validates_associated :district, :election
   
   def validate
     osc = open_seat_count.to_i
     errors.add(:open_seat_count, "must be more than 0") if osc < 1
     errors.add(:open_seat_count, "must be less than 10") if osc > 10
     errors.add(:voting_method_id, "is invalid") if !VotingMethod.exists?(voting_method_id)
-    errors.add(:district_id, "is invalid") if !District.exists?(district_id)
-    errors.add(:election_id, "is invalid") if !Election.exists?(election_id)
   end
   
   def after_initialize

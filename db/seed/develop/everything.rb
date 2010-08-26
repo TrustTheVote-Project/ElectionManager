@@ -17,20 +17,6 @@ District.create(:district_type_id => 5, :display_name => "Felton Fire Protection
 District.create(:district_type_id => 6, :display_name => "Eleventh Coast Guard District")
 District.create(:district_type_id => 7, :display_name => "Moss Landing Harbor District")
 
-# generates precincts, and associates them with districts
-prs = Array[]
-1.upto(20) { |i| prs.push Precinct.create(:display_name => "CA Precinct #{i}")}
-
-puts "Creating district/precinct associations"
-district = District.find(1)
-prs.each { |precinct| district.precincts << precinct }
-district = District.find(2)
-prs[1..5].each { |precinct| district.precincts << precinct }
-district = District.find(3)
-prs[6..10].each { |precinct| district.precincts << precinct }
-district = District.find(4)
-prs[11..20].each { |precinct| district.precincts << precinct }
-
 # creates a district set composed of all known districts
 allDistricts = District.find(:all)
 puts "Creating district set"
