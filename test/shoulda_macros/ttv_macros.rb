@@ -58,9 +58,9 @@ class Test::Unit::TestCase
     @creator = @hash.values.map {|obj| obj[:Creator] if obj.is_a?(Hash) && obj[:Creator] }.first
     @title = @hash.values.map {|obj| obj[:Title] if obj.is_a?(Hash) && obj[:Title] }.first
     @text = @hash.values.find {|obj|obj.unfiltered_data if obj.is_a?(PDF::Reader::Stream) }
-    @creator =  Iconv.iconv('UTF-8', "UTF-16", @creator).first
-    @producer =  Iconv.iconv('UTF-8', "UTF-16", @producer).first
-    @title =  Iconv.iconv('UTF-8', "UTF-16", @title).first
+    # @creator =  Iconv.iconv('UTF-8', "UTF-16", @creator).first
+    # @producer =  Iconv.iconv('UTF-8', "UTF-16", @producer).first
+    # @title =  Iconv.iconv('UTF-8', "UTF-16", @title).first
   end
   
   def pdf_hash(pdf)
