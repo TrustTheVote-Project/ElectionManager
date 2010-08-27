@@ -16,8 +16,10 @@ module Prawn
           shot.merge!(:fields => fields)
         end
         if page.dictionary.data[:Annots]
+          # puts "TGD: page_number = #{page_number.inspect}"
+          # puts "TGD: snapshot annots = #{page.dictionary.data[:Annots].data.inspect}"
           annots = page.dictionary.data[:Annots].data.clone
-          shot.merge!(:annots => annots)          
+          shot.merge!(:annots => {:page_num => page_number, :page_annots => annots})          
         end
         #puts "TGD: taking snapshot = #{shot.inspect}"
         shot
@@ -30,8 +32,10 @@ module Prawn
         if shot[:fields]
           @store.root.data[:AcroForm].data[:Fields] = shot[:fields]
         end
-        if shot[:annots]
-          page.dictionary.data[:Annots].data = shot[:annots]
+        if shot[:annots] && shot[:annots][:page_num] == page_number
+          # puts "TGD: restore page_number = #{page_number.inspect}"
+          # puts "TGD: restore annots = #{page.dictionary.data[:Annots].inspect}"
+          page.dictionary.data[:Annots].data = shot[:annots][:page_annots]
         end
         
         #puts "TGD: restoring shot = #{shot.inspect}"
