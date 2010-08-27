@@ -9,19 +9,22 @@ module Prawn
       # monkey patch, OUCH, prawn snapshot restore the documents
       # fields.
       def take_snapshot
+        puts "TGD: take_snapshot "
         shot = take_snapshot_old
+ 
         if @store.root.data[:AcroForm]
-         #  puts "fields = #{@store.root.data[:AcroForm].data[:Fields].inspect}"
-          fields = @store.root.data[:AcroForm].data[:Fields].clone
+
+          #puts "TGD: fields = #{@store.root.data[:AcroForm].data[:Fields].inspect}"
+          #puts "TGD: fields.object_id = #{@store.root.data[:AcroForm].data[:Fields].object_id.inspect}"
+          fields =  Marshal.load(Marshal.dump(@store.root.data[:AcroForm].data[:Fields]))
           shot.merge!(:fields => fields)
         end
         if page.dictionary.data[:Annots]
           # puts "TGD: page_number = #{page_number.inspect}"
           # puts "TGD: snapshot annots = #{page.dictionary.data[:Annots].data.inspect}"
-          annots = page.dictionary.data[:Annots].data.clone
+          annots = Marshal.load(Marshal.dump(page.dictionary.data[:Annots].data))
           shot.merge!(:annots => {:page_num => page_number, :page_annots => annots})          
         end
-        #puts "TGD: taking snapshot = #{shot.inspect}"
         shot
       end
       
@@ -30,15 +33,17 @@ module Prawn
       
       def restore_snapshot(shot)
         if shot[:fields]
+          #puts "restoring fields = #{shot[:fields].inspect}"
+          #puts "restoring fields object_id = #{shot[:fields].object_id.inspect}"
+          
           @store.root.data[:AcroForm].data[:Fields] = shot[:fields]
         end
         if shot[:annots] && shot[:annots][:page_num] == page_number
           # puts "TGD: restore page_number = #{page_number.inspect}"
-          # puts "TGD: restore annots = #{page.dictionary.data[:Annots].inspect}"
+          # puts "TGD: restore annots =#{page.dictionary.data[:Annots].data.inspect}"
           page.dictionary.data[:Annots].data = shot[:annots][:page_annots]
+
         end
-        
-        #puts "TGD: restoring shot = #{shot.inspect}"
         restore_snapshot_old(shot)
       end
       
