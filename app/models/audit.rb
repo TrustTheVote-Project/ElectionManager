@@ -72,7 +72,7 @@ class Audit < ActiveRecord::Base
       if alert.alert_type == "no_jurisdiction" && alert.choice == "use_current"
         # Make sure it has an ident
         district_set.before_validation
-        election_data_hash["body"]["districts"][alert.objects]["jurisdiction_ident"] = district_set.ident
+        election_data_hash["body"]["districts"][alert.objects.to_i]["jurisdiction_ident"] = district_set.ident
         alerts.delete(alert)
       end
     }  

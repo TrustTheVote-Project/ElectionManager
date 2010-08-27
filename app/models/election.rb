@@ -18,15 +18,6 @@ class Election < ActiveRecord::Base
       return s
     end
     
-#    def districts
-#      @districts = district_set.districts if (!@districts)
-#      @districts  
-#    end
-
-#    def validate 
-#       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
-#    end
-
     def each_ballot param=nil
       cont_list = contests
       quest_list = questions

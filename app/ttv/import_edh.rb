@@ -3,6 +3,7 @@ require 'yaml'
 module TTV
   # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
   class ImportEDH
+
     attr_reader :hash, :election
 
     # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.
@@ -21,41 +22,49 @@ module TTV
       load_elections
     end
     
+    def import_to_jurisdiction jur
+      @jurisdiction = jur
+      load_districts
+      load_precincts
+      load_candidates
+      load_contests
+      load_elections
+    end        
+    
     # Imports all jurisdictions contained in the EDH
-    def load_jurisdictions
-      @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris }
+    def load_jurisdictions      
+      @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris } if @hash["body"].has_key? "jurisdictions"
     end
     
     # Imports all districts contained in the EDH
     def load_districts
-      @hash["body"]["districts"].each { |dist| load_district dist}
+      @hash["body"]["districts"].each { |dist| load_district dist} if @hash["body"].has_key? "districts"
     end
     
     # Imports all precincts contained in the EDH
     def load_precincts
-      @hash["body"]["precincts"].each { |prec| load_precinct prec}
+      @hash["body"]["precincts"].each { |prec| load_precinct prec} if @hash["body"].has_key? "precincts"
     end
     
     # Imports all candidates contained in the EDH
     def load_candidates
-      @hash["body"]["candidates"].each { |cand| load_candidate cand}
+      @hash["body"]["candidates"].each { |cand| load_candidate cand} if @hash["body"].has_key? "candidates"
     end  
     
     # Imports all contests contained in the EDH
     def load_contests
-      @hash["body"]["contests"].each { |cont| load_contest cont}
+      @hash["body"]["contests"].each { |cont| load_contest cont} if @hash["body"].has_key? "contests"
     end
     
     # Imports all elections contained in the EDH
     def load_elections
-      @hash["body"]["elections"].each { |elec| load_election elec}
+      @hash["body"]["elections"].each { |elec| load_election elec} if @hash["body"].has_key? "elections"
     end
         
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
       new_jurisdiction.save!
-      # This is a test
     end
     
     # Loads an EDH formatted district into EM
@@ -63,15 +72,13 @@ module TTV
       if district["type"] and DistrictType.find_by_title(district["type"])
         district_type = DistrictType.find_by_title(district["type"])
       else
-        district_type = 0 # Built-in defaultult district type. TODO: Other better default in db/seed/once/district_types.yml?
+        district_type = DistrictType.find(0) # Built-in defaultult district type. TODO: Other better default in db/seed/once/district_types.yml?
       end
-      
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
-# TODO: When district gets a link back to jurisdiction, this test can be reinstated.      
-#      district["jurisdiction_ident"].each { |jurisdiction|
-#        new_district.district_sets << DistrictSet.find_by_ident(jurisdiction["identref"])
-#      }
-      
+# TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 
+      if @jurisdiction
+        new_district.district_sets << @jurisdiction
+      end
       new_district.save!
     end
 
