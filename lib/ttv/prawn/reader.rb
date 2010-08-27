@@ -3,7 +3,7 @@ module TTV
     
     class Reader
 
-      attr_accessor :pdf_hash
+      attr_accessor :pdf_hash, :pdf_contents
       attr_accessor :producer, :creator, :title, :text
       
       def initialize(pdf)
@@ -38,14 +38,28 @@ module TTV
         obj(pages[:Kids][page_num - 1])
       end
       
+      def page_contents(page_num)
+        # Contents is a PDF::Reader::Stream
+        obj(page(page_num)[:Contents]).data
+      end
+
+      def form?
+        !!catalog[:AcroForm] 
+      end
+
+      def fields?
+        !!obj(catalog[:AcroForm] )[:Fields]
+      end
+      
       def fields
-        acroform = obj(catalog[:AcroForm] )
+        acroform = obj(catalog[:AcroForm])
         @fields || acroform[:Fields].map do |field_ref|
           obj(field_ref)
         end
       end
       
       def page_annotations(page_num)
+        return false unless page(page_num)[:Annots]
         annot_refs = obj(page(page_num)[:Annots])
         annot_refs.map{ |ref|  obj(ref) }
       end
@@ -57,7 +71,7 @@ module TTV
                  when 'Fixnum'
                    ref
                  else
-                   raise ArgumentError, "reference must be an Fixnum or PDF::Reader::Reference"
+                   raise ArgumentError, "reference must be an Fixnum or PDF::Reader::Reference not a #{ref.class.name}"
                  end
         
         @hash.each do |ref, obj|
