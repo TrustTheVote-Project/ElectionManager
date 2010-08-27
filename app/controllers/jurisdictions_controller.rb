@@ -93,7 +93,7 @@ class JurisdictionsController < ApplicationController
   # 2. Import from Audit's EDH
   def do_import
     import_obj = TTV::ImportEDH.new(Audit.find(session[:audit_id]).election_data_hash)
-    import_obj.import
+    import_obj.import_to_jurisdiction(current_context.jurisdiction)
     flash[:notice] = "Import successful."
     redirect_to :action => :import
   end

@@ -16,10 +16,8 @@ class ElectionsController < ApplicationController
       :questions, 
       ])
     current_context.election = @election
-    @districts = @election.districts.paginate(:per_page => 10, :page => params[:page])
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
-    @precincts = @election.district_set.precincts.paginate(:per_page => 10, :page => params[:page])
   end
 
   def new
