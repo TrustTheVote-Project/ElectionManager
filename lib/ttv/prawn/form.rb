@@ -32,7 +32,7 @@ module TTV
         data = store.root.data
         data[:AcroForm] = store.ref(:Fields => (@fields || fields),
                                           :DR => (@resources || resources)
-                                          )
+                                    )
       end
       
       def resources(options={})
@@ -168,7 +168,12 @@ module TTV
         
         # Add this annotation to the current page's set of annotatations
         # Add this field to this document's set of fields
-        @fields << annotate_redirect(dict)
+        # @fields << annotate_redirect(dict)
+        annot =  annotate_redirect(dict)
+        store.root.data[:AcroForm].data[:Fields] << annot
+        # puts "TGD: form field size =  #{store.root.data[:AcroForm].data[:Fields].length.inspect}"
+        annot
+        
       end
       
       
