@@ -20,6 +20,10 @@ module TTV
         @form_enabled = true
         
         @fields = []
+        data = store.root.data
+        data[:AcroForm] = store.ref(:Fields => (@fields || fields),
+                                          :DR => (@resources || resources)
+                                    )
         
         if block_given?
           # if the block param has no arguments then eval it with the
@@ -28,11 +32,6 @@ module TTV
           # Prawn::Document object.
           block.arity < 1 ? instance_eval(&block) : block.call(self)
         end
-        
-        data = store.root.data
-        data[:AcroForm] = store.ref(:Fields => (@fields || fields),
-                                          :DR => (@resources || resources)
-                                    )
       end
       
       def resources(options={})
@@ -40,7 +39,7 @@ module TTV
           :Subtype  => :Type1,
           :BaseFont => :Helvetica,
           :Encoding => :WinAnsiEncoding }.merge(options)
-        @resources = ref(options)
+         @resources = ref(options)
       end
       
       def draw_radio_group(name, opts={}, &block)
