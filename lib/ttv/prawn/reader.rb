@@ -9,8 +9,13 @@ module TTV
       def initialize(pdf)
         raise ArgumentError, "pdf argument is not a Prawn::Document instance" unless pdf.is_a? ::Prawn::Document
         @pdf_contents = pdf.render
-        output = StringIO.new(@pdf_contents, 'r+')
-        @hash = PDF::Hash.new(output)
+        @output = StringIO.new(@pdf_contents, 'r+')
+        @hash = PDF::Hash.new(@output)
+        # Debugger for PDFMalformedException, narrow downs problem        
+        # @hash.each do |ref1, ref2 |
+        #   puts "READER: ref1 = #{ref1.id.inspect}"
+        #   puts "READER: ref2 = #{ref2.inspect}"
+        # end
         producer = @hash.values.map {|obj| obj[:Producer] if obj.is_a?(Hash) && obj[:Producer]}.first
         creator = @hash.values.map {|obj| obj[:Creator] if obj.is_a?(Hash) && obj[:Creator] }.first
         title = @hash.values.map {|obj| obj[:Title] if obj.is_a?(Hash) && obj[:Title] }.first
@@ -81,6 +86,20 @@ module TTV
       end
       
       def ref_to_str(ref)
+        self.class.ref_to_str(ref)
+      end
+      
+      def self.list_callbacks(filename)
+        receiver = PDF::Reader::RegisterReceiver.new
+        pdf = PDF::Reader.file(filename, receiver)
+        receiver.callbacks
+        #receiver.callbacks.each do |cb|
+        #cb.class.name
+        #end
+
+      end
+      
+      def self.ref_to_str(ref)
         # raise ArgumentError, "reference must be a PDF::Reader::Reference" unless ref.is_a? PDF::Reader::Reference 
         if ref.is_a? Array
           ref.inject("[") do |str, pdf_ref|
@@ -89,6 +108,8 @@ module TTV
           end << "]"
         elsif ref.is_a? PDF::Reader::Reference 
           "#{ref.id} #{ref.gen} R"
+        elsif ref.is_a? ::Prawn::Reference 
+          "#{ref.identifier} #{ref.gen} R"
         else
           raise ArgumentError, "reference must be an Array or PDF::Reader::Reference"
         end
