@@ -62,7 +62,7 @@ class PrawnTextBoxTest < ActiveSupport::TestCase
         # puts "TGD: acroform fields list = #{acroform[:Fields].inspect}"
         # puts "TGD: acroform fields = #{@reader.ref_to_str(acroform[:Fields])}"
 
-        assert_equal '[8 0 R, 9 0 R, 10 0 R]', @reader.ref_to_str(acroform[:Fields])
+        assert_equal '[10 0 R, 11 0 R, 12 0 R]', @reader.ref_to_str(acroform[:Fields])
       end            
       
       should "have 3 fields" do
