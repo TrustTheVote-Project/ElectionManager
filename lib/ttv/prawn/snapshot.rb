@@ -9,9 +9,8 @@ module Prawn
       # monkey patch, OUCH, prawn snapshot restore the documents
       # fields.
       def take_snapshot
-        puts "TGD: take_snapshot "
         shot = take_snapshot_old
- 
+        
         if @store.root.data[:AcroForm]
 
           #puts "TGD: fields = #{@store.root.data[:AcroForm].data[:Fields].inspect}"
@@ -46,7 +45,6 @@ module Prawn
         end
         restore_snapshot_old(shot)
       end
-      
     end
   end
 end
