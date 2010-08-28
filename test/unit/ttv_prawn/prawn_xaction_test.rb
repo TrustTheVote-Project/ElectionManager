@@ -11,7 +11,7 @@ class PrawnTextBoxTest < ActiveSupport::TestCase
         
         @pdf.bounding_box([100,600], :width => 400, :height => 200) do
           @pdf.stroke_bounds
-        end
+       end
         @pdf.rollback
       end
       
@@ -20,7 +20,7 @@ class PrawnTextBoxTest < ActiveSupport::TestCase
     end
     
     should "have not changed the pdf" do
-      assert_equal @reader_before.pdf_contents, @reader_before.pdf_contents
+      assert_equal @reader_before.pdf_contents, @reader_after.pdf_contents
     end
     
     should "have not changed the pdf" do
@@ -35,7 +35,7 @@ class PrawnTextBoxTest < ActiveSupport::TestCase
       # puts "TGD: page 1 content before = #{@reader_before.page_contents(1).inspect}"
       # puts "TGD: page 1 content after = #{@reader_after.page_contents(1).inspect}"
       
-      # assert_equal @reader_before.page_contents(1), @reader_after.page_contents(1)
+      assert_equal @reader_before.page_contents(1), @reader_after.page_contents(1)
       # <"/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\nQ\n"> expected but was
       # <"/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\nQ\nQ\n">.
 
