@@ -51,26 +51,26 @@ class PrawnFormTest < ActiveSupport::TestCase
       assert form[:Fields].empty?
     end
 
-    should "be able to change resources" do
-      # generate an empty form
-      @pdf.form do
-        # change the base font to ariel
-        resources(:BaseFont => :Ariel)
-      end
+#     should "be able to change resources" do
+#       # generate an empty form
+#       @pdf.form do
+#         # change the base font to ariel
+#         resources(:BaseFont => :Ariel)
+#       end
 
-      render_and_find_objects(@pdf)
-      form =  get_form()
+#       render_and_find_objects(@pdf)
+#       form =  get_form()
       
-      # check for the form's default resource directory (DR)
-      resources =  get_obj(form[:DR])
-      assert_equal :Font, resources[:Type]
-      assert_equal :WinAnsiEncoding, resources[:Encoding]
-      assert_equal :Type1, resources[:Subtype]
+#       # check for the form's default resource directory (DR)
+#       resources =  get_obj(form[:DR])
+#       assert_equal :Font, resources[:Type]
+#       assert_equal :WinAnsiEncoding, resources[:Encoding]
+#       assert_equal :Type1, resources[:Subtype]
 
-      # changed resource
-      assert_equal :Ariel, resources[:BaseFont]
+#       # changed resource
+#       assert_equal :Ariel, resources[:BaseFont]
 
-    end
+#     end
     
   end # end context
 end
