@@ -4,27 +4,41 @@ class JurisdictionsController < ApplicationController
     if !current_context.jurisdiction?
       redirect_to :action => :change
     else
-      current_context.election = nil
+      @jurisdiction = current_context.jurisdiction
+      current_context.reset
+      current_context.jurisdiction = @jurisdiction
       @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
-      render :elections
+      render :show
     end  
   end
   
-  def elections
+#
+# Show the currently selected jurisdiction.
+#
+  def show
     current_context.election = nil
+    @jurisdiction = current_context.jurisdiction
     @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
   end
  
-  
   def change
     @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
   end
   
   def set
     current_context.jurisdiction = DistrictSet.find(params[:id])
-    redirect_to :action => :elections
+    redirect_to :action => :show
   end
+
+# Show a nice display of the precincts of a particular jurisdiction  
+  def show_precincts
+    @precincts = current_context.jurisdiction.precincts.paginate(:per_page => 10, :page => params[:page])
+    render :partial => 'precincts/precinct_list'
+  end
+    
   
+# Actions to handle importing into the jurisdiction. There are 3 actions to represent the workflow.
+ 
   # 1. Receives file
   # 2. Checks XML vs. YAML
   # 3. Converts to EDH

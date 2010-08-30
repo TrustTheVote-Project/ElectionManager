@@ -1,8 +1,7 @@
 class Precinct < ActiveRecord::Base
   
-#  has_and_belongs_to_many :districts
-#  has_many :district_sets, :through => :precinct_splits
   has_many :precinct_splits
+  belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
   
   attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
   

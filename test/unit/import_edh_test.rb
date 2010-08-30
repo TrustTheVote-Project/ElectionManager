@@ -1,0 +1,49 @@
+require 'test_helper'
+require 'ap'
+
+class AuditTest < ActiveSupport::TestCase
+  
+  context "for data/import_edh/tiny_case.yml" do
+    setup do
+      @yaml = File.new("#{RAILS_ROOT}/test/unit/data/import_edh/tiny_case.yml")
+      @yaml_hash = YAML.load(@yaml) # Can be done in jurisdictions_controller, when file type is YAML
+      @juris = DistrictSet.create!(:display_name => "Jurisdiction tiny_case")
+      @audit = Audit.new(:election_data_hash => @yaml_hash, :district_set => @juris)
+    end
+    
+    should "gen a single alert when audited" do
+      @audit.audit
+      assert_equal 1, @audit.alerts.size
+    end
+    
+    should "be fixable after auditing" do
+      @audit.audit
+      @audit.alerts[0].choice = "use_current"
+      @audit.apply_alerts
+      assert @audit.ready_for_import?
+    end
+    
+    context ", fixed, " do
+      setup do
+        @audit.audit
+        @audit.alerts[0].choice = "use_current"
+        @audit.apply_alerts
+        @import = TTV::ImportEDH.new(@audit.election_data_hash)
+      end
+      
+      should "show one precinct in the jurisdiction after import" do
+        jur = DistrictSet.find_by_display_name("Jurisdiction tiny_case")
+        @import.import_to_jurisdiction jur
+        assert_equal 1, jur.precincts.count
+      end
+      
+      should "create 1 precinct after import" do
+        jur = DistrictSet.find_by_display_name("Jurisdiction tiny_case")
+        @import.import_to_jurisdiction jur
+        assert Precinct.find_by_display_name("PRECINCT 1")
+      end
+      
+    end
+  end
+end
+

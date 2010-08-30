@@ -105,6 +105,7 @@ module ApplicationHelper
     elsif jur_link
       html = jur_link
     end
+#    html <<  + cc.to_s
     content_tag(:h4, html)
   end
 end
