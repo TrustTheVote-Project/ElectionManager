@@ -2,7 +2,7 @@
 # Macros to create various structured Precincts, PrecinctSplits, DistrictSets and Districts
 #
 class Test::Unit::TestCase
-  def setup_precinct name, count
+  def setup_precinct name, count=1
     district_counts = [3, 4, 3, 2, 3]
     assert count <= district_counts.length
     @prec_new = Precinct.create :display_name => name
@@ -34,5 +34,16 @@ class Test::Unit::TestCase
     end
     @district_set_new.save
     @district_set_new
+  end
+  
+# Set up a jurisdiction with a single precinct. NB a different way of returning the
+# results. I am trying this to see if it's more useful.
+  
+  def setup_jurisdiction name
+    jurisdiction = DistrictSet.new(:display_name => name)
+    precinct = setup_precinct(:display_name => "Prec for #{name}")
+    precinct.jurisdiction = jurisdiction
+    precinct.save
+    {:jurisdiction => jurisdiction, :precinct => precinct}
   end
 end

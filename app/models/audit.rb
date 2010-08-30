@@ -15,7 +15,6 @@ class Audit < ActiveRecord::Base
     audit_districts 
     audit_candidates
     audit_contests
-    
     @audit_in_progress = false
     @audited = true
   end

@@ -27,7 +27,21 @@ class PrecinctTest < ActiveSupport::TestCase
     should "have 3 disricts in that split" do
       assert_equal 3,  @p1.precinct_splits[0].district_set.districts.count
     end
-  end
+    
+    context "Jurisdiction and its Precinct" do
+      setup do
+        @fix = setup_jurisdiction "MyJurisdiction"
+      end
+    
+      should "have correct associations" do
+        assert @fix[:jurisdiction].precincts.member? @fix[:precinct]
+      end
+      should "count the right number of precincts" do
+        assert_equal 1, @fix[:jurisdiction].precincts.count
+      end
+    
+  end  
+end
 
   
 # TODO: 

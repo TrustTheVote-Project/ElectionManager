@@ -10,14 +10,8 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>com.aptana.ide.core.unifiedBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>com.aptana.ide.project.nature.web</nature>
 		<nature>org.rubypeople.rdt.core.rubynature</nature>
 		<nature>org.radrails.rails.core.railsnature</nature>
 	</natures>

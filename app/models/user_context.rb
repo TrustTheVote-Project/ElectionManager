@@ -72,7 +72,7 @@ class UserContext
     @session[:contest_id], @session[:question_id] = nil, nil
     
     @session[:precinct_id] = a_precinct ? a_precinct.id : nil
-    self.jurisdiction = a_precinct.district_sets[0]
+    self.jurisdiction = a_precinct.jurisdiction
     @precinct= a_precinct
   end
   
@@ -95,8 +95,8 @@ class UserContext
   end
   
   def reset
-    @session[:election_id] = @session[:jurisdiction_id] = @session[:contest] = @session[:question] = @session[:precinct]= nil
-    @election = @jurisdiction = @contest = @question = @precinct= nil
+    @session[:election_id] = @session[:jurisdiction_id] = @session[:contest_id] = @session[:question_id] = @session[:precinct_id] = nil
+    @election = @jurisdiction = @contest = @question = @precinct = nil
   end
   
   def jurisdiction_secondary_name
@@ -107,20 +107,20 @@ class UserContext
   def to_s
     s = ""
     if !@jurisdiction.nil?
-      s << @jurisdiction.display_name
+      s << "Jur:" + @jurisdiction.display_name
     end
     if !@election.nil?
-      s << " > " + @election.display_name
+      s << " > Elec:" + @election.display_name
     end
     if !@question.nil?
-      s << " > " + @question.display_name
+      s << " > Ques:" + @question.display_name
     end
     if !@contest.nil?
-      s << " > " + @contest.display_name
+      s << " > Cont:" + @contest.display_name
     end
     if !@precinct.nil?
-      s << " > " + @precinct.display_name
+      s << " > Prec:" + @precinct.display_name
     end
-    s
+    return s
   end
 end

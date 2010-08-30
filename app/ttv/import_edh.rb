@@ -84,8 +84,10 @@ module TTV
 
     # Loads an EDH formatted precinct into EM
     def load_precinct precinct
+      @jurisdiction ||= DistrictSet.find_by_ident(precinct["jurisdiction_ident"])
       new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], 
-                                                      :ident => precinct["ident"])
+                                                      :ident => precinct["ident"], 
+                                                      :jurisdiction => @jurisdiction)
       new_precinct.save!
     end
     
