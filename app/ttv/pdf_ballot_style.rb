@@ -34,12 +34,16 @@ class PDFBallotStyle
 #    puts BALLOT_DIR
     return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
   end
-
-  def self.get_ballot_config(style, lang, election, scanner, instruction_text_url)
+  def self.get_ballot_config(election, template)
+#  def self.get_ballot_config(style, lang, election, scanner, instruction_text_url)
     #begin
-      ballot_defining_module = style.camelize + "Ballot"
-      mod = ballot_defining_module.constantize
-      mod::BallotConfig.new(style, lang, election, scanner, instruction_text_url)
+    # TODO: fix this, shd not do a find here. template.shd have one
+    # ballot style attribute
+    style = BallotStyle.find(template.ballot_style).ballot_style_code
+    ballot_defining_module = style.camelize + "Ballot"
+    mod = ballot_defining_module.constantize
+    mod::BallotConfig.new(election,template)
+#      mod::BallotConfig.new(style, lang, election, scanner, instruction_text_url)
     #rescue => ex
     #  Rails.logger.error(ex)
     #  raise "Unknown Ballot Style: #{style}"

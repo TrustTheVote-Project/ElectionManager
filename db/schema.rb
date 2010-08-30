@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100802153118) do
+ActiveRecord::Schema.define(:version => 20100816182113) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20100802153118) do
     t.string   "instructions_image_file_name"
     t.string   "instructions_image_content_type"
     t.string   "instructions_image_file_size"
+    t.boolean  "pdf_form"
   end
 
   create_table "ballot_styles", :force => true do |t|

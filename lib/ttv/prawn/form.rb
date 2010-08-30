@@ -9,16 +9,29 @@ module TTV
       include TTV::Prawn::Graphics
       
       attr_reader :resources, :fields
+      attr_accessor :form_enabled
+
+      def form?
+        @form_enabled
+      end
       
       def form(options={}, &block )
-
-        @fields = []
-        instance_eval(&block) if block_given?
         
+        @form_enabled = true
+        
+        @fields = []
         data = store.root.data
         data[:AcroForm] = store.ref(:Fields => (@fields || fields),
                                           :DR => (@resources || resources)
-                                          )
+                                    )
+        
+        if block_given?
+          # if the block param has no arguments then eval it with the
+          # scope of this Prawn::Document object.
+          # otherwise yield, block.call(..), with the arg this
+          # Prawn::Document object.
+          block.arity < 1 ? instance_eval(&block) : block.call(self)
+        end
       end
       
       def resources(options={})
@@ -26,7 +39,7 @@ module TTV
           :Subtype  => :Type1,
           :BaseFont => :Helvetica,
           :Encoding => :WinAnsiEncoding }.merge(options)
-        @resources = ref(options)
+         @resources = ref(options)
       end
       
       def draw_radio_group(name, opts={}, &block)
@@ -102,7 +115,14 @@ module TTV
       def draw_checkbox(name, opts={}, &block)
         options = { :width => 10, :height => 10}.merge(opts)
         x,y = map_to_absolute(options[:at])
-
+        #puts "TTV::Prawn::Form#draw_checkbox"
+        #TTV::Prawn::Util.show_bounds_coordinates(bounds)    
+        #TTV::Prawn::Util.show_abs_bounds_coordinates(bounds)
+        # puts "TGD: annot t, l, w, h = #{[y,x, x + options[:width] , y + options[:height]].inspect}"
+        # stroke_color("00FF00") #"FFFFFF"
+#         stroke_line([x, y], [x+ options[:width], y])
+#         stroke_line([x, y], [x, y+ options[:height]])
+        
         unchecked_box_ref = check_box(options[:width], options[:height], false)
         checked_box_ref = check_box(options[:width], options[:height])
 
@@ -114,7 +134,7 @@ module TTV
           :V => :Off, # the name used in the appearance stream (AP),
           :Ff => 0
         }
-
+        
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
@@ -147,7 +167,12 @@ module TTV
         
         # Add this annotation to the current page's set of annotatations
         # Add this field to this document's set of fields
-        @fields << annotate_redirect(dict)
+        # @fields << annotate_redirect(dict)
+        annot =  annotate_redirect(dict)
+        store.root.data[:AcroForm].data[:Fields] << annot
+        # puts "TGD: form field size =  #{store.root.data[:AcroForm].data[:Fields].length.inspect}"
+        annot
+        
       end
       
       
@@ -236,10 +261,9 @@ module TTV
           # create_stamp makes the with and height the same of the page
           # width and height. Not right for this.
           #create_stamp("checked_box") do
-          box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do        
+          box = form_xobject("checked_box",:x => 0, :y => 0, :width => width, :height => height) do
             ttv_rectangle([0, 0], width, height)          
             stroke
-            
             ttv_line(0,0,width,height)
             stroke
 
@@ -267,34 +291,6 @@ module TTV
         box 
       end
 
-      # TODO: Move these into a Util module
-      def deref(obj)
-        obj.is_a?(Prawn::Core::Reference) ? obj.data : obj
-      end
-      
-      def get_obj(ref)
-        obj = store[ref.identifier]
-        deref(obj)
-      end
-      
-      def show_obj_store()
-        out = ""
-        out << "Prawn::Core::ObjectStore\n"
-        out << "\nIdentifiers: #{store.instance_variable_get(:@identifiers).inspect}"
-        out << "\nRoot/Catalog: #{store.root}"
-        out << "\nInfo:  #{store.info}"
-        out << "\nPages:  #{store.pages}"
-        out << "\n  -------------"
-        # show me the all the objects in the store
-        store.each do |obj|
-          out << "\n"
-          out << "Object Reference = #{obj}\n"
-          out << "#{obj.object}\n"
-          out << "\n  -------------"
-        end
-        out
-      end
-      
       
     end # Form
   end # Prawn

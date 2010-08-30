@@ -1,0 +1,150 @@
+PrecinctsController#ballot
+  Get the election and precinct for this ballot
+  Get the ballot_style_template from the election
+  The BallotStyleTemplate will contain customization info like:
+   - default_voting_method, default_language, instruction_text, state_graphic, ... most
+  importantly it'll have the ballot_style.
+  The BallotStyle will ONLY be used to get the ballot_config, class to use
+  when rendering:
+   - "Office Block" implemented by app/default/ballot_config.rb 
+   - "Party Column" implemented by app/nh/ballot_config.rb
+   - ...
+  call:
+
+  * Election#render_ballot
+    Get the "Ballot" style, "default", from this election's
+    BallotStyleTemplate.
+    Get the instruction's image attached to this election's
+    BallotStyleTemplate. This is instruction_text_url with a value of
+    "/instructions_images/original/missing.png" here. NOTE: the
+    "missing" in the url means there really isn't any instructions.
+
+    *AbstractBallot.create(election, precinct, style='default', lang='en',
+    instruction_text_url="/instructions_images/original/missing.png",destination = nil)
+
+      * scanner = TTV::Scanner.new()
+      
+      * config = PDFBallotStyle.get_ballot_config(style, lang, election, scanner,
+      instruction_text_url)
+        use the "style" to construct the name of the Module that this
+        BallotConfig class resides in. Ex: given "default" get
+        DefaultBallot::BallotConfig in app/ballots/default/ballot_config.rb
+      
+      
+        If using the "default" ballot_config class the initializion
+        method will: 
+        - @file_root will be 'app/ballots/default'
+
+        - @election will be the election we're generating the ballot for.
+
+        - @ballot_translation will be a hash containing contents of
+        the /app/ballots/default/lang/en/ballot.yml file. See
+        unit/test/pdf_ballot_style_test.rb
+        {:Vote_Both_Sides=>"Vote Both Sides", :Vote_for_1=>"Vote for
+        &1;", :or_write_in=>"or write-in", :Vote_for_many=>"Vote for
+        up to &1;", :Thank_you=>"Thank you for voting. \nPlease turn
+        in your ballot", :Rank_candidates=>"Rank the candidates",
+        :Yes=>"Yes", :Sample_Ballot=>"Sample Ballot",
+        :Vote_yes_or_no=>"Vote yes or no", :No=>"No",
+        :OFFICIAL_BALLOT=>"OFFICIAL BALLOT",
+        :Continue_voting_next_side=>"Continue voting \nnext side"}
+
+        - @election_translations will be a hash of the contents of
+        db/translations/election-2.en.yml. NO FILES CURRENTLY IN
+        db/translations
+
+        - Lots of PDF/PRAWN layout stuff, margins, page_size, padding,
+        etc. used when rendering
+
+        # Default::BallotConfig.new(style, lang, election, scanner, instruction_text_url)
+        DefaultBallot::BallotConfig#initialize
+              @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
+              @election = election
+              @lang = lang
+              @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
+              @election_translation = PDFBallotStyle.get_election_translation(election, lang)
+              @instruction_text_url = instruction_text_url
+              @page_size = "LETTER"
+              @page_layout = :portrait
+              @left_margin = @right_margin = 18
+              @top_margin = @bottom_margin = 30
+              @pleaseVoteHeight = 30
+              @padding = 8
+              @columns = @columns || 3
+              @checkbox_orientation = @checkbox_orientation || :left 
+              @scanner = scanner
+              @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
+
+      * renderer = Renderer.new(election, precinct, config,
+        destination) 
+        Just set the renderer's attributes it will need.
+        
+
+      * renderer.render
+        - create the Prawn document, pdf, from ballot_config object, using
+     the  default in app/ballots/default/ballot_config.rb here. 
+        - call Default::BallotConfig.setup(pdf, precinct)
+           -set the ballot_config, config, prawn document and precinct
+            to render. 
+           - set the prawn document's fonts
+           - set the wrap character to space
+        * init_flow_items (Create a list of FlowItem::Header,
+      FlowItem::Contest and FlowItem::Question)
+          - get all the districts for this precinct that are in this
+      election. for each of these districts:
+            - Get the header FlowItem::Header for this district.
+              - get the display_name for the district
+              - ballot_config.create_flow_item
+              - FlowItem::Header.new("District Display Name", @scanner)
+                - sets @item = "District Display Name"
+                - sets @scanner = scanner
+            - Get all the Contests for this district and election. 
+            - For the first contest in this district create a combo
+              flow item that will have the district header and the
+              first  contest:.
+                - FlowItem::Combo.initialize([header_item, FlowItem::Contest.new(contest,@scanner))
+                  - FlowItem::Contest.initialize(contest,@scanner)
+                    @item = contest
+                    @scanner = scanner
+                  - @flow_items = [header_item,  FlowItem::Contest.new(contest,@scanner))
+            - For the subsequent, not first, contest in this
+             district create a FlowItem::Contest instance. 
+            - Push each flow item onto the list of flow items.
+            - Get all the Questions for this district and election.
+              - pretty much do the same as above but for FlowItem::Question
+            - Push each flow item onto the list of flow items.
+            
+        * render_everything
+          * start_page
+            - create a prawn bounding box from the Prawn::Document
+            created above, flow_rect
+            * DefaultBallot.BallotConfig.render_frame( flow_rect)
+              
+            * DefaultBallot.BallotConfig.render_header( flow_rect)
+
+            * DefaultBallot.BallotConfig.create_columns( flow_rect)
+              - create 3 columns in the flow rectangle.
+            
+
+           
+          
+
+
+*********************
+Tests
+-----------------
+Unit Tests
+ballot_style_template_test.rb
+ballot_style_test.rb
+language_test.rb
+medium_test.rb 
+pdf_ballot_test.rb 
+
+# These tests generate a set of pdf files that can be used to determine if the rendering code is working.
+
+renderer_test.rb  # this tests the entire ballot rendering for the "default"/office block ballot rendering code. It shb run to determine if anything has broken.
+
+header_flow_test.rb # simplest test for the flow classes. Lots of comments in the test and the associated question_flow.rb file to show how flow logic works.
+question_flow_test.rb # more complex flow
+contest_flow_test.rb # most complex flow
+

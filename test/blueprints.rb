@@ -32,6 +32,7 @@ Sham.define do
   jurisdiction_name(:unique => false) { %w{Northern MiddleSex Southern}.rand }
 
   display_name(:unique => false) { Faker::Lorem.words(1).first }
+  ident { Faker::Lorem.words(1).first }
   
 end
 
@@ -84,6 +85,11 @@ Contest.blueprint do
   election
 end
 
+Candidate.blueprint do
+  # contest
+  # party 
+end
+
 Question.blueprint do
   display_name
   requesting_district { District.make }
@@ -106,3 +112,67 @@ end
 JurisdictionMembership.blueprint(:admin) do
   role { 'admin' }
 end
+
+# NOTE: DistrictType, Party and VotingMethod are using the
+# ConstantCache and loaded as seed data.
+
+# TODO: remove these blueprints, they are loaded as seed data.
+# Party::DEMOCRATIC, Party::REPUBLICAN, Party::INDEPENDENT
+Party.blueprint do
+
+end
+
+Party.blueprint(:democrat) do
+  display_name { 'Democrat'}
+end
+
+Party.blueprint(:republican) do
+  display_name { 'Republican'}
+end
+
+Party.blueprint(:independent) do
+  display_name { 'Independent'}
+end
+
+# NOTE: commented out blueprints because they are seed data
+
+BallotStyle.blueprint do
+  display_name
+end
+
+BallotStyle.blueprint(:office_block) do
+  display_name { "Office Block"}
+  ballot_style_code { "default"}
+end
+
+BallotStyle.blueprint(:party_column) do
+   display_name { "Party Column"}
+  # TODO: rename this to party_column ?
+   ballot_style_code { "nh"}
+ end
+
+  Language.blueprint(:english) do
+    display_name { "English"}
+    code { "en" }
+  end
+
+#  VotingMethod.blueprint do
+
+#  end
+#  VotingMethod.blueprint(:winner_take_all) do
+#    display_name { "Winner Take All"}
+#  end
+
+# VotingMethod.blueprint(:ranked) do
+#   display_name { "Ranked"}
+# end
+
+BallotStyleTemplate.blueprint do
+   display_name
+   default_voting_method { VotingMethod::WINNER_TAKE_ALL }
+   ballot_style { BallotStyle.make(:office_block).id}
+  default_language { Language.make(:english).id }
+#  instructions_image.urlimage_instructions { 'missing' }
+  medium_id { 0}
+  pdf_form { false}
+ end

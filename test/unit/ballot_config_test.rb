@@ -1,6 +1,5 @@
 require 'test_helper'
-require 'ballots/default/ballot_config.rb'
-
+require 'ballots/default/ballot_config'
 
 class BallotConfigTest < ActiveSupport::TestCase
   setup_jurisdictions do  
@@ -11,11 +10,14 @@ class BallotConfigTest < ActiveSupport::TestCase
           
           @e1 = Election.find_by_display_name "Election 1"
           @p1 = Precinct.find_by_display_name "Precint 1"
-          @scanner = TTV::Scanner.new
-          @lang = 'en'
-          @style = "default"
-          image_instructions = 'images/test/instructions.jpg'
-          @ballot_config = DefaultBallot::BallotConfig.new(@style, @lang, @e1, @scanner,image_instructions)
+          
+          # TODO: create a test for ballot_instructions, it's
+          # commented out below
+          # @template = BallotStyleTemplate.make(:display_name => "test template", :instructions_image_file_name => "instructions.jpg", :instructions_image_file_size => 182537, :instructions_image_content_type => 'jpg')
+          
+          @template = BallotStyleTemplate.make(:display_name => "test template")
+          
+          @ballot_config = DefaultBallot::BallotConfig.new( @e1, @template)
           
           @pdf = create_pdf("Test Default Ballot")
           
@@ -27,7 +29,8 @@ class BallotConfigTest < ActiveSupport::TestCase
         end # end setup
         
         should "set the correct ballot directory " do
-          assert_equal  "#{Rails.root}/app/ballots/#{@style}", @ballot_config.instance_variable_get(:@file_root) 
+          style = BallotStyle.find(@template.ballot_style).ballot_style_code
+          assert_equal  "#{Rails.root}/app/ballots/#{style}", @ballot_config.instance_variable_get(:@file_root) 
         end
         
         should "set the correct ballot translation" do
@@ -43,7 +46,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
 
         #TODO: load_test method doesn't seem to be used anywhere
-        should "load the ballot file for the language code #{@lang}" do
+        should "load the ballot file for the language code \"en\"" do
           assert_nothing_raised do
             @ballot_config.load_text("ballot.yml")
           end
@@ -54,7 +57,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
       
         # TODO: remove as it doesn't seem to be used?      
-        should "load the image for language code #{@lang}" do
+        should "load the image for language code \"en\"" do
           assert_nothing_raised do
             @ballot_config.load_image("instructions2.png")          
           end
@@ -72,40 +75,14 @@ class BallotConfigTest < ActiveSupport::TestCase
 
         should "create a pdf continuation box" do
           assert_instance_of DefaultBallot::ContinuationBox, @ballot_config.create_continuation_box
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n", util.page_contents[0]
           @pdf.render_file("#{Rails.root}/tmp/ballot_create_continuation_box.pdf")
         end
         
         should "create 3 columns in the ballot" do
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           assert_instance_of AbstractBallot::Columns, @ballot_config.create_columns(flow_rect)
-        end
-
-        should "create short instructions for a contest that is winner take all" do
-          contest = Contest.make(:voting_method => VotingMethod::WINNER_TAKE_ALL)
-          contest.open_seat_count = 1
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Vote for 1", ballot_xlation
-
-          contest.open_seat_count = 5
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Vote for up to 5", ballot_xlation
-
-        end
-        
-        should "create short instructions for a contest that is ranked" do
-          contest = Contest.make(:voting_method => VotingMethod::RANKED)
-          ballot_xlation = @ballot_config.short_instructions(contest)
-          assert_equal "Rank the candidates", ballot_xlation
-        end
-        
-        should "create short instructions for a question" do
-          assert_equal "Vote yes or no", @ballot_config.short_instructions(Question.make)
-        end
-        
-        should "raise an exception when getting short instructions for any other item" do
-          assert_raise RuntimeError do
-            @ballot_config.short_instructions(Election.make)
-          end
         end
         
         should "have a wide style of continue" do
@@ -115,6 +92,9 @@ class BallotConfigTest < ActiveSupport::TestCase
         should "create a checkbox outline " do
           # in about the middle of the page
           @ballot_config.stroke_checkbox([@pdf.bounds.top/2, @pdf.bounds.right/2])
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n384.000 308.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n", util.page_contents[0]
+
           @pdf.render_file("#{Rails.root}/tmp/ballot_stroke_checkbox.pdf")
         end
         
@@ -131,6 +111,10 @@ class BallotConfigTest < ActiveSupport::TestCase
           2.times do |column_num|
             @ballot_config.draw_checkbox(three_columns.next, "This is a test checkbox in column #{column_num+2}")
           end
+          util = TTV::Prawn::Util.new(@pdf)
+          
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n68.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2031> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n240.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n268.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n268.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2032> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n440.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n468.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n468.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2033> Tj\nET\n\n", util.page_contents[0]
+
           @pdf.render_file("#{Rails.root}/tmp/ballot_draw_checkbox.pdf")
         end
 
@@ -144,6 +128,9 @@ class BallotConfigTest < ActiveSupport::TestCase
           # top, left, bottom and right
           rect = AbstractBallot::Rect.create(@pdf.bounds.top-100,0, 0, @pdf.bounds.right-100 )
           @ballot_config.frame_item(rect, rect.height-300 )
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n0.5 w\n18.000 662.000 m\n494.000 662.000 l\nS\n494.000 662.000 m\n494.000 362.000 l\nS\n18.000 662.000 m\n18.000 362.000 l\nS\n", util.page_contents[0]
+
           @pdf.render_file("#{Rails.root}/tmp/ballot_frame_item.pdf")
         end
         
@@ -157,7 +144,23 @@ class BallotConfigTest < ActiveSupport::TestCase
         should "render a frame around the entire page" do
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           @ballot_config.render_frame flow_rect
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 1.000 0.000 scn\nf\n0.000 0.000 0.000 scn\n0.000 0.000 0.000 scn\n18.000 30.000 18.000 140.000 re\n18.000 622.000 18.000 140.000 re\n576.000 30.000 18.000 140.000 re\n576.000 622.000 18.000 140.000 re\nb\n44.000 95.000 524.000 672.000 re\nS\n\nBT\n0.000 1.000 -1.000 0.000 34.000 370.000 Tm\n/F1.0 14 Tf\n<53616d706c652042616c6c6f74> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 592.000 370.000 Tm\n/F1.0 14 Tf\n<53616d706c652042616c6c6f74> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 34.000 505.000 Tm\n/F1.0 14 Tf\n<3132303031303430313030303430> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 592.000 241.000 Tm\n/F1.0 14 Tf\n<313332333031313133> Tj\nET\n\n", util.page_contents[0]
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_frame.pdf")          
+        end
+        
+        should "render a header with an old date for this page" do
+          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          
+          # make sure the election has a start date
+          @e1.start_date = DateTime.new(2009, 11,3)
+          
+          @ballot_config.render_header flow_rect
+          
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4e6f76656d6265722030322c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
+
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
         
         should "render a header for this page" do
@@ -171,14 +174,17 @@ class BallotConfigTest < ActiveSupport::TestCase
           flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
           
           # make sure the election has a start date
-          @e1.start_date = DateTime.now
+          @e1.start_date = DateTime.new(2009, 7, 25)
           
           @ballot_config.render_header flow_rect
+          
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4a756c792032342c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
+
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
-
         # render the column instruction image in the leftmost column
-        should "render column instructions" do
+        should "not render column instructions" do
           # bounding rect of pdf page
           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
 
@@ -186,16 +192,42 @@ class BallotConfigTest < ActiveSupport::TestCase
           three_columns = AbstractBallot::Columns.new(3, rect)
           page = 1
           @ballot_config.render_column_instructions(three_columns, page)
-          @pdf.render_file("#{Rails.root}/tmp/ballot_render_column_instructions.pdf")          
           
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n0.5 w\n", util.page_contents[0]
+          
+          @pdf.render_file("#{Rails.root}/tmp/ballot_not_render_column_instructions.pdf")
+
         end
+
+#         # render the column instruction image in the leftmost column
+#         should "render column instructions" do
+#           # bounding rect of pdf page
+#           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+
+#           # split the page into 3 columns
+#           three_columns = AbstractBallot::Columns.new(3, rect)
+#           page = 1
+#           @ballot_config.render_column_instructions(three_columns, page)
+#           util = TTV::Prawn::Util.new(@pdf)
+#           assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nq\n172.000 0 0 600.000 20.000 161.000 cm\n/I1 Do\nQ\n0.5 w\n", util.page_contents[0]
+#           @pdf.render_file("#{Rails.root}/tmp/ballot_render_column_instructions.pdf")          
+          
+#         end
         
         # render the column instruction image in the leftmost column
         should "page complete will show \"Vote Both Sides\" if not the last page of the ballot " do
           page_num = 33
           last_page = false
           @ballot_config.page_complete(page_num, last_page)
-          @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")                  
+
+          util = TTV::Prawn::Util.new(@pdf)
+          #assert_equal 'foo', util.page_contents[0]
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n252.90653125 751.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n252.90653125 39.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n", util.page_contents[0]
+
+          @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")   
+
+
         end
 
         should "get the Content flow item for Contests" do
@@ -208,10 +240,6 @@ class BallotConfigTest < ActiveSupport::TestCase
 
         should "get the Header flow item for Strings" do
           assert_instance_of DefaultBallot::FlowItem::Header, @ballot_config.create_flow_item("Header Content String")
-        end
-        
-        should "get the Combo flow item for Arrays" do
-          assert_instance_of DefaultBallot::FlowItem::Combo, @ballot_config.create_flow_item([])
         end
 
       end # end initialize context

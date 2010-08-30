@@ -1,19 +1,23 @@
 require 'test_helper'
-require 'ballots/default/ballot_config.rb'
+require 'ballots/default/ballot_config'
 
 class ScannerTest < ActiveSupport::TestCase
   context "Scanner creation" do
     setup do
-      @scanner = TTV::Scanner.new
+
       # @election = Election.make
       # @precinct = Precinct.make
       @election = TTV::ImportExport.import(File.new( RAILS_ROOT + "/test/elections/contests_mix.xml"))
       @precinct = @election.district_set.precincts.first
-      
-      @c = ::DefaultBallot::BallotConfig.new('default', 'en', @election, @scanner, "missing")
+       @template = BallotStyleTemplate.make(:display_name => "test template")
+      @c = DefaultBallot::BallotConfig.new( @election, @template)     
+#      @c = ::DefaultBallot::BallotConfig.new('default', 'en', @election, @scanner, "missing")
       
       @pdf = create_pdf("Test Scanner")
       @c.setup(@pdf, @precinct)
+      
+      @scanner = @c.scanner
+      
       @renderer = ::AbstractBallot::Renderer.new(@election, @precinct, @c,'')
     end
     
@@ -33,6 +37,11 @@ class ScannerTest < ActiveSupport::TestCase
     # TODO: doesn't seem to do anything??
     should "render grid" do
       subject.render_grid(@pdf)
+      util = TTV::Prawn::Util.new(@pdf)
+      assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 1.000 0.000 scn\nf\n0.000 0.000 0.000 scn\n", util.page_contents[0]
+      
+      #puts "object_store = #{util.show_obj_store}"
+      
       @pdf.render_file("#{Rails.root}/tmp/scanner_render_grid.pdf")                
     end
     
@@ -45,7 +54,7 @@ class ScannerTest < ActiveSupport::TestCase
     should "render header" do
 #      header = DefaultBallot::FlowItem::Header.new("Hey Header",
       #    @scanner)
-      header = DefaultBallot::FlowItem::Header.new("Hey Header", nil)
+      header = DefaultBallot::FlowItem::Header.new(@pdf, "Hey Header", nil)
       flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
       
       columns = AbstractBallot::Columns.new(3, flow_rect)

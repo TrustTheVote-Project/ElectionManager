@@ -7,352 +7,15 @@
 require 'ttv/abstract_ballot.rb'
 require 'prawn'
 
+require 'ballots/default/combo_flow'
+require 'ballots/default/header_flow'
+require 'ballots/default/question_flow'
+require 'ballots/default/contest_flow'
+require 'ballots/default/continuation_box'
+require 'ballots/default/flow_item'
+
 module DefaultBallot
   include ::AbstractBallot
-  
-  class FlowItem
-
-    ANY_WIDTH = 1
-    HPAD = 3
-    HPAD2 = 6
-    VPAD = 3
-    VPAD2 = 6
-
-    def initialize(item, scanner)
-      @item = item
-      @scanner = scanner
-    end
-
-    def reset_ballot_marks
-      @ballot_marks = []
-    end
-    
-    def ballot_marks
-      @ballot_marks || []
-    end
-    
-    def add_ballot_mark(contest, choice, page, location)
-      @ballot_marks.push(@scanner.create_ballot_mark contest, choice, page, location )
-    end
-    
-    def fits(config, rect)
-      # clever way to see if we fit, avoiding code duplication for measure vs. draw
-      # Algorithm: draw the item. If it overflows flow rectangle, it does not fit.
-      r = rect.clone
-      config.pdf.transaction do
-        draw(config, r)
-        config.pdf.rollback
-      end
-      r.height > 0
-    end
-
-    def draw(config, rect)
-      # debug only code, never executed
-      top = rect.top
-      config.pdf.font("Helvetica", :size => 10, :style => :italic)
-      config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD ) do
-        config.pdf.move_down VPAD
-        config.pdf.text "FlowItem.draw"
-        rect.top -= config.pdf.bounds.height
-      end
-      config.pdf.stroke_line [rect.left, rect.top], [rect.right, rect.top]
-      config.pdf.stroke_line [rect.right, rect.top], [rect.right, top]
-    end
-
-    def min_width
-      0
-    end
-
-    def to_s
-      @item.to_s
-    end
-
-    class Combo
-      def initialize(flow_items)
-        @flow_items = flow_items
-      end
-
-      def fits(config, rect)
-        r = rect.clone
-        config.pdf.transaction do
-          @flow_items.each { |f|  f.draw config, r if r.height > 0 }
-          config.pdf.rollback
-        end
-        r.height > 0
-      end
-
-      def min_width
-        @flow_items.map { |r| r.min_width }.max
-      end
-
-      def draw(config, rect, &bloc)
-        reset_ballot_marks
-        @flow_items.each { |f| f.draw config, rect, &bloc }
-      end
-      
-      def reset_ballot_marks
-        @flow_items.each { |f| f.reset_ballot_marks }
-      end
-      
-      def ballot_marks
-        ret = []
-        @flow_items.each { |f| ret.concat f.ballot_marks }
-        ret
-      end
-
-      def to_s
-        s = "Combo\n"
-        @flow_items.each { |f| s += f.to_s + "\n" }
-        s
-      end
-    end
-
-    class Header < FlowItem
-      def min_width
-        ANY_WIDTH
-      end
-
-      def draw(config, rect)
-        top = rect.top
-        config.pdf.font("Helvetica", :size => 10, :style => :bold )
-        config.pdf.bounding_box([rect.left + HPAD, rect.top], :width => rect.width - HPAD * 2) do
-          config.pdf.move_down VPAD
-          config.pdf.text @item, :leading => 1
-          rect.top -= config.pdf.bounds.height 
-        end
-        config.frame_item rect, top
-      end
-
-    end
-
-    class Question < FlowItem
-
-      def min_width
-        return 300 if @item.question.length > 100
-        return ANY_WIDTH
-      end
-
-      def draw(config, rect)
-        reset_ballot_marks
-        top = rect.top
-        config.pdf.bounding_box([rect.left+2, rect.top], :width => rect.width - 4) do
-          config.pdf.font "Helvetica", :size => 10, :style => :bold
-          config.pdf.move_down VPAD
-          config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
-          config.pdf.move_down VPAD
-          config.pdf.text config.short_instructions(@item), :leading => 1
-          config.pdf.move_down VPAD * 2
-          config.pdf.font "Helvetica", :size => 10
-          config.pdf.text config.et.get(@item, :question), :leading => 1 # question
-          rect.top -= config.pdf.bounds.height
-        end
-        rect.top -= 3
-        space, location = config.draw_checkbox rect, config.bt[:Yes]
-        add_ballot_mark @item, "Yes", config.pdf.page_number, location
-        rect.top -= 3
-        space, location = config.draw_checkbox  rect, config.bt[:No]
-        add_ballot_mark @item, "No", config.pdf.page_number, location
-        config.pdf.line_width 0.5
-        rect.top -= 3
-        config.frame_item rect, top
-      end
-    end
-
-    class Contest < FlowItem
-
-      NAME_WIDTH = 100
-      MAX_RANKED = 10
-      NEXT_COL_BOUNCE = 30
-
-      def min_width
-        if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
-          super
-        else
-          100 + 3 * HPAD + [@item.candidates.count, MAX_RANKED].min * (HPAD + BallotConfig::CHECKBOX_WIDTH)
-        end
-      end
-
-      def draw(config, rect, &bloc)
-        reset_ballot_marks
-        if @item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
-          draw_winner config, rect, &bloc
-        else
-          draw_ranked config, rect, &bloc
-        end
-      end
-
-      def draw_winner(config, rect, &bloc)
-        top = rect.top
-        # HEADER
-        config.pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
-          config.pdf.font "Helvetica", :size => 10, :style => :bold
-          config.pdf.move_down VPAD
-          config.pdf.text config.et.get(@item, :display_name), :leading => 1 #header
-          config.pdf.move_down VPAD
-          config.pdf.text config.short_instructions(@item), :leading => 1
-          rect.top -= config.pdf.bounds.height
-        end
-        # CANDIDATES
-        candidates_list = @item.candidates
-        candidates_list.sort { |a,b| a.order <=> b.order}.each do |candidate|
-          if bloc && rect.height < NEXT_COL_BOUNCE
-            config.frame_item rect, top
-            rect = yield
-          end
-          rect.top -= VPAD * 2
-          space, location = config.draw_checkbox rect, config.et.get(candidate, :display_name) + "\n" + config.et.get(candidate.party, :display_name)
-          add_ballot_mark @item, candidate, config.pdf.page_number, location
-        end
-        @item.open_seat_count.times do
-          if bloc && rect.height < NEXT_COL_BOUNCE
-             config.frame_item rect, top
-             rect = yield
-           end
-          rect.top -= VPAD * 2
-          left, location = config.draw_checkbox rect, config.bt[:or_write_in]
-          add_ballot_mark @item, "Writein", config.pdf.page_number, location
-          config.pdf.dash 1
-          v = 16
-          config.pdf.stroke_line [rect.left + left, rect.top - v], 
-          [rect.right - 6, rect.top - v]
-          rect.top -= v
-          config.pdf.undash
-        end
-        rect.top -= 6 if @item.open_seat_count != 0
-        config.frame_item rect, top
-      end
-
-      def draw_ranked(config, rect, &bloc)
-        top = rect.top
-        pdf = config.pdf
-        # title
-        pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
-          pdf.font "Helvetica", :size => 10, :style => :bold
-          pdf.move_down VPAD
-          pdf.text config.et.get(@item, :display_name), :leading => 1 #header
-          config.pdf.move_down VPAD
-          config.pdf.text config.short_instructions(@item), :leading => 1
-          rect.top -= pdf.bounds.height
-        end
-
-        # Ordinals: 1st 2nd...
-        hpad4 = HPAD2 * 2
-        rect.top -= VPAD * 2
-        count = @item.candidates.count
-        checkbox_count = [@item.candidates.count, MAX_RANKED].min
-        height = 0
-        0.upto(checkbox_count - 1) do |i|
-          x = rect.left + HPAD2 + i * (BallotConfig::CHECKBOX_WIDTH + hpad4)
-          y = rect.top + VPAD 
-          pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
-            pdf.text(config.et.ordinalize(i + 1), :align => :center)
-            height = pdf.bounds.height
-          end
-        end
-        rect.top -= height;
-
-        # checkboxes
-
-        0.upto(count) do |i|  # candidates
-          if bloc && rect.height < NEXT_COL_BOUNCE
-            config.frame_item rect, top
-            rect = yield
-            rect.top -= HPAD2
-          end
-          0.upto(checkbox_count - 1) do |j|
-            x = rect.left + HPAD2 + j * (BallotConfig::CHECKBOX_WIDTH + hpad4)
-            y = rect.top
-            pdf.bounding_box [x, y], :width => BallotConfig::CHECKBOX_WIDTH do
-              config.stroke_checkbox
-              f = pdf.font "Helvetica", :size => 9
-              pdf.move_down( (BallotConfig::CHECKBOX_HEIGHT - f.ascender) / 2)
-              pdf.fill_color "999999"
-              pdf.text( (j + 1).to_s, :align => :center)
-            end
-          end
-          pdf.fill_color "000000"
-          spacer = HPAD2 + checkbox_count * (BallotConfig::CHECKBOX_WIDTH + hpad4)
-          pdf.font "Helvetica", :size => 10
-          pdf.bounding_box [rect.left + spacer, rect.top], :width => rect.width - spacer do
-            if i < count
-              pdf.text config.et.get(@item.candidates[i], :display_name) + "\n" + config.et.get( @item.candidates[i].party, :display_name)
-            else # writein
-              pdf.text config.bt[:or_write_in]
-              pdf.dash 1
-              pdf.move_down 16
-              config.pdf.stroke_line [0, 0], [rect.width - spacer - HPAD2, 0]
-              pdf.undash
-              pdf.move_down VPAD
-            end            
-            rect.top -= [pdf.bounds.height, BallotConfig::CHECKBOX_HEIGHT].max
-          end
-          pdf.move_down VPAD * 2
-          rect.top -= VPAD * 2
-        end
-        config.frame_item rect, top
-      end
-    end
-
-  end
-
-  class ContinuationBox
-    def initialize(pdf)
-      @pdf = pdf
-    end
-
-    def height(config, rect, last_page = false)
-      r = rect.clone;
-      @pdf.transaction do
-        draw(config, r, last_page)
-        @pdf.rollback
-      end
-      rect.top - r.top
-    end
-
-    def draw(config, rect, last_page)
-      top = rect.top
-      @pdf.font "Helvetica", :size => 10, :style => :bold
-      unless last_page
-        circle_width = 20
-        text_height = 0
-        text_width = rect.width - circle_width - 8
-        @pdf.bounding_box [rect.left+FlowItem::HPAD, rect.top], :width => text_width do
-          @pdf.move_down FlowItem::VPAD
-          @pdf.text config.bt[:Continue_voting_next_side], :align => :center
-          @pdf.move_down FlowItem::VPAD
-          text_height = @pdf.bounds.height
-        end
-        circle_top = rect.top - 6
-        @pdf.bounding_box [rect.left + text_width, circle_top ], :width => rect.width - text_width - 8 , :height => circle_width do
-          @pdf.circle_at [circle_width / 2, circle_width / 2], :radius => circle_width / 2
-          @pdf.fill_color "000000"
-          @pdf.fill_and_stroke
-          @pdf.stroke_color "FFFFFF"
-          @pdf.cap_style :round
-          @pdf.line_width 2
-          inset = 4
-          @pdf.stroke_line [inset, circle_width / 2], [ circle_width - inset, circle_width / 2]
-          @pdf.move_to [circle_width / 2, circle_width - inset]
-          @pdf.line_to [circle_width - inset, circle_width / 2]
-          @pdf.line_to [circle_width / 2, inset]
-          @pdf.stroke
-        end
-        rect.top -= text_height
-      else
-        @pdf.bounding_box [rect.left + FlowItem::HPAD, rect.top], :width => (rect.width - FlowItem::HPAD2) do
-          @pdf.move_down FlowItem::VPAD
-          @pdf.text config.bt[:Thank_you], :align => :center
-          @pdf.move_down FlowItem::VPAD
-          rect.top -= @pdf.bounds.height
-        end
-      end
-      @pdf.line_width 0.75
-      @pdf.stroke_color "000000"
-      @pdf.stroke_line([rect.left, rect.top], [rect.right, rect.top])
-      @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
-      @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
-    end
-  end
 
   class BallotConfig
 
@@ -364,14 +27,23 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
 
-    def initialize(style, lang, election, scanner, instruction_text_url)
+#    def initialize(style, lang, election, scanner,
+    #    instruction_text_url)
+    def initialize(election, template)
+
+      style = BallotStyle.find(template.ballot_style).ballot_style_code
+      @lang = Language.find(template.default_language).code
+      @instruction_text_url = template.instructions_image.url
+      @scanner = TTV::Scanner.new
+      
+      @template = template
+      
       @file_root = "#{RAILS_ROOT}/app/ballots/#{style}"
       @election = election
-      @lang = lang
-      @ballot_translation = PDFBallotStyle.get_ballot_translation(style, lang)
-      @election_translation = PDFBallotStyle.get_election_translation(election, lang)
-      @instruction_text_url = instruction_text_url
-    
+      @ballot_translation = PDFBallotStyle.get_ballot_translation(style, @lang)
+      @election_translation = PDFBallotStyle.get_election_translation(election, @lang)
+      #@instruction_text_url = instruction_text_url
+      
       @page_size = "LETTER"
       @page_layout = :portrait
       @left_margin = @right_margin = 18
@@ -386,6 +58,8 @@ module DefaultBallot
 
     def setup(pdf, precinct)
       @pdf = pdf
+      @pdf.form if @template.pdf_form
+      
       @precinct = precinct
       if @lang == "zh"  # chinese fonts, 
         pdf.font_families.update({
@@ -434,21 +108,6 @@ module DefaultBallot
     def create_columns(flow_rect)
       AbstractBallot::Columns.new(@columns, flow_rect)
     end
-
-    def short_instructions(item)
-      if item.is_a?(Contest)
-        if item.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
-          return bt[:Vote_for_1].sub("&1;", "1") if item.open_seat_count < 2
-          return bt[:Vote_for_many].sub("&1;", item.open_seat_count.to_s)
-        else
-          return bt[:Rank_candidates]
-        end
-      elsif item.is_a?(Question)
-        return bt[:Vote_yes_or_no]
-      else
-        raise "Unknown short instruction type #{item.class}"
-      end      
-    end
     
     def wide_style
       # do narrow flow items continue flowing after wide ones?
@@ -473,7 +132,7 @@ module DefaultBallot
       end
     end
 
-    def stroke_checkbox(pt = [0,0])
+    def stroke_checkbox(pt = [0,0], name="")
       @pdf.line_width 1.5
       @pdf.fill_color "FFFFFF"
       @pdf.stroke_color "000000"
@@ -481,7 +140,41 @@ module DefaultBallot
       @pdf.fill_and_stroke
       @pdf.fill_color "000000"
     end
-
+    
+    
+    # drow the checkbox to the left of the text.
+    def xxdraw_checkbox(rect, text)
+      # rect is either an enclosing column or combo box flow.
+      
+      # draw the checkbox in a bounding box within the rect.
+      #      x = rect.left + (FlowItem::HPAD2*2)
+      x = rect.left + FlowItem::HPAD2*2
+      y = rect.top
+      puts "x, y = #{x}, #{y}"
+      
+      # space btw the checkbox and the text. "<checkbox><horiz_space><text>"
+      horiz_space = CHECKBOX_WIDTH + (FlowItem::HPAD2*2)
+      
+      @pdf.bounding_box [x, y], :width => rect.width - horiz_space do
+        puts "draw_checkbox bounds is "
+        TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
+        @pdf.form? ? stroke_checkbox([0,0]) : stroke_checkbox([x,y]) 
+      end
+      
+      
+      # draw the text in a bounding box to the rigth of the checkbox. 
+      @pdf.bounding_box [rect.left + horiz_space, rect.top], :width => rect.width - horiz_space do
+        @pdf.font "Helvetica", :size => 10
+        @pdf.text text
+        # this will decrease the enclosing column/combo box top by
+        # height of text bounding box or checkbox height
+        rect.top -= [@pdf.bounds.height, CHECKBOX_HEIGHT].max
+      end      
+      
+      location  = [1,5] # dummy location to make things work
+      return horiz_space, location
+    end
+    
     def draw_checkbox(rect, text)
 #      @pdf.bounding_box [rect.left + FlowItem::HPAD2, rect.top], :width => CHECKBOX_WIDTH do
 #        stroke_checkbox
@@ -560,7 +253,7 @@ module DefaultBallot
       @pdf.bounding_box( [rect.left + @padding, rect.top], 
                         :width => rect.width - @padding * 2) do
         @pdf.move_down 3
-        unless @instruction_text_url.index("missing")
+        if instructions?
           @pdf.image "#{RAILS_ROOT}/public/#{@instruction_text_url}", :width => 172, :height => 600, :at =>[-6,+2] #need to move sizes into style template?
         end
       end
@@ -585,10 +278,10 @@ module DefaultBallot
 
     def create_flow_item(item)
       case
-      when item.is_a?(Contest) then FlowItem::Contest.new(item, @scanner)
-      when item.is_a?(Question) then FlowItem::Question.new(item, @scanner)
-      when item.is_a?(String) then FlowItem::Header.new(item, @scanner)
-      when item.is_a?(Array) then FlowItem::Combo.new(item)
+      when item.is_a?(Contest) then FlowItem::Contest.new(@pdf, item, @scanner)
+      when item.is_a?(Question) then FlowItem::Question.new(@pdf, item, @scanner)
+      when item.is_a?(String) then FlowItem::Header.new(@pdf, item, @scanner)
+      when item.is_a?(Array) then FlowItem::Combo.new(@pdf, item)
       end
     end
     
