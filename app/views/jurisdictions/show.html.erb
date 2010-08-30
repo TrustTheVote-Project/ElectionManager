@@ -18,7 +18,7 @@
   <div class="inner">
         <h3>Information about Jurisdiction: <%= @jurisdiction.display_name%></h3>   
           <p>Number of precincts: <%=link_to "#{@jurisdiction.precincts.count} (click to view)", show_precincts_jurisdiction_path(@jurisdiction) %></p>
-          <p>Number of precinct splits: xxx</p>
+          <p>Number of districts: <%=link_to "#{@jurisdiction.jur_districts.count} (click to view)", show_districts_jurisdiction_path(@jurisdiction) %></p></p>
         </h3>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_jurisdiction_path(current_context.jurisdiction), :class => "button" %> 

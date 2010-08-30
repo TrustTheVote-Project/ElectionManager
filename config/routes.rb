@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :set => :get,
                  :show => :get,
                  :show_precincts => :get,
+                 :show_districts => :get,
                  :import => :get,
                  :import_file => :put,
                  :interactive_audit => :get,

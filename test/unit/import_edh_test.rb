@@ -23,26 +23,43 @@ class AuditTest < ActiveSupport::TestCase
       assert @audit.ready_for_import?
     end
     
-    context ", fixed, " do
+    context ", fixed, imported, " do
       setup do
         @audit.audit
         @audit.alerts[0].choice = "use_current"
         @audit.apply_alerts
         @import = TTV::ImportEDH.new(@audit.election_data_hash)
+        @jur = DistrictSet.find_by_display_name("Jurisdiction tiny_case")
+        @import.import_to_jurisdiction @jur
       end
       
-      should "show one precinct in the jurisdiction after import" do
-        jur = DistrictSet.find_by_display_name("Jurisdiction tiny_case")
-        @import.import_to_jurisdiction jur
-        assert_equal 1, jur.precincts.count
+      should "show one precinct in the jurisdiction" do
+        assert_equal 1, @jur.precincts.count
       end
       
-      should "create 1 precinct after import" do
-        jur = DistrictSet.find_by_display_name("Jurisdiction tiny_case")
-        @import.import_to_jurisdiction jur
-        assert Precinct.find_by_display_name("PRECINCT 1")
+      should "create 1 precinct" do
+        Precinct.find_by_display_name("PRECINCT 1")
       end
       
+      should "create 1 precinct split" do
+        prec = Precinct.find_by_display_name("PRECINCT 1")
+        assert_equal 1, prec.precinct_splits.count
+      end
+      
+      should "contain the right district set" do
+        prec = Precinct.find_by_display_name("PRECINCT 1")
+        assert_equal 1, prec.precinct_splits.count
+        split = prec.precinct_splits[0]
+        assert_not_nil split.district_set
+        assert_valid split.district_set
+      end
+      
+      should "have districts in the right jurisdiction" do
+        prec = Precinct.find_by_display_name("PRECINCT 1")
+        split = prec.precinct_splits[0]
+        dset = split.district_set
+        dset.districts.each { |dist| assert_equal @jur, dist.jurisdiction }        
+      end
     end
   end
 end
