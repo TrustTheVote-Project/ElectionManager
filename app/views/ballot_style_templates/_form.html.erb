@@ -37,6 +37,11 @@
   </div>
 
   <div class="group">
+    <%= f.label :pdf_form, t("activerecord.attributes.ballot_style_template.pdf_form", :default => "PDF Form enabled"), :class => :label %>
+    <%= f.check_box :pdf_form %>
+  </div>
+
+  <div class="group">
     <%= f.label :medium_id, t("activerecord.attributes.ballot_style_template.medium_id", :default => "Medium"), :class => :label %>
 	<%= f.collection_select(:medium_id, Medium.all, :id, :display_name) %>
     <span class="description">ID of medium for this template</span>
