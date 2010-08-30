@@ -3,8 +3,8 @@ class District < ActiveRecord::Base
 
   has_many :contests, :order => :display_name
   has_many :questions, :order => :display_name
-
   belongs_to :district_type
+  belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
   
   attr_accessible :district_type, :display_name, :district_type_id, :ident
   

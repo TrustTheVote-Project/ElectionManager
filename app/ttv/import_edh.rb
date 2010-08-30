@@ -17,6 +17,8 @@ module TTV
       load_jurisdictions
       load_districts
       load_precincts
+      load_district_sets
+      load_precinct_splits
       load_candidates
       load_contests
       load_elections
@@ -25,7 +27,9 @@ module TTV
     def import_to_jurisdiction jur
       @jurisdiction = jur
       load_districts
+      load_district_sets
       load_precincts
+      load_precinct_splits
       load_candidates
       load_contests
       load_elections
@@ -60,6 +64,15 @@ module TTV
     def load_elections
       @hash["body"]["elections"].each { |elec| load_election elec} if @hash["body"].has_key? "elections"
     end
+    
+    def load_precinct_splits
+      @hash["body"]["splits"].each { |split| load_precinct_split split } if @hash["body"].has_key? "splits"
+    end
+    
+    # Imports all district_sets contained in the EDH
+    def load_district_sets
+      @hash["body"]["district_sets"].each { |dset| load_district_set dset} if @hash["body"].has_key? "district_sets"
+    end 
         
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
@@ -77,7 +90,7 @@ module TTV
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
 # TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 
       if @jurisdiction
-        new_district.district_sets << @jurisdiction
+        new_district.jurisdiction = @jurisdiction
       end
       new_district.save!
     end
@@ -89,6 +102,22 @@ module TTV
                                                       :ident => precinct["ident"], 
                                                       :jurisdiction => @jurisdiction)
       new_precinct.save!
+    end
+    
+    # Load an EDH formatted precinct split into EM
+    def load_precinct_split split
+      dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
+      prec = Precinct.find_by_ident(split["precinct_ident"])
+      PrecinctSplit.create!(:district_set => dist_set, :precinct => prec)
+    end
+    
+    # Load an EDH formatted district_set into EM
+    def load_district_set distset
+      if !DistrictSet.find_by_ident(distset["ident"])
+        ds_new = DistrictSet.create!(:ident => distset["ident"])
+        distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
+      end
+      ds_new.save!
     end
     
     # Loads an EDH formatted candidate into EM
