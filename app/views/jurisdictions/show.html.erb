@@ -4,9 +4,11 @@
       <li class="first active">
         <%= link_to "#{t("web-app-theme.list", :default => "List")}", show_jurisdiction_path(current_context.jurisdiction) %>
       </li>
-      <li>
-        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_election_path %>
-      </li>
+	  <% if can? :create, DistrictSet %> 
+	      <li>
+	        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_election_path %>
+	      </li>
+	  <% end %>
     </ul>
   </div>
   <div class="content">
