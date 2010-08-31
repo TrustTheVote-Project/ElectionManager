@@ -18,6 +18,13 @@ class AuditTest < ActiveSupport::TestCase
       audit_obj = Audit.new(:election_data_hash => @hash)
       audit_obj.alerts << @alert
     end
+    
+    should "correctly search a simple hash" do
+      audit_obj = Audit.new(:election_data_hash => @hash)
+      t = [{:a => 1}, {:b => 2}, {:c=> 3}]
+      assert audit_obj.input_has? t, :b, 2
+      assert !audit_obj.input_has?(t, "c", 2)
+    end
   end
   
   context "A test hash" do
@@ -37,37 +44,37 @@ class AuditTest < ActiveSupport::TestCase
     end
     
     should "be successfully built from xml" do
-      assert @audit_xml.audit
+      assert @audit_xml.audit :jurisdiction
       assert !@audit_xml.ready_for_import?
     end
     
     should "be successfully built from yml" do
-      assert @audit_yaml.audit
+      assert @audit_yaml.audit :jurisdiction
       assert !@audit_yaml.ready_for_import?
     end
 
     should "store an alert for not defining a valid jurisdiction" do
-      assert @audit_yaml.audit
+      assert @audit_yaml.audit :jurisdiction
       assert @audit_yaml.alerts[0]
       assert_equal "use_current", @audit_yaml.alerts[0].default_option
       
-      assert @audit_xml.audit
+      assert @audit_xml.audit :jurisdiction
       assert @audit_xml.alerts[0]
       assert_equal "use_current", @audit_xml.alerts[0].default_option
     end
 
     context "with an alert option response" do
       setup do
-        @audit_yaml.audit
+        @audit_yaml.audit :jurisdiction
         @audit_yaml.alerts[0].choice = "use_current"
-        @audit_xml.audit
+        @audit_xml.audit :jurisdiction
         @audit_xml.alerts[0].choice = "use_current"
 
         @audit_yaml.apply_alerts
-        @audit_yaml.audit
+        @audit_yaml.audit :jurisdiction
         
         @audit_xml.apply_alerts
-        @audit_xml.audit
+        @audit_xml.audit :jurisdiction
       end
 
       should "have a fixed hash, have no alerts left, be ready for import" do

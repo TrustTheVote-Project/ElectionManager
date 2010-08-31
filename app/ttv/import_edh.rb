@@ -116,8 +116,8 @@ module TTV
       if !DistrictSet.find_by_ident(distset["ident"])
         ds_new = DistrictSet.create!(:ident => distset["ident"])
         distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
+        ds_new.save!
       end
-      ds_new.save!
     end
     
     # Loads an EDH formatted candidate into EM

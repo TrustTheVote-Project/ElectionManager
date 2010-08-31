@@ -21,7 +21,7 @@ class Audit < ActiveRecord::Base
     audit_districts 
     audit_candidates
     audit_contests
-#    audit_precinct_splits
+    audit_precinct_splits
 
     @audit_in_progress = false
     @audited = true
@@ -52,15 +52,16 @@ class Audit < ActiveRecord::Base
   end
   
   def audit_precinct_splits
-    election_data_hash["body"]["splits"].each_index do
+    election_data_hash["body"]["splits"].each_index {
       |index|
          audit_precinct_split index 
-    end
+    } if election_data_hash["body"].has_key? "splits"
   end
   
   def audit_precinct_split split_index
     split = election_data_hash["body"]["splits"][split_index]
     if !input_has?(election_data_hash["body"]["district_sets"], "ident", split["district_set_ident"])
+            logger.info "Alert: Invalid District #{election_data_hash["body"]["district_sets"].inspect}"
             alerts << Alert.new(:message => "Invalid DistrictSet mentioned in Precinct Split. What would you like to do? ", 
                           :alert_type => "dangling_link", 
                           :options => {"skip" => "Skip this split", 
@@ -89,8 +90,11 @@ class Audit < ActiveRecord::Base
     end
   end
   
-  # check a particular District to make sure the Jurisdiction is valid
+  # Check a particular District to make sure the Jurisdiction is valid.
+  # Note that when auditing for jurisdiction import, this check is not needed, because import
+  # target pre-specified.s
   def audit_district_jurisdiction dist_index
+    return if @audit_type == :jurisdiction
     district = election_data_hash["body"]["districts"][dist_index]
     if district && !district["jurisdiction_ident"]
       alerts << Alert.new(:message => "No Jurisdiction specified for district \'#{district["display_name"]}\'. What would you like to do? ", 
