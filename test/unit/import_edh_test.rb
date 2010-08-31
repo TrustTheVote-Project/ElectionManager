@@ -12,12 +12,12 @@ class AuditTest < ActiveSupport::TestCase
     end
     
     should "gen a single alert when audited" do
-      @audit.audit
+      @audit.audit :jurisdiction
       assert_equal 1, @audit.alerts.size
     end
     
     should "be fixable after auditing" do
-      @audit.audit
+      @audit.audit :jurisdiction
       @audit.alerts[0].choice = "use_current"
       @audit.apply_alerts
       assert @audit.ready_for_import?
@@ -25,7 +25,7 @@ class AuditTest < ActiveSupport::TestCase
     
     context ", fixed, imported, " do
       setup do
-        @audit.audit
+        @audit.audit :jurisdiction
         @audit.alerts[0].choice = "use_current"
         @audit.apply_alerts
         @import = TTV::ImportEDH.new(@audit.election_data_hash)

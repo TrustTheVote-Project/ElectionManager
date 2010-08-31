@@ -1,5 +1,5 @@
 class JurisdictionsController < ApplicationController
-  
+   
   def current
     if !current_context.jurisdiction?
       redirect_to :action => :change
@@ -72,7 +72,7 @@ class JurisdictionsController < ApplicationController
       audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
       audit_obj.save!
       session[:audit_id] = audit_obj.id
-      audit_obj.audit
+      audit_obj.audit :jurisdiction
       
       if audit_obj.ready_for_import?
         redirect_to :action => :do_import
@@ -102,7 +102,7 @@ class JurisdictionsController < ApplicationController
       alert.choice = choice[1] if choice
     }    
     audit_obj.apply_alerts    
-    audit_obj.audit
+    audit_obj.audit :jurisdiction
     
     if audit_obj.ready_for_import?
       redirect_to :action => :do_import
