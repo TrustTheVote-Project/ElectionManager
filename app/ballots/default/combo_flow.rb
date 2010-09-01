@@ -36,6 +36,12 @@ module DefaultBallot
         ret
       end
 
+      def display_name
+        @flow_items.each do |flow_item|
+          return flow_item.display_name if flow_item.is_a? ::DefaultBallot::FlowItem::Header
+        end
+      end
+      
       def to_s
         s = "Combo\n"
         @flow_items.each { |f| s += f.to_s + "\n" }

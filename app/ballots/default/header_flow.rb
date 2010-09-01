@@ -18,6 +18,10 @@ module DefaultBallot
         ANY_WIDTH
       end
       
+      def display_name
+        @text
+      end
+      
       # Draw header, text and 3 sides of bounding box, within an
       # enclosing column. Will move the top of the enclosing column
       # down by the height of the header text.
