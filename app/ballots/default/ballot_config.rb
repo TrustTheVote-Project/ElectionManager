@@ -204,24 +204,68 @@ module DefaultBallot
       @pdf.stroke_line [rect.right, rect.top], [rect.right, top]
       @pdf.stroke_line [rect.left, rect.top], [rect.left, top]
     end 
-
+    
+    # TODO: refactor
     def render_frame(flow_rect)
       bar_width = 18
       bar_height = 140
-      @scanner.render_grid(@pdf)
-      @scanner.render_ballot_marks(@pdf)
-      @pdf.bounding_box [0, @pdf.bounds.height - @pleaseVoteHeight + 35], :width => @pdf.bounds.width, :height => @pdf.bounds.height - @pleaseVoteHeight * 2 do
 
-        @pdf.stroke_rectangle [bar_width + @padding,@pdf.bounds.height], 
-        @pdf.bounds.width - (bar_width + @padding)* 2, @pdf.bounds.height
+      # TODO: remove as this, effectively, does nothing.
+      # all it does is fill of empty space. Add a '\f\n' pdf primitive
+      @scanner.render_grid(@pdf)
+      
+      # TODO: remove this. Only used for the grid system that is no
+      # longer needed.
+      # draws the long black rectangles around the edges of the doc
+      @scanner.render_ballot_marks(@pdf)
+
+      # bounding box at:
+      # x, y, w, h = 0, 737.0, 576.0, 672.0
+      x = 0
+      y =  @pdf.bounds.height - @pleaseVoteHeight + 35
+      w = @pdf.bounds.width
+      h = @pdf.bounds.height - @pleaseVoteHeight * 2
+      # puts "render_frame: x, y, w, h = #{x}, #{y}, #{w}, #{h}"
+      @pdf.bounding_box [x,y], :width => w, :height => h do
+
+        # puts "render_frame:"
+        # TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
+        # Bounds coordinates "t, r, b, l" = "672.0, 576.0, 0, 0"
+        # TTV::Prawn::Util.show_abs_bounds_coordinates(@pdf.bounds)
+        # Absolute Bounds coordinates "t, r, b, l" = "767.0, 594.0,
+        # 95.0, 18"
+
+        
+        # draw a rectangle at:
+        # x, y, w, h = 26, 672.0, 524.0, 672.0
+        # This draws the frame around the header and contents of the
+        # doc
+        x = bar_width + @padding
+        y = @pdf.bounds.height
+        w = @pdf.bounds.width - (bar_width + @padding)*2
+        h = @pdf.bounds.height
+        # puts "render_frame: x, y, w, h = #{x}, #{y}, #{w}, #{h}"
+        @pdf.stroke_rectangle([x, y], w, h)
+
+        # draws the below vertically up the left/right side of doc
         @pdf.font "Courier", :size => 14
         @pdf.draw_text bt[:Sample_Ballot], :at => [16, 275], :rotate => 90
         @pdf.draw_text bt[:Sample_Ballot], :at => [@pdf.bounds.right - 2 , 275], :rotate => 90
         @pdf.draw_text "12001040100040", :at => [16, 410], :rotate => 90
         @pdf.draw_text "132301113", :at => [@pdf.bounds.right - 2, 146], :rotate => 90
+        
         # need to add 5 points to the bottom of the flow_rect to get
         # it align with the bottom of the frame?
-        flow_rect.inset bar_width + @padding, (@pleaseVoteHeight*2)+5
+        horiz_delta = bar_width + @padding
+        vert_delta =  (@pleaseVoteHeight*2)+5
+        
+        # puts "flow_rect before = #{flow_rect}"
+        # flow_rect before = emptyT:732.0 L:0 B:0 R:576.0 W:576.0 H:732.0
+        # puts "render_frame: decrease flow_rect by horiz, vert = #{horiz_delta}, #{vert_delta}"
+        # render_frame: decrease flow_rect by horiz, vert = 26, 65
+        flow_rect.inset horiz_delta, vert_delta
+        # puts "flow_rect after = #{flow_rect}"
+        # flow_rect after = T:667.0 L:26 B:65 R:550.0 W:524.0 H:602.0
       end
     end
 
