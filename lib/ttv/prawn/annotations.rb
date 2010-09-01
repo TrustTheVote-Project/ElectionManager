@@ -29,7 +29,9 @@ module TTV
         annot_ref = ref!(options)
         # append this ref to the array of annotations
         page.dictionary.data[:Annots].data << annot_ref
-
+        
+        # puts "TGD: page #{page_number} annots = #{::TTV::Prawn::Reader.ref_to_str(page.dictionary.data[:Annots].data)}"
+        
         # Make sure the object store, used to write pdf, is the same
         # as the annotations in the page dictionary
         store[page.dictionary.data[:Annots].identifier].data = page.dictionary.data[:Annots].data

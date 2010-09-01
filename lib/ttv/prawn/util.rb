@@ -4,6 +4,7 @@ module TTV
       
       def initialize(pdf)
         @store = pdf.store
+        @pdf = pdf
       end
       
       def deref(obj)
@@ -11,7 +12,12 @@ module TTV
       end
       
       def get_obj(ref)
-        obj = @store[ref.identifier]
+        if ref.is_a? Fixnum
+          ident = ref
+        else
+          indent = ref.identifier
+        end
+        obj = @store[ident]
         deref(obj)
       end
 
@@ -33,6 +39,11 @@ module TTV
         pages[:Kids].map do |ref|
           deref(ref)
         end
+      end
+      
+      def page_annotations
+        return nil unless @pdf.page.dictionary.data[:Annots]
+        @pdf.page.dictionary.data[:Annots].data 
       end
 
       def page_contents
