@@ -82,7 +82,13 @@ PrecinctsController#ballot
 
       * renderer.render
         - create the Prawn document, pdf, from ballot_config object, using
-     the  default in app/ballots/default/ballot_config.rb here. 
+          the default in app/ballots/default/ballot_config.rb here. 
+          This will create a bounding box for the document based on
+          the left/right margin, 18 pts, and top/bottom margin, 30 pts.
+          * Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0,
+          30.0, 18".  
+          * Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0". 
+
         - call Default::BallotConfig.setup(pdf, precinct)
            -set the ballot_config, config, prawn document and precinct
             to render. 
@@ -115,11 +121,18 @@ PrecinctsController#ballot
             - Push each flow item onto the list of flow items.
             
         * render_everything
+          * don't call end_page first time thru, @page is nil
           * start_page
             - create a prawn bounding box from the Prawn::Document
             created above, flow_rect
             * DefaultBallot.BallotConfig.render_frame( flow_rect)
-              
+              * @scanner.render_grid 
+              remove as this, effectively, does nothing. all it does
+              is fill of empty space. Add a '\f\n' pdf primitive 
+              * @scanner.render_ballot_marks
+              Draws the long black rectangles on the edges of
+              document. Shb removed.
+              * draw a rectangle at x, y, w, h = 26, 672.0, 524.0, 672.0
             * DefaultBallot.BallotConfig.render_header( flow_rect)
 
             * DefaultBallot.BallotConfig.create_columns( flow_rect)
