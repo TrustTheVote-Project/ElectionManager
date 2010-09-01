@@ -3,15 +3,21 @@ class Contest < ActiveRecord::Base
   belongs_to  :district
   
   belongs_to :election
+  
   belongs_to :voting_method
+  
   has_many :candidates, :dependent => :destroy, :order => :display_name
+  
   attr_accessible :display_name, :open_seat_count, :voting_method_id , 
                   :candidates_attributes, :election_id, :district, :position, 
-                  :ident, :district_id
+                  :ident, :district_id, :election
+  
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   
-  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election_id
+  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election
+  
   validates_numericality_of :open_seat_count
+  
   validates_associated :district, :election
   
   def validate

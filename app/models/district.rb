@@ -32,4 +32,8 @@ class District < ActiveRecord::Base
     return election.questions.select { |q| q.requesting_district.id == self.id }
   end
   
+  def to_s
+    "Dist: #{display_name}"
+  end
+  
 end

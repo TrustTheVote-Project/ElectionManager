@@ -18,21 +18,23 @@ module TTV
       load_districts
       load_precincts
       load_district_sets
+      load_elections
       load_precinct_splits
       load_candidates
       load_contests
-      load_elections
+      # load_questions
     end
     
     def import_to_jurisdiction jur
       @jurisdiction = jur
       load_districts
-      load_district_sets
       load_precincts
+      load_district_sets
+      load_elections
       load_precinct_splits
       load_candidates
       load_contests
-      load_elections
+      # load_questions
     end        
     
     # Imports all jurisdictions contained in the EDH
@@ -85,7 +87,7 @@ module TTV
       if district["type"] and DistrictType.find_by_title(district["type"])
         district_type = DistrictType.find_by_title(district["type"])
       else
-        district_type = DistrictType.find(0) # Built-in defaultult district type. TODO: Other better default in db/seed/once/district_types.yml?
+        district_type = DistrictType.find(0) # Built-in default district type. TODO: Other better default in db/seed/once/district_types.yml?
       end
       new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
 # TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 

@@ -38,8 +38,21 @@ class Election < ActiveRecord::Base
       end
     end
 
+# Return an array with the Districts corresponding to this Election's Questions
+    def question_districts
+      questions.reduce([]) { |memo, q| memo <<  q.requesting_district }      
+    end
+    
+# Return an array with the Districts corresponding to this Election's Contest
+    def contest_districts
+      contests.reduce([]) { |memo, c| memo << c.district }      
+    end
+    
+# Return an array with the Districts involved in this Election.
     def collect_districts
-#TODO      district_sets.reduce([]) { |coll, ds| coll |= ds.districts}
+      q = question_districts
+      d = contest_districts
+      q | d
     end
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
@@ -179,14 +192,15 @@ class Election < ActiveRecord::Base
 # Handy verbose to_s for Elections. Feel free to add useful stuff as needed.
 #
   def to_s
-    s = "E: #{display_name}\n"
+    s = "E: #{display_name}, c#: #{contests.count}, q#:#{questions.count}\n"
     contests.each do |c|
-      s = s += "   * c: #{c.display_name} (d: #{c.district.display_name})"
+      s += "   * c: #{c.display_name} (d: #{c.district.display_name})\n"
     end      
     
     questions.each do |q|
-      s = s += "   * c: #{q.display_name} (d: #{q.requesting_district.display_name})"
+      s += "   * q: #{q.display_name} (d: #{q.requesting_district.display_name})\n"
     end
+
     return s
   end
 

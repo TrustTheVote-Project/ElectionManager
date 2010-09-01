@@ -44,37 +44,37 @@ class AuditTest < ActiveSupport::TestCase
     end
     
     should "be successfully built from xml" do
-      assert @audit_xml.audit :jurisdiction
+      assert @audit_xml.audit :global
       assert !@audit_xml.ready_for_import?
     end
     
     should "be successfully built from yml" do
-      assert @audit_yaml.audit :jurisdiction
+      assert @audit_yaml.audit :global
       assert !@audit_yaml.ready_for_import?
     end
 
     should "store an alert for not defining a valid jurisdiction" do
-      assert @audit_yaml.audit :jurisdiction
+      assert @audit_yaml.audit :globals
       assert @audit_yaml.alerts[0]
       assert_equal "use_current", @audit_yaml.alerts[0].default_option
       
-      assert @audit_xml.audit :jurisdiction
+      assert @audit_xml.audit :global
       assert @audit_xml.alerts[0]
       assert_equal "use_current", @audit_xml.alerts[0].default_option
     end
 
     context "with an alert option response" do
       setup do
-        @audit_yaml.audit :jurisdiction
+        @audit_yaml.audit :global
         @audit_yaml.alerts[0].choice = "use_current"
-        @audit_xml.audit :jurisdiction
+        @audit_xml.audit :global
         @audit_xml.alerts[0].choice = "use_current"
 
         @audit_yaml.apply_alerts
-        @audit_yaml.audit :jurisdiction
+        @audit_yaml.audit :global
         
         @audit_xml.apply_alerts
-        @audit_xml.audit :jurisdiction
+        @audit_xml.audit :global
       end
 
       should "have a fixed hash, have no alerts left, be ready for import" do
@@ -137,6 +137,7 @@ class AuditTest < ActiveSupport::TestCase
           @import_yaml.load_jurisdictions
           @import_yaml.load_districts
           @import_yaml.load_candidates
+          @import_yaml.load_elections
           @import_yaml.load_contests
           contest = Contest.find_by_display_name "County Attorney"
           assert contest
@@ -150,8 +151,8 @@ class AuditTest < ActiveSupport::TestCase
           @import_yaml.load_districts
           @import_yaml.load_precincts
           @import_yaml.load_candidates
-          @import_yaml.load_contests
           @import_yaml.load_elections
+          @import_yaml.load_contests
           
           election = Election.find_by_display_name "New Hampshire General Election"
           assert election

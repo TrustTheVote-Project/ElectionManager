@@ -21,6 +21,7 @@ body:
     - candidate_ident: 2
     district_ident: 222
     voting_method: Winner Take All
+    election_ident: 1
   precincts:
   - display_name: State of New Hampshire
     ident: 1

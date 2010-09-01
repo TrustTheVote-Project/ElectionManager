@@ -65,15 +65,14 @@ class ActiveSupport::TestCase
     setup_precincts do
       context "valid jurisdictions and elections" do
         setup do
-          # create a district set with only the first 2 districts in the
-          # first precinct
+          # Create two DistrictSets with 3 and 5 districts, respectively
           ds1 = setup_districtset "DistrictSet A", 0, 3
           ds2 = setup_districtset "DistrictSet B", 4, 5
 
           # create 2 elections each associated with a district set
           @e1 = Election.create!(:display_name => "Election 1", :district_set => ds1)
           @e2 = Election.create!(:display_name => "Election 2", :district_set => ds2)
-
+          
         end # end setup
         
         yield
@@ -90,19 +89,16 @@ class ActiveSupport::TestCase
         
         setup do
         # Create contests that where requested by district
-
-         open_seat_count = 2
          voting_method = VotingMethod::WINNER_TAKE_ALL
         
           d0 =  District.find_by_display_name("DistrictSet A District 0")
 
           4.times do |i|
-            c = Contest.new(:display_name => "Contest #{i}", :open_seat_count => open_seat_count)
+            c = Contest.new(:display_name => "Contest #{i}", :open_seat_count => 2)
             c.district = d0
             c.election = @e1
             c.voting_method = voting_method
             c.save!
-            
           end
           
         end # end setup
@@ -150,5 +146,4 @@ class ActiveSupport::TestCase
       end # end context
     end # #end setup_jurisdictions block
   end # end setup_question_reminders
-  
 end

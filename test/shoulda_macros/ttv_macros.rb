@@ -99,4 +99,32 @@ class Test::Unit::TestCase
       field_hash = get_obj(ref.id)
     end
   end
+  
+   
+  def create_contest(name, voting_method, district, election, position = 0)
+    contest = Contest.make(:display_name => name,
+                           :voting_method => voting_method,
+                           :district => district,
+                           :election => election,
+                           :position => position)
+        
+    position += 1
+    [:democrat, :republican, :independent].each do |party_sym|
+      party = Party.make(party_sym)
+      Candidate.make(:party => party, :display_name => "#{name}_#{party_sym.to_s[0..2]}", :contest => contest)
+    end
+    contest
+  end
+
+  def create_ballot_config(pdf_form = false)
+    @scanner = TTV::Scanner.new
+    @election = Election.make(:display_name => "Election 1" )
+      
+    @district = District.make(:display_name => "District 1")
+    @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => pdf_form)
+    @ballot_config = DefaultBallot::BallotConfig.new( @election, @template)
+      
+    @ballot_config.setup(create_pdf("Test PDF"), nil) # don't need the 2nd arg precinct
+    @pdf = @ballot_config.pdf
+  end
 end

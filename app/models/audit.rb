@@ -9,8 +9,9 @@ class Audit < ActiveRecord::Base
 
   # Audits election_data_hash (without touching it), producing more @alerts
   # type -> :jurisdiction if this will be imported at Jurisdiction level
+  #      -> :global if this will be imported at the top levels
   
-  def audit audit_type
+  def audit audit_type=:global
     @audit_in_progress = true
     @audit_type = audit_type
 

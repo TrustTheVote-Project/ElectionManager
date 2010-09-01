@@ -17,22 +17,18 @@ class Precinct < ActiveRecord::Base
   end
   
   def collect_districts
-    precinct_splits.reduce([]) { |coll, ps| coll |= ps.district_set.districts}
+    precinct_splits.reduce([]) { |coll, ps| coll | ps.district_set.districts}
   end
-
-#  def districts_for_election(election)
-#    districts & election.district_set.districts
-#  end
 
 # Is this precinct a split precinct?
   def split?
     precinct_splits.size != 1
   end
 
-# For now we are assuming one PrecinctSplit per Precinct.
   def districts_for_election(election)
-    prec_districts = collect_districts
-    district_list.districts & election.contests
+    p = collect_districts
+    e = election.collect_districts
+    p & e
   end
   
 # Nice to_s
