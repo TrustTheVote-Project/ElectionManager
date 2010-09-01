@@ -29,17 +29,22 @@ class RendererTest < ActiveSupport::TestCase
       
       # Create 3 contests for this election
       pos = 0;
-      ["FOO", "State Rep", "Attorney General","Governor"].each do |contest_name|
-        contest = Contest.make(:display_name => contest_name,
-                               :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                               :district => e1.district_set.districts.first,
-                               :election => e1, :position => pos)
-        
+      ["Lt Governor", "State Rep", "Attorney General","Governor", "Contest5", "Contest6", "Contest7"].each do |contest_name|
+        create_contest(contest_name,  VotingMethod::WINNER_TAKE_ALL,e1.district_set.districts.first, e1, pos)
         pos += 1
-        [:democrat, :republican, :independent].each do |party_sym|
-          party = Party.make(party_sym)
-          Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => contest)
-        end
+      end
+      
+      contest = Contest.make(:display_name => "ContestNotFitOnPage",
+                                :voting_method => VotingMethod::WINNER_TAKE_ALL,
+                                :district => e1.district_set.districts.first,
+                                :election => e1, :position => pos)
+        
+      pos += 1
+      
+      # create a set of checkboxes that will not fit on page 1.
+      [:silly, :bluehat, :redshirt, :socialdemocrat, :nonothing, :whig, :bongo, :communist, :green, :democrat, :republican, :independent].each do |party_sym|
+        party = Party.make(:display_name => party_sym.to_s)
+        Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => contest)
       end
       
       Question.make(:display_name => "Dog Racing",
