@@ -8,7 +8,9 @@ module DefaultBallot
     HPAD2 = 6
     VPAD = 3
     VPAD2 = 6
-
+    
+    attr_accessor :item
+    
     def initialize(item, scanner)
       @item = item
       @scanner = scanner
@@ -36,7 +38,11 @@ module DefaultBallot
     def min_width
       0
     end
-
+    
+    def display_name
+      @item.display_name
+    end
+    
     def to_s
       @item.to_s
     end

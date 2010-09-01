@@ -44,7 +44,9 @@ module TTV
     def append_ballot_marks(marks)
       @ballot_marks.concat(marks)
     end
-
+    
+    # TODO: remove as this, effectively, does nothing.
+    # all it does is fill of empty space. Add a '\f\n' pdf primitive
     def render_grid(pdf)
       pdf.canvas do
         pdf.fill_color = 'FFFF00'

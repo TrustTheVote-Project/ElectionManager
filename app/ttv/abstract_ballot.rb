@@ -258,8 +258,14 @@ module AbstractBallot
       end_page(false) if @page
       @pagenum += 1
       @pdf.start_new_page
-      
 
+      #puts "start_page:"
+      #TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
+      #TTV::Prawn::Util.show_abs_bounds_coordinates(@pdf.bounds)
+
+      # create a Rect from the bounding box "732.0, 576.0, 0, 0"
+      # Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0"
+      # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
       flow_rect = Rect.create_bound_box(@pdf.bounds)
       @c.render_frame flow_rect
       @c.render_header flow_rect
@@ -273,6 +279,7 @@ module AbstractBallot
       curr_column = columns.next
 
       @page = { :continuation_box => continuation_box, :columns => columns, :last_column => curr_column }
+
       [flow_rect, columns, curr_column]
     end
 
@@ -327,12 +334,22 @@ module AbstractBallot
     end
     
     def render_everything
+      
       @pagenum = 0
       @page =  nil
       curr_column = nil   # used as a flag that we need a new page
+
       while @flow_items.size > 0
-        flow_rect, columns, curr_column = start_page if curr_column == nil
+        # start a new page if curr_column is nil, we've run out
+        # of columns on this page.
+        if curr_column == nil
+          #puts "TGD: start a new page"
+          flow_rect, columns, curr_column = start_page
+        end
+        
         item = @flow_items.first
+        # puts "TGD: page #{@pdf.page_number}, processing a #{item.class.name} named #{item.display_name}"
+        
         curr_column = fit_width(item, flow_rect, curr_column, columns)
         
         if curr_column == nil # item too wide for current page, start a new one
@@ -346,10 +363,16 @@ module AbstractBallot
         if item.fits @c, curr_column
           @page[:last_column] = curr_column
           item = @flow_items.shift
+          # puts "TGD: page #{@pdf.page_number}, drawing a #{item.class.name} named #{item.display_name}"
+
           item.draw @c, curr_column
-          @c.scanner.append_ballot_marks(item.ballot_marks)
-        elsif curr_column.full_height? # item is taller than a single column, need to break it up
-          if curr_column.first != columns.first # split items go on a brand new page for now
+
+          @c.scanner.append_ballot_marks(item.ballot_marks) 
+        elsif curr_column.full_height? # item is taller than a single
+          # column, need to break it up
+          # puts "TGD: item doesn't it's longer than column height"
+          if curr_column.first != columns.first # split items go on a
+            # brand new page for now
             curr_column = nil
             next
           else
@@ -373,7 +396,15 @@ module AbstractBallot
           end
         else
           curr_column = columns.next
+          # if columns.next is nil then we are at the end of the
+          # page!. Need a new page
+          if curr_column
+            #puts "TGD: item doesn't fit, make the next column current"
+          else
+           # puts "TGD: item doesn't fit, out of columns on page #{@pdf.page_number}, draw on a new page "
+          end
         end
+
       end
       end_page(true)
     end

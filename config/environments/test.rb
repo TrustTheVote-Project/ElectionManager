@@ -33,4 +33,3 @@ config.gem 'faker'
 config.gem 'mocha'
 config.gem 'webrat', :lib => false
 config.gem 'cucumber', :lib => false
-config.gem 'pdf-reader'

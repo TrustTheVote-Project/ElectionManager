@@ -106,7 +106,7 @@ module TTV
             str << (str == "[" ? "" : ", ") << ref_to_str(pdf_ref)
 
           end << "]"
-        elsif ref.is_a? PDF::Reader::Reference 
+        elsif ref.is_a? ::PDF::Reader::Reference 
           "#{ref.id} #{ref.gen} R"
         elsif ref.is_a? ::Prawn::Reference 
           "#{ref.identifier} #{ref.gen} R"
