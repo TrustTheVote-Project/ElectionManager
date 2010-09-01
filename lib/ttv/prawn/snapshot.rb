@@ -19,8 +19,8 @@ module Prawn
           shot.merge!(:fields => fields)
         end
         if page.dictionary.data[:Annots]
-          # puts "TGD: page_number = #{page_number.inspect}"
-          # puts "TGD: snapshot annots = #{page.dictionary.data[:Annots].data.inspect}"
+          #puts "TGD: snapshot page_number = #{page_number.inspect}"
+          #puts "TGD: snapshot annots =#{::TTV::Prawn::Reader.ref_to_str(page.dictionary.data[:Annots].data)}"
           annots = Marshal.load(Marshal.dump(page.dictionary.data[:Annots].data))
           shot.merge!(:annots => {:page_num => page_number, :page_annots => annots})          
         end
@@ -38,10 +38,8 @@ module Prawn
           @store.root.data[:AcroForm].data[:Fields] = shot[:fields]
         end
         if shot[:annots] && shot[:annots][:page_num] == page_number
-          # puts "TGD: restore page_number = #{page_number.inspect}"
-          # puts "TGD: restore annots =#{page.dictionary.data[:Annots].data.inspect}"
           page.dictionary.data[:Annots].data = shot[:annots][:page_annots]
-
+          store[page.dictionary.data[:Annots].identifier].data = page.dictionary.data[:Annots].data
         end
         restore_snapshot_old(shot)
       end
