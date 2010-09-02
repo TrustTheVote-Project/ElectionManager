@@ -28,7 +28,7 @@ class RendererTest < ActiveSupport::TestCase
       
       # Create 3 contests for this election
       pos = 0;
-      ["State Rep", "Attorney General","Governor"].each do |contest_name|
+      ["Contest 1", "Contest 2", "Contest 3", "State Rep", "Attorney General","Governor"].each do |contest_name|
         contest = create_contest(contest_name,
                                  VotingMethod::WINNER_TAKE_ALL,
                                  e1.district_set.districts.first,
@@ -42,7 +42,12 @@ class RendererTest < ActiveSupport::TestCase
                     :question => 'This proposed law would prohibit any dog racing or racing meeting in Massachusetts where any form of betting or wagering on the speed or ability of dogs occurs. The State Racing Commission would be prohibited from accepting or approving any application or request for racing dates for dog racing. Any person violating the proposed law could be required to pay a civil penalty of not less than $20,000 to the Commission. The penalty would be used for the Commission\'s administrative purposes, subject to appropriation by the state Legislature. All existing parts of the chapter of the state\'s General Laws concerning dog and horse racing meetings would be interpreted as if they did not refer to dogs. These changes would take effect January 1, 2010. The proposed law states that if any of its parts were declared invalid, the other parts would stay in effect.' )
       
       scanner = TTV::Scanner.new
-      @template = BallotStyleTemplate.make(:display_name => "test template")
+      # @template = BallotStyleTemplate.make(:display_name => "test template")
+      @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => true)
+      @template.page = ballot_page
+      @template.frame = ballot_frame
+      @template.contents = ballot_contents
+      
       @ballot_config = DCBallot::BallotConfig.new( e1, @template)
 
       @pdf = create_pdf("Test Renderer")
@@ -54,10 +59,10 @@ class RendererTest < ActiveSupport::TestCase
       
     end
     
-#     should "should be created " do
+#      should "should be created " do
 
-#       assert @renderer
-#     end
+#        assert @renderer
+#      end
 
 #     # This will look for all the Contests and Questions for this
 #     # Precinct and create Contest, Question and Container Flow objects

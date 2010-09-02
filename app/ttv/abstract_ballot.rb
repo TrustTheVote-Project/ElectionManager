@@ -268,7 +268,13 @@ module AbstractBallot
       # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
       flow_rect = Rect.create_bound_box(@pdf.bounds)
       @c.render_frame flow_rect
-      @c.render_header flow_rect
+      if @c.is_a? ::DCBallot::BallotConfig
+        # resets the flow rect to be under header, above footer,
+        # inside page frame.
+        flow_rect = @c.render_header flow_rect
+      else
+        @c.render_header flow_rect        
+      end
 
       columns = @c.create_columns(flow_rect)
       # make space for continuation box

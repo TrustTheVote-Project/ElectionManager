@@ -12,6 +12,9 @@ module DCBallot
       @page = @template.page
       @frame = @template.frame
       @contents = @template.contents
+
+      # to get renderer working
+      super(election, template)
     end
     
     def setup(pdf, precinct)
@@ -57,6 +60,7 @@ module DCBallot
     # returns - Rectangle that is used to contain all flow items such
     # (contest flow item, question flow item,...)
     def render_contents(contents_rect)
+      flow_rect = nil 
       @pdf.bounding_box [contents_rect.left, contents_rect.top], :width => contents_rect.width, :height => contents_rect.height do
         
         if @contents[:border]
@@ -82,6 +86,11 @@ module DCBallot
       flow_rect
     end
 
+    # HACK to get renderer to work
+    def render_header(flow_rect)
+      new_flow_rect = render_contents(flow_rect)
+    end
+    
     private
 
     # Draw the border for frame. 
@@ -152,6 +161,9 @@ module DCBallot
     end
     
     def draw_body(contents_rect)
+      #
+      new_flow_rectangle = nil
+      
       x = @pdf.bounds.left + @contents[:body][:margin][:left]
       y = contents_rect.top -  @contents[:body][:margin][:top]
       w = (@pdf.bounds.width * @contents[:body][:width]) - (@contents[:body][:margin][:left] +  @contents[:body][:margin][:right])
@@ -174,10 +186,12 @@ module DCBallot
         
         # draw the body text
         @contents[:body][:graphics].call(@pdf) if @contents[:body][:graphics]
+        
+        # new flow rectangle
+        new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
+
       end
-      
-      # flow rectangle
-      AbstractBallot::Rect.new(y, x, y - h, x + w )
+      new_flow_rectangle
     end
 
     def draw_footer(contents_rect)
@@ -204,7 +218,7 @@ module DCBallot
         @contents[:footer][:graphics].call(@pdf) if @contents[:footer][:graphics]
       end
     end
-
+    
   end
 
 end
