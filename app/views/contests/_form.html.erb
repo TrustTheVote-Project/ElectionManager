@@ -1,47 +1,40 @@
-
-  <div class="group">
-    <%= f.label :display_name, t("activerecord.attributes.contest.display_name", :default => "Display name"), :class => :label %>
+<div class="group">
+    <%= f.label :display_name, t("ttv.display_name", :default => "Display name"), :class => :label %>
     <%= f.text_field :display_name, :class => 'text_field' %>
     <span class="description">Name of contest</span>
-  </div>
-
-  <div class="group">
-    <%= f.label :open_seat_count, t("activerecord.attributes.contest.open_seat_count", :default => "Open seat count"), :class => :label %>
+</div>
+<div class="group">
+    <%= f.label :open_seat_count, t("ttv.open_seat_count", :default => "Open seat count"), :class => :label %>
     <%= f.text_field :open_seat_count, :class => 'text_field' %>
     <span class="description">Number of open seats in contest</span>
-  </div>
-
-  <div class="group">
+</div>
+<div class="group">
     <% voting_methods = VotingMethod.find(:all, :order => :id) %>
     <% default_method = current_context.election.default_voting_method_id if current_context.election? %>
-    <%= f.label :voting_method_id, t("activerecord.attributes.contest.voting_method_id", :default => "Voting method"), :class => :label %>
+    <%= f.label :voting_method_id, t("ttv.voting_method", :default => "Voting method"), :class => :label %>
     <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name) if default_method.nil? %>
     <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name, :selected => default_method) unless default_method.nil? %>
-  </div>
-
-  <div class="group">
-    <% districts = current_context.jurisdiction.districts if !current_context.jurisdiction.nil? %>
+</div>
+<div class="group">
+    <% districts = District.find(:all, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
     <% districts = District.find(:all, :order => :id) if current_context.jurisdiction.nil? %>
-    <%= f.label :district_id, t("activerecord.attributes.contest.district_id", :default => "District"), :class => :label %>
+    <%= f.label :district_id, t("ttv.district", :default => "District"), :class => :label %>
     <%= f.collection_select(:district_id, districts, :id, :display_name) %>
-  </div>
-
-  <div class="group">
+</div>
+<div class="group">
     <% elections = Election.find(:all, :order => :id) %>
-    <%= f.label :election_id, t("activerecord.attributes.contest.election_id", :default => "Election"), :class => :label %>
+    <%= f.label :election_id, t("ttv.election", :default => "Election"), :class => :label %>
     <%= f.collection_select(:election_id, elections, :id, :display_name, :selected => current_context.election.id) unless current_context.election.nil? %>
     <%= f.collection_select(:election_id, elections, :id, :display_name) if current_context.election.nil? %>
-  </div>
-
-  <div class="group">
+</div>
+<div class="group">
     <%= f.label :position, t("activerecord.attributes.contest.position", :default => "Order"), :class => :label %>
     <%= f.text_field :position, :class => 'text_field' %>
     <span class="description">Order in which contest will be displayed</span>
-  </div>
-        
+</div>
 <div class="group navform wat-cf">
-  <button class="button" type="submit">
-    <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
-  </button>  
-  <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", contests_path, :class => "button" %> 
+    <button class="button" type="submit">
+        <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %><%= t("web-app-theme.save", :default => "Save") %>
+    </button>
+    <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("ttv.cancel", :default => "Cancel") }")} #{t("ttv.cancel", :default => "Cancel")}", contests_path, :class => "button" %>
 </div>

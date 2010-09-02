@@ -1,0 +1,55 @@
+<div id="questions">
+<div class="inner"><%= javascript_include_tag :defaults %>
+ <div class="flash" id="flash">
+    <% flash.each do |type, message| -%>
+    <div class="message <%= type %>">
+      <p>
+        <%= message %>
+      </p>
+    </div>
+    <% end -%>
+    <% flash.discard -%>
+  </div>
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>
+        <%= t("ttv.question", :default => "Questiont") %>
+      </th>
+	  <th>
+	  	<%= t("ttv.district", :default => "District")%>
+	  </th>
+      <th class="last">
+        &nbsp;
+      </th>
+    </tr>
+    <% @questions = election.question.paginate :per_page => 10, :page => page, :order => "position" if @questions.nil?%>
+    <% @questions.each do |question| -%>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td>
+         <% unless current_context.election.nil? -%> 
+           <%= link_to_remote image_tag("ui_icons/uparrow.png", :border=>0, :alt => "Move Question up", :title => "Move Question up"), :url => move_question_path(:id=>question.id, :direction=>"up", :page => params[:page]), :update => 'questions', :method => :put, :complete => "new Effect.Highlight('questions')" %>
+           <%= link_to_remote image_tag("ui_icons/downarrow.png",:border=>0, :alt => "Move Question down", :title => "Move Question down"), :url => move_question_path(:id=>question.id, :direction=>"down", :page => params[:page]), :update => 'questions', :method => :put, :complete => "new Effect.Highlight('questions')" %>
+        <% end -%>
+      </td>
+      <td>
+        <%= link_to question.display_name, question_path(question) %>
+      </td>
+	  <td>
+	  	<%= link_to question.requesting_district.display_name, district_path(question.requesting_district) %>
+      <td class="last">
+        <%= link_to "#{t("ttv.show", :default => "Show")}", question_path(question) %>|<%= link_to "#{t("ttv.edit", :default => "Edit")}", edit_question_path(question) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", question_path(question), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </td>      
+    </tr>
+    <% end -%>
+  </table>
+  <div class="actions-bar wat-cf">
+    <div class="actions">
+      <%= link_to "#{t("ttv.add_new_question", :default => "Add new question")}", :controller => "questions", :action => "new" %> 
+    </div>
+    <%= will_paginate @questions if @question.nil? %>
+    <%= will_paginate @questions, :params => { :controller => "elections", :action => "show", :id => @question.election_id
+ } unless @question.nil? %>
+  </div>
+</div>
+</div>

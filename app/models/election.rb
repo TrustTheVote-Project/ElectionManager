@@ -34,7 +34,7 @@ class Election < ActiveRecord::Base
           result_quest_list = quest_list.reduce([]) do
             |memo, quest| memo |= (split.district_set.districts.member?(quest.requesting_district)) ? [quest] : []
           end
-          yield result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
+          yield split, result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
       end
     end
 

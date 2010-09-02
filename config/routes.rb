@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :candidates, :except => [:create]
   map.resources :contests, :has_many => :candidates, :member => { :move => :put }
+  map.resources :questions, :member => { :move => :put}
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
@@ -36,7 +37,6 @@ ActionController::Routing::Routes.draw do |map|
     end
   map.resources :parties
   map.resources :precincts
-  map.resources :questions
   map.resources :voting_methods
   map.resources :ballot_styles, :only => [:index, :show]
   

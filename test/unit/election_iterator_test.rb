@@ -6,7 +6,7 @@ class ElectionTest < ActiveSupport::TestCase
     should "have #{n} ballots" do
       ballot_count = 0
       @e1.each_ballot @p1 do
-        |cont_list, quest_list|
+        |split, cont_list, quest_list|
         ballot_count += 1
       end
       assert_equal n, ballot_count
@@ -30,7 +30,7 @@ class ElectionTest < ActiveSupport::TestCase
         @e1.contests << @c
       end
       
-      should_have_n_ballots 2
+      should_have_n_ballots 1
     
       context "and adding one question" do
         setup do
@@ -40,7 +40,7 @@ class ElectionTest < ActiveSupport::TestCase
           @e1.questions << @q
         end
         
-        should_have_n_ballots 1
+        should_have_n_ballots 2
       end
     end
   end

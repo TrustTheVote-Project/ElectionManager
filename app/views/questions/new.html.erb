@@ -1,27 +1,18 @@
-<h1>New question</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("ttv.list", :default => "List")}", questions_path  %></li>
+      <li class="active"><%= link_to "#{t("ttv.new", :default => "New")}", new_question_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  Question</h2>
+    <div class="inner">
+      <% form_for :question, :url => questions_path, :html => { :class => :form } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
-<% form_for(@question) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
-  </p>
-  <p>
-    <%= f.label :question %><br />
-    <%= f.text_area :question %>
-  </p>
-  <p>
-    <%= f.label :requesting_district_id %><br />
-    <%= f.text_field :requesting_district_id %>
-  </p>
-  <p>
-    <%= f.label :election_id %><br />
-    <%= f.text_field :election_id %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', questions_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

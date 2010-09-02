@@ -2,45 +2,45 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
       <li class="first">
-        <%= link_to "#{t("web-app-theme.list", :default => "List")}", contests_path %>
+        <%= link_to "#{t("ttv.list", :default => "List")}", contests_path %>
       </li>
       <li>
-        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_contest_path %>
+        <%= link_to "#{t("ttv.new", :default => "New")}", new_contest_path %>
       </li>
       <li class="active">
-        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", contest_path %>
+        <%= link_to "#{t("ttv.show", :default => "Show")}", contest_path %>
       </li>
     </ul>
   </div>
   <div class="content">
     <div class="inner">
       <p>
-        <b><%= t("activerecord.attributes.contest.display_name", :default => t("activerecord.labels.display_name", :default => "Contest")) %>:</b>
+        <b><%= t("ttv.display_name", :default => "Contest") %>:</b>
         <%= @contest.display_name %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.open_seat_count", :default => t("activerecord.labels.open_seat_count", :default => "Open seat count")) %>:</b>
+        <b><%= t("ttv.open_seat_count", :default => "Open seat count") %>:</b>
         <%= @contest.open_seat_count %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.voting_method_id", :default => t("activerecord.labels.voting_method_id", :default => "Voting method")) %>:</b>
+        <b><%= t("ttv.voting_method", :default =>  "Voting method") %>:</b>
         <%= VotingMethod.find_by_id(@contest.voting_method_id).display_name %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.district_id", :default => t("activerecord.labels.district_id", :default => "District")) %>:</b>
+        <b><%= t("ttv.district", :default => "District") %>:</b>
         <%= District.find_by_id(@contest.district_id).display_name %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.election_id", :default => t("activerecord.labels.election_id", :default => "Election")) %>:</b>
+        <b><%= t("ttv.election", :default => "Election") %>:</b>
         <%= Election.find_by_id(@contest.election_id).display_name %>
       </p>
       <p>
-        <b><%= t("activerecord.attributes.contest.position", :default => t("activerecord.labels.position", :default => "Order")) %>:</b>
+        <b><%= t("ttv.order", :default => "Order") %>:</b>
         <%= @contest.position %>
       </p>
       <div class="wat-cf">
-        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_contest_path(@contest), :class => "button" %>
-        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", contest_path(@contest), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("ttv.edit", :default=> "Edit")}")} #{t("ttv.edit", :default=> "Edit")}", edit_contest_path(@contest), :class => "button" %>
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("ttv.delete", :default=> "Delete")}")} #{t("ttv.delete", :default=> "Delete")}", contest_path(@contest), :method => "delete", :class => "button", :confirm => "#{t("ttv.are_you_sure", :default => "Are you sure?")}" %>
       </div>
     </div>
     <h2 class="title">Candidates</h2>

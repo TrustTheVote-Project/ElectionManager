@@ -100,7 +100,7 @@ class JurisdictionsController < ApplicationController
     audit_obj.alerts.each { |alert| 
       choice = params.find{|param| param[0] == alert.alert_type}
       alert.choice = choice[1] if choice
-    }    
+    } 
     audit_obj.apply_alerts    
     audit_obj.audit :jurisdiction
     
@@ -109,8 +109,13 @@ class JurisdictionsController < ApplicationController
     else
       redirect_to :action => :interactive_audit
     end
+  rescue Exception => exc
+    Alert.destroy_all
+    logger.error("Message for the log file #{exc.message}")
+    flash[:error] = "Failed to import file: #{exc.message}"
+    redirect_to :back
   end
-  
+
   # 1. Get Audit object from DB (stored as params[:audit_id])
   # 2. Import from Audit's EDH
   def do_import

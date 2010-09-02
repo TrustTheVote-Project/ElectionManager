@@ -64,18 +64,18 @@ class Audit < ActiveRecord::Base
     if !input_has?(election_data_hash["body"]["district_sets"], "ident", split["district_set_ident"])
             logger.info "Alert: Invalid District #{election_data_hash["body"]["district_sets"].inspect}"
             alerts << Alert.new(:message => "Invalid DistrictSet mentioned in Precinct Split. What would you like to do? ", 
-                          :alert_type => "dangling_link", 
+                          :alert_type => "invalid_ds_in_ps", 
                           :options => {"skip" => "Skip this split", 
                                        "abort" => "Abort import"}, 
-                          :default_option => "skip")
+                          :default_option => "abort")
 
     end
     if !input_has?(election_data_hash["body"]["precincts"], "ident", split["precinct_ident"])
-      alerts << Alert.new(:message => "Invalid Precinct mentioned in Precinct Split. What would you like to do? ", 
-                          :alert_type => "dangling_link",
+      alerts << Alert.new(:message => "Invalid Precinct mentioned in Precinct Split:" + split["precinct_ident"]+ ". What would you like to do? ", 
+                          :alert_type => "invalid_p_in_ps",
                           :options => {"skip" => "Skip this split", 
                                        "abort" => "Abort import"}, 
-                          :default_option => "skip")
+                          :default_option => "abort")
     end
   end
   
@@ -100,7 +100,9 @@ class Audit < ActiveRecord::Base
     if district && !district["jurisdiction_ident"]
       alerts << Alert.new(:message => "No Jurisdiction specified for district \'#{district["display_name"]}\'. What would you like to do? ", 
                           :alert_type => "no_jurisdiction", :objects => dist_index, 
-                          :options => {"use_current" => "Use current #{district_set.display_name}", "import" => "Import without a Jurisdiction", "abort" => "Abort import"}, 
+                          :options => {"use_current" => "Use current #{district_set.display_name}", 
+                                       "import" => "Import without a Jurisdiction", 
+                                       "abort" => "Abort import"}, 
                           :default_option => "use_current")
     end
   end
@@ -113,7 +115,13 @@ class Audit < ActiveRecord::Base
         district_set.before_validation
         election_data_hash["body"]["districts"][alert.objects.to_i]["jurisdiction_ident"] = district_set.ident
         alerts.delete(alert)
-      end
+      elsif alert.alert_type == "no_jurisdiction" && alert.choice == "abort"
+        raise "Import aborted"
+      elsif alert.alert_type == "invalid_p_in_ps" && alert.choice == "abort"
+        raise "Import aborted"
+      elsif alert.alert_type == "invalid_ds_in_ps" && alert.choice == "abort"
+        raise "Import aborted"
+      end        
     }  
     self.save!
   end
