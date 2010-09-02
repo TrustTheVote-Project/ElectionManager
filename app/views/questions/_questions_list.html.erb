@@ -24,6 +24,7 @@
       </th>
     </tr>
     <% @questions = election.question.paginate :per_page => 10, :page => page, :order => "position" if @questions.nil?%>
+    <%-# @questions.sort!{|c1,c2|c1.position <=> c2.position} %>
     <% @questions.each do |question| -%>
     <tr class="<%= cycle("odd", "even") %>">
       <td>
