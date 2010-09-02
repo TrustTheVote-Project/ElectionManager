@@ -120,10 +120,12 @@ class Test::Unit::TestCase
     @election = Election.make(:display_name => "Election 1" )
       
     @district = District.make(:display_name => "District 1")
+    @precint = Precinct.make(:display_name => "Precinct 1")
+
     @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => pdf_form)
     @ballot_config = DefaultBallot::BallotConfig.new( @election, @template)
       
-    @ballot_config.setup(create_pdf("Test PDF"), nil) # don't need the 2nd arg precinct
+    @ballot_config.setup(create_pdf("Test PDF"), @precinct) # don't need the 2nd arg precinct
     @pdf = @ballot_config.pdf
   end
 end

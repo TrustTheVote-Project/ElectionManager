@@ -19,6 +19,9 @@
 #
 
 class BallotStyleTemplate < ActiveRecord::Base
+  
+  attr_accessor :page, :frame, :contents
+  
   validates_presence_of [:display_name], :on => :create, :message => "can't be blank"
   
   has_attached_file :instructions_image,
@@ -27,5 +30,6 @@ class BallotStyleTemplate < ActiveRecord::Base
       :small  => "150x150>"
       # :medium => "300x300>",
       #       :large =>   "400x400>" 
-      }
+  }
+  
 end
