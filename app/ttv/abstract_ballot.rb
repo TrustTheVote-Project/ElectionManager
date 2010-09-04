@@ -31,12 +31,18 @@ module AbstractBallot
 
   class Rect
     attr_accessor :top, :left, :bottom, :right, :original_top
+    attr_accessor :header # true if this column rectangle includes a header item
 
     def initialize(top, left, bottom, right)
       @top, @left, @bottom , @right = top, left, bottom, right
       @original_top = @top
+      @header = false
     end
-
+    
+    def header?
+      @header
+    end
+    
     def width
       right - left
     end
@@ -354,10 +360,11 @@ module AbstractBallot
         end
         
         item = @flow_items.first
-        # puts "TGD: page #{@pdf.page_number}, processing a #{item.class.name} named #{item.display_name}"
+        
+        #puts "TGD: page #{@pdf.page_number}, processing a #{item.class.name} named #{item.display_name}"
         
         curr_column = fit_width(item, flow_rect, curr_column, columns)
-        
+
         if curr_column == nil # item too wide for current page, start a new one
           if columns.empty? # too wide for empty page, that's an error
             @flow_items.shift
@@ -365,18 +372,30 @@ module AbstractBallot
           end
           next
         end
+
+        #puts "curr_column = #{curr_column.inspect}"
+        # This will go to next column if we have a header, which means
+        # a new district
+        if item.is_a?(::DefaultBallot::FlowItem::Combo) && curr_column.header?
+          curr_column = columns.next
+        end
         
+        break unless curr_column # end of page, no more columns
+
         if item.fits @c, curr_column
           @page[:last_column] = curr_column
           item = @flow_items.shift
-          # puts "TGD: page #{@pdf.page_number}, drawing a #{item.class.name} named #{item.display_name}"
+          #puts "TGD: page #{@pdf.page_number}, drawing a #{item.class.name} named #{item.display_name}"
 
           item.draw @c, curr_column
 
+          # this column has a header item now
+          curr_column.header = true if item.is_a?(::DefaultBallot::FlowItem::Combo)
+          
           @c.scanner.append_ballot_marks(item.ballot_marks) 
         elsif curr_column.full_height? # item is taller than a single
           # column, need to break it up
-          # puts "TGD: item doesn't it's longer than column height"
+          #puts "TGD: item doesn't it's longer than column height"
           if curr_column.first != columns.first # split items go on a
             # brand new page for now
             curr_column = nil
@@ -407,7 +426,7 @@ module AbstractBallot
           if curr_column
             #puts "TGD: item doesn't fit, make the next column current"
           else
-           # puts "TGD: item doesn't fit, out of columns on page #{@pdf.page_number}, draw on a new page "
+           #puts "TGD: item doesn't fit, out of columns on page #{@pdf.page_number}, draw on a new page "
           end
         end
 
