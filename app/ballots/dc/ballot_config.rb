@@ -17,10 +17,6 @@ module DCBallot
       super(election, template)
     end
     
-    def setup(pdf, precinct)
-      @pdf = pdf
-      @pdf.form if @template.pdf_form
-    end
 
     # Draw the frame around the edges of the page. This frame MAY have
     # a border and MAY, mostly likely will, have content for one of more
@@ -63,7 +59,7 @@ module DCBallot
       flow_rect = nil 
       @pdf.bounding_box [contents_rect.left, contents_rect.top], :width => contents_rect.width, :height => contents_rect.height do
         
-        if @contents[:border]
+        unless @contents[:border][:width] == 0
           # draw the contents border
           orig_color = @pdf.stroke_color
           dash unless @contents[:border][:style] = :solid
@@ -106,7 +102,7 @@ module DCBallot
 
       @pdf.bounding_box([x,y], :width => w, :height => h) do      
 
-        if @frame[:border]
+        unless @frame[:border][:width] == 0
           # draw the frame border
           orig_color = @pdf.stroke_color
           dash unless @frame[:border][:style] = :solid
@@ -124,11 +120,11 @@ module DCBallot
     # bottom and left sides of the frame
     def draw_frame_contents
 
-      @frame[:content][:top][:graphics].call(@pdf) if  @frame[:content][:top][:graphics]
-      @frame[:content][:right][:graphics].call(@pdf) if  @frame[:content][:right][:graphics]
-      @frame[:content][:bottom][:graphics].call(@pdf) if @frame[:content][:bottom][:graphics]
-      @frame[:content][:left][:graphics].call(@pdf) if @frame[:content][:left][:graphics]
-      
+      instance_eval(&@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
+      instance_eval(&@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
+      instance_eval(&@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
+      instance_eval(&@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
+
       yield if block_given?
     end
     
@@ -137,15 +133,18 @@ module DCBallot
 
       x = @pdf.bounds.left + @contents[:header][:margin][:left]
       y = @pdf.bounds.top -  @contents[:header][:margin][:top]
-      w = (@pdf.bounds.width * @contents[:header][:width]) - (@contents[:header][:margin][:left] +  @contents[:header][:margin][:right])
-      h = (@pdf.bounds.height * @contents[:header][:height]) -  (@contents[:header][:margin][:top] +  @contents[:header][:margin][:bottom])
+      # w = (@pdf.bounds.width * @contents[:header][:width]) - (@contents[:header][:margin][:left] +  @contents[:header][:margin][:right])
+      w = @contents[:header][:width]
+      # h = (@pdf.bounds.height * @contents[:header][:height]) - (@contents[:header][:margin][:top] +
+      #@contents[:header][:margin][:bottom])
+      h = @contents[:header][:height]
 
       # update the top of the contents rect
       contents_rect.top = y - h
 
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        if @contents[:header][:border]
+        unless @contents[:header][:border][:width] == 0
           # draw the header border
           orig_color = @pdf.stroke_color
           dash unless @contents[:header][:border][:style] = :solid
@@ -156,7 +155,7 @@ module DCBallot
         end
         
         # draw the header text
-        @contents[:header][:graphics].call(@pdf) if @contents[:header][:graphics]
+        instance_eval(&@contents[:header][:graphics]) if @contents[:header][:graphics]
       end
     end
     
@@ -173,7 +172,7 @@ module DCBallot
       # top, left, bottom, right
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        if @contents[:body][:border]
+        unless @contents[:body][:border][:width] == 0
           # draw the body border
           dash unless @contents[:body][:border][:style] = :solid
           orig_stroke_color = @pdf.stroke_color
@@ -185,7 +184,7 @@ module DCBallot
         end
         
         # draw the body text
-        @contents[:body][:graphics].call(@pdf) if @contents[:body][:graphics]
+        instance_eval(&@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
         new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
@@ -203,7 +202,7 @@ module DCBallot
       
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        if @contents[:footer][:border]
+        unless @contents[:footer][:border][:width] == 0
           # draw the body border
           dash unless @contents[:footer][:border][:style] = :solid
           orig_stroke_color = @pdf.stroke_color
@@ -215,7 +214,7 @@ module DCBallot
         end
         
         # draw the footer text
-        @contents[:footer][:graphics].call(@pdf) if @contents[:footer][:graphics]
+        instance_eval(&@contents[:footer][:graphics]) if @contents[:footer][:graphics]
       end
     end
     
