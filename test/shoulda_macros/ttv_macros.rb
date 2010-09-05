@@ -45,6 +45,20 @@ class Test::Unit::TestCase
 
   end
   
+  def create_pdf_from_template(template, election, precinct)
+    @pdf = ::Prawn::Document.new( :page_layout => template.page[:layout], 
+                                  :page_size => template.page[:size],
+                                  :left_margin => template.page[:margin][:left],
+                                  :right_margin => template.page[:margin][:right],
+                                  :top_margin =>  template.page[:margin][:top],
+                                  :bottom_margin =>  template.page[:margin][:bottom],
+                                  :skip_page_creation => true,
+                                  :info => { :Creator => "TrustTheVote",
+                                    :Title => "#{election.display_name}  #{precinct.display_name} ballot"} )
+
+  end
+
+  
   def print_bounds(bounds)
     puts "TGD: absolute top, left, bottom and right = #{bounds.absolute_top.inspect}, #{bounds.absolute_left.inspect}, #{bounds.absolute_bottom.inspect}, #{bounds.absolute_right.inspect}"
     puts "TGD: top, left, bottom and right = #{bounds.top.inspect}, #{bounds.left.inspect}, #{bounds.bottom.inspect},  #{bounds.right.inspect}"
@@ -187,20 +201,20 @@ class Test::Unit::TestCase
     
     frame[:content][:right][:graphics] = lambda{ |pdf|
 
-      pdf.font "Courier"
+      @pdf.font "Courier"
       text = frame[:content][:right][:text]
-      middle_x = pdf.bounds.right - frame[:content][:right][:width]/2
-      middle_y = pdf.bounds.height/2 + pdf.width_of(text)/2
-      pdf.draw_text text, :at => [middle_x, middle_y], :rotate => -90
+      middle_x = @pdf.bounds.right - frame[:content][:right][:width]/2
+      middle_y = @pdf.bounds.height/2 + @pdf.width_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => -90
 
     }
     
     frame[:content][:left][:graphics] = lambda{ |pdf|
-      pdf.font "Courier"
+      @pdf.font "Courier"
       text = frame[:content][:right][:text]
       middle_x = frame[:content][:left][:width]/2
-      middle_y = pdf.bounds.height/2 - pdf.width_of(text)/2
-      pdf.draw_text text, :at => [middle_x, middle_y], :rotate => 90
+      middle_y = @pdf.bounds.height/2 - @pdf.width_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => 90
     }        
     
     frame
@@ -212,8 +226,8 @@ class Test::Unit::TestCase
       :border => {:width => 2, :color => '#00000F', :style => :dashed},
       
       :header =>{
-        :width => 1.0, # % width of ballot contents box
-        :height => 0.15, # % height of ballot contents box
+        :width => 400, # % width of ballot contents box
+        :height => 100, # % height of ballot contents box
         :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
         :border => {:width => 2, :color => '0000FF', :style => :solid},
         :text => "Header Text", # this will be Rich Text in Prawn 1.0
@@ -222,8 +236,10 @@ class Test::Unit::TestCase
       },
       
       :footer =>{
-        :width => 1.0, # % width of ballot contents box
-        :height => 0.15, # % height of ballot contents box
+        # :width => 1.0, # % width of ballot contents box
+        # :height => 0.15, # % height of ballot contents box
+        :width => 400, # % width of ballot contents box
+        :height => 50, # % height of ballot contents box
         :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
         :border => {:width => 2, :color => 'FF0000', :style => :solid},
         :text => "Footer Text", # this will be Rich Text in Prawn 1.0
@@ -232,8 +248,10 @@ class Test::Unit::TestCase
       },
       
       :body =>{
-        :width => 1.0, # % width of ballot contents box
-        :height => 0.7, # % height of ballot contents box
+        #:width => 1.0, # % width of ballot contents box
+        #:height => 0.7, # % height of ballot contents box
+        :width => 400, # % width of ballot contents box
+        :height => 400, # % height of ballot contents box
         :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
         :border => {:width => 1, :color => '00FF00', :style => :solid},
         :text => "Body Text", # this will be Rich Text in Prawn 1.0
@@ -243,28 +261,28 @@ class Test::Unit::TestCase
       
     }
     
-    contents[:header][:graphics] = lambda do |pdf|
-      pdf.font "Helvetica"
+    contents[:header][:graphics] = lambda do 
+      @pdf.font "Helvetica"
       text = contents[:header][:text]
-      middle_x = pdf.bounds.width/2 - pdf.width_of(text)/2
-      middle_y = pdf.bounds.height/2 - pdf.height_of(text)/2
-      pdf.draw_text text, :at => [middle_x, middle_y]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
     end
     
-    contents[:body][:graphics] = lambda do |pdf|
-      pdf.font "Helvetica"
+    contents[:body][:graphics] = lambda do 
+      @pdf.font "Helvetica"
       text = contents[:body][:text]
-      middle_x = pdf.bounds.width/2 - pdf.width_of(text)/2
-      middle_y = pdf.bounds.height/2 - pdf.height_of(text)/2
-      pdf.draw_text text, :at => [middle_x, middle_y]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
     end
     
     contents[:footer][:graphics] = lambda do |pdf|
-      pdf.font "Helvetica"
+      @pdf.font "Helvetica"
       text = contents[:footer][:text]
-      middle_x = pdf.bounds.width/2 - pdf.width_of(text)/2
-      middle_y = pdf.bounds.height/2 - pdf.height_of(text)/2
-      pdf.draw_text text, :at => [middle_x, middle_y]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
     end
 
     contents
