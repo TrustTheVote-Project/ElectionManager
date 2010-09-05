@@ -199,23 +199,23 @@ class Test::Unit::TestCase
       :left => { :width => 40,:text => "    132301113              Sample Ballot", :rotate => 90, :graphics => nil }
     }
     
-    frame[:content][:right][:graphics] = lambda{ |pdf|
+    frame[:content][:right][:graphics] = <<-'CONTENT_RIGHT'
 
       @pdf.font "Courier"
-      text = frame[:content][:right][:text]
-      middle_x = @pdf.bounds.right - frame[:content][:right][:width]/2
+      text = @frame[:content][:right][:text]
+      middle_x = @pdf.bounds.right - @frame[:content][:right][:width]/2
       middle_y = @pdf.bounds.height/2 + @pdf.width_of(text)/2
       @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => -90
 
-    }
+    CONTENT_RIGHT
     
-    frame[:content][:left][:graphics] = lambda{ |pdf|
+    frame[:content][:left][:graphics] = <<-'CONTENT_LEFT'
       @pdf.font "Courier"
-      text = frame[:content][:right][:text]
-      middle_x = frame[:content][:left][:width]/2
+      text = @frame[:content][:right][:text]
+      middle_x = @frame[:content][:left][:width]/2
       middle_y = @pdf.bounds.height/2 - @pdf.width_of(text)/2
       @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => 90
-    }        
+    CONTENT_LEFT
     
     frame
   end
@@ -261,29 +261,29 @@ class Test::Unit::TestCase
       
     }
     
-    contents[:header][:graphics] = lambda do 
+    contents[:header][:graphics] = <<-'HEADER'
       @pdf.font "Helvetica"
-      text = contents[:header][:text]
+      text = @contents[:header][:text]
       middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
       middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
       @pdf.draw_text text, :at => [middle_x, middle_y]
-    end
+    HEADER
     
-    contents[:body][:graphics] = lambda do 
+    contents[:body][:graphics] = <<-'BODY'
       @pdf.font "Helvetica"
-      text = contents[:body][:text]
+      text = @contents[:body][:text]
       middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
       middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
       @pdf.draw_text text, :at => [middle_x, middle_y]
-    end
+    BODY
     
-    contents[:footer][:graphics] = lambda do |pdf|
+    contents[:footer][:graphics] = <<-'FOOTER'
       @pdf.font "Helvetica"
-      text = contents[:footer][:text]
+      text = @contents[:footer][:text]
       middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
       middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
       @pdf.draw_text text, :at => [middle_x, middle_y]
-    end
+    FOOTER
 
     contents
   end

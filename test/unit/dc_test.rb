@@ -145,7 +145,7 @@ class RendererTest < ActiveSupport::TestCase
     }
 
     # header, minus instructions
-    contents[:header][:graphics] = lambda do 
+    contents[:header][:graphics] = <<-'HEADER'
       
       # draw yellow background rectangle
       orig_color = @pdf.fill_color
@@ -185,10 +185,7 @@ class RendererTest < ActiveSupport::TestCase
         @pdf.text instr_text, :size => 8
       end
       
-    end
-    
-    contents[:body][:graphics] = lambda do 
-    end
+    HEADER
     
     contents
   end
@@ -226,29 +223,27 @@ class RendererTest < ActiveSupport::TestCase
       :left => { :width => 67,:text => "    132301113              Sample Ballot", :rotate => 90, :graphics => nil }
     }
     
-    #    frame[:content][:top][:graphics] = lambda{ |pdf|
-    frame[:content][:top][:graphics] = lambda{ 
+    frame[:content][:top][:graphics] = <<-'CONTENT_TOP'
 
 
-      #text = frame[:content][:top][:text]
+      #text = @frame[:content][:top][:text]
       text = @precinct.display_name
       middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2
-      middle_y = @pdf.bounds.top - frame[:content][:top][:width]/2 + @pdf.height_of(text)/2
+      middle_y = @pdf.bounds.top - @frame[:content][:top][:width]/2 + @pdf.height_of(text)/2
       @pdf.font("Times-Roman", :size => 18, :style => :bold) do
         @pdf.draw_text text, :at => [middle_x, middle_y]
       end
-    }
+    CONTENT_TOP
     
-        #    frame[:content][:top][:graphics] = lambda{ |pdf|
-    frame[:content][:bottom][:graphics] = lambda{ 
+    frame[:content][:bottom][:graphics] = <<-'CONTENT_BOTTOM' 
 
       text = @precinct.display_name
       middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2
-      middle_y = @pdf.bounds.bottom + frame[:content][:bottom][:width]/2 - @pdf.height_of(text)/2
+      middle_y = @pdf.bounds.bottom + @frame[:content][:bottom][:width]/2 - @pdf.height_of(text)/2
       @pdf.font("Times-Roman", :size => 18, :style => :bold) do
         @pdf.draw_text text, :at => [middle_x, middle_y]
       end
-    }
+    CONTENT_BOTTOM
 
     frame
   end
