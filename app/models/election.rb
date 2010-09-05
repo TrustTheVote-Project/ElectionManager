@@ -18,12 +18,19 @@ class Election < ActiveRecord::Base
       return s
     end
     
+# Iterator for generating ballots.
+# <tt>param:</tt> A Precinct, then it's all the ballots for this precinct in this election
+# <tt>:</tt>A Jurisdiction (DS), then it's all the ballots for this Jurisdiction in this election
+
     def each_ballot param=nil
       cont_list = contests
       quest_list = questions
       if param.class == Precinct
         prec_splits = param.precinct_splits
-      else
+      elsif param.class == DistrictSet # TODO will be Jurisdiction in the future)
+        precincts = Precinct.find_all_by_jurisdiction_id(param.id)
+        prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+      else 
         raise ArgumentError, "Invalid parameter for Election.each_ballot"
       end
       prec_splits.each do 

@@ -6,8 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ballot_style_templates
   
   map.resources :jurisdictions,
-    :collection => {:current => :get,
-                    :change => :get},
+                  :collection => {:current => :get,
+                  :change => :get},
     :member => { :set => :get,
                  :show => :get,
                  :show_precincts => :get,
@@ -27,14 +27,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :elections, :member => { :export => :get, :precincts => :get , :translate => :put },
                             :collection => {:all => :get, :current => :get, :import => :put, :import_yml => :put } do 
     | elections |
-        elections.resources :districts do | districts | 
-          districts.resources :contests, :only => [:new]
-          districts.resources :questions, :only => [:new]
-        end
-      elections.resources :precincts, :member => { :ballot => :get }, :only => []
-      elections.resources :precincts, :member => { :ballots => :get }, :only => []
-      elections.resources :contests
+    elections.resources :districts do | districts | 
+      districts.resources :contests, :only => [:new]
+      districts.resources :questions, :only => [:new]
     end
+    elections.resources :precincts, :member => { :ballot => :get }, :only => []
+    elections.resources :precincts, :member => { :ballots => :get }, :only => []
+    elections.resources :contests
+  end
   map.resources :parties
   map.resources :precincts
   map.resources :voting_methods
@@ -65,7 +65,7 @@ ActionController::Routing::Routes.draw do |map|
   
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-     
+  
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
   
@@ -89,6 +89,6 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
-#  map.connect ':controller/:action/:id'
-#  map.connect ':controller/:action/:id.:format'
+  #  map.connect ':controller/:action/:id'
+  #  map.connect ':controller/:action/:id.:format'
 end

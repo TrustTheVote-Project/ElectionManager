@@ -53,16 +53,19 @@
       </div>
     </div>
     <br/>
-    <br/>
+	<div class="content">
+		<h2 class="title">Ballots</h2>
+		<%= render(:partial => "ballot_list") %>
+	</div>
 	<a name="contests"></a>
     <div class="content">
       <h2 class="title">Contests</h2>
-      <%= render (:partial => 'contests/contest_list') %>
+      <%= render(:partial => 'contests/contest_list') %>
     </div>
 	<a name="questions"></a>
    	<div class="content">
       <h2 class="title">Questions</h2>
-      <%= render (:partial => 'questions/questions_list') %>
+      <%= render(:partial => 'questions/questions_list') %>
     </div>
 
   </div>

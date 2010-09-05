@@ -22,7 +22,7 @@ class JurisdictionsController < ApplicationController
   end
  
   def change
-    @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
+    @district_sets = DistrictSet.all
   end
   
   def set
@@ -33,16 +33,20 @@ class JurisdictionsController < ApplicationController
 # Show a nice display of the precincts of a particular jurisdiction  
   def show_precincts
     @precincts = current_context.jurisdiction.precincts.paginate(:per_page => 10, :page => params[:page])
-#    render :partial => 'precincts/precinct_list'
     render "precincts/index"
   end
   
 # Show a nice display of all the districts of a particular jurisdiction
   def show_districts
     @districts = current_context.jurisdiction.jur_districts.paginate(:per_page => 10, :page => params[:page])
-#    render :partial => "districts/district_list"
-     render "districts/index"
+    render "districts/index"
   end
+  
+  def edit
+    @jurisdiction = current_context.jurisdiction
+  end
+ 
+ 
     
   
 # Actions to handle importing into the jurisdiction. There are 3 actions to represent the workflow.

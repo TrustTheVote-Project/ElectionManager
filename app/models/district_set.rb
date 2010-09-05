@@ -1,4 +1,4 @@
-class DistrictSet < ActiveRecord::Base
+  class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
   has_many :jur_districts, :class_name => "District", :foreign_key => :jurisdiction_id
   has_many :elections

@@ -5,6 +5,10 @@ module TTV
   class ImportEDH
 
     attr_reader :hash, :election
+    
+    def l (string)
+      Rails.logger.debug string
+    end
 
     # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.
     def initialize(hash)
@@ -101,16 +105,19 @@ module TTV
     def load_precinct precinct
       @jurisdiction ||= DistrictSet.find_by_ident(precinct["jurisdiction_ident"])
       new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], 
-                                                      :ident => precinct["ident"], 
-                                                      :jurisdiction => @jurisdiction)
+                                                      :ident => precinct["ident"])
+      new_precinct.jurisdiction = @jurisdiction                                                
       new_precinct.save!
+        l "*** after new_precinct_save: #{new_precinct.inspect}"
+        l "    #{new_precinct.jurisdiction.inspect}\n\n"
     end
     
-    # Load an EDH formatted precinct split into EM
+    # Load an EDH formatted PrecinctSplit into EM. The PrecinctSplit's display_name is the
+    # Associated DistrictSet's ident. We know that PrecinctSplit : DistrictSet is 1:1
     def load_precinct_split split
       dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
       prec = Precinct.find_by_ident(split["precinct_ident"])
-      PrecinctSplit.create!(:district_set => dist_set, :precinct => prec)
+      PrecinctSplit.create!(:display_name => dist_set.ident, :district_set => dist_set, :precinct => prec)
     end
     
     # Load an EDH formatted district_set into EM

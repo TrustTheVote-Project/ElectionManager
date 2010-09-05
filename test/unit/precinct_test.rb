@@ -32,27 +32,14 @@ class PrecinctTest < ActiveSupport::TestCase
       setup do
         @fix = setup_jurisdiction "MyJurisdiction"
       end
-    
+      
       should "have correct associations" do
         assert @fix[:jurisdiction].precincts.member? @fix[:precinct]
       end
       should "count the right number of precincts" do
         assert_equal 1, @fix[:jurisdiction].precincts.count
       end
-    
-  end  
-end
-
-  
-# TODO: 
-#  setup_jurisdictions do
-#    
-#    should "districts that are part of an election" do
-#      election1 = Election.find_by_display_name("Election 1")
-#      assert_equal 2, subject.districts_for_election(election1).size
-#      assert_contains subject.districts_for_election(election1), subject.districts.first
-#      assert_does_not_contain subject.districts_for_election(election1), District.last
-#    end
-#    
-#  end 
+      
+    end  
+  end
 end

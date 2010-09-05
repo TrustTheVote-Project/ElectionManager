@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ElectionTest < ActiveSupport::TestCase
-  
   def self.should_have_n_ballots n
     should "have #{n} ballots" do
       ballot_count = 0
@@ -12,7 +11,7 @@ class ElectionTest < ActiveSupport::TestCase
       assert_equal n, ballot_count
     end
   end
-
+  
   context "Election" do
     setup do
       @e1 = Election.make
@@ -22,7 +21,7 @@ class ElectionTest < ActiveSupport::TestCase
     end
     
     should_have_n_ballots 0
-
+    
     context "after adding one contest" do
       setup do
         @c = Contest.make
@@ -31,7 +30,7 @@ class ElectionTest < ActiveSupport::TestCase
       end
       
       should_have_n_ballots 1
-    
+      
       context "and adding one question" do
         setup do
           @q = Question.make

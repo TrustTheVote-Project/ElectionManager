@@ -3,7 +3,8 @@ class Precinct < ActiveRecord::Base
   has_many :precinct_splits
   belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
   
-  attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
+  # TODO: :importID for xml import, hacky could do this by dynamically extending class at runtime
+  attr_accessor :importId
   
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
