@@ -95,4 +95,25 @@ class BallotStyleTemplatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def import_style_file
+    ballot_style_template = BallotStyleTemplate.find(params[:id])
+
+    if params[:importStyleFile].nil?
+      
+      flash[:error] = "Import Style File failed because file was not specified."
+      redirect_to ballot_style_templates_url
+      return
+    end
+
+    styles = YAML.load(params[:importStyleFile])
+    #logger.debug "TGD: styles[:page] = #{styles[:page].inspect}"
+    #logger.debug "TGD: styles[:frame] = #{styles[:frame].inspect}"
+    #logger.debug "TGD: styles[:content] = #{styles[:contents].inspect}"
+    
+    ballot_style_template.update_styles(styles)
+
+    redirect_to edit_ballot_style_template_url(ballot_style_template)
+
+  end
 end

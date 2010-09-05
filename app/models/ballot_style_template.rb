@@ -161,4 +161,17 @@ class BallotStyleTemplate < ActiveRecord::Base
     
   end
   
+  # given a hash of styles update the page, frame and contents attributes/hashes.
+  def update_styles(styles_hash)
+    page.merge!(styles_hash[:page]) if styles_hash[:page]
+    frame.merge!(styles_hash[:frame]) if styles_hash[:frame]
+    contents.merge!(styles_hash[:contents]) if styles_hash[:contents]
+    save!
+    #update_attribute(page)
+  end
+  
+  def to_yaml
+    { :page => page, :frame => frame, :contents => contents}.to_yaml
+  end
+  
 end

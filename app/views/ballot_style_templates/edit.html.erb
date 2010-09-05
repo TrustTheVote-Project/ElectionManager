@@ -12,6 +12,12 @@
       <% form_for @ballot_style_template, :url => ballot_style_template_path(@ballot_style_template), :html => { :class => :form, :multipart => true } do |f| -%>
         <%= render :partial => "form", :locals => {:f => f} %>
       <% end -%>
+      <% form_tag ({:action => 'import_style_file'}, {:method => 'put', :multipart => true}) do %>
+      Choose Ballot Style File: <%= file_field_tag "importStyleFile", :accept => "text/yml" %>
+    <br/>
+      <%= submit_tag "Import Style file" %>
+      <% end %>	
+
     </div>
   </div>
 </div>
