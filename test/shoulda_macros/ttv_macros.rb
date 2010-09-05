@@ -45,6 +45,20 @@ class Test::Unit::TestCase
 
   end
   
+  def create_pdf_from_template(template, election, precinct)
+    @pdf = ::Prawn::Document.new( :page_layout => template.page[:layout], 
+                                  :page_size => template.page[:size],
+                                  :left_margin => template.page[:margin][:left],
+                                  :right_margin => template.page[:margin][:right],
+                                  :top_margin =>  template.page[:margin][:top],
+                                  :bottom_margin =>  template.page[:margin][:bottom],
+                                  :skip_page_creation => true,
+                                  :info => { :Creator => "TrustTheVote",
+                                    :Title => "#{election.display_name}  #{precinct.display_name} ballot"} )
+
+  end
+
+  
   def print_bounds(bounds)
     puts "TGD: absolute top, left, bottom and right = #{bounds.absolute_top.inspect}, #{bounds.absolute_left.inspect}, #{bounds.absolute_bottom.inspect}, #{bounds.absolute_right.inspect}"
     puts "TGD: top, left, bottom and right = #{bounds.top.inspect}, #{bounds.left.inspect}, #{bounds.bottom.inspect},  #{bounds.right.inspect}"
@@ -120,10 +134,158 @@ class Test::Unit::TestCase
     @election = Election.make(:display_name => "Election 1" )
       
     @district = District.make(:display_name => "District 1")
+    @precint = Precinct.make(:display_name => "Precinct 1")
+
     @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => pdf_form)
     @ballot_config = DefaultBallot::BallotConfig.new( @election, @template)
       
-    @ballot_config.setup(create_pdf("Test PDF"), nil) # don't need the 2nd arg precinct
+    @ballot_config.setup(create_pdf("Test PDF"), @precinct) # don't need the 2nd arg precinct
     @pdf = @ballot_config.pdf
   end
+
+    def ballot_page
+    # see Prawn::Document::PageGeometry
+    # LETTER => width = 612.00 pts, heigth= 792.00 pts
+    #  612/72, 792/72  where 72 pts/in
+    # width = 8.5 in, heigth= 11 in
+    page = {}
+    page[:size] = "LETTER" 
+    page[:layout] = :portrait # :portrait or :landscape
+    page[:background] = '#000000'
+    page[:margin] = { :top => 30, :right => 18, :bottom => 30, :left => 18}
+    page
+  end
+  
+  def ballot_frame
+    # MARGIN
+    # surrounds the border, size of whitespace surrounding the frame
+    # inside the page margin.
+    # top, right, bottom, left
+    # {:top => 11, :right => 22, :bottom => 15, :left => 30}
+    frame = { }
+    frame[:margin] = {:top => 30, :right => 30, :bottom => 30, :left => 30}
+    
+    # BORDER
+    # surrounds the padding
+    # width, color, style(dotted, dashed, solid)
+    # {:width => 2, :color => '#FF0000', :style => :solid}
+    frame[:border] = {:width => 2, :color => '#00FF00', :style => :solid}
+    # future below
+    # width, color, style(dotted, dashed, solid)
+    # {:top {:width => 2, :color => '#FF0000', :style => :solid}}
+    # frame[:border][:top]  # future
+    # frame[:border][:right] # future
+    # frame[:border][:bottom] # future
+    # frame[:border][:left] # future
+    # frame[:border][:top][:width] # future
+
+    # frame contents surrounds the ballot election info. it may have text and graphics
+    # width, background_color, text, rotate, graphics
+    # :text can be Rich Text Strings as defined in the PDF Spec.
+    # OR
+    # it can be a Proc of prawn primitives
+    # {:left =>
+    #   {:width => 33, background_color => '#00FF00',
+    #    :text => '<b color="#000000">Sample <i>Ballot</i></b>',
+    #    :rotate => 90, # text rotation in degrees
+    #    :graphics => <Proc of prawn primitives>
+    #   }
+    # }
+
+    frame[:content] = {
+      :top => { :width => 40, :text => "Sample Ballot", :rotate => 90, :graphics => nil },
+      :right => { :width => 40,:text => "   12001040100040         Sample Ballot", :rotate => 90, :graphics => nil },
+      :bottom => { :width => 40,:text => "Sample Ballot", :rotate => 90, :graphics => nil },
+      :left => { :width => 40,:text => "    132301113              Sample Ballot", :rotate => 90, :graphics => nil }
+    }
+    
+    frame[:content][:right][:graphics] = <<-'CONTENT_RIGHT'
+
+      @pdf.font "Courier"
+      text = @frame[:content][:right][:text]
+      middle_x = @pdf.bounds.right - @frame[:content][:right][:width]/2
+      middle_y = @pdf.bounds.height/2 + @pdf.width_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => -90
+
+    CONTENT_RIGHT
+    
+    frame[:content][:left][:graphics] = <<-'CONTENT_LEFT'
+      @pdf.font "Courier"
+      text = @frame[:content][:right][:text]
+      middle_x = @frame[:content][:left][:width]/2
+      middle_y = @pdf.bounds.height/2 - @pdf.width_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y], :rotate => 90
+    CONTENT_LEFT
+    
+    frame
+  end
+  
+  def ballot_contents
+    
+    contents = {
+      :border => {:width => 2, :color => '#00000F', :style => :dashed},
+      
+      :header =>{
+        :width => 400, # % width of ballot contents box
+        :height => 100, # % height of ballot contents box
+        :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
+        :border => {:width => 2, :color => '0000FF', :style => :solid},
+        :text => "Header Text", # this will be Rich Text in Prawn 1.0
+        :background_color => '#0000FF',
+        :graphics => nil
+      },
+      
+      :footer =>{
+        # :width => 1.0, # % width of ballot contents box
+        # :height => 0.15, # % height of ballot contents box
+        :width => 400, # % width of ballot contents box
+        :height => 50, # % height of ballot contents box
+        :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
+        :border => {:width => 2, :color => 'FF0000', :style => :solid},
+        :text => "Footer Text", # this will be Rich Text in Prawn 1.0
+        :background_color => '#00FF00',
+        :graphics => nil
+      },
+      
+      :body =>{
+        #:width => 1.0, # % width of ballot contents box
+        #:height => 0.7, # % height of ballot contents box
+        :width => 400, # % width of ballot contents box
+        :height => 400, # % height of ballot contents box
+        :margin => {:top => 10, :right => 10, :bottom => 10, :left => 10},
+        :border => {:width => 1, :color => '00FF00', :style => :solid},
+        :text => "Body Text", # this will be Rich Text in Prawn 1.0
+        :background_color => '#FF0000',
+        :graphics => nil
+      }
+      
+    }
+    
+    contents[:header][:graphics] = <<-'HEADER'
+      @pdf.font "Helvetica"
+      text = @contents[:header][:text]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
+    HEADER
+    
+    contents[:body][:graphics] = <<-'BODY'
+      @pdf.font "Helvetica"
+      text = @contents[:body][:text]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
+    BODY
+    
+    contents[:footer][:graphics] = <<-'FOOTER'
+      @pdf.font "Helvetica"
+      text = @contents[:footer][:text]
+      middle_x = @pdf.bounds.width/2 - @pdf.width_of(text)/2
+      middle_y = @pdf.bounds.height/2 - @pdf.height_of(text)/2
+      @pdf.draw_text text, :at => [middle_x, middle_y]
+    FOOTER
+
+    contents
+  end
+
 end

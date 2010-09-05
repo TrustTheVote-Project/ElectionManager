@@ -82,20 +82,28 @@ module DefaultBallot
       def short_instructions
         short_instr = if @contest.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
 
-                        @contest.open_seat_count < 2 ? "Vote for 1" : "Vote for up to #{@contest.open_seat_count}"
+                        @contest.open_seat_count < 2 ? "Vote for not more than (1)" : "Vote for up to #{@contest.open_seat_count}"
                       else
                         "Rank the candidates"
                       end
         
-        @pdf.text short_instr, :leading => 1
+        @pdf.text short_instr, :size => 8, :align => :center, :leading => 1
       end
       
 
       def header(rect)
         @pdf.bounding_box [rect.left+HPAD, rect.top], :width => rect.width - HPAD2 do
+                      
+          # TODO: make this configurable via ballot style template
+          orig_color = @pdf.fill_color
+          @pdf.fill_color('DCDCDC')
+          @pdf.fill_rectangle([@pdf.bounds.left-HPAD, @pdf.bounds.top], rect.width,  @pdf.height_of(@contest.display_name)+14)
+          @pdf.fill_color(orig_color)
+            
+
           @pdf.font "Helvetica", :size => 10, :style => :bold
           @pdf.move_down VPAD
-          @pdf.text @contest.display_name, :leading => 1 #header
+          @pdf.text @contest.display_name, :align => :center, :leading => 1 #header
           @pdf.move_down VPAD
           short_instructions
           rect.top -= @pdf.bounds.height
@@ -156,6 +164,7 @@ module DefaultBallot
           # the pdf.text(...) to change it's bounding box???
           @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
             contest_text = candidate.display_name + "\n" + candidate.party.display_name
+
             contest_bottom = 0
             
             contest_bottom = draw_contest( 0, contest_bottom, rect.width, contest_text, :active => active, :id => checkbox_id)

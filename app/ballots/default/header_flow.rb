@@ -30,18 +30,27 @@ module DefaultBallot
         column_top_orig = enclosing_column_rect.top
         config.pdf.font("Helvetica", :size => 10, :style => :bold )
         
+        # TODO: make this configurable via ballot style template
+        orig_color = config.pdf.fill_color
+        config.pdf.fill_color('808080')
+        config.pdf.fill_rectangle([enclosing_column_rect.left, enclosing_column_rect.top], enclosing_column_rect.width, VPAD + config.pdf.height_of(@text))
+        config.pdf.fill_color(orig_color)
+
         # bounding box is the document at this point
         # Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0"
         #TTV::Prawn::Util.show_bounds_coordinates(config.pdf.bounds)
         
         config.pdf.bounding_box([enclosing_column_rect.left + HPAD, enclosing_column_rect.top], :width => enclosing_column_rect.width - HPAD * 2) do
+          
           # created a new bounding box.
           # Bounds coordinates "t, r, b, l" = "0.0, 194, 0, 0"
           #TTV::Prawn::Util.show_bounds_coordinates(config.pdf.bounds)
           
           config.pdf.move_down VPAD
+          
           # The @item is always just a Ruby String
           config.pdf.text @text, :leading => 1
+          
 
           # bounding box is increased the height of header text, 14.87 pts
           # Bounds coordinates "t, r, b, l" = "14.87, 194, 0, 0"
