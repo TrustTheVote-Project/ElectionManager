@@ -8,15 +8,24 @@ module DcBallot
   class BallotConfig < DefaultBallot::BallotConfig
     
     def initialize(election, template)
-      @template = template      
-      @page = @template.page
-      @frame = @template.frame
-      @contents = @template.contents
-
+      @template = template
       # to get renderer working
       super(election, template)
+      
+      @page = @template.page
+      @frame = @template.frame
+      
+      # hack to override these geting set in the superclass
+      @contents = @template.contents
+      @page_size = @template.page[:size]
+      @page_layout = @template.page[:style]
+      @left_margin = @template.page[:margin][:left]
+      @right_margin = @template.page[:margin][:right]
+      @top_margin =  @template.page[:margin][:top]
+      @bottom_margin =  @template.page[:margin][:bottom]
+      
+
     end
-    
 
     # Draw the frame around the edges of the page. This frame MAY have
     # a border and MAY, mostly likely will, have content for one of more
@@ -99,7 +108,7 @@ module DcBallot
       y = page_rect.top - @frame[:margin][:top]
       w = page_rect.width - @frame[:margin][:left] - @frame[:margin][:right]
       h = page_rect.top - @frame[:margin][:top] - @frame[:margin][:bottom]
-
+      
       @pdf.bounding_box([x,y], :width => w, :height => h) do      
 
         unless @frame[:border][:width] == 0
@@ -120,10 +129,11 @@ module DcBallot
     # bottom and left sides of the frame
     def draw_frame_contents
 
-      instance_eval(&@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
-      instance_eval(&@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
-      instance_eval(&@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
-      instance_eval(&@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
+      instance_eval(@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
+      instance_eval(@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
+      instance_eval(@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
+      instance_eval(@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
+      
 
       yield if block_given?
     end
@@ -163,7 +173,7 @@ module DcBallot
         end
         
         # draw the header text
-        instance_eval(&@contents[:header][:graphics]) if @contents[:header][:graphics]
+        instance_eval(@contents[:header][:graphics]) if @contents[:header][:graphics]
       end
     end
     
@@ -204,7 +214,7 @@ module DcBallot
         end
         
         # draw the body text
-        instance_eval(&@contents[:body][:graphics]) if @contents[:body][:graphics]
+        instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
         new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
@@ -246,7 +256,7 @@ module DcBallot
         end
         
         # draw the footer text
-        instance_eval(&@contents[:footer][:graphics]) if @contents[:footer][:graphics]
+        instance_eval(@contents[:footer][:graphics]) if @contents[:footer][:graphics]
       end
     end
     
