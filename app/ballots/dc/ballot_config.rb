@@ -133,12 +133,20 @@ module DCBallot
 
       x = @pdf.bounds.left + @contents[:header][:margin][:left]
       y = @pdf.bounds.top -  @contents[:header][:margin][:top]
-      # w = (@pdf.bounds.width * @contents[:header][:width]) - (@contents[:header][:margin][:left] +  @contents[:header][:margin][:right])
-      w = @contents[:header][:width]
-      # h = (@pdf.bounds.height * @contents[:header][:height]) - (@contents[:header][:margin][:top] +
-      #@contents[:header][:margin][:bottom])
-      h = @contents[:header][:height]
-
+      
+      if @contents[:header][:width] <= 1.0
+        # percentage of width
+        w = (@pdf.bounds.width * @contents[:header][:width]) - (@contents[:header][:margin][:left] +  @contents[:header][:margin][:right])
+      else
+        w = @contents[:header][:width]
+      end
+      if @contents[:header][:height] <= 1.0
+        # percentage of height
+        h = (@pdf.bounds.height * @contents[:header][:height]) - (@contents[:header][:margin][:top] +@contents[:header][:margin][:bottom])
+      else
+        h = @contents[:header][:height]
+      end
+      
       # update the top of the contents rect
       contents_rect.top = y - h
 
@@ -165,8 +173,20 @@ module DCBallot
       
       x = @pdf.bounds.left + @contents[:body][:margin][:left]
       y = contents_rect.top -  @contents[:body][:margin][:top]
-      w = (@pdf.bounds.width * @contents[:body][:width]) - (@contents[:body][:margin][:left] +  @contents[:body][:margin][:right])
-      h = (@pdf.bounds.height * @contents[:body][:height]) -  (@contents[:body][:margin][:top] +  @contents[:body][:margin][:bottom])
+      
+      if @contents[:body][:width] <= 1.0
+        # percentage of width
+        w = (@pdf.bounds.width * @contents[:body][:width]) - (@contents[:body][:margin][:left] +  @contents[:body][:margin][:right])
+      else
+        w = @contents[:body][:width]
+      end
+      if @contents[:body][:height] <= 1.0
+        # percentage of height
+        h = (@pdf.bounds.height * @contents[:body][:height]) -(@contents[:body][:margin][:top] + @contents[:body][:margin][:bottom])
+      else
+        h = @contents[:body][:height]
+      end
+      
       # update the top of the contents rect
       contents_rect.top = y - h
       # top, left, bottom, right
@@ -197,8 +217,20 @@ module DCBallot
       
       x = @pdf.bounds.left + @contents[:footer][:margin][:left]
       y = contents_rect.top -  @contents[:footer][:margin][:top]
-      w = (@pdf.bounds.width * @contents[:footer][:width]) - (@contents[:footer][:margin][:left] +  @contents[:footer][:margin][:right])
-      h = (@pdf.bounds.height * @contents[:footer][:height]) -  (@contents[:footer][:margin][:top] +  @contents[:footer][:margin][:bottom])
+      
+      if @contents[:footer][:width] <= 1.0
+        # percentage of contents width
+        w = (@pdf.bounds.width * @contents[:footer][:width]) - (@contents[:footer][:margin][:left] +  @contents[:footer][:margin][:right])
+      else
+        w = @contents[:footer][:width]        
+      end
+      
+      if @contents[:footer][:height] <= 1.0
+        # percentage of contents height
+        h = (@pdf.bounds.height * @contents[:footer][:height]) -  (@contents[:footer][:margin][:top] +  @contents[:footer][:margin][:bottom])
+      else
+        h = @contents[:footer][:height]
+      end
       
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
