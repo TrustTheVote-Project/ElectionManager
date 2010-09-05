@@ -84,8 +84,8 @@ class RendererTest < ActiveSupport::TestCase
       
       @ballot_config = DCBallot::BallotConfig.new( e1, @template)
 
-      @pdf = create_pdf(@template, e1, p1)
-      # @pdf = create_pdf("DC")
+      @pdf = create_pdf_from_template(@template, e1, p1)
+      # @pdf = create_pdf_from_template("DC")
       @ballot_config.setup( @pdf,  p1)
 
       
@@ -102,19 +102,6 @@ class RendererTest < ActiveSupport::TestCase
 
     end
   end
-  def create_pdf(template, election, precinct)
-    @pdf = ::Prawn::Document.new( :page_layout => template.page[:layout], 
-                                  :page_size => template.page[:size],
-                                  :left_margin => template.page[:margin][:left],
-                                  :right_margin => template.page[:margin][:right],
-                                  :top_margin =>  template.page[:margin][:top],
-                                  :bottom_margin =>  template.page[:margin][:bottom],
-                                  :skip_page_creation => true,
-                                  :info => { :Creator => "TrustTheVote",
-                                    :Title => "#{election.display_name}  #{precinct.display_name} ballot"} )
-
-  end
-
       
   def contents
     
