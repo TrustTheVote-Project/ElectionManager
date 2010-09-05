@@ -1,8 +1,8 @@
-require 'ttv/abstract_ballot.rb'
+#require 'ttv/abstract_ballot.rb'
 require 'ballots/default/ballot_config'
 require 'prawn'
 
-module DCBallot
+module DcBallot
   include ::AbstractBallot
 
   class BallotConfig < DefaultBallot::BallotConfig

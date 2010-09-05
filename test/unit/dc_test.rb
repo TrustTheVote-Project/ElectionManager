@@ -82,7 +82,7 @@ class RendererTest < ActiveSupport::TestCase
       @template.frame =  frame
       @template.contents = contents
       
-      @ballot_config = DCBallot::BallotConfig.new( e1, @template)
+      @ballot_config = DcBallot::BallotConfig.new( e1, @template)
 
       @pdf = create_pdf_from_template(@template, e1, p1)
       # @pdf = create_pdf_from_template("DC")

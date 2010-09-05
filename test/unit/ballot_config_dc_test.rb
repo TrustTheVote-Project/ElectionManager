@@ -14,7 +14,7 @@ class BallotConfigTest < ActiveSupport::TestCase
       @template.frame = ballot_frame
       @template.contents = ballot_contents
       
-      @c = @ballot_config = DCBallot::BallotConfig.new( @e1, @template)
+      @c = @ballot_config = DcBallot::BallotConfig.new( @e1, @template)
       @pdf = ::Prawn::Document.new( :page_layout => @template.page[:layout], 
                                    :page_size => @template.page[:size],
                                     :left_margin => @template.page[:margin][:left],

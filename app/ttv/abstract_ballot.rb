@@ -1,4 +1,5 @@
 require 'prawn'
+require 'ballots/dc/ballot_config'
 
 module AbstractBallot
     
@@ -86,11 +87,19 @@ module AbstractBallot
   # WideColumn is used in layout to group columns together
   # its boundaries are leftmost/rightmost/lowest top/highest bottom
   class WideColumn
+
+    attr_accessor :header # true if this column rectangle includes a
+    # header item
+
     def initialize (rects)
       @rects = rects
       @original_top = top
     end
 
+    def header?
+      @header
+    end
+        
     def initialize_copy(old)
       @rects =  @rects.map { |r| r.clone }
     end
@@ -274,7 +283,7 @@ module AbstractBallot
       # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
       flow_rect = Rect.create_bound_box(@pdf.bounds)
       @c.render_frame flow_rect
-      if @c.is_a? ::DCBallot::BallotConfig
+      if @c.is_a? ::DcBallot::BallotConfig
         # resets the flow rect to be under header, above footer,
         # inside page frame.
         flow_rect = @c.render_header flow_rect
