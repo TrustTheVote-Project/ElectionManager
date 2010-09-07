@@ -45,6 +45,19 @@ class Election < ActiveRecord::Base
       end
     end
 
+# Generate a ballot map, as a Hash. This maps certain characteristics of the ballot to its file name
+# TODO: Move this to a BallotUtils or Ballot class which will capture the functionality relating to controling
+# ballot generation.
+  def generate_ballot_map
+    outlist = []
+    each_ballot(district_set) do | split, result_cont_list, result_quest_list |
+
+      outlist << {:precinct_split => split.display_name, :file => "#{split.display_name}.pdf"}
+    end
+    puts "*** #{outlist.inspect}"
+    return outlist
+  end
+
 # Return an array with the Districts corresponding to this Election's Questions
     def question_districts
       questions.reduce([]) { |memo, q| memo <<  q.requesting_district }      

@@ -24,7 +24,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :districts
   map.resources :district_sets
   map.resources :district_types
-  map.resources :elections, :member => { :export => :get, :precincts => :get , :translate => :put },
+  map.resources :elections, :member => { :export => :get, 
+                                         :precincts => :get, 
+                                         :translate => :put,
+                                         :ballot_map => :get},
                             :collection => {:all => :get, :current => :get, :import => :put, :import_yml => :put } do 
     | elections |
     elections.resources :districts do | districts | 

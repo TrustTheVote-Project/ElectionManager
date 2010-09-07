@@ -126,6 +126,17 @@ class ElectionsController < ApplicationController
     flash[:notice] = "Election was successfully translated"
     redirect_to precincts_election_url
   end
-
+  
+  def ballot_map
+    @election = Election.find(params[:id])
+    respond_to do |format|
+      format.yml { 
+          headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballotmap.yml\"" 
+          render :text => @election.generate_ballot_map.to_yaml, :content_type => 'text/x-yml' }
+      format.xml { 
+          headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballotmap\"" 
+          render :xml => @election.generate_ballot_map.to_xml }
+    end
+  end
 end
 
