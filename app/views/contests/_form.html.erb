@@ -16,6 +16,7 @@
     <%= f.collection_select(:voting_method_id, voting_methods, :id, :display_name, :selected => default_method) unless default_method.nil? %>
 </div>
 <div class="group">
+	<%= puts current_context.jurisdiction.inspect %>
     <% districts = District.find(:all, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
     <% districts = District.find(:all, :order => :id) if current_context.jurisdiction.nil? %>
     <%= f.label :district_id, t("ttv.district", :default => "District"), :class => :label %>
