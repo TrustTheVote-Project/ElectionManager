@@ -34,3 +34,12 @@ harbor:
   id: 8
   title: Harbor
 
+ward:
+  id: 9
+  title: Ward
+
+district:
+  id: 10
+  title: District
+
+

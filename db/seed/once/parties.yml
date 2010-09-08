@@ -36,4 +36,9 @@ republican:
     id: 7
     display_name: Republican
     ident: party-7
+
+statehoodgreen:
+    id: 8
+    display_name: statehoodgreen
+    ident: party-8
     
