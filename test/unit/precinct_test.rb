@@ -26,7 +26,7 @@ class PrecinctTest < ActiveSupport::TestCase
   end
 
   setup_precincts do
-    subject { Precinct.find_by_display_name "Precint 1"}
+    subject { Precinct.find_by_display_name "Precinct 1"}
 
     should "have a couple of districts" do
       assert_equal 4,  subject.districts.count

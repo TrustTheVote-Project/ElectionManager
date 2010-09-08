@@ -45,7 +45,7 @@ class ActiveSupport::TestCase
     context "valid precincts" do
       setup do
         # create a precint within 4 Districts
-        @p1 = Precinct.create!(:display_name => "Precint 1")
+        @p1 = Precinct.create!(:display_name => "Precinct 1")
         (0..3).each do |i|
           @p1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
         end
