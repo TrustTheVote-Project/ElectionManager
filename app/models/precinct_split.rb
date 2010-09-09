@@ -7,6 +7,10 @@ class PrecinctSplit < ActiveRecord::Base
     district_set.districts & election.district_set.jur_districts
   end
   
+  def ballot_contests(election)
+    district_set.districts & election.contests.map(&:district)
+  end
+  
   # Nice to_s
   def to_s
     s = "S: #{display_name}\n"
