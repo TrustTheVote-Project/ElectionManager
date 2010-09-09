@@ -13,7 +13,7 @@
 			<% form_tag ({:action => 'import_file'}, {:method => 'put', :multipart => true}) do %>
 				Choose file: <%= file_field_tag "import_file", :accept => "text/yml, text/xml, text/yaml" %>
 				<br><br>Type: 
-					<%= select_tag :type, options_for_select([["Ballot Config", :ballot_config], ["Something Else", :something_else]], :ballot_config) %>
+					<%= select_tag :type, options_for_select([["YAML", :yaml], ["XML", :xml]], :yaml) %>
         <br /> <br />
         <div class="group navform wat-cf">
           <button class="button" type="submit">

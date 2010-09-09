@@ -1,20 +1,10 @@
-# == Schema Information
-# Schema version: 20100802153118
-#
-# Table name: precincts
-#
-#  id           :integer         not null, primary key
-#  display_name :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  ident        :string(255)
-#
-
 class Precinct < ActiveRecord::Base
   
-  has_and_belongs_to_many :districts
+  has_many :precinct_splits
+  belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
   
-  attr_accessor :importId # for xml import, hacky could do this by dynamically extending class at runtime
+  # TODO: :importID for xml import, hacky could do this by dynamically extending class at runtime
+  attr_accessor :importId
   
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
@@ -26,14 +16,28 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
+  
+  def collect_districts
+    precinct_splits.reduce([]) { |coll, ps| coll | ps.district_set.districts}
+  end
+
+# Is this precinct a split precinct?
+  def split?
+    precinct_splits.size != 1
+  end
 
   def districts_for_election(election)
-    districts & election.district_set.districts
+    p = collect_districts
+    e = election.collect_districts
+    p & e
   end
   
-  # Return a list of DistrictSets tjat this Precinct belongs to. 
-  # In the real world, this should always be a list of length 1, even though the data model permits more
-  def district_sets
-    districts.reduce([]) { |res, dist| res.include?(dist.district_sets[0]) ? res : res << dist.district_sets[0] }
+# Nice to_s
+  def to_s
+    s = "P: #{display_name}\n"
+    precinct_splits.each do |ps|
+      s += "  * s: #{ps.to_s}\n"
+    end
+    return s
   end
 end

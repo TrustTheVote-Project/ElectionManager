@@ -1,26 +1,17 @@
-<h1>Listing questions</h1>
-
-<table>
-  <tr>
-    <th>Display name</th>
-    <th>Question</th>
-    <th>District</th>
-    <th>Election</th>
-  </tr>
-
-<% @questions.each do |question| %>
-  <tr>
-    <td><%=h question.display_name %></td>
-    <td><%=h truncate(question.question,40) %></td>
-    <td><%=h question.requesting_district.display_name %></td>
-    <td><%=h question.election.display_name %></td>
-    <td><%= link_to 'Show', question %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New question', new_question_path %>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active">
+        <%= link_to "#{t("ttv.list", :default => "List")}", questions_path %>
+      </li>
+      <li>
+        <%= link_to "#{t("ttv.new", :default => "New")}", new_question_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= t("ttv.all", :default => "All") %>Questions</h2>
+    <%= render :partial => 'questions_list' %>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

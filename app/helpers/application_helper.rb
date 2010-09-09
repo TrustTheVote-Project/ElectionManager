@@ -99,12 +99,13 @@ module ApplicationHelper
       jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
     end
     if c_or_q_or_p_link != ""
-      html = c_or_q_or_p_link + " <small> (in " + el_link + " in " + jur_link + " )</small>"
+      html = c_or_q_or_p_link + content_tag(:small, " (in " + el_link + " in " + jur_link + " )")
     elsif el_link != ""
-      html = el_link + " <small> (in " + jur_link + " )</small>"
+      html = el_link + content_tag(:small, " (in " + jur_link + " )")
     elsif jur_link
       html = jur_link
     end
+#    html <<  + cc.to_s
     content_tag(:h4, html)
   end
 end

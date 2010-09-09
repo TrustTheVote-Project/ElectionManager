@@ -223,8 +223,50 @@ module AbstractBallot
     def to_s
       @pdf.render
     end
-
+    
     def init_flow_items
+      @flow_items = []
+      # puts "TGD: election districts = #{@election.district_set.jur_districts.map(&:display_name).join(',')}"
+      # puts "TGD: precinct_split districts = #{@precinct.district_set.districts.map(&:display_name).join(',')}"
+      
+      # intersection of this precinct split's districts and an election's districts
+      ballot_districts = @precinct.ballot_districts(@election)
+      # puts "TGD: adding ballot flow items for #{ballot_districts.map(&:display_name).join(',')}"
+      
+      ballot_districts.each do |district|
+        # puts "TGD: creating header flow item for district #{district.display_name}"
+        header_item = @c.create_flow_item @c.et.get(district, :display_name)        
+
+        contest_list = Contest.find_all_by_district_id(district.id)
+        # puts "TGD: contest_list = #{contest_list.map(&:display_name).join(',')}"
+        
+        contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
+          if header_item
+            # puts "TGD: adding contest flow #{contest.display_name} and heading for district #{district.display_name}"
+            @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(contest)] ))
+            header_item = nil
+          else
+            # puts "TGD: adding contest flow #{contest.display_name} for district #{district.display_name}"
+            @flow_items.push(@c.create_flow_item(contest))
+          end
+        end
+        question_list = Question.find_all_by_requesting_district_id(district.id)
+        # puts "TGD: question_list = #{question_list.map(&:display_name).join(',')}"
+
+        question_list.each do |question|
+          if header_item
+            # puts "TGD: adding question flow #{question.display_name} and heading for district #{district.display_name}"
+            @flow_items.push(@c.create_flow_item( [header_item, @c.create_flow_item(question)] ))
+            header_item = nil
+          else
+            # puts "TGD: adding question flow #{question.display_name} for district #{district.display_name}"
+            @flow_items.push(@c.create_flow_item(question))
+          end
+        end
+      end       
+    end
+
+    def init_flow_items_old
       @flow_items = []
       @precinct.districts(@election.district_set).each do |district|
         header_item = @c.create_flow_item @c.et.get(district, :display_name)        

@@ -114,6 +114,7 @@ class Test::Unit::TestCase
     end
   end
   
+   
   def create_contest(name, voting_method, district, election, position = 0)
     contest = Contest.make(:display_name => name,
                            :voting_method => voting_method,

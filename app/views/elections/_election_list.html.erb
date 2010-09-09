@@ -8,9 +8,6 @@
             <%= t("activerecord.attributes.election.date", :default => "Date" )%>
           </th>
           <th>
-            <%= t("activerecord.attributes.election.precincts", :default => "Precincts") %>
-          </th>
-          <th>
             <%= t("activerecord.attributes.election.contests", :default => "Contests") %>
           </th>
             
@@ -25,9 +22,6 @@
           </td>
           <td>
             <%= election.start_date.to_date.to_formatted_s(:long)  %>
-          </td>
-          <td>
-            <%= election.district_set.precincts.size %>
           </td>
           <td>
             <%= election.contests.count %>  

@@ -1,30 +1,56 @@
 class JurisdictionsController < ApplicationController
-  
+   
   def current
     if !current_context.jurisdiction?
       redirect_to :action => :change
     else
-      current_context.election = nil
+      @jurisdiction = current_context.jurisdiction
+      current_context.reset
+      current_context.jurisdiction = @jurisdiction
       @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
-      render :elections
+      render :show
     end  
   end
   
-  def elections
+#
+# Show the currently selected jurisdiction.
+#
+  def show
     current_context.election = nil
+    @jurisdiction = current_context.jurisdiction
     @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
   end
  
-  
   def change
-    @district_sets = DistrictSet.paginate(:per_page => 10, :page => params[:page])
+    @district_sets = DistrictSet.all
   end
   
   def set
     current_context.jurisdiction = DistrictSet.find(params[:id])
-    redirect_to :action => :elections
+    redirect_to :action => :show
+  end
+
+# Show a nice display of the precincts of a particular jurisdiction  
+  def show_precincts
+    @precincts = current_context.jurisdiction.precincts.paginate(:per_page => 10, :page => params[:page])
+    render "precincts/index"
   end
   
+# Show a nice display of all the districts of a particular jurisdiction
+  def show_districts
+    @districts = current_context.jurisdiction.jur_districts.paginate(:per_page => 10, :page => params[:page])
+    render "districts/index"
+  end
+  
+  def edit
+    @jurisdiction = current_context.jurisdiction
+  end
+ 
+ 
+    
+  
+# Actions to handle importing into the jurisdiction. There are 3 actions to represent the workflow.
+ 
   # 1. Receives file
   # 2. Checks XML vs. YAML
   # 3. Converts to EDH
@@ -40,25 +66,27 @@ class JurisdictionsController < ApplicationController
       
       if params[:import_file]
         session[:audit_id] = nil
-        begin
+        if params[:type] == "yaml"
           edh_to_audit = YAML.load(params[:import_file])
-        rescue
-          # Not of type YAML. Try XML.
-          flash[:error] = 'Ballot is not YAML.'
-          return
+        elsif params[:type] == "xml"
+          converter = TTV::XMLToEDH.new(params[:import_file])
+          edh_to_audit = converter.convert
         end
       end
-      
       audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
       audit_obj.save!
       session[:audit_id] = audit_obj.id
-      audit_obj.audit
+      audit_obj.audit :jurisdiction
       
       if audit_obj.ready_for_import?
         redirect_to :action => :do_import
       else
         redirect_to :action => :interactive_audit
       end
+    rescue Exception => exc
+       logger.error("Message for the log file #{exc.message}")
+       flash[:error] = "Failed to import file: #{exc.message}"
+       redirect_to :back
     end
   end
   
@@ -76,24 +104,27 @@ class JurisdictionsController < ApplicationController
     audit_obj.alerts.each { |alert| 
       choice = params.find{|param| param[0] == alert.alert_type}
       alert.choice = choice[1] if choice
-    }
-    
-    audit_obj.apply_alerts
-    
-    audit_obj.audit
+    } 
+    audit_obj.apply_alerts    
+    audit_obj.audit :jurisdiction
     
     if audit_obj.ready_for_import?
       redirect_to :action => :do_import
     else
       redirect_to :action => :interactive_audit
     end
+  rescue Exception => exc
+    Alert.destroy_all
+    logger.error("Message for the log file #{exc.message}")
+    flash[:error] = "Failed to import file: #{exc.message}"
+    redirect_to :back
   end
-  
+
   # 1. Get Audit object from DB (stored as params[:audit_id])
   # 2. Import from Audit's EDH
   def do_import
     import_obj = TTV::ImportEDH.new(Audit.find(session[:audit_id]).election_data_hash)
-    import_obj.import
+    import_obj.import_to_jurisdiction(current_context.jurisdiction)
     flash[:notice] = "Import successful."
     redirect_to :action => :import
   end

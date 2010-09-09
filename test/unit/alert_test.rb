@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'ttv/alert'
 
 class AlertTest < ActiveSupport::TestCase
   context "An alert model object" do

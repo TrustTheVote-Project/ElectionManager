@@ -25,13 +25,18 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'tpitale-constant_cache', :lib => 'constant_cache', :version => '>= 0.1.2'
   config.gem 'rubyzip', :version => '>= 0.9.4', :lib => 'zip/zip'
-  config.gem 'redgreen', :version => '>=1.2.2'
   config.gem 'searchlogic', :version => '>=2.4.14'
   config.gem 'cancan'
   config.gem 'faker'
   config.gem 'machinist'
   config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
   config.gem 'pdf-reader'
+  
+  
+  unless !ENV['TM_DIRECTORY'].nil?
+    config.gem 'redgreen', :version => '>=1.2.2'
+  end
+  
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

@@ -2,7 +2,6 @@ class DistrictsController < ApplicationController
 
   def index
     @districts = District.paginate(:per_page => 10, :page => params[:page])
-    
   end
 
   def show

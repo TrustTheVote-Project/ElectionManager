@@ -1,34 +1,9 @@
-# == Schema Information
-# Schema version: 20100802153118
-#
-# Table name: elections
-#
-#  id                       :integer         not null, primary key
-#  display_name             :string(255)
-#  district_set_id          :integer
-#  start_date               :datetime
-#  created_at               :datetime
-#  updated_at               :datetime
-#  ballot_style_template_id :integer         default(0)
-#  default_voting_method_id :integer         default(0)
-#
-
-# == Schema Information
-# Schema version: 20100215144641
-#
-# Table name: elections
-#
-#  id              :integer         not null, primary key
-#  display_name    :string(255)
-#  district_set_id :integer
-#  start_date      :datetime
-#  created_at      :datetime
-#  updated_at      :datetime
-#
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
     has_many :contests, :order => :position, :dependent => :destroy
     has_many :questions, :order => :display_name, :dependent => :destroy
+    
+    attr_accessible :ident, :display_name, :district_set_id, :district_set, :start_date, :district_set
     
     validates_presence_of :display_name
     belongs_to :district_set
@@ -42,14 +17,79 @@ class Election < ActiveRecord::Base
       end
       return s
     end
+
+    def precinct_splits
+      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
+      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+    end
     
     def districts
-      @districts = district_set.districts if (!@districts)
-      @districts  
+      district_set.districts
+    end
+    
+    def contest_districts
+      contests.map(&:district)
     end
 
-    def validate 
-       errors.add(:district_set_id , "is invalid") unless DistrictSet.exists?(district_set)
+    def question_districts
+      questions.map(&:requesting_district)
+    end
+    
+# Iterator for generating ballots.
+# <tt>param:</tt> A Precinct, then it's all the ballots for this precinct in this election
+# <tt>:</tt>A Jurisdiction (DS), then it's all the ballots for this Jurisdiction in this election
+
+    def each_ballot param=nil
+      cont_list = contests
+      quest_list = questions
+      if param.class == Precinct
+        prec_splits = param.precinct_splits
+      elsif param.class == DistrictSet # TODO will be Jurisdiction in the future)
+        precincts = Precinct.find_all_by_jurisdiction_id(param.id)
+        prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+      else 
+        raise ArgumentError, "Invalid parameter for Election.each_ballot"
+      end
+      prec_splits.each do 
+        |split|
+          result_cont_list = cont_list.reduce([]) do
+            |memo, cont| memo |= (split.district_set.districts.member?(cont.district)) ? [cont] : []
+          end
+          result_quest_list = quest_list.reduce([]) do
+            |memo, quest| memo |= (split.district_set.districts.member?(quest.requesting_district)) ? [quest] : []
+          end
+          yield split, result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
+      end
+    end
+
+# Generate a ballot map, as a Hash. This maps certain characteristics of the ballot to its file name
+# TODO: Move this to a BallotUtils or Ballot class which will capture the functionality relating to controling
+# ballot generation.
+  def generate_ballot_map
+    outlist = []
+    each_ballot(district_set) do | split, result_cont_list, result_quest_list |
+
+      outlist << {:precinct_split => split.display_name, :file => "#{split.display_name}.pdf"}
+    end
+    puts "*** #{outlist.inspect}"
+    return outlist
+  end
+
+# Return an array with the Districts corresponding to this Election's Questions
+    def question_districts
+      questions.reduce([]) { |memo, q| memo <<  q.requesting_district }      
+    end
+    
+# Return an array with the Districts corresponding to this Election's Contest
+    def contest_districts
+      contests.reduce([]) { |memo, c| memo << c.district }      
+    end
+    
+# Return an array with the Districts involved in this Election.
+    def collect_districts
+      q = question_districts
+      d = contest_districts
+      q | d
     end
     
     # really used for export. I'd use a different method, if I could force 'render :xml' to call it
@@ -112,7 +152,7 @@ class Election < ActiveRecord::Base
     return equal
   end
 
-  #
+  # TODO: equal_districts? and friends should be moved out of Election, maybe in its owbs class or module?
   # Contains assertions that certify the election objects election1 and 
   # election2 contain equivalent precincts and associated districts
   #
@@ -163,9 +203,7 @@ class Election < ActiveRecord::Base
       end
       return new_ballot
     end
-    
-    
-    
+        
     
     def render_ballots(election, precincts, ballot_style_template)
       style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
@@ -183,7 +221,22 @@ class Election < ActiveRecord::Base
         #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
         
       return ballot_array
-    end
+   end
+  
+#
+# Handy verbose to_s for Elections. Feel free to add useful stuff as needed.
+#
+  def to_s
+    s = "E: #{display_name}, c#: #{contests.count}, q#:#{questions.count}\n"
+    contests.each do |c|
+      s += "   * c: #{c.display_name} (d: #{c.district.display_name})\n"
+    end      
     
+    questions.each do |q|
+      s += "   * q: #{q.display_name} (d: #{q.requesting_district.display_name})\n"
+    end
+
+    return s
+  end
 
 end
