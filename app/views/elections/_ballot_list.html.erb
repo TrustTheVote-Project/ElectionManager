@@ -33,8 +33,9 @@
                     <%= split.display_name %> 
                 </td>
                 <td>
-                  precinct contests
-                	<%# = result_cont_list.size %>
+                  <%= split.ballot_contests(@election).length %>
+                  <%# = result_cont_list.size %>
+
                 </td>
                 <td>
                   precinct questions
