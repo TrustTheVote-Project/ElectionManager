@@ -24,7 +24,7 @@ class Election < ActiveRecord::Base
     end
     
     def districts
-      district_set.districts
+      district_set.jur_districts
     end
     
     def contest_districts
