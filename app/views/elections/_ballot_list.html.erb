@@ -26,20 +26,17 @@
                     &nbsp;
                 </th>
             </tr>
-            <% #@election.each_ballot(@election.district_set) do |split, result_cont_list, result_quest_list | -%>
-            <% @election.precinct_splits.each do |split| -%>
+            <% @election.each_ballot(@election.district_set) do |split, result_cont_list, result_quest_list | -%>
+            <% #@election.precinct_splits.each do |split| -%>
             <tr class="<%= cycle("odd", "even") %>">
                 <td>
                     <%= split.display_name %> 
                 </td>
                 <td>
-                  <%= split.ballot_contests(@election).length %>
                   <%# = result_cont_list.size %>
-
                 </td>
                 <td>
-                  precinct questions
-                    <%# = result_quest_list.size %>
+                  <%= result_quest_list.size %>
                 </td>
                <td class="last">
                  <%= link_to "generate", ballot_election_precinct_path(@election, split)  %>   preview
