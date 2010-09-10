@@ -100,11 +100,6 @@ class MultiClassTest < ActiveSupport::TestCase
       assert_valid @p
       assert_valid @d
     end
-
-    should "be able to add a precinct to a known district" do
-      @d.precincts << @p
-      assert_valid @d
-    end
     
     should "be able to add a dist to a known prec" do
 # I need to find out why this doesn't work.
