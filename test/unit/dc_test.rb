@@ -32,45 +32,45 @@ class RendererTest < ActiveSupport::TestCase
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
                            :election => e1,
-                           :position => 1)
+                           :position => 1, :ident => 'ident-1')
 
-      Candidate.make(:party => dem_party, :display_name => "Missy Reilly Smith", :contest => contest1)
+      Candidate.make(:party => dem_party, :display_name => "Missy Reilly Smith", :contest => contest1, :ident => 'ident-1')
       
       mayor_contest = Contest.make(:display_name => "MAYOR OF THE DISTRICT OF COLUMBIA",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
                            :election => e1,
-                           :position => 1)
+                           :position => 1, :ident => 'ident-2' )
 
-      Candidate.make(:party => rep_party, :display_name => "Robert Vaughn", :contest => mayor_contest)
-      Candidate.make(:party => dem_party, :display_name => "Ian Trainor", :contest => mayor_contest)
+      Candidate.make(:party => rep_party, :display_name => "Robert Vaughn", :contest => mayor_contest, :ident => 'ident-2')
+      Candidate.make(:party => dem_party, :display_name => "Ian Trainor", :contest => mayor_contest, :ident => 'ident-3')
       
       chair_contest = Contest.make(:display_name => "CHAIRMAN OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
                            :election => e1,
-                           :position => 2)
+                           :position => 2, :ident => 'ident-3')
 
-      Candidate.make(:party => rep_party, :display_name => "Marcella Farrell", :contest => chair_contest)
-      Candidate.make(:party => dem_party, :display_name => "Darby Rush", :contest => chair_contest)
+      Candidate.make(:party => rep_party, :display_name => "Marcella Farrell", :contest => chair_contest, :ident => 'ident-4')
+      Candidate.make(:party => dem_party, :display_name => "Darby Rush", :contest => chair_contest, :ident => 'ident-5')
       
       atlarge_contest = Contest.make(:display_name => "AT-LARGE MEMBER OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
                            :election => e1,
-                           :position => 3)
+                           :position => 3, :ident => 'ident-4')
 
-      Candidate.make(:party => rep_party, :display_name => "Catherine Calnan", :contest => atlarge_contest)
-      Candidate.make(:party => dem_party, :display_name => "Sybina Cull", :contest => atlarge_contest)
+      Candidate.make(:party => rep_party, :display_name => "Catherine Calnan", :contest => atlarge_contest, :ident => 'ident-6')
+      Candidate.make(:party => dem_party, :display_name => "Sybina Cull", :contest => atlarge_contest, :ident => 'ident-7')
       
       ward_contest = Contest.make(:display_name => "WARD COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
                            :election => e1,
-                           :position => 4)
+                           :position => 4, :ident => 'ident-5')
 
-      Candidate.make(:party => rep_party, :display_name => "Mike Donelan", :contest => ward_contest)
-      Candidate.make(:party => dem_party, :display_name => "Cassie McDonald", :contest => ward_contest)
+      Candidate.make(:party => rep_party, :display_name => "Mike Donelan", :contest => ward_contest, :ident => 'ident-8')
+      Candidate.make(:party => dem_party, :display_name => "Cassie McDonald", :contest => ward_contest, :ident => 'ident-9')
 
       # @template = BallotStyleTemplate.make(:display_name => "test template")
       @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => true)

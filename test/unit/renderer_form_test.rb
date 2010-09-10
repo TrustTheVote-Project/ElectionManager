@@ -35,14 +35,14 @@ class RendererTest < ActiveSupport::TestCase
       contest = Contest.make(:display_name => "ContestNotFitOnPage",
                              :voting_method => VotingMethod::WINNER_TAKE_ALL,
                              :district => e1.district_set.jur_districts.first,
-                             :election => e1, :position => pos)
+                             :election => e1, :position => pos, :ident => "ident-ContestNoFitOnPage")
       
       pos += 1
       
       # create a set of checkboxes that will not fit on page 1.
       [:silly, :bluehat, :redshirt, :socialdemocrat, :nonothing, :whig, :bongo, :communist, :green, :democrat, :republican, :independent].each do |party_sym|
         party = Party.make(:display_name => party_sym.to_s)
-        Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => contest)
+        Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => contest, :ident => "ident-#{party_sym}_Candidate_#{contest.display_name}")
       end
       
       Question.make(:display_name => "Dog Racing",

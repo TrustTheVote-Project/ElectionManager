@@ -149,6 +149,10 @@ module DefaultBallot
         active = @pdf.form? 
         header(rect)
 
+        # contest name  and id used in field identifiers
+        cont_name = @contest.display_name.gsub(/\s+/,'_')
+        cont_ident = @contest.ident.gsub(/\s+/,'_')
+
         # CANDIDATES
         candidates_list = @contest.candidates
         candidates_list.sort { |a,b| a.order <=> b.order}.each do |candidate|
@@ -157,8 +161,11 @@ module DefaultBallot
             config.frame_item rect, top
             rect = yield
           end
+
+          cand_name = candidate.display_name.gsub(/\s+/,'_')
           
-          checkbox_id = "#{@contest.display_name}_#{candidate.display_name}_#{candidate.party.display_name}"
+          checkbox_id = "#{cont_ident}+#{cand_name}+#{cont_name}"
+          
           rect.top -= VPAD * 2
           # need to create a bounding box here in order to get
           # the pdf.text(...) to change it's bounding box???
@@ -179,8 +186,7 @@ module DefaultBallot
         
         @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
           # @contest.open_seat_count.times do |i|
-          #checkbox_id = "#{@contest.display_name}_writein_#{i}"
-          checkbox_id = "#{@contest.display_name}_writein"
+          checkbox_id = "#{cont_ident}+write_in"
            contest_bottom = draw_contest( 0, contest_bottom, rect.width, config.bt[:or_write_in], :active => active, :id => checkbox_id) 
             rect.top -= contest_bottom
             rect.top -= VPAD * 2
@@ -189,7 +195,7 @@ module DefaultBallot
           left = 50
           
           if active
-            textbox_id = "#{@contest.display_name}_textbox_writein"
+            textbox_id = "#{cont_ident}+writein_text"
             @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
           end
           @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]

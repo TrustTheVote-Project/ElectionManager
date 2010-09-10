@@ -9,18 +9,9 @@ class ContestFlowTest < ActiveSupport::TestCase
       scanner = TTV::Scanner.new
       election = Election.make(:display_name => "Election 1")
       
-      
-      @contest = Contest.make(:display_name => "US Senate",
-                              :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                              :district => District.make(:display_name => "District 1"),
-                              :election => election,
-                              :position => 0)
+      district = District.make(:display_name => "District 1")
+      @contest = create_contest("US Senate",VotingMethod::WINNER_TAKE_ALL, district, election, 0)
       @contest_flow_height = 168
-      
-      [:democrat, :republican, :independent].each do |party_sym|
-        party = Party.make(party_sym)
-        Candidate.make(:party => party, :display_name => "#{party_sym}_Candidate", :contest => @contest)
-      end
       
       @template = BallotStyleTemplate.make(:display_name => "test template")
       @ballot_config = DefaultBallot::BallotConfig.new( election, @template)
