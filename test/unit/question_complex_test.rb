@@ -1,12 +1,15 @@
 require 'pp'
 require 'test_helper'
 
+# TODO: may want to remove this test as
+# Question.questions_for_precinct_election(...) is no longer used
+=begin
 class QuestionTest < ActiveSupport::TestCase
   
   setup_question_requesters do
     
     context "finding questions requested by districts" do
-
+      
       should "in the first election of the first  precinct" do
         
         # find the questions that where requested by a district that is
@@ -54,3 +57,4 @@ class QuestionTest < ActiveSupport::TestCase
   end
   
 end
+=end
