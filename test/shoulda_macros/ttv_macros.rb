@@ -303,26 +303,26 @@ class Test::Unit::TestCase
     p1 = Precinct.make(:display_name => "Precinct 1", :jurisdiction => ds1)
     # TODO: what happens when a precinct p1 has a different
     # jurisdiction/district_set that one of it's precincts?
-    @prec_split1 = PrecinctSplit.make(:display_name => "Precinct Split 1", :precinct => p1, :district_set => ds1)
-    p1.precinct_splits << @prec_split1
+    @prec_split = PrecinctSplit.make(:display_name => "Precinct Split 1", :precinct => p1, :district_set => ds1)
+    p1.precinct_splits << @prec_split
 
     # make an election for this jurisdiction
-    e1 = Election.create!(:display_name => "Election 1", :district_set => ds1)
-    e1.start_date = DateTime.new(2009, 11,3)
+    @election = Election.create!(:display_name => "Election 1", :district_set => ds1)
+    @election.start_date = DateTime.new(2009, 11,3)
 
     # Create 3 contests for this election
     pos = 0;
     ["Contest 1", "Contest 2", "Contest 3", "State Rep", "Attorney General","Governor"].each do |contest_name|
       contest = create_contest(contest_name,
                                VotingMethod::WINNER_TAKE_ALL,
-                               e1.district_set.jur_districts.first,
-                               e1, pos)
+                               @election.district_set.jur_districts.first,
+                               @election, pos)
       pos += 1
     end
     
     Question.make(:display_name => "Dog Racing",
-                  :election => e1,
-                  :requesting_district => e1.district_set.districts.first,
+                  :election => @election,
+                  :requesting_district => @election.district_set.districts.first,
                   :question => 'This proposed law would prohibit any dog racing or racing meeting in Massachusetts where any form of betting or wagering on the speed or ability of dogs occurs. The State Racing Commission would be prohibited from accepting or approving any application or request for racing dates for dog racing. Any person violating the proposed law could be required to pay a civil penalty of not less than $20,000 to the Commission. The penalty would be used for the Commission\'s administrative purposes, subject to appropriation by the state Legislature. All existing parts of the chapter of the state\'s General Laws concerning dog and horse racing meetings would be interpreted as if they did not refer to dogs. These changes would take effect January 1, 2010. The proposed law states that if any of its parts were declared invalid, the other parts would stay in effect.' )
     
     scanner = TTV::Scanner.new
@@ -333,7 +333,7 @@ class Test::Unit::TestCase
     # @template.frame = ballot_frame
     # @template.contents = ballot_contents
     
-    @ballot_config = ::DcBallot::BallotConfig.new( e1, @template)
+    @ballot_config = ::DcBallot::BallotConfig.new( @election, @template)
 
     @pdf = create_pdf("Test Renderer")
     @ballot_config.setup(@pdf, p1)
@@ -341,8 +341,8 @@ class Test::Unit::TestCase
 
     destination = nil
     
-    # @renderer = AbstractBallot::Renderer.new(e1, p1, @ballot_config, destination)
-    @renderer = AbstractBallot::Renderer.new(e1, @prec_split1, @ballot_config, destination)
+    # @renderer = AbstractBallot::Renderer.new(@election, p1, @ballot_config, destination)
+    @renderer = AbstractBallot::Renderer.new(@election, @prec_split, @ballot_config, destination)
 
   end
   

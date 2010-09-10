@@ -230,19 +230,6 @@ class BallotConfigTest < ActiveSupport::TestCase
 
           @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")   
 
-
-        end
-
-        should "get the Content flow item for Contests" do
-          assert_instance_of DefaultBallot::FlowItem::Contest, @ballot_config.create_flow_item(Contest.new)
-        end
-        
-        should "get the Question flow item for Questions" do
-          assert_instance_of DefaultBallot::FlowItem::Question, @ballot_config.create_flow_item(Question.new)
-        end
-
-        should "get the Header flow item for Strings" do
-          assert_instance_of DefaultBallot::FlowItem::Header, @ballot_config.create_flow_item("Header Content String")
         end
 
       end # end initialize context
