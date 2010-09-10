@@ -1,0 +1,95 @@
+--- 
+:page: 
+  :margin: 
+    :top: 0
+    :left: 0
+    :bottom: 0
+    :right: 0
+  :size: 
+  - 612
+  - 1152
+  :background: "000000"
+  :layout: :portrait
+:frame: 
+  :margin: 
+    :top: 0
+    :left: 0
+    :bottom: 0
+    :right: 0
+  :content: 
+    :top: 
+      :rotate: 0
+      :graphics: "      text = @precinct.display_name\n      middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2\n      middle_y = @pdf.bounds.top - @frame[:content][:top][:width]/2 + @pdf.height_of(text)/2\n      @pdf.font(\"Times-Roman\", :size => 18, :style => :bold) do\n        @pdf.draw_text text, :at => [middle_x, middle_y]\n      end\n"
+      :text: Sample Ballot
+      :width: 50
+    :left: 
+      :rotate: 90
+      :graphics: 
+      :text: "    132301113              Sample Ballot"
+      :width: 67
+    :bottom: 
+      :rotate: 0
+      :graphics: "      text = @precinct.display_name\n      middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2\n      middle_y = @pdf.bounds.bottom + @frame[:content][:bottom][:width]/2 - @pdf.height_of(text)/2\n      @pdf.font(\"Times-Roman\", :size => 18, :style => :bold) do\n        @pdf.draw_text text, :at => [middle_x, middle_y]\n      end\n"
+      :text: Sample Ballot
+      :width: 190
+    :right: 
+      :rotate: 90
+      :graphics: 
+      :text: " tom D was here"
+      :width: 47
+  :border: 
+    :style: :solid
+    :color: "000000"
+    :width: 0
+:contents: 
+  :body: 
+    :background_color: "000000"
+    :graphics: 
+    :text: Body Text
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 0.7
+    :width: 1.0
+    :border: 
+      :style: :solid
+      :color: "000000"
+      :width: 1
+  :footer: 
+    :background_color: "#00FF00"
+    :graphics: 
+    :text: Footer Text
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 0.15
+    :width: 1.0
+    :border: 
+      :style: :solid
+      :color: FF0000
+      :width: 0
+  :header: 
+    :background_color: "000000"
+    :graphics: "      \n      # draw yellow background rectangle\n      orig_color = @pdf.fill_color\n      @pdf.fill_color('F0E68C')\n      rect_x = 36\n      rect_y= @pdf.bounds.top - 14\n      rect_width = 430\n      rect_height = 53\n      @pdf.fill_rectangle([rect_x, rect_y], rect_width, rect_height)\n      @pdf.fill_color(orig_color)\n      \n      # Election Date is used in header\n      edate = Date.parse(\"#{@election.start_date}\").strftime(\"%A, %B %d, %Y\" )\n      \n      @pdf.move_down 14\n      @pdf.text \"OFFICIAL REPUBLICAN BALLOT\\n#{@election.display_name}\", :align => :center, :style => :bold\n      @pdf.text \"#{@election.district_set.display_name}\\n#{edate}\", :align => :center\n      \n      # instructions\n      @pdf.bounding_box [0, @pdf.bounds.top - 82], :width => @pdf.bounds.width, :height => @pdf.bounds.height - 82 do\n        \n        @pdf.stroke_bounds\n        \n        @pdf.move_down 3\n        @pdf.font \"Helvetica\", :style => :bold, :size => 10 do\n          @pdf.text \"INSTRUCTIONS TO VOTER\", :align => :center\n        end\n        \n        @pdf.move_down 5\n        instr_text = \"1. TO VOTE YOU MUST DARKEN THE OVAL TO THE LEFT OF YOUR CHOICE COMPLETELY. An oval darkened to the left of the name of any candidate indicates a vote for that candidate.\\n2. Use only a pencil or blue or black medium ball point pen.\\n3. If you make a mistake DO NOT ERASE. Ask for a new ballot.\\n4. For a Write-in candidate, write the name of the person on the line and darken the oval.\"\n        y = @pdf.bounds.top - @pdf.height_of(\"TEXT\")\n        @pdf.text instr_text, :size => 8\n      end\n      \n"
+    :text: Header Text
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 154
+    :width: 498
+    :border: 
+      :style: :solid
+      :color: "000000"
+      :width: 1
+  :border: 
+    :style: :dashed
+    :color: "000000"
+    :width: 1
+:ballot_layout: 
+  :create_A_headers: false
