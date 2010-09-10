@@ -3,51 +3,162 @@ require 'yaml'
 module TTV
   # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
   class ImportEDH
+
     attr_reader :hash, :election
+    
+    def l (string)
+      Rails.logger.debug string
+    end
 
     # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.
     def initialize(hash)
       @hash = hash
-      @jurisdiction = nil
-      @dist_id_map = {}
+      @jurisdictions = []
     end
     
+    # Performs the import of all items contained within <tt>hash</tt>.
     def import
-      load_jurisdiction
-      @hash["ballot_info"]["precinct_list"].each { |prec| load_precinct prec}
+      load_jurisdictions
+      load_districts
+      load_precincts
+      load_district_sets
+      load_elections
+      load_precinct_splits
+      load_candidates
+      load_contests
+      # load_questions
     end
     
-    def load_jurisdiction
-      @jurisdiction = DistrictSet.find_or_create_by_display_name(@hash["ballot_info"]["jurisdiction_display_name"])
+    def import_to_jurisdiction jur
+      @jurisdiction = jur
+      load_districts
+      load_precincts
+      load_district_sets
+      load_elections
+      load_precinct_splits
+      load_candidates
+      load_contests
+      # load_questions
+    end        
+    
+    # Imports all jurisdictions contained in the EDH
+    def load_jurisdictions      
+      @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris } if @hash["body"].has_key? "jurisdictions"
     end
     
-    # load a single precinct into ElectionManager
-    # <tt>precinct::</tt> hash representing a single precinct
-    def load_precinct precinct
-      # First find or create the precinct
-      prec_disp_name = precinct["display_name"]
-      new_precinct = Precinct.find_or_create_by_display_name(prec_disp_name)
-      
-      if precinct.key? "district_list"
-        load_districts precinct["district_list"], new_precinct 
-      end
+    # Imports all districts contained in the EDH
+    def load_districts
+      @hash["body"]["districts"].each { |dist| load_district dist} if @hash["body"].has_key? "districts"
     end
     
-    # find or create a list of districts.
-    # <tt>district_list::</tt> district_list from hash
-    # <tt>precinct::</tt> ElectionManager precinct object associated with district_list
-    def load_districts district_list, precinct
-      district_list.each do |district_hash|
-        dist_disp_name = district_hash["display_name"]
-        district = District.find_or_create_by_display_name(dist_disp_name)
+    # Imports all precincts contained in the EDH
+    def load_precincts
+      @hash["body"]["precincts"].each { |prec| load_precinct prec} if @hash["body"].has_key? "precincts"
+    end
+    
+    # Imports all candidates contained in the EDH
+    def load_candidates
+      @hash["body"]["candidates"].each { |cand| load_candidate cand} if @hash["body"].has_key? "candidates"
+    end  
+    
+    # Imports all contests contained in the EDH
+    def load_contests
+      @hash["body"]["contests"].each { |cont| load_contest cont} if @hash["body"].has_key? "contests"
+    end
+    
+    # Imports all elections contained in the EDH
+    def load_elections
+      @hash["body"]["elections"].each { |elec| load_election elec} if @hash["body"].has_key? "elections"
+    end
+    
+    def load_precinct_splits
+      @hash["body"]["splits"].each { |split| load_precinct_split split } if @hash["body"].has_key? "splits"
+    end
+    
+    # Imports all district_sets contained in the EDH
+    def load_district_sets
+      @hash["body"]["district_sets"].each { |dset| load_district_set dset} if @hash["body"].has_key? "district_sets"
+    end 
         
-        # Add this district to the district set we're working with, and to the precinct being built
-        @jurisdiction.districts << district
-        district.precincts << precinct
+    # Loads an EDH formatted jurisdiction into EM
+    def load_jurisdiction jurisdiction
+      new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
+      new_jurisdiction.save!
+    end
+    
+    # Loads an EDH formatted district into EM
+    def load_district district
+      if district["type"] and DistrictType.find_by_title(district["type"])
+        district_type = DistrictType.find_by_title(district["type"])
+      else
+        district_type = DistrictType.find(0) # Built-in default district type. TODO: Other better default in db/seed/once/district_types.yml?
+      end
+      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
+# TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 
+      if @jurisdiction
+        new_district.jurisdiction = @jurisdiction
+      end
+      new_district.save!
+    end
 
-        # For later lookups during contest/question import, record which district "ident" represents which District object
-        @dist_id_map[district_hash["ident"]] = district
+    # Loads an EDH formatted precinct into EM
+    def load_precinct precinct
+      @jurisdiction ||= DistrictSet.find_by_ident(precinct["jurisdiction_ident"])
+      new_precinct = Precinct.find_or_create_by_ident(:display_name => precinct["display_name"], 
+                                                      :ident => precinct["ident"])
+      new_precinct.jurisdiction = @jurisdiction                                                
+      new_precinct.save!
+        l "*** after new_precinct_save: #{new_precinct.inspect}"
+        l "    #{new_precinct.jurisdiction.inspect}\n\n"
+    end
+    
+    # Load an EDH formatted PrecinctSplit into EM. The PrecinctSplit's display_name is the
+    # Associated DistrictSet's ident. We know that PrecinctSplit : DistrictSet is 1:1
+    def load_precinct_split split
+      dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
+      prec = Precinct.find_by_ident(split["precinct_ident"])
+      PrecinctSplit.create!(:display_name => dist_set.ident, :district_set => dist_set, :precinct => prec)
+    end
+    
+    # Load an EDH formatted district_set into EM
+    def load_district_set distset
+      if !DistrictSet.find_by_ident(distset["ident"])
+        ds_new = DistrictSet.create!(:ident => distset["ident"])
+        distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
+        ds_new.save!
       end
     end
+    
+    # Loads an EDH formatted candidate into EM
+    def load_candidate candidate
+      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party_id => Party.find_or_create_by_display_name(candidate["party"]).id)
+      new_candidate.save! 
+    end
+    
+    # Loads an EDH formatted contest into EM
+    def load_contest contest
+      if contest["voting_method"] and VotingMethod.find_by_display_name(contest["voting_method"])
+        voting_method_id = VotingMethod.find_by_display_name(contest["voting_method"]) 
+      else
+        voting_method_id = 0
+      end
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
+                                                    :ident => contest["ident"], 
+                                                    :voting_method_id => voting_method_id, 
+                                                    :district => District.find_by_ident(contest["district_ident"]))
+      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
+      new_contest.election = Election.find_by_ident(contest["election_ident"])
+      new_contest.save!
+    end
+
+    # Loads an EDH formatted election into EM
+    def load_election election
+      new_election = Election.find_or_create_by_ident(
+          :display_name => election["display_name"], 
+          :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_ident"]).id, 
+          :ident => election["ident"], 
+          :start_date => election["start_date"])      
+      new_election.save!
+    end      
   end
 end

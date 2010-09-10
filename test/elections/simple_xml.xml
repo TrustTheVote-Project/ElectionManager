@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election display_name="New Hampshire General Election" start_date="2010-11-04 08:00:00 -0700">
+  <!-- the districts field display_name = "New Hampshire" has been removed for this example -->
+  <districts display_name="New Hampshire">
+    <district type="state" display_name="State of New Hampshire" id="1">
+      <precinct idref="1"/>
+      <precinct idref="2"/>
+    </district>
+    <district type="county" display_name="Bedford County" id="2">
+      <precinct idref="2"/>
+    </district>
+  </districts>
+  <precincts>
+    <precinct display_name="State of New Hampshire" id="1"/>
+    <precinct display_name="Bedford County" id="2"/>
+  </precincts>
+</election>

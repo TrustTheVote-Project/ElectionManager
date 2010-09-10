@@ -6,39 +6,37 @@ class RendererTest < ActiveSupport::TestCase
   context "AbstractBallot::Renderer with pdf form elements" do
     
     setup do
-      
-      # create a precint within 4 Districts
-      p1 = Precinct.create!(:display_name => "Precint 1")
-      (0..3).each do |i|
-        p1.districts << District.new(:display_name => "District #{i}", :district_type => DistrictType::COUNTY)
-      end
-      p1.save
-      
+      d1 = District.make(:display_name => "District 1", :district_type => DistrictType::COUNTY)
+      d2 = District.make(:display_name => "District 2", :district_type => DistrictType::COUNTY)
+
       # create a jurisdiction with only the first 2 districts 
-      ds1  = DistrictSet.create!(:display_name => "District Set 1")
-      ds1.districts << District.find_by_display_name("District 0")
-      ds1.districts << District.find_by_display_name("District 1")
-      ds1.save!
+      ds1  = DistrictSet.make(:display_name => "District Set 1")
+      ds1.districts << d1
+      ds1.districts << d2
+      ds1.jur_districts << d1
+      
+      p1 = Precinct.make(:display_name => "Precinct 1", :jurisdiction => ds1)
+      # TODO: what happens when a precinct p1 has a different
+      # jurisdiction/district_set that one of it's precincts?
+      @prec_split1 = PrecinctSplit.make(:display_name => "Precinct Split 1", :precinct => p1, :district_set => ds1)
+      p1.precinct_splits << @prec_split1
 
       # make an election for this jurisdiction
       e1 = Election.create!(:display_name => "Election 1", :district_set => ds1)
       e1.start_date = DateTime.new(2009, 11,3)
-
-      # OK, now we have a precinct that contains districts 0 to 3
-      # And an election that has districts 0 and 1
       
       # Create 3 contests for this election
       pos = 0;
       ["Lt Governor", "State Rep", "Attorney General","Governor", "Contest5", "Contest6", "Contest7"].each do |contest_name|
-        create_contest(contest_name,  VotingMethod::WINNER_TAKE_ALL,e1.district_set.districts.first, e1, pos)
+        create_contest(contest_name,  VotingMethod::WINNER_TAKE_ALL,e1.district_set.jur_districts.first, e1, pos)
         pos += 1
       end
       
       contest = Contest.make(:display_name => "ContestNotFitOnPage",
-                                :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                                :district => e1.district_set.districts.first,
-                                :election => e1, :position => pos)
-        
+                             :voting_method => VotingMethod::WINNER_TAKE_ALL,
+                             :district => e1.district_set.jur_districts.first,
+                             :election => e1, :position => pos)
+      
       pos += 1
       
       # create a set of checkboxes that will not fit on page 1.
@@ -63,7 +61,7 @@ class RendererTest < ActiveSupport::TestCase
 
       destination = nil
       
-      @renderer = AbstractBallot::Renderer.new(e1, p1, @ballot_config, destination)
+      @renderer = AbstractBallot::Renderer.new(e1, @prec_split1, @ballot_config, destination)
       
     end
     

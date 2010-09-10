@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
 
   def index
     current_context.reset
-    @questions = Question.all
+    @questions = Question.paginate(:per_page => 10, :page => params[:page])
   end
 
   def show

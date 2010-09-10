@@ -9,7 +9,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         setup do
           
           @e1 = Election.find_by_display_name "Election 1"
-          @p1 = Precinct.find_by_display_name "Precint 1"
+          @p1 = Precinct.find_by_display_name "Precinct 1"
           
           # TODO: create a test for ballot_instructions, it's
           # commented out below
@@ -157,10 +157,11 @@ class BallotConfigTest < ActiveSupport::TestCase
           
           @ballot_config.render_header flow_rect
           
-          util = TTV::Prawn::Util.new(@pdf)
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4e6f76656d6265722030322c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")
 
-          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
+          util = TTV::Prawn::Util.new(@pdf)
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4e6f76656d6265722030322c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n373.622666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e63742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\nQ\n", util.page_contents[0]
+          
         end
         
         should "render a header for this page" do
@@ -177,12 +178,14 @@ class BallotConfigTest < ActiveSupport::TestCase
           @e1.start_date = DateTime.new(2009, 7, 25)
           
           @ballot_config.render_header flow_rect
+
+          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")
           
           util = TTV::Prawn::Util.new(@pdf)
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4a756c792032342c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n377.236666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\n", util.page_contents[0]
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4a756c792032342c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n373.622666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e63742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\nQ\n", util.page_contents[0]
 
-          @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")          
         end
+        
         # render the column instruction image in the leftmost column
         should "not render column instructions" do
           # bounding rect of pdf page

@@ -1,23 +1,9 @@
-# == Schema Information
-# Schema version: 20100802153118
-#
-# Table name: candidates
-#
-#  id           :integer         not null, primary key
-#  display_name :string(255)
-#  party_id     :integer
-#  contest_id   :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  ident        :string(255)
-#  order        :integer         default(0)
-#
 
 class Candidate < ActiveRecord::Base
   belongs_to :contest
   belongs_to :party
   
-  attr_accessible :order, :ident
+  attr_accessible :order, :ident, :display_name
   
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique candidate ident attempted: {{value}}."
@@ -32,7 +18,6 @@ class Candidate < ActiveRecord::Base
   
 
   attr_accessible :display_name, :party_id, :contest_id
-
   validates_presence_of :display_name
   
   # default values, should not be all republican/democrat

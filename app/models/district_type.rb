@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100802153118
+# Schema version: 20100813053101
 #
 # Table name: district_types
 #
@@ -14,7 +14,9 @@ class DistrictType < ActiveRecord::Base
   include ConstantCache
 
   cache_constants :key => :title
-    
+  
+  attr_accessible :title
+  
   def DistrictType.xmlToId(xml)
     raise "unknown district type #{xml}" unless const_get(xml.constant_name)
     const_get(xml.constant_name).id

@@ -1,0 +1,47 @@
+<div id="contents">
+    <div class="inner">
+        <%= javascript_include_tag :defaults %>
+        <div class="flash" id="flash">
+            <% flash.each do |type, message| -%>
+            <div class="message <%= type %>">
+                <p>
+                    <%= message %>
+                </p>
+            </div>
+            <% end -%>
+            <% flash.discard -%>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    <%= t("ttv.ballot", :default => "Ballot") %>
+                </th>
+                <th>
+                    <%= t("ttv.contests", :default => "Contests") %>
+                </th>
+                <th>
+                    <%= t("ttv.questions", :default => "Questions") %>
+                </th>
+                <th class="last">
+                    &nbsp;
+                </th>
+            </tr>
+            <% @election.each_ballot(@election.district_set) do |split, result_cont_list, result_quest_list | -%>
+            <% #@election.precinct_splits.each do |split| -%>
+            <tr class="<%= cycle("odd", "even") %>">
+                <td>
+                    <%= split.display_name %> 
+                </td>
+                <td>
+                  <%# = result_cont_list.size %>
+                </td>
+                <td>
+                  <%= result_quest_list.size %>
+                </td>
+               <td class="last">
+                 <%= link_to "generate", ballot_election_precinct_path(@election, split)  %>   preview
+                </td>
+              </tr>
+            <% end -%>
+        </table>
+    </div>
