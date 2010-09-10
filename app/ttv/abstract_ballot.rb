@@ -239,7 +239,7 @@ module AbstractBallot
       )
       @c.setup(@pdf, @precinct)
 
-      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @precinct)
+      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @precinct, @c.template)
       render_everything
     end
 

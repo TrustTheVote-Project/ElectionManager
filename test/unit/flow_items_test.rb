@@ -25,7 +25,7 @@ class FlowItemsTest < ActiveSupport::TestCase
     # Precinct and create Contest, Question and Container Flow objects
     # for each.
     should "initialize all the flow items" do
-      flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split)
+      flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split, @template)
       
       #flow_items = @renderer.instance_variable_get(:@flow_items)
       

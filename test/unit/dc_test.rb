@@ -92,7 +92,7 @@ class RendererTest < ActiveSupport::TestCase
     
     should "render" do
       # @renderer.render
-      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split1))
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split1, @template))
       @renderer.render_everything
       #pdf = @renderer.instance_variable_get(:@pdf)
       @pdf.render_file("#{Rails.root}/tmp/DCBallot.pdf")

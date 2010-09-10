@@ -18,7 +18,7 @@ class RendererTest < ActiveSupport::TestCase
     # Precinct and create Contest, Question and Container Flow objects
     # for each.
     should "initialize all the flow items" do
-      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split)
+      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split,@template)
       
       # Should have 4 flow items
       # A Combo flow that contains a Header flow and a Contest flow
@@ -67,7 +67,7 @@ class RendererTest < ActiveSupport::TestCase
     should "start page " do
       
       # setup
-      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split)
+      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split, @template)
       @renderer.instance_variable_set(:@pagenum, 0)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -117,7 +117,7 @@ class RendererTest < ActiveSupport::TestCase
     should "end page " do
       
       # setup
-      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split,@template))
       @renderer.instance_variable_set(:@pagenum, 1)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -142,7 +142,7 @@ class RendererTest < ActiveSupport::TestCase
     should "end page that is not the last page" do
       
       # setup
-      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split, @template))
       @renderer.instance_variable_set(:@pagenum, 1)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -168,7 +168,7 @@ class RendererTest < ActiveSupport::TestCase
     # middle column
     should "render everything" do
       # setup 
-      @renderer.instance_variable_set(:@flow_items, ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
+      @renderer.instance_variable_set(:@flow_items, ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split, @template))
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
 

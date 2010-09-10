@@ -47,7 +47,7 @@ module DefaultBallot
       @item.to_s
     end
     
-    def self.init_flow_items(pdf,election, precinct_split)
+    def self.init_flow_items(pdf,election, precinct_split, template)
       flow_items = []
       # puts "TGD: election districts = #{election.district_set.jur_districts.map(&:display_name).join(',')}"
       # puts "TGD: precinct_split districts = #{precinct_split.district_set.districts.map(&:display_name).join(',')}"
@@ -64,7 +64,7 @@ module DefaultBallot
         # puts "TGD: contest_list = #{contest_list.map(&:display_name).join(',')}"
         
         contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
-          if header_item
+          if header_item && template.create_A_ballot_headers?
             # puts "TGD: adding contest flow #{contest.display_name} and heading for district #{district.display_name}"
             flow_items.push(self.create_flow_item(pdf, [header_item, self.create_flow_item(pdf,contest)] ))
             header_item = nil

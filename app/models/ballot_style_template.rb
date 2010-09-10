@@ -22,8 +22,9 @@ class BallotStyleTemplate < ActiveRecord::Base
   
   serialize :page
   #  serialize :frame, Hash
-    serialize :frame
+  serialize :frame
   serialize :contents
+  serialize :ballot_layout
   
   validates_presence_of [:display_name], :on => :create, :message => "can't be blank"
   
@@ -45,7 +46,9 @@ class BallotStyleTemplate < ActiveRecord::Base
     }
 
     default_frame
+    default_ballot_layout
     default_contents
+    
   end
   
   def default_frame
@@ -80,6 +83,10 @@ class BallotStyleTemplate < ActiveRecord::Base
       end
     FRAME_BOT
 
+  end
+  
+  def default_ballot_layout
+    self.ballot_layout ||= { :create_A_headers => true} 
   end
   
   def default_contents
@@ -157,21 +164,22 @@ class BallotStyleTemplate < ActiveRecord::Base
     HEADER
   end # default_contents
   
-  def default_footer
-    
-  end
-  
   # given a hash of styles update the page, frame and contents attributes/hashes.
   def update_styles(styles_hash)
     page.merge!(styles_hash[:page]) if styles_hash[:page]
     frame.merge!(styles_hash[:frame]) if styles_hash[:frame]
     contents.merge!(styles_hash[:contents]) if styles_hash[:contents]
+    ballot_layout.merge!(styles_hash[:ballot_layout]) if styles_hash[:ballot_layout]
     save!
-    #update_attribute(page)
+
   end
   
   def to_yaml
-    { :page => page, :frame => frame, :contents => contents}.to_yaml
+    { :page => page, :frame => frame, :contents => contents, :ballot_layout => ballot_layout}.to_yaml
+  end
+
+  def create_A_ballot_headers?
+    ballot_layout && ballot_layout[:create_A_headers]
   end
   
 end

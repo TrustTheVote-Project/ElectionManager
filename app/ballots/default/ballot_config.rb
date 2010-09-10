@@ -19,7 +19,7 @@ module DefaultBallot
 
   class BallotConfig
 
-    attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns, :scanner
+    attr_accessor :pdf, :page_size, :page_layout, :left_margin, :right_margin, :top_margin, :bottom_margin, :columns, :scanner, :template
 
     CHECKBOX_WIDTH = 22
     CHECKBOX_HEIGHT = 10
