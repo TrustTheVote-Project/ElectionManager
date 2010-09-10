@@ -14,13 +14,14 @@ class ComboFlowTest < ActiveSupport::TestCase
         
         @template = BallotStyleTemplate.make(:display_name => "test template")
         @ballot_config = DefaultBallot::BallotConfig.new( @e1, @template)        
-
-        @ballot_config.setup(create_pdf("Test Combo Flow"),nil)
+        
+        @pdf = create_pdf("Test Combo Flow")
+        @ballot_config.setup(@pdf,nil)
         
       end
       
       should "get the Combo flow item for Arrays" do
-        assert_instance_of DefaultBallot::FlowItem::Combo, @ballot_config.create_flow_item([])
+        assert_instance_of DefaultBallot::FlowItem::Combo, ::DefaultBallot::FlowItem.create_flow_item(@pdf,[])
       end
       
     end

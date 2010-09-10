@@ -22,8 +22,8 @@ class RendererTest < ActiveSupport::TestCase
       p1.save
       
       # make an election for this jurisdiction
-      e1 = Election.create!(:display_name => "MAYORAL PRIMARY ELECTION", :district_set => dc_jurisdiction)
-      e1.start_date = DateTime.new(2009, 9, 14)
+      @election = Election.create!(:display_name => "MAYORAL PRIMARY ELECTION", :district_set => dc_jurisdiction)
+      @election.start_date = DateTime.new(2009, 9, 14)
       
       dem_party = Party.make(:democrat)
       rep_party = Party.make(:republican)
@@ -31,7 +31,7 @@ class RendererTest < ActiveSupport::TestCase
       contest1 = Contest.make(:display_name => "DELEGATE TO THE U.S. HOUSE OF REPRESENTATIVES",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
-                           :election => e1,
+                           :election => @election,
                            :position => 1, :ident => 'ident-1')
 
       Candidate.make(:party => dem_party, :display_name => "Missy Reilly Smith", :contest => contest1, :ident => 'ident-1')
@@ -39,7 +39,7 @@ class RendererTest < ActiveSupport::TestCase
       mayor_contest = Contest.make(:display_name => "MAYOR OF THE DISTRICT OF COLUMBIA",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
-                           :election => e1,
+                           :election => @election,
                            :position => 1, :ident => 'ident-2' )
 
       Candidate.make(:party => rep_party, :display_name => "Robert Vaughn", :contest => mayor_contest, :ident => 'ident-2')
@@ -48,7 +48,7 @@ class RendererTest < ActiveSupport::TestCase
       chair_contest = Contest.make(:display_name => "CHAIRMAN OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
-                           :election => e1,
+                           :election => @election,
                            :position => 2, :ident => 'ident-3')
 
       Candidate.make(:party => rep_party, :display_name => "Marcella Farrell", :contest => chair_contest, :ident => 'ident-4')
@@ -57,7 +57,7 @@ class RendererTest < ActiveSupport::TestCase
       atlarge_contest = Contest.make(:display_name => "AT-LARGE MEMBER OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
-                           :election => e1,
+                           :election => @election,
                            :position => 3, :ident => 'ident-4')
 
       Candidate.make(:party => rep_party, :display_name => "Catherine Calnan", :contest => atlarge_contest, :ident => 'ident-6')
@@ -66,7 +66,7 @@ class RendererTest < ActiveSupport::TestCase
       ward_contest = Contest.make(:display_name => "WARD COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
                            :district => fed_district,
-                           :election => e1,
+                           :election => @election,
                            :position => 4, :ident => 'ident-5')
 
       Candidate.make(:party => rep_party, :display_name => "Mike Donelan", :contest => ward_contest, :ident => 'ident-8')
@@ -79,20 +79,20 @@ class RendererTest < ActiveSupport::TestCase
       @template.frame =  frame
       @template.contents = contents
       
-      @ballot_config = DcBallot::BallotConfig.new( e1, @template)
+      @ballot_config = DcBallot::BallotConfig.new( @election, @template)
 
-      @pdf = create_pdf_from_template(@template, e1, p1)
+      @pdf = create_pdf_from_template(@template, @election, p1)
       # @pdf = create_pdf_from_template("DC")
       @ballot_config.setup( @pdf,  p1)
 
       
-      @renderer = AbstractBallot::Renderer.new(e1, @prec_split1, @ballot_config, nil)
+      @renderer = AbstractBallot::Renderer.new(@election, @prec_split1, @ballot_config, nil)
       @renderer.instance_variable_set(:@pdf, @pdf)
     end
     
     should "render" do
       # @renderer.render
-      @renderer.init_flow_items
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split1))
       @renderer.render_everything
       #pdf = @renderer.instance_variable_get(:@pdf)
       @pdf.render_file("#{Rails.root}/tmp/DCBallot.pdf")

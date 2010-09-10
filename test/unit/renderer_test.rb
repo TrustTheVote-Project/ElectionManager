@@ -18,18 +18,16 @@ class RendererTest < ActiveSupport::TestCase
     # Precinct and create Contest, Question and Container Flow objects
     # for each.
     should "initialize all the flow items" do
-      @renderer.init_flow_items
-      
-      flow_items = @renderer.instance_variable_get(:@flow_items)
+      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split)
       
       # Should have 4 flow items
       # A Combo flow that contains a Header flow and a Contest flow
       # Two  Contest flows
       # And  a Question flow
-      assert_equal 7, flow_items.size
+      assert_equal 7, @flow_items.size
 
       # First is a Combo Flow
-      combo_flow = flow_items.first
+      combo_flow = @flow_items.first
       assert_instance_of DefaultBallot::FlowItem::Combo, combo_flow
       # This Combo Flow contains 2 other flow items
       combo_flow_items = combo_flow.instance_variable_get(:@flow_items)
@@ -43,19 +41,19 @@ class RendererTest < ActiveSupport::TestCase
       assert_equal Contest.find_by_display_name('Contest 1'), contest
       
       # Next is a Contest flow with a ref to the Contest 2 Contest
-      contest_flow = flow_items[1]
+      contest_flow = @flow_items[1]
       assert_instance_of DefaultBallot::FlowItem::Contest, contest_flow
       contest = contest_flow.instance_variable_get(:@item)
       assert_equal Contest.find_by_display_name('Contest 2'), contest
 
       # A Contest flow with a ref to the Contest 3 Contest
-      contest_flow = flow_items[2]
+      contest_flow = @flow_items[2]
       assert_instance_of DefaultBallot::FlowItem::Contest, contest_flow
       contest = contest_flow.instance_variable_get(:@item)
       assert_equal Contest.find_by_display_name('Contest 3'), contest
 
       # A Question flow
-      question_flow = flow_items.last
+      question_flow = @flow_items.last
       assert_instance_of DefaultBallot::FlowItem::Question, question_flow
       question = question_flow.instance_variable_get(:@item)
       assert_equal Question.find_by_display_name('Dog Racing'), question
@@ -69,7 +67,7 @@ class RendererTest < ActiveSupport::TestCase
     should "start page " do
       
       # setup
-      @renderer.init_flow_items
+      @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split)
       @renderer.instance_variable_set(:@pagenum, 0)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -119,7 +117,7 @@ class RendererTest < ActiveSupport::TestCase
     should "end page " do
       
       # setup
-      @renderer.init_flow_items
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
       @renderer.instance_variable_set(:@pagenum, 1)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -144,7 +142,7 @@ class RendererTest < ActiveSupport::TestCase
     should "end page that is not the last page" do
       
       # setup
-      @renderer.init_flow_items
+      @renderer.instance_variable_set(:@flow_items,::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
       @renderer.instance_variable_set(:@pagenum, 1)
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
@@ -170,7 +168,7 @@ class RendererTest < ActiveSupport::TestCase
     # middle column
     should "render everything" do
       # setup 
-      @renderer.init_flow_items
+      @renderer.instance_variable_set(:@flow_items, ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @prec_split))
       pdf = @ballot_config.instance_variable_get(:@pdf)
       @renderer.instance_variable_set(:@pdf, pdf)
 

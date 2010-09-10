@@ -320,14 +320,6 @@ module DefaultBallot
       end
     end
 
-    def create_flow_item(item)
-      case
-      when item.is_a?(Contest) then FlowItem::Contest.new(@pdf, item, @scanner)
-      when item.is_a?(Question) then FlowItem::Question.new(@pdf, item, @scanner)
-      when item.is_a?(String) then FlowItem::Header.new(@pdf, item, @scanner)
-      when item.is_a?(Array) then FlowItem::Combo.new(@pdf, item)
-      end
-    end
     
     def instructions?
      !@instruction_text_url.blank? && !@instruction_text_url.include?('missing')
