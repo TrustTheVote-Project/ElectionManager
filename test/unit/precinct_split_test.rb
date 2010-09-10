@@ -19,27 +19,5 @@ class PrecinctSplitTest < ActiveSupport::TestCase
       assert_equal 1, PrecinctSplit.count
     end
     
-    should "add a district_set to a precinct" do
-      prec_split = PrecinctSplit.make(:district_set => @dist_set)
-      prec = Precinct.make
-      prec.precinct_splits << prec_split
-      assert_equal 1, prec.district_sets.size
-      ds = prec.district_sets.first
-      assert_equal "some districts", ds.display_name
-      assert_equal ds, @dist_set
-      
-    end
-    
-    should "be able to get a precincts' districts" do                                                                                   
-      10.times { @dist_set.districts << District.make }                                                                                
-      prec_split = PrecinctSplit.make(:district_set => @dist_set)                                                                      
-      prec = Precinct.make                                                                                                             
-      prec.precinct_splits << prec_split                                                                                               
-      ds = prec.district_sets.first                                                                                                    
-      assert_equal 10, ds.districts.size
-      
-      ds = prec.precinct_splits[0].district_set
-      assert_equal 10, ds.districts.size 
-    end 
   end
 end
