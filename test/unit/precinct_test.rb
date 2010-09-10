@@ -10,10 +10,10 @@ class PrecinctTest < ActiveSupport::TestCase
     should_change("the number of precincts", :by => 1) { Precinct.count}    
     should_have_class_methods :find
     should_have_instance_methods :before_validation, :districts_for_election
-    should have_db_column :display_name
-    should have_db_column :ident
+    # should have_db_column :display_name
+    # should have_db_column :ident
     should_have_attr_reader :display_name
-    should ensure_length_of(:display_name).is_equal_to(9).with_message(/is invalid/)
+    # should ensure_length_of(:display_name).is_equal_to(9).with_message(/is invalid/)
     should "have an identity" do
       assert !@precinct.ident.blank?
     end    
