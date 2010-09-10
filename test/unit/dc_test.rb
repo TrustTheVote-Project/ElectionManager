@@ -6,27 +6,24 @@ class RendererTest < ActiveSupport::TestCase
   context "DCBallot::Renderer " do
     
     setup do
+      fed_district = District.make(:display_name => "Federal")
+      
       # create a jurisdiction with  2 districts 
       dc_jurisdiction  = DistrictSet.create!(:display_name => "District of Columbia")
-      fed_district = District.make(:display_name => "Federal")
-      dc_district =  District.make(:display_name => "District of Columbia")
       dc_jurisdiction.districts << fed_district
-      dc_jurisdiction.districts  << dc_district
+      dc_jurisdiction.jur_districts << fed_district
       dc_jurisdiction.save!
 
       # create a precint within 4 Districts
       p1 = Precinct.create!(:display_name => "PRECINCT 1 01")
-      p1.districts << fed_district
-      p1.districts << dc_district
+      p1.jurisdiction = dc_jurisdiction
+      @prec_split1 = PrecinctSplit.make(:display_name => "Precinct Split 1", :precinct => p1, :district_set => dc_jurisdiction)
+      p1.precinct_splits << @prec_split1
       p1.save
-
-
+      
       # make an election for this jurisdiction
       e1 = Election.create!(:display_name => "MAYORAL PRIMARY ELECTION", :district_set => dc_jurisdiction)
       e1.start_date = DateTime.new(2009, 9, 14)
-
-      # OK, now we have a precinct that contains districts 0 to 3
-      # And an election that has districts 0 and 1
       
       dem_party = Party.make(:democrat)
       rep_party = Party.make(:republican)
@@ -41,7 +38,7 @@ class RendererTest < ActiveSupport::TestCase
       
       mayor_contest = Contest.make(:display_name => "MAYOR OF THE DISTRICT OF COLUMBIA",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                           :district => dc_district,
+                           :district => fed_district,
                            :election => e1,
                            :position => 1)
 
@@ -50,7 +47,7 @@ class RendererTest < ActiveSupport::TestCase
       
       chair_contest = Contest.make(:display_name => "CHAIRMAN OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                           :district => dc_district,
+                           :district => fed_district,
                            :election => e1,
                            :position => 2)
 
@@ -59,7 +56,7 @@ class RendererTest < ActiveSupport::TestCase
       
       atlarge_contest = Contest.make(:display_name => "AT-LARGE MEMBER OF THE COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                           :district => dc_district,
+                           :district => fed_district,
                            :election => e1,
                            :position => 3)
 
@@ -68,7 +65,7 @@ class RendererTest < ActiveSupport::TestCase
       
       ward_contest = Contest.make(:display_name => "WARD COUNCIL",
                            :voting_method => VotingMethod::WINNER_TAKE_ALL,
-                           :district => dc_district,
+                           :district => fed_district,
                            :election => e1,
                            :position => 4)
 
@@ -89,7 +86,7 @@ class RendererTest < ActiveSupport::TestCase
       @ballot_config.setup( @pdf,  p1)
 
       
-      @renderer = AbstractBallot::Renderer.new(e1, p1, @ballot_config, nil)
+      @renderer = AbstractBallot::Renderer.new(e1, @prec_split1, @ballot_config, nil)
       @renderer.instance_variable_set(:@pdf, @pdf)
     end
     
