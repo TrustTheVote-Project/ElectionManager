@@ -1,5 +1,9 @@
 --- 
 body: 
+  contests: []
+
+  elections: []
+
   districts: 
   - ident: dist-CITY OF WASHINGTON WARD 6
     type: WARD
@@ -41,73 +45,89 @@ body:
     type: SMD
     display_name: SMD 06-ANC 2A
   district_sets: 
-  - ident: ds-0-dist-SMD 01-ANC 6C
+  - ident: ds-1-SMD 01-ANC 6C
     district_list: 
     - district_ident: dist-SMD 01-ANC 6C
     - district_ident: dist-CITY OF WASHINGTON WARD 6
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-1-dist-SMD 02-ANC 6C
+  - ident: ds-1-SMD 02-ANC 6C
     district_list: 
     - district_ident: dist-SMD 02-ANC 6C
     - district_ident: dist-CITY OF WASHINGTON WARD 6
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-2-dist-SMD 03-ANC 6C
+  - ident: ds-1-SMD 03-ANC 6C
     district_list: 
     - district_ident: dist-SMD 03-ANC 6C
     - district_ident: dist-CITY OF WASHINGTON WARD 6
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-3-dist-SMD 09-ANC 6C
+  - ident: ds-1-SMD 09-ANC 6C
     district_list: 
     - district_ident: dist-SMD 09-ANC 6C
     - district_ident: dist-CITY OF WASHINGTON WARD 6
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-0-dist-SMD 01-ANC 2A
+  - ident: ds-2-SMD 01-ANC 2A
     district_list: 
     - district_ident: dist-SMD 01-ANC 2A
     - district_ident: dist-CITY OF WASHINGTON WARD 2
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-1-dist-SMD 05-ANC 2A
+  - ident: ds-2-SMD 05-ANC 2A
     district_list: 
     - district_ident: dist-SMD 05-ANC 2A
     - district_ident: dist-CITY OF WASHINGTON WARD 2
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
-  - ident: ds-2-dist-SMD 06-ANC 2A
+  - ident: ds-2-SMD 06-ANC 2A
     district_list: 
     - district_ident: dist-SMD 06-ANC 2A
     - district_ident: dist-CITY OF WASHINGTON WARD 2
     - district_ident: dist-DISTRICT OF COLUMBIA
     - district_ident: dist-1ST CONGRESSIONAL DIST-DEM
   precincts: 
-  - ident: prec-1
+  - ident: 1
     display_name: PRECINCT 1
-  - ident: prec-2
+  - ident: 2
     display_name: PRECINCT 2
+  candidates: []
+
   splits: 
-  - district_set_ident: ds-0-dist-SMD 01-ANC 6C
-    precinct_ident: prec-1
-  - district_set_ident: ds-1-dist-SMD 02-ANC 6C
-    precinct_ident: prec-1
-  - district_set_ident: ds-2-dist-SMD 03-ANC 6C
-    precinct_ident: prec-1
-  - district_set_ident: ds-3-dist-SMD 09-ANC 6C
-    precinct_ident: prec-1
-  - district_set_ident: ds-0-dist-SMD 01-ANC 2A
-    precinct_ident: prec-2
-  - district_set_ident: ds-1-dist-SMD 05-ANC 2A
-    precinct_ident: prec-2
-  - district_set_ident: ds-2-dist-SMD 06-ANC 2A
-    precinct_ident: prec-2
+  - district_set_ident: ds-1-SMD 01-ANC 6C
+    ident: split-1-SMD 01-ANC 6C
+    precinct_ident: 1
+    display_name: split-1-SMD 01-ANC 6C
+  - district_set_ident: ds-1-SMD 02-ANC 6C
+    ident: split-1-SMD 02-ANC 6C
+    precinct_ident: 1
+    display_name: split-1-SMD 02-ANC 6C
+  - district_set_ident: ds-1-SMD 03-ANC 6C
+    ident: split-1-SMD 03-ANC 6C
+    precinct_ident: 1
+    display_name: split-1-SMD 03-ANC 6C
+  - district_set_ident: ds-1-SMD 09-ANC 6C
+    ident: split-1-SMD 09-ANC 6C
+    precinct_ident: 1
+    display_name: split-1-SMD 09-ANC 6C
+  - district_set_ident: ds-2-SMD 01-ANC 2A
+    ident: split-2-SMD 01-ANC 2A
+    precinct_ident: 2
+    display_name: split-2-SMD 01-ANC 2A
+  - district_set_ident: ds-2-SMD 05-ANC 2A
+    ident: split-2-SMD 05-ANC 2A
+    precinct_ident: 2
+    display_name: split-2-SMD 05-ANC 2A
+  - district_set_ident: ds-2-SMD 06-ANC 2A
+    ident: split-2-SMD 06-ANC 2A
+    precinct_ident: 2
+    display_name: split-2-SMD 06-ANC 2A
 audit_header: 
   schema_version: "0.1"
   operator: Pito Salas
   type: jurisdiction_slate
-  create_date: 2010-09-01T19:51:00-04:00
+  create_date: 2010-09-10T16:31:24-04:00
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: TTV Tabulator TAB02
   file_id: 9F023408009B11DF924800163E3DE33F

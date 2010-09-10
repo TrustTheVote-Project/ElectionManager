@@ -1,7 +1,7 @@
 require 'yaml'
 
 module TTV
-  # Import Yaml-based election using standard formats, and convert as needed to Election and related objects.
+  # Import Election Data Hash (EDH) and convert as needed to Election and related objects.
   class ImportEDH
 
     attr_reader :hash, :election
@@ -10,37 +10,35 @@ module TTV
       Rails.logger.debug string
     end
 
+
+    # <tt>import_type:</tt> is "jurisdiction_info", "election_info" or "candidate_info"
     # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.
-    def initialize(hash)
+    #
+    def initialize(import_type, hash)
       @hash = hash
+      @import_type = import_type
       @jurisdictions = []
     end
     
-    # Performs the import of all items contained within <tt>hash</tt>.
-    def import
-      load_jurisdictions
-      load_districts
-      load_precincts
-      load_district_sets
-      load_elections
-      load_precinct_splits
-      load_candidates
-      load_contests
-      # load_questions
-    end
-    
-    def import_to_jurisdiction jur
+    # Performs the import of all items in EDH
+    # <tt>jur:</tt>Jurisdition to use as context
+    def import jur
       @jurisdiction = jur
-      load_districts
-      load_precincts
-      load_district_sets
-      load_elections
-      load_precinct_splits
-      load_candidates
-      load_contests
-      # load_questions
-    end        
-    
+
+      if @import_type.eql? "jurisdiction_info"
+        load_districts
+        load_precincts
+        load_district_sets
+        load_precinct_splits
+      elsif @import_type.eql? "election_info"
+        load_elections
+        load_contests
+        load_questions
+      elsif @import_type.eql? "candidate_info"
+        load_candidates
+      end
+    end
+
     # Imports all jurisdictions contained in the EDH
     def load_jurisdictions      
       @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris } if @hash["body"].has_key? "jurisdictions"
@@ -79,7 +77,12 @@ module TTV
     def load_district_sets
       @hash["body"]["district_sets"].each { |dset| load_district_set dset} if @hash["body"].has_key? "district_sets"
     end 
-        
+
+    # Imports all questions contained in the EDH
+    def load_questions
+      @hash["body"]["questions"].each { |dset| load_district_set dset} if @hash["body"].has_key? "questions"
+    end 
+                
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
@@ -155,10 +158,11 @@ module TTV
     def load_election election
       new_election = Election.find_or_create_by_ident(
           :display_name => election["display_name"], 
-          :district_set_id => DistrictSet.find_by_ident(election["jurisdiction_ident"]).id, 
           :ident => election["ident"], 
           :start_date => election["start_date"])      
+      new_election.district_set = @jurisdiction
       new_election.save!
+
     end      
   end
 end

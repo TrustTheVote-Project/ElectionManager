@@ -1,43 +1,69 @@
 require 'ap'
 class Audit < ActiveRecord::Base
   serialize :election_data_hash # TODO: find maximum size for serialize
-  attr_accessible :display_name, :election_data_hash, :district_set, :district_set_id
+  attr_accessible :display_name, :election_data_hash, :district_set, :district_set_id, :content_type
   
   has_many :alerts
-  
-  belongs_to :district_set
+  belongs_to :district_set # TODO change to "Jurisdiction" when we do that.
 
+  def auditing_jurisdiction?
+    content_type.eql? "jurisdiction_info"
+  end
+  
+  def auditing_election?
+    content_type.eql? "election_info"
+  end
+  
+  def auditing_candidate?
+    content_type.eql? "candidate_info"
+  end
+  #
   # Audits election_data_hash (without touching it), producing more @alerts
-  # type -> :jurisdiction if this will be imported at Jurisdiction level
-  #      -> :global if this will be imported at the top levels
-  
-  def audit audit_type=:global
+  # 
+  def audit
     @audit_in_progress = true
-    @audit_type = audit_type
+    raise ArgumentError, "Audit.audit: invalid content_type: #{content_type}" unless auditing_jurisdiction? || auditing_candidate? || auditing_election?
 
-# Now do each kind of sanity check    
-    audit_sanity_check      # See if the file looks anything like what we want
-    audit_jurisdictions     # Collect IDs of new jurisdictions and EM-imported jurisdictions
-    audit_precincts         # Collect IDs (so we know which ones are valid for districts)
-    audit_districts 
-    audit_candidates
-    audit_contests
-    audit_precinct_splits
-
+# Now do each kind of sanity check, depending on type of input info we are auditing
+    if auditing_jurisdiction?
+      audit_sanity_check_body
+      audit_sanity_check "precincts"
+      audit_sanity_check "splits"
+      audit_sanity_check "districts"
+      audit_precincts         # Collect IDs (so we know which ones are valid for districts)
+      audit_districts 
+      audit_precinct_splits      
+    elsif auditing_election?
+      audit_sanity_check_body
+      audit_sanity_check "elections"
+      audit_sanity_check "contests"
+      audit_election
+      audit_contests
+    elsif auditing_candidate?
+      audit_sanity_check_body
+      audit_sanity_check "candidates"
+      audit_candidates
+    end
     @audit_in_progress = false
     @audited = true
   end
 
-  # See if the file looks anything like what we are expecting
-  def audit_sanity_check
-    unless election_data_hash.has_key?("body") && election_data_hash["body"].has_key?("districts")
-      raise ArgumentError, "Invalid format. No Body or Districts tag"
-    end
-    unless election_data_hash["body"]["districts"].reduce(true) { |memo, dist| dist.has_key?("ident") ? memo : false }
-      raise ArgumentError, "Invalid format. All districts require a dent"
+# Various basic sanity checks
+  def audit_sanity_check_body
+    unless election_data_hash.has_key?("body")
+      raise ArgumentError, "Invalid format. No Body tag"
     end
   end
   
+  def audit_sanity_check section
+    unless election_data_hash.has_key?("body") && election_data_hash["body"].has_key?(section)
+      raise ArgumentError, "Invalid format. No #{section} section."
+    end
+    unless election_data_hash["body"][section].reduce(true) { |memo, sect| sect.has_key?("ident") ? memo : false }
+      raise ArgumentError, "Invalid format. All #{section} elements require an ident"
+    end
+  end
+
   def audit_jurisdictions
 # TODO: For each jurisdiction in election_data_hash["ballot_info"]["jurisdictions"], store ident
 # TODO: For each jurisdiction in EM DistrictSets.all.each { |district_set| # store ident }
@@ -50,6 +76,10 @@ class Audit < ActiveRecord::Base
   
   def audit_candidates
 # TODO: Audit Candidates    
+  end 
+
+  def audit_election
+# TODO Audit Election
   end
   
   def audit_precinct_splits
@@ -87,7 +117,7 @@ class Audit < ActiveRecord::Base
   def audit_districts
     election_data_hash["body"]["districts"].each_index do
       |dist_index|
-        audit_district_jurisdiction dist_index if @audit_type != :jurisdictions 
+        audit_district_jurisdiction dist_index if !auditing_jurisdiction?
     end
   end
   
@@ -95,7 +125,7 @@ class Audit < ActiveRecord::Base
   # Note that when auditing for jurisdiction import, this check is not needed, because import
   # target pre-specified.s
   def audit_district_jurisdiction dist_index
-    return if @audit_type == :jurisdiction
+    return if content_type == :jurisdiction
     district = election_data_hash["body"]["districts"][dist_index]
     if district && !district["jurisdiction_ident"]
       alerts << Alert.new(:message => "No Jurisdiction specified for district \'#{district["display_name"]}\'. What would you like to do? ", 

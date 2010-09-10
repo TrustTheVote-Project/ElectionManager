@@ -1,18 +1,23 @@
 <div class="block">
-  <h3>Toolbox</h3>
-  <div class="content">
-    <br/>
-    <%= render :partial => 'application/admin_toolbox' %>
-  </div>
+    <h3>Toolbox</h3>
+    <div class="content">
+        <br/>
+        <%= render :partial => 'application/admin_toolbox' %>
+    </div>
 </div>
 <div class="block">
-  <h3>Navigation</h3>
-  <ul class="navigation">
-    <li>
-      <a href="#">What kinds of things do you need to navigate to here?</a>
-    </li>
-    <li>
-      <a href="#">And anything else? </a>
-    </li>
-  </ul>
+    <h3>Commands</h3>
+    <div class="content">
+        <br/>
+        <ul class="list">
+            <% if current_context.jurisdiction? %>
+            <li>
+                <%= link_to "Import into this Jurisdiction", import_jurisdiction_path(:id => current_context.jurisdiction.id) %>
+            </li>
+            <% end %>
+            <li>
+                <a href="#">And anything else? </a>
+            </li>
+        </ul>
+    </div>
 </div>
