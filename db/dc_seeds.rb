@@ -75,7 +75,8 @@
 ####################################################
 # Create Contests
 def create_contest(pos, name, district_name)
-  c = Contest.new(:position=> pos, :open_seat_count => 1, :display_name =>  name) 
+  c = Contest.new(:position=> pos, :open_seat_count => 1, :display_name =>  name,
+                  :ident => "ident-#{name}") 
   c.election = Election.find_by_display_name('DC Election')
   c.district = District.find_by_display_name(district_name)
   c.voting_method = VotingMethod::WINNER_TAKE_ALL
@@ -90,6 +91,7 @@ pos = 0
   contest = create_contest(pos += 1, name, "DISTRICT OF COLUMBIA")
   ['Democratic', 'Republican', 'Green'].each do |cand_name|
     cand = Candidate.new(:display_name => "#{cand_name}_#{contest.id}")
+    cand.ident = "ident-#{cand.display_name}" 
     cand.party = Party.find_by_display_name(cand_name)
     cand.contest = contest
     cand.save!

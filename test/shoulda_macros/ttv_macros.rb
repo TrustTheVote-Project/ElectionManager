@@ -120,12 +120,13 @@ class Test::Unit::TestCase
                            :voting_method => voting_method,
                            :district => district,
                            :election => election,
-                           :position => position)
+                           :position => position,
+                           :ident => "ident-#{name}")
     
     position += 1
     [:democrat, :republican, :independent].each do |party_sym|
       party = Party.make(party_sym)
-      Candidate.make(:party => party, :display_name => "#{name}_#{party_sym.to_s[0..2]}", :contest => contest)
+      Candidate.make(:party => party, :display_name => "#{name}_#{party_sym.to_s[0..2]}", :contest => contest, :ident => "ident-#{name}_#{party_sym.to_s[0..2]}_#{contest.display_name}")
     end
     contest
   end

@@ -67,6 +67,14 @@ class ContestFlowTest < ActiveSupport::TestCase
           @flow_items <<  @contest_flow = DefaultBallot::FlowItem::Contest.new(@pdf, contest, @scanner)      
         end
       end
+
+      # TODO: complete this test.
+      should "have valid annotation metadata" do
+        # check that the generate pdf had correct identifiers for each
+        # annotation, (textfield, checkbox, etc.)
+        # See PT story 4136021
+        # Ex: /T (ident-US_Senate+US_Senate_dem+US_Senate)
+      end
       
       should "should fit all contests" do
         @flow_items.each do |contest_flow|
