@@ -1,7 +1,7 @@
 ---
 body:  
   
- candidate:
+  candidates:
    - display_name: George G. Gray
      ident: cand-1234
      contest_ident: cont-33

@@ -1,0 +1,52 @@
+--- 
+body: 
+  candidates: 
+  - party_display_name: Independent
+    ident: "500374"
+    contest_ident: "500006"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Independent
+    ident: "500490"
+    contest_ident: "500004"
+    display_name: Danielle H. Snider
+  - party_display_name: Independent
+    ident: "500439"
+    contest_ident: "500004"
+    display_name: Bill "Billy" E. Frazier
+  - party_display_name: Independent
+    ident: "500346"
+    contest_ident: "500004"
+    display_name: LISA B CAMPBELL
+  - party_display_name: Independent
+    ident: "500296"
+    contest_ident: "500004"
+    display_name: L. Trevor N. Craddock
+  - party_display_name: Independent
+    ident: "500648"
+    contest_ident: "500004"
+    display_name: Sonja C. Jones
+  - party_display_name: Independent
+    ident: "500649"
+    contest_ident: "500004"
+    display_name: Sharon K. Braden
+  - party_display_name: Independent
+    ident: "500553"
+    contest_ident: "500004"
+    display_name: Betty H. Wolfe
+  - party_display_name: Independent
+    ident: "500474"
+    contest_ident: "500004"
+    display_name: Sharon P. Oliver
+  - party_display_name: Republican
+    ident: "500370"
+    contest_ident: "500087"
+    display_name: H. Morgan Griffith
+  - party_display_name: Independent
+    ident: "500533"
+    contest_ident: "500087"
+    display_name: Jeremiah D. Heaton
+  - party_display_name: Democrat
+    ident: "500528"
+    contest_ident: "500087"
+    display_name: Rick C. Boucher
+  

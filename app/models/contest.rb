@@ -1,8 +1,7 @@
 class Contest < ActiveRecord::Base
-  # requesting district
-  belongs_to  :district
+  belongs_to  :district # requesting district
   
-  belongs_to :election
+  belongs_to :election # TODO: to be changed when we create Office class
   
   belongs_to :voting_method
   
@@ -14,10 +13,8 @@ class Contest < ActiveRecord::Base
   
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   
-  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election
-  
+  validates_presence_of :display_name, :open_seat_count, :voting_method_id, :district_id, :election  
   validates_numericality_of :open_seat_count
-  
   validates_associated :district, :election
   
   def validate
@@ -26,8 +23,6 @@ class Contest < ActiveRecord::Base
     errors.add(:open_seat_count, "must be less than 10") if osc > 10
     errors.add(:voting_method_id, "is invalid") if !VotingMethod.exists?(voting_method_id)
     errors.add(:district_id, "is invalid") if !District.exists?(district_id)
-    # TODO: Re-add this validation, fix relevant code in app/ttv/import_edh.rb, tested by tests/unit/audit_test.rb
-    # errors.add(:election_id, "is invalid") if !Election.exists?(election_id)
   end
   
   def after_initialize

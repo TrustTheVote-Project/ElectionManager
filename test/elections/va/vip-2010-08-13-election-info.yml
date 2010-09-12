@@ -1,0 +1,615 @@
+--- 
+body: 
+  contests: 
+  - election_ident: "14"
+    ident: "500000"
+    display_name: Member School Board - Bayside
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500001"
+    display_name: Member City Council
+    district_ident: "501158"
+  - election_ident: "14"
+    ident: "500002"
+    display_name: Member City Council
+    district_ident: "500940"
+  - election_ident: "14"
+    ident: "500003"
+    display_name: Member School Board
+    district_ident: "501112"
+  - election_ident: "14"
+    ident: "500004"
+    display_name: Clerk of Court
+    district_ident: "501737"
+  - election_ident: "14"
+    ident: "500005"
+    display_name: Member Board of Supervisors
+    district_ident: "500798"
+  - election_ident: "14"
+    ident: "500006"
+    display_name: Member House of Representatives - 5th District
+    district_ident: "501612"
+  - election_ident: "14"
+    ident: "500007"
+    display_name: Member School Board
+    district_ident: "500758"
+  - election_ident: "14"
+    ident: "500008"
+    display_name: Member Town Council - Glasgow
+    district_ident: "501512"
+  - election_ident: "14"
+    ident: "500009"
+    display_name: Member Town Council - Brookneal
+    district_ident: "501511"
+  - election_ident: "14"
+    ident: "500010"
+    display_name: Member County Board
+    district_ident: "501724"
+  - election_ident: "14"
+    ident: "500011"
+    display_name: Member Town Council - Special
+    district_ident: "501528"
+  - election_ident: "14"
+    ident: "500012"
+    display_name: Member Board of Supervisors
+    district_ident: "501135"
+  - election_ident: "14"
+    ident: "500013"
+    display_name: Member City Council
+    district_ident: "500953"
+  - election_ident: "14"
+    ident: "500014"
+    display_name: Member Town Council - Special
+    district_ident: "501539"
+  - election_ident: "14"
+    ident: "500015"
+    display_name: Member Town Council - Clifton Forge
+    district_ident: "501410"
+  - election_ident: "14"
+    ident: "500016"
+    display_name: Mayor - Chatham
+    district_ident: "501564"
+  - election_ident: "14"
+    ident: "500017"
+    display_name: Member Town Council
+    district_ident: "501481"
+  - election_ident: "14"
+    ident: "500018"
+    display_name: Mayor - Bridgewater
+    district_ident: "501531"
+  - election_ident: "14"
+    ident: "500019"
+    display_name: Member School Board - West District
+    district_ident: "501707"
+  - election_ident: "14"
+    ident: "500020"
+    display_name: Member City Council
+    district_ident: "501218"
+  - election_ident: "14"
+    ident: "500021"
+    display_name: Member House of Representatives - 8th District
+    district_ident: "501613"
+  - election_ident: "14"
+    ident: "500022"
+    display_name: Clerk of Court
+    district_ident: "501685"
+  - election_ident: "14"
+    ident: "500023"
+    display_name: Member Town Council - Altavista
+    district_ident: "501395"
+  - election_ident: "14"
+    ident: "500024"
+    display_name: Member City Council
+    district_ident: "501671"
+  - election_ident: "14"
+    ident: "500025"
+    display_name: Member City Council
+    district_ident: "501064"
+  - election_ident: "14"
+    ident: "500026"
+    display_name: Member Town Council - Chatham
+    district_ident: "501564"
+  - election_ident: "14"
+    ident: "500027"
+    display_name: Member City Council
+    district_ident: "500857"
+  - election_ident: "14"
+    ident: "500028"
+    display_name: Member School Board - Beach
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500029"
+    display_name: Mayor - Dayton
+    district_ident: "501509"
+  - election_ident: "14"
+    ident: "500030"
+    display_name: Member City Council
+    district_ident: "501091"
+  - election_ident: "14"
+    ident: "500031"
+    display_name: Sheriff
+    district_ident: "501640"
+  - election_ident: "14"
+    ident: "500032"
+    display_name: Member House of Representatives - 6th District
+    district_ident: "501617"
+  - election_ident: "14"
+    ident: "500033"
+    display_name: Member House of Representatives - 4th District
+    district_ident: "501616"
+  - election_ident: "14"
+    ident: "500034"
+    display_name: Member Town Council
+    district_ident: "501376"
+  - election_ident: "14"
+    ident: "500035"
+    display_name: Member Town Council - Alberta
+    district_ident: "501406"
+  - election_ident: "14"
+    ident: "500036"
+    display_name: Member City Council
+    district_ident: "501369"
+  - election_ident: "14"
+    ident: "500037"
+    display_name: Mayor - Gretna
+    district_ident: "501384"
+  - election_ident: "14"
+    ident: "500038"
+    display_name: Mayor - Elkton
+    district_ident: "501477"
+  - election_ident: "14"
+    ident: "500039"
+    display_name: Member City Council - Lynnhaven
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500040"
+    display_name: Commissioner of Revenue
+    district_ident: "501636"
+  - election_ident: "14"
+    ident: "500041"
+    display_name: Mayor
+    district_ident: "501703"
+  - election_ident: "14"
+    ident: "500042"
+    display_name: Member Town Council - Craigsville
+    district_ident: "501563"
+  - election_ident: "14"
+    ident: "500043"
+    display_name: Member City Council - Princess Anne
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500044"
+    display_name: Member Town Council - Bridgewater
+    district_ident: "501531"
+  - election_ident: "14"
+    ident: "500045"
+    display_name: Member City Council
+    district_ident: "501165"
+  - election_ident: "14"
+    ident: "500046"
+    display_name: Mayor
+    district_ident: "501376"
+  - election_ident: "14"
+    ident: "500047"
+    display_name: Member Town Council - Gordonsville
+    district_ident: "501401"
+  - election_ident: "14"
+    ident: "500048"
+    display_name: Mayor -Timberville
+    district_ident: "501400"
+  - election_ident: "14"
+    ident: "500049"
+    display_name: Member School Board - Princess Anne
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500050"
+    display_name: Member City Council
+    district_ident: "501053"
+  - election_ident: "14"
+    ident: "500051"
+    display_name: Member School Board
+    district_ident: "501728"
+  - election_ident: "14"
+    ident: "500052"
+    display_name: "Member City Council - Beach "
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500053"
+    display_name: Sheriff
+    district_ident: "501714"
+  - election_ident: "14"
+    ident: "500054"
+    display_name: Member Town Council - Dayton
+    district_ident: "501509"
+  - election_ident: "14"
+    ident: "500055"
+    display_name: Member Town Council - Gretna
+    district_ident: "501384"
+  - election_ident: "14"
+    ident: "500056"
+    display_name: Mayor
+    district_ident: "501468"
+  - election_ident: "14"
+    ident: "500057"
+    display_name: Member School Board
+    district_ident: "501272"
+  - election_ident: "14"
+    ident: "500058"
+    display_name: Member House of Representatives - 2nd District
+    district_ident: "501609"
+  - election_ident: "14"
+    ident: "500059"
+    display_name: Mayor - Hillsboro
+    district_ident: "501380"
+  - election_ident: "14"
+    ident: "500060"
+    display_name: Member Town Council
+    district_ident: "501468"
+  - election_ident: "14"
+    ident: "500061"
+    display_name: Treasurer
+    district_ident: "501632"
+  - election_ident: "14"
+    ident: "500062"
+    display_name: Member City Council
+    district_ident: "501630"
+  - election_ident: "14"
+    ident: "500063"
+    display_name: Member Board of Supervisors
+    district_ident: "500805"
+  - election_ident: "14"
+    ident: "500064"
+    display_name: Member Town Council - Special
+    district_ident: "501417"
+  - election_ident: "14"
+    ident: "500065"
+    display_name: Mayor - Alberta
+    district_ident: "501406"
+  - election_ident: "14"
+    ident: "500066"
+    display_name: Clerk of Court
+    district_ident: "501654"
+  - election_ident: "14"
+    ident: "500067"
+    display_name: Member Board of Supervisors
+    district_ident: "500766"
+  - election_ident: "14"
+    ident: "500068"
+    display_name: Member School Board
+    district_ident: "501724"
+  - election_ident: "14"
+    ident: "500069"
+    display_name: Member School Board
+    district_ident: "501091"
+  - election_ident: "14"
+    ident: "500070"
+    display_name: Mayor - Goshen
+    district_ident: "501382"
+  - election_ident: "14"
+    ident: "500071"
+    display_name: Treasurer
+    district_ident: "501748"
+  - election_ident: "14"
+    ident: "500072"
+    display_name: "Member School Board "
+    district_ident: "500913"
+  - election_ident: "14"
+    ident: "500073"
+    display_name: Member City Council - At Large
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500074"
+    display_name: Member City Council - Central
+    district_ident: "501653"
+  - election_ident: "14"
+    ident: "500075"
+    display_name: Treasurer
+    district_ident: "501698"
+  - election_ident: "14"
+    ident: "500076"
+    display_name: Member School Board
+    district_ident: "501019"
+  - election_ident: "14"
+    ident: "500077"
+    display_name: Clerk of Court
+    district_ident: "501624"
+  - election_ident: "14"
+    ident: "500078"
+    display_name: Mayor
+    district_ident: "501530"
+  - election_ident: "14"
+    ident: "500079"
+    display_name: Member Town Council - Courtland, Ward C Special
+    district_ident: "501784"
+  - election_ident: "14"
+    ident: "500080"
+    display_name: Member School Board - East District
+    district_ident: "501707"
+  - election_ident: "14"
+    ident: "500081"
+    display_name: Member Board of Supervisors
+    district_ident: "501184"
+  - election_ident: "14"
+    ident: "500082"
+    display_name: Member Town Council - Special
+    district_ident: "501407"
+  - election_ident: "14"
+    ident: "500083"
+    display_name: Member City Council - Western
+    district_ident: "501653"
+  - election_ident: "14"
+    ident: "500084"
+    display_name: Member School Board
+    district_ident: "501064"
+  - election_ident: "14"
+    ident: "500085"
+    display_name: Member City Council
+    district_ident: "501633"
+  - election_ident: "14"
+    ident: "500086"
+    display_name: Member City Council - Eastern
+    district_ident: "501653"
+  - election_ident: "14"
+    ident: "500087"
+    display_name: Member House of Representatives - 9th District
+    district_ident: "501614"
+  - election_ident: "14"
+    ident: "500088"
+    display_name: Member School Board
+    district_ident: "500960"
+  - election_ident: "14"
+    ident: "500089"
+    display_name: Sheriff
+    district_ident: "501655"
+  - election_ident: "14"
+    ident: "500090"
+    display_name: Mayor - Amherst
+    district_ident: "501427"
+  - election_ident: "14"
+    ident: "500091"
+    display_name: Member City Council - Bayside
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500092"
+    display_name: Mayor - Brookneal
+    district_ident: "501511"
+  - election_ident: "14"
+    ident: "500093"
+    display_name: Member House of Representatives - 10th District
+    district_ident: "501610"
+  - election_ident: "14"
+    ident: "500094"
+    display_name: Member City Council
+    district_ident: "501738"
+  - election_ident: "14"
+    ident: "500095"
+    display_name: Member House of Representatives - 1st District
+    district_ident: "501615"
+  - election_ident: "14"
+    ident: "500096"
+    display_name: Member School Board - Lynnhaven
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500097"
+    display_name: Member Town Council
+    district_ident: "501530"
+  - election_ident: "14"
+    ident: "500098"
+    display_name: Member School Board - At Large Special
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500099"
+    display_name: Member House of Representatives - 11th District
+    district_ident: "501618"
+  - election_ident: "14"
+    ident: "500100"
+    display_name: Member City Council
+    district_ident: "501311"
+  - election_ident: "14"
+    ident: "500101"
+    display_name: Member City Council - Superward
+    district_ident: "501620"
+  - election_ident: "14"
+    ident: "500102"
+    display_name: Member City Council
+    district_ident: "501707"
+  - election_ident: "14"
+    ident: "500103"
+    display_name: Member School Board
+    district_ident: "501181"
+  - election_ident: "14"
+    ident: "500104"
+    display_name: Member Town Council - Timberville
+    district_ident: "501400"
+  - election_ident: "14"
+    ident: "500105"
+    display_name: Mayor - Grottoes
+    district_ident: "501553"
+  - election_ident: "14"
+    ident: "500106"
+    display_name: Member School Board
+    district_ident: "500908"
+  - election_ident: "14"
+    ident: "500107"
+    display_name: " Member Town Council - Stanley"
+    district_ident: "501555"
+  - election_ident: "14"
+    ident: "500108"
+    display_name: Mayor
+    district_ident: "501508"
+  - election_ident: "14"
+    ident: "500109"
+    display_name: Member School Board - Special
+    district_ident: "501088"
+  - election_ident: "14"
+    ident: "500110"
+    display_name: Member School Board
+    district_ident: "500936"
+  - election_ident: "14"
+    ident: "500111"
+    display_name: Member Town Council - Elkton
+    district_ident: "501477"
+  - election_ident: "14"
+    ident: "500112"
+    display_name: Member City Council
+    district_ident: "501181"
+  - election_ident: "14"
+    ident: "500113"
+    display_name: "Member School Board "
+    district_ident: "501115"
+  - election_ident: "14"
+    ident: "500114"
+    display_name: Mayor - Mt Crawford
+    district_ident: "501485"
+  - election_ident: "14"
+    ident: "500115"
+    display_name: Member House of Representatives - 7th District
+    district_ident: "501608"
+  - election_ident: "14"
+    ident: "500116"
+    display_name: Member Town Council - Special
+    district_ident: "501511"
+  - election_ident: "14"
+    ident: "500117"
+    display_name: Member City Council
+    district_ident: "501010"
+  - election_ident: "14"
+    ident: "500118"
+    display_name: Member Board of Supervisors
+    district_ident: "501295"
+  - election_ident: "14"
+    ident: "500119"
+    display_name: Member Town Council - Special
+    district_ident: "501523"
+  - election_ident: "14"
+    ident: "500120"
+    display_name: Clerk of Court
+    district_ident: "501638"
+  - election_ident: "14"
+    ident: "500121"
+    display_name: Member Town Council
+    district_ident: "501567"
+  - election_ident: "14"
+    ident: "500122"
+    display_name: Member City Council
+    district_ident: "501115"
+  - election_ident: "14"
+    ident: "500123"
+    display_name: Mayor
+    district_ident: "501481"
+  - election_ident: "14"
+    ident: "500124"
+    display_name: Member School Board - At Large
+    district_ident: "501704"
+  - election_ident: "14"
+    ident: "500125"
+    display_name: Member Town Council - Grottoes
+    district_ident: "501553"
+  - election_ident: "14"
+    ident: "500126"
+    display_name: Member School Board
+    district_ident: "501127"
+  - election_ident: "14"
+    ident: "500127"
+    display_name: "Member School Board "
+    district_ident: "501053"
+  - election_ident: "14"
+    ident: "500128"
+    display_name: Member City Council
+    district_ident: "501266"
+  - election_ident: "14"
+    ident: "500129"
+    display_name: Member Town Council - Amherst
+    district_ident: "501427"
+  - election_ident: "14"
+    ident: "500130"
+    display_name: Member School Board
+    district_ident: "501010"
+  - election_ident: "14"
+    ident: "500131"
+    display_name: Member Town Council - Special
+    district_ident: "501466"
+  - election_ident: "14"
+    ident: "500132"
+    display_name: Member House of Representatives - 3rd District
+    district_ident: "501611"
+  - election_ident: "14"
+    ident: "500133"
+    display_name: Member, Town Council - Hurt
+    district_ident: "501552"
+  - election_ident: "14"
+    ident: "500134"
+    display_name: Member Town Council - Mt Crawford
+    district_ident: "501485"
+  - election_ident: "14"
+    ident: "500135"
+    display_name: Member Town Council
+    district_ident: "501480"
+  - election_ident: "14"
+    ident: "500136"
+    display_name: Member, School Board
+    district_ident: "501630"
+  - election_ident: "14"
+    ident: "500137"
+    display_name: Member City Council
+    district_ident: "500913"
+  - election_ident: "14"
+    ident: "500138"
+    display_name: Member City Council
+    district_ident: "501728"
+  - election_ident: "14"
+    ident: "500139"
+    display_name: Member City Council - Special
+    district_ident: "501633"
+  - election_ident: "14"
+    ident: "500140"
+    display_name: Member Town Council - Goshen
+    district_ident: "501382"
+  - election_ident: "14"
+    ident: "500141"
+    display_name: "Member School Board "
+    district_ident: "501165"
+  - election_ident: "14"
+    ident: "500142"
+    display_name: Mayor
+    district_ident: "501480"
+  - election_ident: "14"
+    ident: "500143"
+    display_name: Member Town Council - Hillsboro
+    district_ident: "501380"
+  - election_ident: "14"
+    ident: "500144"
+    display_name: Member Board of Supervisors
+    district_ident: "501233"
+  - election_ident: "14"
+    ident: "500145"
+    display_name: Member Town Council
+    district_ident: "501508"
+  elections: 
+  - start_date: "2010-11-02"
+    ident: "14"
+    type: FEDERAL
+    display_name: Nov 2011
+  - date: "2010-11-02"
+    ident: "14"
+    type: FEDERAL
+    display_name: Nov 2011
+
+  districts: []
+
+  district_sets: []
+
+  precincts: []
+
+  candidates: []
+
+  splits: []
+
+audit_header: 
+  schema_version: "0.1"
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-09-09T21:30:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F

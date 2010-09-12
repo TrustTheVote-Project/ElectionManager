@@ -12,7 +12,7 @@ module TTV
 
 
     # <tt>import_type:</tt> is "jurisdiction_info", "election_info" or "candidate_info"
-    # <tt>hash::</tt> Hash containing ElectionManager data. Has been processed for errors.
+    # <tt>hash::</tt> Hash containing `ElectionManager data. Has been processed for errors.
     #
     def initialize(import_type, hash)
       @hash = hash
@@ -134,7 +134,10 @@ module TTV
     
     # Loads an EDH formatted candidate into EM
     def load_candidate candidate
-      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], :ident => candidate["ident"], :party_id => Party.find_or_create_by_display_name(candidate["party"]).id)
+      new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], 
+                                                        :ident => candidate["ident"], 
+                                                        :party_id => Party.find_or_create_by_display_name(candidate["party"]).id)
+      new_candidate.contest = Contest.find_by_ident(candidate["contest_ident"])
       new_candidate.save! 
     end
     
@@ -159,7 +162,7 @@ module TTV
       new_election = Election.find_or_create_by_ident(
           :display_name => election["display_name"], 
           :ident => election["ident"], 
-          :start_date => election["start_date"])      
+          :start_date => election["start_date"])
       new_election.district_set = @jurisdiction
       new_election.save!
 

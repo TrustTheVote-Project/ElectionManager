@@ -1,0 +1,29 @@
+--- 
+body: 
+  contests:
+  - election_ident: "14"
+    ident: "500006"
+    display_name: Member House of Representatives - 5th District
+    district_ident: "501612"
+  - election_ident: "14"
+    ident: "500004"
+    display_name: Clerk of Court
+    district_ident: "501737"
+  - election_ident: "14"
+    ident: "500087"
+    display_name: Member House of Representatives - 9th District
+    district_ident: "501614"
+  elections:
+  - start_date: "2010-11-02"
+    ident: "14"
+    type: FEDERAL
+    display_name: Nov 2011
+
+audit_header: 
+  schema_version: "0.1"
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-09-09T21:30:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F

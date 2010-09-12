@@ -46,7 +46,6 @@
 	  </p>
       <div class="wat-cf">
       <% if can? :create, Election %> 
-
         <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_election_path(@election)) %>
       <% end %>
       <% if can? :destroy, Election %> 

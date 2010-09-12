@@ -13,7 +13,7 @@
         </ul>
     </div>
     <div class="content">
-        <h2 class="title"><%= t("ttv.import", :default => "Import") %> into Jurisdiction</h2>
+        <h2 class="title"><%= t("ttv.import", :default => "Import") %>into Jurisdiction</h2>
         <div class="inner">
             <% form_tag ({:action => 'import_file'}, {:method => 'put', :multipart => true}) do %>
             Choose file: <%= file_field_tag "import_file", :accept => "text/yml, text/xml, text/yaml" %>
@@ -22,12 +22,12 @@
             File Format: <%= select_tag :format, options_for_select([["YAML", :yaml], ["XML", :xml]], :yaml) %>
             <br/>
             <br>
-            File Contents: <%= select_tag :contents, 
-					options_for_select([["Jurisdiction, Precincts, Splits and Districts", :jurisdiction_info], 
-										["Election, Contest and Offices", :election_info],
-										["Candidates", :candidate_info]], :jurisdiction_info) %>
+            File Contents: <%= select_tag :contents,
+            options_for_select([["Jurisdiction, Precincts, Splits and Districts", :jurisdiction_info],
+            										["Election, Contest and Offices", :election_info],
+            										["Candidates", :candidate_info]], :jurisdiction_info) %>
             <br/>
-			<br/>
+            <br/>
             <div class="group navform wat-cf">
                 <button class="button" type="submit">
                     <%= image_tag("web-app-theme/tick.png", :alt => "#{t("web-app-theme.save", :default => "Submit")}") %><%= t("web-app-theme.save", :default => "Submit") %>

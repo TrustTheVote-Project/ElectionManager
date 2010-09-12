@@ -1,7 +1,7 @@
 ---
 body:  
   elections: 
-  - date: "2010-11-02"
+  - start_date: "2010-11-02"
     ident: elect-14
     type: FEDERAL
   
