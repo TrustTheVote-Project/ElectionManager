@@ -83,11 +83,13 @@ Contest.blueprint do
   display_name
   district
   election
+  ident
 end
 
 Candidate.blueprint do
   # contest
-  # party 
+  # party
+  ident
 end
 
 Question.blueprint do
@@ -95,6 +97,7 @@ Question.blueprint do
   requesting_district { District.make }
   election
   question
+  ident
 end
 
 Precinct.blueprint do
