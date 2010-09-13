@@ -1,46 +1,43 @@
-    <div class="inner">
-      <table class="table">
-        <tr>
-          <th>
-            <%= t("activerecord.attributes.election.election", :default => t("activerecord.labels.election", :default => "Election")) %>
-          </th>
-          <th>
-            <%= t("activerecord.attributes.election.date", :default => "Date" )%>
-          </th>
-          <th>
-            <%= t("activerecord.attributes.election.contests", :default => "Contests") %>
-          </th>
-            
-         <th class="last">
+<div class="inner">
+  <table class="table">
+    <tr>
+        <th>
+            <%= t("ttv.election", :default => "Election") %>
+        </th>
+        <th>
+            <%= t("ttv.date", :default => "Date") %>
+        </th>
+        <th>
+            <%= t("ttv.contests", :default => "Contests") %>
+        </th>
+        <th class="last">
             &nbsp;
-          </th>
-        </tr>
-        <% @elections.each do |election| -%>
-        <tr class="<%= cycle("odd", "even") %>">
+        </th>
+    </tr>
+    <% @elections.each do |election| -%>
+      <tr class="<%= cycle("odd", "even") %>">
           <td>
-            <%= link_to election.display_name, election_path(election) %>
+              <%= link_to election.display_name, election_path(election) %>
           </td>
           <td>
-            <%= election.start_date.to_date.to_formatted_s(:long)  %>
+              <%= election.start_date.to_date.to_formatted_s(:long) %>
           </td>
           <td>
-            <%= election.contests.count %>  
+          <%= election.contests.count %>
           <td class="last">
-            <%= link_to "#{t("web-app-theme.show", :default =>
-            "Show")}", election_path(election) %>
-            <% if can? :update, Election %>
-              |<%= link_to "#{t("web-app-theme.edit", :default =>
-            "Edit")}", edit_election_path(election) %>
-              |<%= link_to "#{t("web-app-theme.delete", :default =>
-            "Delete")}", election_path(election), :method => :delete,
-            :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-            <% end %>
+              <%= link_to "#{t("ttv.show", :default => "Show")}", election_path(election) %>
+              <% if can? :update, Election %>
+              |<%= link_to "#{t("ttv.edit", :default => "Edit")}", edit_election_path(election) %>
+              |<%= link_to "#{t("ttv.delete", :default => "Delete")}",
+              election_path(election), :method => :delete, :confirm => "#{t("ttv.areyousure", :default => "Are you sure?")}" %>
+              <% end %>
           </td>
-        </tr>
-        <% end -%>
-      </table>
-      <div class="actions-bar wat-cf">
-        <div class="actions">
-        </div>
-        <%= will_paginate @elections %>
+      </tr>
+    <% end -%>
+  </table>
+  <div class="actions-bar wat-cf">
+      <div class="actions">
       </div>
+      <%= will_paginate @elections %>
+  </div>
+</div>

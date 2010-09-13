@@ -1,18 +1,17 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", jurisdictions_path  %></li>
-      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_jurisdiction_path %></li>
-      <li><%= link_to "#{t("web-app-theme.import", :default => "Import")}", import_jurisdiction_path %></li>
-      <li class="active"><%= link_to "#{t("web-app-theme.audit", :default => "Audit")}", interactive_audit_jurisdiction_path %></li>
-
+      <li class="first"><%= link_to "#{t("ttv.list", :default => "List")}", jurisdictions_path  %></li>
+      <li><%= link_to "#{t("ttv.new", :default => "New")}", new_jurisdiction_path %></li>
+      <li><%= link_to "#{t("ttv.import", :default => "Import")}", import_jurisdiction_path %></li>
+      <li class="active"><%= link_to "#{t("ttv.audit", :default => "Audit")}", interactive_audit_jurisdiction_path %></li>
     </ul>
   </div>          
   <div class="content">            
     <h2 class="title">Import <%= t("web-app-theme.audit", :default => "Audit")%> report</h2>
     <div class="inner">
 
-		<% form_tag ({:action => 'apply_audit'}, :method => :put) do %>
+		<% form_tag({:action => 'apply_audit'}, :method => :put) do %>
     <% @alerts.each { |alert|  %>
     <div class="group">
     <label class="label"><%= alert.message %></label>

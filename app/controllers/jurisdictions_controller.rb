@@ -47,8 +47,6 @@ class JurisdictionsController < ApplicationController
   end
  
  
-    
-  
 # Actions to handle importing into the jurisdiction. There are 3 actions to represent the workflow.
  
   # 1. Receives file
@@ -66,17 +64,17 @@ class JurisdictionsController < ApplicationController
       
       if params[:import_file]
         session[:audit_id] = nil
-        if params[:type] == "yaml"
+        if params[:format] == "yaml"
           edh_to_audit = YAML.load(params[:import_file])
-        elsif params[:type] == "xml"
+        elsif params[:format] == "xml"
           converter = TTV::XMLToEDH.new(params[:import_file])
           edh_to_audit = converter.convert
         end
       end
-      audit_obj = Audit.new(:election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
+      audit_obj = Audit.new(:content_type => params[:contents], :election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
       audit_obj.save!
       session[:audit_id] = audit_obj.id
-      audit_obj.audit :jurisdiction
+      audit_obj.audit
       
       if audit_obj.ready_for_import?
         redirect_to :action => :do_import
@@ -84,7 +82,7 @@ class JurisdictionsController < ApplicationController
         redirect_to :action => :interactive_audit
       end
     rescue Exception => exc
-       logger.error("Message for the log file #{exc.message}")
+       logger.error("Exception during import: #{exc.message}")
        flash[:error] = "Failed to import file: #{exc.message}"
        redirect_to :back
     end
@@ -106,7 +104,7 @@ class JurisdictionsController < ApplicationController
       alert.choice = choice[1] if choice
     } 
     audit_obj.apply_alerts    
-    audit_obj.audit :jurisdiction
+    audit_obj.audit
     
     if audit_obj.ready_for_import?
       redirect_to :action => :do_import
@@ -115,17 +113,19 @@ class JurisdictionsController < ApplicationController
     end
   rescue Exception => exc
     Alert.destroy_all
-    logger.error("Message for the log file #{exc.message}")
+    logger.error("Exception during import: #{exc.message}")
     flash[:error] = "Failed to import file: #{exc.message}"
     redirect_to :back
   end
 
-  # 1. Get Audit object from DB (stored as params[:audit_id])
-  # 2. Import from Audit's EDH
+  # Get Audit object from DB (stored as params[:audit_id])
+  # Create Import Object, for content_type (Jurisdiction, Election or Candidate), and give it the EDH
+  # Import from Audit's EDH
   def do_import
-    import_obj = TTV::ImportEDH.new(Audit.find(session[:audit_id]).election_data_hash)
-    import_obj.import_to_jurisdiction(current_context.jurisdiction)
+    audit_obj = Audit.find(session[:audit_id])
+    import_obj = TTV::ImportEDH.new(audit_obj.content_type, audit_obj.election_data_hash)
+    import_obj.import(current_context.jurisdiction)
     flash[:notice] = "Import successful."
-    redirect_to :action => :import
+    redirect_to :action => :show
   end
 end

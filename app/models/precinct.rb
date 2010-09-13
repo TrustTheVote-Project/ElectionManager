@@ -2,10 +2,7 @@ class Precinct < ActiveRecord::Base
   
   has_many :precinct_splits
   belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
-  
-  # TODO: :importID for xml import, hacky could do this by dynamically extending class at runtime
-  attr_accessor :importId
-  
+
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
 
@@ -21,7 +18,8 @@ class Precinct < ActiveRecord::Base
     precinct_splits.reduce([]) { |coll, ps| coll | ps.district_set.districts}
   end
 
-# Is this precinct a split precinct?
+# Is this precinct a split precinct? A "split precinct" in the vernacular corresponds
+# to a Precinct with one PrecinctSplit in our schema.
   def split?
     precinct_splits.size != 1
   end

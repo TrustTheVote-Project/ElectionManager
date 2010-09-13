@@ -39,42 +39,30 @@ class AuditTest < ActiveSupport::TestCase
       @jurisdiction = DistrictSet.new(:display_name => "District Set", :secondary_name => "An example, for example's sake.")
       @jurisdiction.before_validation # perform pre-validation, generating an ident
       
-      @audit_yaml = Audit.new(:election_data_hash => @yaml_hash, :district_set => @jurisdiction)
-      @audit_xml = Audit.new(:election_data_hash => @xml_hash, :district_set => @jurisdiction)
+      @audit_yaml = Audit.new(:content_type => "jurisdiction_info", :election_data_hash => @yaml_hash, :district_set => @jurisdiction)
+      @audit_xml = Audit.new(:content_type => "jurisdiction_info", :election_data_hash => @xml_hash, :district_set => @jurisdiction)
     end
     
     should "be successfully built from xml" do
-      assert @audit_xml.audit :global
-      assert !@audit_xml.ready_for_import?
+      assert @audit_xml.audit
     end
     
     should "be successfully built from yml" do
-      assert @audit_yaml.audit :global
-      assert !@audit_yaml.ready_for_import?
-    end
-
-    should "store an alert for not defining a valid jurisdiction" do
-      assert @audit_yaml.audit :globals
-      assert @audit_yaml.alerts[0]
-      assert_equal "use_current", @audit_yaml.alerts[0].default_option
-      
-      assert @audit_xml.audit :global
-      assert @audit_xml.alerts[0]
-      assert_equal "use_current", @audit_xml.alerts[0].default_option
+      assert @audit_yaml.audit 
     end
 
     context "with an alert option response" do
       setup do
-        @audit_yaml.audit :global
+        @audit_yaml.audit
         @audit_yaml.alerts[0].choice = "use_current"
-        @audit_xml.audit :global
+        @audit_xml.audit
         @audit_xml.alerts[0].choice = "use_current"
 
         @audit_yaml.apply_alerts
-        @audit_yaml.audit :global
+        @audit_yaml.audit
         
         @audit_xml.apply_alerts
-        @audit_xml.audit :global
+        @audit_xml.audit
       end
 
       should "have a fixed hash, have no alerts left, be ready for import" do

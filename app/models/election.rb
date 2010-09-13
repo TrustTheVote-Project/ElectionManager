@@ -4,9 +4,10 @@ class Election < ActiveRecord::Base
     has_many :questions, :order => :display_name, :dependent => :destroy
     
     attr_accessible :ident, :display_name, :district_set_id, :district_set, :start_date, :district_set
-  attr_accessible :default_voting_method_id, :ballot_style_template_id
+    attr_accessible :default_voting_method_id, :ballot_style_template_id
+
     validates_presence_of :display_name
-    belongs_to :district_set
+    belongs_to :district_set # @TODO Soon this will be :jurisdiction
     
     before_destroy :destroy_translations
     
@@ -18,9 +19,12 @@ class Election < ActiveRecord::Base
       return s
     end
 
+# Return collection of PrecinctSplits associated with this Election. 
+# 
     def precinct_splits
-      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
-      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+#      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
+#      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+      district_set.precincts.map { |prec| prec.precinct_splits }.flatten
     end
     
     def districts

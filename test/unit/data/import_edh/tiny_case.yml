@@ -14,6 +14,7 @@ body:
   splits: 
   - district_set_ident: ds-1
     precinct_ident: prec-1
+    ident: ds-1234
 audit_header: 
   schema_version: "0.1"
   operator: Pito Salas

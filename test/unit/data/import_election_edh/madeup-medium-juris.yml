@@ -1,0 +1,9 @@
+--- 
+body: 
+  districts: 
+  - ident: dist-CITY OF WASHINGTON WARD 6
+    type: WARD
+    display_name: CITY OF WASHINGTON WARD 6
+  - ident: dist-DISTRICT OF COLUMBIA
+    type: CITYWI
+    display_name: DISTRICT OF COLUMBIA
