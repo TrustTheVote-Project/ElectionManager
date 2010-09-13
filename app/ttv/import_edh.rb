@@ -156,7 +156,7 @@ module TTV
       if contest["voting_method"] and VotingMethod.find_by_display_name(contest["voting_method"])
         voting_method_id = VotingMethod.find_by_display_name(contest["voting_method"]) 
       else
-        voting_method_id = 0
+        voting_method_id = VotingMethod.find_by_display_name("Winner Take All")
       end
       new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
                                                     :ident => contest["ident"], 
