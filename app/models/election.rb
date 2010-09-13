@@ -1,70 +1,79 @@
 require 'abstract_ballot'
 class Election < ActiveRecord::Base
-    has_many :contests, :order => :position, :dependent => :destroy
-    has_many :questions, :order => :display_name, :dependent => :destroy
-    
-    attr_accessible :ident, :display_name, :district_set_id, :district_set, :start_date, :district_set
-    attr_accessible :default_voting_method_id, :ballot_style_template_id
+  has_many :contests, :order => :position, :dependent => :destroy
+  has_many :questions, :order => :display_name, :dependent => :destroy
+  
+  attr_accessible :ident, :display_name, :district_set_id, :district_set, :start_date, :district_set
+  attr_accessible :default_voting_method_id, :ballot_style_template_id
 
-    validates_presence_of :display_name
-    belongs_to :district_set # @TODO Soon this will be :jurisdiction
-    
-    before_destroy :destroy_translations
-    
-    def to_s
-      s = ""
-      attributes.each do |key, value| 
-        s += ("#{key}:#{value} ")
-      end
-      return s
+  validates_presence_of :display_name
+  belongs_to :district_set # @TODO Soon this will be :jurisdiction
+  
+  before_destroy :destroy_translations
+  
+  def to_s
+    s = ""
+    attributes.each do |key, value| 
+      s += ("#{key}:#{value} ")
     end
+    return s
+  end
 
 # Return collection of PrecinctSplits associated with this Election. 
 # 
-    def precinct_splits
+  def precinct_splits
 #      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
 #      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
-      district_set.precincts.map { |prec| prec.precinct_splits }.flatten
-    end
-    
-    def districts
-      district_set.jur_districts
-    end
-    
-    def contest_districts
-      contests.map(&:district)
-    end
+    district_set.precincts.map { |prec| prec.precinct_splits }.flatten
+  end
+  
+  def districts
+    district_set.jur_districts
+  end
+  
+  def contest_districts
+    contests.map(&:district)
+  end
 
-    def question_districts
-      questions.map(&:requesting_district)
-    end
-    
+  def question_districts
+    questions.map(&:requesting_district)
+  end
+  
 # Iterator for generating ballots.
 # <tt>param:</tt> A Precinct, then it's all the ballots for this precinct in this election
 # <tt>:</tt>A Jurisdiction (DS), then it's all the ballots for this Jurisdiction in this election
 
-    def each_ballot param=nil
-      cont_list = contests
-      quest_list = questions
-      if param.class == Precinct
-        prec_splits = param.precinct_splits
-      elsif param.class == DistrictSet # TODO will be Jurisdiction in the future)
-        precincts = Precinct.find_all_by_jurisdiction_id(param.id)
-        prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
-      else 
-        raise ArgumentError, "Invalid parameter for Election.each_ballot"
-      end
-      prec_splits.each do 
-        |split|
-          result_cont_list = cont_list.reduce([]) do
-            |memo, cont| memo |= (split.district_set.districts.member?(cont.district)) ? [cont] : []
-          end
-          result_quest_list = quest_list.reduce([]) do
-            |memo, quest| memo |= (split.district_set.districts.member?(quest.requesting_district)) ? [quest] : []
-          end
-          yield split, result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
-      end
+  def each_ballot param=nil
+    cont_list = contests
+    quest_list = questions
+    if param.class == Precinct
+      prec_splits = param.precinct_splits
+    elsif param.class == DistrictSet # TODO will be Jurisdiction in the future)
+#      precincts = Precinct.find_all_by_jurisdiction_id(param.id)
+      precincts = param.precincts
+      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+    else 
+      raise ArgumentError, "Invalid parameter for Election.each_ballot"
     end
+    prec_splits.each do 
+      |split|
+        result_cont_list = cont_list.reduce([]) do
+          |memo, cont| memo |= (split.district_set.districts.member?(cont.district)) ? [cont] : []
+        end
+        result_quest_list = quest_list.reduce([]) do
+          |memo, quest| memo |= (split.district_set.districts.member?(quest.requesting_district)) ? [quest] : []
+        end
+        yield split, result_cont_list, result_quest_list unless (result_cont_list.length + result_quest_list.length) == 0
+    end
+ end
+
+ # Return all the ballots as an array
+ def all_ballots param=nil
+   result = []
+   each_ballot(param) {|split, contests, quests| result << [split, contests, quests]}
+   result
+ end
+
 
 # Generate a ballot map, as a Hash. This maps certain characteristics of the ballot to its file name
 # TODO: Move this to a BallotUtils or Ballot class which will capture the functionality relating to controling
@@ -75,7 +84,6 @@ class Election < ActiveRecord::Base
 
       outlist << {:precinct_split => split.display_name, :file => "#{split.display_name}.pdf"}
     end
-    puts "*** #{outlist.inspect}"
     return outlist
   end
 

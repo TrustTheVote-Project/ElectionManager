@@ -10,6 +10,7 @@ class ElectionsController < ApplicationController
   end
 
   def show
+    params[:ballot_page] ||= 1
     @election = Election.find(params[:id], :include => [ 
       { :district_set => :districts }, 
       { :contests => :candidates },
@@ -18,6 +19,12 @@ class ElectionsController < ApplicationController
     current_context.election = @election
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
+    
+    ballots_array = @election.all_ballots @election.district_set # TODO: Jurisdiction. TODO: Maybe store in session.
+    @ballots = WillPaginate::Collection.create(params[:ballot_page], 10, ballots_array.length) do |pager|
+      start = (pager.current_page - 1) * pager.per_page
+      pager.replace(ballots_array.slice(start, 10 ))
+    end
   end
 
   def new

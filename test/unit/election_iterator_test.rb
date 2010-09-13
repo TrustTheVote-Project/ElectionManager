@@ -40,6 +40,11 @@ class ElectionTest < ActiveSupport::TestCase
         end
         
         should_have_n_ballots 2
+        
+        should "correctly count using the enumerator" do
+          all_ballots = @e1.all_ballots @p1
+          assert_equal 2, all_ballots.length
+        end
       end
     end
   end
