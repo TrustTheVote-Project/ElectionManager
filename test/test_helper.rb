@@ -1,8 +1,10 @@
 ENV["RAILS_ENV"] = "test"
+  
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 # for machinist blueprint file
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
+
 
 require 'test_help'
 require 'shoulda'
@@ -10,6 +12,17 @@ require 'mocha'
 require "authlogic/test_case"
 require "pdf/reader"
 require 'ttv/prawn/util'
+
+require 'spork'
+
+Spork.prefork do
+  
+  # Loading more in this block will cause your tests to run faster. However, 
+  # if you change any configuration or code from libraries loaded here, you'll
+  # need to restart spork for it take effect.
+  
+
+
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -61,4 +74,5 @@ class  ActionController::TestCase
     # this is a added to the User model by authlogic
     # User.maintain_sessions = false    
     }
+end
 end
