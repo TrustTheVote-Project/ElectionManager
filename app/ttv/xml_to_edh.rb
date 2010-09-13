@@ -25,6 +25,7 @@ module TTV
       @xml_body.add_element('contest') if @xml_body.get_elements('contest').size == 1
       @xml_body.add_element('candidate') if @xml_body.get_elements('candidate').size == 1
       @xml_body.add_element('jurisdiction') if @xml_body.get_elements('jurisdiction').size == 1
+      @xml_body.add_element('split') if @xml_body.get_elements('split').size == 1
 
       #   Add empty elements for districts' jurisdiction references
       districts = @xml_body.get_elements('district')         

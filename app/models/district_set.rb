@@ -4,6 +4,7 @@
   has_many :elections
   has_many :audits
   has_many :precincts, :foreign_key => :jurisdiction_id
+  has_many :precinct_splits, :through => :precincts
   has_attached_file :icon, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   has_many :jurisdiction_memberships, :class_name => "JurisdictionMembership"
