@@ -85,7 +85,7 @@ class Audit < ActiveRecord::Base
     split = election_data_hash["body"]["splits"][split_index]
     if !input_has?(election_data_hash["body"]["district_sets"], "ident", split["district_set_ident"])
       logger.info "Alert: Invalid District #{election_data_hash["body"]["district_sets"].inspect}"
-      alerts << Alert.new(:message => "Invalid DistrictSet mentioned in Precinct Split. What would you like to do? ", 
+      alerts << Alert.new(:message => "Invalid DistrictSet \'#{split["district_set_ident"]}\' mentioned in Precinct Split \'#{split["ident"]}\'. What would you like to do? ", 
                           :alert_type => "invalid_ds_in_ps", 
                           :options => {"skip" => "Skip this split", 
                                        "abort" => "Abort import"}, 

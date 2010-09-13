@@ -21,7 +21,7 @@
         <%= @election.display_name %>
       </p>
       <p>
-        <b><%= t("ttv.district_set", :default => "District Set") %>:</b>
+        <b><%= t("ttv.jurisdiction", :default => "Jurisdiction") %>:</b>
         <%= DistrictSet.find_by_id(@election.district_set_id).display_name %>
       </p>
       <p>

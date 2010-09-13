@@ -19,9 +19,12 @@ class Election < ActiveRecord::Base
       return s
     end
 
+# Return collection of PrecinctSplits associated with this Election. 
+# 
     def precinct_splits
-      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
-      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+#      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
+#      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
+      district_set.precincts.map { |prec| prec.precinct_splits }.flatten
     end
     
     def districts

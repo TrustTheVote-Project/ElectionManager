@@ -69,6 +69,16 @@ module TTV
       @hash["body"]["elections"].each { |elec| load_election elec} if @hash["body"].has_key? "elections"
     end
     
+    # Loads an EDH formatted election into EM
+    def load_election election
+      new_election = Election.find_or_create_by_ident(
+          :display_name => election["display_name"], 
+          :ident => election["ident"], 
+          :start_date => election["start_date"])
+      new_election.district_set = @jurisdiction
+      new_election.save!
+    end      
+    
     def load_precinct_splits
       @hash["body"]["splits"].each { |split| load_precinct_split split } if @hash["body"].has_key? "splits"
     end
@@ -156,16 +166,5 @@ module TTV
       new_contest.election = Election.find_by_ident(contest["election_ident"])
       new_contest.save!
     end
-
-    # Loads an EDH formatted election into EM
-    def load_election election
-      new_election = Election.find_or_create_by_ident(
-          :display_name => election["display_name"], 
-          :ident => election["ident"], 
-          :start_date => election["start_date"])
-      new_election.district_set = @jurisdiction
-      new_election.save!
-
-    end      
   end
 end
