@@ -68,14 +68,14 @@ module TTV
           annotation_ref.data.merge!(:Parent => radio_button_ref)
           
           # add this radio button to the list of this document's fields
-          store.root.data[:AcroForm].data[:Fields] << annotation_ref
+          # store.root.data[:AcroForm].data[:Fields] << annotation_ref
         end
 
         # add this radio button group to the list of this document's fields
         store.root.data[:AcroForm].data[:Fields] << radio_button_ref
         
         # add this radio button group to the list of this page's fields
-        store[page.dictionary.data[:Annots].identifier].data << radio_button_ref
+        # store[page.dictionary.data[:Annots].identifier].data << radio_button_ref
       end
       
       def draw_radiobutton(name, opts={}, &block)
