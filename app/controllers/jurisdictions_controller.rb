@@ -22,7 +22,7 @@ class JurisdictionsController < ApplicationController
   end
  
   def change
-    @district_sets = DistrictSet.all
+    @district_sets = DistrictSet.display_name_not("").paginate(:per_page => 3, :page => params[:page])
   end
   
   def set
