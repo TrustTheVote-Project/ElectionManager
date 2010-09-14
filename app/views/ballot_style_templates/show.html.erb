@@ -40,10 +40,17 @@
           <b><%= t("activerecord.attributes.ballot_style_template.medium_id", :default => t("activerecord.labels.medium_id", :default => "Medium")) %>:</b>
           <%= Medium.find(@ballot_style_template.medium_id).display_name %>
         </p>
+
         <p>
           <b><%= t("activerecord.attributes.ballot_style_template.pdf_form", :default => t("activerecord.labels.pdf_form", :default => "PDF Form ")) %>:</b>
          <%= @ballot_style_template.pdf_form? ? "enabled" : "disabled" %>
         </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.ballot_style_template.ballot_title", :default => t("activerecord.labels.ballot_title", :default => "Ballot Title")) %>:</b>
+         <%= @ballot_style_template.ballot_title.blank? ? "empty": @ballot_style_template.ballot_title  %>
+        </p>
+
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_ballot_style_template_path(@ballot_style_template), :class => "button" %> 
         <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", ballot_style_template_path(@ballot_style_template), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>

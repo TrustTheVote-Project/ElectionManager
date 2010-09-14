@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100910205037) do
+ActiveRecord::Schema.define(:version => 20100914210917) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20100910205037) do
     t.text     "frame"
     t.text     "contents"
     t.text     "ballot_layout"
+    t.string   "ballot_title"
   end
 
   create_table "ballot_styles", :force => true do |t|

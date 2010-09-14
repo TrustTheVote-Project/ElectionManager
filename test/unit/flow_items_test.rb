@@ -10,11 +10,11 @@ class FlowItemsTest < ActiveSupport::TestCase
 
     end 
     should "get the Content flow item for Contests" do
-      assert_instance_of DefaultBallot::FlowItem::Contest, ::DefaultBallot::FlowItem.create_flow_item(@pdf, Contest.new)
+      assert_instance_of DefaultBallot::FlowItem::Contest, ::DefaultBallot::FlowItem.create_flow_item(@pdf, Contest.make)
     end
     
     should "get the Question flow item for Questions" do
-      assert_instance_of DefaultBallot::FlowItem::Question, ::DefaultBallot::FlowItem.create_flow_item(@pdf, Question.new)
+      assert_instance_of DefaultBallot::FlowItem::Question, ::DefaultBallot::FlowItem.create_flow_item(@pdf, Question.make)
     end
 
     should "get the Header flow item for Strings" do
