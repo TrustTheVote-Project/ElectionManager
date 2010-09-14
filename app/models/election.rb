@@ -49,7 +49,6 @@ class Election < ActiveRecord::Base
     if param.class == Precinct
       prec_splits = param.precinct_splits
     elsif param.class == DistrictSet # TODO will be Jurisdiction in the future)
-#      precincts = Precinct.find_all_by_jurisdiction_id(param.id)
       precincts = param.precincts
       prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
     else 
