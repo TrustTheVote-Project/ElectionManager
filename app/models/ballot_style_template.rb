@@ -142,7 +142,7 @@ class BallotStyleTemplate < ActiveRecord::Base
       edate = Date.parse("#{@election.start_date}").strftime("%A, %B %d, %Y" )
       
       @pdf.move_down 14
-      @pdf.text "OFFICIAL REPUBLICAN BALLOT\n#{@election.display_name}", :align => :center, :style => :bold
+      @pdf.text "#{@template.ballot_title}\n#{@election.display_name}", :align => :center, :style => :bold
       @pdf.text "#{@election.district_set.display_name}\n#{edate}", :align => :center
       
       # instructions
