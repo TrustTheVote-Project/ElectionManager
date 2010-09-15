@@ -55,7 +55,7 @@
       <%= link_to "#{t("web-app-theme.new", :default => "Add new contest")}", :controller => "contests", :action => "new" %> 
     </div>
     <%= will_paginate @contests if @contest.nil? %>
-    <%= will_paginate @contests, :params => { :controller => "elections", :action => "show", :id => @contest.election.id } unless @contest.nil? %>
+    <%= will_paginate @contests,  :param_name => :contest_page, :params => { :controller => "elections", :action => "show", :id => @contest.election.id } unless @contest.nil? %>
   </div>
 </div>
 </div>

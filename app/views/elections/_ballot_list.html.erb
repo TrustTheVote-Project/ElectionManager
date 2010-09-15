@@ -33,11 +33,9 @@
                 </td>
                 <td>
                     <%= split.ballot_contests(@election).size %>
-                    <%#= result_cont_list.size %>
                 </td>
                 <td>
                     <%= split.ballot_questions(@election).size %>
-                    <%#= result_quest_list.size %>
                 </td>
                 <td class="last">
                     <%= link_to "generate", ballot_election_precinct_path(@election, split) %> | preview
@@ -47,7 +45,7 @@
         </table>
         <div class="actions-bar wat-cf">
             <div class="actions"></div>
-            <%= will_paginate @precinct_splits %>
+            <%= will_paginate @precinct_splits, :param_name => :ballot_page %>
         </div>
     </div>
 </div>

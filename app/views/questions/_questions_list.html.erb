@@ -49,7 +49,7 @@
       <%= link_to "#{t("ttv.add_new_question", :default => "Add new question")}", :controller => "questions", :action => "new" %> 
     </div>
     <%= will_paginate @questions if @question.nil? %>
-    <%= will_paginate @questions, :params => { :controller => "elections", :action => "show", :id => @question.election_id
+    <%= will_paginate @questions,  :param_name => :question_page, :params => { :controller => "elections", :action => "show", :id => @question.election_id
  } unless @question.nil? %>
   </div>
 </div>

@@ -4,315 +4,315 @@ body:
   - display_name: Alice Example
     ident: cand-1000
     contest_ident: cont-01
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: Bob Example
     ident: cand-1001
     contest_ident: cont-01
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Carol Example
     ident: cand-1002
     contest_ident: cont-01
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Duane Example
     ident: cand-1003
     contest_ident: cont-02
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Edward Example
     ident: cand-1004
     contest_ident: cont-02
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Frances Example
     ident: cand-1005
     contest_ident: cont-02
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Gregory Example
     ident: cand-1006
     contest_ident: cont-03
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Helen Example
     ident: cand-1007
     contest_ident: cont-03
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Inez Example
     ident: cand-1008
     contest_ident: cont-03
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Joan Example
     ident: cand-1009
     contest_ident: cont-04
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Kimberley Example
     ident: cand-1010
     contest_ident: cont-04
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Liam Example
     ident: cand-1011
     contest_ident: cont-04
-    party: Republican
+    party_display_name: Republican
     position: 3
   - display_name: Mary Example
     ident: cand-1012
     contest_ident: cont-05
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Nitan Example
     ident: cand-1013
     contest_ident: cont-05
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Odell Example
     ident: cand-1014
     contest_ident: cont-05
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Paris Example
     ident: cand-1015
     contest_ident: cont-06
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Queenie Example
     ident: cand-1016
     contest_ident: cont-06
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Ralph Example
     ident: cand-1017
     contest_ident: cont-06
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Samantha Example
     ident: cand-1018
     contest_ident: cont-07
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Troy Example
     ident: cand-1019
     contest_ident: cont-07
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Upton Example
     ident: cand-1020
     contest_ident: cont-07
-    party: Republican
+    party_display_name: Republican
     position: 3
   - display_name: Venus Example
     ident: cand-1021
     contest_ident: cont-08
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: William Example
     ident: cand-1022
     contest_ident: cont-08
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Xavier Example
     ident: cand-1023
     contest_ident: cont-08
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Yvonne Example
     ident: cand-1024
     contest_ident: cont-09
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: Zachary Example
     ident: cand-1025
     contest_ident: cont-09
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 2
   - display_name: Abigail Example
     ident: cand-1026
     contest_ident: cont-09
-    party: Republican
+    party_display_name: Republican
     position: 3
   - display_name: Barbara Example
     ident: cand-1027
     contest_ident: cont-10
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Carleton Example
     ident: cand-1028
     contest_ident: cont-10
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Eduardo Example
     ident: cand-1029
     contest_ident: cont-10
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Freida Example
     ident: cand-1030
     contest_ident: cont-11
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Geraldine Example
     ident: cand-1031
     contest_ident: cont-11
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Howard Example
     ident: cand-1032
     contest_ident: cont-11
-    party: Republican
+    party_display_name: Republican
     position: 3
   - display_name: Iesha Example
     ident: cand-1033
     contest_ident: cont-12
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Jackie Example
     ident: cand-1034
     contest_ident: cont-12
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Kelvin Example
     ident: cand-1035
     contest_ident: cont-12
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Latoya Example
     ident: cand-1036
     contest_ident: cont-13
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Marcus Example
     ident: cand-1037
     contest_ident: cont-13
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 2
   - display_name: Newton Example
     ident: cand-1038
     contest_ident: cont-13
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Orlando Example
     ident: cand-1039
     contest_ident: cont-14
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: Phyllis Example
     ident: cand-1040
     contest_ident: cont-14
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 2
   - display_name: Quincy Example
     ident: cand-1041
     contest_ident: cont-14
-    party: Republican
+    party_display_name: Republican
     position: 3
   - display_name: Randi Example
     ident: cand-1042
     contest_ident: cont-15
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: Sung Example
     ident: cand-1043
     contest_ident: cont-15
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Terry Example
     ident: cand-1044
     contest_ident: cont-15
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Uma Example
     ident: cand-1045
     contest_ident: cont-16
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Verna Example
     ident: cand-1046
     contest_ident: cont-16
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Wilma Example
     ident: cand-1047
     contest_ident: cont-16
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Xaio Example
     ident: cand-1048
     contest_ident: cont-17
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Yvette Example
     ident: cand-1049
     contest_ident: cont-17
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 2
   - display_name: Zora Example
     ident: cand-1050
     contest_ident: cont-17
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Andrea Example
     ident: cand-1051
     contest_ident: cont-18
-    party: Democratic
+    party_display_name: Democratic
     position: 1
   - display_name: Benjamin Example
     ident: cand-1052
     contest_ident: cont-18
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Cedric Example
     ident: cand-1053
     contest_ident: cont-18
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Darlene Example
     ident: cand-1054
     contest_ident: cont-19
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Elmer Example
     ident: cand-1055
     contest_ident: cont-19
-    party: Republican
+    party_display_name: Republican
     position: 2
   - display_name: Franklin Example
     ident: cand-1056
     contest_ident: cont-19
-    party: Democratic
+    party_display_name: Democratic
     position: 3
   - display_name: Garland Example
     ident: cand-1057
     contest_ident: cont-20
-    party: Republican
+    party_display_name: Republican
     position: 1
   - display_name: Hazel Example
     ident: cand-1058
     contest_ident: cont-20
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Ingrid Example
     ident: cand-1059
     contest_ident: cont-20
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 3
   - display_name: Janice Example
     ident: cand-1060
     contest_ident: cont-21
-    party: Statehood Green
+    party_display_name: Statehood Green
     position: 1
   - display_name: Kenneth Example
     ident: cand-1061
     contest_ident: cont-21
-    party: Democratic
+    party_display_name: Democratic
     position: 2
   - display_name: Lawrance Example
     ident: cand-1062
     contest_ident: cont-21
-    party: Republican
+    party_display_name: Republican
     position: 3
