@@ -17,9 +17,9 @@ class ElectionsController < ApplicationController
       :questions, 
       ])
     current_context.election = @election
-    @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
-    @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
-    @precinct_splits = PrecinctSplit.precinct_jurisdiction_id_is(@election.district_set_id).paginate(:per_page => 10, :page => params[:page])
+    @contests = @election.contests.paginate(:per_page => 1000, :page => params[:page], :order => 'position')
+    @questions = @election.questions.paginate(:per_page => 1000, :page => params[:page])
+    @precinct_splits = PrecinctSplit.precinct_jurisdiction_id_is(@election.district_set_id).paginate(:per_page => 1000, :page => params[:page])
     
 #    ballots_array = @election.all_ballots @election.district_set # TODO: Jurisdiction. TODO: Maybe store in session.
 #    @ballots = WillPaginate::Collection.create(params[:ballot_page], 10, ballots_array.length) do |pager|
