@@ -245,11 +245,12 @@ module AbstractBallot
 
     # initializes everything outside of the flow rect on a new page
     def start_page
+      
       end_page(false) if @page
       @pagenum += 1
       @pdf.start_new_page
 
-      #puts "start_page:"
+      # puts "TGD: start_page: created a new page"
       #TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
       #TTV::Prawn::Util.show_abs_bounds_coordinates(@pdf.bounds)
 
@@ -257,16 +258,22 @@ module AbstractBallot
       # Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0"
       # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
       flow_rect = Rect.create_bound_box(@pdf.bounds)
+      # puts "TGD: start_page: created a new flow rectange"
+      
       @c.render_frame flow_rect
       if @c.is_a? ::DcBallot::BallotConfig
         # resets the flow rect to be under header, above footer,
         # inside page frame.
         flow_rect = @c.render_header flow_rect
+        # puts "TGD: start_page: adjusted the flow rectangle to be inside the ballot contents"
       else
         @c.render_header flow_rect        
       end
-
+      
+ 
       columns = @c.create_columns(flow_rect)
+      # puts "TGD: start_page: created the columns for the flow rectangle"
+      
       # make space for continuation box
       continuation_box = @c.create_continuation_box
       columns.last.bottom += continuation_box.height(@c, columns.last, true)
@@ -339,13 +346,12 @@ module AbstractBallot
         # start a new page if curr_column is nil, we've run out
         # of columns on this page.
         if curr_column == nil
-          #puts "TGD: start a new page"
           flow_rect, columns, curr_column = start_page
         end
         
         item = @flow_items.first
         
-        #puts "TGD: page #{@pdf.page_number}, processing a #{item.class.name} named #{item.display_name}"
+        # puts "TGD: page #{@pdf.page_number}, processing a #{item.class.name} named #{item.display_name}"
         
         curr_column = fit_width(item, flow_rect, curr_column, columns)
 
@@ -357,19 +363,25 @@ module AbstractBallot
           next
         end
 
-        #puts "curr_column = #{curr_column.inspect}"
+        # puts "curr_column = #{curr_column.inspect}"
         # This will go to next column if we have a header, which means
         # a new district
         if item.is_a?(::DefaultBallot::FlowItem::Combo) && curr_column.header?
+          # puts "TGD: go to the next column as this is a combo and the current colum has a header"
           curr_column = columns.next
+          # puts "TGD: curr_column = #{curr_column.inspect},there are #{@flow_items.size} flow items left to process"
         end
         
-        break unless curr_column # end of page, no more columns
-
+        unless curr_column # end of page, no more columns
+          # puts "TGD: end of page #{@pdf.page_number}, no more columns, there are #{@flow_items.size} flow items left to process"
+          next
+        end
+        
+        # puts "TGD: check if this item fits in the current column"
         if item.fits @c, curr_column
           @page[:last_column] = curr_column
           item = @flow_items.shift
-          #puts "TGD: page #{@pdf.page_number}, drawing a #{item.class.name} named #{item.display_name}"
+          # puts "TGD: page #{@pdf.page_number}, drawing a #{item.class.name} named #{item.display_name}"
 
           item.draw @c, curr_column
 
@@ -379,7 +391,7 @@ module AbstractBallot
           @c.scanner.append_ballot_marks(item.ballot_marks) 
         elsif curr_column.full_height? # item is taller than a single
           # column, need to break it up
-          #puts "TGD: item doesn't it's longer than column height"
+          # puts "TGD: item doesn't it's longer than column height"
           if curr_column.first != columns.first # split items go on a
             # brand new page for now
             curr_column = nil
@@ -408,9 +420,9 @@ module AbstractBallot
           # if columns.next is nil then we are at the end of the
           # page!. Need a new page
           if curr_column
-            #puts "TGD: item doesn't fit, make the next column current"
+            # puts "TGD: item doesn't fit, make the next column current"
           else
-           #puts "TGD: item doesn't fit, out of columns on page #{@pdf.page_number}, draw on a new page "
+            # puts "TGD: item doesn't fit, out of columns on page #{@pdf.page_number}, draw on a new page "
           end
         end
 
