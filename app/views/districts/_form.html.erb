@@ -22,6 +22,12 @@
     <%= f.text_field :ident, :class => 'text_field' %>
     <span class="description">Ident of district. Ex. DIST-001, DIST-053</span>
   </div>
+
+  <div class="group">
+    <%= f.label :position, t("activerecord.attributes.district.position", :default => "Position"), :class => :label %>
+    <%= f.text_field :position, :class => 'text_field' %>
+    <span class="description">Position in Ballot</span>
+  </div>
         
 <div class="group navform wat-cf">
   <button class="button" type="submit">
