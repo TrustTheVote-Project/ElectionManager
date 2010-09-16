@@ -225,6 +225,13 @@ module AbstractBallot
     end
 
     def render
+      puts "TGD: render: page_layout = #{@c.page_layout}"
+      puts "TGD: render: page size = #{@c.page_size.inspect}"
+      puts "TGD: render: top_margin = #{@c.top_margin}"
+      puts "TGD: render: right_margin = #{@c.right_margin}"
+      puts "TGD: render: bottom_margin = #{@c.bottom_margin}"
+      puts "TGD: render: left_margin = #{@c.left_margin}"
+      
       @pdf = Prawn::Document.new(
       :page_layout => @c.page_layout,
       :page_size => @c.page_size, 

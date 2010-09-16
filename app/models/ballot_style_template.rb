@@ -39,7 +39,7 @@ class BallotStyleTemplate < ActiveRecord::Base
   def after_initialize
 
     # default page params
-    self.page ||= { :size =>  [612,1152],
+    self.page ||= { :size =>  "LETTER",
       :layout => :portrait,
       :background => '000000',
       :margin => { :top => 0, :right => 0, :bottom => 0, :left => 0}
@@ -173,6 +173,36 @@ class BallotStyleTemplate < ActiveRecord::Base
     save!
 
   end
+  
+  def reload_style
+    logger.debug "TGD: reloading ballot style file #{ballot_style_file.inspect}"
+    load_style(self.ballot_style_file) if self.ballot_style_file
+  end
+  
+  def load_style(filename)
+    self.ballot_style_file = filename
+    
+    style_hash = YAML.load(filename)
+
+    logger.debug "TGD: style_hash[:page] = #{style_hash[:page].inspect}"
+    
+    logger.debug "="*30    
+    logger.debug "\nTGD: style_hash[:frame][:margin] = #{style_hash[:frame][:margin].inspect}"
+    logger.debug "\nTGD: style_hash[:frame][:content][:top] = #{style_hash[:frame][:content][:top].inspect}"
+    logger.debug "\nTGD: style_hash[:frame][:content][:right] = #{style_hash[:frame][:content][:right].inspect}"
+    logger.debug "\nTGD: style_hash[:frame][:content][:bottom] = #{style_hash[:frame][:content][:bottom].inspect}"
+    logger.debug "\nTGD: style_hash[:frame][:content][:left] = #{style_hash[:frame][:content][:left].inspect}"
+    logger.debug "\nTGD: style_hash[:frame][:border] = #{style_hash[:frame][:border].inspect}"
+    
+    logger.debug "="*30    
+    logger.debug "\nTGD: style_hash[:contents][:body] = #{style_hash[:contents][:body].inspect}"
+    logger.debug "\nTGD: style_hash[:contents][:footer] = #{style_hash[:contents][:footer].inspect}"
+    logger.debug "\nTGD: style_hash[:contents][:header] = #{style_hash[:contents][:header].inspect}"
+    logger.debug "\nTGD: style_hash[:contents][:border] = #{style_hash[:contents][:border].inspect}"
+    
+    update_styles(style_hash)
+  end
+
   
   def to_yaml
     { :page => page, :frame => frame, :contents => contents, :ballot_layout => ballot_layout}.to_yaml

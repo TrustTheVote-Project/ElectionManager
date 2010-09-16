@@ -27,7 +27,7 @@ module DefaultBallot
         super(@contest, scanner)
       end
       
-      def draw_candidate(left,top, width, text, options={})
+      def draw_candidate(left,top, width, candidate_name, party_name, options={})
         cb_width = 22
         cb_height = 10
         
@@ -61,15 +61,11 @@ module DefaultBallot
 
         # indent  text
         left_text = opts[:left_margin] + cb_width + (HPAD*5) 
-
-        #         puts "width = #{width}"
-        #         puts "left_margin= #{opts[:left_margin]}"
-        #         puts "cb_width = #{cb_width}"
-        #         puts "left_text = #{left_text}"
         bottom = 0
         # box for wrapping text
         @pdf.bounding_box([left_text, opts[:top_margin]], :width => width - left_text ) do
-          @pdf.text(text)
+          @pdf.text(candidate_name)
+          @pdf.text(party_name, :style => :normal) if party_name
         end
         
         bottom = @pdf.bounds.top
@@ -102,7 +98,7 @@ module DefaultBallot
           # TODO: make this configurable via ballot style template
           orig_color = @pdf.fill_color
           @pdf.fill_color('DCDCDC')
-          @pdf.fill_rectangle([@pdf.bounds.left-HPAD, @pdf.bounds.top], rect.width,  @pdf.height_of(@contest.display_name)+14)
+          @pdf.fill_rectangle([@pdf.bounds.left-HPAD, @pdf.bounds.top], rect.width,  @pdf.height_of(@contest.display_name)+18)
           @pdf.fill_color(orig_color)
           
 
@@ -162,14 +158,14 @@ module DefaultBallot
           checkbox_id = "#{@cont_ident}+#{cand_name}+#{@cont_name}"
           
           rect.top -= VPAD * 2
+          contest_bottom = 0
+          
           # need to create a bounding box here in order to get
           # the pdf.text(...) to change it's bounding box???
           @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
-            contest_text = candidate.display_name + "\n" + candidate.party.display_name
-
-            contest_bottom = 0
+            #contest_text = candidate.display_name + "\n" + candidate.party.display_name
             
-            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, contest_text, :active => @active, :id => checkbox_id, :radio_group => radio_group)
+            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, candidate.display_name, candidate.party.display_name, :active => @active, :id => checkbox_id, :radio_group => radio_group)
             rect.top -= contest_bottom
           end
           #         TTV::Prawn::Util.show_rect_coordinates(rect)
@@ -178,12 +174,14 @@ module DefaultBallot
           #space, location = config.draw_checkbox rect, candidate.display_name + "\n" + candidate.party.display_name
           #ballot_marks << TTV::BallotMark.new(@contest,candidate, @pdf.page_number, location)
         end
-        
+
+        rect.top -= VPAD * 2
         # draw the write-in candiate (radiobutton and text field)
         @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
           # @contest.open_seat_count.times do |i|
+
           checkbox_id = "#{@cont_ident}+write_in"
-          contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in], :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
+          contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
           rect.top -= contest_bottom
           rect.top -= VPAD * 2
           @pdf.dash 1
@@ -197,7 +195,7 @@ module DefaultBallot
           @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
           @pdf.undash
 
-          rect.top -= v
+          rect.top -= 16
           #end
         end
         

@@ -19,7 +19,7 @@ module DcBallot
       # hack to override these geting set in the superclass
 
       @page_size = @template.page[:size]
-      @page_layout = @template.page[:style]
+      @page_layout = @template.page[:layout]
       @left_margin = @template.page[:margin][:left]
       @right_margin = @template.page[:margin][:right]
       @top_margin =  @template.page[:margin][:top]
