@@ -47,6 +47,10 @@
     :color: "000000"
     :width: 0
 :contents: 
+  :border: 
+    :style: :dashed
+    :color: "000000"
+    :width: 1
   :body: 
     :background_color: "000000"
     :graphics: 
@@ -115,9 +119,5 @@
       :style: :solid
       :color: "000000"
       :width: 1
-  :border: 
-    :style: :dashed
-    :color: "000000"
-    :width: 1
 :ballot_layout: 
   :create_A_headers: false
