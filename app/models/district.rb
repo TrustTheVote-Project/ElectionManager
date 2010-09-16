@@ -6,7 +6,7 @@ class District < ActiveRecord::Base
   belongs_to :district_type
   belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet"  
   
-  attr_accessible :district_type, :display_name, :district_type_id, :ident
+  attr_accessible :district_type, :display_name, :district_type_id, :ident, :position
   
   attr_accessor :importId, :importPrecincts # for xml import
   

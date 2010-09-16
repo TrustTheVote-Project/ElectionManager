@@ -10,7 +10,7 @@ class BallotStyleTemplateTest < ActiveSupport::TestCase
     should "have default page styles" do
       assert @bst.page
       assert_kind_of Hash, @bst.page
-      assert_equal @bst.page[:size], [612,1152]
+      assert_equal @bst.page[:size], "LETTER"
       assert_equal @bst.page[:layout], :portrait
       assert_equal @bst.page[:margin],  { :top => 0, :right => 0, :bottom => 0, :left => 0}
     end
