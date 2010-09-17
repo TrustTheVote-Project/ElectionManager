@@ -73,43 +73,16 @@ class PrecinctsController < ApplicationController
       redirect_to election_path election
     end    
   end
-  
-  def ballot_old
-     election = Election.find(params[:election_id])
-     precinct = Precinct.find(params[:id])
-     unless election.ballot_style_template_id == nil
-       ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
-       #begin
-             new_ballot = election.render_ballot(election, precinct, ballot_style_template)
-             #RENDER BASED ON MEDIUM CHOSEN   
-             if new_ballot[:medium_id] == 0
-                send_data new_ballot[:pdfBallot], :filename => new_ballot[:fileName], :type => "application/pdf", :disposition => 'inline'
-             elsif new_ballot[:medium_id] == 1
-               render :text => 'This is where we will generate html ballot'
-             else
-               flash[:error] = "Please edit ballot style template to include a output a medium and then try again."
-               redirect_to election_path election
-             end
-       #  rescue Exception => ex
-       #    flash[:error] = "precinct_controller - #{ex.message}"
-       #    redirect_to precincts_election_path election
-       # end
-     else
-       flash[:error] = "A Ballot Style Template must be selected for this election before a ballot can be generated."
-       redirect_to election_path election
-     end    
-
-  end
-  
-  
+    
   def ballots
-     election = Election.find(params[:election_id])
-     precincts = election.district_set.precincts
+    election = Election.find(params[:election_id])
+    # precincts = election.district_set.precincts
+    precinct_splits = PrecinctSplit.precinct_jurisdiction_id_is(election.district_set_id)
      
      unless election.ballot_style_template_id == nil
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
        begin
-        ballots_array = election.render_ballots(election, precincts, ballot_style_template)
+        ballots_array = election.render_ballots(election, precinct_splits, ballot_style_template)
         zipped_ballots = zip_ballots(ballots_array)
         send_file zipped_ballots, :type => 'application/zip', :disposition => 'application', :filename => "ballots-#{Time.now}.zip"
        
