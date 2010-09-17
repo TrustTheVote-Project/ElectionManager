@@ -217,20 +217,14 @@ class Election < ActiveRecord::Base
         
     
     def render_ballots(election, precincts, ballot_style_template)
-      style = BallotStyle.find(ballot_style_template.ballot_style).ballot_style_code
-      lang = Language.find(ballot_style_template.default_language).code
-      instruction_text_url = ballot_style_template.instructions_image.url
       ballot_array = Array.new
       precincts.each do |precinct|
         title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
-        pdfBallot = AbstractBallot.create(election, precinct, style, lang, instruction_text_url)
+        pdfBallot = AbstractBallot.create(election, precinct, ballot_style_template)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
         ballot_array << new_ballot
       end
-      
-         
-        #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
-        
+      #new_ballots = {:fileName => title, :pdfBallot => pdfBallot, :medium_id => medium_id}
       return ballot_array
    end
   
