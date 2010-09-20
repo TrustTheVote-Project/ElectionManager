@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class BallotLayoutStrategyVATest < ActiveSupport::TestCase
+class BallotVARuleTest < ActiveSupport::TestCase
   context "Candidate sorting strategy" do
     setup do
-      @base_klass = ::TTV::BallotLayoutStrategy::Base
+      @base_klass = ::TTV::BallotRule::Base
       @va_klass = @base_klass.find_class("VA")
       
       # not one of the default parties

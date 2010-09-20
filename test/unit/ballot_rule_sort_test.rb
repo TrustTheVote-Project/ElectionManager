@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class BallotLayoutStrategySortTest < ActiveSupport::TestCase
+class BallotRuleSortTest < ActiveSupport::TestCase
   
   context "District sorting strategy" do
     setup do
-      @base_class = ::TTV::BallotLayoutStrategy::Base.new
+      @base_class = ::TTV::BallotRule::Base.new
       @districts = []
       10.times do |i|
         @districts << District.make(:display_name => "District#{i}", :position => rand(10))

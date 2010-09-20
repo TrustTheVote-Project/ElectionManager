@@ -1,7 +1,7 @@
 module ::TTV
-  module BallotLayoutStrategy
+  module BallotRule
     
-    class VA < BallotLayoutStrategy::Base
+    class VA < BallotRule::Base
       
       class << self
         

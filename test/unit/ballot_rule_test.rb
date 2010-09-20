@@ -1,20 +1,20 @@
 require 'test_helper'
 
-class BallotLayoutStrategyTest < ActiveSupport::TestCase
-  class ::TTV::BallotLayoutStrategy::Dummy < ::TTV::BallotLayoutStrategy::Base
+class BallotRuleTest < ActiveSupport::TestCase
+  class ::TTV::BallotRule::Dummy < ::TTV::BallotRule::Base
   end
   
   context "Layout Inheritence" do
     setup do
-      @base_class = ::TTV::BallotLayoutStrategy::Base
-      @va_klass = ::TTV::BallotLayoutStrategy::VA
-      @dummy_klass = ::TTV::BallotLayoutStrategy::Dummy
+      @base_class = ::TTV::BallotRule::Base
+      @va_klass = ::TTV::BallotRule::VA
+      @dummy_klass = ::TTV::BallotRule::Dummy
     end
     
     should "get strategy subclasses" do
-      assert  !::TTV::BallotLayoutStrategy::Base.strategies.empty?
-      assert ::TTV::BallotLayoutStrategy::Base.strategies.include?(@va_klass)
-      assert ::TTV::BallotLayoutStrategy::Base.strategies.include?(@dummy_klass)
+      assert  !::TTV::BallotRule::Base.strategies.empty?
+      assert ::TTV::BallotRule::Base.strategies.include?(@va_klass)
+      assert ::TTV::BallotRule::Base.strategies.include?(@dummy_klass)
     end
   end  # end context
   
@@ -22,9 +22,9 @@ class BallotLayoutStrategyTest < ActiveSupport::TestCase
     
     setup do
       @strategy_display_name = "VA Ballot Layout"
-      @base_klass = ::TTV::BallotLayoutStrategy::Base
-      @va_klass = ::TTV::BallotLayoutStrategy::VA
-      @dummy_klass = ::TTV::BallotLayoutStrategy::Dummy
+      @base_klass = ::TTV::BallotRule::Base
+      @va_klass = ::TTV::BallotRule::VA
+      @dummy_klass = ::TTV::BallotRule::Dummy
     end
     
     should "find a strategy class by name" do
