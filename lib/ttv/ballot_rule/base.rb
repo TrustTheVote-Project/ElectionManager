@@ -1,5 +1,5 @@
 module TTV
-  module BallotLayoutStrategy
+  module BallotRule
     class Base
       
       class << self
@@ -41,7 +41,7 @@ module TTV
         end
 
         def display_name
-          "#{self.name.demodulize} Ballot Layout"
+          "#{self.name.demodulize} Ballot Rule"
         end
 
       end # end class methods
