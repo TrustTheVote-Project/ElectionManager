@@ -45,24 +45,35 @@ module TTV
         end
 
       end # end class methods
-
-      def initialize(election, precinct_split)
+      
+      def initialize
       end
       
-      def district_ordering(d1,d2)
-        top proc d1 <=> d2
+      def district_ordering
+        return lambda do |d1, d2|
+          d1.position <=> d2.position
+        end
       end
       
       def contest_ordering
+        return lambda do |c1, c2|
+          c1.position <=> c2.position
+        end
       end
       
       def question_ordering
+        return lambda do |q1, q2|
+          q1.position <=> q2.position
+        end
       end
 
       def candidate_ordering
+        return lambda do |c1, c2|
+          c1.position <=> c2.position
+        end
       end
-end # end Base class
-
+      
+    end # end Base class
+    
   end
-  
 end

@@ -6,6 +6,7 @@ class BallotLayoutStrategyTest < ActiveSupport::TestCase
   
   context "Layout Inheritence" do
     setup do
+      @base_class = ::TTV::BallotLayoutStrategy::Base
       @va_klass = ::TTV::BallotLayoutStrategy::VA
       @dummy_klass = ::TTV::BallotLayoutStrategy::Dummy
     end
