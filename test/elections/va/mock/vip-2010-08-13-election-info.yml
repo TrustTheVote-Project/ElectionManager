@@ -595,16 +595,6 @@ body:
     type: FEDERAL
     display_name: Nov 2011
 
-  districts: []
-
-  district_sets: []
-
-  precincts: []
-
-  candidates: []
-
-  splits: []
-
 audit_header: 
   schema_version: "0.1"
   operator: Pito Salas

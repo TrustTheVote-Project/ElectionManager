@@ -27,21 +27,20 @@ class Audit < ActiveRecord::Base
     # Now do each kind of sanity check, depending on type of input info we are auditing
     if auditing_jurisdiction?
       audit_sanity_check_body
-      audit_sanity_check "precincts"
-      audit_sanity_check "splits"
-      audit_sanity_check "districts"
+      audit_sanity_check ["precincts", "splits", "districts", "district_sets"]
       audit_precincts
       audit_districts 
-      audit_precinct_splits      
+      audit_precinct_splits
+      audit_district_sets
     elsif auditing_election?
       audit_sanity_check_body
-      audit_sanity_check "elections"
-      audit_sanity_check "contests"
+      audit_sanity_check ["elections", "contests", "questions"]
       audit_elections
       audit_contests
+      audit_questions
     elsif auditing_candidate?
       audit_sanity_check_body
-      audit_sanity_check "candidates"
+      audit_sanity_check ["candidates"]
       audit_candidates 
     end
     @audit_in_progress = false
@@ -55,12 +54,19 @@ class Audit < ActiveRecord::Base
     end
   end
   
-  def audit_sanity_check section
-    unless election_data_hash.has_key?("body") && election_data_hash["body"].has_key?(section)
-      raise ArgumentError, "Invalid format. No #{section} section."
+# for each section in target-sections: if it is present, each sub-element must have an ident
+# for each section found in the body, it better be one of the target-sections
+  def audit_sanity_check target_sections
+    target_sections.each do |target_sect|
+      edh_sect = election_data_hash["body"][target_sect]
+      if !edh_sect.nil?
+        edh_sect.each do |sect_element|
+          raise ArgumentError, "Invalid format. Section #{target_sect} does not have a required ident"  if sect_element["ident"].nil?
+        end
+      end
     end
-    unless election_data_hash["body"][section].reduce(true) { |memo, sect| sect.has_key?("ident") ? memo : false }
-      raise ArgumentError, "Invalid format. All #{section} elements require an ident"
+    election_data_hash["body"].each_key do |input_sect|
+      raise ArgumentError, "Invalid format. Unexpected #{input_sect} section encountered in import file" if !target_sections.member? input_sect
     end
   end
   
@@ -72,6 +78,10 @@ class Audit < ActiveRecord::Base
   def audit_precincts
     # TODO: For each precinct in election_data_hash["ballot_info"]["precincts"], store ident with display_name
     # After district audit, look for unattached precincts
+  end
+  
+  def audit_district_sets
+    
   end
   
   def audit_precinct_splits
@@ -103,10 +113,9 @@ class Audit < ActiveRecord::Base
   
   # Run audit_contest on all contests in the input EDH
   def audit_contests
-    election_data_hash["body"]["contests"].each_index do
-      |contest_index|
+    election_data_hash["body"]["contests"].each_index do |contest_index|
       audit_contest contest_index
-    end
+    end if election_data_hash["body"].has_key? "contests"
   end
   
   # See if a particular Contest in the EDH looks reasonble:
@@ -127,6 +136,40 @@ class Audit < ActiveRecord::Base
                           :options => {"skip" => "Skip this contest",
                                        "abort" => "Abort this import"},
                           :default_option => "skip")
+    end
+  end
+
+  # Run audit_question on all questions in the EDH
+  def audit_questions
+    election_data_hash["body"]["questions"].each_index do |question_index|
+      audit_question question_index
+    end if election_data_hash["body"].has_key? "questions"
+  end
+  
+# See if a particular Question looks reasonable
+# Example:
+#    election_ident: "14"
+#    ident: quest-e14-q1
+#    display_name: Question 1
+#    question: Shall Section 6 of Article X o
+#    district_ident: 501630
+  def audit_question quest_index
+    quest = election_data_hash["body"]["questions"][quest_index]
+    elect_ident = quest["election_ident"]
+    if elect_ident.nil?
+      alerts << Alert.new(:message => "No Election specified for question \'#{quest["display_name"]}\'. What would you like to do? ",
+                          :alert_type => "no_elect_in_quest",
+                          :objects => quest_index,
+                          :options => {"skip" => "Skip question",
+                                       "abort" => "Abort import"},
+                          :default_option => "skip")
+    elsif Election.find_by_ident(elect_ident).nil?
+      alerts << Alert.new(:message => "Invalid Election (#{elect_ident}) specified for question \'#{quest["display_name"]}\'. What would you like to do? ",
+                          :alert_type => "no_elect_in_quest",
+                          :objects => quest_index,
+                          :options => {"skip" => "Skip question",
+                                       "abort" => "Abort import"},
+                          :default_option => "skip")                          
     end
   end
   
@@ -184,7 +227,7 @@ class Audit < ActiveRecord::Base
 
 # Audit all the Elections in the input EDH
   def audit_elections
-    election_data_hash["body"]["elections"].each_index { |e_index| audit_election e_index }
+    election_data_hash["body"]["elections"].each_index { |e_index| audit_election e_index } if election_data_hash["body"].has_key? "elections"
   end
     
 # Check whether a particular Election in the EDH looks reasonbable.
@@ -239,6 +282,11 @@ class Audit < ActiveRecord::Base
     when ["unnamed_election", "skip"]
       election_data_hash["body"]["elections"].slice!(alert.objects.to_i)
       Alert.delete(alert)
+    when ["no_elect_in_quest", "abort"]
+      raise "Import aborted"
+    when ["no_elect_in_quest", "skip"]
+      election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
+      Alert.delete(alert)
     else
       raise ArgumentError, "Invalid code in Audit#process_alert"
     end
@@ -250,7 +298,7 @@ class Audit < ActiveRecord::Base
   end
   
   # Search through target (an array of hashes), 
-  # for an element who has key equal to value
+  # for an element who has key e`qu`al to value
   def input_has? target, key, value
     target.each { |item| (return true if item[key].eql? value) }
     false

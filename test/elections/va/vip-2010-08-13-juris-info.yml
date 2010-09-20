@@ -1,11 +1,6 @@
 --- 
 body: 
-  contests: []
 
-  elections: 
-  - date: "2010-11-02"
-    ident: "14"
-    type: FEDERAL
   districts: 
   - ident: "500658"
     type: ""

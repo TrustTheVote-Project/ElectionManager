@@ -59,7 +59,6 @@ body:
   precincts: 
     - ident: "502452"
       display_name: 702 - MIDWAY
-      candidates: []
 
   splits: 
     - district_set_ident: "504377"

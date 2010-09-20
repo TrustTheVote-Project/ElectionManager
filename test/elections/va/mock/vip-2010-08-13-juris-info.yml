@@ -1,11 +1,6 @@
 --- 
 body: 
-  contests: []
 
-  elections: 
-  - date: "2010-11-02"
-    ident: "14"
-    type: FEDERAL
   districts: 
   - ident: "500658"
     type: ""
@@ -30429,7 +30424,6 @@ body:
     display_name: 501 - TABB
   - ident: "502836"
     display_name: 502 - BETHEL
-  candidates: []
 
   splits: 
   - district_set_ident: "504377"

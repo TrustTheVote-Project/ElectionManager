@@ -82,7 +82,7 @@ class JurisdictionsController < ApplicationController
         redirect_to :action => :interactive_audit
       end
     rescue Exception => exc
-       logger.error("Exception during import: #{exc.message}")
+       logger.error("Exception during import: #{exc.message}, #{exc.backtrace}")
        flash[:error] = "Failed to import file: #{exc.message}"
        redirect_to :back
     end

@@ -57,13 +57,44 @@ module TTV
     # Imports all candidates contained in the EDH
     def load_candidates
       @hash["body"]["candidates"].each { |cand| load_candidate cand} if @hash["body"].has_key? "candidates"
-    end  
+    end
+    
+    # Imports all questions contained in the EDH
+    def load_questions
+      @hash["body"]["questions"].each { |question| load_question question} if @hash["body"].has_key? "questions"
+    end
+    
+    # Import a question from EDH into EM database
+    def load_question question
+      new_question = Question.find_or_create_by_ident(:display_name => question["display_name"],
+                                                      :ident => question["ident"],
+                                                      :question => question["question"])
+      new_question.requesting_district = District.find_by_ident(question["district_ident"])                                                      
+      new_question.election = Election.find_by_ident(question["election_ident"])
+      new_question.save!
+    end
     
     # Imports all contests contained in the EDH
     def load_contests
       @hash["body"]["contests"].each { |cont| load_contest cont} if @hash["body"].has_key? "contests"
     end
     
+    # Loads an EDH formatted contest into EM
+    def load_contest contest
+      if contest["voting_method"] and VotingMethod.find_by_display_name(contest["voting_method"])
+        voting_method_id = VotingMethod.find_by_display_name(contest["voting_method"]) 
+      else
+        voting_method_id = VotingMethod.find_by_display_name("Winner Take All")
+      end
+      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
+                                                    :ident => contest["ident"], 
+                                                    :voting_method_id => voting_method_id, 
+                                                    :district => District.find_by_ident(contest["district_ident"]))
+      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
+      new_contest.election = Election.find_by_ident(contest["election_ident"])
+      new_contest.save!
+    end
+
     # Imports all elections contained in the EDH
     def load_elections
       @hash["body"]["elections"].each { |elec| load_election elec} if @hash["body"].has_key? "elections"
@@ -88,11 +119,6 @@ module TTV
       @hash["body"]["district_sets"].each { |dset| load_district_set dset} if @hash["body"].has_key? "district_sets"
     end 
 
-    # Imports all questions contained in the EDH
-    def load_questions
-      @hash["body"]["questions"].each { |dset| load_district_set dset} if @hash["body"].has_key? "questions"
-    end 
-                
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
@@ -151,20 +177,5 @@ module TTV
       new_candidate.save! 
     end
     
-    # Loads an EDH formatted contest into EM
-    def load_contest contest
-      if contest["voting_method"] and VotingMethod.find_by_display_name(contest["voting_method"])
-        voting_method_id = VotingMethod.find_by_display_name(contest["voting_method"]) 
-      else
-        voting_method_id = VotingMethod.find_by_display_name("Winner Take All")
-      end
-      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
-                                                    :ident => contest["ident"], 
-                                                    :voting_method_id => voting_method_id, 
-                                                    :district => District.find_by_ident(contest["district_ident"]))
-      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
-      new_contest.election = Election.find_by_ident(contest["election_ident"])
-      new_contest.save!
-    end
   end
 end
