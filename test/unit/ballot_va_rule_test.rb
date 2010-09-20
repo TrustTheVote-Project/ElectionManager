@@ -4,7 +4,7 @@ class BallotVARuleTest < ActiveSupport::TestCase
   context "Candidate sorting strategy" do
     setup do
       @base_klass = ::TTV::BallotRule::Base
-      @va_klass = @base_klass.find_class("VA")
+      @va_klass = @base_klass.find_subclass("VA")
       
       # not one of the default parties
       Party.make(:display_name => 'IndependentGreen')
@@ -35,7 +35,7 @@ class BallotVARuleTest < ActiveSupport::TestCase
 
     context "condidate ordering " do
       setup do
-        @va_strategy = @base_klass.create("VA")
+        @va_strategy = @base_klass.create_instance("VA")
         
         district = District.make
         election = Election.make
