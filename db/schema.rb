@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20100921164018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ident"
-    t.integer  "order",        :default => 0
+    t.integer  "position",     :default => 0
   end
 
   create_table "contests", :force => true do |t|

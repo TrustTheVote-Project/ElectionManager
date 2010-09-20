@@ -146,7 +146,7 @@ module DefaultBallot
       def draw_all_candidates(config, rect, radio_group, &bloc)
         # CANDIDATES
         candidates_list = @contest.candidates
-        candidates_list.sort { |a,b| a.order <=> b.order}.each do |candidate|
+        candidates_list.sort { |a,b| a.position <=> b.position}.each do |candidate|
 
           if bloc && rect.height < NEXT_COL_BOUNCE
             config.frame_item rect, top
