@@ -20,12 +20,6 @@ class ElectionsController < ApplicationController
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
     @precinct_splits = PrecinctSplit.precinct_jurisdiction_id_is(@election.district_set_id).paginate(:per_page => 10, :page => params[:page])
-    
-#    ballots_array = @election.all_ballots @election.district_set # TODO: Jurisdiction. TODO: Maybe store in session.
-#    @ballots = WillPaginate::Collection.create(params[:ballot_page], 10, ballots_array.length) do |pager|
-#      start = (pager.current_page - 1) * pager.per_page
-#      pager.replace(ballots_array.slice(start, 10 ))
-#    end
   end
 
   def new
@@ -144,6 +138,17 @@ class ElectionsController < ApplicationController
       format.xml { 
           headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballotmap\"" 
           render :xml => @election.generate_ballot_map.to_xml }
+    end
+  end
+  
+  def ballot_proofing
+    @election = Election.find(params[:id])
+    respond_to do |format|
+      format.csv { 
+        headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballotlisting.csv\"" 
+        render :text => @election.generate_ballot_proofing, :content_type => Mime::Type.lookup_by_extension("csv").to_s
+      }
+      format.html {}
     end
   end
 end

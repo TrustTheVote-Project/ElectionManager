@@ -1,4 +1,6 @@
 require 'abstract_ballot'
+require 'fastercsv'
+
 class Election < ActiveRecord::Base
   has_many :contests, :order => :position, :dependent => :destroy
   has_many :questions, :order => :display_name, :dependent => :destroy
@@ -19,11 +21,10 @@ class Election < ActiveRecord::Base
     return s
   end
 
+#
 # Return collection of PrecinctSplits associated with this Election. 
 # 
   def precinct_splits
-#      precincts = Precinct.find_all_by_jurisdiction_id(district_set.id)
-#      prec_splits = precincts.map { |prec| prec.precinct_splits }.flatten
     district_set.precincts.map { |prec| prec.precinct_splits }.flatten
   end
   
@@ -80,10 +81,34 @@ class Election < ActiveRecord::Base
   def generate_ballot_map
     outlist = []
     each_ballot(district_set) do | split, result_cont_list, result_quest_list |
-
       outlist << {:precinct_split => split.display_name, :file => "#{split.display_name}.pdf"}
     end
     return outlist
+  end
+  
+# Generate ballot proofing file as a text string. This listing contains a summary of info about each ballot
+# and is used for auditing purposes. It includes: 
+# - precinct split name
+# - precinct name
+# - number of contests
+# - number of questions
+# - contest display names, as one column, separated by "|"
+# - question display names, as one column, separated by "|"
+  def generate_ballot_proofing
+    splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id)
+    csv_string = FasterCSV.generate do |csv|
+      csv << ["precinct split", "precinct", "n contests", "n questions", "contest names", "question_names"]
+      splits.each do |split|
+        row = [split.display_name]
+        row << split.precinct.display_name
+        row << split.ballot_contests(self).count
+        row << split.ballot_questions(self).count
+        row << split.ballot_contests(self).join("|")
+        row << split.ballot_questions(self).join("|")
+        csv << row
+      end
+    end
+    return csv_string
   end
 
 # Return an array with the Districts corresponding to this Election's Questions

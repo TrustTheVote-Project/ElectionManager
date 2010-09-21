@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100919232631) do
+ActiveRecord::Schema.define(:version => 20100921134643) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(:version => 20100919232631) do
     t.integer "district_set_id"
     t.integer "district_id"
   end
+
+  add_index "district_sets_districts", ["district_id"], :name => "index_district_sets_districts_on_district_id"
+  add_index "district_sets_districts", ["district_set_id"], :name => "index_district_sets_districts_on_district_set_id"
 
   create_table "district_types", :force => true do |t|
     t.string   "title"

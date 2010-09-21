@@ -28,7 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :elections, :member => { :export => :get, 
                                          :precincts => :get, 
                                          :translate => :put,
-                                         :ballot_map => :get},
+                                         :ballot_map => :get,
+                                         :ballot_proofing => :get},
                             :collection => {:all => :get, :current => :get, :import => :put, :import_yml => :put } do 
     | elections |
     elections.resources :districts do | districts | 

@@ -6,13 +6,15 @@ class PrecinctSplit < ActiveRecord::Base
   def ballot_districts(election)
     district_set.districts & election.district_set.jur_districts
   end
-  
+
+# Return all the contests corresponding to this precinct split, in this election. The logic goes like this:
+# 
   def ballot_contests(election)
-    district_set.districts & election.contests.map(&:district)
+    election.contests.reduce([]) { |memo, contest| district_set.districts.include?(contest.district) ? memo | [contest] : memo}
   end
   
   def ballot_questions(election)
-    district_set.districts & election.questions.map(&:requesting_district)
+    election.questions.reduce([]) { |memo, question| district_set.districts.include?(question.requesting_district) ? memo | [question] : memo}
   end
   
   # Nice to_s

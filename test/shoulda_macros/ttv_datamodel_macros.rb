@@ -38,12 +38,83 @@ class Test::Unit::TestCase
   
 # Set up a jurisdiction with a single precinct. NB a different way of returning the
 # results. I am trying this to see if it's more useful.
-  
   def setup_jurisdiction name
     jurisdiction = DistrictSet.new(:display_name => name)
     precinct = setup_precinct(:display_name => "Prec for #{name}")
     precinct.jurisdiction = jurisdiction
     precinct.save
     {:jurisdiction => jurisdiction, :precinct => precinct}
+  end
+
+  
+# Set up info for a test election:
+# @election = :display_name => "reiciendis", :district_set_id => 1
+# @ds1 = :display_name => "DistrictSet 1"
+# @ds2 = :display_name => "DistrictSet 2"
+# @split1 = :display_name => "Precinct Split 1",
+# @split2 = :display_name => "Precinct Split 2"
+
+  def setup_test_election
+    # create 3 districts
+    d1 = District.make(:display_name => "District 1", :district_type => DistrictType::COUNTY )
+    d2 = District.make(:display_name => "District 2", :district_type => DistrictType::COUNTY )
+    d3 = District.make(:display_name => "District 3", :district_type => DistrictType::COUNTY )
+    d1.save!
+    d2.save!
+    d3.save!
+
+    # create a district set that will have district 1 and 2
+    @ds1 = DistrictSet.make(:display_name => "DistrictSet 1")
+    @ds1.districts << d1
+    @ds1.districts << d2
+    @ds1.save!
+    
+    
+    @ds2 = DistrictSet.make(:display_name => "DistrictSet 2")
+    @ds2.districts << d3
+    @ds2.save!
+
+    # create a precinct_split that has district_set 1
+    @split1 = PrecinctSplit.make(:display_name => 'Precinct Split 1')
+    @split1.district_set = @ds1
+    @split1.save!
+    # create a precinct_split that has district_set 1
+    @split2 = PrecinctSplit.make(:display_name => 'Precinct Split 2')
+    @split2.district_set = @ds1
+    @split2.save!
+    
+    # add these precinct split to a precinct
+    @precinct = Precinct.make(:display_name => 'Precinct 1')
+    @precinct.jurisdiction =  @ds1
+    @precinct.precinct_splits << @split1
+    @precinct.precinct_splits << @split2
+    @precinct.save!
+    
+    # create a contest that is for district 1 
+    c1 = Contest.make(:display_name => "Contest 1")
+    c1.district = d1
+    c1.save!
+    
+    # create a contest that is for district 3
+    c2 = Contest.make(:display_name => "Contest 2")
+    c2.district = d3
+    c2.save!
+    
+    # create questions and attach them to districts
+    q1 = Question.make(:display_name => "Question 1")
+    q2 = Question.make(:display_name => "Question 2")
+    q3 = Question.make(:display_name => "Question 3")
+    q1.requesting_district = d1
+    q2.requesting_district = d2
+    q3.requesting_district = d3
+    
+    
+    # create an election that has this contest
+    @election = Election.make
+    @election.contests << c1
+    @election.questions << q1
+    @election.questions << q2
+    @election.district_set = @ds1
+    @election.save!
   end
 end

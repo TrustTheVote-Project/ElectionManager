@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'ap'
 
 class PrecinctSplitTest < ActiveSupport::TestCase
   
@@ -19,5 +20,15 @@ class PrecinctSplitTest < ActiveSupport::TestCase
       assert_equal 1, PrecinctSplit.count
     end
     
+    context "iterators" do
+      setup do
+        setup_test_election
+      end
+    
+      should "correctly return ballot contests" do
+        ap @split1.ballot_contests(@election)
+        puts 1
+      end 
+    end    
   end
 end

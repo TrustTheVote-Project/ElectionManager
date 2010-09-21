@@ -1,9 +1,5 @@
 --- 
 body: 
-  contests: []
-
-  elections: []
-
   districts: 
   - ident: dist-CITY OF WASHINGTON WARD 6
     type: WARD
@@ -92,7 +88,6 @@ body:
     display_name: PRECINCT 1
   - ident: 2
     display_name: PRECINCT 2
-  candidates: []
 
   splits: 
   - district_set_ident: ds-1-SMD 01-ANC 6C
