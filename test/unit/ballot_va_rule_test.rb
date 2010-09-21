@@ -5,9 +5,6 @@ class BallotVARuleTest < ActiveSupport::TestCase
     setup do
       @base_klass = ::TTV::BallotRule::Base
       @va_klass = @base_klass.find_subclass("VA")
-      
-      # not one of the default parties
-      Party.make(:display_name => 'IndependentGreen')
     end
     
     should 'have all the VA parties' do

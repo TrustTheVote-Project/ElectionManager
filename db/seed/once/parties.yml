@@ -42,3 +42,8 @@ statehoodgreen:
     display_name: statehoodgreen
     ident: party-8
     
+independent_green:
+    id: 9
+    display_name: IndependentGreen
+    ident: party-9
+    

@@ -10,7 +10,7 @@ module ::TTV
         # rule below
         def party_order
           # create it once for this class
-          @party_order ||=  {Party::INDEPENDENT => 0, Party.find_by_display_name('IndependentGreen') => 1, Party::DEMOCRATIC => 2, Party::REPUBLICAN => 3}
+          @party_order ||=  {Party::INDEPENDENT => 0, Party::INDEPENDENTGREEN => 1, Party::DEMOCRATIC => 2, Party::REPUBLICAN => 3}
         end
         
       end # end class singleton methods

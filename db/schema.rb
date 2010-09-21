@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100921164018) do
     t.text     "ballot_layout"
     t.string   "ballot_title"
     t.string   "ballot_style_file"
+    t.string   "ballot_rule_classname",                          :default => "Default"
   end
 
   create_table "ballot_styles", :force => true do |t|
