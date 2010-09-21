@@ -27,10 +27,10 @@
       </td>
       <td class="last">
 		<% if @controller.controller_name == 'elections' %>
-        	<%= link_to "#{t("web-app-theme.ballot", :default => "Download Ballot")}", ballot_election_precinct_path(@election, precinct)  %> 
+        	<%= link_to "#{t("ttv.download_ballot", :default => "Download Ballot")}", ballot_election_precinct_path(@election, precinct)  %> 
 		|
 		<% end -%>
-		<%= link_to "#{t("web-app-theme.show", :default => "Show")}", precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", precinct_path(precinct), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+		<%= link_to "#{t("ttv.show", :default => "Show")}", precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_precinct_path(precinct) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", precinct_path(precinct), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
       </td>
     </tr>
     <% end -%>

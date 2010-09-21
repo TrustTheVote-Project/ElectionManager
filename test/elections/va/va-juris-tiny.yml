@@ -1,0 +1,48 @@
+--- 
+body: 
+  districts: 
+  - ident: "500726"
+    type: House of Delegates
+    display_name: House of Delegates 060 (500726)
+  - ident: "501592"
+    type: State Senate
+    display_name: State Senate 015 (501592)
+  - ident: "501622"
+    type: Congressional
+    display_name: Congressional 05 (501622)
+  - ident: "501349"
+    type: Election
+    display_name: Election DISTRICT 7 (501349)
+  - ident: "501660"
+    type: LOCALITY
+    display_name: HALIFAX COUNTY (501660)
+  - ident: "501631"
+    type: STATEWIDE
+    display_name: STATEWIDE (501631)
+  district_sets: 
+  - ident: "504388"
+    district_list: 
+    - district_ident: "500726"
+    - district_ident: "501592"
+    - district_ident: "501622"
+    - district_ident: "501349"
+    - district_ident: "501660"
+    - district_ident: "501631"
+  precincts:
+  - ident: "502462"
+    display_name: 702 - MIDWAY
+  splits: 
+  - district_set_ident: "504388"
+    ident: "504388"
+    precinct_ident: "502462"
+    display_name: 501660-702 - MIDWAY-0000
+
+audit_header: 
+  based_on: inputs/VA/vip-2010-09-13-jurisdiction-info.xml
+  schema_version: "0.2"
+  operator: Pito Salas
+  type: jurisdiction
+  create_date: 2010-09-21T15:20:02-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: n/a
+  file_id: 9F023408009B11DF924800163E3DE33F

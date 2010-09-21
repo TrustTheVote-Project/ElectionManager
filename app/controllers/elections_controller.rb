@@ -145,7 +145,7 @@ class ElectionsController < ApplicationController
     @election = Election.find(params[:id])
     respond_to do |format|
       format.csv { 
-        headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballotlisting.csv\"" 
+        headers["Content-Disposition"] = "attachment; filename=\"#{@election.display_name}-ballot-proof.csv\"" 
         render :text => @election.generate_ballot_proofing, :content_type => Mime::Type.lookup_by_extension("csv").to_s
       }
       format.html {}

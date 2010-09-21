@@ -114,11 +114,28 @@ module TTV
       @hash["body"]["splits"].each { |split| load_precinct_split split } if @hash["body"].has_key? "splits"
     end
     
+    # Load an EDH formatted PrecinctSplit into EM. The PrecinctSplit's display_name is the
+    # Associated DistrictSet's ident. We know that PrecinctSplit : DistrictSet is 1:1
+    def load_precinct_split split
+      dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
+      prec = Precinct.find_by_ident(split["precinct_ident"])
+      PrecinctSplit.create!(:display_name => split["display_name"], :district_set => dist_set, :precinct => prec)
+    end    
+    
     # Imports all district_sets contained in the EDH
     def load_district_sets
       @hash["body"]["district_sets"].each { |dset| load_district_set dset} if @hash["body"].has_key? "district_sets"
     end 
 
+    # Load an EDH formatted district_set into EM
+    def load_district_set distset
+      if !DistrictSet.find_by_ident(distset["ident"])
+        ds_new = DistrictSet.create!(:ident => distset["ident"])
+        distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
+        ds_new.save!
+      end
+    end
+    
     # Loads an EDH formatted jurisdiction into EM
     def load_jurisdiction jurisdiction
       new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
@@ -150,23 +167,7 @@ module TTV
         l "*** after new_precinct_save: #{new_precinct.inspect}"
         l "    #{new_precinct.jurisdiction.inspect}\n\n"
     end
-    
-    # Load an EDH formatted PrecinctSplit into EM. The PrecinctSplit's display_name is the
-    # Associated DistrictSet's ident. We know that PrecinctSplit : DistrictSet is 1:1
-    def load_precinct_split split
-      dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
-      prec = Precinct.find_by_ident(split["precinct_ident"])
-      PrecinctSplit.create!(:display_name => dist_set.ident, :district_set => dist_set, :precinct => prec)
-    end
-    
-    # Load an EDH formatted district_set into EM
-    def load_district_set distset
-      if !DistrictSet.find_by_ident(distset["ident"])
-        ds_new = DistrictSet.create!(:ident => distset["ident"])
-        distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
-        ds_new.save!
-      end
-    end
+
     
     # Loads an EDH formatted candidate into EM
     def load_candidate candidate
