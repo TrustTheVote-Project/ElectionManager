@@ -24,7 +24,7 @@ module ::TTV
       def candidate_ordering
         
         return lambda do |c1, c2|
-          if c1.party = c2.party
+          if c1.party == c2.party
             c1.display_name <=> c2.display_name
           else
             # set the default to indy if candidate doesn't have a party
