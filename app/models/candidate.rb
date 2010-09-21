@@ -3,7 +3,7 @@ class Candidate < ActiveRecord::Base
   belongs_to :contest
   belongs_to :party
   
-  attr_accessible :order, :ident, :display_name
+  attr_accessible :position, :ident, :display_name
   
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique candidate ident attempted: {{value}}."

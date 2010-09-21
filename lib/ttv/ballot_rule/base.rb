@@ -101,6 +101,14 @@ module TTV
         end
       end
       
+      def contest_include_party
+        true
+      end
+
+      def candidate_display_name(candidate)
+        candidate.display_name
+      end
+      
     end # end Base class
     
   end

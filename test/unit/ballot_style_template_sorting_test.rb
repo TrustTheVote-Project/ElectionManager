@@ -45,7 +45,7 @@ class BallotStyleTemplateSortTest < ActiveSupport::TestCase
       sorted_candidates = candidates.sort(&@bst.candidate_ordering)
 
       # candidates shb sorted by party
-      assert_equal sorted_candidates, [indy, indy_green, dem, repub]
+      assert_equal sorted_candidates, [repub, dem, indy_green,indy]
 
       # include a candidate with no party
       no_party = Candidate.make(:position => 8, :party => nil)
@@ -56,7 +56,7 @@ class BallotStyleTemplateSortTest < ActiveSupport::TestCase
       
       # candidates shb sorted by party, candidates with no party will
       # be treated like they are independents
-      assert_equal sorted_candidates, [no_party, indy_green, dem, repub]
+      assert_equal sorted_candidates, [repub, dem, indy_green, no_party]
       
       # sorted_candidates.each do |c|
       #   puts "TGD: sorted candidate name = #{c.display_name}"

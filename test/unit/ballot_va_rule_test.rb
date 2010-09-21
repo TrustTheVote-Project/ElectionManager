@@ -45,10 +45,10 @@ class BallotVARuleTest < ActiveSupport::TestCase
       
       should "have the correct ordering" do
         sorted_candidates = @candidates.sort(&@va_strategy.candidate_ordering)
-        assert_equal "cand_Independent", sorted_candidates[0].display_name
-        assert_equal "cand_IndependentGreen", sorted_candidates[1].display_name
-        assert_equal "cand_Democratic", sorted_candidates[2].display_name
-        assert_equal "cand_Republican", sorted_candidates[3].display_name
+        assert_equal "cand_Independent", sorted_candidates[3].display_name
+        assert_equal "cand_IndependentGreen", sorted_candidates[2].display_name
+        assert_equal "cand_Democratic", sorted_candidates[1].display_name
+        assert_equal "cand_Republican", sorted_candidates[0].display_name
       end
       
     end # end context
