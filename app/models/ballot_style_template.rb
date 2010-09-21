@@ -249,4 +249,13 @@ class BallotStyleTemplate < ActiveRecord::Base
     ballot_rule.candidate_ordering
   end
   
+  # used for collection select
+  # creates a set of 
+  def ballot_rules
+    rule_struct = Struct.new(:id, :display_name)
+    rule_map  = TTV::BallotRule::Base.rules.map{ |rule| rule_struct.new(rule.simple_class_name, rule.display_name) }
+
+    # puts "TGD: rule_map = #{rule_map.inspect}"
+    rule_map
+  end
 end

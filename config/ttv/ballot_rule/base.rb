@@ -1,3 +1,9 @@
+# TODO: fix this workaround for loading classes that set class
+# instance variables
+# needed to put this outside of directories that dev mode reloads
+# automatically.
+# NOTE: def reloadable?; false; end; # doesn't work
+
 module TTV
   module BallotRule
     class Base
@@ -46,7 +52,15 @@ module TTV
         def display_name
           "#{self.name.demodulize} Ballot Rule"
         end
+
         
+        # returns "VA" for TTV::BallotRule::VA, "Default" for
+        # TTV::BallotRule::Default
+        # used in form to id this Ballot Rule class
+        def simple_class_name
+          "#{self.name.demodulize}"
+        end
+
         # Find a sub class given this subclass's display_name, e.g. "VA Ballot
         # Rule"
         def find_subclass_by_display_name(display_name)

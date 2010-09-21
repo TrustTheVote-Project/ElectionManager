@@ -10,7 +10,7 @@ module ::TTV
         # rule below
         def party_order
           # create it once for this class
-          @party_order ||=  {Party::INDEPENDENT => 0, Party::INDEPENDENTGREEN => 1, Party::DEMOCRATIC => 2, Party::DEMOCRAT => 2, Party::REPUBLICAN => 3}
+          @party_order ||=  {Party::INDEPENDENT => 0, Party::LIBERTARIAN => 1, Party::INDEPENDENTGREEN => 2, Party::DEMOCRATIC => 3, Party::DEMOCRAT => 3, Party::REPUBLICAN => 4}
         end
         
       end # end class singleton methods
@@ -24,6 +24,12 @@ module ::TTV
       def candidate_ordering
         
         return lambda do |c1, c2|
+          # puts "TGD: c1 = #{c1.display_name}"
+          # puts "TGD: c1.party = #{c1.party.display_name}"
+          # puts "TGD: c2 = #{c2.display_name}"
+          # puts "TGD: c2.party = #{c2.party.display_name}"
+
+          # puts "part_order = #{self.class.party_order.inspect}"
           if c1.party == c2.party
             c1.display_name <=> c2.display_name
           else
