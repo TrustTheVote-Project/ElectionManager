@@ -95,7 +95,7 @@ class Election < ActiveRecord::Base
 # - contest display names, as one column, separated by "|"
 # - question display names, as one column, separated by "|"
   def generate_ballot_proofing
-    splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id)
+    splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id).all(:include => [:precinct,  {:district_set => :districts}] )
     csv_string = FasterCSV.generate do |csv|
       csv << ["precinct split", "precinct", "n contests", "n questions", "contest names", "question_names"]
       splits.each do |split|

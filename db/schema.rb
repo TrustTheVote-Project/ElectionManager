@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100921134643) do
+ActiveRecord::Schema.define(:version => 20100921164018) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20100921134643) do
     t.integer  "position",         :default => 0
     t.string   "ident"
   end
+
+  add_index "contests", ["election_id"], :name => "index_contests_on_election_id"
 
   create_table "district_sets", :force => true do |t|
     t.string   "display_name"
@@ -169,6 +171,8 @@ ActiveRecord::Schema.define(:version => 20100921134643) do
     t.datetime "updated_at"
   end
 
+  add_index "precinct_splits", ["precinct_id"], :name => "index_precinct_splits_on_precinct_id"
+
   create_table "precincts", :force => true do |t|
     t.string   "display_name"
     t.datetime "created_at"
@@ -176,6 +180,8 @@ ActiveRecord::Schema.define(:version => 20100921134643) do
     t.string   "ident"
     t.integer  "jurisdiction_id"
   end
+
+  add_index "precincts", ["jurisdiction_id"], :name => "index_precincts_on_jurisdiction_id"
 
   create_table "questions", :force => true do |t|
     t.string   "display_name"
@@ -187,6 +193,8 @@ ActiveRecord::Schema.define(:version => 20100921134643) do
     t.string   "ident"
     t.integer  "position",               :default => 0
   end
+
+  add_index "questions", ["election_id"], :name => "index_questions_on_election_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
