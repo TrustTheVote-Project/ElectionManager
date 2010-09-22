@@ -115,7 +115,7 @@ module TTV
         end
       end
       
-      def contest_include_party
+      def contest_include_party(contest)
         true
       end
 

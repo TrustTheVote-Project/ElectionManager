@@ -79,7 +79,7 @@ module DefaultBallot
         # puts "TGD: question_list = #{question_list.map(&:display_name).join(',')}"
 
         question_list.each do |question|
-          if header_item
+          if header_item && template.create_A_ballot_headers?
             # puts "TGD: adding question flow #{question.display_name} and heading for district #{district.display_name}"
             flow_items.push(self.create_flow_item(pdf, [header_item, self.create_flow_item(pdf,question)] ))
             header_item = nil

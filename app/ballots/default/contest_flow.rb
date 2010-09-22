@@ -57,7 +57,6 @@ module DefaultBallot
             @pdf.stroke
           end
         end
-        
 
         # indent  text
         left_text = opts[:left_margin] + cb_width + (HPAD*5) 
@@ -65,7 +64,7 @@ module DefaultBallot
         # box for wrapping text
         @pdf.bounding_box([left_text, opts[:top_margin]], :width => width - left_text ) do
           @pdf.text(candidate_name)
-          @pdf.text(party_name, :style => :normal) if party_name
+          @pdf.text(party_name, :style => :normal) if party_name && @config.template.contest_include_party(@contest)
         end
         
         bottom = @pdf.bounds.top
@@ -112,6 +111,8 @@ module DefaultBallot
       end
       
       def draw(config, rect, &bloc)
+        @config = config
+        
         reset_ballot_marks
         if @contest.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
           draw_winner_contest config, rect, &bloc

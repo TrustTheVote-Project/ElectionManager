@@ -248,6 +248,10 @@ class BallotStyleTemplate < ActiveRecord::Base
   def candidate_ordering
     ballot_rule.candidate_ordering
   end
+
+  def contest_include_party(contest)
+    ballot_rule.contest_include_party(contest)
+  end
   
   # used for collection select
   # creates a set of 

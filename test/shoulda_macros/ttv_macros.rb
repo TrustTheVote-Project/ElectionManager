@@ -114,6 +114,13 @@ class Test::Unit::TestCase
     end
   end
   
+  def create_question(name, district, election, text)
+    question = Question.make(:display_name => name,
+                                 :election => election,
+                                 :requesting_district => district,
+                                 :question => text)
+  
+  end
   
   def create_contest(name, voting_method, district, election, position = 0)
     contest = Contest.make(:display_name => name,

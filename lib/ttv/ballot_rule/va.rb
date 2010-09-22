@@ -20,7 +20,13 @@ module ::TTV
         @election = election
         @precinct_split = precinct_split
       end
-
+      
+      def contest_include_party(contest)
+        raise ArgumentError, "#{self.class.name}#contest_include_party: argument must be a Contest" unless contest.is_a?(Contest)
+        
+        contest.district.district_type.title.downcase == "congressional"
+      end
+      
       def candidate_ordering
         
         return lambda do |c1, c2|

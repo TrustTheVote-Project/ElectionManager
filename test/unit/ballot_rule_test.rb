@@ -79,4 +79,18 @@ class BallotRuleTest < ActiveSupport::TestCase
     end
 
   end
+
+  context "Candidate party display" do
+    setup do
+      @default = ::TTV::BallotRule::Default.new
+      @contest = nil
+      create_ballot_config(true)
+    end
+
+    should "display the candidate party by default" do
+      assert @default.contest_include_party(@contest)
+      assert @template.contest_include_party(@contest)
+    end
+
+  end
 end
