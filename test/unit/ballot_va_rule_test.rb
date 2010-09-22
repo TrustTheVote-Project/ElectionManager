@@ -19,14 +19,20 @@ class BallotVARuleTest < ActiveSupport::TestCase
       party = Party.find_by_display_name("Independent")
       assert_equal 0, @va_klass.party_order[party]
 
-      party = Party.find_by_display_name("IndependentGreen")
+      party = Party.find_by_display_name("Libertarian")
       assert_equal 1, @va_klass.party_order[party]
-
-      party = Party.find_by_display_name("Democratic")
+      
+      party = Party.find_by_display_name("IndependentGreen")
       assert_equal 2, @va_klass.party_order[party]
 
-      party = Party.find_by_display_name("Republican")
+      party = Party.find_by_display_name("Democratic")
       assert_equal 3, @va_klass.party_order[party]
+      
+      party = Party.find_by_display_name("Democrat")
+      assert_equal 3, @va_klass.party_order[party]
+
+      party = Party.find_by_display_name("Republican")
+      assert_equal 4, @va_klass.party_order[party]
 
     end
 
