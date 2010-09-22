@@ -27,14 +27,21 @@ module DefaultBallot
       end
       
       def short_instructions
-        @pdf.text "Vote for not more than (1)", :size => 8, :leading => 1        
+        @pdf.text "Vote for not more than (1)", :size => 8, :align => :center, :leading => 1        
       end
       
       def header(rect)
         @pdf.bounding_box([rect.left+12, rect.top], :width => rect.width - 16) do
+
+          # TODO: make this configurable via ballot style template
+          orig_color = @pdf.fill_color
+          @pdf.fill_color('DCDCDC')
+          @pdf.fill_rectangle([@pdf.bounds.left-12, @pdf.bounds.top], rect.width,  @pdf.height_of(@question.display_name)+18)
+          @pdf.fill_color(orig_color)
+
           @pdf.font "Helvetica", :size => 10, :style => :bold
           @pdf.move_down VPAD
-          @pdf.text "Proposed Constitutional Amendment " + @question.display_name, :leading => 1 #header
+          @pdf.text "Proposed Constitutional Amendment " + @question.display_name, :align => :center, :leading => 1 #header
           @pdf.move_down VPAD
 
           short_instructions
