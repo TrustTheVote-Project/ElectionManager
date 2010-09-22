@@ -211,5 +211,51 @@ class BallotStyleTemplate < ActiveRecord::Base
   def create_A_ballot_headers?
     ballot_layout && ballot_layout[:create_A_headers]
   end
+
+  # get the ballot rule given this template's ballot rule class name
+  # e.g. if ballot_rule_classname is "VA" then get TTV::BallotRule::VA
+  # class
+  def ballot_rule_class
+    ::TTV::BallotRule::Base.find_subclass(ballot_rule_classname)
+  end
   
+  # get and instance of the ballot rule indicated by the
+  # ballot_rule_classname attribute
+  def ballot_rule
+    ballot_rule_class.new
+  end
+
+  # Supplies the sorting algorithm for districts
+  # districts.sort(&ballot_style_template.district_ordering)    
+  def district_ordering
+    ballot_rule.district_ordering
+  end
+  
+  # Supplies the sorting algorithm for contests
+  # contests.sort(&ballot_style_template.contest_ordering)    
+  def contest_ordering
+    ballot_rule.contest_ordering
+  end
+
+  # Supplies the sorting algorithm for questions
+  # questions.sort(&ballot_style_template.question_ordering)    
+  def question_ordering
+    ballot_rule.question_ordering
+  end
+  
+  # Supplies the sorting algorithm for candidates
+  # candidates.sort(&ballot_style_template.candidate_ordering)    
+  def candidate_ordering
+    ballot_rule.candidate_ordering
+  end
+  
+  # used for collection select
+  # creates a set of 
+  def ballot_rules
+    rule_struct = Struct.new(:id, :display_name)
+    rule_map  = TTV::BallotRule::Base.rules.map{ |rule| rule_struct.new(rule.simple_class_name, rule.display_name) }
+
+    # puts "TGD: rule_map = #{rule_map.inspect}"
+    rule_map
+  end
 end

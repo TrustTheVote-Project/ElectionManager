@@ -2,6 +2,41 @@ require 'test_helper'
 
 class BallotStyleTemplateTest < ActiveSupport::TestCase
   
+  context "Ballot Rule" do
+    
+    setup do
+      @bst = BallotStyleTemplate.make
+    end
+    
+    should "have an attribute with the name of the default ballot rule class" do
+      assert @bst.ballot_rule_classname
+      assert_equal "Default", @bst.ballot_rule_classname
+    end
+
+    should "have a method that gets the ballot rule class" do
+      assert @bst.ballot_rule_class
+      assert_equal TTV::BallotRule::Default,  @bst.ballot_rule_class
+    end
+
+    should "have a method that gets an instance of the ballot rule class" do
+      assert @bst.ballot_rule
+      assert @bst.ballot_rule.instance_of?(TTV::BallotRule::Default)
+    end
+
+    should "be able to change the ballot rule class" do
+      @bst.ballot_rule_classname = "VA"
+      
+      assert @bst.ballot_rule_classname
+      assert_equal "VA", @bst.ballot_rule_classname
+      
+      assert @bst.ballot_rule_class
+      assert_equal TTV::BallotRule::VA,  @bst.ballot_rule_class
+
+      assert @bst.ballot_rule
+      assert @bst.ballot_rule.instance_of?(TTV::BallotRule::VA)
+    end
+  end
+  
   context "have default ballot styles" do
     setup do
       @bst = BallotStyleTemplate.make

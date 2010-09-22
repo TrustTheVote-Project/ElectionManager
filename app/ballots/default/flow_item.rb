@@ -56,14 +56,14 @@ module DefaultBallot
       ballot_districts = precinct_split.ballot_districts(election)
       # puts "TGD: adding ballot flow items for #{ballot_districts.map(&:display_name).join(',')}"
       
-      ballot_districts.sort{ |a,b| a.position <=> b.position}.each do |district|
+      ballot_districts.sort(&template.district_ordering).each do |district|
         # puts "TGD: creating flow items for district #{district.display_name} with position = #{district.position}"
         header_item = self.create_flow_item(pdf, district.display_name)        
 
         contest_list = ::Contest.find_all_by_district_id(district.id)
         # puts "TGD: contest_list = #{contest_list.map(&:display_name).join(',')}"
         
-        contest_list.sort { |a,b| a.position <=> b.position}.each do |contest|
+        contest_list.sort(&template.contest_ordering).each do |contest|
           # puts "TGD: adding contest flow #{contest.display_name} with position = #{contest.position}"
           if header_item && template.create_A_ballot_headers?
             # puts "TGD: adding contest flow #{contest.display_name} and heading for district #{district.display_name}"

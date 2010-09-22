@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100921164018) do
     t.text     "ballot_layout"
     t.string   "ballot_title"
     t.string   "ballot_style_file"
+    t.string   "ballot_rule_classname",                          :default => "Default"
   end
 
   create_table "ballot_styles", :force => true do |t|
@@ -69,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20100921164018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ident"
-    t.integer  "order",        :default => 0
+    t.integer  "position",     :default => 0
   end
 
   create_table "contests", :force => true do |t|

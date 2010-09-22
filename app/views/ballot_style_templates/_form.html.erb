@@ -26,6 +26,12 @@
   </div>
 
   <div class="group">
+    <%= f.label :ballot_rule, t("activerecord.attributes.ballot_style_template.ballot_rule", :default => "Ballot Rule"), :class => :label %>
+	<%= f.collection_select(:ballot_rule_classname, @ballot_style_template.ballot_rules, :id, :display_name)%>
+    <span class="description">Ballot Rule for this template.</span>
+  </div>
+
+  <div class="group">
     <%= f.label :default_language, t("activerecord.attributes.ballot_style_template.default_language", :default => "Default language"), :class => :label %>
 	<%= f.collection_select(:default_language, Language.all, :id, :display_name) %>
     <span class="description">Default language for this template.</span>
