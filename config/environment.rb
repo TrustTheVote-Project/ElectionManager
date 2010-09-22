@@ -31,8 +31,8 @@ Rails::Initializer.run do |config|
   config.gem 'machinist'
   config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
   config.gem 'pdf-reader'
-  
-  
+  config.gem 'fastercsv'
+    
   unless !ENV['TM_DIRECTORY'].nil?
     config.gem 'redgreen', :version => '>=1.2.2'
   end
