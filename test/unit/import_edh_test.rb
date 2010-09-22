@@ -47,8 +47,10 @@ class ImportEDHTest < ActiveSupport::TestCase
       end
       
       should "have correclty named split" do
-        split = Precinct.find_by_display_name("PRECINCT 1").precinct_splits[0]
-        assert_equal "ds-1", split.display_name
+        prec = Precinct.find_by_display_name("PRECINCT 1")
+        splits = prec.precinct_splits
+        split = splits[0]
+        assert_equal "702 - MIDWAY-0000", split.display_name
       end
       
       should "contain the right district set" do
@@ -64,6 +66,14 @@ class ImportEDHTest < ActiveSupport::TestCase
         split = prec.precinct_splits[0]
         dset = split.district_set
         dset.districts.each { |dist| assert_equal @jur, dist.jurisdiction }        
+      end
+      
+      should "have districts of the right type" do
+        prec = Precinct.find_by_display_name("PRECINCT 1")
+        split = prec.precinct_splits[0]
+        dset = split.district_set
+        dset.districts.each { |dist| assert_equal "WARD", dist.district_type.title }        
+
       end
     end
   end

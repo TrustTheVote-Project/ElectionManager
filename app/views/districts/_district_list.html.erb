@@ -23,7 +23,7 @@
                 <%= link_to district.display_name, district_path(district) %>
             </td>
             <td>
-                <%= link_to district.district_type.title, district_type_path(district) %>
+                <%= link_to district.district_type.title, district_type_path(district.district_type) %>
             </td>
             <td class="last">
                 <%= link_to "#{t("ttv.show", :default => "Show")}", district_path(district) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_district_path(district) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", district_path(district), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>

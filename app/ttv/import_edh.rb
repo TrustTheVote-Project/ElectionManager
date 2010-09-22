@@ -44,10 +44,30 @@ module TTV
       @hash["body"]["jurisdictions"].each { |juris| load_jurisdiction juris } if @hash["body"].has_key? "jurisdictions"
     end
     
+    # Loads an EDH formatted jurisdiction into EM
+    def load_jurisdiction jurisdiction
+      new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
+      new_jurisdiction.save!
+    end
+    
     # Imports all districts contained in the EDH
     def load_districts
       @hash["body"]["districts"].each { |dist| load_district dist} if @hash["body"].has_key? "districts"
     end
+    
+    # Loads an EDH formatted district into EM
+    def load_district district
+      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"])
+      new_district.district_type = DistrictType.find_or_create_by_title(district["type"])
+
+# TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 
+      if @jurisdiction
+        new_district.jurisdiction = @jurisdiction
+      end
+      new_district.save!
+    end
+
+
     
     # Imports all precincts contained in the EDH
     def load_precincts
@@ -119,7 +139,8 @@ module TTV
     def load_precinct_split split
       dist_set = DistrictSet.find_by_ident(split["district_set_ident"])
       prec = Precinct.find_by_ident(split["precinct_ident"])
-      PrecinctSplit.create!(:display_name => split["display_name"], :district_set => dist_set, :precinct => prec)
+# TODO: rps: PrecinctSplit should have an ident column
+      PrecinctSplit.find_or_create_by_display_name(:display_name => split["display_name"], :district_set => dist_set, :precinct => prec)
     end    
     
     # Imports all district_sets contained in the EDH
@@ -136,27 +157,6 @@ module TTV
       end
     end
     
-    # Loads an EDH formatted jurisdiction into EM
-    def load_jurisdiction jurisdiction
-      new_jurisdiction = DistrictSet.find_or_create_by_ident(:display_name => jurisdiction["display_name"], :ident => jurisdiction["ident"])
-      new_jurisdiction.save!
-    end
-    
-    # Loads an EDH formatted district into EM
-    def load_district district
-      if district["type"] and DistrictType.find_by_title(district["type"])
-        district_type = DistrictType.find_by_title(district["type"])
-      else
-        district_type = DistrictType.find(0) # Built-in default district type. TODO: Other better default in db/seed/once/district_types.yml?
-      end
-      new_district = District.find_or_create_by_ident(:display_name => district["display_name"], :ident => district["ident"], :district_type => district_type)
-# TODO: When we have an actual Jurisdiction model, @jurisdiciton.class != DistrictSet 
-      if @jurisdiction
-        new_district.jurisdiction = @jurisdiction
-      end
-      new_district.save!
-    end
-
     # Loads an EDH formatted precinct into EM
     def load_precinct precinct
       @jurisdiction ||= DistrictSet.find_by_ident(precinct["jurisdiction_ident"])
