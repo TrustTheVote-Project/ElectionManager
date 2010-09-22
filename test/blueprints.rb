@@ -89,6 +89,7 @@ end
 Candidate.blueprint do
   # contest
   # party
+  display_name
   ident
 end
 
@@ -139,6 +140,10 @@ end
 
 Party.blueprint(:independent) do
   display_name { 'Independent'}
+end
+
+Party.blueprint(:independentgreen) do
+  display_name { 'IndependentGreen'}
 end
 
 # NOTE: commented out blueprints because they are seed data
