@@ -126,6 +126,14 @@ end
 
 # TODO: remove these blueprints, they are loaded as seed data.
 # Party::DEMOCRATIC, Party::REPUBLICAN, Party::INDEPENDENT
+
+DistrictType.blueprint do
+end
+
+DistrictType.blueprint(:congressional) do
+  title { "Congressional"}
+end
+
 Party.blueprint do
 
 end

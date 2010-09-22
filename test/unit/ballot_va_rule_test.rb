@@ -1,6 +1,25 @@
 require 'test_helper'
 
 class BallotVARuleTest < ActiveSupport::TestCase
+  context "Candidate party display" do
+    setup do
+      create_ballot_config(true)
+      @template.ballot_rule_classname = "VA"
+    end
+    
+    should "show party for districts that are state or federal" do
+      district = District.make(:display_name => "District 1", :district_type => DistrictType::CONGRESSIONAL)
+      contest = create_contest("Contest1", VotingMethod::WINNER_TAKE_ALL, district, @election)
+      assert @template.contest_include_party(contest)
+    end
+
+    should "not show party for districts that are not state or federal" do
+      district = District.make(:display_name => "District 1", :district_type => DistrictType::DISTRICT)
+      contest = create_contest("Contest1", VotingMethod::WINNER_TAKE_ALL, district, @election)
+      assert !@template.contest_include_party(contest)
+    end
+  end
+  
   context "Candidate sorting strategy" do
     setup do
       @base_klass = ::TTV::BallotRule::Base
