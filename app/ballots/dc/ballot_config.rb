@@ -66,9 +66,10 @@ module DcBallot
     # returns - Rectangle that is used to contain all flow items such
     # (contest flow item, question flow item,...)
     def render_contents(contents_rect)
-      flow_rect = nil 
+      flow_rect = nil
+      
       @pdf.bounding_box [contents_rect.left, contents_rect.top], :width => contents_rect.width, :height => contents_rect.height do
-        
+
         unless @contents[:border][:width] == 0
           # draw the contents border
           orig_color = @pdf.stroke_color
@@ -193,13 +194,15 @@ module DcBallot
       end
       if @contents[:body][:height] <= 1.0
         # percentage of height
-        h = (@pdf.bounds.height * @contents[:body][:height]) -(@contents[:body][:margin][:top] + @contents[:body][:margin][:bottom])
+        # The contents height at this point is the @pdf.bounds.height - the height contents[:header]. 
+        h = (contents_rect.height * @contents[:body][:height]) -(@contents[:body][:margin][:top] + @contents[:body][:margin][:bottom])  
       else
         h = @contents[:body][:height]
       end
-      
+
       # update the top of the contents rect
       contents_rect.top = y - h
+      
       # top, left, bottom, right
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
@@ -221,6 +224,7 @@ module DcBallot
         new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
 
       end
+
       new_flow_rectangle
     end
 
