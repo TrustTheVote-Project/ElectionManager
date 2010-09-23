@@ -59,7 +59,7 @@ class BallotStyleTemplate < ActiveRecord::Base
       :content =>{
         :top => { :width => 50, :text => "Sample Ballot", :rotate => 0, :graphics => nil },
         :right => { :width => 47,:text => " tom D was here", :rotate => 90, :graphics => nil },
-        :bottom => { :width => 190,:text => "Sample Ballot", :rotate => 0, :graphics => nil },
+        :bottom => { :width => 50,:text => "Sample Ballot", :rotate => 0, :graphics => nil },
         :left => { :width => 67,:text => "    132301113              Sample Ballot", :rotate => 90, :graphics => nil }
       }}
     
@@ -105,7 +105,7 @@ class BallotStyleTemplate < ActiveRecord::Base
 
       :body =>{
         :width => 1.0, # % width of ballot contents box
-        :height => 0.7, # % height of ballot contents box
+        :height => 1.0, # % height of ballot contents box
         :margin => {:top => 0, :right => 0, :bottom => 0, :left => 0},
         :border => {:width => 0, :color => '000000', :style => :solid},
         :text => "Body Text", # this will be Rich Text in Prawn 1.0
@@ -114,7 +114,7 @@ class BallotStyleTemplate < ActiveRecord::Base
       },
       :footer =>{
         :width => 1.0, # % width of ballot contents box
-        :height => 0.15, # % height of ballot contents box
+        :height => 0.0, # % height of ballot contents box
         :margin => {:top => 0, :right => 0, :bottom => 0, :left => 0},
         :border => {:width => 0, :color => 'FF0000', :style => :solid},
         :text => "Footer Text", # this will be Rich Text in Prawn 1.0
@@ -184,21 +184,21 @@ class BallotStyleTemplate < ActiveRecord::Base
     
     style_hash = YAML.load(filename)
 
-    logger.debug "TGD: style_hash[:page] = #{style_hash[:page].inspect}"
+#     logger.debug "TGD: style_hash[:page] = #{style_hash[:page].inspect}"
     
-    logger.debug "="*30    
-    logger.debug "\nTGD: style_hash[:frame][:margin] = #{style_hash[:frame][:margin].inspect}"
-    logger.debug "\nTGD: style_hash[:frame][:content][:top] = #{style_hash[:frame][:content][:top].inspect}"
-    logger.debug "\nTGD: style_hash[:frame][:content][:right] = #{style_hash[:frame][:content][:right].inspect}"
-    logger.debug "\nTGD: style_hash[:frame][:content][:bottom] = #{style_hash[:frame][:content][:bottom].inspect}"
-    logger.debug "\nTGD: style_hash[:frame][:content][:left] = #{style_hash[:frame][:content][:left].inspect}"
-    logger.debug "\nTGD: style_hash[:frame][:border] = #{style_hash[:frame][:border].inspect}"
+#     logger.debug "="*30    
+#     logger.debug "\nTGD: style_hash[:frame][:margin] = #{style_hash[:frame][:margin].inspect}"
+#     logger.debug "\nTGD: style_hash[:frame][:content][:top] = #{style_hash[:frame][:content][:top].inspect}"
+#     logger.debug "\nTGD: style_hash[:frame][:content][:right] = #{style_hash[:frame][:content][:right].inspect}"
+#     logger.debug "\nTGD: style_hash[:frame][:content][:bottom] = #{style_hash[:frame][:content][:bottom].inspect}"
+#     logger.debug "\nTGD: style_hash[:frame][:content][:left] = #{style_hash[:frame][:content][:left].inspect}"
+#     logger.debug "\nTGD: style_hash[:frame][:border] = #{style_hash[:frame][:border].inspect}"
     
-    logger.debug "="*30    
-    logger.debug "\nTGD: style_hash[:contents][:body] = #{style_hash[:contents][:body].inspect}"
-    logger.debug "\nTGD: style_hash[:contents][:footer] = #{style_hash[:contents][:footer].inspect}"
-    logger.debug "\nTGD: style_hash[:contents][:header] = #{style_hash[:contents][:header].inspect}"
-    logger.debug "\nTGD: style_hash[:contents][:border] = #{style_hash[:contents][:border].inspect}"
+#     logger.debug "="*30    
+#     logger.debug "\nTGD: style_hash[:contents][:body] = #{style_hash[:contents][:body].inspect}"
+#     logger.debug "\nTGD: style_hash[:contents][:footer] = #{style_hash[:contents][:footer].inspect}"
+#     logger.debug "\nTGD: style_hash[:contents][:header] = #{style_hash[:contents][:header].inspect}"
+#     logger.debug "\nTGD: style_hash[:contents][:border] = #{style_hash[:contents][:border].inspect}"
     
     update_styles(style_hash)
   end

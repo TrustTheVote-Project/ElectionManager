@@ -101,7 +101,7 @@
       :left: 0
       :bottom: 0
       :right: 0
-    :height: 0.9
+    :height: 1.0
     :width: 1.0
     :border: 
       :style: :solid
