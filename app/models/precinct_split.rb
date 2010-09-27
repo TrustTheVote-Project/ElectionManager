@@ -17,6 +17,10 @@ class PrecinctSplit < ActiveRecord::Base
     election.questions.reduce([]) { |memo, question| district_set.districts.include?(question.requesting_district) ? memo | [question] : memo}
   end
   
+  def districts
+    district_set.districts
+  end
+  
   # Nice to_s
   def to_s
     s = "S: #{display_name}\n"
