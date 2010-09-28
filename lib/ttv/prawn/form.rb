@@ -88,12 +88,14 @@ module TTV
         
         # name of the xobject used to draw the on/selected state
         selected_xobj_name = name.capitalize.to_sym
-        
+        puts "TGD: page = #{page_number.inspect}"
+        #puts "TGD: pages = #{pages[0].inspect}"
+        #puts "TGD: pages = #{pages[0].dictionary.indentifier.inspect}"
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
           # Guess we don't need to point to this annotation's parent
-          # :P => page.dictionary.data[:Annots],
+          :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           :Subtype => :Widget,
           # Rectangle, defining the location of the annotation on
@@ -140,12 +142,12 @@ module TTV
           :V => :Off, # the name used in the appearance stream (AP),
           :Ff => 0
         }
-        
+        puts "TGD: page = #{page_number}"        
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
           # Guess we don't need to point to this annotation's parent
-          # :P => page.dictionary.data[:Annots],
+          :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           :Subtype => :Widget,
           # Rectangle, defining the location of the annotation on
@@ -196,6 +198,8 @@ module TTV
           # field flag: not read only, not required, can be exported
           :Ff => 0,
         }
+
+        puts "TGD: page = #{page_number.inspect}"
         
         # The PDF object for this text box can also be used as
         # Annotation dictionary.
@@ -206,7 +210,7 @@ module TTV
           # Indirect Object Reference to the page's annotations
           # not sure if this is required?
           # NOTE: This breaks the iText RUPS parser when it's included!!
-          #:P => page.dictionary.data[:Annots],
+          :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           # This is a Widget annotation
           :Subtype => :Widget,
