@@ -9,8 +9,8 @@ class District < ActiveRecord::Base
   attr_accessible :district_type, :display_name, :district_type_id, :ident, :position
   
   attr_accessor :importId, :importPrecincts # for xml import
-  
   validates_presence_of :display_name
+  validates_presence_of :jurisdiction
   
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique district ident attempted: {{value}}."

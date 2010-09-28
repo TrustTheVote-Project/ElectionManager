@@ -16,7 +16,6 @@ class Candidate < ActiveRecord::Base
     end
   end
   
-
   attr_accessible :display_name, :party_id, :contest_id
   validates_presence_of :display_name
   

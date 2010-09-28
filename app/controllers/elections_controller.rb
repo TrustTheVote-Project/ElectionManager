@@ -11,11 +11,7 @@ class ElectionsController < ApplicationController
 
   def show
     params[:ballot_page] ||= 1
-    @election = Election.find(params[:id], :include => [ 
-      { :district_set => :districts }, 
-      { :contests => :candidates },
-      :questions, 
-      ])
+    @election = Election.find(params[:id], :include => [:contests, :questions])
     current_context.election = @election
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
