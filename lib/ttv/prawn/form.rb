@@ -22,7 +22,7 @@ module TTV
         @fields = []
         data = store.root.data
         data[:AcroForm] = store.ref(:Fields => (@fields || fields),
-                                          :DR => (@resources || resources)
+                                          :DR => (resources)
                                     )
         
         if block_given?
@@ -39,7 +39,7 @@ module TTV
           :Subtype  => :Type1,
           :BaseFont => :Helvetica,
           :Encoding => :WinAnsiEncoding }.merge(options)
-         @resources = ref(options)
+         @resources = ref!(options)
       end
       
       def draw_radio_group(name, opts={}, &block)
@@ -88,14 +88,16 @@ module TTV
         
         # name of the xobject used to draw the on/selected state
         selected_xobj_name = name.capitalize.to_sym
-        puts "TGD: page = #{page_number.inspect}"
+        # puts "TGD: page = #{page_number.inspect}"
         #puts "TGD: pages = #{pages[0].inspect}"
         #puts "TGD: pages = #{pages[0].dictionary.indentifier.inspect}"
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
-          # Guess we don't need to point to this annotation's parent
-          :P => pages[page_number-1].dictionary,
+          # TODO: Indirect Object Reference to the page's annotations
+          # TODO: Determine whether to add this. Preview and Adobe Pro
+          # generate this parent pointer in each annotation. 
+          # :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           :Subtype => :Widget,
           # Rectangle, defining the location of the annotation on
@@ -142,12 +144,11 @@ module TTV
           :V => :Off, # the name used in the appearance stream (AP),
           :Ff => 0
         }
-        puts "TGD: page = #{page_number}"        
+        # puts "TGD: page = #{page_number}"        
         annotation_dict = {
           # NOTE: This breaks the iText RUPS parser when it's
           # included!!
-          # Guess we don't need to point to this annotation's parent
-          :P => pages[page_number-1].dictionary,
+          # :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           :Subtype => :Widget,
           # Rectangle, defining the location of the annotation on
@@ -199,7 +200,7 @@ module TTV
           :Ff => 0,
         }
 
-        puts "TGD: page = #{page_number.inspect}"
+        #puts "TGD: page = #{page_number.inspect}"
         
         # The PDF object for this text box can also be used as
         # Annotation dictionary.
@@ -207,10 +208,8 @@ module TTV
         # used to represent both a field and and annotation      
         # sect 8.4.5 Widget Annotations
         annotation_dict = {
-          # Indirect Object Reference to the page's annotations
-          # not sure if this is required?
-          # NOTE: This breaks the iText RUPS parser when it's included!!
-          :P => pages[page_number-1].dictionary,
+          # NOTE: This breaks the iText RUPS parser when it's included??
+          # :P => pages[page_number-1].dictionary,
           :Type => :Annot,
           # This is a Widget annotation
           :Subtype => :Widget,

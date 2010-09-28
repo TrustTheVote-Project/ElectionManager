@@ -95,6 +95,12 @@ class Test::Unit::TestCase
       return obj if ref.id == ref_id
     end
   end
+  
+  def get_ref(reference)
+    @hash.each do |ref, obj|
+      return obj if ref.id == reference.id
+    end
+  end
 
   # get the form, AcroForm
   # return - Hash for form
