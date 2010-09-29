@@ -38,7 +38,8 @@
                     <%= split.ballot_questions(@election).size %>
                 </td>
                 <td class="last">
-                    <%= link_to "generate", ballot_election_precinct_path(@election, split) %> | preview
+                  <%= link_to "generate", ballot_election_precinct_path(@election, split) %> | preview
+                  <%#= link_to "generate", ballot_path(@election, split) %> | preview
                 </td>
             </tr>
             <% end -%>
