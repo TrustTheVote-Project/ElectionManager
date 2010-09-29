@@ -1,10 +1,20 @@
 class Ballot < ActiveRecord::Base
-  #named_scope :create_by_election_and_precinct_split, lambda{ |election, precinct_split| Ballot.create!(:election => election, :precinct_split => precinct_split)}
+#   named_scope :find_or_create_by_election, lambda{ |election| election.precinct_splits.each do |split|
+#       find_or_create_by_election_id_and_precinct_split_id(:election_id => election.id, :precinct_split_id => split.id)
+#     end
+#   }
   
+
   belongs_to :election
   belongs_to :precinct_split
-
-  validates_presence_of :election, :precinct_split
+  
+  def self.find_or_create_by_election(election)
+    election.precinct_splits.each do |split|
+      find_or_create_by_election_id_and_precinct_split_id(:election_id => election.id, :precinct_split_id => split.id)
+    end
+  end
+  
+  #validates_presence_of :election, :precinct_split
 
   def districts
    #  puts "TGD #{self.class.name}#districts: election districts = #{election.district_set.districts.map(&:display_name)}"
