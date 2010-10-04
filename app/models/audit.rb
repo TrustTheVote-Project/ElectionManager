@@ -178,7 +178,7 @@ class Audit < ActiveRecord::Base
     election_data_hash["body"]["districts"].each_index do
       |dist_index|
       audit_district_jurisdiction dist_index if !auditing_jurisdiction?
-    end
+    end if election_data_hash["body"].has_key? "districts"
   end
   
   # Check a particular District to make sure the Jurisdiction is valid.
@@ -202,7 +202,7 @@ class Audit < ActiveRecord::Base
     election_data_hash["body"]["candidates"].each_index do
       |cand_index|
       audit_candidate cand_index
-    end
+    end if election_data_hash["body"].has_key? "candidates"
   end
   
 # Check whether a particular candidate in the EDH looks reasonable. For example:
@@ -227,7 +227,9 @@ class Audit < ActiveRecord::Base
 
 # Audit all the Elections in the input EDH
   def audit_elections
-    election_data_hash["body"]["elections"].each_index { |e_index| audit_election e_index } if election_data_hash["body"].has_key? "elections"
+    election_data_hash["body"]["elections"].each_index do |e_index| 
+      audit_election e_index 
+    end if election_data_hash["body"].has_key? "elections"
   end
     
 # Check whether a particular Election in the EDH looks reasonbable.
@@ -298,7 +300,7 @@ class Audit < ActiveRecord::Base
   end
   
   # Search through target (an array of hashes), 
-  # for an element who has key e`qu`al to value
+  # for an element who has key equal to value
   def input_has? target, key, value
     target.each { |item| (return true if item[key].eql? value) }
     false
