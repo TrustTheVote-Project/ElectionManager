@@ -31,10 +31,14 @@
         <b><%= t("ttv.election", :default => "Election") %>:</b>
         <%= @question.election.display_name %>
       </p>
+        <b><%= t("ttv.ident", :default => "Ident") %>:</b>
+        <%= @question.ident %>
+      </p>
       <p>
         <b><%= t("ttv.order", :default => "Order") %>:</b>
-        <%= "@question.position" %>
+        <%= "tbd: @question.position" %>
       </p>
+      <p>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("ttv.edit", :default=> "Edit")}")} #{t("ttv.edit", :default=> "Edit")}", edit_question_path(@question), :class => "button" %>
         <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("ttv.delete", :default=> "Delete")}")} #{t("ttv.delete", :default=> "Delete")}", question_path(@question), :method => "delete", :class => "button", :confirm => "#{t("ttv.are_you_sure", :default => "Are you sure?")}" %>
