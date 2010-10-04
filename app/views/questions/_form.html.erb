@@ -9,7 +9,7 @@
     <span class="description">Actual text of the question</span>
 </div>
 <div class="group">
-    <% districts = District.find(:all, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
+    <% districts = District.find(:all, :order => :display_name, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
     <% districts = District.find(:all, :order => :id) if current_context.jurisdiction.nil? %>
     <%= f.label :district_id, t("ttv.district", :default => "District"), :class => :label %>
     <%= f.collection_select(:requesting_district_id, districts, :id, :display_name) %>
