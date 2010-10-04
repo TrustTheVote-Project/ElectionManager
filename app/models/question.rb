@@ -12,6 +12,14 @@ class Question < ActiveRecord::Base
   def to_s
     "QUESTION: #{self.display_name}"
   end
+  
+  # Make sure that ident is not nil. If it is, create a unique one.
+  def before_validation
+    if self.blank? || self.ident.blank?
+      self.ident = "question-#{ActiveSupport::SecureRandom.hex}"
+      self.save!
+    end
+  end
 
   def self.questions_for_precinct_election(p, e)
     d = p.districts_for_election(e)
