@@ -17,3 +17,7 @@ h1.title-header {
 span.error_message {
   color: red;
 }
+
+#footer {
+  padding: 0px 0px 0px 0px;
+}
