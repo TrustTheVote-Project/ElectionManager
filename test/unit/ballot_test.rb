@@ -139,6 +139,57 @@ class BallotTest < ActiveSupport::TestCase
       end
       
     end
+    context "election destruction" do
+      setup do
+        # create another district set
+        @split_ds2 = DistrictSet.make(:display_name => "split_ds2")
+        (1..3).to_a.each do |i|
+        @split_ds2.districts << District.find_by_display_name("district_#{i}")
+        end
+      
+        @precinct2 = Precinct.make(:display_name => "Precinct 2", :jurisdiction => @common_jurisdiction)
+        
+        # NOTE: the precinct_split has a subset of the jurisdiction's districts
+        @precinct_split2 = PrecinctSplit.make(:display_name => "Precinct Split 2",:precinct => @precinct2, :district_set => @split_ds2)
+        
+        # create two ballots
+        @ballot1 = Ballot.create(:election => @election, :precinct_split => @precinct_split)
+        @ballot2 = Ballot.create(:election => @election, :precinct_split => @precinct_split2)
+
+      end
+
+      should "remove it's  ballots " do
+        assert 2, Ballot.count
+        @election.destroy
+        assert_equal 0, Ballot.count
+      end
+    end
+    context "precinct_split destruction" do
+      setup do
+        # create another district set
+        @split_ds2 = DistrictSet.make(:display_name => "split_ds2")
+        (1..3).to_a.each do |i|
+        @split_ds2.districts << District.find_by_display_name("district_#{i}")
+        end
+      
+        @precinct2 = Precinct.make(:display_name => "Precinct 2", :jurisdiction => @common_jurisdiction)
+        
+        # NOTE: the precinct_split has a subset of the jurisdiction's districts
+        @precinct_split2 = PrecinctSplit.make(:display_name => "Precinct Split 2",:precinct => @precinct2, :district_set => @split_ds2)
+        
+        # create two ballots
+        @ballot1 = Ballot.create(:election => @election, :precinct_split => @precinct_split)
+        @ballot2 = Ballot.create(:election => @election, :precinct_split => @precinct_split2)
+
+      end
+
+      should "remove it's ballots " do
+        assert 2, Ballot.count
+        @precinct_split2.destroy
+        assert_equal 1, Ballot.count
+        assert_equal @ballot1, Ballot.first
+      end
+    end
 #     context "Contests" do
 #       setup do
 #         @ballot = Ballot.create(:election => @election, :precinct_split => @precinct_split)
