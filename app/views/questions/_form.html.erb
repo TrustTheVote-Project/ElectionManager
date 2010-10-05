@@ -9,7 +9,7 @@
     <span class="description">Actual text of the question</span>
 </div>
 <div class="group">
-    <% districts = District.find(:all, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
+    <% districts = District.find(:all, :order => :display_name, :conditions => ['jurisdiction_id = ?', current_context.jurisdiction]) if !current_context.jurisdiction.nil? %>
     <% districts = District.find(:all, :order => :id) if current_context.jurisdiction.nil? %>
     <%= f.label :district_id, t("ttv.district", :default => "District"), :class => :label %>
     <%= f.collection_select(:requesting_district_id, districts, :id, :display_name) %>
@@ -20,6 +20,11 @@
     <%= f.collection_select(:election_id, elections, :id, :display_name, :selected => current_context.election.id) unless current_context.election.nil? %>
     <%= f.collection_select(:election_id, elections, :id, :display_name) if current_context.election.nil? %>
 </div>
+<div class="group">
+    <%= f.label :ident, t("ttv.ident", :default => "Ident"), :class => :label %>
+    <%= f.text_field :ident, :class => 'text_field' %>
+    <span class="description">Ident of question. Ex: QUEST-001, ballot-question-x</span>
+  </div>
 <div class="group navform wat-cf">
     <button class="button" type="submit">
         <%= image_tag("web-app-theme/tick.png", :alt => "#{t("ttv.save", :default => "Save")}") %><%= t("ttv.save", :default => "Save") %>

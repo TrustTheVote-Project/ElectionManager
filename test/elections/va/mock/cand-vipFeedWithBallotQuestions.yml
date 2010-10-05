@@ -1,0 +1,1508 @@
+--- 
+body: 
+  candidates: 
+  - party_display_name: Democrat
+    ident: "500589"
+    contest_ident: "500088"
+    display_name: Rick C. Boucher
+  - party_display_name: Independent
+    ident: "500400"
+    contest_ident: "500106"
+    display_name: Doug W. Shifflett
+  - party_display_name: Republican
+    ident: "500697"
+    contest_ident: "500103"
+    display_name: Greg L. Coffman
+  - party_display_name: Independent
+    ident: "500401"
+    contest_ident: "500004"
+    display_name: Lisa Bradfield Campbell
+  - party_display_name: Independent
+    ident: "500698"
+    contest_ident: "500042"
+    display_name: Joseph S. Colvin, Sr.
+  - party_display_name: Independent
+    ident: "500402"
+    contest_ident: "500074"
+    display_name: Rita Sweet Bellitto
+  - party_display_name: Independent
+    ident: "500699"
+    contest_ident: "500136"
+    display_name: Phebe F. Cress
+  - party_display_name: Independent
+    ident: "500510"
+    contest_ident: "500110"
+    display_name: Cheryl M. Toler
+  - party_display_name: Democrat
+    ident: "500403"
+    contest_ident: "500021"
+    display_name: James P. "Jim" Moran, Jr.
+  - party_display_name: Independent
+    ident: "500430"
+    contest_ident: "500006"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Independent
+    ident: "500404"
+    contest_ident: "500143"
+    display_name: Robert A. "Bobby" Waid
+  - party_display_name: Independent
+    ident: "500350"
+    contest_ident: "500003"
+    display_name: Lisa E. Bell
+  - party_display_name: IndependentGreen
+    ident: "500431"
+    contest_ident: "500096"
+    display_name: G. Gail "for Rail" Parker
+  - party_display_name: Independent
+    ident: "500511"
+    contest_ident: "500076"
+    display_name: Diane Finch Harding
+  - party_display_name: Independent
+    ident: "500432"
+    contest_ident: "500076"
+    display_name: Theresa J. Crenshaw
+  - party_display_name: Independent
+    ident: "500351"
+    contest_ident: "500057"
+    display_name: Cherrelle L. Hurt
+  - party_display_name: Independent
+    ident: "500405"
+    contest_ident: "500044"
+    display_name: Dillina Wimer Stickley
+  - party_display_name: Independent
+    ident: "500512"
+    contest_ident: "500025"
+    display_name: Jeffrey L. Gardy
+  - party_display_name: Democrat
+    ident: "500620"
+    contest_ident: "500100"
+    display_name: Gerald E. "Gerry" Connolly
+  - party_display_name: Independent
+    ident: "500700"
+    contest_ident: "500099"
+    display_name: Ashley K. McLeod
+  - party_display_name: Independent
+    ident: "500406"
+    contest_ident: "500009"
+    display_name: Tracy J. Meisenbach
+  - party_display_name: Independent
+    ident: "500513"
+    contest_ident: "500051"
+    display_name: Richard M. "Mike" Yates
+  - party_display_name: Independent
+    ident: "500433"
+    contest_ident: "500121"
+    display_name: Penny P. Wallace
+  - party_display_name: Independent
+    ident: "500352"
+    contest_ident: "500004"
+    display_name: L. Trevor N. Craddock
+  - party_display_name: Independent
+    ident: "500540"
+    contest_ident: "500118"
+    display_name: Charles F. Brown
+  - party_display_name: IndependentGreen
+    ident: "500701"
+    contest_ident: "500100"
+    display_name: David William Gillis, Jr.
+  - party_display_name: Independent
+    ident: "500353"
+    contest_ident: "500046"
+    display_name: Stephen D. Walker
+  - party_display_name: Independent
+    ident: "500407"
+    contest_ident: "500103"
+    display_name: Charles R. Chenault
+  - party_display_name: Independent
+    ident: "500460"
+    contest_ident: "500087"
+    display_name: E. T. "Tom" Meree
+  - party_display_name: Independent
+    ident: "500514"
+    contest_ident: "500054"
+    display_name: Carolyn Hoover Ware
+  - party_display_name: Independent
+    ident: "500541"
+    contest_ident: "500031"
+    display_name: Darrell Wayne Hixenbaugh
+  - party_display_name: Independent
+    ident: "500621"
+    contest_ident: "500016"
+    display_name: Joseph H. "Joe" Rogers, Jr.
+  - party_display_name: Independent
+    ident: "500702"
+    contest_ident: "500060"
+    display_name: Deborah Tucker Kennedy
+  - party_display_name: Independent
+    ident: "500622"
+    contest_ident: "500041"
+    display_name: Terry Layne Hancock, Sr.
+  - party_display_name: Independent
+    ident: "500703"
+    contest_ident: "500043"
+    display_name: Tanya J. Bullock
+  - party_display_name: Independent
+    ident: "500515"
+    contest_ident: "500108"
+    display_name: T. Leon Rickard
+  - party_display_name: Independent
+    ident: "500434"
+    contest_ident: "500078"
+    display_name: Margaret R. "Peggy" Ralph
+  - party_display_name: Independent
+    ident: "500380"
+    contest_ident: "500039"
+    display_name: James L. "Jim" Wood
+  - party_display_name: Democrat
+    ident: "500408"
+    contest_ident: "500096"
+    display_name: Krystal M. Ball
+  - party_display_name: Independent
+    ident: "500461"
+    contest_ident: "500055"
+    display_name: James D. Gilbert
+  - party_display_name: Independent
+    ident: "500542"
+    contest_ident: "500058"
+    display_name: Kenny E. Golden
+  - party_display_name: Independent
+    ident: "500354"
+    contest_ident: "500111"
+    display_name: Allen B. Jennings
+  - party_display_name: Independent
+    ident: "500381"
+    contest_ident: "500134"
+    display_name: Thomas L."Tommy" Neal
+  - party_display_name: Independent
+    ident: "500650"
+    contest_ident: "500146"
+    display_name: Richard G. White, Sr.
+  - party_display_name: Democrat
+    ident: "500704"
+    contest_ident: "500076"
+    display_name: R. Christian Rickers
+  - party_display_name: Independent
+    ident: "500623"
+    contest_ident: "500095"
+    display_name: Mary P. Harvey
+  - party_display_name: Independent
+    ident: "500462"
+    contest_ident: "500129"
+    display_name: Mary L. Person
+  - party_display_name: Independent
+    ident: "500435"
+    contest_ident: "500031"
+    display_name: M. W. "Pete" McDuff
+  - party_display_name: Independent
+    ident: "500409"
+    contest_ident: "500034"
+    display_name: J. Wayland Dunn
+  - party_display_name: Independent
+    ident: "500516"
+    contest_ident: "500083"
+    display_name: Beverly G. Winfield
+  - party_display_name: Republican
+    ident: "500543"
+    contest_ident: "500005"
+    display_name: Jason Moore
+  - party_display_name: Libertarian
+    ident: "500355"
+    contest_ident: "500100"
+    display_name: David L. Dotson
+  - party_display_name: Independent
+    ident: "500651"
+    contest_ident: "500137"
+    display_name: Willie M. Price-Harris
+  - party_display_name: Independent
+    ident: "500570"
+    contest_ident: "500029"
+    display_name: William W. "Buddy" Farris, Jr.
+  - party_display_name: Independent
+    ident: "500436"
+    contest_ident: "500122"
+    display_name: K. Ray Weiland
+  - party_display_name: Independent
+    ident: "500463"
+    contest_ident: "500047"
+    display_name: Brenda A. Watkins
+  - party_display_name: Independent
+    ident: "500517"
+    contest_ident: "500115"
+    display_name: Alfred L. Cook
+  - party_display_name: Independent
+    ident: "500624"
+    contest_ident: "500000"
+    display_name: Carray Banks, Jr.
+  - party_display_name: Independent
+    ident: "500705"
+    contest_ident: "500145"
+    display_name: A. Gwen Ikenberry
+  - party_display_name: Independent
+    ident: "500356"
+    contest_ident: "500067"
+    display_name: Cheryl Cheatham Comeau
+  - party_display_name: Independent
+    ident: "500382"
+    contest_ident: "500142"
+    display_name: Kenneth L. Pritchett
+  - party_display_name: Independent
+    ident: "500383"
+    contest_ident: "500034"
+    display_name: Samantha G. Dunn-Miller
+  - party_display_name: Independent
+    ident: "500625"
+    contest_ident: "500108"
+    display_name: Mike A. Uram
+  - party_display_name: Independent
+    ident: "500544"
+    contest_ident: "500086"
+    display_name: Michael R. Bunner
+  - party_display_name: Independent
+    ident: "500437"
+    contest_ident: "500052"
+    display_name: John E. Uhrin
+  - party_display_name: Independent
+    ident: "500464"
+    contest_ident: "500141"
+    display_name: Daniel J. Harrison
+  - party_display_name: Independent
+    ident: "500490"
+    contest_ident: "500074"
+    display_name: James D. Cabiness II
+  - party_display_name: Republican
+    ident: "500518"
+    contest_ident: "500116"
+    display_name: Eric I. Cantor
+  - party_display_name: Independent
+    ident: "500571"
+    contest_ident: "500112"
+    display_name: Harry J. Armbruster
+  - party_display_name: Republican
+    ident: "500652"
+    contest_ident: "500020"
+    display_name: John P. Tagnesi
+  - party_display_name: Independent
+    ident: "500706"
+    contest_ident: "500013"
+    display_name: Doris T. White
+  - party_display_name: Independent
+    ident: "500626"
+    contest_ident: "500023"
+    display_name: William F. "Bill" Ferguson
+  - party_display_name: Independent
+    ident: "500572"
+    contest_ident: "500118"
+    display_name: William E. "Bill" Newsome, Jr.
+  - party_display_name: Independent
+    ident: "500491"
+    contest_ident: "500050"
+    display_name: W. Howard Myers
+  - party_display_name: Democrat
+    ident: "500438"
+    contest_ident: "500133"
+    display_name: Robert C. "Bobby" Scott
+  - party_display_name: Independent
+    ident: "500545"
+    contest_ident: "500146"
+    display_name: Rhonda Locke Sandridge
+  - party_display_name: Independent
+    ident: "500384"
+    contest_ident: "500126"
+    display_name: Marjorie S. "Midge" Funk
+  - party_display_name: Independent
+    ident: "500465"
+    contest_ident: "500035"
+    display_name: Donald L. Thomas
+  - party_display_name: Independent
+    ident: "500519"
+    contest_ident: "500000"
+    display_name: Carolyn D. Weems
+  - party_display_name: Independent
+    ident: "500653"
+    contest_ident: "500128"
+    display_name: Kenneth W. Lewis
+  - party_display_name: Independent
+    ident: "500707"
+    contest_ident: "500098"
+    display_name: Doris R. Swenson
+  - party_display_name: Independent
+    ident: "500357"
+    contest_ident: "500036"
+    display_name: Edward V. Lankford IV
+  - party_display_name: Republican
+    ident: "500358"
+    contest_ident: "500006"
+    display_name: Robert Hurt
+  - party_display_name: Democrat
+    ident: "500466"
+    contest_ident: "500145"
+    display_name: P. Stephen "Steve" Vaughn
+  - party_display_name: Independent
+    ident: "500627"
+    contest_ident: "500009"
+    display_name: Mark A. Wilkes
+  - party_display_name: Independent
+    ident: "500492"
+    contest_ident: "500074"
+    display_name: Bill R. DeSteph, Jr.
+  - party_display_name: Independent
+    ident: "500546"
+    contest_ident: "500095"
+    display_name: Charles N. "Chuck" Smith
+  - party_display_name: Independent
+    ident: "500573"
+    contest_ident: "500015"
+    display_name: James N. "Jimmie" Houff
+  - party_display_name: Republican
+    ident: "500680"
+    contest_ident: "500068"
+    display_name: DARRELL I SHORT
+  - party_display_name: Independent
+    ident: "500708"
+    contest_ident: "500014"
+    display_name: Francis R. "Bill" Burnham
+  - party_display_name: Independent
+    ident: "500385"
+    contest_ident: "500036"
+    display_name: Deborah D. Dixon
+  - party_display_name: Independent
+    ident: "500439"
+    contest_ident: "500055"
+    display_name: Deborah Price Moran
+  - party_display_name: Democrat
+    ident: "500547"
+    contest_ident: "500082"
+    display_name: R. Joseph Puckett
+  - party_display_name: Independent
+    ident: "500709"
+    contest_ident: "500019"
+    display_name: Polly B. Fravel
+  - party_display_name: Independent
+    ident: "500493"
+    contest_ident: "500083"
+    display_name: James H. "Mickey" Jones
+  - party_display_name: Independent
+    ident: "500574"
+    contest_ident: "500133"
+    display_name: John D. Kelly
+  - party_display_name: Independent
+    ident: "500628"
+    contest_ident: "500119"
+    display_name: Claudia H. Lundy
+  - party_display_name: Independent
+    ident: "500654"
+    contest_ident: "500011"
+    display_name: Dennis Edward Reedy
+  - party_display_name: Independent
+    ident: "500681"
+    contest_ident: "500043"
+    display_name: Barbara M. Henley
+  - party_display_name: Independent
+    ident: "500359"
+    contest_ident: "500074"
+    display_name: Andrew R. Jackson
+  - party_display_name: Independent
+    ident: "500386"
+    contest_ident: "500023"
+    display_name: Charles R. Edwards
+  - party_display_name: Republican
+    ident: "500387"
+    contest_ident: "500140"
+    display_name: W. J. "Bill" Treuting Jr.
+  - party_display_name: Independent
+    ident: "500655"
+    contest_ident: "500009"
+    display_name: Sonya D. Furgurson
+  - party_display_name: Independent
+    ident: "500629"
+    contest_ident: "500108"
+    display_name: Richard Lee Dorraugh
+  - party_display_name: Independent
+    ident: "500494"
+    contest_ident: "500074"
+    display_name: David S. "Dave" Redmond
+  - party_display_name: Independent
+    ident: "500548"
+    contest_ident: "500010"
+    display_name: J. Kevin Chisholm
+  - party_display_name: Republican
+    ident: "500575"
+    contest_ident: "500094"
+    display_name: Frank R. Wolf
+  - party_display_name: Independent
+    ident: "500682"
+    contest_ident: "500018"
+    display_name: Hallie D. Dinkel
+  - party_display_name: Independent
+    ident: "500467"
+    contest_ident: "500029"
+    display_name: L. J. Purcell
+  - party_display_name: Independent
+    ident: "500576"
+    contest_ident: "500049"
+    display_name: William J. "Bill" Brunke IV
+  - party_display_name: Independent
+    ident: "500388"
+    contest_ident: "500061"
+    display_name: Pamela Allen Lifsey
+  - party_display_name: Independent
+    ident: "500683"
+    contest_ident: "500131"
+    display_name: Lorraine B. Skeeter
+  - party_display_name: Independent
+    ident: "500656"
+    contest_ident: "500060"
+    display_name: Larry D. Walton
+  - party_display_name: Independent
+    ident: "500495"
+    contest_ident: "500109"
+    display_name: James D. Ramsey, Jr.
+  - party_display_name: Independent
+    ident: "500549"
+    contest_ident: "500004"
+    display_name: Danielle H. Snider
+  - party_display_name: Independent
+    ident: "500468"
+    contest_ident: "500071"
+    display_name: Justin L. Thompson
+  - party_display_name: Independent
+    ident: "500657"
+    contest_ident: "500023"
+    display_name: Carol A. Day
+  - party_display_name: Independent
+    ident: "500684"
+    contest_ident: "500022"
+    display_name: EUGENE C WINGFIELD
+  - party_display_name: Independent
+    ident: "500389"
+    contest_ident: "500026"
+    display_name: Janet Royster Bishop
+  - party_display_name: Democrat
+    ident: "500469"
+    contest_ident: "500101"
+    display_name: Evan H. Clark
+  - party_display_name: Independent
+    ident: "500496"
+    contest_ident: "500004"
+    display_name: Bill E. "Billy" Frazier
+  - party_display_name: Independent
+    ident: "500577"
+    contest_ident: "500136"
+    display_name: Edgar C. Mayse
+  - party_display_name: Independent
+    ident: "500658"
+    contest_ident: "500034"
+    display_name: David C. Watkins, Jr.
+  - party_display_name: Independent
+    ident: "500685"
+    contest_ident: "500012"
+    display_name: K. Ronald Snead
+  - party_display_name: Independent
+    ident: "500497"
+    contest_ident: "500011"
+    display_name: Daniel J. Jarstfer
+  - party_display_name: Independent
+    ident: "500686"
+    contest_ident: "500008"
+    display_name: Tracy M. Shafer
+  - party_display_name: Independent
+    ident: "500659"
+    contest_ident: "500139"
+    display_name: Michael A. Cherry
+  - party_display_name: Independent
+    ident: "500578"
+    contest_ident: "500112"
+    display_name: Jay Tony Dean
+  - party_display_name: Independent
+    ident: "500498"
+    contest_ident: "500060"
+    display_name: Clarence Adams Hamlett, Jr.
+  - party_display_name: Independent
+    ident: "500579"
+    contest_ident: "500083"
+    display_name: L. Chester Carter
+  - party_display_name: Independent
+    ident: "500499"
+    contest_ident: "500031"
+    display_name: John R. Charboneau
+  - party_display_name: Independent
+    ident: "500687"
+    contest_ident: "500051"
+    display_name: Cindy G. Shortlidge
+  - party_display_name: Independent
+    ident: "500688"
+    contest_ident: "500105"
+    display_name: Sharon M. Jones
+  - party_display_name: Republican
+    ident: "500689"
+    contest_ident: "500121"
+    display_name: Rick D. Boyer
+  - party_display_name: Independent
+    ident: "500420"
+    contest_ident: "500076"
+    display_name: Nicholas O. "Nick" Daniel
+  - party_display_name: Independent
+    ident: "500500"
+    contest_ident: "500135"
+    display_name: Donna W. Trobaugh
+  - party_display_name: Independent
+    ident: "500421"
+    contest_ident: "500126"
+    display_name: Harry T. "Tom" Messick
+  - party_display_name: Independent
+    ident: "500501"
+    contest_ident: "500093"
+    display_name: Kenneth J. Jennings
+  - party_display_name: Independent
+    ident: "500502"
+    contest_ident: "500054"
+    display_name: Steven J. Dean
+  - party_display_name: Independent
+    ident: "500422"
+    contest_ident: "500085"
+    display_name: Enoch C. "E.C." Copeland
+  - party_display_name: Independent
+    ident: "500530"
+    contest_ident: "500137"
+    display_name: Steven R. Childers
+  - party_display_name: Independent
+    ident: "500503"
+    contest_ident: "500041"
+    display_name: Elizabeth M. Psimas
+  - party_display_name: Independent
+    ident: "500610"
+    contest_ident: "500041"
+    display_name: A. Lee Cherry III
+  - party_display_name: Independent
+    ident: "500531"
+    contest_ident: "500015"
+    display_name: Nellie D. Friel
+  - party_display_name: Independent
+    ident: "500611"
+    contest_ident: "500104"
+    display_name: Michael J. Debranski
+  - party_display_name: Independent
+    ident: "500423"
+    contest_ident: "500146"
+    display_name: Audrey H. Payne
+  - party_display_name: Independent
+    ident: "500450"
+    contest_ident: "500130"
+    display_name: J. Paul Kilgore, Jr.
+  - party_display_name: Independent
+    ident: "500504"
+    contest_ident: "500044"
+    display_name: A. Fontaine Canada
+  - party_display_name: Independent
+    ident: "500612"
+    contest_ident: "500085"
+    display_name: William N. Owen
+  - party_display_name: Independent
+    ident: "500532"
+    contest_ident: "500004"
+    display_name: Sharon P. Oliver
+  - party_display_name: Independent
+    ident: "500370"
+    contest_ident: "500130"
+    display_name: Michael R. Mozingo, Sr.
+  - party_display_name: Independent
+    ident: "500424"
+    contest_ident: "500009"
+    display_name: Barbara M. LaPrade
+  - party_display_name: Independent
+    ident: "500451"
+    contest_ident: "500011"
+    display_name: Barry Lee Whitt
+  - party_display_name: Independent
+    ident: "500505"
+    contest_ident: "500135"
+    display_name: Carol A. Scheppard
+  - party_display_name: Independent
+    ident: "500425"
+    contest_ident: "500108"
+    display_name: Steven Dermont Thomas
+  - party_display_name: Democrat
+    ident: "500506"
+    contest_ident: "500103"
+    display_name: Sal T. Romero, Jr.
+  - party_display_name: Independent
+    ident: "500640"
+    contest_ident: "500078"
+    display_name: Paul E. Hagstrom
+  - party_display_name: Independent
+    ident: "500371"
+    contest_ident: "500067"
+    display_name: Chantel D. Taylor
+  - party_display_name: Independent
+    ident: "500452"
+    contest_ident: "500103"
+    display_name: Carolyn W. Frank
+  - party_display_name: Independent
+    ident: "500613"
+    contest_ident: "500039"
+    display_name: J. Toni Hedrick
+  - party_display_name: Independent
+    ident: "500720"
+    contest_ident: "500129"
+    display_name: Carolyn S. Carey
+  - party_display_name: Democrat
+    ident: "500560"
+    contest_ident: "500086"
+    display_name: Suhas Naddoni
+  - party_display_name: Independent
+    ident: "500453"
+    contest_ident: "500031"
+    display_name: Rick L. Andrews
+  - party_display_name: Independent
+    ident: "500614"
+    contest_ident: "500083"
+    display_name: Percy J. Owens
+  - party_display_name: Independent
+    ident: "500507"
+    contest_ident: "500070"
+    display_name: Mary E. Hill
+  - party_display_name: Independent
+    ident: "500533"
+    contest_ident: "500080"
+    display_name: LOU ANNE DAVIS
+  - party_display_name: Republican
+    ident: "500641"
+    contest_ident: "500145"
+    display_name: Larry B. Ceola
+  - party_display_name: Independent
+    ident: "500372"
+    contest_ident: "500017"
+    display_name: Christopher J. Boothe
+  - party_display_name: Republican
+    ident: "500426"
+    contest_ident: "500088"
+    display_name: H. Morgan Griffith
+  - party_display_name: Democrat
+    ident: "500721"
+    contest_ident: "500010"
+    display_name: Christopher Zimmerman
+  - party_display_name: Independent
+    ident: "500454"
+    contest_ident: "500019"
+    display_name: Scott E. Baxter
+  - party_display_name: Independent
+    ident: "500534"
+    contest_ident: "500023"
+    display_name: Michael E. "Mike" Mattox
+  - party_display_name: Independent
+    ident: "500373"
+    contest_ident: "500122"
+    display_name: Harold Dean Goad
+  - party_display_name: Independent
+    ident: "500427"
+    contest_ident: "500042"
+    display_name: Herbert A. Campbell
+  - party_display_name: Republican
+    ident: "500480"
+    contest_ident: "500103"
+    display_name: James T. Byrd
+  - party_display_name: Independent
+    ident: "500508"
+    contest_ident: "500067"
+    display_name: Janet A. Robertson
+  - party_display_name: Independent
+    ident: "500561"
+    contest_ident: "500146"
+    display_name: Joanna S. Lang
+  - party_display_name: Independent
+    ident: "500615"
+    contest_ident: "500004"
+    display_name: Betty H. Wolfe
+  - party_display_name: Independent
+    ident: "500642"
+    contest_ident: "500099"
+    display_name: Gertrude "Bunny" Waugh
+  - party_display_name: Independent
+    ident: "500428"
+    contest_ident: "500008"
+    display_name: Susan M. Wood
+  - party_display_name: Republican
+    ident: "500374"
+    contest_ident: "500063"
+    display_name: Robert M. Curd
+  - party_display_name: Independent
+    ident: "500509"
+    contest_ident: "500086"
+    display_name: Preston M. Banks
+  - party_display_name: Independent
+    ident: "500616"
+    contest_ident: "500038"
+    display_name: Phillip "Rick" Workman II
+  - party_display_name: Republican
+    ident: "500455"
+    contest_ident: "500058"
+    display_name: E. Scott Rigell
+  - party_display_name: Independent
+    ident: "500481"
+    contest_ident: "500139"
+    display_name: C. Scott Davis
+  - party_display_name: Independent
+    ident: "500535"
+    contest_ident: "500041"
+    display_name: Barnabas W. "Billy" Baker
+  - party_display_name: Independent
+    ident: "500562"
+    contest_ident: "500053"
+    display_name: Bob I. Addison, Sr.
+  - party_display_name: Independent
+    ident: "500643"
+    contest_ident: "500093"
+    display_name: Phyllis L. Campbell
+  - party_display_name: Independent
+    ident: "500375"
+    contest_ident: "500126"
+    display_name: Mark A. Sterling
+  - party_display_name: Independent
+    ident: "500348"
+    contest_ident: "500025"
+    display_name: J. B. Varney
+  - party_display_name: Independent
+    ident: "500429"
+    contest_ident: "500126"
+    display_name: David L. Raynes
+  - party_display_name: Independent
+    ident: "500482"
+    contest_ident: "500062"
+    display_name: Joseph F. "Huck" Hunnicutt
+  - party_display_name: Independent
+    ident: "500536"
+    contest_ident: "500053"
+    display_name: Alvin Wayne Clayton, Sr.
+  - party_display_name: Independent
+    ident: "500563"
+    contest_ident: "500015"
+    display_name: Don V. Carter
+  - party_display_name: Independent
+    ident: "500617"
+    contest_ident: "500075"
+    display_name: C. M. "Bud" Southall III
+  - party_display_name: Independent
+    ident: "500670"
+    contest_ident: "500045"
+    display_name: Ken Pritchett
+  - party_display_name: Independent
+    ident: "500564"
+    contest_ident: "500062"
+    display_name: William J. Mays
+  - party_display_name: Independent
+    ident: "500590"
+    contest_ident: "500069"
+    display_name: Miriam A. Gennari
+  - party_display_name: Independent
+    ident: "500349"
+    contest_ident: "500125"
+    display_name: Dorothy M. "Dottie" Holtz
+  - party_display_name: Independent
+    ident: "500376"
+    contest_ident: "500031"
+    display_name: Adrian F. Lee, Sr.
+  - party_display_name: Independent
+    ident: "500456"
+    contest_ident: "500009"
+    display_name: G. R. "Bob" Jean, Jr.
+  - party_display_name: Independent
+    ident: "500483"
+    contest_ident: "500071"
+    display_name: Darell V. "JB" Sprouse
+  - party_display_name: Democrat
+    ident: "500537"
+    contest_ident: "500094"
+    display_name: Jeffery R. Barnett
+  - party_display_name: Independent
+    ident: "500618"
+    contest_ident: "500091"
+    display_name: Jacob P. Bailey
+  - party_display_name: Independent
+    ident: "500644"
+    contest_ident: "500014"
+    display_name: John William Joeckel
+  - party_display_name: Independent
+    ident: "500671"
+    contest_ident: "500037"
+    display_name: Glenna T. Lingafelt
+  - party_display_name: Independent
+    ident: "500484"
+    contest_ident: "500112"
+    display_name: Wayne E. Printz
+  - party_display_name: Independent
+    ident: "500619"
+    contest_ident: "500137"
+    display_name: Tim D. Cassell
+  - party_display_name: Independent
+    ident: "500457"
+    contest_ident: "500135"
+    display_name: Robert E. "Bob" Wimer
+  - party_display_name: Independent
+    ident: "500645"
+    contest_ident: "500134"
+    display_name: Ralph A. Woods
+  - party_display_name: Democrat
+    ident: "500672"
+    contest_ident: "500090"
+    display_name: Michael G. "Mike" Winston
+  - party_display_name: Independent
+    ident: "500377"
+    contest_ident: "500060"
+    display_name: Juanita T. Hamlett
+  - party_display_name: Independent
+    ident: "500538"
+    contest_ident: "500106"
+    display_name: Joe L. Morris
+  - party_display_name: Independent
+    ident: "500565"
+    contest_ident: "500132"
+    display_name: Frank A. Russell II
+  - party_display_name: Republican
+    ident: "500591"
+    contest_ident: "500082"
+    display_name: Harry J. Monk
+  - party_display_name: Independent
+    ident: "500378"
+    contest_ident: "500014"
+    display_name: Susan A. Parker
+  - party_display_name: Independent
+    ident: "500673"
+    contest_ident: "500022"
+    display_name: RONALD M. "Ron" IRVINE
+  - party_display_name: Independent
+    ident: "500485"
+    contest_ident: "500038"
+    display_name: M. Lee Dearing
+  - party_display_name: Independent
+    ident: "500458"
+    contest_ident: "500105"
+    display_name: Danny W. Sawyer
+  - party_display_name: Independent
+    ident: "500539"
+    contest_ident: "500102"
+    display_name: Earl P. Fraley, Jr.
+  - party_display_name: Independent
+    ident: "500592"
+    contest_ident: "500102"
+    display_name: Jimmie D. Wilson
+  - party_display_name: Independent
+    ident: "500646"
+    contest_ident: "500056"
+    display_name: Denise L. Pridgen
+  - party_display_name: Independent
+    ident: "500486"
+    contest_ident: "500117"
+    display_name: Tracy Janine Meisenbach
+  - party_display_name: Independent
+    ident: "500647"
+    contest_ident: "500008"
+    display_name: Roger Davis Funkhouser
+  - party_display_name: Independent
+    ident: "500593"
+    contest_ident: "500063"
+    display_name: Leslie B. "Les" Irvin
+  - party_display_name: Independent
+    ident: "500459"
+    contest_ident: "500017"
+    display_name: H. John Cook, Jr.
+  - party_display_name: Independent
+    ident: "500566"
+    contest_ident: "500113"
+    display_name: Alvin E. Copeland
+  - party_display_name: Independent
+    ident: "500674"
+    contest_ident: "500114"
+    display_name: Elsie R. Jarmon
+  - party_display_name: Independent
+    ident: "500487"
+    contest_ident: "500131"
+    display_name: William H. Goodman
+  - party_display_name: Independent
+    ident: "500379"
+    contest_ident: "500146"
+    display_name: William E. "Billy" Gibbs
+  - party_display_name: Independent
+    ident: "500567"
+    contest_ident: "500087"
+    display_name: H. R. "Buddy" Green, Jr.
+  - party_display_name: Independent
+    ident: "500594"
+    contest_ident: "500088"
+    display_name: Jeremiah D. Heaton
+  - party_display_name: Independent
+    ident: "500648"
+    contest_ident: "500104"
+    display_name: Deborah D. "Deb" Wahlstrom
+  - party_display_name: Democrat
+    ident: "500675"
+    contest_ident: "500103"
+    display_name: Joseph G. Fitzgerald
+  - party_display_name: Libertarian
+    ident: "500595"
+    contest_ident: "500032"
+    display_name: Stuart M. Bain
+  - party_display_name: Independent
+    ident: "500649"
+    contest_ident: "500090"
+    display_name: Mike W. Stovall
+  - party_display_name: Independent
+    ident: "500488"
+    contest_ident: "500057"
+    display_name: Maurice A. Henderson
+  - party_display_name: Democrat
+    ident: "500568"
+    contest_ident: "500002"
+    display_name: Art H. Major
+  - party_display_name: Independent
+    ident: "500676"
+    contest_ident: "500055"
+    display_name: Steven T. Gibson
+  - party_display_name: Independent
+    ident: "500569"
+    contest_ident: "500081"
+    display_name: Stephen S. Barranco, Jr.
+  - party_display_name: Independent
+    ident: "500596"
+    contest_ident: "500130"
+    display_name: Bobby J. Bondurant
+  - party_display_name: Independent
+    ident: "500677"
+    contest_ident: "500030"
+    display_name: M.Caroline Martin
+  - party_display_name: Independent
+    ident: "500489"
+    contest_ident: "500098"
+    display_name: Richard N. Early, Jr.
+  - party_display_name: Independent
+    ident: "500597"
+    contest_ident: "500014"
+    display_name: H. Vernon Baker
+  - party_display_name: Independent
+    ident: "500598"
+    contest_ident: "500042"
+    display_name: Katie F. Campbell
+  - party_display_name: Democrat
+    ident: "500678"
+    contest_ident: "500040"
+    display_name: J. E. "Eddie" Monahan
+  - party_display_name: Independent
+    ident: "500679"
+    contest_ident: "500127"
+    display_name: Atlas Stokes Robinson
+  - party_display_name: Independent
+    ident: "500410"
+    contest_ident: "500055"
+    display_name: Michael L. Bond
+  - party_display_name: Independent
+    ident: "500599"
+    contest_ident: "500062"
+    display_name: Joseph E. Fawbush
+  - party_display_name: Independent
+    ident: "500411"
+    contest_ident: "500044"
+    display_name: Richard L. Blackwell III
+  - party_display_name: Republican
+    ident: "500520"
+    contest_ident: "500033"
+    display_name: J. Randy Forbes
+  - party_display_name: Independent
+    ident: "500600"
+    contest_ident: "500083"
+    display_name: Abram E. Norfleet, Jr.
+  - party_display_name: Independent
+    ident: "500412"
+    contest_ident: "500123"
+    display_name: John A. Hart, Sr.
+  - party_display_name: Independent
+    ident: "500413"
+    contest_ident: "500060"
+    display_name: Roscoe M. Eubanks, Sr.
+  - party_display_name: Republican
+    ident: "500521"
+    contest_ident: "500027"
+    display_name: Jeffrey B. Buettner
+  - party_display_name: Independent
+    ident: "500601"
+    contest_ident: "500074"
+    display_name: John D. Moss
+  - party_display_name: Independent
+    ident: "500440"
+    contest_ident: "500048"
+    display_name: Don P. Delaughter, Jr.
+  - party_display_name: Republican
+    ident: "500414"
+    contest_ident: "500032"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Republican
+    ident: "500441"
+    contest_ident: "500010"
+    display_name: Mark D. Kelly
+  - party_display_name: Independent
+    ident: "500602"
+    contest_ident: "500035"
+    display_name: Janet W. Waller
+  - party_display_name: Independent
+    ident: "500360"
+    contest_ident: "500130"
+    display_name: Kenneth R. Bumgarner
+  - party_display_name: Republican
+    ident: "500361"
+    contest_ident: "500067"
+    display_name: Terrie I. Conrad
+  - party_display_name: Independent
+    ident: "500522"
+    contest_ident: "500076"
+    display_name: T. L. "Tommy" Powell, Jr.
+  - party_display_name: Republican
+    ident: "500710"
+    contest_ident: "500096"
+    display_name: Robert J. "Rob" Wittman
+  - party_display_name: Independent
+    ident: "500442"
+    contest_ident: "500122"
+    display_name: Rebecca J. Adcock
+  - party_display_name: Independent
+    ident: "500603"
+    contest_ident: "500102"
+    display_name: Phillip Hawkins, Jr.
+  - party_display_name: Independent
+    ident: "500415"
+    contest_ident: "500092"
+    display_name: Louis R. Jones
+  - party_display_name: Independent
+    ident: "500630"
+    contest_ident: "500136"
+    display_name: Edward D. Bordett
+  - party_display_name: Independent
+    ident: "500416"
+    contest_ident: "500110"
+    display_name: R. B. "Brad" Whorley
+  - party_display_name: Independent
+    ident: "500523"
+    contest_ident: "500030"
+    display_name: Michael D. "Mike" Duman
+  - party_display_name: Independent
+    ident: "500631"
+    contest_ident: "500065"
+    display_name: Melissa Bragg Parrish
+  - party_display_name: Independent
+    ident: "500550"
+    contest_ident: "500015"
+    display_name: Gayle S. Hillert
+  - party_display_name: Independent
+    ident: "500604"
+    contest_ident: "500070"
+    display_name: Dorothy Bland Gamble
+  - party_display_name: Independent
+    ident: "500711"
+    contest_ident: "500084"
+    display_name: Carey Lawson Freeman
+  - party_display_name: Independent
+    ident: "500362"
+    contest_ident: "500053"
+    display_name: Janette G. Epps
+  - party_display_name: Independent
+    ident: "500443"
+    contest_ident: "500092"
+    display_name: George Furman III
+  - party_display_name: Independent
+    ident: "500712"
+    contest_ident: "500004"
+    display_name: Sonja C. Jones
+  - party_display_name: Independent
+    ident: "500524"
+    contest_ident: "500121"
+    display_name: Sheila Wiley Bosiger
+  - party_display_name: Independent
+    ident: "500363"
+    contest_ident: "500081"
+    display_name: Sallie M. Strickler
+  - party_display_name: Independent
+    ident: "500605"
+    contest_ident: "500108"
+    display_name: Bruce Wade Stoneberger
+  - party_display_name: Independent
+    ident: "500417"
+    contest_ident: "500130"
+    display_name: Haney "Bobby" Mottley
+  - party_display_name: Republican
+    ident: "500444"
+    contest_ident: "500100"
+    display_name: Keith S. Fimian
+  - party_display_name: Independent
+    ident: "500470"
+    contest_ident: "500047"
+    display_name: C. Pam Black-VanGroll
+  - party_display_name: Independent
+    ident: "500551"
+    contest_ident: "500083"
+    display_name: James M. "Jimmy" Matthews
+  - party_display_name: Independent
+    ident: "500418"
+    contest_ident: "500026"
+    display_name: William S. Wiebking
+  - party_display_name: Independent
+    ident: "500364"
+    contest_ident: "500083"
+    display_name: Steven W. Banty
+  - party_display_name: Independent
+    ident: "500713"
+    contest_ident: "500004"
+    display_name: Sharon K. Braden
+  - party_display_name: Independent
+    ident: "500606"
+    contest_ident: "500140"
+    display_name: Richard R. Schubert, Jr.
+  - party_display_name: Independent
+    ident: "500632"
+    contest_ident: "500071"
+    display_name: Lisa F. Landrum
+  - party_display_name: Independent
+    ident: "500390"
+    contest_ident: "500026"
+    display_name: Andrew D. Wall
+  - party_display_name: Independent
+    ident: "500471"
+    contest_ident: "500072"
+    display_name: Evelyn B Martin
+  - party_display_name: Independent
+    ident: "500525"
+    contest_ident: "500136"
+    display_name: Alan S. Brenner
+  - party_display_name: Independent
+    ident: "500552"
+    contest_ident: "500095"
+    display_name: George R. Pryde
+  - party_display_name: Independent
+    ident: "500526"
+    contest_ident: "500074"
+    display_name: W. W. "Wally" Erb
+  - party_display_name: Independent
+    ident: "500365"
+    contest_ident: "500125"
+    display_name: Todd C. Davidson
+  - party_display_name: Independent
+    ident: "500391"
+    contest_ident: "500042"
+    display_name: Richard Lee Fox
+  - party_display_name: Independent
+    ident: "500607"
+    contest_ident: "500139"
+    display_name: Milton E. Freeland, Jr.
+  - party_display_name: Independent
+    ident: "500419"
+    contest_ident: "500134"
+    display_name: Lorraine L. "Rainy" Clay
+  - party_display_name: Independent
+    ident: "500633"
+    contest_ident: "500015"
+    display_name: Carl D. Brinkley
+  - party_display_name: Independent
+    ident: "500660"
+    contest_ident: "500139"
+    display_name: John T. Wood
+  - party_display_name: Independent
+    ident: "500714"
+    contest_ident: "500083"
+    display_name: H. F. "Woody" Wheeler, Jr
+  - party_display_name: Democrat
+    ident: "500445"
+    contest_ident: "500058"
+    display_name: Glenn C. Nye III
+  - party_display_name: Independent
+    ident: "500472"
+    contest_ident: "500095"
+    display_name: Frank W. Friedman
+  - party_display_name: Independent
+    ident: "500553"
+    contest_ident: "500107"
+    display_name: Jim L. Kelly
+  - party_display_name: Independent
+    ident: "500527"
+    contest_ident: "500047"
+    display_name: Robert L. Hall
+  - party_display_name: Independent
+    ident: "500366"
+    contest_ident: "500008"
+    display_name: Ray M.  "Shorty" Berkstresser
+  - party_display_name: Independent
+    ident: "500634"
+    contest_ident: "500041"
+    display_name: Mark A. Geduldig-Yatrofsky
+  - party_display_name: Independent
+    ident: "500446"
+    contest_ident: "500070"
+    display_name: Linda W. Bouchard
+  - party_display_name: Independent
+    ident: "500661"
+    contest_ident: "500024"
+    display_name: James A. Vest
+  - party_display_name: Independent
+    ident: "500715"
+    contest_ident: "500113"
+    display_name: Charles D. Parr, Sr.
+  - party_display_name: Independent
+    ident: "500392"
+    contest_ident: "500077"
+    display_name: Kimberly Boyd Hibbitts
+  - party_display_name: Independent
+    ident: "500473"
+    contest_ident: "500035"
+    display_name: Carla P. Martindale
+  - party_display_name: Independent
+    ident: "500554"
+    contest_ident: "500032"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500580"
+    contest_ident: "500097"
+    display_name: Emma L. "Em" Davis
+  - party_display_name: Write-In
+    ident: "500608"
+    contest_ident: "500089"
+    display_name: JAMEY J LEWCHANIN
+  - party_display_name: Independent
+    ident: "500474"
+    contest_ident: "500121"
+    display_name: Tonda Hines Davis
+  - party_display_name: Independent
+    ident: "500716"
+    contest_ident: "500023"
+    display_name: Timothy J. Thacker
+  - party_display_name: Independent
+    ident: "500635"
+    contest_ident: "500112"
+    display_name: Theodore Oliver Pence
+  - party_display_name: Independent
+    ident: "500662"
+    contest_ident: "500024"
+    display_name: Mary Lazenby Flood
+  - party_display_name: Democrat
+    ident: "500393"
+    contest_ident: "500005"
+    display_name: Marsell C. Bustos
+  - party_display_name: Independent
+    ident: "500367"
+    contest_ident: "500041"
+    display_name: C. W. "Bill" Moran II
+  - party_display_name: Independent
+    ident: "500447"
+    contest_ident: "500067"
+    display_name: Karen G. Lawson
+  - party_display_name: Independent
+    ident: "500528"
+    contest_ident: "500072"
+    display_name: Garry L Friend
+  - party_display_name: Independent
+    ident: "500581"
+    contest_ident: "500034"
+    display_name: Debra P. Andrews
+  - party_display_name: Independent
+    ident: "500609"
+    contest_ident: "500125"
+    display_name: D. Scott Seery
+  - party_display_name: Independent
+    ident: "500582"
+    contest_ident: "500124"
+    display_name: William V. Rader
+  - party_display_name: Independent
+    ident: "500475"
+    contest_ident: "500028"
+    display_name: Sam G. Reid
+  - party_display_name: Independent
+    ident: "500555"
+    contest_ident: "500038"
+    display_name: Roy E. "Gene" Davis
+  - party_display_name: Republican
+    ident: "500529"
+    contest_ident: "500040"
+    display_name: Michael Lee Yates
+  - party_display_name: Independent
+    ident: "500663"
+    contest_ident: "500105"
+    display_name: B. Ellen Nash
+  - party_display_name: Libertarian
+    ident: "500717"
+    contest_ident: "500133"
+    display_name: James J. Quigley
+  - party_display_name: Independent
+    ident: "500394"
+    contest_ident: "500079"
+    display_name: Gary E. Lowe
+  - party_display_name: Independent
+    ident: "500448"
+    contest_ident: "500100"
+    display_name: Christopher F. DeCarlo
+  - party_display_name: Independent
+    ident: "500636"
+    contest_ident: "500102"
+    display_name: Angelia M. Williams
+  - party_display_name: Independent
+    ident: "500476"
+    contest_ident: "500026"
+    display_name: William P.Black
+  - party_display_name: Independent
+    ident: "500664"
+    contest_ident: "500136"
+    display_name: Wendy J. Jones
+  - party_display_name: Independent
+    ident: "500395"
+    contest_ident: "500130"
+    display_name: Richard M. Wydner, Jr.
+  - party_display_name: Independent
+    ident: "500690"
+    contest_ident: "500120"
+    display_name: Kristi D. Eaton
+  - party_display_name: Independent
+    ident: "500718"
+    contest_ident: "500024"
+    display_name: C. G. Stanley, Jr.
+  - party_display_name: IndependentGreen
+    ident: "500368"
+    contest_ident: "500021"
+    display_name: J. Ron Fisher
+  - party_display_name: Independent
+    ident: "500449"
+    contest_ident: "500112"
+    display_name: Dwight E. "Gene" Kite
+  - party_display_name: Independent
+    ident: "500556"
+    contest_ident: "500041"
+    display_name: Kenneth Irvin Wright
+  - party_display_name: Independent
+    ident: "500583"
+    contest_ident: "500061"
+    display_name: Cheryl Jones Allen
+  - party_display_name: Independent
+    ident: "500637"
+    contest_ident: "500138"
+    display_name: Dama Elizabeth Rice
+  - party_display_name: Democrat
+    ident: "500719"
+    contest_ident: "500033"
+    display_name: Wynne V. E. LeGrow
+  - party_display_name: Independent
+    ident: "500691"
+    contest_ident: "500047"
+    display_name: Wendy L Hartsook
+  - party_display_name: Independent
+    ident: "500477"
+    contest_ident: "500044"
+    display_name: Theodore W. "Ted" Flory
+  - party_display_name: Independent
+    ident: "500369"
+    contest_ident: "500008"
+    display_name: Michael Lewis Turner
+  - party_display_name: Democrat
+    ident: "500557"
+    contest_ident: "500061"
+    display_name: Linda B. Richardson
+  - party_display_name: Independent
+    ident: "500396"
+    contest_ident: "500095"
+    display_name: John W. Morman
+  - party_display_name: Independent
+    ident: "500584"
+    contest_ident: "500076"
+    display_name: Amona W. Currin
+  - party_display_name: Independent
+    ident: "500638"
+    contest_ident: "500054"
+    display_name: Jeff S. McNeal
+  - party_display_name: Independent
+    ident: "500692"
+    contest_ident: "500138"
+    display_name: Treska Wilson-Smith
+  - party_display_name: Democrat
+    ident: "500665"
+    contest_ident: "500116"
+    display_name: Rick E. Waugh, Jr.
+  - party_display_name: Independent
+    ident: "500639"
+    contest_ident: "500034"
+    display_name: Paul Henry Masselin, Jr.
+  - party_display_name: Republican
+    ident: "500397"
+    contest_ident: "500133"
+    display_name: C. L. "Chuck" Smith, Jr.
+  - party_display_name: Republican
+    ident: "500558"
+    contest_ident: "500086"
+    display_name: Brian C. Leeper
+  - party_display_name: Independent
+    ident: "500585"
+    contest_ident: "500041"
+    display_name: D. Stefa'n Adams, Sr.
+  - party_display_name: Independent
+    ident: "500398"
+    contest_ident: "500136"
+    display_name: Malanie Parker Jones
+  - party_display_name: Independent
+    ident: "500478"
+    contest_ident: "500001"
+    display_name: F. Woodrow  Harris
+  - party_display_name: Independent
+    ident: "500559"
+    contest_ident: "500050"
+    display_name: Jacquelyn Bailey Kidd
+  - party_display_name: Independent
+    ident: "500586"
+    contest_ident: "500064"
+    display_name: Frank Reaves, Jr.
+  - party_display_name: Independent
+    ident: "500666"
+    contest_ident: "500077"
+    display_name: Austin H. Crumpton
+  - party_display_name: IndependentGreen
+    ident: "500693"
+    contest_ident: "500116"
+    display_name: Floyd C. Bayne
+  - party_display_name: Libertarian
+    ident: "500667"
+    contest_ident: "500094"
+    display_name: William B. Redpath
+  - party_display_name: Independent
+    ident: "500694"
+    contest_ident: "500069"
+    display_name: Sally M. Baird
+  - party_display_name: Independent
+    ident: "500479"
+    contest_ident: "500083"
+    display_name: Rosalyn Erskine Dancy
+  - party_display_name: Independent
+    ident: "500587"
+    contest_ident: "500083"
+    display_name: Milton S. "Sam" Winfield
+  - party_display_name: Republican
+    ident: "500399"
+    contest_ident: "500021"
+    display_name: J. Patrick Murray
+  - party_display_name: Independent
+    ident: "500668"
+    contest_ident: "500051"
+    display_name: Christopher M. Foederer
+  - party_display_name: Independent
+    ident: "500695"
+    contest_ident: "500123"
+    display_name: Horace P. Webb
+  - party_display_name: Democrat
+    ident: "500669"
+    contest_ident: "500006"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Independent
+    ident: "500696"
+    contest_ident: "500073"
+    display_name: Steven L. Pierce, Sr.
+  - party_display_name: Independent
+    ident: "500588"
+    contest_ident: "500011"
+    display_name: James Claude Owens
+audit_header: 
+  based_on: inputs/VA/cand-vipFeedWithBallotQuestions.xml
+  schema_version: "0.2"
+  operator: Pito Salas
+  type: candidates
+  create_date: 2010-10-04T16:01:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: n/a
+  file_id: 9F023408009B11DF924800163E3DE33F

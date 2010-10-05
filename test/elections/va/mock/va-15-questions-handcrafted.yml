@@ -1,0 +1,102 @@
+--- 
+body: 
+  questions:
+  - election_ident: "14"
+    ident: quest-e15-q1
+    district_name: "MINERAL DISTRICT"
+    display_name: "Mixed Alcoholic Beverages"
+    question: "Shall the sale of mixed alcoholic beverages by restaurants licensed by the Alcoholic Beverage Control Board be permitted in the Mineral District in the County of Louisa, Virgina?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q2
+    district_name: "MIDDLESEX COUNTY"
+    display_name: "Food and Beverage Tax"
+    question: "Should the Board of Supervisors levy a Food and Beverage Tax within Middlesex County, Virginia?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q3
+    district_name: "LOUDOUN COUNTY"
+    display_name: "School Bonds"
+    question: "Shall the County of Loudoun, Virginia contract a debt and issue its general obligation capital improvement bonds in the maximum amount of $27,820,000 to finance, in whole or in part, the cost to design, construct and equip the new Leesburg Area Elementary School (ES-15)?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q4
+    district_name: "BRUNSWICK COUNTY"
+    display_name: "Food and Beverage Tax"
+    question: "Should Brunswick County, Virginia, levy a tax on food and beverages sold, for human consumption, by a restaurant, not to exceed four percent (4%) of the amount charged for such food and beverages, and should grocery stores and convenience stores selling prepared foods ready for human consumption at a delicatessen counter also be subject to such tax, for that portion of the grocery store or convenience store selling such items?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q5
+    district_name: "BUENA VISTA CITY"
+    display_name: "General Obligation School Bond"
+    question: "Shall the City of Buena Vista, Virginia contract debt, borrow money, and issue its general obligation school bond to Virginia Public School Authority in a principal amount not to exceed $550,000 in order to pay the costs of capital projects for school purposes in the City and to pay issuance costs in connection with such general obligation school bond?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q6
+    district_name: "FAIRFAX COUNTY"
+    display_name: "Transportation Bonds"
+    question: "Shall the Board of Supervisors contract a debt, borrow money and issue bonds of Fairfax County, Virginia, in addition to the bonds previously authorized for transportation improvements and facilities, in the maximum aggregate principal amount of $120,000,000 for the purpose of providing funds to finance the cost of constructing, reconstructing, improving and acquiring transportation improvements, including improvements to primary and secondary State highways, off-street parking, pedestrian improvements, and ancillary related improvements and facilities, and including capital costs of land, transit facilities, rolling stock and equipment in the Washington metropolitan area allocable to Fairfax County, Virginia pursuant to the provisions of the Washington Metropolitan Area Transit Authority Compact?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q7
+    district_name: "GREENSVILLE COUNTY"
+    display_name: "Election of School Board"
+    question: "Shall the method of selecting the school board be changed from appointment by the governing body to direct election by the voters?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q8
+    district_name: "JAMES CITY COUNTY"
+    display_name: "Stormwater Management Projects"
+    question: "Shall James City County, Virginia, contract a debt and issue its general obligation bonds in a principal amount not to exceed $30,000,000 pursuant to the Public Finance Act of 1991, as amended, for the purpose of financing a portion of the cost of stormwater management projects?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q9
+    district_name: "BROOKNEAL"
+    display_name: "Mixed Alcoholic Beverages"
+    question: "Shall the sale of mixed alcoholic beverages by restaurants licensed by the Alcoholic Beverage Control Board be permitted in the Town of Brookneal, Virginia?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q10
+    district_name: "ARLINGTON COUNTY"
+    display_name: "Metro and Transportation"
+    question: "QUESTION: Shall Arlington County contract a debt and issue its general obligation bonds in the maximum amount of $34,100,000 to finance, together with available funds, the cost of various capital projects for the Washington Metropolitan Area Transit Authority and other transit, pedestrian, road or transportation projects?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q11
+    district_name: "ARLINGTON COUNTY"
+    display_name: "Local Parks and Recreation"
+    question: "QUESTION: Shall Arlington County contract a debt and issue its general obligation bonds in the maximum amount of $5,975,000 to finance, together with available funds, the cost of various capital projects for local parks and recreation, and land acquisition for open space?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q12
+    district_name: "ARLINGTON COUNTY"
+    display_name: "Community Infrastructure"
+    question: "QUESTION: Shall Arlington County contract a debt and issue its general obligation bonds in the maximum amount of $18,065,000 to finance, together with available funds, the cost of various capital projects for County facilities, land acquisition and infrastructure?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q13
+    district_name: "ARLINGTON COUNTY"
+    display_name: "Arlington Public Schools"
+    question: "QUESTION: Shall Arlington County contract a debt and issue its general obligation bonds in the maximum amount of $102,888,000 to finance, together with available funds, the cost of various capital projects for Arlington Public Schools?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q14
+    district_name: "ACCOMACK COUNTY"
+    display_name: "Food and Beverage Tax"
+    question: "Shall the County of Accomack be authorized to levy a tax on food and beverages sold, for human consumption, by a restaurant in accordance with Virginia Code Section 58.1-3833, with one hundred percent (100%) of the revenue generated by such tax to be applied toward the costs of education in Accomack County?"
+    district_ident:
+  - election_ident: "14"
+    ident: quest-e15-q15
+    display_name: "Spillway Bonds"
+    question: "Shall the Board of Supervisors of Frederick County, Virginia, on behalf of the Lake Holiday Sanitary District, contract a debt and issue bonds of the sanitary district, in the maximum amount of ten million dollars ($10,000,000) for the purpose of paying the costs, in whole or in part, of the reconstruction of the spillway of the Lake Holiday Dam (formerly known as the Summit Dam)?"
+    district_name: "203 - REDLAND"
+    district_ident:
+audit_header: 
+  schema_version: "0.1"
+  operator: Pito Salas
+  type: elections
+  create_date: 2010-10-05T21:30:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
+  

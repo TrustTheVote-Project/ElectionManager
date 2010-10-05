@@ -170,6 +170,20 @@ class Audit < ActiveRecord::Base
                           :options => {"skip" => "Skip question",
                                        "abort" => "Abort import"},
                           :default_option => "skip")                          
+    elsif quest["district_ident"].nil? && !quest["district_name"].nil?
+      dist_name = quest["district_name"]
+      guessed_dist = District.display_name_like(dist_name).first
+      if !guessed_dist.nil?
+        guessed_dist_name = guessed_dist.display_name
+        guessed_dist_ident = guessed_dist.ident
+      end  
+      alerts << Alert.new(:message => "Looks like \'#{quest["display_name"]}\' should be associated with #{guessed_dist_name}. What would you like to do? ",
+                          :alert_type => "no_district_ident_in_quest",
+                          :objects => [quest_index, guessed_dist_ident],
+                          :options => {"skip" => "Skip question",
+                                       "repair" => "I agree, please update the question accordingly.",
+                                       "abort" => "Abort import"},
+                          :default_option => "repair")
     end
   end
   
@@ -178,7 +192,7 @@ class Audit < ActiveRecord::Base
     election_data_hash["body"]["districts"].each_index do
       |dist_index|
       audit_district_jurisdiction dist_index if !auditing_jurisdiction?
-    end
+    end if election_data_hash["body"].has_key? "districts"
   end
   
   # Check a particular District to make sure the Jurisdiction is valid.
@@ -202,7 +216,7 @@ class Audit < ActiveRecord::Base
     election_data_hash["body"]["candidates"].each_index do
       |cand_index|
       audit_candidate cand_index
-    end
+    end if election_data_hash["body"].has_key? "candidates"
   end
   
 # Check whether a particular candidate in the EDH looks reasonable. For example:
@@ -227,7 +241,9 @@ class Audit < ActiveRecord::Base
 
 # Audit all the Elections in the input EDH
   def audit_elections
-    election_data_hash["body"]["elections"].each_index { |e_index| audit_election e_index } if election_data_hash["body"].has_key? "elections"
+    election_data_hash["body"]["elections"].each_index do |e_index| 
+      audit_election e_index 
+    end if election_data_hash["body"].has_key? "elections"
   end
     
 # Check whether a particular Election in the EDH looks reasonbable.
@@ -287,6 +303,15 @@ class Audit < ActiveRecord::Base
     when ["no_elect_in_quest", "skip"]
       election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
       Alert.delete(alert)
+    when ["no_district_type_in_quest","skip"]
+      election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
+      Alert.delete(alert)
+    when ["no_district_ident_in_quest","repair"]
+      question_number, district_ident = alert.objects
+      election_data_hash["body"]["questions"][question_number]["district_ident"] = district_ident
+      Alert.delete(alert)
+    when ["no_district_type_in_quest","abort"]
+      raise "Import aborted"
     else
       raise ArgumentError, "Invalid code in Audit#process_alert"
     end
@@ -298,7 +323,7 @@ class Audit < ActiveRecord::Base
   end
   
   # Search through target (an array of hashes), 
-  # for an element who has key e`qu`al to value
+  # for an element who has key equal to value
   def input_has? target, key, value
     target.each { |item| (return true if item[key].eql? value) }
     false
