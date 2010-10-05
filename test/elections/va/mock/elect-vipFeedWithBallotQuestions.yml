@@ -573,78 +573,6 @@ body:
     ident: "500146"
     display_name: Member Town Council
     district_ident: "501573"
-  - election_ident: "14"
-    ident: "500147"
-    display_name: Member Town Council
-    district_ident: "501686"
-  - election_ident: "14"
-    ident: "500148"
-    display_name: Member Town Council
-    district_ident: "501765"
-  - election_ident: "14"
-    ident: "500149"
-    display_name: Member Town Council
-    district_ident: "501789"
-  - election_ident: "14"
-    ident: "500150"
-    display_name: Member Town Council
-    district_ident: "501789"
-  - election_ident: "14"
-    ident: "500151"
-    display_name: Member Town Council
-    district_ident: "501780"
-  - election_ident: "14"
-    ident: "500152"
-    display_name: Member Town Council
-    district_ident: "501686"
-  - election_ident: "14"
-    ident: "500153"
-    display_name: Member Town Council
-    district_ident: "501436"
-  - election_ident: "14"
-    ident: "500154"
-    display_name: Member Town Council
-    district_ident: "501794"
-  - election_ident: "14"
-    ident: "500155"
-    display_name: Member Town Council
-    district_ident: "501576"
-  - election_ident: "14"
-    ident: "500156"
-    display_name: Member Town Council
-    district_ident: "502906"
-  - election_ident: "14"
-    ident: "500157"
-    display_name: Member Town Council
-    district_ident: "501693"
-  - election_ident: "14"
-    ident: "500158"
-    display_name: Member Town Council
-    district_ident: "501764"
-  - election_ident: "14"
-    ident: "500159"
-    display_name: Member Town Council
-    district_ident: "501697"
-  - election_ident: "14"
-    ident: "500160"
-    display_name: Member Town Council
-    district_ident: "501686"
-  - election_ident: "14"
-    ident: "500161"
-    display_name: Member Town Council
-    district_ident: "501789"
-  - election_ident: "14"
-    ident: "500162"
-    display_name: Member Town Council
-    district_ident: "501708"
-  - election_ident: "14"
-    ident: "500163"
-    display_name: Member Town Council
-    district_ident: "501775"
-  - election_ident: "14"
-    ident: "500164"
-    display_name: Member Town Council
-    district_ident: "501789"
   elections: 
   - start_date: "2010-11-02"
     ident: "14"
@@ -654,7 +582,7 @@ audit_header:
   schema_version: "0.2"
   operator: Pito Salas
   type: elections
-  create_date: 2010-10-04T15:59:31-04:00
+  create_date: 2010-10-05T11:00:49-04:00
   software: TTV Election Management System 0.1 JAN-1-2010
   hardware: n/a
   file_id: 9F023408009B11DF924800163E3DE33F

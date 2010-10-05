@@ -170,6 +170,20 @@ class Audit < ActiveRecord::Base
                           :options => {"skip" => "Skip question",
                                        "abort" => "Abort import"},
                           :default_option => "skip")                          
+    elsif quest["district_ident"].nil? && !quest["district_name"].nil?
+      dist_name = quest["district_name"]
+      guessed_dist = District.display_name_like(dist_name).first
+      if !guessed_dist.nil?
+        guessed_dist_name = guessed_dist.display_name
+        guessed_dist_ident = guessed_dist.ident
+      end  
+      alerts << Alert.new(:message => "Looks like \'#{quest["display_name"]}\' should be associated with #{guessed_dist_name}. What would you like to do? ",
+                          :alert_type => "no_district_ident_in_quest",
+                          :objects => [quest_index, guessed_dist_ident],
+                          :options => {"skip" => "Skip question",
+                                       "repair" => "I agree, please update the question accordingly.",
+                                       "abort" => "Abort import"},
+                          :default_option => "repair")
     end
   end
   
@@ -289,6 +303,15 @@ class Audit < ActiveRecord::Base
     when ["no_elect_in_quest", "skip"]
       election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
       Alert.delete(alert)
+    when ["no_district_type_in_quest","skip"]
+      election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
+      Alert.delete(alert)
+    when ["no_district_ident_in_quest","repair"]
+      question_number, district_ident = alert.objects
+      election_data_hash["body"]["questions"][question_number]["district_ident"] = district_ident
+      Alert.delete(alert)
+    when ["no_district_type_in_quest","abort"]
+      raise "Import aborted"
     else
       raise ArgumentError, "Invalid code in Audit#process_alert"
     end
