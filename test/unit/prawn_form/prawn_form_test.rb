@@ -37,7 +37,8 @@ class PrawnFormTest < ActiveSupport::TestCase
       # puts "TGD: form = #{form.inspect}"
 
       # check for the form's default resource directory (DR)
-      resources =  get_obj(form[:DR])
+      #resources =  get_obj(form[:DR])
+      resources =  get_ref(form[:DR])
       # puts "TGD: form.resources = #{resources.inspect}"
       assert_equal :Font, resources[:Type]
       assert_equal :WinAnsiEncoding, resources[:Encoding]
