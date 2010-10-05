@@ -4,11 +4,11 @@ class BallotTest < ActiveSupport::TestCase
   context "Ballot" do
 
     setup do
-      common_jurisdiction = DistrictSet.make(:display_name => "common_jurisdiction")
+      @common_jurisdiction = DistrictSet.make(:display_name => "common_jurisdiction")
       
       # create 9 districts
       9.times do |i|
-        common_jurisdiction.districts << District.make(:display_name => "district_#{i}")
+        @common_jurisdiction.districts << District.make(:display_name => "district_#{i}")
       end
       
       @split_ds = DistrictSet.make(:display_name => "split_ds")
@@ -16,12 +16,12 @@ class BallotTest < ActiveSupport::TestCase
         @split_ds.districts << District.find_by_display_name("district_#{i}")
       end
       
-      @precinct = Precinct.make(:display_name => "Precinct 1", :jurisdiction => common_jurisdiction)
+      @precinct = Precinct.make(:display_name => "Precinct 1", :jurisdiction => @common_jurisdiction)
       
       # NOTE: the precinct_split has a subset of the jurisdiction's districts
       @precinct_split = PrecinctSplit.make(:display_name => "Precinct Split 1",:precinct => @precinct, :district_set => @split_ds)
       
-      @election = Election.make(:display_name => "Election 1", :district_set => common_jurisdiction)
+      @election = Election.make(:display_name => "Election 1", :district_set => @common_jurisdiction)
     end
     
     context "Districts" do
@@ -101,7 +101,44 @@ class BallotTest < ActiveSupport::TestCase
 
       end
     end
-    
+    context "mulitple ballots" do
+      setup do
+        @split_ds2 = DistrictSet.make(:display_name => "split_ds2")
+        (1..3).to_a.each do |i|
+        @split_ds2.districts << District.find_by_display_name("district_#{i}")
+        end
+      
+        @precinct2 = Precinct.make(:display_name => "Precinct 2", :jurisdiction => @common_jurisdiction)
+        
+        # NOTE: the precinct_split has a subset of the jurisdiction's districts
+        @precinct_split2 = PrecinctSplit.make(:display_name => "Precinct Split 2",:precinct => @precinct2, :district_set => @split_ds2)
+        
+        # create the ballot
+        @ballot1 = Ballot.create(:election => @election, :precinct_split => @precinct_split)
+      end
+      should "find_or_create" do
+        # created in setup
+        assert_equal 1, Ballot.count
+
+        # shd find one ballot, for precinct_split1,  and create one
+        # ballot, for precinct_split2
+        ballots_found = Ballot.find_or_create_by_election(@election)
+        assert_equal 2, Ballot.count
+        assert_equal 2, ballots_found.size
+
+        ballots = Ballot.all
+        ballot1 = ballots.first
+        ballot2 = ballots.last
+        
+        assert ballot1
+        assert ballot2
+
+        assert_equal @precinct_split, ballot1.precinct_split
+        assert @precinct_split2, ballot2.precinct_split
+        
+      end
+      
+    end
 #     context "Contests" do
 #       setup do
 #         @ballot = Ballot.create(:election => @election, :precinct_split => @precinct_split)
