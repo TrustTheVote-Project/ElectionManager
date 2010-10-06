@@ -79,7 +79,7 @@ class Election < ActiveRecord::Base
 # Generate a ballot map, as a Hash. This maps certain characteristics of the ballot to its file name
 # TODO: Move this to a BallotUtils or Ballot class which will capture the functionality relating to controling
 # ballot generation.
-  def generate_ballot_map
+  def deleteme_generate_ballot_map
     outlist = []
     each_ballot(district_set) do | split, result_cont_list, result_quest_list |
       outlist << {:precinct_split => split.display_name, :file => "#{split.display_name}.pdf"}
@@ -95,7 +95,7 @@ class Election < ActiveRecord::Base
 # - number of questions
 # - contest display names, as one column, separated by "|"
 # - question display names, as one column, separated by "|"
-  def generate_ballot_proofing
+  def old_generate_ballot_proofing
     splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id).all(:include => [:precinct,  {:district_set => :districts}] )
     csv_string = FasterCSV.generate do |csv|
       csv << ["precinct split", "precinct", "n contests", "n questions", "contest names", "question_names"]
@@ -110,6 +110,20 @@ class Election < ActiveRecord::Base
       end
     end
     return csv_string
+  end
+  
+#
+# Generate ballot proofing file for each ballot in this election. 
+#
+  def generate_ballot_proofing
+    splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id).all(:include => [:precinct,  {:district_set => :districts}] )
+    bprep = BallotProofingReport.new
+    bprep.begin_listing
+    splits.each do |split|
+      filename = BallotFileNamer.new(split, self)
+      bprep.ballot_entry(split, self, split.ballot_contest(self), split.ballot_questions(self), filename)
+    end
+    return bprep.end_listing
   end
 
 # Return an array with the Districts corresponding to this Election's Questions

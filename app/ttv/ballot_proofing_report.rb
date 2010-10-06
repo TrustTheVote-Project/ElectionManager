@@ -28,7 +28,7 @@ class BallotProofingReport
   end
   
   # Call this once for every ballot in the proofing report
-  def ballot_entry precinct_split, precinct, election, contest_list, question_list, file_name
+  def ballot_entry precinct_split, election, contest_list, question_list, file_name
 
   end
   

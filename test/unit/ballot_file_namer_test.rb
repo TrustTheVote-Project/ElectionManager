@@ -1,6 +1,8 @@
-# ballot_file_namer.rb: contruct file name for a ballot file
-# Author: Pito Salas
-# Date: Sept 28, 2010
+# OSDV Election Manager - Unit Test
+# Author: FillMeIn
+# Date: FillMeIn
+#
+# License Version: OSDV Public License 1.2
 #
 # The contents of this file are subject to the OSDV Public License
 # Version 1.2 (the "License"); you may not use this file except in
@@ -16,20 +18,18 @@
 # Portions created by Open Source Digital Voting Foundation are Copyright (C) 2010.
 # All Rights Reserved.
 
-# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Brian Jordan, John Sebes, Jeffrey Gray
-#
-# Manage the generation of the Ballot Proofing report
-#
-class BallotFileNamer
-  
-  # Return a file name to use for the ballot corresponding to the parameters
-  # <tt>precinct_split,precinct,election</tt>Parameters of the ballot
-  # Return a string
-  def ballot_file_name(precinct_split, election)
-    precinct_split.precinct.display_name + "-" + precinct_split.display_name 
-  end
-  
-  def to_s
-    "Default"
+# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.require 'test_helper'
+
+class FillMeIn < ActiveSupport::TestCase
+  context "context name" do
+    setup do
+    end
+    
+    should "should name" do
+      assert true
+    end
   end
 end
+
+  
+  

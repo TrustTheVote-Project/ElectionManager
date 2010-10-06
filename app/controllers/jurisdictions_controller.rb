@@ -128,4 +128,9 @@ class JurisdictionsController < ApplicationController
     flash[:notice] = "Import successful."
     redirect_to :action => :show
   end
+  
+  def export
+    @jurisdiction = current_context.jurisdiction    
+  end
+
 end
