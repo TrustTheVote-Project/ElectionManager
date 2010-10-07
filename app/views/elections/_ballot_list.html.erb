@@ -26,27 +26,26 @@
                     &nbsp;
                 </th>
             </tr>
-            <% @precinct_splits.each do |split| -%>
+            <% @ballots.each do |ballot| -%>
             <tr class="<%= cycle("odd", "even") %>">
                 <td>
-                    <%= split.display_name %>
+                    <%= ballot.precinct_split.display_name %>
                 </td>
                 <td>
-                    <%= split.ballot_contests(@election).size %>
+                    <%= ballot.contests.size %>
                 </td>
                 <td>
-                    <%= split.ballot_questions(@election).size %>
+                    <%= ballot.questions.size %>
                 </td>
                 <td class="last">
-                  <%= link_to "generate", ballot_election_precinct_path(@election, split) %> | preview
-                  <%#= link_to "generate", ballot_path(@election, split) %> | preview
+                  <%= link_to "generate", ballot_path(ballot) %> | preview
                 </td>
             </tr>
             <% end -%>
         </table>
         <div class="actions-bar wat-cf">
             <div class="actions"></div>
-            <%= will_paginate @precinct_splits, :param_name => :ballot_page %>
+            <%= will_paginate @ballots, :param_name => :ballot_page %>
         </div>
     </div>
 </div>

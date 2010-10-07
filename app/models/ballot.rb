@@ -4,7 +4,6 @@ class Ballot < ActiveRecord::Base
 #     end
 #   }
   
-
   belongs_to :election
   belongs_to :precinct_split
   
@@ -22,13 +21,20 @@ class Ballot < ActiveRecord::Base
   validates_presence_of :election, :precinct_split
 
   def districts
-   #  puts "TGD #{self.class.name}#districts: election districts = #{election.district_set.districts.map(&:display_name)}"
-#     puts "TGD #{self.class.name}#districts: election districts = #{election.districts.map(&:display_name)}"
-#     puts "TGD #{self.class.name}#districts: precinct_split districts = #{precinct_split.districts.map(&:display_name)}"
-    # election.district_set.districts & precinct_split.districts
     precinct_split.districts
   end
+  
   def contests
-    districts.map(&:contests).flatten.uniq
+    Contest.find_all_by_district_id(precinct_split.districts.map(&:id))
+  end
+  
+  def questions
+    Question.find_all_by_requesting_district_id(precinct_split.districts.map(&:id))
+  end
+
+  def render_pdf
+    # TODO: make this a real association
+    bst = BallotStyleTemplate.find(election.ballot_style_template_id)
+    AbstractBallot.create(election, self.precinct_split, bst)
   end
 end
