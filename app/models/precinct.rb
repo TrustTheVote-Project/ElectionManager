@@ -3,7 +3,7 @@ class Precinct < ActiveRecord::Base
   has_many :precinct_splits
   belongs_to :jurisdiction, :foreign_key => :jurisdiction_id, :class_name => "DistrictSet" 
 
-  attr_accessible :jurisdiction, :display_name
+  attr_accessible :jurisdiction, :display_name, :ident
 
   validates_presence_of :ident
   validates_uniqueness_of :ident, :message => "Non-unique Precinct ident attempted: {{value}}."
