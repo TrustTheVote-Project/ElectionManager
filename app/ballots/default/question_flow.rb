@@ -41,7 +41,8 @@ module DefaultBallot
 
           @pdf.font "Helvetica", :size => 10, :style => :bold
           @pdf.move_down VPAD
-          @pdf.text "Proposed Constitutional Amendment " + @question.display_name, :align => :center, :leading => 1 #header
+          #@pdf.text "Proposed Constitutional Amendment " + @question.display_name, :align => :center, :leading => 1 #header
+          @pdf.text @question.display_name, :align => :center, :leading => 1 #header
           @pdf.move_down VPAD
 
           short_instructions
