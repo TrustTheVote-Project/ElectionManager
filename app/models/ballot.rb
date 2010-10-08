@@ -33,8 +33,18 @@ class Ballot < ActiveRecord::Base
   end
 
   def render_pdf
-    # TODO: make this a real association
+    # TODO: make the ballot style template belong_to an election
     bst = BallotStyleTemplate.find(election.ballot_style_template_id)
-    AbstractBallot.create(election, self.precinct_split, bst)
+    
+    # TODO: refactor this after the above belongs_to is
+    # created. BallotStyleTemplate will belong_to an election and the
+    # election wont need to be passed to this method.
+    ballot_config  = bst.ballot_config(election)
+    
+    renderer = AbstractBallot::Renderer.new(election, precinct_split, ballot_config, nil)
+    # TODO: refactor this crazy magic
+    renderer.render
+    # calls the Prawn::Document.render method
+    renderer.to_s
   end
 end

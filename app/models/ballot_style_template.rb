@@ -262,4 +262,22 @@ class BallotStyleTemplate < ActiveRecord::Base
     # puts "TGD: rule_map = #{rule_map.inspect}"
     rule_map
   end
+
+  # given an election create a BallotConfig instance that will used in
+  # ballot rendering
+  def ballot_config(election)
+    # TODO: refactor this after this BallotStyleTemplate belongs_to
+    # an election.
+    
+    # TODO: make the ballot style belong to this ballot style template
+    case BallotStyle.find(ballot_style).ballot_style_code
+    when "nh"
+      NhBallot::BallotConfig.new(election, self)
+    else
+      # TODO: Make this the default BallotConfig
+      # it will replace the older DefaultBallot::BallotConfig
+      # This DcBallot::BallotConfig implements Ballot Styles.
+     DcBallot::BallotConfig.new(election, self)
+    end
+  end
 end

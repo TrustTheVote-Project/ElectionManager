@@ -34,6 +34,8 @@ class PDFBallotStyle
 #    puts BALLOT_DIR
     return TTV::Translate::YamlTranslation.new("#{BALLOT_DIR}/#{style}/lang/#{lang}/ballot.yml")
   end
+  
+  # TODO: remove method , code moved into Ballot#render_pdf
   def self.get_ballot_config(election, template)
 #  def self.get_ballot_config(style, lang, election, scanner, instruction_text_url)
     #begin
