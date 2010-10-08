@@ -2,13 +2,15 @@ class BallotsController < ApplicationController
   
   before_filter :election, :precinct_split, :only => [:show]
   
+  def index
+  end
+  
   def show
     if @election && @precinct
       @ballot = Ballot.find_or_create(@election, @precinct_split)
     else
       @ballot = Ballot.find(params[:id])
     end
-    
     title =  @ballot.precinct_split.display_name.gsub(/ /, "_").camelize << " Ballot.pdf"
     
     send_data @ballot.render_pdf, :filename => title, :type => "application/pdf", :disposition => 'inline'

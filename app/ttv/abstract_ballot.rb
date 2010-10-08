@@ -2,7 +2,8 @@ require 'prawn'
 require 'ballots/dc/ballot_config'
 
 module AbstractBallot
-    
+  
+  # TODO: remove method , code moved into Ballot#render_pdf
   def self.create(election, precinct, template,destination = nil)
 #      Prawn.debug = true
     scanner = TTV::Scanner.new()
