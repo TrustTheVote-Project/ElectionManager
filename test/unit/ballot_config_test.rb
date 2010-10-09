@@ -225,10 +225,10 @@ class BallotConfigTest < ActiveSupport::TestCase
           @ballot_config.page_complete(page_num, last_page)
 
           util = TTV::Prawn::Util.new(@pdf)
-          #assert_equal 'foo', util.page_contents[0]
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n252.90653125 751.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n252.90653125 39.808 Td\n/F1.0 14 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n", util.page_contents[0]
-
           @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")   
+
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n268.07609375 749.72 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n268.07609375 42.72 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\nQ\n", util.page_contents[0]
+
 
         end
 
