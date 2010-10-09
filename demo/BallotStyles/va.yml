@@ -17,7 +17,7 @@
   :content: 
     :top: 
       :rotate: 0
-      :graphics: ' @pdf.move_down(10);
+      :graphics: ' @pdf.move_down(20);
       text = "Automated Write-In Absentee Ballot Authorized by Virginia State Board of Elections";
       text << "\n1100  Bank St., Richmond, VA 23219";
       middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2 ;
@@ -35,7 +35,7 @@
       :graphics:  "text = \"#{@precinct.precinct.display_name} - #{@precinct.display_name.gsub(/ds-\d+-/, '')}\";
        middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2;
        middle_y = @pdf.bounds.bottom + @frame[:content][:bottom][:width]/2 - @pdf.height_of(text)/2;
-       @pdf.draw_text(text, :at => [middle_x, middle_y], :style => :bold);
+       @pdf.draw_text(text, :at => [middle_x, middle_y+10], :size => 8, :style => :bold);
       "
       :text: Sample Ballot
       :width: 36

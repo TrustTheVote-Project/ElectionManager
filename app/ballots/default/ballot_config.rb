@@ -310,12 +310,12 @@ module DefaultBallot
     def page_complete(pagenum, last_page)
       unless last_page
         @pdf.font "Helvetica", :size => 14, :style => :bold
-        @pdf.bounding_box [ 0 , @pdf.bounds.height ], :width => @pdf.bounds.width do
-          @pdf.text bt[:Vote_Both_Sides], :align => :center
+        @pdf.bounding_box [0, @pdf.bounds.height-5 ], :width => @pdf.bounds.width do
+          @pdf.text bt[:Vote_Both_Sides], :size => 10,:align => :center
         end
         @pdf.bounding_box [ 0 , @pleaseVoteHeight ], :width => @pdf.bounds.width do
           @pdf.move_down 10
-          @pdf.text bt[:Vote_Both_Sides], :align => :center
+          @pdf.text bt[:Vote_Both_Sides], :size => 10, :align => :center
         end
       end
     end
