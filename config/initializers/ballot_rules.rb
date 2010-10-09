@@ -3,3 +3,4 @@ require "#{Rails.root}/config/ttv/ballot_rule/base"
 
 TTV::BallotRule::Default
 TTV::BallotRule::VA
+TTV::BallotRule::DC

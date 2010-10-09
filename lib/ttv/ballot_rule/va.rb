@@ -1,6 +1,8 @@
 module ::TTV
   module BallotRule
     
+    # NOTE: Don't forget to add this class to the ballot_rules.rb
+    # initializer!!
     class VA < BallotRule::Base
 
       # class singleton methods
