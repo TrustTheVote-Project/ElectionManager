@@ -26,8 +26,8 @@ class PrecinctSplitTest < ActiveSupport::TestCase
       end
     
       should "correctly return ballot contests" do
-        ap @split1.ballot_contests(@election)
-        puts 1
+        # ap @split1.ballot_contests(@election)
+        # puts 1
       end 
     end    
   end
