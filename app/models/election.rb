@@ -2,6 +2,7 @@ require 'abstract_ballot'
 require 'fastercsv'
 
 class Election < ActiveRecord::Base
+  has_many :balllots
   has_many :contests, :order => :position, :dependent => :destroy
   has_many :questions, :order => :display_name, :dependent => :destroy
   

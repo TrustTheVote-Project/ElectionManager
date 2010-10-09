@@ -1,0 +1,41 @@
+--- 
+body: 
+  districts: 
+  - ident: "500739"
+    type: House of Delegates
+    display_name: House of Delegates 060 (500739)
+  - ident: "501633"
+    type: State Senate
+    display_name: State Senate 015 (501633)
+  district_sets: 
+  - ident: "504443"
+    district_list: 
+    - district_ident: "500739"
+    - district_ident: "501633"
+  precincts: 
+  - ident: "55000"
+    display_name: 101 - CHINCOTEAGUE
+  - ident: "55001"
+    display_name: 201 - ATLANTIC
+  - ident: "55002"
+    display_name: 202 - GREENBACKVILLE
+  - ident: "55003"
+    display_name: 203 - HALLWOOD
+  - ident: "55004"
+    display_name: 204 - SAXIS
+  - ident: "55005"
+    display_name: 205 - TANGIER
+  splits: 
+  - district_set_ident: "504443"
+    ident: "504443"
+    precinct_ident: "55000"
+    display_name: 501715-702 - MIDWAY-0000
+audit_header: 
+  based_on: inputs/VA/juris-vipFeedWithBallotQuestions.xml
+  schema_version: "0.2"
+  operator: Pito Salas
+  type: jurisdiction
+  create_date: 2010-10-04T15:44:14-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: n/a
+  file_id: 9F023408009B11DF924800163E3DE33F

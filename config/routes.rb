@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :ballots
+
   
   map.resources :media
   map.resources :languages
