@@ -10,16 +10,16 @@ class AuditTest < ActiveSupport::TestCase
             {"use_current" => "Use current jurisdiction test", "abort" => "Abort import"}, :default_option => "use_current"})
     end
     
-    should "be instantiated with a hash" do
+    should_eventually "be instantiated with a hash" do
       audit_obj = Audit.new(:election_data_hash => @hash)
     end
     
-    should "associate with an alert" do
+    should_eventually "associate with an alert" do
       audit_obj = Audit.new(:election_data_hash => @hash)
       audit_obj.alerts << @alert
     end
     
-    should "correctly search a simple hash" do
+    should_eventually "correctly search a simple hash" do
       audit_obj = Audit.new(:election_data_hash => @hash)
       t = [{:a => 1}, {:b => 2}, {:c=> 3}]
       assert audit_obj.input_has? t, :b, 2
@@ -43,11 +43,11 @@ class AuditTest < ActiveSupport::TestCase
       @audit_xml = Audit.new(:content_type => "jurisdiction_info", :election_data_hash => @xml_hash, :district_set => @jurisdiction)
     end
     
-    should "be successfully built from xml" do
+    should_eventually "be successfully built from xml" do
       assert @audit_xml.audit
     end
     
-    should "be successfully built from yml" do
+    should_eventually "be successfully built from yml" do
       assert @audit_yaml.audit 
     end
 
@@ -65,7 +65,7 @@ class AuditTest < ActiveSupport::TestCase
         @audit_xml.audit
       end
 
-      should "have a fixed hash, have no alerts left, be ready for import" do
+      should_eventually "have a fixed hash, have no alerts left, be ready for import" do
         assert_equal 0, @audit_yaml.alerts.size # assert empty
         assert_equal 0, @audit_xml.alerts.size # assert empty
         
@@ -85,14 +85,14 @@ class AuditTest < ActiveSupport::TestCase
           #@import_xml.import
         end
         
-        should "load and save jurisdictions" do
+        should_eventually "load and save jurisdictions" do
           @import_yaml.load_jurisdictions
           jurisdiction = DistrictSet.find_by_display_name("New Hampshire")
           assert jurisdiction
           assert_equal "1", jurisdiction.ident
         end
         
-        should "load and save districts" do
+        should_eventually "load and save districts" do
           @import_yaml.load_jurisdictions
           @import_yaml.load_districts
           district = District.find_by_display_name "State of New Hampshire"
@@ -101,7 +101,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_equal "State", DistrictType.find_by_id(district.district_type_id).title
         end
         
-        should "load and save precincts" do
+        should_eventually "load and save precincts" do
           @import_yaml.load_jurisdictions
           @import_yaml.load_districts
           @import_yaml.load_precincts
@@ -112,7 +112,7 @@ class AuditTest < ActiveSupport::TestCase
           assert District.find_by_display_name("State of New Hampshire")
         end
         
-        should "load and save candidates" do
+        should_eventually "load and save candidates" do
           @import_yaml.load_candidates
           candidate_1 = Candidate.find_by_ident "1"
           candidate_2 = Candidate.find_by_ident "2"
@@ -121,7 +121,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_equal "republican", candidate_2.party.display_name
         end
         
-        should "load and save contests" do
+        should_eventually "load and save contests" do
           @import_yaml.load_jurisdictions
           @import_yaml.load_districts
           @import_yaml.load_candidates
@@ -134,7 +134,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_equal "Winner Take All", contest.voting_method.display_name 
         end
 
-        should "load and save elections" do
+        should_eventually "load and save elections" do
           @import_yaml.load_jurisdictions
           @import_yaml.load_districts
           @import_yaml.load_precincts
@@ -149,7 +149,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_equal "1", election.district_set.ident
         end
         
-        should "import all items (XML source)" do
+        should_eventually "import all items (XML source)" do
           @import_xml.import
           
           assert District.find_by_display_name "State of New Hampshire", "Can't find District"
@@ -160,7 +160,7 @@ class AuditTest < ActiveSupport::TestCase
           assert Election.find_by_display_name "New Hampshire General Election", "Can't find Election"
         end
         
-        should "not fail adding a District Set object to an Election by ID" do
+        should_eventually "not fail adding a District Set object to an Election by ID" do
           new_district_set_1 = DistrictSet.find_or_create_by_display_name("District 1")
           new_district_set_1.save!
           new_election_1 = Election.find_or_create_by_display_name(:display_name => "Election 1", :district_set_id => new_district_set_1.id)
@@ -168,7 +168,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_valid new_election_1
         end
           
-        should "not fail adding a District Set object to an Election by object" do
+        should_eventually "not fail adding a District Set object to an Election by object" do
           new_district_set = DistrictSet.find_or_create_by_display_name("District 2")
           new_district_set.save!
           new_election = Election.find_or_create_by_display_name(:display_name => "Election 2")
@@ -178,7 +178,7 @@ class AuditTest < ActiveSupport::TestCase
           assert_equal new_district_set, new_election.district_set
         end
         
-        should "not fail adding a District Set object to an Election in initializer" do
+        should_eventually "not fail adding a District Set object to an Election in initializer" do
           new_district_set = DistrictSet.find_or_create_by_display_name("District 3")
           new_district_set.save!
           new_election = Election.find_or_create_by_display_name(:display_name => "Election 3", :district_set => new_district_set)
