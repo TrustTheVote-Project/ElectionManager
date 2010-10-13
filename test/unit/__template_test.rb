@@ -1,4 +1,4 @@
-# OSDV Election Manager - Unit Test for Ballot File Namer
+# OSDV Election Manager - Unit Test for @TODO
 # Author: Pito Salas
 # Date: 10/5/2010
 #
@@ -18,11 +18,16 @@
 # Portions created by Open Source Digital Voting Foundation are Copyright (C) 2010.
 # All Rights Reserved.
 
-# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.require 'test_helper'
+# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
 
-class BallotFileNamer < ActiveSupport::TestCase
+require 'test_helper'
+require 'ap'
+
+
+class TestTest < ActiveSupport::TestCase
   context "context name" do
     setup do
+      # @TODO
     end
     
     should "should name" do

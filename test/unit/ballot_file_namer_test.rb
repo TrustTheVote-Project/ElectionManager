@@ -18,15 +18,20 @@
 # Portions created by Open Source Digital Voting Foundation are Copyright (C) 2010.
 # All Rights Reserved.
 
-# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.require 'test_helper'
+# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
 
-class FillMeIn < ActiveSupport::TestCase
-  context "context name" do
+require 'test_helper'
+require 'ap'
+
+class BallotFileNamerTest < ActiveSupport::TestCase
+  context "BallotFileNamer" do
     setup do
+      @bnf = BallotFileNamer.new
+      setup_test_election
     end
     
-    should "should name" do
-      assert true
+    should "work in default case" do
+      assert_equal "Precinct-1-Precinct-Split-1", @bnf.ballot_file_name(@split1, @election)
     end
   end
 end

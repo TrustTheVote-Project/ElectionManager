@@ -20,21 +20,34 @@
 #
 # Manage the generation of the Ballot Proofing report
 #
+
 class BallotProofingReport
 
   # Call before any ballot_entry calls
   def begin_listing
-    
+    @csv = FasterCSV.new ""
+    @csv << ["file name", "precinct split", "precinct", "n contests", "n questions", "contest names", "question_names"]
   end
   
   # Call this once for every ballot in the proofing report
-  def ballot_entry precinct_split, election, contest_list, question_list, file_name
-
+  # <tt>prec_split:</tt>precinct split for ballot
+  # <tt>election:</tt>relevant election
+  # <tt>file_namer:</tt>instance of BallotFileNamer which defines the names of the individual ballot files
+  def ballot_entry split, election, file_namer
+    contests = split.ballot_contests(election)
+    questions = split.ballot_questions(election)
+    file_name = file_namer.ballot_file_name(split, election)
+    row = [file_name, split.display_name, split.precinct.display_name]
+    row << contests.count
+    row << questions.count
+    row << contests.join("|")
+    row << questions.join("|")
+    @csv << row
   end
   
   # Call this at the end, to actually return the ballot proofing report, as a csv
   # <tt>returns:</tt>text string corresponding to the ballot proofing report.
   def end_listing
-    ""
+    return @csv.string
   end
 end

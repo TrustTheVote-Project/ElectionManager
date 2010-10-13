@@ -117,13 +117,14 @@ class Election < ActiveRecord::Base
 #
   def generate_ballot_proofing
     splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id).all(:include => [:precinct,  {:district_set => :districts}] )
-    bprep = BallotProofingReport.new
-    bprep.begin_listing
+    ballot_proofer = BallotProofingReport.new
+    ballot_proofer.begin_listing
+    file_namer = BallotFileNamer.new
     splits.each do |split|
-      filename = BallotFileNamer.new(split, self)
-      bprep.ballot_entry(split, self, split.ballot_contest(self), split.ballot_questions(self), filename)
+      file_namer = BallotFileNamer.new
+      ballot_proofer.ballot_entry(split, self, file_namer)
     end
-    return bprep.end_listing
+    return ballot_proofer.end_listing
   end
 
 # Return an array with the Districts corresponding to this Election's Questions

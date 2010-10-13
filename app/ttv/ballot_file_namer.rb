@@ -18,7 +18,8 @@
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Brian Jordan, John Sebes, Jeffrey Gray
 #
-# Manage the generation of the Ballot Proofing report
+# Generate file names for Ballots. This allows us to have different schemes and let election officials decide what
+# scheme they like.
 #
 class BallotFileNamer
   
@@ -26,10 +27,14 @@ class BallotFileNamer
   # <tt>precinct_split,precinct,election</tt>Parameters of the ballot
   # Return a string
   def ballot_file_name(precinct_split, election)
-    precinct_split.precinct.display_name + "-" + precinct_split.display_name 
+    remove_whitespace(precinct_split.precinct.display_name + "-" + precinct_split.display_name)
+  end
+  
+  def remove_whitespace a_string
+    a_string.gsub(" ", "-")
   end
   
   def to_s
-    "Default"
+    "Default Ballot File Namer"
   end
 end
