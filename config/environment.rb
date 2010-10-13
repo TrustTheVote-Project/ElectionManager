@@ -64,4 +64,5 @@ Rails::Initializer.run do |config|
   }
 end
 
-Paperclip.options[:command_path] = "/usr/local/bin"
+# Path to imagemagic executables 
+Paperclip.options[:command_path] = "/opt/local/bin"

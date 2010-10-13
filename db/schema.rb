@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100926165042) do
+ActiveRecord::Schema.define(:version => 20101013181620) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20100926165042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "audit_id"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "ident"
+    t.string   "kind"
+    t.string   "asset_file_name"
+    t.integer  "asset_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "display_name"
+    t.datetime "asset_updated_at"
+    t.string   "asset_content_type"
   end
 
   create_table "audits", :force => true do |t|

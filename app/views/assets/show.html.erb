@@ -1,0 +1,37 @@
+<div class="block">
+    <div class="secondary-navigation">
+        <ul class="wat-cf">
+            <li class="first">
+                <%= link_to "#{t("ttv.list", :default => "List")}", assets_path %>
+            </li>
+            <li>
+                <%= link_to "#{t("ttv.new", :default => "New")}", new_asset_path %>
+            </li>
+            <li class="active">
+                <%= link_to "#{t("ttv.show", :default => "Show")}", asset_path %>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="inner">
+            <p>
+                <b><%= t("ttv.ident", :default => "Ident") %>:</b>
+                <%= @asset.ident %>
+            </p>
+            <p>
+                <b><%= t("ttv.display_name", :default => "Display Name") %>:</b>
+                <%= @asset.display_name %>
+            </p>
+            <p>
+                <%-#= image_tag @asset.asset.url %>
+                <%-#= image_tag @asset.asset.url(:medium) %>
+                <%= image_tag @asset.asset.url(:thumb) %>
+            </p>
+            <div class="wat-cf">
+                <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_asset_path(@asset)) %>
+                <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", asset_path(@asset), :delete) %>
+            </div>
+        </div>
+    </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
