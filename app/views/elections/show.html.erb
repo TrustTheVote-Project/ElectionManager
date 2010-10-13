@@ -42,9 +42,6 @@
                 <%= link_to "#{t("ttv.download_all_ballots", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
             </p>
             <p>
-                <%= link_to "#{t("ttv.ballot_mapping_file", :default => "Download Ballot Mapping File")}", ballot_map_election_path(@election) %>
-            </p>
-            <p>
                 <%= link_to "#{t("ttv.ballot_listing_file", :default => "Download Ballot Proofing File")}", ballot_proofing_election_path(@election, :format => "csv") %>
             </p>
             <div class="wat-cf">

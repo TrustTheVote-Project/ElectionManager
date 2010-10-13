@@ -14,6 +14,9 @@
             <li>
                 <%= link_to "Import into this Jurisdiction", import_jurisdiction_path(:id => current_context.jurisdiction.id) %>
             </li>
+            <li>
+                <%= link_to "Export from this Jurisdiction", export_jurisdiction_path(:id => current_context.jurisdiction.id) %>
+            </li>
             <% end %>
             <li>
                 <a href="#">And anything else? </a>

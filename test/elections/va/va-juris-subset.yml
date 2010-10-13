@@ -58,13 +58,17 @@ body:
 
   precincts: 
     - ident: "502452"
-      display_name: 702 - MIDWAY
+      display_name: 702-MIDWAY
 
   splits: 
     - district_set_ident: "504377"
       ident: "504377"
       precinct_ident: "502452"
-      display_name: 702 - MIDWAY-0000
+      display_name: 702-MIDWAY-0000
+    - district_set_ident: "504420"
+      ident: "504420"
+      precinct_ident: "502452"
+      display_name: "702-MIDWAY-0001"
 
 audit_header: 
   schema_version: "0.1"
