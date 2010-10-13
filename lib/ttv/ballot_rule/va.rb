@@ -49,33 +49,52 @@ module ::TTV
           end
         end
       end # end candidate_ordering
+      
+      # TODO: move this rendering code out of ballot rules.
+      # This should be:
+      # - replaced by PDF rich text in the ballot style files
+      # OR
+      # - rendered in rails views that generate pdf, see prawn_to gem
 
+      # draw the text at that top of the ballot
       def frame_content_top(ballot_config)
         pdf = ballot_config.pdf
         frame = ballot_config.frame
         
-        pdf.move_down(20);
+        # little vertical space at the top of the page, could've been frame[:margin][:top] 
+        pdf.move_down(20); 
+
         text = "Automated Write-In Absentee Ballot Authorized by Virginia State Board of Elections";
         text << "\n1100  Bank St., Richmond, VA 23219";
+        
+        # center text at the top of the ballot
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2 ;
         middle_y = pdf.bounds.top - frame[:content][:top][:width]/2 + pdf.height_of(text)/2 ;
+        # draw text
         pdf.text(text, :style => :bold, :align => :center, :size => 8);
       end
       
+      # draw the text at that bottom of the ballot      
       def frame_content_bottom(ballot_config)
         pdf = ballot_config.pdf
         precinct = ballot_config.precinct
         frame = ballot_config.frame
+        
         text = "#{precinct.precinct.display_name} - #{precinct.display_name.gsub(/ds-\d+-/, '')}"
+        # center text
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2;
         middle_y = pdf.bounds.bottom + frame[:content][:bottom][:width]/2 - pdf.height_of(text)/2;
+        #draw text
         pdf.draw_text(text, :at => [middle_x, middle_y+10], :size => 8, :style => :bold);
       end
-
+      
+      # draw the text in the ballot header
       def contents_header(ballot_config)
         pdf = ballot_config.pdf
         precinct = ballot_config.precinct
         template = ballot_config.template
+
+        # draw yellow background for the header
         orig_color = pdf.fill_color;
         pdf.fill_color('F0E68C');
         rect_x = 36;
@@ -83,7 +102,11 @@ module ::TTV
         rect_width = 430;
         rect_height = 57;
         pdf.fill_rectangle([rect_x, rect_y], rect_width, rect_height);
+
+        # restore color
         pdf.fill_color(orig_color);
+
+        # draw header 
         edate = 'November 2, 2010';
         pdf.move_down 14 ;
         pdf.text("#{template.ballot_title}", :align => :center, :style => :bold );
@@ -91,7 +114,7 @@ module ::TTV
         pdf.text("#{precinct.precinct.display_name}\n#{edate}", :align => :center );
         
         # TODO: move instruction rendering out of header rendering
-        # here we render instructions within the header
+        # render instructions within the header
         pdf.stroke_line(0, pdf.bounds.top - 82, pdf.bounds.width, pdf.bounds.top - 82);
         pdf.bounding_box([5, pdf.bounds.top - 82], :width => pdf.bounds.width-10, :height => pdf.bounds.height - 82) do;
           pdf.move_down(3);
