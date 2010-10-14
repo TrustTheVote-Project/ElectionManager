@@ -24,8 +24,8 @@
             </p>
             <p>
                 <%-#= image_tag @asset.asset.url %>
-                <%-#= image_tag @asset.asset.url(:medium) %>
-                <%= image_tag @asset.asset.url(:thumb) %>
+                <%= image_tag(@asset.asset.url(:medium)) %>
+                <%= image_tag(@asset.asset.url(:thumb)) %>
             </p>
             <div class="wat-cf">
                 <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_asset_path(@asset)) %>

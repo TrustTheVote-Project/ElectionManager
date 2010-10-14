@@ -9,31 +9,19 @@ module ApplicationHelper
       :locals => { :options => options, :model => model} unless messages.empty?
   end
   
-  #
-  # Pretty print objects, to be used in views
-  #
-  def pp_debug(obj)
-    '<pre>' +
-    h(obj.pretty_inspect) +
-    '</pre>'
-  end
-
-  def icon_helper
-    curr_jurisd = current_context.jurisdiction
-    if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
-      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdictions)
+ # @TODO: change a little when DistrictSet and Jurisdiction model are disentangled
+  def jurisdiction_logo_thumbnail(jurisd)
+    if jurisd.nil? || !jurisd.has_logo?
+      image_tag("ttv-100.png", :class =>"avatar")
     else
-      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdictions)
+      ass = Asset.ident_is(jurisd.logo_ident).first
+      image_tag(ass.asset.url(:thumb), :class => "avatar")
     end
   end
 
-  def icon_for district_set
-   return image_tag("ttv-100.png", :class =>"avatar") unless district_set.icon?
-   return image_tag(district_set.icon.url(:thumb), :class => "avatar") if district_set.icon?
-  end
 
-  def link_icon_for district_set
-    link_to(icon_for(district_set), set_jurisdiction_path(district_set))
+  def link_logo_for jurisdiction
+    link_to(jurisdiction_logo_thumbnail(jurisdiction), set_jurisdiction_path(jurisdiction))
   end
 
   # HTML for header that is over all pages

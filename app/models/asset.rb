@@ -9,5 +9,4 @@ class Asset < ActiveRecord::Base
       self.save!
     end
   end
-
 end
