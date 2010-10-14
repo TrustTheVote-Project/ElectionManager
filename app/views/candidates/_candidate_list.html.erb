@@ -2,13 +2,13 @@
   <table class="table">
     <tr>
        <th>
-        <%= t("activerecord.attributes.candidate.display_name", :default => t("activerecord.labels.display_name", :default => "Name")) %>
+        <%= t("ttv.display_name", :default => "Display Name") %>
       </th>
       <th>
-        <%= t("web-app-theme.party", :default => "Party") %>
+        <%= t("ttv.party", :default => "Party") %>
       </th>
       <th>
-        <%= t("web-app-theme.contest", :default => "Contest") %>
+        <%= t("ttv.contest", :default => "Contest") %>
       </th>
       <th class="last">
         &nbsp;
@@ -26,7 +26,7 @@
         <%= link_to candidate.contest.display_name, contest_path(candidate.contest) %>
       </td>
       <td class="last">
-        <%= link_to "#{t("web-app-theme.show", :default => "Show")}", candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", candidate_path(candidate), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        <%= link_to "#{t("ttv.show", :default => "Show")}", candidate_path(candidate) %>|<%= link_to "#{t("ttv.edit", :default => "Edit")}", edit_candidate_path(candidate) %>|<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", candidate_path(candidate), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
       </td>
     </tr>
     <% end -%>

@@ -2,15 +2,15 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
       <li class="first active">
-        <%= link_to "#{t("web-app-theme.list", :default => "List")}", candidates_path %>
+        <%= link_to "#{t("ttv.list", :default => "List")}", candidates_path %>
       </li>
       <li>
-        <%= link_to "#{t("web-app-theme.new", :default => "New")}", new_candidate_path %>
+        <%= link_to "#{t("ttv.new", :default => "New")}", new_candidate_path %>
       </li>
     </ul>
   </div>
   <div class="content">
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All") %>Candidates</h2>
+    <h2 class="title"><%= t("ttv.all", :default => "All") %>Candidates</h2>
     <%= render :partial => 'candidate_list' %>
   </div>
 </div>

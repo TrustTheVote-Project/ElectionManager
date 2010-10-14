@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("ttv.list", :default => "List")}", assets_path  %></li>
+      <li class="active"><%= link_to "#{t("ttv.new", :default => "New")}", new_asset_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("ttv.new", :default => "New")%>  Asset</h2>
+    <div class="inner">
+      <% form_for :asset, @asset, :url => assets_path, :html => { :class => :form, :multipart => true } do |f| -%>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

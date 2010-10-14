@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ident: MyString
+  kind: MyString
+  file_name: MyString
+  file_size: 1
+  updated_at: 
+
+two:
+  ident: MyString
+  kind: MyString
+  file_name: MyString
+  file_size: 1
+  updated_at: 

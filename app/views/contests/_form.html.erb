@@ -28,7 +28,7 @@
     <%= f.collection_select(:election_id, elections, :id, :display_name) if current_context.election.nil? %>
 </div>
 <div class="group">
-    <%= f.label :position, t("activerecord.attributes.contest.position", :default => "Order"), :class => :label %>
+    <%= f.label :position, t("ttv.order", :default => "Order"), :class => :label %>
     <%= f.text_field :position, :class => 'text_field' %>
     <span class="description">Order in which contest will be displayed</span>
 </div>

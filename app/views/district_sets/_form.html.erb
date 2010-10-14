@@ -1,29 +1,28 @@
 
   <div class="group">
-    <%= f.label :display_name, t("activerecord.attributes.district_set.display_name", :default => "Display name"), :class => :label %>
+    <%= f.label :display_name, t("ttv.display_name", :default => "Display name"), :class => :label %>
     <%= f.text_field :display_name, :class => 'text_field' %>
     <span class="description">Name of jurisdiction</span>
   </div>
 
   <div class="group">
-    <%= f.label :secondary_name, t("activerecord.attributes.district_set.secondary_name", :default => "Secondary name"), :class => :label %>
+    <%= f.label :secondary_name, t("ttv.secondary_name", :default => "Secondary name"), :class => :label %>
     <%= f.text_field :secondary_name, :class => 'text_field' %>
     <span class="description">Subtitle of jurisdiction, displayed below name</span>
   </div>
   
   <div class="group">
-    <%= f.label :descriptive_text, t("activerecord.attributes.district_set.descriptive_text", :default => "Descriptive text"), :class => :label %>
+    <%= f.label :descriptive_text, t("ttv.descriptive_text", :default => "Descriptive text"), :class => :label %>
     <%= f.text_field :descriptive_text, :class => 'text_field' %>
     <span class="description">Description text to be displayed on jurisdiction selection page</span>
   </div>
 
   <div class="group">
-    <%= f.label :secondary_name, t("activerecord.attributes.district_set.icon", :default => "Icon"), :class => :label %>
-    <%= icon_for @district_set %>
-    <br />
-    <%= f.file_field :icon %>
-    <br />
-    <span class="description">Optional icon for jurisdiction</span>
+    <% assets = Asset.find(:all, :order => :display_name) %>
+    <%= f.label :logo_ident, t("ttv.logo", :default => "Logo"), :class => :label %>
+    <%= f.collection_select(:logo_ident, assets, :ident, :display_name, :selected => :logo_ident) %>
+
+    <span class="description">Optional logo for jurisdiction</span>
   </div>
   
 <div class="group navform wat-cf">
