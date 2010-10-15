@@ -168,14 +168,14 @@ body:
     position: 1
   - display_name: Joyce Robinson-Paul
     ident: cand-1032
-    contest_ident: cont-usrep
+    contest_ident: usrep
     party_display_name: STATEHOOD GREEN
     position: 2
   - display_name: Mike Panetta
     ident: cand-1033
     contest_ident: cont-usrep
     party_display_name: DEMOCRATIC
-    position: 3  
+    position: 3
   - display_name:  Lisa Kralovic
     contest_ident: cont-anc1A01
     position:  1
@@ -800,6 +800,9 @@ body:
   - display_name:  Joyce Robinson-Paul
     contest_ident: cont-anc5C02
     position:  1
+  - display_name:  COLUMBIA 2 Joyce Robinson-Paul
+    contest_ident: cont-ancDISTRICT
+    position:  OF
   - display_name:  Sylvia Pinkney
     contest_ident: cont-anc5C02
     position:  2
@@ -1109,6 +1112,9 @@ body:
   - display_name:  Liz Pecot
     contest_ident: cont-anc7D05
     position:  2
+  - display_name:  COLUMBIA 3 Rick Tingling-Clemmons
+    contest_ident: cont-ancDISTRICT
+    position:  OF
   - display_name:  Willette Seaward
     contest_ident: cont-anc7D06
     position:  1

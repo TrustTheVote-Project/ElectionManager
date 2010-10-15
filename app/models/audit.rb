@@ -326,7 +326,8 @@ class Audit < ActiveRecord::Base
     when ["missing_ident", "abort"]
       raise "Import aborted"
     when ["missing_ident", "generate"]
-      puts "rps: audit.rb... missing_ident, generate -- no op"
+      election_data_hash["body"][alert.objects[0]][alert.objects[1].to_i]["ident"] = "CAND-#{ActiveSupport::SecureRandom.hex}"
+      puts "rps: generate: #{election_data_hash["body"][alert.objects[0]][alert.objects[1].to_i].inspect}"
       Alert.delete(alert)
     else
       raise ArgumentError, "Invalid code in Audit#process_alert"
