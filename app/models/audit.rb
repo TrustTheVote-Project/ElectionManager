@@ -60,8 +60,16 @@ class Audit < ActiveRecord::Base
     target_sections.each do |target_sect|
       edh_sect = election_data_hash["body"][target_sect]
       if !edh_sect.nil?
-        edh_sect.each do |sect_element|
-          raise ArgumentError, "Invalid format. Section #{target_sect} does not have a required ident"  if sect_element["ident"].nil?
+        edh_sect.each_index do |element_index|
+          if election_data_hash["body"][target_sect][element_index]["ident"].nil?
+            alerts << Alert.new(:message => "An item in the #{target_sect} does not have a required ident" + ". What would you like to do? ", 
+                                :alert_type => "missing_ident",
+                                :options => {"skip" => "Skip this item",
+                                             "generate" => "Generate one on the fly",
+                                             "abort" => "Abort import"},
+                                :objects => [target_sect, element_index],
+                                :default_option => "generate")
+          end
         end
       end
     end
@@ -312,6 +320,14 @@ class Audit < ActiveRecord::Base
       Alert.delete(alert)
     when ["no_district_type_in_quest","abort"]
       raise "Import aborted"
+    when ["missing_ident", "skip"]
+      election_data_hash["body"][alert.objects[0]].slice!(alert.objects[1].to_i)
+      Alert.delete(alert)
+    when ["missing_ident", "abort"]
+      raise "Import aborted"
+    when ["missing_ident", "generate"]
+      puts "rps: audit.rb... missing_ident, generate -- no op"
+      Alert.delete(alert)
     else
       raise ArgumentError, "Invalid code in Audit#process_alert"
     end
