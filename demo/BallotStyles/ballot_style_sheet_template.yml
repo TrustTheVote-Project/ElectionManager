@@ -1,0 +1,157 @@
+# This is a template showing all the properties accepted in a Ballot Style Sheet. It is also the documentation for 
+# all the properties.
+--- 
+:ballot_layout:
+  :columns: 3                                # New property
+#  :create_a_headers: :false                 # No longer valid. See header sections below.
+  :radio_box_asset:                          # New property
+    :on_ident:    "radio_box_on"             # Value is an Asset ident (new feature)
+    :off_ident:   "radio_box_off"
+  :checkbox_box_asset:                       # New property
+    :on_ident:    "check_box_on"             # Value is an Asset ident (new feature)
+    :off_ident:   "check_box_off"
+  :questions_columns: 2                      # New property. number means to span questions across 2 cols. Otherwise say :auto
+
+:page: 
+  :margin: 
+    :top: 0      # in pixels
+    :left: 0    
+    :bottom: 0
+    :right: 0
+  :size: "LETTER"
+  :background_color: "000000"      # Change from :background, to have consistent naming. 
+  :layout: :portrait
+:frame: 
+  :margin:       # pixels between the edge of the frame and the content of the frame. 
+    :top: 0
+    :left: 0
+    :bottom: 0
+    :right: 0
+  :content: 
+    :top: 
+      :rotate: 0
+      :text: Sample AIGA Ballot
+      :width: 50
+    :left: 
+      :rotate: 90
+      :text: "    132301113              Sample AIGA Ballot"
+      :width: 36
+    :bottom: 
+      :rotate: 0
+      :text: Sample AIGA Ballot
+      :width: 36
+    :right: 
+      :rotate: 90
+      :text: "Sample AIGA Ballot"
+      :width: 36
+  :border: 
+    :style: :none                # New value, meaning no border. Could also ommit the :border section.
+    :color: "000000"
+    :width: 0
+  :background_color: "000000"    # New property, overall background of the frame.
+:contents: 
+  :border: 
+    :style: :none                # New value, meaning no border.
+    :color: "000000"
+    :width: 1
+  :header: 
+    :background_color: "000000"
+    :text: Header Text
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 36
+    :width: 1.0                  # What does 1.0 mean? Is it 100%?
+    :border: 
+      :style: :none
+      :color: "000000"
+      :width: 1
+  :body: 
+    :background_color: "000000"
+    :text:                       # What is this text?
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 1.0                        # Assume 1.0 means 100%?
+    :width: 1.0
+    :border: 
+      :style: :none
+      :color: "000000"
+      :width: 0
+  :footer: 
+    :background_color: "#00FF00"
+    :text: Footer Text
+    :margin: 
+      :top: 0
+      :left: 0
+      :bottom: 0
+      :right: 0
+    :height: 0.0                          # Hm. What does 0.0 mean?
+    :width: 1.0
+    :border: 
+      :style: :solid
+      :color: FF0000
+      :width: 0
+  
+:instructions:                           # New property. Instruction text/graphic boxes
+  :type: :column                         # New property, a full column devoted to instructions.
+                                         # Could also be :full_width
+  :position: 1                           # Meaning first column. In case of :full_width, this is :header or :footer
+  :graphics:                             # Graphic placed inside the instruction box
+    :asset_ident: asset-ident            # Asset ident
+    :placement:                          # Coordinate of top left. Graphic is not scaled.
+      :top:   10
+      :left:  10
+  :text
+    :asset_ident: asset-ident            # Text asset containing instructional text
+    :rectangle:
+      :top:  50
+      :left: 50
+      :bottom: 200                        # Text requires bottom and right too, for wrapping 
+      :right: 300
+    :font:
+      :family
+      :size
+      :leading
+      :tracking
+      :alignment
+    :margin:
+      :top:
+      :left:
+      :bottom:
+      :right
+  :borders:
+    :top:
+      :color: "00000000"                # Hex code for border along top of instruction rectangle
+      :thickness: 1                     # Pixels
+      :style: "single-line"             # Also allows "dotted-line"
+    :left:
+      :color: "00000000"                # Hex code for border along top of instruction rectangle
+      :thickness: 1                     # Pixels
+      :style: "single-line"             # Also allows "dotted-line"
+    :bottom:
+      :color: "00000000"                # Hex code for border along top of instruction rectangle
+      :thickness: 1                     # Pixels
+      :style: "single-line"             # Also allows "dotted-line"
+    :right:
+      :color: "00000000"                # Hex code for border along top of instruction rectangle
+      :thickness: 1                     # Pixels
+      :style: "single-line"             # Also allows "dotted-line"
+  :background_color: "00000000"         # Hex code for whole instruction box background
+
+:district_header
+  :present:  :true                      # Replaces :create_a_headers from before
+  :font: {:family: x, :size: x, :leading: x, :tracking: x, :alignment: x} # Valid YML alternative compact syntax (I think)
+  :margin: {:top: x, :left: x, :bottom: x, :right: x}
+  :borders:
+    :top: {:color: "000000", :thickness: 1, :style: "single-line"}
+    :left:
+    :bottom:
+    :right:
+  :background_color: "00000000"
+
+# Same exact pattern for :contest_header, :voting_rule_header, :question_header, :questions, :contests
