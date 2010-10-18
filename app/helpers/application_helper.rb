@@ -19,9 +19,17 @@ module ApplicationHelper
     end
   end
 
+  def icon_helper
+    curr_jurisd = current_context.jurisdiction
+    if curr_jurisd.nil? or !DistrictSet.find(curr_jurisd).icon?
+      link_to(image_tag("ttv-100.png", :class => "ttv-logo"), :current_jurisdictions)
+     else
+      link_to(image_tag(DistrictSet.find(curr_jurisd).icon.url(:thumb), :class => "ttv-logo"), :current_jurisdictions)
+     end
+   end
 
   def link_logo_for jurisdiction
-    link_to(jurisdiction_logo_thumbnail(jurisdiction), set_jurisdiction_path(jurisdiction))
+    link_to(jurisdiction_logo_thumbnail(jurisdiction), :current_jurisdictions)
   end
 
   # HTML for header that is over all pages

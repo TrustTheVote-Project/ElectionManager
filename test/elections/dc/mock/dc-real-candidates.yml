@@ -1,0 +1,1273 @@
+---
+body:
+ candidates:
+  - display_name: Queen Noble
+    ident: cand-1000
+    contest_ident: cont-delegate
+    party_display_name: H.E.R.O.S.H.E.R.O.
+    position: 1
+  - display_name: Missy Reilly Smith
+    ident: cand-1001
+    contest_ident: cont-delegate
+    party_display_name: REPUBLICAN
+    position: 2
+  - display_name: Rick Tingling-Clemmons
+    ident: cand-1002
+    contest_ident: cont-delegate
+    party_display_name: STATEHOOD GREEN
+    position: 3
+  - display_name: Eleanor Holmes Norton
+    ident: cand-1003
+    contest_ident: cont-delegate
+    party_display_name: DEMOCRATIC
+    position: 4
+
+  - display_name: Carlos Allen
+    ident: cand-1004
+    contest_ident: cont-mayor
+    party_display_name: INDEPENDENT
+    position: 1
+  - display_name: Faith
+    ident: cand-1005
+    contest_ident: cont-mayor
+    party_display_name: STATEHOOD GREEN
+    position: 2
+  - display_name: Omari Musa
+    ident: cand-1006
+    contest_ident: cont-mayor
+    party_display_name: SOCIALIST WORKERS
+    position: 3
+  - display_name: Vincent C. Gray
+    ident: cand-1007
+    contest_ident: cont-mayor
+    party_display_name: DEMOCRATIC
+    position: 4
+
+  - display_name: Kwame R. Brown
+    ident: cand-1008
+    contest_ident: cont-chairman
+    party_display_name: DEMOCRATIC
+    position: 1
+  - display_name: Ann C. Wilcox
+    ident: cand-1009
+    contest_ident: cont-chairman
+    party_display_name: STATEHOOD GREEN
+    position: 2
+
+  - display_name: Richard Urban
+    ident: cand-1010
+    contest_ident: cont-atlarge
+    party_display_name: INDEPENDENT
+    position: 1
+  - display_name: Phil Mendelson
+    ident: cand-1011
+    contest_ident: cont-atlarge
+    party_display_name: DEMOCRATIC
+    position: 2
+  - display_name: David Catania
+    ident: cand-1012
+    contest_ident: cont-atlarge
+    party_display_name: INDEPENDENT
+    position: 3
+  - display_name: David Schwartzman
+    ident: cand-1013
+    contest_ident: cont-atlarge
+    party_display_name: STATEHOOD GREEN
+    position: 4
+
+  - display_name: Jim Graham
+    ident: cand-1014
+    contest_ident: cont-council1
+    party_display_name: DEMOCRATIC
+    position: 1
+  - display_name: Nancy Shia
+    ident: cand-1015
+    contest_ident: cont-council1
+    party_display_name: STATEHOOD GREEN
+    position: 2
+  - display_name: Marc Morgan
+    ident: cand-1016
+    contest_ident: cont-council1
+    party_display_name: REPUBLICAN
+    position: 3
+
+  - display_name: Dotti Love Wade
+    ident: cand-1017
+    contest_ident: cont-educ1
+    position: 1
+  - display_name: Patrick Mara
+    ident: cand-1018
+    contest_ident: cont-educ1
+    position: 2
+
+  - display_name: Dave Hedgepeth
+    ident: cand-1019
+    contest_ident: cont-council3
+    party_display_name: REPUBLICAN
+    position: 1
+  - display_name: Mary Cheh
+    ident: cand-1020
+    contest_ident: cont-council3
+    party_display_name: DEMOCRATIC
+    position: 2
+
+  - display_name: Laura McGiffert Slover
+    ident: cand-1021
+    contest_ident: cont-educ3
+    position: 1
+
+  - display_name: Harry Tommy Thomas, Jr.
+    ident: cand-1022
+    contest_ident: cont-council5
+    party_display_name: DEMOCRATIC
+    position: 1
+  - display_name: Tim Day
+    ident: cand-1023
+    contest_ident: cont-council5
+    party_display_name: REPUBLICAN
+    position: 2
+  - display_name: Kathy Henderson
+    ident: cand-1024
+    contest_ident: cont-council5
+    party_display_name: INDEPENDENT
+    position: 3
+
+  - display_name: Darlene Glymph
+    ident: cand-1025
+    contest_ident: cont-educ5
+    position: 1
+  - display_name: Mark Jones
+    ident: cand-1026
+    contest_ident: cont-educ5
+    position: 2
+
+  - display_name: Tommy Wells
+    ident: cand-1027
+    contest_ident: cont-council6
+    party_display_name: DEMOCRATIC
+    position: 1
+  - display_name: Jim DeMartino
+    ident: cand-1028
+    contest_ident: cont-council6
+    party_display_name: REPUBLICAN
+    position: 2
+
+  - display_name: Monica Warren-Jones
+    ident: cand-1029
+    contest_ident: cont-educ6
+    position: 1
+  - display_name: Melissa Rohan
+    ident: cand-1030
+    contest_ident: cont-educ6
+    position: 2
+
+  - display_name: Nelson Rimensnyder
+    ident: cand-1031
+    contest_ident: cont-usrep
+    party_display_name: REPUBLICAN
+    position: 1
+  - display_name: Joyce Robinson-Paul
+    ident: cand-1032
+    contest_ident: cont-usrep
+    party_display_name: STATEHOOD GREEN
+    position: 2
+  - display_name: Mike Panetta
+    ident: cand-1033
+    contest_ident: cont-usrep
+    party_display_name: DEMOCRATIC
+    position: 3  
+  - display_name:  Lisa Kralovic
+    contest_ident: cont-anc1A01
+    position:  1
+  - display_name:  Vickey A. Wright-Smith
+    contest_ident: cont-anc1A02
+    position:  1
+  - display_name:  Betty Pair
+    contest_ident: cont-anc1A04
+    position:  1
+  - display_name:  Mack A. James
+    contest_ident: cont-anc1A04
+    position:  2
+  - display_name:  Laina Aquiline
+    contest_ident: cont-anc1A05
+    position:  1
+  - display_name:  William (Bill) Brown Jr.
+    contest_ident: cont-anc1A06
+    position:  1
+  - display_name:  Miriam Z. Savad
+    contest_ident: cont-anc1A06
+    position:  2
+  - display_name:  Richard Du Beshter
+    contest_ident: cont-anc1A06
+    position:  3
+  - display_name:  Thomas Boisvert
+    contest_ident: cont-anc1A07
+    position:  1
+  - display_name:  Kent Boese
+    contest_ident: cont-anc1A08
+    position:  1
+  - display_name:  Bobby Holmes
+    contest_ident: cont-anc1A09
+    position:  1
+  - display_name:  Lakeisha G. Thomas
+    contest_ident: cont-anc1A09
+    position:  1
+  - display_name:  Sam Moore
+    contest_ident: cont-anc1A09
+    position:  1
+  - display_name:  Jonathan Madison
+    contest_ident: cont-anc1A10
+    position:  1
+  - display_name:  Lenwood (Lenny) Johnson
+    contest_ident: cont-anc1A10
+    position:  1
+  - display_name:  Kat Skiles
+    contest_ident: cont-anc1A11
+    position:  1
+  - display_name:  Myla Moss
+    contest_ident: cont-anc1B01
+    position:  1
+  - display_name:  Aaron Spencer
+    contest_ident: cont-anc1B02
+    position:  1
+  - display_name:  Peter J. Raia Sr
+    contest_ident: cont-anc1B02
+    position:  2
+  - display_name:  Tucker VE Gallagher
+    contest_ident: cont-anc1B02
+    position:  3
+  - display_name:  Sedrick Muhammad
+    contest_ident: cont-anc1B03
+    position:  1
+  - display_name:  Deborah R. Thomas
+    contest_ident: cont-anc1B04
+    position:  1
+  - display_name:  William M. Girardo
+    contest_ident: cont-anc1B04
+    position:  2
+  - display_name:  Mary M. Streett
+    contest_ident: cont-anc1B05
+    position:  1
+  - display_name:  Charles Meisch
+    contest_ident: cont-anc1B06
+    position:  1
+  - display_name:  Juan E. Lopez
+    contest_ident: cont-anc1B07
+    position:  1
+  - display_name:  Brittany Kademian
+    contest_ident: cont-anc1B07
+    position:  2
+  - display_name:  RT Akinmboni
+    contest_ident: cont-anc1B08
+    position:  1
+  - display_name:  Ahnna Smith
+    contest_ident: cont-anc1B08
+    position:  2
+  - display_name:  Shahrzad M. Rastegar
+    contest_ident: cont-anc1B09
+    position:  1
+  - display_name:  Lauren McKenzie
+    contest_ident: cont-anc1B09
+    position:  2
+  - display_name:  Tony Norman
+    contest_ident: cont-anc1B10
+    position:  1
+  - display_name:  E. Gail Anderson Holness
+    contest_ident: cont-anc1B11
+    position:  1
+  - display_name:  Stacey Moye
+    contest_ident: cont-anc1C01
+    position:  1
+  - display_name:  Bill O' Field
+    contest_ident: cont-anc1C02
+    position:  1
+  - display_name:  Martis (Marty) Davis
+    contest_ident: cont-anc1C02
+    position:  2
+  - display_name:  Jose Sueiro
+    contest_ident: cont-anc1C03
+    position:  1
+  - display_name:  Olivier Kamanda
+    contest_ident: cont-anc1C03
+    position:  2
+  - display_name:  Adam Eidinger
+    contest_ident: cont-anc1C03
+    position:  3
+  - display_name:  Steve Lanning
+    contest_ident: cont-anc1C06
+    position:  1
+  - display_name:  Raymond Mosley
+    contest_ident: cont-anc1C06
+    position:  2
+  - display_name:  Wilson Reynolds
+    contest_ident: cont-anc1C07
+    position:  1
+  - display_name:  Kathie Boettrich
+    contest_ident: cont-anc1C08
+    position:  1
+  - display_name:  Laura Wilson Phelan
+    contest_ident: cont-anc1D02
+    position:  1
+  - display_name:  Jack McKay
+    contest_ident: cont-anc1D03
+    position:  1
+  - display_name:  Gregg Edwards
+    contest_ident: cont-anc1D04
+    position:  1
+  - display_name:  Phil Greiner
+    contest_ident: cont-anc1D04
+    position:  2
+  - display_name:  China Terrell
+    contest_ident: cont-anc1D05
+    position:  1
+  - display_name:  Angelia D. Scott
+    contest_ident: cont-anc1D06
+    position:  2
+  - display_name:  David M. Lehrman
+    contest_ident: cont-anc2A01
+    position:  1
+  - display_name:  Rebecca Coder
+    contest_ident: cont-anc2A02
+    position:  1
+  - display_name:  Asher Corson
+    contest_ident: cont-anc2A03
+    position:  1
+  - display_name:  Armando Irizarry
+    contest_ident: cont-anc2A04
+    position:  1
+  - display_name:  Eric Malinen
+    contest_ident: cont-anc2A05
+    position:  1
+  - display_name:  Florence E. Harmon
+    contest_ident: cont-anc2A06
+    position:  1
+  - display_name:  Mike Feldstein
+    contest_ident: cont-anc2B01
+    position:  1
+  - display_name:  Kevin O' Connor
+    contest_ident: cont-anc2B02
+    position:  1
+  - display_name:  Bob Meehan
+    contest_ident: cont-anc2B03
+    position:  1
+  - display_name:  Jack Jacobson
+    contest_ident: cont-anc2B04
+    position:  1
+  - display_name:  Victor Wexler
+    contest_ident: cont-anc2B05
+    position:  1
+  - display_name:  Mike Silverstein
+    contest_ident: cont-anc2B06
+    position:  1
+  - display_name:  Phil Carney
+    contest_ident: cont-anc2B07
+    position:  1
+  - display_name:  Will Stephens
+    contest_ident: cont-anc2B08
+    position:  1
+  - display_name:  Ramon Estrada
+    contest_ident: cont-anc2B09
+    position:  1
+  - display_name:  Sunit Talapatra
+    contest_ident: cont-anc2B09
+    position:  1
+  - display_name:  Alexander M. (Alex) Padro
+    contest_ident: cont-anc2C01
+    position:  1
+  - display_name:  Kevin Chapple
+    contest_ident: cont-anc2C02
+    position:  1
+  - display_name:  Leroy Joseph Thorpe, Jr.
+    contest_ident: cont-anc2C02
+    position:  2
+  - display_name:  Doris L. Brooks
+    contest_ident: cont-anc2C03
+    position:  1
+  - display_name:  Rickey Williams, Jr.
+    contest_ident: cont-anc2C03
+    position:  1
+  - display_name:  Theresa Sule
+    contest_ident: cont-anc2C04
+    position:  1
+  - display_name:  Rachelle P. Nigro
+    contest_ident: cont-anc2C04
+    position:  2
+  - display_name:  Cary Sheih
+    contest_ident: cont-anc2C04
+    position:  3
+  - display_name:  Derrick Barrett
+    contest_ident: cont-anc2C04
+    position:  4
+  - display_name:  David R. Bender
+    contest_ident: cont-anc2D01
+    position:  1
+  - display_name:  Ed Solomon
+    contest_ident: cont-anc2E01
+    position:  1
+  - display_name:  Ron Lewis
+    contest_ident: cont-anc2E02
+    position:  1
+  - display_name:  Jeffrey Jones
+    contest_ident: cont-anc2E03
+    position:  1
+  - display_name:  Jake Gregory Sticka
+    contest_ident: cont-anc2E04
+    position:  1
+  - display_name:  Bill Starrels
+    contest_ident: cont-anc2E05
+    position:  1
+  - display_name:  Tom Birch
+    contest_ident: cont-anc2E06
+    position:  1
+  - display_name:  Charles F. Eason, Jr.
+    contest_ident: cont-anc2E07
+    position:  1
+  - display_name:  Charles Reed
+    contest_ident: cont-anc2F01
+    position:  1
+  - display_name:  Joshua H. Hubner
+    contest_ident: cont-anc2F02
+    position:  1
+  - display_name:  Emily Barton
+    contest_ident: cont-anc2F02
+    position:  2
+  - display_name:  Samuel Goekjian
+    contest_ident: cont-anc2F03
+    position:  1
+  - display_name:  Kate McMahon
+    contest_ident: cont-anc2F06
+    position:  1
+  - display_name:  Michael Benardo
+    contest_ident: cont-anc2F06
+    position:  2
+  - display_name:  Ben Thielen
+    contest_ident: cont-anc3B01
+    position:  1
+  - display_name:  Jackie Blumenthal
+    contest_ident: cont-anc3B02
+    position:  1
+  - display_name:  Alev Akbulut
+    contest_ident: cont-anc3B02
+    position:  2
+  - display_name:  Mark Stevens
+    contest_ident: cont-anc3B03
+    position:  1
+  - display_name:  Horace (Howie) Kreitzman
+    contest_ident: cont-anc3B04
+    position:  1
+  - display_name:  Brian A. Cohen
+    contest_ident: cont-anc3B05
+    position:  1
+  - display_name:  Lee Brian Reba
+    contest_ident: cont-anc3C01
+    position:  1
+  - display_name:  William Kummings
+    contest_ident: cont-anc3C02
+    position:  1
+  - display_name:  Matthew James Kozik
+    contest_ident: cont-anc3C03
+    position:  1
+  - display_name:  Anne-Marie Bairstow
+    contest_ident: cont-anc3C03
+    position:  2
+  - display_name:  Roger Burns
+    contest_ident: cont-anc3C04
+    position:  1
+  - display_name:  Leila J. Afzal
+    contest_ident: cont-anc3C05
+    position:  1
+  - display_name:  Trudy Reeves
+    contest_ident: cont-anc3C06
+    position:  1
+  - display_name:  Victor Silveira
+    contest_ident: cont-anc3C07
+    position:  1
+  - display_name:  Catherine May
+    contest_ident: cont-anc3C08
+    position:  1
+  - display_name:  Nancy J. MacWood
+    contest_ident: cont-anc3C09
+    position:  1
+  - display_name:  Kent Slowinski
+    contest_ident: cont-anc3D01
+    position:  1
+  - display_name:  Elizabeth (Betsy) Sandza
+    contest_ident: cont-anc3D01
+    position:  2
+  - display_name:  Tom Smith
+    contest_ident: cont-anc3D02
+    position:  1
+  - display_name:  Nan Wells
+    contest_ident: cont-anc3D03
+    position:  1
+  - display_name:  Stu Ross
+    contest_ident: cont-anc3D04
+    position:  1
+  - display_name:  William Philip Thomas
+    contest_ident: cont-anc3D05
+    position:  1
+  - display_name:  Ann F. Heuer
+    contest_ident: cont-anc3D06
+    position:  1
+  - display_name:  John Curran
+    contest_ident: cont-anc3D06
+    position:  2
+  - display_name:  Lee P. Minichiello
+    contest_ident: cont-anc3D08
+    position:  1
+  - display_name:  Ann Haas
+    contest_ident: cont-anc3D09
+    position:  1
+  - display_name:  Petar A. Dimtchev
+    contest_ident: cont-anc3D09
+    position:  2
+  - display_name:  Jonathan McHugh
+    contest_ident: cont-anc3E01
+    position:  1
+  - display_name:  Beverly Sklover
+    contest_ident: cont-anc3E01
+    position:  2
+  - display_name:  Matthew Frumin
+    contest_ident: cont-anc3E02
+    position:  1
+  - display_name:  Jonathan Bender
+    contest_ident: cont-anc3E03
+    position:  1
+  - display_name:  Tom Quinn
+    contest_ident: cont-anc3E04
+    position:  1
+  - display_name:  Sally J. Greenberg
+    contest_ident: cont-anc3E04
+    position:  2
+  - display_name:  Sam J. Serebin
+    contest_ident: cont-anc3E05
+    position:  1
+  - display_name:  Adam Tope
+    contest_ident: cont-anc3F01
+    position:  1
+  - display_name:  Mike Siegel
+    contest_ident: cont-anc3F01
+    position:  2
+  - display_name:  Karen Lee Perry
+    contest_ident: cont-anc3F02
+    position:  1
+  - display_name:  Karen Beiley
+    contest_ident: cont-anc3F03
+    position:  1
+  - display_name:  Tom Whitley
+    contest_ident: cont-anc3F04
+    position:  1
+  - display_name:  Roman Jankowski
+    contest_ident: cont-anc3F05
+    position:  1
+  - display_name:  Cathy Wiss
+    contest_ident: cont-anc3F06
+    position:  1
+  - display_name:  Bob Summersgill
+    contest_ident: cont-anc3F07
+    position:  1
+  - display_name:  Bayard Brewin
+    contest_ident: cont-anc3G01
+    position:  1
+  - display_name:  Carolyn (Callie) Cook
+    contest_ident: cont-anc3G01
+    position:  2
+  - display_name:  Gary Thompson
+    contest_ident: cont-anc3G02
+    position:  1
+  - display_name:  Margaret (Peggy) Sewell
+    contest_ident: cont-anc3G03
+    position:  1
+  - display_name:  Allen E. Beach
+    contest_ident: cont-anc3G04
+    position:  1
+  - display_name:  David Engel
+    contest_ident: cont-anc3G05
+    position:  1
+  - display_name:  Jim McCarthy
+    contest_ident: cont-anc3G06
+    position:  1
+  - display_name:  Henry Griffin
+    contest_ident: cont-anc3G07
+    position:  1
+  - display_name:  Jack J. Burriesci
+    contest_ident: cont-anc3G07
+    position:  2
+  - display_name:  Karl Kennedy
+    contest_ident: cont-anc4A01
+    position:  1
+  - display_name:  Dwayne M. Toliver
+    contest_ident: cont-anc4A02
+    position:  1
+  - display_name:  Stephen A (Steve) Whatley
+    contest_ident: cont-anc4A03
+    position:  1
+  - display_name:  Marian C. Bennett
+    contest_ident: cont-anc4A04
+    position:  1
+  - display_name:  Habieba Israel
+    contest_ident: cont-anc4A05
+    position:  1
+  - display_name:  Kimberly L. Boyd
+    contest_ident: cont-anc4A06
+    position:  1
+  - display_name:  Dave Wilson
+    contest_ident: cont-anc4A07
+    position:  1
+  - display_name:  Gale Black
+    contest_ident: cont-anc4A08
+    position:  1
+  - display_name:  Sara Green
+    contest_ident: cont-anc4B01
+    position:  1
+  - display_name:  Faith E. Wheeler
+    contest_ident: cont-anc4B02
+    position:  1
+  - display_name:  Monique-Michelle Smith
+    contest_ident: cont-anc4B03
+    position:  1
+  - display_name:  Frederick D. Grant
+    contest_ident: cont-anc4B03
+    position:  2
+  - display_name:  Gerald Long Sazon Jr
+    contest_ident: cont-anc4B04
+    position:  1
+  - display_name:  James J Sydnor
+    contest_ident: cont-anc4B04
+    position:  2
+  - display_name:  Joseph Alfred
+    contest_ident: cont-anc4B04
+    position:  3
+  - display_name:  Douglas E. Smith, Sr
+    contest_ident: cont-anc4B04
+    position:  4
+  - display_name:  Brenda K. Speaks
+    contest_ident: cont-anc4B05
+    position:  1
+  - display_name:  Blondine C. Hughes
+    contest_ident: cont-anc4B05
+    position:  2
+  - display_name:  Gloria D. Palmer
+    contest_ident: cont-anc4B06
+    position:  1
+  - display_name:  Judi Jones
+    contest_ident: cont-anc4B07
+    position:  1
+  - display_name:  Yvonne A. Jefferson
+    contest_ident: cont-anc4B08
+    position:  1
+  - display_name:  Michael Yates
+    contest_ident: cont-anc4C01
+    position:  1
+  - display_name:  Janet M. Myers
+    contest_ident: cont-anc4C02
+    position:  1
+  - display_name:  Steve Leraris
+    contest_ident: cont-anc4C04
+    position:  1
+  - display_name:  Joseph Vaughan
+    contest_ident: cont-anc4C05
+    position:  1
+  - display_name:  T. Tabron
+    contest_ident: cont-anc4C05
+    position:  2
+  - display_name:  David Tumblin
+    contest_ident: cont-anc4C06
+    position:  1
+  - display_name:  Shanel Anthony
+    contest_ident: cont-anc4C07
+    position:  1
+  - display_name:  Jeff Green
+    contest_ident: cont-anc4C08
+    position:  1
+  - display_name:  Timothy A. Jones
+    contest_ident: cont-anc4C08
+    position:  1
+  - display_name:  Joseph Martin
+    contest_ident: cont-anc4C09
+    position:  1
+  - display_name:  Robert H. Mandle
+    contest_ident: cont-anc4C10
+    position:  1
+  - display_name:  Lisa Colbert
+    contest_ident: cont-anc4D03
+    position:  1
+  - display_name:  Bill Quirk
+    contest_ident: cont-anc4D06
+    position:  1
+  - display_name:  Sandi Washington
+    contest_ident: cont-anc5A01
+    position:  1
+  - display_name:  Patricia Ann Roberts
+    contest_ident: cont-anc5A02
+    position:  1
+  - display_name:  Angel Sherri Alston
+    contest_ident: cont-anc5A03
+    position:  1
+  - display_name:  Antonio Baxter
+    contest_ident: cont-anc5A03
+    position:  1
+  - display_name:  Herman (Rip) Preston
+    contest_ident: cont-anc5A04
+    position:  1
+  - display_name:  John J. Feely, Jr.
+    contest_ident: cont-anc5A06
+    position:  1
+  - display_name:  John Daggett
+    contest_ident: cont-anc5A07
+    position:  1
+  - display_name:  Carolyn C. Steptoe
+    contest_ident: cont-anc5A07
+    position:  2
+  - display_name:  Timothy Thomas
+    contest_ident: cont-anc5A08
+    position:  1
+  - display_name:  Shirley Rivens Smith
+    contest_ident: cont-anc5A09
+    position:  1
+  - display_name:  Allen L. Tillman, Jr
+    contest_ident: cont-anc5A10
+    position:  1
+  - display_name:  Jehan Ashley Carter
+    contest_ident: cont-anc5A10
+    position:  2
+  - display_name:  Corey Arnez Griffin
+    contest_ident: cont-anc5A10
+    position:  3
+  - display_name:  Robert Bob King
+    contest_ident: cont-anc5A12
+    position:  1
+  - display_name:  Mercile Banks
+    contest_ident: cont-anc5B01
+    position:  1
+  - display_name:  William C. Shelton
+    contest_ident: cont-anc5B01
+    position:  1
+  - display_name:  Patricia Brown-Daniels
+    contest_ident: cont-anc5B02
+    position:  1
+  - display_name:  Regina James
+    contest_ident: cont-anc5B03
+    position:  1
+  - display_name:  Rayseen Woodland
+    contest_ident: cont-anc5B04
+    position:  1
+  - display_name:  Vaughn L. Bennett
+    contest_ident: cont-anc5B04
+    position:  2
+  - display_name:  Rosetta Davis
+    contest_ident: cont-anc5B05
+    position:  1
+  - display_name:  George Jackson
+    contest_ident: cont-anc5B06
+    position:  1
+  - display_name:  Thalia Wiggins
+    contest_ident: cont-anc5B06
+    position:  1
+  - display_name:  David L. Hooper
+    contest_ident: cont-anc5B07
+    position:  1
+  - display_name:  Laura A. Casperson
+    contest_ident: cont-anc5B07
+    position:  2
+  - display_name:  Arthur Yarbrough
+    contest_ident: cont-anc5B07
+    position:  3
+  - display_name:  Connell Wise
+    contest_ident: cont-anc5B08
+    position:  1
+  - display_name:  Tina Laskaris
+    contest_ident: cont-anc5B08
+    position:  2
+  - display_name:  Jacqueline Manning
+    contest_ident: cont-anc5B09
+    position:  1
+  - display_name:  Camille Jean-Esther Tucker
+    contest_ident: cont-anc5B10
+    position:  1
+  - display_name:  India A. Henderson
+    contest_ident: cont-anc5B10
+    position:  1
+  - display_name:  William H. (Bill) Myers, Jr.
+    contest_ident: cont-anc5B11
+    position:  1
+  - display_name:  Bradley Ashton Thomas
+    contest_ident: cont-anc5C01
+    position:  1
+  - display_name:  Kimberly Tignor
+    contest_ident: cont-anc5C01
+    position:  2
+  - display_name:  Joyce Robinson-Paul
+    contest_ident: cont-anc5C02
+    position:  1
+  - display_name:  Sylvia Pinkney
+    contest_ident: cont-anc5C02
+    position:  2
+  - display_name:  W. Hugh Youngblood
+    contest_ident: cont-anc5C03
+    position:  1
+  - display_name:  John Salatti
+    contest_ident: cont-anc5C04
+    position:  1
+  - display_name:  Denise L. Wright
+    contest_ident: cont-anc5C05
+    position:  1
+  - display_name:  Timothy (Tim) Clark
+    contest_ident: cont-anc5C05
+    position:  2
+  - display_name:  Mary Lois Farmer-Allen
+    contest_ident: cont-anc5C06
+    position:  1
+  - display_name:  Darin Allen
+    contest_ident: cont-anc5C06
+    position:  2
+  - display_name:  Barrie Daneker
+    contest_ident: cont-anc5C07
+    position:  1
+  - display_name:  James J. Fournier
+    contest_ident: cont-anc5C07
+    position:  2
+  - display_name:  J. Jioni Palmer
+    contest_ident: cont-anc5C08
+    position:  1
+  - display_name:  Silas Grant Jr.
+    contest_ident: cont-anc5C09
+    position:  1
+  - display_name:  Ronnie Edwards
+    contest_ident: cont-anc5C11
+    position:  1
+  - display_name:  Albrette (Gigi) Ransom
+    contest_ident: cont-anc5C12
+    position:  1
+  - display_name:  Derrick O. Holloway
+    contest_ident: cont-anc5C12
+    position:  1
+  - display_name:  Lawrence Russell
+    contest_ident: cont-anc6A01
+    position:  1
+  - display_name:  Angelia Rice
+    contest_ident: cont-anc6A01
+    position:  2
+  - display_name:  Adam C. Healy
+    contest_ident: cont-anc6A01
+    position:  3
+  - display_name:  Drew Ronneberg
+    contest_ident: cont-anc6A02
+    position:  1
+  - display_name:  David Holmes
+    contest_ident: cont-anc6A03
+    position:  1
+  - display_name:  Nick Alberti
+    contest_ident: cont-anc6A04
+    position:  1
+  - display_name:  William R. Mohring
+    contest_ident: cont-anc6A05
+    position:  1
+  - display_name:  Sharee Lawler
+    contest_ident: cont-anc6A05
+    position:  2
+  - display_name:  Andrew J. Hysell
+    contest_ident: cont-anc6A06
+    position:  1
+  - display_name:  Gladys Ann Mack
+    contest_ident: cont-anc6A07
+    position:  1
+  - display_name:  Necothia (Nikki) Bowens
+    contest_ident: cont-anc6A07
+    position:  2
+  - display_name:  Lia Veenendaal-Selck
+    contest_ident: cont-anc6A08
+    position:  1
+  - display_name:  Dave Garrison
+    contest_ident: cont-anc6B01
+    position:  1
+  - display_name:  Ivan Frishberg
+    contest_ident: cont-anc6B02
+    position:  1
+  - display_name:  Mary Wright
+    contest_ident: cont-anc6B02
+    position:  2
+  - display_name:  Vernon Mallu
+    contest_ident: cont-anc6B02
+    position:  3
+  - display_name:  Norman Metzger
+    contest_ident: cont-anc6B03
+    position:  1
+  - display_name:  Jason E. Townsend
+    contest_ident: cont-anc6B03
+    position:  2
+  - display_name:  Kirsten Oldenburg
+    contest_ident: cont-anc6B04
+    position:  1
+  - display_name:  Larry Janezich
+    contest_ident: cont-anc6B04
+    position:  2
+  - display_name:  Tim Casey
+    contest_ident: cont-anc6B04
+    position:  3
+  - display_name:  Brian Pate
+    contest_ident: cont-anc6B05
+    position:  1
+  - display_name:  Kenan Jarboe
+    contest_ident: cont-anc6B05
+    position:  2
+  - display_name:  Jared Critchfield
+    contest_ident: cont-anc6B06
+    position:  1
+  - display_name:  Carol J Green
+    contest_ident: cont-anc6B07
+    position:  1
+  - display_name:  Jon Marker
+    contest_ident: cont-anc6B07
+    position:  1
+  - display_name:  Michael McCamman
+    contest_ident: cont-anc6B08
+    position:  1
+  - display_name:  Laura McSorley
+    contest_ident: cont-anc6B08
+    position:  2
+  - display_name:  Neil Glick
+    contest_ident: cont-anc6B08
+    position:  3
+  - display_name:  Brian Flahaven
+    contest_ident: cont-anc6B09
+    position:  1
+  - display_name:  Michael O. Patterson
+    contest_ident: cont-anc6B09
+    position:  1
+  - display_name:  Richard Counts
+    contest_ident: cont-anc6B10
+    position:  1
+  - display_name:  Larry Frankel
+    contest_ident: cont-anc6B10
+    position:  2
+  - display_name:  Francis M. Campbell
+    contest_ident: cont-anc6B10
+    position:  3
+  - display_name:  Keith Silver
+    contest_ident: cont-anc6C01
+    position:  1
+  - display_name:  Marge Maceda
+    contest_ident: cont-anc6C01
+    position:  1
+  - display_name:  Mark A. Dixon
+    contest_ident: cont-anc6C02
+    position:  1
+  - display_name:  Rob Amos
+    contest_ident: cont-anc6C02
+    position:  1
+  - display_name:  Anne M. Phelps
+    contest_ident: cont-anc6C04
+    position:  1
+  - display_name:  Brian Cox
+    contest_ident: cont-anc6C05
+    position:  1
+  - display_name:  Tony Richardson
+    contest_ident: cont-anc6C05
+    position:  2
+  - display_name:  Jennifer Zatkowski
+    contest_ident: cont-anc6C05
+    position:  3
+  - display_name:  Tom Hamilton
+    contest_ident: cont-anc6C06
+    position:  1
+  - display_name:  Bill Crews
+    contest_ident: cont-anc6C07
+    position:  1
+  - display_name:  Karen Wirt
+    contest_ident: cont-anc6C08
+    position:  1
+  - display_name:  Kevin Wilsey
+    contest_ident: cont-anc6C09
+    position:  1
+  - display_name:  LeRoy-Jacob Smith
+    contest_ident: cont-anc6C09
+    position:  2
+  - display_name:  Bob Craycraft
+    contest_ident: cont-anc6D01
+    position:  1
+  - display_name:  Cara Lea Shockley
+    contest_ident: cont-anc6D02
+    position:  1
+  - display_name:  Kathleen Hoppe
+    contest_ident: cont-anc6D02
+    position:  2
+  - display_name:  Mary C. Williams
+    contest_ident: cont-anc6D03
+    position:  1
+  - display_name:  Ron McBee
+    contest_ident: cont-anc6D03
+    position:  2
+  - display_name:  Andy Litsky
+    contest_ident: cont-anc6D04
+    position:  1
+  - display_name:  Roger Moffatt
+    contest_ident: cont-anc6D05
+    position:  1
+  - display_name:  Grace E. Daughtridge
+    contest_ident: cont-anc6D05
+    position:  2
+  - display_name:  Rhonda Hamilton
+    contest_ident: cont-anc6D06
+    position:  1
+  - display_name:  Mark Driscoll
+    contest_ident: cont-anc6D06
+    position:  2
+  - display_name:  Carl L. Barnes Sr.
+    contest_ident: cont-anc6D06
+    position:  3
+  - display_name:  David Garber
+    contest_ident: cont-anc6D07
+    position:  1
+  - display_name:  Robert (Bob) Siegel
+    contest_ident: cont-anc6D07
+    position:  1
+  - display_name:  Shahidah Nicole Hamlett
+    contest_ident: cont-anc7A03
+    position:  1
+  - display_name:  Latese Q. M. Gilbert
+    contest_ident: cont-anc7A04
+    position:  1
+  - display_name:  Martha Kent
+    contest_ident: cont-anc7A05
+    position:  1
+  - display_name:  Adwoa Beidleman Aggrey
+    contest_ident: cont-anc7A07
+    position:  1
+  - display_name:  Villareal (VJ) Johnson
+    contest_ident: cont-anc7A07
+    position:  2
+  - display_name:  Robert K. Idlett
+    contest_ident: cont-anc7A07
+    position:  3
+  - display_name:  Holly Muhammad
+    contest_ident: cont-anc7B01
+    position:  1
+  - display_name:  Zina D. Williams
+    contest_ident: cont-anc7B02
+    position:  1
+  - display_name:  L. Yvonne Moore
+    contest_ident: cont-anc7B03
+    position:  1
+  - display_name:  Phillip J. Hammond
+    contest_ident: cont-anc7B04
+    position:  1
+  - display_name:  Robin Hammond Marlin
+    contest_ident: cont-anc7B05
+    position:  1
+  - display_name:  Robert A. Jordan
+    contest_ident: cont-anc7B06
+    position:  1
+  - display_name:  Richard Evans
+    contest_ident: cont-anc7B06
+    position:  2
+  - display_name:  Robert T Richards
+    contest_ident: cont-anc7B07
+    position:  1
+  - display_name:  D. L. Humphrey
+    contest_ident: cont-anc7B07
+    position:  2
+  - display_name:  Patricia Malloy
+    contest_ident: cont-anc7C01
+    position:  1
+  - display_name:  Khaliq
+    contest_ident: cont-anc7C02
+    position:  1
+  - display_name:  Catherine A. Woods
+    contest_ident: cont-anc7C03
+    position:  1
+  - display_name:  Ronnie Streff
+    contest_ident: cont-anc7C03
+    position:  2
+  - display_name:  Sylvia C. Brown
+    contest_ident: cont-anc7C04
+    position:  1
+  - display_name:  Mary L. Gaffney
+    contest_ident: cont-anc7C05
+    position:  1
+  - display_name:  Lisa White
+    contest_ident: cont-anc7D01
+    position:  1
+  - display_name:  Veronica E. Raglin
+    contest_ident: cont-anc7D01
+    position:  1
+  - display_name:  Sharita C. Slayton
+    contest_ident: cont-anc7D02
+    position:  1
+  - display_name:  Derric Daniels
+    contest_ident: cont-anc7D02
+    position:  2
+  - display_name:  Will H Ross
+    contest_ident: cont-anc7D03
+    position:  1
+  - display_name:  JoAnne Prue
+    contest_ident: cont-anc7D04
+    position:  1
+  - display_name:  Rick Tingling-Clemmons
+    contest_ident: cont-anc7D05
+    position:  1
+  - display_name:  Liz Pecot
+    contest_ident: cont-anc7D05
+    position:  2
+  - display_name:  Willette Seaward
+    contest_ident: cont-anc7D06
+    position:  1
+  - display_name:  Willie Henry Woods, Jr.
+    contest_ident: cont-anc7D07
+    position:  1
+  - display_name:  George B. Browne Jr
+    contest_ident: cont-anc7E01
+    position:  1
+  - display_name:  Linda S. Green
+    contest_ident: cont-anc7E02
+    position:  1
+  - display_name:  Rosa A. Hamlett
+    contest_ident: cont-anc7E03
+    position:  1
+  - display_name:  Mary D. Jackson
+    contest_ident: cont-anc7E04
+    position:  1
+  - display_name:  Marquette Austin
+    contest_ident: cont-anc7E06
+    position:  1
+  - display_name:  Evelyn Hunter Armstrong
+    contest_ident: cont-anc7E06
+    position:  2
+  - display_name:  Maxine Nightingale Starling
+    contest_ident: cont-anc7E07
+    position:  1
+  - display_name:  Anthony Muhammad
+    contest_ident: cont-anc8A01
+    position:  1
+  - display_name:  Barbara J. Clark
+    contest_ident: cont-anc8A02
+    position:  1
+  - display_name:  Greta J. Fuller
+    contest_ident: cont-anc8A03
+    position:  1
+  - display_name:  Charles E. Wilson
+    contest_ident: cont-anc8A04
+    position:  1
+  - display_name:  Carolyn Bridges-Ward
+    contest_ident: cont-anc8A05
+    position:  1
+  - display_name:  David DJ White
+    contest_ident: cont-anc8A05
+    position:  2
+  - display_name:  Gregg J Justice III
+    contest_ident: cont-anc8A06
+    position:  1
+  - display_name:  Lendia Sue Johnson
+    contest_ident: cont-anc8A07
+    position:  1
+  - display_name:  Khadijah Watson
+    contest_ident: cont-anc8B01
+    position:  1
+  - display_name:  Janasha Thomas
+    contest_ident: cont-anc8B01
+    position:  2
+  - display_name:  David S. Brewer
+    contest_ident: cont-anc8B02
+    position:  1
+  - display_name:  Darrel D. Gaston
+    contest_ident: cont-anc8B03
+    position:  1
+  - display_name:  India L. Blocker
+    contest_ident: cont-anc8B03
+    position:  2
+  - display_name:  JB Shoatz
+    contest_ident: cont-anc8B04
+    position:  1
+  - display_name:  Tijwanna U. Phillips
+    contest_ident: cont-anc8B05
+    position:  1
+  - display_name:  Charles Rick Turner
+    contest_ident: cont-anc8B06
+    position:  1
+  - display_name:  Mitchell Gary Hawkins III
+    contest_ident: cont-anc8B06
+    position:  1
+  - display_name:  Von Pariss
+    contest_ident: cont-anc8B07
+    position:  1
+  - display_name:  Louise Thorne
+    contest_ident: cont-anc8B07
+    position:  2
+  - display_name:  Zaccai Free
+    contest_ident: cont-anc8C01
+    position:  1
+  - display_name:  William R. Ellis
+    contest_ident: cont-anc8C01
+    position:  2
+  - display_name:  Dion Jordan
+    contest_ident: cont-anc8C02
+    position:  1
+  - display_name:  Lashaun N. Smith
+    contest_ident: cont-anc8C02
+    position:  1
+  - display_name:  Mary J. Cuthbert
+    contest_ident: cont-anc8C03
+    position:  1
+  - display_name:  Larry T. Pretlow II
+    contest_ident: cont-anc8C03
+    position:  2
+  - display_name:  Lloyd T. Logan
+    contest_ident: cont-anc8C04
+    position:  1
+  - display_name:  Cardell Shelton
+    contest_ident: cont-anc8C07
+    position:  1
+  - display_name:  Brenda E Shields
+    contest_ident: cont-anc8C07
+    position:  2
+  - display_name:  Patricia A Carmon
+    contest_ident: cont-anc8D01
+    position:  1
+  - display_name:  Olivia L. Henderson
+    contest_ident: cont-anc8D02
+    position:  1
+  - display_name:  Absalom (Ab) Jordan
+    contest_ident: cont-anc8D03
+    position:  1
+  - display_name:  Thea Dyson
+    contest_ident: cont-anc8D04
+    position:  1
+  - display_name:  Theresa H. Jones
+    contest_ident: cont-anc8D07
+    position:  1
+  - display_name:  Dionne Brown
+    contest_ident: cont-anc8D07
+    position:  2
+  - display_name:  Richard T. (Dick) Clark
+    contest_ident: cont-anc8D07
+    position:  3
+  - display_name:  S.S. - Sandra Seegars
+    contest_ident: cont-anc8E02
+    position:  1
+  - display_name:  Christopher L. Hawthorne
+    contest_ident: cont-anc8E03
+    position:  1
+  - display_name:  Melvin H. Sims
+    contest_ident: cont-anc8E04
+    position:  1
+  - display_name:  Phomika (PHO) Palmer
+    contest_ident: cont-anc8E05
+    position:  1
+  - display_name:  Charles Edward Fuller
+    contest_ident: cont-anc8E05
+    position:  2
+  - display_name:  Rita Margaret Steele
+    contest_ident: cont-anc8E05
+    position:  3
+  - display_name:  Joyce Burnette
+    contest_ident: cont-anc8E05
+    position:  4
+  - display_name:  Karlene (K.) Armstead
+    contest_ident: cont-anc8E06
+    position:  1
+  - display_name:  Angela S. Hooker
+    contest_ident: cont-anc8E06
+    position:  2
+  - display_name:  Stephen A. Slaughter
+    contest_ident: cont-anc8E07
+    position:  1
