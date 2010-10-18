@@ -20,7 +20,7 @@ class Party < ActiveRecord::Base
     self.display_name.downcase
   end
   
-  validates_presence_of :ident
+  validates_presence_of :ident, :display_name
   validates_uniqueness_of :ident, :message => "Non-unique Party ident attempted: {{value}}."
 
   # Make sure that ident is not nil. If it is, create a unique one.

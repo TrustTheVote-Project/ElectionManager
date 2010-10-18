@@ -14,7 +14,7 @@ class PartiesControllerTest < ActionController::TestCase
 
   test "should create party" do
     assert_difference('Party.count') do
-      post :create, :party => { }
+      post :create, :party => {:display_name => "Democrat" }
     end
 
     assert_redirected_to party_path(assigns(:party))

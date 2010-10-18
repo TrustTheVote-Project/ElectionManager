@@ -135,7 +135,8 @@ DistrictType.blueprint(:congressional) do
 end
 
 Party.blueprint do
-
+  display_name
+  ident
 end
 
 Party.blueprint(:democrat) do
