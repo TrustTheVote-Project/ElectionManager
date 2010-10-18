@@ -69,3 +69,34 @@
     :right: {style: :none}
   :controls_width: 32
 
+:question_header
+  :present: :true 
+  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
+  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
+  :borders:
+    :top: {:color: "000000", :thickness: 3, :style: :single_line}
+    :left: {:color: "000000", :thickness: 2, :style: :single_line}
+    :bottom: {:style: :none} 
+    :right: {style: :none}
+  :background_color: "DCDDDE"
+
+:question_rule_header, 
+  :present: :true
+  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
+  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
+  :borders:
+    :top: {:style: :none}
+    :left: {:color: "000000", :thickness: 2, :style: :single_line}
+    :bottom: {:style: :none} 
+    :right: {style: :none}
+  :background_color: "E1F4FD"
+
+:question_text
+  :present: :true
+  :font:  {:family: "Helvetica", :size: 12, :leading: 13, :tracking: -20, :alignment: :left, :color: "000000"}
+  :borders:
+    :top: {:style: :none}
+    :left: {:style: :none}
+    :bottom: {:style: :none}
+    :right: {style: :none}
+  :controls_width: 32

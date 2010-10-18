@@ -177,4 +177,4 @@
     :right:
   :background_color: "00000000"
 
-# Same exact pattern for :contest_header, :voting_rule_header, :question_header, :question_rule_header, :question,tes
+# Same exact pattern for :contest_header, :voting_rule_header, :question_header, :question_rule_header, :question_text
