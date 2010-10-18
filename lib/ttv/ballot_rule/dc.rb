@@ -52,7 +52,7 @@ module ::TTV
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2 ;
         middle_y = pdf.bounds.top - frame[:content][:top][:width]/2 + pdf.height_of(text)/2
         # draw text
-        pdf.draw_text(text, :at => [middle_x, middle_y], :style => :bold)
+        pdf.draw_text(text, :at => [middle_x, middle_y-10], :style => :bold)
       end
 
       # draw the text at that bottom of the ballot
@@ -107,6 +107,19 @@ module ::TTV
           pdf.text(instr_text, :size => 8);
         end
         
+      end
+      
+      # TODO: Refactor so that we don't depend on flow_items
+      def process_flow_items(flow_items)
+        order = { "DefaultBallot::FlowItem::Contest" => 0, "DefaultBallot::FlowItem::Question" => 1}
+        flow_items.sort! do |item1, item2|
+          order[item1.class.name] <=> order[item2.class.name]
+        end
+
+#         flow_items.each do  |item|
+#           puts "TGD2: flow_item = #{item}"
+#           puts "TGD2: flow_item = #{item.class.name.inspect}"
+#         end
       end
       
     end # end DC class

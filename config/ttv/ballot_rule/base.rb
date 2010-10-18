@@ -144,6 +144,10 @@ module TTV
       def contents_footer(ballot_config)
       end
 
+      # TODO: Refactor so that we don't depend on flow_items
+      def process_flow_items(flow_items)
+      end
+      
     end # end Base class
     
   end

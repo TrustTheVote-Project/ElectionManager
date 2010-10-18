@@ -82,11 +82,15 @@ module DefaultBallot
       def short_instructions
         short_instr = if @contest.voting_method_id == VotingMethod::WINNER_TAKE_ALL.id
 
-                        @contest.open_seat_count < 2 ? "Vote for not more than (1)" : "Vote for up to #{@contest.open_seat_count}"
+                        @contest.open_seat_count < 2 ? "Vote for not more than one (1)" : "Vote for up to #{@contest.open_seat_count}"
                       else
                         "Rank the candidates"
                       end
-        
+        # TODO: temp HACK for DC
+        puts "TGD @contest.display_name = #{@contest.display_name}"
+        if @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/
+          short_instr = "Vote for not more than two (2)"
+        end
         @pdf.text short_instr, :size => 8, :align => :center, :leading => 1
       end
       

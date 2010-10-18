@@ -89,6 +89,7 @@ module DefaultBallot
           end
         end
       end
+      template.ballot_rule.process_flow_items(flow_items)
       flow_items
     end
     
