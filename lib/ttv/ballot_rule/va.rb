@@ -27,7 +27,7 @@ module ::TTV
         raise ArgumentError, "#{self.class.name}#contest_include_party: argument must be a Contest" unless contest.is_a?(Contest)
         
         contest.district.district_type.title.downcase == "congressional"
-      end
+      end # end contest_include_party
       
       def candidate_ordering
         
@@ -48,9 +48,92 @@ module ::TTV
             self.class.party_order[c2.party] <=> self.class.party_order[c1.party]
           end
         end
+      end # end candidate_ordering
+      
+      # TODO: move this rendering code out of ballot rules.
+      # This should be:
+      # - replaced by PDF rich text in the ballot style files
+      # OR
+      # - rendered in rails views that generate pdf, see prawn_to gem
 
+      # draw the text at that top of the ballot
+      def frame_content_top(ballot_config)
+        pdf = ballot_config.pdf
+        frame = ballot_config.frame
+        
+        # little vertical space at the top of the page, could've been frame[:margin][:top] 
+        pdf.move_down(20); 
+
+        text = "Automated Write-In Absentee Ballot Authorized by Virginia State Board of Elections";
+        text << "\n1100  Bank St., Richmond, VA 23219";
+        
+        # center text at the top of the ballot
+        middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2 ;
+        middle_y = pdf.bounds.top - frame[:content][:top][:width]/2 + pdf.height_of(text)/2 ;
+        # draw text
+        pdf.text(text, :style => :bold, :align => :center, :size => 8);
       end
       
-    end
-  end
-end
+      # draw the text at that bottom of the ballot      
+      def frame_content_bottom(ballot_config)
+        pdf = ballot_config.pdf
+        precinct = ballot_config.precinct
+        frame = ballot_config.frame
+        
+        text = "#{precinct.precinct.display_name} - #{precinct.display_name.gsub(/ds-\d+-/, '')}"
+        # center text
+        middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2;
+        middle_y = pdf.bounds.bottom + frame[:content][:bottom][:width]/2 - pdf.height_of(text)/2;
+        #draw text
+        pdf.draw_text(text, :at => [middle_x, middle_y+10], :size => 8, :style => :bold);
+      end
+      
+      # draw the text in the ballot header
+      def contents_header(ballot_config)
+        pdf = ballot_config.pdf
+        precinct = ballot_config.precinct
+        template = ballot_config.template
+
+        # draw yellow background for the header
+        orig_color = pdf.fill_color;
+        pdf.fill_color('F0E68C');
+        rect_x = 36;
+        rect_y= pdf.bounds.top - 10;
+        rect_width = 430;
+        rect_height = 57;
+        pdf.fill_rectangle([rect_x, rect_y], rect_width, rect_height);
+
+        # restore color
+        pdf.fill_color(orig_color);
+
+        # draw header 
+        edate = 'November 2, 2010';
+        pdf.move_down 14 ;
+        pdf.text("#{template.ballot_title}", :align => :center, :style => :bold );
+        pdf.text("General Election", :align => :center, :style => :bold );
+        pdf.text("#{precinct.precinct.display_name}\n#{edate}", :align => :center );
+        
+        # TODO: move instruction rendering out of header rendering
+        # render instructions within the header
+        pdf.stroke_line(0, pdf.bounds.top - 82, pdf.bounds.width, pdf.bounds.top - 82);
+        pdf.bounding_box([5, pdf.bounds.top - 82], :width => pdf.bounds.width-10, :height => pdf.bounds.height - 82) do;
+          pdf.move_down(3);
+          pdf.font("Helvetica", :style => :bold, :size => 10) do;
+            pdf.text("INSTRUCTIONS TO VOTER", :align => :center);
+          end;
+          
+          pdf.move_down(5);
+          instr_text = "1. TO VOTE YOU MUST DARKEN THE OVAL TO THE LEFT OF YOUR CHOICE COMPLETELY. An oval darkened to the left of the name of any candidate indicates a vote for that candidate.\n2. Use only a pencil or blue or black medium ball point pen.\n3. If you make a mistake DO NOT ERASE. Ask for a new ballot.\n4. For a Write-in candidate, write the name of the person on the line and darken the oval.";
+          y = pdf.bounds.top - pdf.height_of("TEXT");
+          pdf.text(instr_text, :size => 8);
+        end # end bounding box
+      end
+      
+      def contents_body(ballot_config)
+      end
+      def contents_footer(ballot_config)
+      end
+      
+    end # end VA class
+  end # end BallotRule module
+end # end TTV module

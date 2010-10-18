@@ -122,7 +122,28 @@ module TTV
       def candidate_display_name(candidate)
         candidate.display_name
       end
+
+      # TODO: move this rendering code out of ballot rules.
+      # This should be:
+      # - replaced by PDF rich text in the ballot style files
+      # OR
+      # - rendered in rails views that generate pdf, see prawn_to gem
+      def frame_content_top(ballot_config)
+      end
+      def frame_content_right(ballot_config)
+      end
+      def frame_content_bottom(ballot_config)
+      end
+      def frame_content_left(ballot_config)
+      end
       
+      def contents_header(ballot_config)
+      end
+      def contents_body(ballot_config)
+      end
+      def contents_footer(ballot_config)
+      end
+
     end # end Base class
     
   end

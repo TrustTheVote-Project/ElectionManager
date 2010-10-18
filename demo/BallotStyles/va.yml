@@ -17,31 +17,18 @@
   :content: 
     :top: 
       :rotate: 0
-      :graphics: ' @pdf.move_down(20);
-      text = "Automated Write-In Absentee Ballot Authorized by Virginia State Board of Elections";
-      text << "\n1100  Bank St., Richmond, VA 23219";
-      middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2 ;
-      middle_y = @pdf.bounds.top - @frame[:content][:top][:width]/2 + @pdf.height_of(text)/2 ;
-      @pdf.text(text, :style => :bold, :align => :center, :size => 8);'
       :text: Sample Ballot
       :width: 50
     :left: 
       :rotate: 90
-      :graphics: 
       :text: "    132301113              Sample Ballot"
       :width: 36
     :bottom: 
       :rotate: 0
-      :graphics:  "text = \"#{@precinct.precinct.display_name} - #{@precinct.display_name.gsub(/ds-\d+-/, '')}\";
-       middle_x = @pdf.bounds.right/2 - @pdf.width_of(text)/2;
-       middle_y = @pdf.bounds.bottom + @frame[:content][:bottom][:width]/2 - @pdf.height_of(text)/2;
-       @pdf.draw_text(text, :at => [middle_x, middle_y+10], :size => 8, :style => :bold);
-      "
       :text: Sample Ballot
       :width: 36
     :right: 
       :rotate: 90
-      :graphics: 
       :text: " tom D was here"
       :width: 36
   :border: 
@@ -55,31 +42,6 @@
     :width: 1
   :header: 
     :background_color: "000000"
-    :graphics: " orig_color = @pdf.fill_color;
-     @pdf.fill_color('F0E68C');
-     rect_x = 36;
-     rect_y= @pdf.bounds.top - 10;
-     rect_width = 430;
-     rect_height = 57;
-     @pdf.fill_rectangle([rect_x, rect_y], rect_width, rect_height);
-     @pdf.fill_color(orig_color);
-     edate = 'November 2, 2010';
-     @pdf.move_down 14 ;
-     @pdf.text(\"#{@template.ballot_title}\", :align => :center, :style => :bold );
-     @pdf.text(\"General Election\", :align => :center, :style => :bold );
-     @pdf.text(\"#{@precinct.precinct.display_name}\\n#{edate}\", :align => :center );
-     @pdf.stroke_line(0, @pdf.bounds.top - 82, @pdf.bounds.width, @pdf.bounds.top - 82);
-     @pdf.bounding_box([5, @pdf.bounds.top - 82], :width => @pdf.bounds.width-10, :height => @pdf.bounds.height - 82) do;
-     @pdf.move_down(3);
-     @pdf.font(\"Helvetica\", :style => :bold, :size => 10) do;
-     @pdf.text(\"INSTRUCTIONS TO VOTER\", :align => :center);
-     end;
-     @pdf.move_down(5);
-     instr_text = \"1. TO VOTE YOU MUST DARKEN THE OVAL TO THE LEFT OF YOUR CHOICE COMPLETELY. An oval darkened to the left of the name of any candidate indicates a vote for that candidate.\\n2. Use only a pencil or blue or black medium ball point pen.\\n3. If you make a mistake DO NOT ERASE. Ask for a new ballot.\\n4. For a Write-in candidate, write the name of the person on the line and darken the oval.\";
-     y = @pdf.bounds.top - @pdf.height_of(\"TEXT\");
-     @pdf.text(instr_text, :size => 8);
-     end;
-     "
     :text: Header Text
     :margin: 
       :top: 0
@@ -94,7 +56,6 @@
       :width: 1
   :body: 
     :background_color: "000000"
-    :graphics: 
     :text: Body Text
     :margin: 
       :top: 0
@@ -109,7 +70,6 @@
       :width: 0
   :footer: 
     :background_color: "#00FF00"
-    :graphics: 
     :text: Footer Text
     :margin: 
       :top: 0

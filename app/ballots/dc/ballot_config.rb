@@ -6,6 +6,7 @@ module DcBallot
   include ::AbstractBallot
 
   class BallotConfig < DefaultBallot::BallotConfig
+    attr_accessor :page, :frame
     
     def initialize(election, template)
       @template = template
@@ -127,15 +128,18 @@ module DcBallot
       end
     end
 
-    # Invoke the Procs that will draw the content for the top, right,
+    # Invoke the methods that will draw the content for the top, right,
     # bottom and left sides of the frame
     def draw_frame_contents
+      template.ballot_rule.frame_content_top(self)
+      template.ballot_rule.frame_content_right(self)
+      template.ballot_rule.frame_content_bottom(self)
+      template.ballot_rule.frame_content_left(self)
 
-      instance_eval(@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
-      instance_eval(@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
-      instance_eval(@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
-      instance_eval(@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
-      
+      # instance_eval(@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
+      # instance_eval(@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
+      # instance_eval(@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
+      # instance_eval(@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
 
       yield if block_given?
     end
@@ -175,7 +179,8 @@ module DcBallot
         end
         
         # draw the header text
-        instance_eval(@contents[:header][:graphics]) if @contents[:header][:graphics]
+        template.ballot_rule.contents_header(self)
+        # instance_eval(@contents[:header][:graphics]) if @contents[:header][:graphics]
       end
     end
     
@@ -218,7 +223,8 @@ module DcBallot
         end
         
         # draw the body text
-        instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
+        template.ballot_rule.contents_body(self)
+        #instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
         new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
@@ -261,7 +267,8 @@ module DcBallot
         end
         
         # draw the footer text
-        instance_eval(@contents[:footer][:graphics]) if @contents[:footer][:graphics]
+        template.ballot_rule.contents_footer(self)
+        # instance_eval(@contents[:footer][:graphics]) if @contents[:footer][:graphics]
       end
     end
     
