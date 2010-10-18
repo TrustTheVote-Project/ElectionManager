@@ -11,7 +11,8 @@ class BallotsController < ApplicationController
     else
       @ballot = Ballot.find(params[:id])
     end
-    title =  @ballot.precinct_split.display_name.gsub(/ /, "_").camelize << " Ballot.pdf"
+    # title =  BallotFileNamer.new.ballot_file_name(@precinct_split, @election)
+    title = @ballot.precinct_split.display_name.gsub(/split-/, "P").gsub(/ /,"-") << ".pdf"
     
     send_data @ballot.render_pdf, :filename => title, :type => "application/pdf", :disposition => 'inline'
     # TODO: use respond_to to generate pdf
