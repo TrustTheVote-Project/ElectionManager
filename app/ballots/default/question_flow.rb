@@ -78,8 +78,12 @@ module DefaultBallot
                 radio_group[:Kids] <<  @pdf.draw_radiobutton("#{@question_ident}_yes", :at => [0,cb_bottom], :width => cb_width, :height => cb_height,:selected => false)
               end
               # Draw "Yes" text
-              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 20 ) do
-                @pdf.text("Yes")
+              #   @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 20 ) do
+              # TODO: hack for DC
+              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 220 ) do
+
+                @pdf.text("FOR Charter Amendment")
+                # @pdf.text("Yes")
               end
               rect.top -= @pdf.bounds.top
             end # end "Yes" selection
@@ -100,8 +104,13 @@ module DefaultBallot
               end
               
               # Draw "No" text
-              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 20 ) do
-                @pdf.text("No")
+              # @pdf.bounding_box([cb_width + (HPAD*3),0], :width =>
+       # 20 ) do
+              # TODO: hack for DC
+              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 220 ) do
+
+                @pdf.text("AGAINST Charter Amendment")
+                # @pdf.text("No")
               end
               
               rect.top -= @pdf.bounds.top
