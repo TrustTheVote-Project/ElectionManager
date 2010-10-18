@@ -87,7 +87,7 @@ module DefaultBallot
                         "Rank the candidates"
                       end
         # TODO: temp HACK for DC
-        puts "TGD @contest.display_name = #{@contest.display_name}"
+        # puts "TGD @contest.display_name = #{@contest.display_name}"
         if @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/
           short_instr = "Vote for not more than two (2)"
         end

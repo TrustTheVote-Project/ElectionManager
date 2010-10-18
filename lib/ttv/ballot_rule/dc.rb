@@ -111,15 +111,32 @@ module ::TTV
       
       # TODO: Refactor so that we don't depend on flow_items
       def process_flow_items(flow_items)
-        order = { "DefaultBallot::FlowItem::Contest" => 0, "DefaultBallot::FlowItem::Question" => 1}
-        flow_items.sort! do |item1, item2|
-          order[item1.class.name] <=> order[item2.class.name]
-        end
-
 #         flow_items.each do  |item|
-#           puts "TGD2: flow_item = #{item}"
-#           puts "TGD2: flow_item = #{item.class.name.inspect}"
+#            puts "TGD1: flow_item = #{item}"
+#            puts "TGD1: flow_item = #{item.class.name.inspect}"
 #         end
+        questions = []
+        contests = []
+        flow_items.each do |item|
+         if item.class.name == "DefaultBallot::FlowItem::Contest"
+           contests << item
+         elsif item.class.name == "DefaultBallot::FlowItem::Question"
+           questions << item
+         else
+           raise Exception, "Unknown FlowItem class #{item.class.name}"
+         end
+        end
+        flow_items = contests + questions
+        # re-orders contests NOT GOOD
+#         order = { "DefaultBallot::FlowItem::Contest" => 0, "DefaultBallot::FlowItem::Question" => 1}
+#         flow_items.sort! do |item1, item2|
+#           order[item1.class.name] <=> order[item2.class.name]
+#         end
+#          flow_items.each do  |item|
+#            puts "TGD2: flow_item = #{item}"
+#            puts "TGD2: flow_item = #{item.class.name.inspect}"
+#          end
+        flow_items
       end
       
     end # end DC class
