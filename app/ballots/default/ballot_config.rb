@@ -69,13 +69,15 @@ module DefaultBallot
         })
         @wrap = :character
       else
-        pdf.font_families.update({
-          "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
-                           :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
-          "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
-            })
+        puts "TGD: updating font families"
+#         pdf.font_families.update({
+#           "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+#                            :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
+#           "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
+#             })
         @wrap = :space
       end
+
     end
 
     def load_text(filename)
