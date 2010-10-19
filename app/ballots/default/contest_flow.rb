@@ -39,12 +39,14 @@ module DefaultBallot
           :select_multiple => false,
           :radio_group => {},
           :id => "cb" }.merge(options)
+
+        opts[:select_multiple] = true if @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/
         
         # draw bounding box at top/left of enclosing rect/bounding box
         @pdf.bounding_box([opts[:left_margin], opts[:top_margin]], :width => cb_width+3) do
           # draw_checkbox draws from lower right of it's bounding box
           # so translate bottom of checkbox to be near bounds.top
-          if(opts[:active])
+          if(opts[:active]) 
             cb_bottom = @pdf.bounds.top-cb_height 
             if opts[:select_multiple]
               @pdf.draw_checkbox(opts[:id], :at => [0, cb_bottom], :width => cb_width, :height => cb_height)
