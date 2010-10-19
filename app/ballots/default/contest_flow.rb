@@ -182,30 +182,38 @@ module DefaultBallot
           #ballot_marks << TTV::BallotMark.new(@contest,candidate, @pdf.page_number, location)
         end
 
-        rect.top -= VPAD * 2
-        # draw the write-in candiate (radiobutton and text field)
-        @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
-          # @contest.open_seat_count.times do |i|
+        num_writeins = @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/ ? 2 : 1;
+        select_multiple =  @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/ ? true : false;
+        num_writeins.times do |writein_num|
 
-          checkbox_id = "#{@cont_ident}+write_in"
-          contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
-          rect.top -= contest_bottom
           rect.top -= VPAD * 2
-          @pdf.dash 1
-          v = 32
-          left = 50
-          
-          if @active
-            textbox_id = "#{@cont_ident}+writein_text"
-            @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
+          # draw the write-in candiate (radiobutton and text field)
+          @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
+            # @contest.open_seat_count.times do |i|
+            
+            checkbox_id = "#{@cont_ident}_#{writein_num}+write_in"
+            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => select_multiple) 
+            rect.top -= contest_bottom
+            rect.top -= VPAD * 2
+            @pdf.dash 1
+            v = 32
+            left = 50
+            
+            if @active
+              textbox_id = "#{@cont_ident}_#{writein_num}+writein_text"
+              puts "TGD: draw_text_field = #{textbox_id}"
+              puts "TGD: draw_text_field x = #{@pdf.bounds.left}"
+              puts "TGD: draw_text_field y = #{@pdf.bounds.top}"
+              @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
+            end
+            
+            @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
+            @pdf.undash
+            
+            rect.top -= 16
+            #end
           end
-          @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
-          @pdf.undash
-
-          rect.top -= 16
-          #end
         end
-        
       end
       
       def draw_winner_contest(config, rect, &bloc)
