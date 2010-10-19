@@ -172,7 +172,8 @@ module TTV
     # Loads an EDH formatted candidate into EM
     def load_candidate candidate
       new_candidate = Candidate.find_or_create_by_ident(:display_name => candidate["display_name"], 
-                                                        :ident => candidate["ident"], 
+                                                        :ident => candidate["ident"],
+                                                        :position => candidate["position"],
                                                         :party_id => Party.find_or_create_by_display_name(candidate["party_display_name"]).id)
       new_candidate.contest = Contest.find_by_ident(candidate["contest_ident"])
       new_candidate.save! 
