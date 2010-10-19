@@ -26,8 +26,10 @@ module DefaultBallot
         
         super(@contest, scanner)
       end
-      
-      def draw_candidate(left,top, width, candidate_name, party_name, options={})
+
+# TODO: This file needs comments above each method
+# TODO: It looks like the 'top' parameter is never used      
+      def draw_candidate(left, top, width, candidate_name, party_name, options={})
         cb_width = 22
         cb_height = 10
         
@@ -39,7 +41,7 @@ module DefaultBallot
           :select_multiple => false,
           :radio_group => {},
           :id => "cb" }.merge(options)
-
+# TODO: TGD - DC Specific hack. Could be @contest.open_seat_countn > 1, I think.
         opts[:select_multiple] = true if @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/
         
         # draw bounding box at top/left of enclosing rect/bounding box
@@ -185,27 +187,25 @@ module DefaultBallot
         rect.top -= VPAD * 2
         # draw the write-in candiate (radiobutton and text field)
         @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
-          # @contest.open_seat_count.times do |i|
-
-          checkbox_id = "#{@cont_ident}+write_in"
-          contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
-          rect.top -= contest_bottom
-          rect.top -= VPAD * 2
-          @pdf.dash 1
-          v = 32
-          left = 50
-          
-          if @active
-            textbox_id = "#{@cont_ident}+writein_text"
-            @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
+          @contest.open_seat_count.times do |i|
+            v = 32 * (i+1)
+            checkbox_id = "#{@cont_ident}+write_in"
+            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
+            rect.top -= contest_bottom
+            rect.top -= VPAD * 2
+            @pdf.dash 1
+            left = 50
+            puts "rps: v=#{v}"
+            if @active
+              textbox_id = "#{@cont_ident}+writein_text"
+              @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
+            end
+            @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
+            @pdf.undash
+  
+            rect.top -= 16 - (i * 16)
           end
-          @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
-          @pdf.undash
-
-          rect.top -= 16
-          #end
-        end
-        
+        end      
       end
       
       def draw_winner_contest(config, rect, &bloc)

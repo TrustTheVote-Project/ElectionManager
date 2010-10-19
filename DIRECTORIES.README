@@ -1,3 +1,5 @@
+# NOTE: This scheme is still under discussion. It's not yet implemented.
+
 app/ - all "application" code, standard Rails set up
 app/ttv - application code that is not a model, controller, view, helper or ballot-related
 
