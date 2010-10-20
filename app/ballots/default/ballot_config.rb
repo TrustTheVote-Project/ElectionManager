@@ -69,7 +69,6 @@ module DefaultBallot
         })
         @wrap = :character
       else
-        puts "TGD: updating font families"
 #         pdf.font_families.update({
 #           "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
 #                            :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
