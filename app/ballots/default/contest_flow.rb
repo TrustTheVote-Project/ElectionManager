@@ -166,7 +166,9 @@ module DefaultBallot
           @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
             #contest_text = candidate.display_name + "\n" + candidate.party.display_name
             
-            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, candidate.display_name, candidate.party.display_name, :active => @active, :id => checkbox_id, :radio_group => radio_group)
+            party_name = ""
+            party_name = candidate.party.display_name if candidate.party && !candidate.party.display_name.blank?
+            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, candidate.display_name, party_name, :active => @active, :id => checkbox_id, :radio_group => radio_group)
             rect.top -= contest_bottom
           end
           #         TTV::Prawn::Util.show_rect_coordinates(rect)
