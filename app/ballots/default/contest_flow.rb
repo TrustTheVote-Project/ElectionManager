@@ -42,6 +42,9 @@ module DefaultBallot
 
         opts[:select_multiple] = true if @contest.display_name =~ /AT-LARGE MEMBER OF THE COUNCIL/
         
+        # remove non alphanum char for PDF ids
+        opts[:id].gsub!(/\W/, "") unless opts[:id].blank?
+        
         # draw bounding box at top/left of enclosing rect/bounding box
         @pdf.bounding_box([opts[:left_margin], opts[:top_margin]], :width => cb_width+3) do
           # draw_checkbox draws from lower right of it's bounding box
@@ -201,9 +204,6 @@ module DefaultBallot
             
             if @active
               textbox_id = "#{@cont_ident}_#{writein_num}+writein_text"
-              puts "TGD: draw_text_field = #{textbox_id}"
-              puts "TGD: draw_text_field x = #{@pdf.bounds.left}"
-              puts "TGD: draw_text_field y = #{@pdf.bounds.top}"
               @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
             end
             
