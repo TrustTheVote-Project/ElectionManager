@@ -1,6 +1,5 @@
 # This is a template showing all the properties accepted in a Ballot Style Sheet. It is also the documentation for 
-# all the properties.
-# All coordiantes are points, or if a number between 0 and 1.0 it's a percentage
+# all the properties. All coordiantes are points, or if a number between 0 and 1.0 it's a percentage
 --- 
 ballot_layout:
   columns: 3                                # New property
