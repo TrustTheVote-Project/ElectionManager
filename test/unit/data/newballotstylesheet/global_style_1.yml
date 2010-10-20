@@ -1,0 +1,70 @@
+# This is a template showing all the properties accepted in a Ballot Style Sheet. It is also the documentation for 
+# all the properties. All coordiantes are points, or if a number between 0 and 1.0 it's a percentage
+--- 
+ballot_layout:
+  columns: 3                                # Columns in ballot (default:3)
+  column-spacing: 10                        # Points between columns (0 default)
+  questions_columns: 2                      # Span questions across n cols. (default: 1)
+  questions_placement: :with_district       # New property. Values are :at_end or :with_
+
+page: 
+  size: "LETTER"                            # Choices are pdf named sizes. Default "LETTER"
+  background_color: "A43368"                # Hex color. (default "00000000")
+  background_watermark_asset_ident:         # Asset ident to use for a watermark 
+  layout: :portrait
+
+frame: 
+  margin:                                    # Pixels outside the frame (to edge of paper)
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+  content:
+    font: { family: "Helvetica", size: 20, leading: 20, tracking: 0, aligntment: :left}
+    top: {rotate: 0, text: "I am the top content", width: 1.0}
+    left: {rotate:90, text: "I am the left content", width: 0.5}
+    bottom: {rotate: 180, text: "I am the bottom", width: 0.8} 
+    right: {rotate: 270, text: "I am the right", width: 100 } 
+  border: 
+    style: :single                            # Values: :none, :single (default)
+    color: "E6B0C9"                           # Hex value for color. ("000000" default)
+    width: 1                                  # Points thickness. (1 default)
+  background_color: "D5EBB3"                  # Hex value for background color ("FFFFFF" default)
+
+contents: 
+  border: 
+    style: :single                             # Values: :none, :single (default)
+    color: "5F3070"
+    width: 1
+  header: 
+    background_color: "84B538"
+    text:
+    padding:                                   # Points inside the header before content of header 
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    height: 0.2                                # Height of box in points or 0.0 - 1.0 fraction  
+    border: 
+      style: :single                           # Border style for header. Values :none, :single (default)
+      color: "000000"
+      width: 1
+    header_font:  {family: Helvetica, size: 18, leading: 20, tracking: -20, alignment: "left", color: "8D3961"} 
+    sub_header_font: {family: "Helvetica", size: 14, leading: 10, tracking: -20, alignment: "left", color: "659221"} 
+  body: 
+    background_color: "FFFFFF"
+    margin: {top: 0, left: 0, bottom: 0, right: 0}
+    height: 1.0                                  #  Height in points, or fraction (1.0 means 100%, default)
+    width: 1.0
+    border: 
+      style: :none
+      color: "000000"
+      width: 0
+  footer: 
+    background_color: "#9E3223"
+    text: I am the test footer
+    margin: 
+      {top: 10, left: 10, bottom: 10, right: 10}
+    height: 0.1                          
+    border: {style: :solid, color: "FF0000", width: 2} 
+ 
