@@ -266,8 +266,7 @@ module AbstractBallot
       if @c.is_a? ::DcBallot::BallotConfig
         # resets the flow rect to be under header, above footer,
         # inside page frame.
-        flow_rect = @c.render_header flow_rect
-        # puts "TGD: start_page: adjusted the flow rectangle to be inside the ballot contents"
+        flow_rect = @c.render_contents flow_rect
       else
         @c.render_header flow_rect        
       end

@@ -93,11 +93,6 @@ module DcBallot
       end
       flow_rect
     end
-
-    # HACK to get renderer to work
-    def render_header(flow_rect)
-      new_flow_rect = render_contents(flow_rect)
-    end
     
     private
 
