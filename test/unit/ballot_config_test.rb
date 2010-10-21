@@ -82,7 +82,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         
         should "create 3 columns in the ballot" do
           flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
-          assert_instance_of AbstractBallot::Columns, @ballot_config.create_columns(flow_rect)
+          assert_instance_of TTV::Ballot::Columns, @ballot_config.create_columns(flow_rect)
         end
         
         should "have a wide style of continue" do
@@ -103,7 +103,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
-          three_columns = AbstractBallot::Columns.new(3, rect)
+          three_columns = TTV::Ballot::Columns.new(3, rect)
 
           first_column = three_columns.next
           @ballot_config.draw_checkbox(first_column, "This is a test checkbox in column 1")
@@ -192,7 +192,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
-          three_columns = AbstractBallot::Columns.new(3, rect)
+          three_columns = TTV::Ballot::Columns.new(3, rect)
           page = 1
           @ballot_config.render_column_instructions(three_columns, page)
           
@@ -209,7 +209,7 @@ class BallotConfigTest < ActiveSupport::TestCase
 #           rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
 #           # split the page into 3 columns
-#           three_columns = AbstractBallot::Columns.new(3, rect)
+#           three_columns = TTV::Ballot::Columns.new(3, rect)
 #           page = 1
 #           @ballot_config.render_column_instructions(three_columns, page)
 #           util = TTV::Prawn::Util.new(@pdf)

@@ -56,7 +56,7 @@ class AbstractBallotTest < ActiveSupport::TestCase
         page_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
         
         # break up the page into 5 columns
-        @columns = AbstractBallot::Columns.new(@num_columns, page_rect)
+        @columns = TTV::Ballot::Columns.new(@num_columns, page_rect)
       end
       
       should "create some columns" do

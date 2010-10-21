@@ -106,7 +106,7 @@ module DefaultBallot
     end
 
     def create_columns(flow_rect)
-      AbstractBallot::Columns.new(@columns, flow_rect)
+      TTV::Ballot::Columns.new(@columns, flow_rect)
     end
     
     def wide_style

@@ -35,7 +35,7 @@ class BallotConfigFormTest < ActiveSupport::TestCase
           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
-          three_columns = AbstractBallot::Columns.new(3, rect)
+          three_columns = TTV::Ballot::Columns.new(3, rect)
 
           first_column = three_columns.next
           @ballot_config.draw_checkbox(first_column, "This is a test checkbox in column 1")

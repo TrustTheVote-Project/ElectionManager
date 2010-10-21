@@ -82,7 +82,7 @@ class RendererTest < ActiveSupport::TestCase
       assert check_rect(flow_rect, 2.0, 462.0, 428.0, 558.0, 85, 130.0, 547.0)
       
       # should have 3 columns on the page
-      assert_instance_of AbstractBallot::Columns, columns
+      assert_instance_of TTV::Ballot::Columns, columns
       # puts "TGD: columns = #{columns.inspect}"
       column_rects = columns.instance_variable_get(:@column_rects)
       assert_equal 3, column_rects.size

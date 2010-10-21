@@ -18,7 +18,7 @@ class ContestFlowFormTest < ActiveSupport::TestCase
       TTV::Prawn::Util.stroke_rect(@pdf, flow_rect, "#ffffff")
         
       # create 3 columns of equal width within the frame
-      @columns = AbstractBallot::Columns.new(3, flow_rect)
+      @columns = TTV::Ballot::Columns.new(3, flow_rect)
         
       # get the first, leftmost, column
       @current_column = @columns.next
