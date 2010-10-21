@@ -1,6 +1,6 @@
 audit_header:
   file_id: 9F023408009B11DF924800163E3DE33F
-  candidateste_date: 2010-01-13 23:30:23 -0700
+  create_date: 2010-01-13 23:30:23 -0700
   type: jurisdiction_slate
   operator: Pito Salas
   hardware: TTV Tabulator TAB02
@@ -22,27 +22,6 @@ body:
     district_ident: 222
     voting_method: Winner Take All
     election_ident: 1
-  precincts:
-  - display_name: State of New Hampshire
-    ident: 1
-  - display_name: Bedford County
-    ident: 2
-  precinct_splits:
-  - precinct_ident: 1
-    district_set_ident: 1
-  - precinct_ident: 2
-    district_set_ident: 2
-  district_sets:
-  - ident: 1
-    districts:
-      - district_ident: 1
-  - ident: 1
-    districts:
-      - district_ident: 1
-  districts:
-  - display_name: State of New Hampshire
-    type: State
-    ident: 222
   candidates:
   - display_name: Marguerite Lefebvre Wageling
     party: democrat
