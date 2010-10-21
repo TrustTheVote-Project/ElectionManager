@@ -85,7 +85,7 @@ class AbstractBallotTest < ActiveSupport::TestCase
 #          puts "rect = #{rect.inspect}"
           @rects << rect
         end
-        @wide_column = AbstractBallot::WideColumn.new(@rects)
+        @wide_column = TTV::Ballot::WideColumn.new(@rects)
       end # end setup
       
       should "be true " do
