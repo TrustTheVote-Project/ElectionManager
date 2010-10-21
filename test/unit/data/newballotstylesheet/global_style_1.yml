@@ -20,7 +20,7 @@ frame:
     bottom: 0
     right: 0
   content:
-    font: { family: "Helvetica", size: 20, leading: 20, tracking: 0, aligntment: :left}
+    font: {family: "Helvetica", size: 20, leading: 20, tracking: 0, aligntment: :left}
     top: {rotate: 0, text: "I am the top content", width: 1.0}
     left: {rotate:90, text: "I am the left content", width: 0.5}
     bottom: {rotate: 180, text: "I am the bottom", width: 0.8} 

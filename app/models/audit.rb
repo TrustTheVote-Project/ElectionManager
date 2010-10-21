@@ -281,7 +281,7 @@ class Audit < ActiveRecord::Base
       # Make sure it has an ident
       district_set.before_validation
       election_data_hash["body"]["districts"][alert.objects.to_i]["jurisdiction_ident"] = district_set.ident
-      Alert.delete(alert)
+      alert.destroy
     when ["no_jurisdiction", "abort"]
       raise "Import aborted"
     when ["invalid_p_in_ps", "abort"]
@@ -292,45 +292,44 @@ class Audit < ActiveRecord::Base
       raise "Import aborted"
     when ["contest_invalid_district_ident", "skip"]
       election_data_hash["body"]["contests"].slice!(alert.objects.to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["candidate_invalid_contest_ident", "abort"]
       raise "Import aborted"
     when ["candidate_invalid_contest_ident", "skip"]
       election_data_hash["body"]["candidates"].slice!(alert.objects.to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["unnamed_election", "abort"]
       raise "Import aborted"
     when ["unnamed_election", "default"]
       election_data_hash["body"]["elections"][alert.objects.to_i]["display_name"] = "Election default-name-from-import"
-      Alert.delete(alert)
+      alert.destroy
     when ["unnamed_election", "skip"]
       election_data_hash["body"]["elections"].slice!(alert.objects.to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["no_elect_in_quest", "abort"]
       raise "Import aborted"
     when ["no_elect_in_quest", "skip"]
       election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["no_district_type_in_quest","skip"]
       election_data_hash["body"]["questions"].slice!(alert.objects.to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["no_district_ident_in_quest","repair"]
       question_number, district_ident = alert.objects
       election_data_hash["body"]["questions"][question_number]["district_ident"] = district_ident
-      Alert.delete(alert)
+      alert.destroy
     when ["no_district_type_in_quest","abort"]
       raise "Import aborted"
     when ["missing_ident", "skip"]
       election_data_hash["body"][alert.objects[0]].slice!(alert.objects[1].to_i)
-      Alert.delete(alert)
+      alert.destroy
     when ["missing_ident", "abort"]
       raise "Import aborted"
     when ["missing_ident", "generate"]
-      election_data_hash["body"][alert.objects[0]][alert.objects[1].to_i]["ident"] = "CAND-#{ActiveSupport::SecureRandom.hex}"
-      puts "rps: generate: #{election_data_hash["body"][alert.objects[0]][alert.objects[1].to_i].inspect}"
-      Alert.delete(alert)
+      election_data_hash["body"][alert.objects[0]][alert.objects[1].to_i]["ident"] = alert.objects[0].upcase + "-#{ActiveSupport::SecureRandom.hex}"
+      alert.destroy
     else
-      raise ArgumentError, "Invalid code in Audit#process_alert"
+      raise ArgumentError, "Invalid code in Audit#process_alert #{alert.alert_type}, #{alert.choice}"
     end
     self.save!
   end

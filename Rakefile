@@ -15,3 +15,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 
+# Single Test gem. See http://github.com/grosser/single_test#readme
+require 'single_test' 
+SingleTest.load_tasks
+

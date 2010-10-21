@@ -26,6 +26,7 @@ class BallotFileNamer
   # Return a file name to use for the ballot corresponding to the parameters
   # <tt>precinct_split,precinct,election</tt>Parameters of the ballot
   # Return a string
+
   def ballot_file_name(precinct_split, election)
     remove_whitespace(precinct_split.precinct.display_name + "-" + precinct_split.display_name)
   end
