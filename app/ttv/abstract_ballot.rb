@@ -40,6 +40,8 @@ module AbstractBallot
       @election = election
       @precinct = precinct
       @destination = destination
+      # TODO: gross, shb a belongs_to
+      @template = BallotStyleTemplate.find(@election.ballot_style_template_id)
       @c = config
     end
 
@@ -48,14 +50,13 @@ module AbstractBallot
     end
 
     def render
-      
       @pdf = Prawn::Document.new(
-      :page_layout => @c.page_layout,
-      :page_size => @c.page_size, 
-      :left_margin => @c.left_margin,
-      :right_margin => @c.right_margin,
-      :top_margin => @c.top_margin,
-      :bottom_margin => @c.bottom_margin,
+      :page_layout => @template.page[:layout],
+      :page_size => @template.page[:size], 
+      :left_margin => @template.page[:margin][:left],
+      :right_margin => @template.page[:margin][:right],
+      :top_margin => @template.page[:margin][:top],
+      :bottom_margin => @template.page[:margin][:bottom],
       :skip_page_creation => true,
       :info => { :Creator => "TrustTheVote",
         :Title => "#{@election.display_name} #{@precinct.display_name} ballot"

@@ -27,7 +27,6 @@ module DcBallot
       @right_margin = @template.page[:margin][:right]
       @top_margin =  @template.page[:margin][:top]
       @bottom_margin =  @template.page[:margin][:bottom]
-      
 
     end
 
