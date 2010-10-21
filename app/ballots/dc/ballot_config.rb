@@ -1,5 +1,7 @@
 #require 'ttv/abstract_ballot.rb'
 require 'ballots/default/ballot_config'
+require 'ttv/ballot/rect'
+
 require 'prawn'
 
 module DcBallot
@@ -222,7 +224,7 @@ module DcBallot
         #instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
-        new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
+        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
 
       end
 

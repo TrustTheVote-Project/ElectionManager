@@ -33,7 +33,7 @@ class AbstractBallotTest < ActiveSupport::TestCase
     context "Rect" do
       should "create a bounding box" do
 
-        rect_for_page = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+        rect_for_page = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
         # puts "rect_for_page  = #{rect_for_page.inspect}"
         
         assert_equal rect_for_page.left, @pdf.bounds.bottom_left.first
@@ -53,7 +53,7 @@ class AbstractBallotTest < ActiveSupport::TestCase
       setup do
         @num_columns = 5
         
-        page_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+        page_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
         
         # break up the page into 5 columns
         @columns = AbstractBallot::Columns.new(@num_columns, page_rect)
@@ -81,7 +81,7 @@ class AbstractBallotTest < ActiveSupport::TestCase
          [50, 0, 0, 50], [100,0, 50, 50], # column 1
          [50, 60, 0, 110], [100,60, 50, 110] # column 2
         ].each do |box|
-          rect = AbstractBallot::Rect.create(box[0],box[1],box[2],box[3])
+          rect = TTV::Ballot::Rect.create(box[0],box[1],box[2],box[3])
 #          puts "rect = #{rect.inspect}"
           @rects << rect
         end

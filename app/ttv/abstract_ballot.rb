@@ -1,6 +1,7 @@
 require 'prawn'
 require 'ballots/dc/ballot_config'
 require 'ttv/ballot/wide_column'
+require 'ttv/ballot/rect'
 
 module AbstractBallot
   
@@ -31,68 +32,13 @@ module AbstractBallot
     config.et.save
     TTV::Translate.translate_file(election.translation_path('en'), election.translation_path(lang), 'en', lang)
   end
-
-  class Rect
-    attr_accessor :top, :left, :bottom, :right, :original_top
-    attr_accessor :header # true if this column rectangle includes a header item
-
-    def initialize(top, left, bottom, right)
-      @top, @left, @bottom , @right = top, left, bottom, right
-      @original_top = @top
-      @header = false
-    end
-    
-    def header?
-      @header
-    end
-    
-    def width
-      right - left
-    end
-
-    def height
-      top - bottom
-    end
-
-    def to_s
-      "#{full_height? ? 'empty' : ''  }T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
-    end
-
-    def inset(horiz, vertical)
-      @top -= vertical
-      @bottom += vertical
-      @left += horiz
-      @right -= horiz
-    end
-
-    def first
-      self
-    end
-
-    def full_height?
-      @original_top == @top
-    end
-
-    def self.create(top, left, bottom, right)
-      return new(top, left, bottom, right)
-    end
-
-    def self.create_wh(top, left, width, height)
-      return new(top, left, top - height, left + width)
-    end
-
-    def self.create_bound_box(bb)
-      return self.create(bb.top, bb.left, bb.bottom, bb.right)
-    end
-  end
-
   # encapsulates columns for rendering
   class Columns
     def initialize(col_count, flow_rect)
       @column_rects = []
       column_width = flow_rect.width / ( col_count * 1.0)
       col_count.times do |x|
-        @column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
+        @column_rects.push TTV::Ballot::Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
         column_width, flow_rect.height)
       end
       @next = @column_rects.first
@@ -200,7 +146,7 @@ module AbstractBallot
       # create a Rect from the bounding box "732.0, 576.0, 0, 0"
       # Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0"
       # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
-      flow_rect = Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
       # draw the frame of the ballot on the page
       @c.render_frame flow_rect

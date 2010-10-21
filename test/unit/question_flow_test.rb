@@ -43,7 +43,7 @@ class QuestionFlowTest < ActiveSupport::TestCase
       setup do
         # length is 400 pts, width is 200 pts
         top = 500; left = 50; bottom = 100; right = 250
-        @enclosing_column_rect = AbstractBallot::Rect.new(top, left, bottom, right)
+        @enclosing_column_rect = TTV::Ballot::Rect.new(top, left, bottom, right)
         # draw red outline/stroke to enclosing column
         TTV::Prawn::Util.stroke_rect(@pdf, @enclosing_column_rect)
       end
@@ -78,7 +78,7 @@ class QuestionFlowTest < ActiveSupport::TestCase
         # enclosing column is 1pt shorter than the question flow height
         bottom = top - (@question_flow_height-1)
         right = 250
-        @enclosing_column_rect = AbstractBallot::Rect.new(top, left, bottom, right)
+        @enclosing_column_rect = TTV::Ballot::Rect.new(top, left, bottom, right)
       end
       
       should "not be able to fit the question" do
