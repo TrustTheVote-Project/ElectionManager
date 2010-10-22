@@ -83,30 +83,23 @@ module DefaultBallot
     def draw_page_watermark
       if @template.page[:background_watermark_asset_id]
         image_file = "#{RAILS_ROOT}/public/#{@template.page[:background_watermark_asset_id]}"
-        # position inside the current bounding box, which is the frame
-        # without it's margin
-        # TODO: may want to center this in the middle of ballot if
-        # frame margins are not symetrical. See
-        # draw_page_background_color below
-        @pdf.image image_file, :position => :center, :vposition => :center
+        # position the watermark in the middle of page, not the middle
+        # of the frame
+        @pdf.canvas do
+          @pdf.image image_file, :position => :center, :vposition => :center
+        end
       end
     end
     
     def draw_page_background_color
       if @template.page[:background_color]
         orig_color =  @pdf.fill_color
-        @pdf.fill_color @template.page[:background_color]
-        
-        # funny work to get a rectangle larger than the
-        # current bounding_box which is the frame without it's margin
-        x = -@template.frame[:margin][:left]
-        y = @pdf.bounds.top + @template.frame[:margin][:top]
-        width = @pdf.bounds.absolute_right + @template.frame[:margin][:right]
-        height = y + @template.frame[:margin][:bottom]
-        
-        @pdf.fill_rectangle([x, y], width, height)
-        # restore color
-        @pdf.fill_color = orig_color        
+        @pdf.canvas do
+          @pdf.fill_color @template.page[:background_color]
+          @pdf.fill_rectangle([@pdf.bounds.left, @pdf.bounds.top], @pdf.bounds.width, @pdf.bounds.height)
+          # restore color
+          @pdf.fill_color = orig_color
+        end
       end
     end
     

@@ -83,8 +83,12 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
   end
   
   def create_document
-    @pdf = ::Prawn::Document.new( :page_layout => @template.frame[:layout], 
-                                  :page_size => @template.frame[:size],
+    # NOTE: The Prawn::Document :background  property places it's
+    # background image in the top left of the ballot, not good!!
+    # image_file = "#{RAILS_ROOT}/public/#{@template.page[:background_watermark_asset_id]}"
+    @pdf = ::Prawn::Document.new( :page_layout => @template.page[:layout],
+                                  #:background => image_file,
+                                  :page_size => @template.page[:size],
                                   :left_margin => @template.frame[:margin][:left],
                                   :right_margin => @template.frame[:margin][:right],
                                   :top_margin =>  @template.frame[:margin][:top],
