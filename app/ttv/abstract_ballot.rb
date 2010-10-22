@@ -51,17 +51,18 @@ module AbstractBallot
 
     def render
       @pdf = Prawn::Document.new(
-      :page_layout => @template.page[:layout],
-      :page_size => @template.page[:size], 
-      :left_margin => @template.page[:margin][:left],
-      :right_margin => @template.page[:margin][:right],
-      :top_margin => @template.page[:margin][:top],
-      :bottom_margin => @template.page[:margin][:bottom],
-      :skip_page_creation => true,
-      :info => { :Creator => "TrustTheVote",
-        :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
-      }
-      )
+                                 :page_layout => @template.page[:layout],
+                                 :page_size => @template.page[:size], 
+                                 :left_margin => @template.page[:margin][:left],
+                                 :right_margin => @template.page[:margin][:right],
+                                 :top_margin => @template.page[:margin][:top],
+                                 :bottom_margin => @template.page[:margin][:bottom],
+                                 :background => @template.page[:background][:background_watermark_asset_ident],
+                                 :skip_page_creation => true,
+                                 :info => { :Creator => "TrustTheVote",
+                                   :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+                                 }
+                                 )
       @c.setup(@pdf, @precinct)
 
       @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @precinct, @c.template)

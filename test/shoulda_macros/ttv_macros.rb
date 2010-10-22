@@ -168,6 +168,7 @@ class Test::Unit::TestCase
     page[:layout] = :portrait # :portrait or :landscape
     page[:background] = '#000000'
     page[:margin] = { :top => 30, :right => 18, :bottom => 30, :left => 18}
+    page[:background_color] = 'F0E68C'
     page
   end
   
