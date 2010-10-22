@@ -21,3 +21,11 @@ span.error_message {
 #footer {
   padding: 0px 0px 0px 0px;
 }
+
+.table td {
+  padding: 5px;
+}
+
+.table th.last {
+  width: 150px;  
+}

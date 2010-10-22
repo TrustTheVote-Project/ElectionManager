@@ -4,7 +4,7 @@ module PrecinctsHelper
 # or the total number of contests if we are not looking at a specific election
   def precinct_contest_count_helper (prec, elect)
     if elect.nil? 
-      "-tbd-"
+      "n/a (no election)"
     else
       Contest.contests_for_precinct_election(prec, elect).length
     end
@@ -14,7 +14,7 @@ module PrecinctsHelper
 # or the total number of questions, if we are not looking at a specific election
   def precinct_question_count_helper (prec, elect)
     if elect.nil? 
-      "-tbd-"
+      "n/a (no election)"
     else
       Question.questions_for_precinct_election(prec, elect).length
     end

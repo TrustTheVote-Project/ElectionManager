@@ -5,8 +5,11 @@ app/ballots - all ballot-related code and data
 app/ballots/style_sheets - all style sheets (.yml)
 app/ballots/rules - all ballot rules (.rb)
 
-demo/ good demo data, to be used for public demonstrations.
-demo/<state>/ - per state jurisdiction, election and candidate data files (yml or xml)
+election_data/ - well formed, realistic import data
+election_data/real/ - data from real elections
+election_data/real/DC - etc. Jurisdictions fromwhich they come
+election_data/demo - well formed, but not real-world import data
+election_data/other - other import data
 
 lib/tasks - rake custom tasks
 lib/ttv - non-application code, e.g. file conversion, and so on
@@ -14,3 +17,5 @@ lib/ttv - non-application code, e.g. file conversion, and so on
 public/system/ - paper clip managed attached files
 public/system/assets - specifically files related to 'Asset' model
 
+test/unit/data - data files (fixtures) for specific tests
+test/unit/data/xxx - data files for test xxx

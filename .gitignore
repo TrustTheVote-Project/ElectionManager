@@ -19,3 +19,4 @@ public/images/uploaded/*
 tmp/webrat-*
 tmp/*.pdf
 doc/*
+test/coverage
