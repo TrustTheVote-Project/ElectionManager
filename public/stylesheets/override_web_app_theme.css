@@ -1,0 +1,77 @@
+/* Override here any style definide by web-app-theme */
+ul.wat-cf li {
+  color: #CDE;
+}
+
+img.ttv-logo {
+  vertical-align:middle;
+}
+
+#juris h1 {
+   color: white;
+   line-height: 120%;
+}
+
+#juris h2 {
+  color: white;
+  font-size: medium;
+  margin-top: 0px;
+}
+
+span.error_message {
+  color: red;
+}
+
+#footer {
+  padding: 0px 0px 0px 0px;
+}
+
+.table td {
+  padding: 5px;
+}
+
+.table th.last {
+  width: 150px;  
+}
+
+div#juris {
+  width: 50%;
+  height: 100%;
+  margin: 10px;
+}
+
+#juris img {
+  float:left;
+  margin-right: 15px;
+}
+
+#header {
+  height: 120px;
+}
+
+div#sidebar {
+  background-color: white;
+  padding: 15px;
+  width: 20%;
+}
+
+#sidebar a.button {
+	margin: 3px;
+	text-align:center;
+	width:  120px;
+	margin-bottom: 15px;
+	margin-left: 20px;
+	text-align: center;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#sidebar h2 {
+	padding-top: 15px;
+	margin-top: 5px;
+	border-top: 1px solid #d7d7d7;
+}
+
+div#main {	
+	width:70%;
+}
