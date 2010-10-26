@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'ballots/default/contest_flow'
 
-class ContestFlowTest < ActiveSupport::TestCase
+class ContestFlowFormTest < ActiveSupport::TestCase
   
   context "DefaultBallot::FlowItem::Contest" do
     setup do

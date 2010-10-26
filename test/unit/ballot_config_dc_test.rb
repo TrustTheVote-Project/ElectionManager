@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'ballots/dc/ballot_config'
 
-class BallotConfigTest < ActiveSupport::TestCase
+class BallotConfigDCTest < ActiveSupport::TestCase
   context "initialize " do
     setup do
       

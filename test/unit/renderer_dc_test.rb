@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'ballots/dc/ballot_config.rb'
 
-class RendererTest < ActiveSupport::TestCase
+class RendererDCTest < ActiveSupport::TestCase
   
   context "AbstractBallot::Renderer " do
     
