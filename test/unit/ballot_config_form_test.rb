@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'ballots/default/ballot_config'
 
-class BallotConfigTest < ActiveSupport::TestCase
+class BallotConfigFormTest < ActiveSupport::TestCase
   setup_jurisdictions do  
     
     context "Default::BallotConfig" do
