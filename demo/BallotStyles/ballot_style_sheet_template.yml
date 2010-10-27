@@ -57,7 +57,7 @@ contents:
       style: :single                           # Border style for header. Values :none, :single (default)
       color: "000000"
       width: 1
-    header-font:                               # Font info for contents header, including color
+    header_font:                               # Font info for contents header, including color
       family:
       size:
       leading:
