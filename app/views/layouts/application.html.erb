@@ -8,38 +8,28 @@
   <body>
   <div id="container">
     <div id="header">
-      <table>
-        <tr>
-          <td>
-            <%= link_logo_for(current_context.jurisdiction) %>
-            <%-#= icon_helper %>
-          </td>
-          <td valign="middle">
-            <a href="/"><%= header_helper %></a>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="user-navigation">
-      <%= user_navigation_helper %>
-    </div>
-    <div id="main-navigation">
-      <ul class="wat-cf">
-      </ul>
-    </div>
-  </div>
-  <div id="wrapper" class="wat-cf">
-    <div class="flash" id="flash">
-      <% flash.each do |type, message| -%>
-      <div class="message <%= type %>">
-        <p>
-          <%= message %>
-        </p>
+      <div id="juris">
+        <%= link_logo_for(current_context.jurisdiction) %>
+        <%= header_helper %>
       </div>
-      <% end -%>
+      <div id="user-navigation">
+        <%= user_navigation_helper %>
+      </div>
     </div>
-    <div id="main">
-     <%= breadcrumb_helper(current_context) %>
+    <div id="wrapper" class="wat-cf">
+      <div class="flash" id="flash">
+        <% flash.each do |type, message| -%>
+        <div class="message <%= type %>">
+          <p>
+            <%= message %>
+          </p>
+        </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <div id="breadcrumb">
+         <%= breadcrumb_helper(current_context) %>
+      </div>
       <%= yield %>
       <div id="footer">
         <div class="block">
@@ -47,10 +37,24 @@
         </div>
       </div>
     </div>
-    <div id="sidebar">
-      <%= yield :sidebar %>
+    	<div id="sidebar">
+      <div class="content block">
+        <div class="inner">
+          <div class="wat-cf" id="commands">
+            <a class="button" href="http://www.salas.com">
+                <img src="/images/ui_icons/searchicon.png" alt="Search"/>
+                Search
+            </a>
+            <a class="button" href="http://www.salas.com">
+                <img src="/images/ui_icons/adminicon.png" alt="Admin"/>
+                Admin
+            </a>
+          </div>
+          <%= yield :sidebar %>
+        </div>
+      </div>
     </div>
-  </div>
+    </div>
   </div>
 </body>
 </html>
