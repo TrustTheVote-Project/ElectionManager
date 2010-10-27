@@ -89,7 +89,7 @@ module DefaultBallot
           end
         end
       end
-      flow_items
+      template.ballot_rule.post_process_flow_items(template, flow_items) 
     end
     
     def self.create_flow_item(pdf, item)

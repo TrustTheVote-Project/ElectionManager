@@ -143,7 +143,30 @@ module TTV
       end
       def contents_footer(ballot_config)
       end
-
+      
+      # Make questions display after contests
+      def reorder_questions(flow_items)
+        question_items = []
+        other_items = []
+          flow_items.each do |item|
+            if item.class.name == "DefaultBallot::FlowItem::Question"
+              question_items << item
+            else
+              other_items << item
+            end
+          end
+          flow_items = other_items + question_items
+      end
+      
+      # called after the flow_items,(district, contest, questions), are created
+      def post_process_flow_items(template, flow_items)
+        if template[:ballot_layout][:questions_placement] == :at_end
+          flow_items = reorder_questions(flow_items)
+        end
+        
+        flow_items
+      end # end process_flow_items
+      
     end # end Base class
     
   end

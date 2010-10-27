@@ -167,7 +167,6 @@ class Test::Unit::TestCase
     page[:size] = "LETTER" 
     page[:layout] = :portrait # :portrait or :landscape
     page[:background] = '#000000'
-    page[:margin] = { :top => 30, :right => 18, :bottom => 30, :left => 18}
     page[:background_color] = 'F0E68C'
     page
   end
@@ -360,4 +359,91 @@ class Test::Unit::TestCase
 
   end
   
+  # Creates a Jurisdiction, @jurisdiction,  with an:
+  # - Election, @election
+  # - 9 Districts name "district_<n>", where n = 1..9
+  # - Precinct, @precinct
+  # Creates a Precinct Split, @precinct_split, with:
+  # - District Set that is a subset of above 9 districts,
+  #  district_<n>, where n = 3..5
+  def create_election_with_precincts
+      # Create the DistrictSet which stands in for the Jurisdiction
+      @jurisdiction =  DistrictSet.make(:display_name => "Jurisdiction with Election")
+      
+      # create 9 districts, and make them part of the Jurisdiction
+      9.times do |i|
+        d = District.make(:display_name => "district_#{i}", :jurisdiction => @jurisdiction)
+      end  
+      
+      # create an election in this jurisdiction
+      @election = Election.make(:display_name => "Election 1", :district_set => @jurisdiction)
+      
+      # create a precinct within the jurisdiction we use 
+      @precinct = Precinct.make(:display_name => "Precinct 1", :jurisdiction => @jurisdiction)
+
+      # create a district set has the 3 districts from the
+      # jurisdiction created above
+      split_ds = DistrictSet.make(:display_name => "split_ds")
+      (3..5).to_a.each do |i|        
+        split_ds.districts << District.find_by_display_name("district_#{i}")
+      end
+      
+      # create a precinct_split with this district set and
+      # precinct. The district set we associate with this precinct
+      # split is NOT the jurisdiction district set.
+      @precinct_split = PrecinctSplit.make(:display_name => "Precinct Split 1", :precinct => @precinct, :district_set => split_ds)
+    
+  end
+
+  def create_contests(count=1)
+    pos = 0;
+    # These are the districts created in the
+    # create_election_with_precincts method above
+    (3..5).to_a.each do |i|        
+      district = District.find_by_display_name("district_#{i}")
+      # create contests
+      count.times do |i|
+        contest = create_contest(district.display_name + " Contest #{i} ",
+                                 VotingMethod::WINNER_TAKE_ALL,
+                                 district,
+                                 @election, pos)
+        pos += 1
+      end 
+    end
+  end # create contests
+
+  def create_questions(count=1)
+    # These are the districts created in the
+    # create_election_with_precincts method above
+    (3..5).to_a.each do |i|        
+      district = District.find_by_display_name("district_#{i}")
+      
+      # create questions
+      count.times do |i|
+        name = district.display_name + " Question #{i}"
+        create_question(name,
+                        district,
+                        @election, name + " Question Text...")
+      end
+    end
+  end # create questions
+  
+  def create_document(template)
+    # NOTE: The Prawn::Document :background  property places it's
+    # background image in the top left of the ballot, not good!!
+    # image_file = "#{RAILS_ROOT}/public/#{template.page[:background_watermark_asset_id]}"
+    pdf = ::Prawn::Document.new( :page_layout => template.page[:layout],
+                                  #:background => image_file,
+                                  :page_size => template.page[:size],
+                                  :left_margin => template.frame[:margin][:left],
+                                  :right_margin => template.frame[:margin][:right],
+                                  :top_margin =>  template.frame[:margin][:top],
+                                  :bottom_margin =>  template.frame[:margin][:bottom],
+                                  :info => { :Creator => "TrustTheVote",
+                                    :Title => "Test ballot"} )
+    # document size 
+    @doc_width, @doc_height = Prawn::Document::PageGeometry::SIZES["LETTER"]
+    pdf
+  end
+
 end
