@@ -38,10 +38,9 @@ module ApplicationHelper
     jurisdiction_secondary = current_context.jurisdiction_secondary_name
     
     if current_user() and current_context.jurisdiction?
-      content_tag(:h1, jurisdiction_name +
-                      "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
+      content_tag(:h1, jurisdiction_name) + content_tag(:h2, jurisdiction_secondary)
     else
-      content_tag(:h1, "TTV Election Manager", :class=>"title-header") 
+      content_tag(:h1, "TTV Election Manager") 
     end
     
   end
@@ -95,9 +94,9 @@ module ApplicationHelper
       jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
     end
     if c_or_q_or_p_link != ""
-      html = c_or_q_or_p_link + content_tag(:small, " (in " + el_link + " in " + jur_link + " )")
+      html = c_or_q_or_p_link + content_tag(:h1, " (in " + el_link + " in " + jur_link + " )")
     elsif el_link != ""
-      html = el_link + content_tag(:small, " (in " + jur_link + " )")
+      html = el_link + content_tag(:h1, " (in " + jur_link + " )")
     elsif jur_link
       html = jur_link
     end
