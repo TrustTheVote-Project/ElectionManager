@@ -4,11 +4,11 @@ require 'ballots/dc/ballot_config'
 class BallotStyleSheetPageTest < ActiveSupport::TestCase
   context "initialize" do
     setup do
-      @e1 = Election.make(:display_name => "Election 1")
-      @p1 = Precinct.make(:display_name => "Precint 1")
-
-      @template = BallotStyleTemplate.make(:display_name => "test template")
-
+      create_election_with_precincts
+      create_contests(3)
+      create_questions(2)
+      @template = BallotStyleTemplate.make(:display_name => "BallotStyleTemplate", :pdf_form => false)
+      @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/global_style_1.yml")
     end # end setup
     
     should "set the page and frame attributes" do
@@ -27,18 +27,18 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
       
       # TODO: recfactor how the Prawn::Document and the BallotConfig
       # are used. 
-      @ballot_config = DcBallot::BallotConfig.new( @e1, @template)
+      @ballot_config = DcBallot::BallotConfig.new( @election, @template)
       
       # creates a Prawn::Document used to generate the pdf ballot
       # the following 2 steps are typically done in the
       # AbstractBallot::Render#render
-      create_document
-      @ballot_config.setup(@pdf,@p1 )
+      @pdf = create_document(@template)
+      @ballot_config.setup(@pdf,@precinct)
 
       # describes the ballot box model
       draw_ballot_description
       
-      @pdf.render_file("#{Rails.root}/tmp/ballot_style_page.pdf")
+      @pdf.render_file("#{Rails.root}/tmp/ballot_stylesheet_norender.pdf")
       
       # absolute co-ordinates are offsets from edge of the page
       # puts "TGD: absolute top, right, bottom,left = #{@pdf.bounds.absolute_top},#{@pdf.bounds.absolute_right},#{@pdf.bounds.absolute_bottom},#{@pdf.bounds.absolute_left}"
@@ -82,27 +82,6 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
     @pdf.stroke_color orig_color
   end
   
-  def create_document
-    # NOTE: The Prawn::Document :background  property places it's
-    # background image in the top left of the ballot, not good!!
-    # image_file = "#{RAILS_ROOT}/public/#{@template.page[:background_watermark_asset_id]}"
-    @pdf = ::Prawn::Document.new( :page_layout => @template.page[:layout],
-                                  #:background => image_file,
-                                  :page_size => @template.page[:size],
-                                  :left_margin => @template.frame[:margin][:left],
-                                  :right_margin => @template.frame[:margin][:right],
-                                  :top_margin =>  @template.frame[:margin][:top],
-                                  :bottom_margin =>  @template.frame[:margin][:bottom],
-                                  :info => { :Creator => "TrustTheVote",
-                                    :Title => "#{@e1.display_name}  #{@p1.display_name} ballot"} )
-
-
-
-    # document size 
-    @doc_width, @doc_height = Prawn::Document::PageGeometry::SIZES["LETTER"]
-    # puts "TGD: document height, width = #{@doc_height}, #{@doc_width}"      @ballot_config.setup(@pdf, @p1)
-    
-  end
   
   def draw_ballot_description
     # aliases
