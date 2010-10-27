@@ -1,0 +1,40 @@
+# AIGA Ballots - test set 1
+
+ballot_layout:
+  columns: 3
+
+page: 
+  size: "LETTER"  
+  background_color: "FFFFFF"
+  layout: :portrait
+
+frame: 
+  margin:  {top: 12, left: 12, bottom: 12, right: 12}
+  content
+    margin: {top:0, left: 68, bottom: 32, right: 0}
+    background_color: "FFFFFF"
+
+contents: 
+  border: 
+    style: :none
+  header: 
+    border: 
+      style: :none
+    header_font: {family: "Helvetica", size: 18, leading: 20, tracking: -20, alignment: "left", color: "000000"} 
+  body:
+    background_color: "FFFFFF"
+    margin:   {top: 12, left: 12, bottom: 12, right: 12}
+    height: 1.0
+    width: 1.0
+    column_spacing: 6
+    border: 
+      style: :none
+
+instructions:
+  type: :column
+  position: 1
+  background_color: "E1F4FD"
+
+district_header:
+  present:  :false
+
