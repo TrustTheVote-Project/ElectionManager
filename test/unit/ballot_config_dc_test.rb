@@ -17,10 +17,10 @@ class BallotConfigDCTest < ActiveSupport::TestCase
       @c = @ballot_config = DcBallot::BallotConfig.new( @e1, @template)
       @pdf = ::Prawn::Document.new( :page_layout => @template.page[:layout], 
                                    :page_size => @template.page[:size],
-                                    :left_margin => @template.page[:margin][:left],
-                                    :right_margin => @template.page[:margin][:right],
-                                    :top_margin =>  @template.page[:margin][:top],
-                                    :bottom_margin =>  @template.page[:margin][:bottom],
+                                    :left_margin => @template.frame[:margin][:left],
+                                    :right_margin => @template.frame[:margin][:right],
+                                    :top_margin =>  @template.frame[:margin][:top],
+                                    :bottom_margin =>  @template.frame[:margin][:bottom],
                                    :info => { :Creator => "TrustTheVote",
                                    :Title => "#{@e1.display_name}  #{@p1.display_name} ballot"} )
       

@@ -23,10 +23,10 @@ module DcBallot
 
       @page_size = @template.page[:size]
       @page_layout = @template.page[:layout]
-      @left_margin = @template.page[:margin][:left]
-      @right_margin = @template.page[:margin][:right]
-      @top_margin =  @template.page[:margin][:top]
-      @bottom_margin =  @template.page[:margin][:bottom]
+      @left_margin = @template.frame[:margin][:left]
+      @right_margin = @template.frame[:margin][:right]
+      @top_margin =  @template.frame[:margin][:top]
+      @bottom_margin =  @template.frame[:margin][:bottom]
 
     end
 
@@ -223,7 +223,7 @@ module DcBallot
         #instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
-        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
+        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @frame[:margin][:top], @pdf.bounds.absolute_left- @frame[:margin][:left], @pdf.bounds.absolute_bottom - @frame[:margin][:bottom] , @pdf.bounds.absolute_right- @frame[:margin][:right])
 
       end
 
