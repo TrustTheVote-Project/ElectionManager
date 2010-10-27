@@ -76,8 +76,33 @@ module DefaultBallot
             })
         @wrap = :space
       end
+      draw_page_background_color
+      draw_page_watermark
     end
-
+    
+    def draw_page_watermark
+      if @template.page[:background_watermark_asset_id]
+        image_file = "#{RAILS_ROOT}/public/#{@template.page[:background_watermark_asset_id]}"
+        # position the watermark in the middle of page, not the middle
+        # of the frame
+        @pdf.canvas do
+          @pdf.image image_file, :position => :center, :vposition => :center
+        end
+      end
+    end
+    
+    def draw_page_background_color
+      if @template.page[:background_color]
+        orig_color =  @pdf.fill_color
+        @pdf.canvas do
+          @pdf.fill_color @template.page[:background_color]
+          @pdf.fill_rectangle([@pdf.bounds.left, @pdf.bounds.top], @pdf.bounds.width, @pdf.bounds.height)
+          # restore color
+          @pdf.fill_color = orig_color
+        end
+      end
+    end
+    
     def load_text(filename)
       IO.read "#{@file_root}/lang/#{@lang}/#{filename}"
     end
@@ -106,7 +131,7 @@ module DefaultBallot
     end
 
     def create_columns(flow_rect)
-      AbstractBallot::Columns.new(@columns, flow_rect)
+      TTV::Ballot::Columns.new(@columns, flow_rect)
     end
     
     def wide_style

@@ -1,5 +1,7 @@
 #require 'ttv/abstract_ballot.rb'
 require 'ballots/default/ballot_config'
+require 'ttv/ballot/rect'
+
 require 'prawn'
 
 module DcBallot
@@ -25,7 +27,6 @@ module DcBallot
       @right_margin = @template.page[:margin][:right]
       @top_margin =  @template.page[:margin][:top]
       @bottom_margin =  @template.page[:margin][:bottom]
-      
 
     end
 
@@ -92,11 +93,6 @@ module DcBallot
 
       end
       flow_rect
-    end
-
-    # HACK to get renderer to work
-    def render_header(flow_rect)
-      new_flow_rect = render_contents(flow_rect)
     end
     
     private
@@ -227,7 +223,7 @@ module DcBallot
         #instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
         
         # new flow rectangle
-        new_flow_rectangle = AbstractBallot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
+        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @page[:margin][:top], @pdf.bounds.absolute_left- @page[:margin][:left], @pdf.bounds.absolute_bottom - @page[:margin][:bottom] , @pdf.bounds.absolute_right- @page[:margin][:right])
 
       end
 

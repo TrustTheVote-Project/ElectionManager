@@ -12,13 +12,13 @@ class ContestFlowFormTest < ActiveSupport::TestCase
       create_ballot_config(true)
       
       # create a flow rect/frame to enclose all the columns
-      flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
         
       # draw aqua outline/stroke around the flow rectangle
       TTV::Prawn::Util.stroke_rect(@pdf, flow_rect, "#ffffff")
         
       # create 3 columns of equal width within the frame
-      @columns = AbstractBallot::Columns.new(3, flow_rect)
+      @columns = TTV::Ballot::Columns.new(3, flow_rect)
         
       # get the first, leftmost, column
       @current_column = @columns.next

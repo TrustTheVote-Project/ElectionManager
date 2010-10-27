@@ -40,14 +40,14 @@ class BallotConfigDCTest < ActiveSupport::TestCase
     end
     
     should "render a frame around the entire page" do
-      flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
       @ballot_config.render_frame flow_rect
       util = TTV::Prawn::Util.new(@pdf)
       @pdf.render_file("#{Rails.root}/tmp/ballot_render_dc_frame.pdf")          
     end
     
     should "render a contents for this page" do
-      flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
       @ballot_config.render_frame flow_rect
       @ballot_config.render_contents flow_rect
       @pdf.render_file("#{Rails.root}/tmp/ballot_render_dc_contents.pdf")          

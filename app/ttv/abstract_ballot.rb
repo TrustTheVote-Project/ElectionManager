@@ -1,5 +1,8 @@
 require 'prawn'
 require 'ballots/dc/ballot_config'
+require 'ttv/ballot/wide_column'
+require 'ttv/ballot/rect'
+require 'ttv/ballot/columns'
 
 module AbstractBallot
   
@@ -31,193 +34,14 @@ module AbstractBallot
     TTV::Translate.translate_file(election.translation_path('en'), election.translation_path(lang), 'en', lang)
   end
 
-  class Rect
-    attr_accessor :top, :left, :bottom, :right, :original_top
-    attr_accessor :header # true if this column rectangle includes a header item
-
-    def initialize(top, left, bottom, right)
-      @top, @left, @bottom , @right = top, left, bottom, right
-      @original_top = @top
-      @header = false
-    end
-    
-    def header?
-      @header
-    end
-    
-    def width
-      right - left
-    end
-
-    def height
-      top - bottom
-    end
-
-    def to_s
-      "#{full_height? ? 'empty' : ''  }T:#{@top} L:#{@left} B:#{@bottom} R:#{@right} W:#{self.width} H:#{self.height}"
-    end
-
-    def inset(horiz, vertical)
-      @top -= vertical
-      @bottom += vertical
-      @left += horiz
-      @right -= horiz
-    end
-
-    def first
-      self
-    end
-
-    def full_height?
-      @original_top == @top
-    end
-
-    def self.create(top, left, bottom, right)
-      return new(top, left, bottom, right)
-    end
-
-    def self.create_wh(top, left, width, height)
-      return new(top, left, top - height, left + width)
-    end
-
-    def self.create_bound_box(bb)
-      return self.create(bb.top, bb.left, bb.bottom, bb.right)
-    end
-  end
-
-  # WideColumn is used in layout to group columns together
-  # its boundaries are leftmost/rightmost/lowest top/highest bottom
-  class WideColumn
-
-    attr_accessor :header # true if this column rectangle includes a
-    # header item
-
-    def initialize (rects)
-      @rects = rects
-      @original_top = top
-    end
-
-    def header?
-      @header
-    end
-        
-    def initialize_copy(old)
-      @rects =  @rects.map { |r| r.clone }
-    end
-
-    def top
-      @rects.map { |r| r.top}.min
-    end
-    def top=(x)
-      @rects.each { |r| r.top = x }
-    end        
-    def bottom
-      @rects.map { |r| r.bottom}.max
-    end
-    def bottom=(x)
-      @rects.each { |r| r.bottom = x} 
-    end
-    def left
-      @rects.map { |r| r.left}.min
-    end
-    def right
-      @rects.map { |r| r.right}.max
-    end
-
-    def width
-      right - left
-    end
-
-    def height
-      top - bottom
-    end
-
-    def index(r)
-      @rects.index(r)
-    end
-
-    def first
-      @rects.first
-    end
-
-    def full_height?
-      @original_top == top
-    end
-
-    def to_s
-      s = "T:#{top} L:#{left} B:#{bottom} R:#{right} W:#{width} H#{height}\n\n"
-      @rects.each do |r| 
-        s += "Combo: #{r.to_s}\n" 
-      end
-      s
-    end        
-  end
-
-  # encapsulates columns for rendering
-  class Columns
-    def initialize(col_count, flow_rect)
-      @column_rects = []
-      column_width = flow_rect.width / ( col_count * 1.0)
-      col_count.times do |x|
-        @column_rects.push Rect.create_wh(flow_rect.top, flow_rect.left + column_width *x,
-        column_width, flow_rect.height)
-      end
-      @next = @column_rects.first
-    end
-
-    def to_s
-      s = ""
-      @column_rects.each do |c|
-        s += "#{c}\n"
-      end
-      s
-    end
-
-    def next
-      retval = @next
-      @next = @column_rects[@column_rects.index(@next) + 1] if @next
-      retval
-    end
-
-    def first
-      @column_rects.first
-    end
-
-    def last
-      @column_rects.last
-    end
-
-    def current=(r)
-      @next = @column_rects[@column_rects.index(r) + 1]
-    end
-
-    def empty?
-      @column_rects.select{ |r| r.full_height? }.size == @column_rects.size
-    end
-    
-    def make_wide(column, width)
-      return nil if column == nil # not an error case
-      cols = [column]
-      i = @column_rects.index(column) + 1
-      total = column.width
-      while (total < width && i < @column_rects.size)
-        new_col = @column_rects[i]
-        @next = @column_rects[i+1]
-        total += new_col.width
-        cols.push new_col
-        i += 1
-      end
-      return WideColumn.new(cols) if total >= width
-      nil
-    end      
-  end
-
   class Renderer
 
     def initialize(election, precinct, config, destination)
       @election = election
       @precinct = precinct
       @destination = destination
+      # TODO: gross, shb a belongs_to
+      @template = BallotStyleTemplate.find(@election.ballot_style_template_id)
       @c = config
     end
 
@@ -226,19 +50,19 @@ module AbstractBallot
     end
 
     def render
-      
       @pdf = Prawn::Document.new(
-      :page_layout => @c.page_layout,
-      :page_size => @c.page_size, 
-      :left_margin => @c.left_margin,
-      :right_margin => @c.right_margin,
-      :top_margin => @c.top_margin,
-      :bottom_margin => @c.bottom_margin,
-      :skip_page_creation => true,
-      :info => { :Creator => "TrustTheVote",
-        :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
-      }
-      )
+                                 :page_layout => @template.page[:layout],
+                                 :page_size => @template.page[:size], 
+                                 :left_margin => @template.frame[:margin][:left],
+                                 :right_margin => @template.frame[:margin][:right],
+                                 :top_margin => @template.frame[:margin][:top],
+                                 :bottom_margin => @template.frame[:margin][:bottom],
+                                 :background => @template.page[:background][:background_watermark_asset_ident],
+                                 :skip_page_creation => true,
+                                 :info => { :Creator => "TrustTheVote",
+                                   :Title => "#{@election.display_name} #{@precinct.display_name} ballot"
+                                 }
+                                 )
       @c.setup(@pdf, @precinct)
 
       @flow_items = ::DefaultBallot::FlowItem.init_flow_items(@pdf, @election, @precinct, @c.template)
@@ -252,22 +76,31 @@ module AbstractBallot
       @pagenum += 1
       @pdf.start_new_page
 
-      # puts "TGD: start_page: created a new page"
+      # remember for a ballot the
+      # page surrounds frame, fram surrounds contents,
+      # contents has 3 areas, (header, body and footer)
+      
       #TTV::Prawn::Util.show_bounds_coordinates(@pdf.bounds)
       #TTV::Prawn::Util.show_abs_bounds_coordinates(@pdf.bounds)
-
+      
+      # given a page,  @pdf.bounds, create a Rectangle that will
+      # be used as the flow rectangle.
+      # flow rectangle will be used to enclose the flow items
+      # such as the question, contest flows.
+      
       # create a Rect from the bounding box "732.0, 576.0, 0, 0"
       # Bounds coordinates "t, r, b, l" = "732.0, 576.0, 0, 0"
       # Absolute Bounds coordinates "t, r, b, l" = "762.0, 594.0, 30.0, 18"
-      flow_rect = Rect.create_bound_box(@pdf.bounds)
-      # puts "TGD: start_page: created a new flow rectange"
-      
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
+
+      # draw the frame of the ballot on the page
       @c.render_frame flow_rect
+
+      # set the flow rectangle to be same as 
       if @c.is_a? ::DcBallot::BallotConfig
         # resets the flow rect to be under header, above footer,
         # inside page frame.
-        flow_rect = @c.render_header flow_rect
-        # puts "TGD: start_page: adjusted the flow rectangle to be inside the ballot contents"
+        flow_rect = @c.render_contents flow_rect
       else
         @c.render_header flow_rect        
       end
@@ -296,7 +129,7 @@ module AbstractBallot
       columns = @page[:columns]
       if (continuation_col.height < 
         continuation_box.height(@c, continuation_col, @flow_items.size != 0) )
-        if ! (continuation_col.class == WideColumn && continuation_col.index(columns.last))
+        if ! (continuation_col.class == TTV::Ballot::WideColumn && continuation_col.index(columns.last))
           continuation_col = columns.last
         end
       end
@@ -321,7 +154,7 @@ module AbstractBallot
             curr_column = columns.make_wide columns.next, item.min_width # 
           end
         end
-      elsif curr_column.class == WideColumn # fit narrow items in wide column
+      elsif curr_column.class == TTV::Ballot::WideColumn # fit narrow items in wide column
         if @c.wide_style == :continue
           curr_column = curr_column.first
           columns.current = curr_column

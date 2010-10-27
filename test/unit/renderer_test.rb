@@ -77,12 +77,12 @@ class RendererTest < ActiveSupport::TestCase
 
       # check that flow_rect for the entire page is correct, at least
       # within2 points
-      assert_instance_of AbstractBallot::Rect, flow_rect
+      assert_instance_of TTV::Ballot::Rect, flow_rect
       # check_rect(rectangle, delta, width, height, top, left, bottom,right)
       assert check_rect(flow_rect, 2.0, 462.0, 428.0, 558.0, 85, 130.0, 547.0)
       
       # should have 3 columns on the page
-      assert_instance_of AbstractBallot::Columns, columns
+      assert_instance_of TTV::Ballot::Columns, columns
       # puts "TGD: columns = #{columns.inspect}"
       column_rects = columns.instance_variable_get(:@column_rects)
       assert_equal 3, column_rects.size
@@ -92,7 +92,7 @@ class RendererTest < ActiveSupport::TestCase
       
       # the current column should be the leftmost, first,  most column
       # puts "TGD: curr_column = #{curr_column.inspect}"
-      assert_instance_of AbstractBallot::Rect, curr_column
+      assert_instance_of TTV::Ballot::Rect, curr_column
       assert_equal curr_column, column_rects.first
 
       # draw a red line around the current column

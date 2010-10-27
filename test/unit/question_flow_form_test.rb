@@ -15,12 +15,12 @@ class QuestionFlowTest < ActiveSupport::TestCase
       #                                 :question => 'This proposed law would ')
       
       # create a flow rect/frame to enclose all the columns
-      flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
       # draw aqua outline/stroke around the flow rectangle
       TTV::Prawn::Util.stroke_rect(@pdf, flow_rect, "#ffffff")
       
       # create 3 columns of equal width within the frame
-      @columns = AbstractBallot::Columns.new(3, flow_rect)
+      @columns = TTV::Ballot::Columns.new(3, flow_rect)
       
       # get the first, leftmost, column
       @current_column = @columns.next
@@ -33,7 +33,7 @@ class QuestionFlowTest < ActiveSupport::TestCase
       setup do
         # length is 400 pts, width is 200 pts
         top = 500; left = 50; bottom = 100; right = 250
-        @enclosing_column_rect = AbstractBallot::Rect.new(top, left, bottom, right)
+        @enclosing_column_rect = TTV::Ballot::Rect.new(top, left, bottom, right)
         # draw red outline/stroke to enclosing column
         TTV::Prawn::Util.stroke_rect(@pdf, @enclosing_column_rect)
 

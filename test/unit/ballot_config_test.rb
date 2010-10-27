@@ -81,8 +81,8 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
         
         should "create 3 columns in the ballot" do
-          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
-          assert_instance_of AbstractBallot::Columns, @ballot_config.create_columns(flow_rect)
+          flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
+          assert_instance_of TTV::Ballot::Columns, @ballot_config.create_columns(flow_rect)
         end
         
         should "have a wide style of continue" do
@@ -100,10 +100,10 @@ class BallotConfigTest < ActiveSupport::TestCase
         
         should "draw 3 checkboxes, one in each column" do
           # bounding rect of pdf page
-          rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
-          three_columns = AbstractBallot::Columns.new(3, rect)
+          three_columns = TTV::Ballot::Columns.new(3, rect)
 
           first_column = three_columns.next
           @ballot_config.draw_checkbox(first_column, "This is a test checkbox in column 1")
@@ -126,7 +126,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           # [right -100, top -100] to [right -100, top - 400] on right of rect
           # [0, top-100] to [0, top - 400] on left of rect
           # top, left, bottom and right
-          rect = AbstractBallot::Rect.create(@pdf.bounds.top-100,0, 0, @pdf.bounds.right-100 )
+          rect = TTV::Ballot::Rect.create(@pdf.bounds.top-100,0, 0, @pdf.bounds.right-100 )
           @ballot_config.frame_item(rect, rect.height-300 )
           util = TTV::Prawn::Util.new(@pdf)
           assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n0.5 w\n18.000 662.000 m\n494.000 662.000 l\nS\n494.000 662.000 m\n494.000 362.000 l\nS\n18.000 662.000 m\n18.000 362.000 l\nS\n", util.page_contents[0]
@@ -142,7 +142,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         # - draw some long, hard coded, numbers vertically on the left
         # and right edges of the page
         should "render a frame around the entire page" do
-          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
           @ballot_config.render_frame flow_rect
           util = TTV::Prawn::Util.new(@pdf)
           assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.000 1.000 0.000 scn\nf\n0.000 0.000 0.000 scn\n0.000 0.000 0.000 scn\n18.000 30.000 18.000 140.000 re\n18.000 622.000 18.000 140.000 re\n576.000 30.000 18.000 140.000 re\n576.000 622.000 18.000 140.000 re\nb\n44.000 95.000 524.000 672.000 re\nS\n\nBT\n0.000 1.000 -1.000 0.000 34.000 370.000 Tm\n/F1.0 14 Tf\n<53616d706c652042616c6c6f74> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 592.000 370.000 Tm\n/F1.0 14 Tf\n<53616d706c652042616c6c6f74> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 34.000 505.000 Tm\n/F1.0 14 Tf\n<3132303031303430313030303430> Tj\nET\n\n\nBT\n0.000 1.000 -1.000 0.000 592.000 241.000 Tm\n/F1.0 14 Tf\n<313332333031313133> Tj\nET\n\n", util.page_contents[0]
@@ -150,7 +150,7 @@ class BallotConfigTest < ActiveSupport::TestCase
         end
         
         should "render a header with an old date for this page" do
-          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
           
           # make sure the election has a start date
           @e1.start_date = DateTime.new(2009, 11,3)
@@ -172,7 +172,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           # - Precinct display name under that
           # - Line directly underneath the above
           
-          flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
           
           # make sure the election has a start date
           @e1.start_date = DateTime.new(2009, 7, 25)
@@ -189,10 +189,10 @@ class BallotConfigTest < ActiveSupport::TestCase
         # render the column instruction image in the leftmost column
         should "not render column instructions" do
           # bounding rect of pdf page
-          rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
-          three_columns = AbstractBallot::Columns.new(3, rect)
+          three_columns = TTV::Ballot::Columns.new(3, rect)
           page = 1
           @ballot_config.render_column_instructions(three_columns, page)
           
@@ -206,10 +206,10 @@ class BallotConfigTest < ActiveSupport::TestCase
 #         # render the column instruction image in the leftmost column
 #         should "render column instructions" do
 #           # bounding rect of pdf page
-#           rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+#           rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
 #           # split the page into 3 columns
-#           three_columns = AbstractBallot::Columns.new(3, rect)
+#           three_columns = TTV::Ballot::Columns.new(3, rect)
 #           page = 1
 #           @ballot_config.render_column_instructions(three_columns, page)
 #           util = TTV::Prawn::Util.new(@pdf)

@@ -37,7 +37,7 @@ class ContinuationBoxTest < ActiveSupport::TestCase
     # This is a 3 sided box with lines on each side and the bottom.
     should "draw a box with thanks and asking to turn in youre ballot" do
       flow_rect = AbstractBallot::Rect.create_bound_box(@prawn_doc.bounds)
-      three_columns = AbstractBallot::Columns.new(3, flow_rect)
+      three_columns = TTV::Ballot::Columns.new(3, flow_rect)
       
       @c_box.draw(@ballot_config, three_columns.next, @is_last_page )
       @prawn_doc.render_file(@pdf_fname)
