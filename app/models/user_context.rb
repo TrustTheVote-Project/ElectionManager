@@ -4,10 +4,20 @@
 # ApplicationController where it is created and returned to any other method that needs it.
 
 class UserContext
-  attr_accessor :jurisdiction, :election, :contest, :question, :precinct
+  attr_accessor :what, :jurisdiction, :election, :contest, :question, :precinct
   
   def initialize(session)
     @session = session
+    @session[:what] = :nothing
+  end
+  
+# return "what" is selected. Values are: :jurisdiction, :election, :precinct, :district, :split, :district_set, :nothing
+
+  def what
+    if [:jurisdiction, :election, :precinct, :district, :split, :district_set, :nothing].include?(what)
+      raise "Invalid User Context Session Status"
+    end
+    @session[:what]
   end
 
   #TODO: DRY these common methods with define_method

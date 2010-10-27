@@ -12,12 +12,13 @@ class UserContextTest < ActiveSupport::TestCase
     end
     
     should "not have any context yet" do
-      assert !@uc.election? && !@uc.jurisdiction
+      assert !@uc.what == :nothing
     end
     
     context "with a basic jurisdiction" do
       setup do
         @jur = DistrictSet.make
+        @uc.what = :jurisdiction
         @uc.jurisdiction = @jur
       end
       
