@@ -247,7 +247,7 @@ input.checkbox {
 
 /* pagination */
 
-.pagination em {
+.pagination span.current {
   background: #576C82;
   color: #FFF;
   border: 1px solid #7593B0;
@@ -388,4 +388,17 @@ ul.list li .left  {
   color: #FFF;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+#image-top {
+  float:left;
+  margin-right:100px;
+}
+
+#title-top {
+  float:left;
+  position:relative;
+  top:50%;
+  margin-top:30px;
+  width:500px;
 }
