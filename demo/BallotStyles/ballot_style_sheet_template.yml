@@ -10,7 +10,8 @@ ballot_layout:
 page: 
   size: "LETTER"                            # Choices are pdf named sizes. Default "LETTER"
   background_color: "000000"                # Hex color. (default "00000000")
-  background_watermark_asset_ident:         # Asset ident to use for a watermark 
+  background_watermark_asset_ident:         # Asset ident to use for a watermark
+  background_watermark_position: { top:, left: } # Coordinates for watermark placement on page
   layout: :portrait
 frame: 
   margin:                                    # Pixels outside the frame (to edge of paper)
