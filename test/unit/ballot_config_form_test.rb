@@ -32,7 +32,7 @@ class BallotConfigFormTest < ActiveSupport::TestCase
         
         should "draw 3 checkboxes, one in each column" do
           # bounding rect of pdf page
-          rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+          rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
 
           # split the page into 3 columns
           three_columns = TTV::Ballot::Columns.new(3, rect)

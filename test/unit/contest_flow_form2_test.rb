@@ -12,7 +12,7 @@ class ContestFlowFormTest < ActiveSupport::TestCase
       create_ballot_config(true)
       
       # create a flow rect/frame to enclose all the columns
-      flow_rect = AbstractBallot::Rect.create_bound_box(@pdf.bounds)
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
         
       # draw aqua outline/stroke around the flow rectangle
       TTV::Prawn::Util.stroke_rect(@pdf, flow_rect, "#ffffff")
