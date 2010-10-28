@@ -1,4 +1,37 @@
 /* Override here any style definide by web-app-theme */
+
+#wrapper {
+	padding-top: 0px;
+	padding-right:  0px;
+	background: lightgrey;
+}
+
+body {
+  width: 960px;
+  margin: auto;
+}
+
+#header {
+  height: 80px;
+}
+
+#main .block .content {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+   margin-top:21px;
+}
+
+div#main {	
+	width: 705px;
+	background: lightgrey;
+}
+
+#main div.block {
+  margin: 0px;
+  padding: 0px;
+}
+
+
 ul.wat-cf li {
   color: #CDE;
 }
@@ -7,9 +40,16 @@ img.ttv-logo {
   vertical-align:middle;
 }
 
+div#juris {
+  width: 50%;
+  height: 60px;
+  margin: 10px;
+}
+
 #juris h1 {
    color: white;
    line-height: 120%;
+   font-size: 22px;
 }
 
 #juris h2 {
@@ -18,42 +58,36 @@ img.ttv-logo {
   margin-top: 0px;
 }
 
+
 span.error_message {
   color: red;
 }
 
 #footer {
   padding: 0px 0px 0px 0px;
-}
-
-.table td {
-  padding: 5px;
-}
-
-.table th.last {
-  width: 150px;  
-}
-
-div#juris {
-  width: 50%;
-  height: 100%;
-  margin: 10px;
+  width: 960px;
+  clear: both;
 }
 
 #juris img {
   float:left;
   margin-right: 15px;
-}
-
-#header {
-  height: 120px;
+  height: 64px;
+  width: 64px;
 }
 
 div#sidebar {
   background-color: #fcf9ef;
   padding: 15px;
-  width: 21%;
-  height: 1000px;
+  width: 163px;
+  margin: 20px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-color:#DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+  border-left:4px solid #DDDDDD;
+  border-style:solid;
+  border-width:1px;  
+  
 }
 
 #sidebar a.button {
@@ -64,17 +98,13 @@ div#sidebar {
 	margin-left: 20px;
 	text-align: center;
 	-moz-border-radius: 3px;
-	border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 #sidebar h2 {
 	padding-top: 15px;
 	margin-top: 5px;
 	border-top: 1px solid #d7d7d7;
-}
-
-div#main {	
-	width:74%;
 }
 
 #breadcrumb h1
@@ -86,11 +116,6 @@ div#main {
 {
 	margin-top: 5px;
 	font-size: small;
-}
-
-#wrapper {
-	padding-top: 0px;
-	padding-right:  0px;
 }
 
 #infobox ul {
