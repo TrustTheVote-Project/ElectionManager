@@ -72,8 +72,36 @@ module ApplicationHelper
     link_to("#{image_tag(image_file, :alt => alt_tag)} #{button_label}", link_path, {:class => "button"}.merge(options))
   end
   
-  # HTML for breadcrums
+# String helpers. Just return the string in the target language for "Election" and so on.
+  def s_election
+    t("ttv.election", :default => "Election")
+  end
+  
+  
   def breadcrumb_helper(cc)
+    case cc.what
+    when :jurisdiction
+      content_tag(:h1, t("ttv.jurisdiction", :default => "Jurisdiction") + ": " + link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)))
+    when :election
+      content_tag(:h1, t("ttv.election", :default => "Election") + ": " + link_to(cc.election.display_name, cc.election))
+    when :contest
+      content_tag(:h1, t("ttv.contest", :default => "Contest") + ": " + link_to(cc.contest.display_name, cc.contest)) + 
+      content_tag(:h4, "in " + s_election + ": " + link_to(cc.election.display_name, cc.election)) 
+    when :question
+      content_tag(:h1, t("ttv.election", :default => "Question") + ": " + link_to(cc.question.display_name, cc.question))
+    when :question
+      content_tag(:h1, t("ttv.election", :default => "Precinct") + ": " + link_to(cc.precinct.display_name, cc.precinct))
+    when :nothing
+      content_tag(:h1)
+    else
+      content_tag(:h1, "?")
+    end
+  end
+  
+  
+  
+  # HTML for breadcrums
+  def breadcrumb_helper_old(cc)
     html = ""
     jur_link = ""
     el_link = ""

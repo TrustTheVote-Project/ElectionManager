@@ -28,33 +28,32 @@
       </div>
       <div id="main">
         <div id="breadcrumb">
-         <%= breadcrumb_helper(current_context) %>
-      </div>
-      <%= yield %>
-      <div id="footer">
-        <div class="block">
-            TTV Election Manager <%= IO.readlines("VERSION")[0] %> -- Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
+          <%= breadcrumb_helper(current_context) %>
         </div>
-      </div>
-    </div>
-    	<div id="sidebar">
-      <div class="content block">
-        <div class="inner">
-          <div class="wat-cf" id="commands">
-            <a class="button" href="http://www.salas.com">
-                <img src="/images/ui_icons/searchicon.png" alt="Search"/>
-                Search
-            </a>
-            <a class="button" href="http://www.salas.com">
-                <img src="/images/ui_icons/adminicon.png" alt="Admin"/>
-                Admin
-            </a>
+        <%= yield %>
+         </div>
+
+   	  <div id="sidebar">
+          <div class="content block">
+            <div class="inner">
+              <div class="wat-cf" id="commands">
+                <a class="button" href="http://www.salas.com">
+                  <img src="/images/ui_icons/searchicon.png" alt="Search"/>Search
+                </a>
+                <a class="button" href="http://www.salas.com">
+                   <img src="/images/ui_icons/adminicon.png" alt="Admin"/>Admin
+                </a>
+              </div>
+              <%= yield :sidebar %>
+            </div>
           </div>
-          <%= yield :sidebar %>
         </div>
-      </div>
-    </div>
     </div>
   </div>
-</body>
+  <div id="footer">
+    <div class="block">
+      TTV Election Manager <%= IO.readlines("VERSION")[0] %> -- Copyright &copy; <%= Time.now.year(); link_to("Open Source Digital Voting Foundation", "http://www.osdv.org") %>
+    </div>
+  </div>
+  </body>
 </html>

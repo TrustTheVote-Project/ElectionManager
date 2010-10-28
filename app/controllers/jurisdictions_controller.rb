@@ -16,13 +16,13 @@ class JurisdictionsController < ApplicationController
 # Show the currently selected jurisdiction.
 #
   def show
-    current_context.election = nil
     @jurisdiction = current_context.jurisdiction
     @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
   end
  
   def change
-    @district_sets = DistrictSet.display_name_not("").paginate(:per_page => 3, :page => params[:page])
+    current_context.reset
+    @district_sets = DistrictSet.display_name_not("").paginate(:per_page => 5, :page => params[:page])
   end
   
   def set
