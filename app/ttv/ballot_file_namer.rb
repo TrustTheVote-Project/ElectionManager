@@ -21,6 +21,9 @@
 # Generate file names for Ballots. This allows us to have different schemes and let election officials decide what
 # scheme they like.
 #
+# TODO: Remove this. Ballot File name strategies are implement using
+# ruby Proc objects
+# Ballot#filename and BallotRule::Base#ballot_filename.
 class BallotFileNamer
   
   # Return a file name to use for the ballot corresponding to the parameters
