@@ -40,6 +40,9 @@ module DefaultBallot
           :radio_group => {},
           :id => "cb" }.merge(options)
         
+        # remove non alphanum char for PDF ids
+        opts[:id].gsub!(/\W/, "") unless opts[:id].blank?
+        
         # draw bounding box at top/left of enclosing rect/bounding box
         @pdf.bounding_box([opts[:left_margin], opts[:top_margin]], :width => cb_width+3) do
           # draw_checkbox draws from lower right of it's bounding box
