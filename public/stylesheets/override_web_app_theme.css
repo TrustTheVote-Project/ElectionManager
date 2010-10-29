@@ -1,138 +1,162 @@
 /* Override here any style definide by web-app-theme */
-
 #wrapper {
-	padding-top: 0px;
-	padding-right:  0px;
-	background: lightgrey;
+    padding-top: 0px;
+    padding-right: 0px;
+    background: lightgrey;
 }
 
 body {
-  width: 960px;
-  margin: auto;
+    width: 960px;
+    margin: auto;
+}
+
+.actions-bar .buttons {
+    float: left;
+    padding: 1px 0;
+}
+
+.buttons a, .buttons span, .buttons em, .buttons button {
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+    padding: 2px 5px;
+}
+
+
+.buttons a, .buttons button {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    color: #364B69;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.buttons a:hover, .buttons button:hover {
+  background: #EAEAEA;
+  border: 1px solid #576C82
+  color: #444444;
 }
 
 #header {
-  height: 80px;
+    height: 80px;
 }
 
 #main .block .content {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-   margin-top:21px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-top: 21px;
 }
 
-div#main {	
-	width: 705px;
-	background: lightgrey;
+div#main {
+    width: 705px;
+    background: lightgrey;
 }
 
 #main div.block {
-  margin: 0px;
-  padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
-
 ul.wat-cf li {
-  color: #CDE;
+    color: #CDE;
 }
 
 img.ttv-logo {
-  vertical-align:middle;
+    vertical-align: middle;
 }
 
 div#juris {
-  width: 50%;
-  height: 60px;
-  margin: 10px;
+    width: 50%;
+    height: 60px;
+    margin: 10px;
 }
 
 #juris h1 {
-   color: white;
-   line-height: 120%;
-   font-size: 22px;
+    color: white;
+    line-height: 120%;
+    font-size: 22px;
 }
 
 #juris h2 {
-  color: white;
-  font-size: medium;
-  margin-top: 0px;
+    color: white;
+    font-size: medium;
+    margin-top: 0px;
 }
 
-
 span.error_message {
-  color: red;
+    color: red;
 }
 
 #footer {
-  padding: 0px 0px 0px 0px;
-  width: 960px;
-  clear: both;
+    padding: 0px 0px 0px 0px;
+    width: 960px;
+    clear: both;
 }
 
 #juris img {
-  float:left;
-  margin-right: 15px;
-  height: 64px;
-  width: 64px;
+    float: left;
+    margin-right: 15px;
+    height: 64px;
+    width: 64px;
 }
 
 div#sidebar {
-  background-color: #fcf9ef;
-  padding: 15px;
-  width: 163px;
-  margin: 20px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-color:#DDDDDD #CCCCCC #CCCCCC #DDDDDD;
-  border-left:4px solid #DDDDDD;
-  border-style:solid;
-  border-width:1px;  
-  
+    background-color: #fcf9ef;
+    padding: 15px;
+    width: 163px;
+    margin: 20px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-left: 4px solid #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
 }
 
 #sidebar a.button {
-	margin: 3px;
-	text-align:center;
-	width:  120px;
-	margin-bottom: 15px;
-	margin-left: 20px;
-	text-align: center;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+    margin: 3px;
+    text-align: center;
+    width: 120px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    text-align: center;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 #sidebar h2 {
-	padding-top: 15px;
-	margin-top: 5px;
-	border-top: 1px solid #d7d7d7;
+    padding-top: 15px;
+    margin-top: 5px;
+    border-top: 1px solid #d7d7d7;
 }
 
-#breadcrumb h1
-{
-	margin-bottom:5px;
+#breadcrumb h1 {
+    margin-bottom: 5px;
 }
 
-#breadcrumb h4
-{
-	margin-top: 5px;
-	font-size: small;
+#breadcrumb h4 {
+    margin-top: 5px;
+    font-size: small;
 }
 
 #infobox ul {
-	padding: 20px;
-	list-style: none;
-	line-height: 2;
+    padding: 20px;
+    list-style: none;
+    line-height: 2;
 }
 
 div#infobox.block {
-	margin: 0px;
+    margin: 0px;
 }
 
 #linkbox ul {
-	padding: 20px;
-	list-style: none;
-	line-height: 2;
-	width: 25%;
+    padding: 20px;
+    list-style: none;
+    line-height: 2;
+    width: 25%;
 }
 
 
