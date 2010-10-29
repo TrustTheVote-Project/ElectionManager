@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>TTV Election Manager</title>
+        <link href="/stylesheets/base.css?1288202204" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/themes/warehouse/style.css?1288202204" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/override_web_app_theme.css?1288305500" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="juris">
+                    <a href="/jurisdictions/current"><img alt="Ttv-100" class="avatar" src="/images/ttv-100.png?1282654974" /></a><h1>TTV Election Manager</h1>
+                </div>
+                <div id="user-navigation">
+                    <div class="banner_right">
+                        <ul class="wat-cf">
+                            <li>
+                                no jurisdiction selected <a href="/jurisdictions/change">(change)</a>
+                            </li>
+                            <li>
+                                moe@example.com
+                            </li>
+                            <li>
+                                <a href="/users/1/edit">Edit profile</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="wrapper" class="wat-cf">
+                <div class="flash" id="flash">
+                </div>
+                <div id="main">
+                    <div id="breadcrumb">
+                        <h1></h1>
+                    </div>
+                    <div class="block">
+                        <div class="content">
+                            <h2 class="title">New  Asset</h2>
+                            <div class="inner">
+                                <form action="/assets" class="form" enctype="multipart/form-data" method="post">
+                                    <div style="margin:0;padding:0;display:inline">
+                                        <input name="authenticity_token" type="hidden" value="sSZKGtISTFip0mPd7d0COePIjQzrnhuWn24VP+5cXpA=" />
+                                    </div>
+                                    <div class="group">
+                                        <label class="label" for="asset_ident">
+                                            Ident
+                                        </label>
+                                        <input class="text_field" id="asset_ident" name="asset[ident]" size="30" type="text" /><span class="description">Name of asset</span>
+                                    </div>
+                                    <div class="group">
+                                        <label class="label" for="asset_display_name">
+                                            Display name
+                                        </label>
+                                        <input class="text_field" id="asset_display_name" name="asset[display_name]" size="30" type="text" /><span class="description">Name of asset</span>
+                                    </div>
+                                    <div class="group">
+                                        <input id="asset_asset" name="asset[asset]" size="30" type="file" />
+                                    </div>
+                                    <div class="actions-bar wat-cf">
+                                        <div class="buttons">
+                                            <a href="/candidates">Insert</a>
+                                            <button type="submit">
+                                                Save
+                                            </button>
+                                            <a href="/candidates">Delete</a>
+                                            <a href="/candidates">Cancel</a>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sidebar">
+                    <div class="content block">
+                        <div class="inner">
+                            <div class="wat-cf" id="commands">
+                                <a class="button" href="http://www.salas.com"><img src="/images/ui_icons/searchicon.png" alt="Search"/>Search</a><a class="button" href="http://www.salas.com"><img src="/images/ui_icons/adminicon.png" alt="Admin"/>Admin</a>
+                            </div><h2>Assets</h2>
+                            <p>
+                                Election Manager centrally stores the images and large blocks of text that are used
+                                in ballots. This way it is easy to see what is already available, and upload or delete other assets
+                            </p>
+                            <p>
+                                All assets are identified by an all important key called the "ident". These idents are used for example
+                                in ballot style sheets or other places to refer to an asset of a logo, or an instructional diagram, or any
+                                other uploaded files.
+                            </p>
+                            <p>
+                                This section of Election Manager is used to manage these assets.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="block">
+                TTV Election Manager 0.3 
+                -- Copyright &copy; <a href="http://www.osdv.org">Open Source Digital Voting Foundation</a>
+            </div>
+        </div>
+    </body>
+</html>
