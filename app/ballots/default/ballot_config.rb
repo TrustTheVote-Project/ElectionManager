@@ -69,11 +69,11 @@ module DefaultBallot
         })
         @wrap = :character
       else
-        pdf.font_families.update({
-          "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
-                           :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
-          "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
-            })
+#         pdf.font_families.update({
+#           "Helvetica" => { :normal => "#{Rails.root}/fonts/Arial Unicode.ttf",
+#                            :bold => "#{Rails.root}/fonts/Arial Bold.ttf" },
+#           "Courier" => { :normal => "#{Rails.root}/fonts/Courier New.ttf" }
+#             })
         @wrap = :space
       end
       draw_page_background_color
