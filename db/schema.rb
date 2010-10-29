@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101014135736) do
+ActiveRecord::Schema.define(:version => 20101029111520) do
 
   create_table "alerts", :force => true do |t|
     t.string   "display_name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20101014135736) do
     t.datetime "updated_at"
     t.integer  "position",         :default => 0
     t.string   "ident"
+    t.integer  "writein_count",    :default => 1
   end
 
   add_index "contests", ["election_id"], :name => "index_contests_on_election_id"

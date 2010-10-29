@@ -7,7 +7,7 @@ class Contest < ActiveRecord::Base
   attr_accessible :display_name, :open_seat_count, :voting_method_id , 
                   :candidates_attributes, :election_id, :position,
                   :district, 
-                  :ident, :district_id, :election
+                  :ident, :district_id, :election, :writein_count
   
   accepts_nested_attributes_for :candidates, :allow_destroy => true, :reject_if => proc { |attributes| attributes['display_name'].blank? }
   

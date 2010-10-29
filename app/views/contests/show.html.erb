@@ -23,6 +23,11 @@
         <%= @contest.open_seat_count %>
       </p>
       <p>
+      <p>
+        <b><%= t("ttv.writein_count", :default => "Write-In count") %>:</b>
+        <%= @contest.writein_count %>
+      </p>
+      <p>
         <b><%= t("ttv.voting_method", :default =>  "Voting method") %>:</b>
         <%= VotingMethod.find_by_id(@contest.voting_method_id).display_name %>
       </p>

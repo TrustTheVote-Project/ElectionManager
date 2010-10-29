@@ -177,29 +177,40 @@ module DefaultBallot
           #space, location = config.draw_checkbox rect, candidate.display_name + "\n" + candidate.party.display_name
           #ballot_marks << TTV::BallotMark.new(@contest,candidate, @pdf.page_number, location)
         end
+        
+        # use checkboxes or radiobuttons
+        select_multiple = @contest.writein_count > 1 ? true :false
 
-        rect.top -= VPAD * 2
-        # draw the write-in candiate (radiobutton and text field)
-        @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
-          # @contest.open_seat_count.times do |i|
-
-          checkbox_id = "#{@cont_ident}+write_in"
-          contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => false) 
-          rect.top -= contest_bottom
+        # Draw write-in candidates
+        @contest.writein_count.times do |writein_num|
           rect.top -= VPAD * 2
-          @pdf.dash 1
-          v = 32
-          left = 50
           
-          if @active
-            textbox_id = "#{@cont_ident}+writein_text"
-            @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
-          end
-          @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
-          @pdf.undash
 
-          rect.top -= 16
-          #end
+          @pdf.bounding_box [rect.left, rect.top], :width => rect.width do          
+
+            checkbox_id = "#{@cont_ident}_#{writein_num}+write_in"
+
+            # draw one write-in candidate radiobutton or checkbox,
+            # depending on select_multiple
+            contest_bottom = draw_candidate( 0, contest_bottom, rect.width, config.bt[:or_write_in],nil, :active => @active, :id => checkbox_id, :radio_group => radio_group, :select_multiple => select_multiple) 
+            rect.top -= contest_bottom
+            rect.top -= VPAD * 2
+            @pdf.dash 1
+            v = 32
+            left = 50
+            
+            if @active
+              # draw a text box if this is form enabled
+              textbox_id = "#{@cont_ident}_#{writein_num}+writein_text"
+              @pdf.draw_text_field(textbox_id, :at => [@pdf.bounds.left + left, @pdf.bounds.top - v ], :width => 100, :height => 18)
+            end
+            
+            # draw horizontal line for write-in
+            @pdf.stroke_line [@pdf.bounds.left + left, @pdf.bounds.top - v],[@pdf.bounds.right - 6, @pdf.bounds.top - v]
+            @pdf.undash
+            
+            rect.top -= 16
+          end          
         end
         
       end
