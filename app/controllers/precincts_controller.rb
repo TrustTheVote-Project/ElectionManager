@@ -78,7 +78,8 @@ class PrecinctsController < ApplicationController
     election = Election.find(params[:election_id])
     # precincts = election.district_set.precincts
     precinct_splits = PrecinctSplit.precinct_jurisdiction_id_is(election.district_set_id)
-     
+    # TESTING, get a few ballots.
+    # precinct_splits = precinct_splits[0,13]
      unless election.ballot_style_template_id == nil
        ballot_style_template = BallotStyleTemplate.find(election.ballot_style_template_id)
        begin

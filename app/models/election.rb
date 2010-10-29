@@ -263,7 +263,11 @@ class Election < ActiveRecord::Base
     def render_ballots(election, precincts, ballot_style_template)
       ballot_array = Array.new
       precincts.each do |precinct|
-        title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        # title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        ballot_rule = ballot_style_template.ballot_rule
+        
+        title =  Ballot.filename(election, precinct, ballot_rule) << ".pdf"
+        
         pdfBallot = AbstractBallot.create(election, precinct, ballot_style_template)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
         ballot_array << new_ballot
