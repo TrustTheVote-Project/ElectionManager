@@ -1,17 +1,4 @@
 <div class="block">
-    <div class="secondary-navigation">
-        <ul class="wat-cf">
-            <li class="first">
-                <%= link_to "#{t("ttv.list", :default => "List")}", assets_path %>
-            </li>
-            <li>
-                <%= link_to "#{t("ttv.new", :default => "New")}", new_asset_path %>
-            </li>
-            <li class="active">
-                <%= link_to "#{t("ttv.show", :default => "Show")}", asset_path %>
-            </li>
-        </ul>
-    </div>
     <div class="content">
         <div class="inner">
             <p>
@@ -27,9 +14,11 @@
                 <%= image_tag(@asset.asset.url(:medium)) %>
                 <%= image_tag(@asset.asset.url(:thumb)) %>
             </p>
-            <div class="wat-cf">
-                <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_asset_path(@asset)) %>
-                <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", asset_path(@asset), :delete) %>
+            <div class="actions-bar wat-cf">
+                <div class="buttons">
+                    <%= link_to "#{t("ttv.edit", :default => "Edit")}", edit_asset_path(@asset) %>
+                    <%= link_to "#{t("ttv.delete", :default => "Delete")}", new_asset_path %>
+                </div>
             </div>
         </div>
     </div>

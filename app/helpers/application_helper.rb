@@ -64,12 +64,12 @@ module ApplicationHelper
   end
   
   # HTML for nicely styled buttons in forms
-  def button_link_helper(image_file, alt_tag, button_label, link_path, delete=nil)
+  def button_link_helper(button_label, link_path, delete=nil)
     options = {}
     if (delete == :delete)
-      options = {:method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      options = {:method => "delete", :confirm => "#{t("ttv.areyousure", :default => "Are you sure?")}"}
     end
-    link_to("#{image_tag(image_file, :alt => alt_tag)} #{button_label}", link_path, {:class => "button"}.merge(options))
+    link_to(button_label, link_path, {:class => "button"}.merge(options))
   end
   
 # String helpers. Just return the string in the target language for "Election" and so on.
