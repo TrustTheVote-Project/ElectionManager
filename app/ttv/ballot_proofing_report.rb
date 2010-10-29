@@ -33,10 +33,10 @@ class BallotProofingReport
   # <tt>prec_split:</tt>precinct split for ballot
   # <tt>election:</tt>relevant election
   # <tt>file_namer:</tt>instance of BallotFileNamer which defines the names of the individual ballot files
-  def ballot_entry split, election, file_namer
+  def ballot_entry split, election, ballot_rule
     contests = split.ballot_contests(election)
     questions = split.ballot_questions(election)
-    file_name = file_namer.ballot_file_name(split, election)
+    file_name = Ballot.filename(election,split, ballot_rule)
     row = [file_name, split.display_name, split.precinct.display_name]
     row << contests.count
     row << questions.count

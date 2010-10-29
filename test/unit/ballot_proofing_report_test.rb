@@ -39,8 +39,9 @@ class BallotProofingReportTests < ActiveSupport::TestCase
       setup do
         @bnf = BallotFileNamer.new
         setup_test_election
-        @bp.ballot_entry @split1, @election, @bnf
-        @bp.ballot_entry @split2, @election, @bnf
+        bst = BallotStyleTemplate.find(@election.ballot_style_template_id)
+        @bp.ballot_entry @split1, @election, bst.ballot_rule
+        @bp.ballot_entry @split2, @election, bst.ballot_rule
       end
       
       should "have 3 lines" do

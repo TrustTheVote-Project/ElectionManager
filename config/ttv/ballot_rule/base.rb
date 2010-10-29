@@ -167,6 +167,17 @@ module TTV
         flow_items
       end # end process_flow_items
       
+      # balllot filename strategy.
+      # returns a Proc that get's eval'd in the scope of a ballot
+      # object/model. Which allows use to use all models that can be
+      # reached via a ballot when naming.  
+      def ballot_filename
+        # NOTE: this was originally implemented in the BallotFileNamer class
+        lambda do
+          "#{@precinct_split.precinct.display_name}-#{@precinct_split.display_name}".gsub(' ', '-')
+        end
+      end
+      
     end # end Base class
     
   end
