@@ -9,6 +9,11 @@
     <span class="description">Number of open seats in contest</span>
 </div>
 <div class="group">
+    <%= f.label :writein_count, t("ttv.writein_count", :default => "Write-In count"), :class => :label %>
+    <%= f.text_field :writein_count, :class => 'text_field' %>
+    <span class="description">Number of write-in choices in contest</span>
+</div>
+<div class="group">
     <% voting_methods = VotingMethod.find(:all, :order => :id) %>
     <% default_method = current_context.election.default_voting_method_id if current_context.election? %>
     <%= f.label :voting_method_id, t("ttv.voting_method", :default => "Voting method"), :class => :label %>
