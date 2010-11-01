@@ -10,14 +10,13 @@
                 <%= @asset.display_name %>
             </p>
             <p>
-                <%-#= image_tag @asset.asset.url %>
                 <%= image_tag(@asset.asset.url(:medium)) %>
-                <%= image_tag(@asset.asset.url(:thumb)) %>
             </p>
             <div class="actions-bar wat-cf">
                 <div class="buttons">
                     <%= link_to "#{t("ttv.edit", :default => "Edit")}", edit_asset_path(@asset) %>
                     <%= link_to "#{t("ttv.delete", :default => "Delete")}", new_asset_path %>
+                    <%= link_to "#{t("ttv.back", :default => "Back")}", assets_path %>
                 </div>
             </div>
         </div>
