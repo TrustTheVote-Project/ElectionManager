@@ -77,9 +77,11 @@ module DefaultBallot
                 cb_bottom = @pdf.bounds.top-cb_height
                 radio_group[:Kids] <<  @pdf.draw_radiobutton("#{@question_ident}_yes", :at => [0,cb_bottom], :width => cb_width, :height => cb_height,:selected => false)
               end
-              # Draw "Yes" text
-              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 20 ) do
-                @pdf.text("Yes")
+              label_xoffset = cb_width + (HPAD*3)
+              agree_label_width = @pdf.bounds.width * 0.7
+              # Draw Question Agreement label
+              @pdf.bounding_box([label_xoffset,0], :width => agree_label_width) do
+                @pdf.text(@question.agree_label)
               end
               rect.top -= @pdf.bounds.top
             end # end "Yes" selection
@@ -98,10 +100,12 @@ module DefaultBallot
                    cb_bottom = @pdf.bounds.top-cb_height
                   radio_group[:Kids] <<  @pdf.draw_radiobutton("#{@question_ident}_no", :at => [0,cb_bottom], :width => cb_width, :height => cb_height,:selected => false)
               end
-              
-              # Draw "No" text
-              @pdf.bounding_box([cb_width + (HPAD*3),0], :width => 20 ) do
-                @pdf.text("No")
+
+              label_xoffset = cb_width + (HPAD*3)
+              agree_label_width = @pdf.bounds.width * 0.7
+              # Draw Question Disagreement label
+              @pdf.bounding_box([label_xoffset,0], :width => agree_label_width) do
+                @pdf.text(@question.disagree_label)
               end
               
               rect.top -= @pdf.bounds.top
