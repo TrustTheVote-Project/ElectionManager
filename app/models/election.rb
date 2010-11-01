@@ -114,15 +114,18 @@ class Election < ActiveRecord::Base
   
 #
 # Generate ballot proofing file for each ballot in this election. 
-#
+  #
+  # TODO: this should be moved to the BallotsController.index action
+  # and the resulting csv should be rendered in an ERB template.
+  # At the least this should be moved to the Ballot model.
   def generate_ballot_proofing
     splits = PrecinctSplit.precinct_jurisdiction_id_is(district_set_id).all(:include => [:precinct,  {:district_set => :districts}] )
     ballot_proofer = BallotProofingReport.new
     ballot_proofer.begin_listing
-    file_namer = BallotFileNamer.new
     splits.each do |split|
       file_namer = BallotFileNamer.new
-      ballot_proofer.ballot_entry(split, self, file_namer)
+      # ballot_proofer.ballot_entry(split, self, file_namer)
+      ballot_proofer.ballot_entry(split, self, BallotStyleTemplate.find(ballot_style_template_id).ballot_rule )
     end
     return ballot_proofer.end_listing
   end
@@ -260,7 +263,11 @@ class Election < ActiveRecord::Base
     def render_ballots(election, precincts, ballot_style_template)
       ballot_array = Array.new
       precincts.each do |precinct|
-        title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        # title = precinct.display_name.gsub(/ /, "_").camelize + " Ballot.pdf"
+        ballot_rule = ballot_style_template.ballot_rule
+        
+        title =  Ballot.filename(election, precinct, ballot_rule) << ".pdf"
+        
         pdfBallot = AbstractBallot.create(election, precinct, ballot_style_template)
         new_ballot = {:fileName => title, :pdfBallot => pdfBallot}
         ballot_array << new_ballot

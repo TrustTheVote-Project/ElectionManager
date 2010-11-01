@@ -113,9 +113,10 @@ class BallotConfigTest < ActiveSupport::TestCase
           end
           util = TTV::Prawn::Util.new(@pdf)
           
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n68.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2031> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n240.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n268.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n268.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2032> Tj\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n440.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n468.0 730.72 Td\n/F1.0 10 Tf\n<546869732069732061207465737420636865636b626f7820696e> Tj\nET\n\n\nBT\n468.0 720.04 Td\n/F1.0 10 Tf\n<636f6c756d6e2033> Tj\nET\n\n", util.page_contents[0]
-
           @pdf.render_file("#{Rails.root}/tmp/ballot_draw_checkbox.pdf")
+
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n40.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n68.0 730.82 Td\n/F1.0 10 Tf\n[<54686973206973206120746573742063686563> 20 <6b626f> 30 <7820696e>] TJ\nET\n\n\nBT\n68.0 719.26 Td\n/F1.0 10 Tf\n[<636f6c756d6e2031>] TJ\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n240.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n268.0 730.82 Td\n/F1.0 10 Tf\n[<54686973206973206120746573742063686563> 20 <6b626f> 30 <7820696e>] TJ\nET\n\n\nBT\n268.0 719.26 Td\n/F1.0 10 Tf\n[<636f6c756d6e2032>] TJ\nET\n\n1.5 w\n1.000 1.000 1.000 scn\n0.000 0.000 0.000 SCN\n440.000 728.000 22.000 10.000 re\nb\n0.000 0.000 0.000 scn\n\nBT\n468.0 730.82 Td\n/F1.0 10 Tf\n[<54686973206973206120746573742063686563> 20 <6b626f> 30 <7820696e>] TJ\nET\n\n\nBT\n468.0 719.26 Td\n/F1.0 10 Tf\n[<636f6c756d6e2033>] TJ\nET\n\nQ\n", util.page_contents[0]
+
         end
 
         should "draw a frame item, rectangle with 3 sides " do
@@ -160,7 +161,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")
 
           util = TTV::Prawn::Util.new(@pdf)
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4e6f76656d6265722030322c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n373.622666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e63742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\nQ\n", util.page_contents[0]
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.666 Td\n/F1.0 13 Tf\n[<4f4646494349414c2042> 30 <414c4c4f> 40 <54>] TJ\nET\n\n\nBT\n26 734.196 Td\n/F1.0 13 Tf\n[<4e6f> 20 <76656d6265722030322c> 40 <2032303039>] TJ\nET\n\n\nBT\n373.960666666667 749.666 Td\n/F1.0 13 Tf\n[<456c656374696f6e2031>] TJ\nET\n\n\nBT\n373.596666666667 734.196 Td\n/F1.0 13 Tf\n[<50726563696e63742031>] TJ\nET\n\n0.000 0.000 0.000 SCN\n18.000 726.060 m\n594.000 726.060 l\nS\nQ\n", util.page_contents[0]
           
         end
         
@@ -182,7 +183,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           @pdf.render_file("#{Rails.root}/tmp/ballot_render_header.pdf")
           
           util = TTV::Prawn::Util.new(@pdf)
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.536 Td\n/F1.0 13 Tf\n[<4f4646494349414c> 18.06640625 <2042414c4c4f54>] TJ\nET\n\n\nBT\n26 735.405 Td\n/F1.0 13 Tf\n<4a756c792032342c2032303039> Tj\nET\n\n\nBT\n373.999666666667 749.536 Td\n/F1.0 13 Tf\n<456c656374696f6e2031> Tj\nET\n\n\nBT\n373.622666666667 735.405 Td\n/F1.0 13 Tf\n<50726563696e63742031> Tj\nET\n\n0.000 0.000 0.000 SCN\n18.000 728.738 m\n594.000 728.738 l\nS\nQ\n", util.page_contents[0]
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n26 749.666 Td\n/F1.0 13 Tf\n[<4f4646494349414c2042> 30 <414c4c4f> 40 <54>] TJ\nET\n\n\nBT\n26 734.196 Td\n/F1.0 13 Tf\n[<4a> 20 <756c> 15 <792032342c> 40 <2032303039>] TJ\nET\n\n\nBT\n373.960666666667 749.666 Td\n/F1.0 13 Tf\n[<456c656374696f6e2031>] TJ\nET\n\n\nBT\n373.596666666667 734.196 Td\n/F1.0 13 Tf\n[<50726563696e63742031>] TJ\nET\n\n0.000 0.000 0.000 SCN\n18.000 726.060 m\n594.000 726.060 l\nS\nQ\n", util.page_contents[0]
 
         end
         
@@ -227,7 +228,7 @@ class BallotConfigTest < ActiveSupport::TestCase
           util = TTV::Prawn::Util.new(@pdf)
           @pdf.render_file("#{Rails.root}/tmp/ballot_page_complete.pdf")   
 
-          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n268.07609375 749.72 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n268.07609375 42.72 Td\n/F1.0 10 Tf\n[<56> 74.21875 <6f746520426f7468205369646573>] TJ\nET\n\nQ\n", util.page_contents[0]
+          assert_equal "/DeviceRGB cs\n0.000 0.000 0.000 scn\n/DeviceRGB CS\n0.000 0.000 0.000 SCN\nq\n\nBT\n268.11 749.82 Td\n/F1.0 10 Tf\n[<56> 90 <6f746520426f7468205369646573>] TJ\nET\n\n\nBT\n268.11 42.82 Td\n/F1.0 10 Tf\n[<56> 90 <6f746520426f7468205369646573>] TJ\nET\n\nQ\n", util.page_contents[0]
 
 
         end

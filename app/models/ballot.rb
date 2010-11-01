@@ -6,6 +6,7 @@ class Ballot < ActiveRecord::Base
   
   belongs_to :election
   belongs_to :precinct_split
+  attr_accessor :filename
   
   def self.find_or_create_by_election(election)
     ballots = []
@@ -22,6 +23,27 @@ class Ballot < ActiveRecord::Base
 
   def districts
     precinct_split.districts
+  end
+  
+  # TODO: refactor clients that use this method
+  # to use Ballot instances. Then replace this method with the
+  # filename instance method below.
+  def self.filename(election, precinct_split,ballot_rule)
+    tmp_ballot = new
+    tmp_ballot.election = election
+    tmp_ballot.precinct_split = precinct_split
+    tmp_ballot.filename(&ballot_rule.ballot_filename)
+  end
+  
+  # construct the ballot filename
+  def filename(&block)
+    # default filename
+    @filename = "#{precinct_split.display_name}"
+    # set with a block, perhaps in a ballot rule
+    if block_given?
+      @filename = (block.arity < 1 ? instance_eval(&block) : block.call(self))
+    end
+    @filename
   end
   
   def contests

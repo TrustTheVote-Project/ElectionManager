@@ -108,7 +108,13 @@ module ::TTV
         end
         
       end
-      
+
+      # returns a Proc that get's eval'd in the scope of a ballot object/model
+      def ballot_filename
+        lambda do
+          precinct_split.display_name.gsub(/split-/, "P").gsub(/ /,"-")
+        end
+      end
     end # end DC class
     
   end # end BallotRule module

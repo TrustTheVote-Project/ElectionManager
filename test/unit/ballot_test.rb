@@ -53,6 +53,36 @@ class BallotTest < ActiveSupport::TestCase
         assert_equal 3, @ballot.districts.size
         assert_equal @split_ds.districts, @ballot.districts
       end
+
+      should "have a default ballot file name" do
+        assert_equal "#{@precinct_split.display_name}", subject.filename
+      end
+
+      should "be able to set the filename with a block with arity 0" do
+        fname = subject.filename do
+          "#{precinct_split.display_name.gsub(/ /,'-')}"          
+        end
+        assert_equal "#{@precinct_split.display_name.gsub(/ /, '-')}", fname
+      end
+
+      should "be able to set the filename with a block with arity > 0" do
+        fname = subject.filename do |ballot|
+          ballot.filename = "#{ballot.precinct_split.display_name.gsub(/ /,'-')}"          
+        end
+        assert_equal "#{@precinct_split.display_name.gsub(/ /, '-')}", fname
+      end
+
+      
+      should "be able to set the filename with a ballot rule" do
+        # DC.ballot_filename returns a Proc, that implements the
+        # ballot naming strategy
+        # We cast it to a Block
+        # and pass it Ballot#filename
+        # where it gets eval in the scope of a ballot
+        fname = subject.filename(&TTV::BallotRule::DC.new.ballot_filename)
+        assert_equal "#{@precinct_split.display_name.gsub(/split-/, 'P').gsub(/ /,'-')}", fname
+      end
+
     end
     
     context "find_or_create_by_election" do
