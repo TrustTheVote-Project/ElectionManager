@@ -18,9 +18,17 @@
         <b><%= t("ttv.display_name", :default => "Question") %>:</b>
         <%= @question.display_name %>
       </p>
-	  <p>
+      <p>
         <b><%= t("ttv.text", :default => "Text") %>:</b>
         <%= @question.question %>
+      </p>
+      <p>
+        <b><%= t("ttv.agree_label", :default => "Agreement Label") %>:</b>
+        <%= @question.agree_label %>
+      </p>
+      <p>
+        <b><%= t("ttv.disagree_label", :default => "Disagreement Label") %>:</b>
+        <%= @question.disagree_label %>
       </p>
 
       <p>

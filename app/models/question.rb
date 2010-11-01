@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   belongs_to :election
 
 # TODO rps Do we really need to include :election_id in the accessible? 
-  attr_accessible :ident, :display_name, :position, :question, :requesting_district_id , :election_id
+  attr_accessible :ident, :display_name, :position, :question, :requesting_district_id , :election_id, :agree_label, :disagree_label
   validates_presence_of :display_name, :question, :requesting_district_id, :election_id
   validates_numericality_of :requesting_district_id, :election_id
 
