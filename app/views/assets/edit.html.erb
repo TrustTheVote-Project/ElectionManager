@@ -7,7 +7,7 @@
     </ul>
   </div>          
   <div class="content">            
-    <h2 class="title"><%= t("ttv.edit", :default => "Edit") %> Candidate</h2>
+    <h2 class="title"><%= t("ttv.edit", :default => "Edit") %> Asset</h2>
     <div class="inner">
       <% form_for @asset, :url => asset_path(@asset), :html => { :class => :form, :multipart => true } do |f| -%>
         <%= render :partial => "form", :locals => {:f => f} %>
