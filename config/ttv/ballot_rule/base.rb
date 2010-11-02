@@ -160,7 +160,7 @@ module TTV
       
       # called after the flow_items,(district, contest, questions), are created
       def post_process_flow_items(template, flow_items)
-        if template[:ballot_layout][:questions_placement] == :at_end
+        if template.ballot_layout['questions_placement'] == :at_end
           flow_items = reorder_questions(flow_items)
         end
         

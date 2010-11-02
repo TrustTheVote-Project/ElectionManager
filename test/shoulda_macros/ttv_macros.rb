@@ -345,6 +345,7 @@ class Test::Unit::TestCase
     # @template.page = ballot_page
     # @template.frame = ballot_frame
     # @template.contents = ballot_contents
+    @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml")
     
     @ballot_config = ::DcBallot::BallotConfig.new( @election, @template)
 

@@ -154,7 +154,7 @@ class BallotStyleTemplate < ActiveRecord::Base
   end
 
   def create_A_ballot_headers?
-    ballot_layout && ballot_layout[:create_A_headers]
+    ballot_layout && ballot_layout['create_A_headers']
   end
 
   # get the ballot rule given this template's ballot rule class name

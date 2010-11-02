@@ -38,6 +38,7 @@ class FlowItemsTest < ActiveSupport::TestCase
       # First is a Combo Flow
       combo_flow = flow_items.first
       assert_instance_of DefaultBallot::FlowItem::Combo, combo_flow
+      
       # This Combo Flow contains 2 other flow items
       combo_flow_items = combo_flow.instance_variable_get(:@flow_items)
       assert_equal 2, combo_flow_items.size
@@ -51,7 +52,7 @@ class FlowItemsTest < ActiveSupport::TestCase
       
       # Next is a Contest flow with a ref to the Contest 2 Contest
       contest_flow = flow_items[1]
-      assert_instance_of DefaultBallot::FlowItem::Contest, contest_flow
+       assert_instance_of DefaultBallot::FlowItem::Contest, contest_flow
       contest = contest_flow.instance_variable_get(:@item)
       assert_equal Contest.find_by_display_name('Contest 2'), contest
 
