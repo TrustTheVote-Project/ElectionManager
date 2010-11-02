@@ -41,7 +41,11 @@ class ViewBuilderHelperTest < ActionView::TestCase
     
     should "generate a whole list view" do
       coll = [Asset.make(:display_name => "one"), Asset.make(:display_name => "two")]
-      puts ttv_view_list_body coll, ["display_name"]
+      assert ttv_view_list_body coll, ["display_name"]
+    end
+    
+    should "generate a field for a show" do
+      assert ttv_show_field(Asset.make(:display_name => "one"), "asset")
     end
   end
 end

@@ -1,17 +1,8 @@
 <div class="block">
-  <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first active">
-        <%= link_to "#{t("ttv.list", :default => "List")}", candidates_path %>
-      </li>
-      <li>
-        <%= link_to "#{t("ttv.new", :default => "New")}", new_candidate_path %>
-      </li>
-    </ul>
-  </div>
   <div class="content">
-    <h2 class="title"><%= t("ttv.all", :default => "All") %>Candidates</h2>
-    <%= render :partial => 'candidate_list' %>
+    <h2 class="title"><%= t("ttv.all", :default => "All") %> Candidates</h2>
+    <%= ttv_view_list(@candidates, ["display_name", "party", "contest"], []) %>
+    <%#= render :partial => 'asset_list' %>
   </div>
 </div>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

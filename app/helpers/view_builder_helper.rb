@@ -20,11 +20,19 @@ module ViewBuilderHelper
           |btn|
           case btn
           when :list 
-            html += link_to t("ttv.list", :default => "List"), polymorphic_path(collection)
+            html += ttv_view_link_to(:list, class_symbol_p(collection))
           when :new
-            html += link_to t("ttv.new", :default => "New"), polymorphic_path(:new, collection)
+            html += ttv_view_link_to(:new, class_symbol_s(collection))
+          when :edit
+            html += ttv_view_link_to(:edit, collection)
+          when :show
+            html += ttv_view_link_to(:show, collection)
+          when :back
+            html += ttv_view_link_to(:back, collection)
+          when :delete
+            html += ttv_view_link_to(:delete, collection)
           else
-            raise "Unknown button type in view_builder_helper#ttv_actions_bar"
+            raise "Unknown button type in view_builder_helper#ttv_actions_bar: #{btn}"
           end
         end
         html
@@ -61,6 +69,39 @@ module ViewBuilderHelper
        link_to(t("ttv.edit", :default => "Edit"), polymorphic_path([:edit, element]))
     when :delete
       link_to(t("ttv.delete", :default => "Delete"), polymorphic_path([element]), :method => :delete, :confirm => t("ttv.areyosure", :default => "Are you sure?"))
+    when :back
+      link_to(t("ttv.back", :default => "Back"), polymorphic_path([element]))
+    when :list
+      link_to(t("ttv.list", :default => "List"), polymorphic_path([element]))
+    when :new
+      link_to(t("ttv.new", :default => "New"), polymorphic_path([:new, element]))
+    else
+      raise "invalid command in ViewBuilderHelper#ttv_view_link_to: #{command}"
+    end
+  end
+  
+  def ttv_show_field(record, field)
+    content_tag(:p) do
+      case field
+      when "ident"
+        content_tag(:b, t("ttv.ident", :default => "Ident")+": ") + record.ident
+      when "display_name"
+        content_tag(:b, t("ttv.display_name", :default => "Display Name")+": ") + record.display_name
+      when "asset"
+        image_tag(record.asset.url(:medium))
+      when "party_id"
+        content_tag(:b, t("ttv.party_id", :default => "Party Id")+": ") + record.party_id.to_s
+      when "contest_id"
+        content_tag(:b, t("ttv.contest_id", :default => "Contest Id") + ": ") + record.contest_id.to_s
+      when "position"
+        content_tag(:b, t("ttv.position", :default => "Position") + ": ") + record.position.to_s
+      when "party"
+        content_tag(:b, t("ttv.party", :default => "Position")+": ") + record.party.display_name
+      when "contest"
+        content_tag(:b, t("ttv.contest", :default => "Contest")+": ") + record.contest.display_name
+      else
+        raise "view_builder_helper#ttv_show_field invalid field: #{field}"
+      end
     end
   end
   
@@ -73,4 +114,27 @@ module ViewBuilderHelper
     hdr_section += content_tag(:th,  "&nbsp", :class => "last")   
     content_tag(:tr, hdr_section)
   end
+  
+# Given a column name as a string (e.g. "party_affiliation") convert it to a string suitable for
+# a prompt or column name in a view.
+  def ttv_col_name(col_name)
+    t("ttv."+col_name, :default => col_name.titleize)
+  end
+  
+#
+# Take a Collection of ActiveRecord models and return the underlying class name as a :symbol. This crazy conversion
+# is needed because polymorphic_path requires the classname as a symbol in order to generate a path for the whole collection.
+#
+# e.g: coll is an array of instances of the model Asset, then class_symbol_p(coll) => :assets and class_symbol_s(coll) => :asset
+#
+# <tt>coll:</tt>Collection to be converted
+# <tt>returns:</tt>Class name as a plural symbol
+  def class_symbol_p(coll)
+    coll[0].class.to_s.pluralize.downcase.to_sym
+  end
+  def class_symbol_s(coll)
+    coll[0].class.to_s.downcase.to_sym
+  end
+
+
 end
