@@ -37,56 +37,6 @@ class BallotStyleTemplateTest < ActiveSupport::TestCase
     end
   end
   
-  context "have default ballot styles" do
-    setup do
-      @bst = BallotStyleTemplate.make
-    end
-    
-    should "have default page styles" do
-      assert @bst.page
-      assert_kind_of Hash, @bst.page
-      assert_equal @bst.page[:size], "LETTER"
-      assert_equal @bst.page[:layout], :portrait
-      assert_equal @bst.page[:margin],  { :top => 0, :right => 0, :bottom => 0, :left => 0}
-    end
-    
-    should "have default frame styles" do
-      assert @bst.frame
-      assert_kind_of Hash, @bst.frame
-      assert @bst.frame[:margin]
-      assert_kind_of Hash, @bst.frame[:margin]
-      assert @bst.frame[:border]
-      assert_kind_of Hash, @bst.frame[:border]
-      assert @bst.frame[:content]
-      assert_kind_of Hash, @bst.frame[:content]
-    end
-    
-    should "have default content styles" do
-      assert @bst.contents
-      assert_kind_of Hash, @bst.contents
-
-      assert @bst.contents[:border]
-      assert_kind_of Hash, @bst.contents[:border]
-
-      assert @bst.contents[:header]
-      assert_kind_of Hash, @bst.contents[:header]
-      
-      assert @bst.contents[:body]
-      assert_kind_of Hash, @bst.contents[:body]
-      
-      assert @bst.contents[:footer]
-      assert_kind_of Hash, @bst.contents[:footer]
-
-    end
-    
-    should "have default ballot layout styles" do
-      assert @bst.ballot_layout
-      assert_kind_of Hash, @bst.ballot_layout
-      assert @bst.ballot_layout[:create_A_headers]
-      
-    end
-      
-  end
   context "use ballot layout" do
     setup do
       @bst = BallotStyleTemplate.make
