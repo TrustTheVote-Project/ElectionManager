@@ -8,23 +8,39 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
       create_contests(3)
       create_questions(2)
       @template = BallotStyleTemplate.make(:display_name => "BallotStyleTemplate", :pdf_form => false)
-      @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/global_style_1.yml")
+
+      # TODO: may want to move this to test/fixtures?
+      # test stylesheet
+      fname = "#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml"
+      @expected_styles = {}
+      File.open(fname) do |yaml_file|
+        @expected_styles = YAML.load(yaml_file)
+      end
+      @template.load_style(fname)
+      # @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/global_style_1.yml")
     end # end setup
     
-    should "set the page and frame attributes" do
-      
-      # set the frame margin
-      # margin around the edge of the ballot
-      @template.frame[:margin][:top] = 50
-      @template.frame[:margin][:right] = 40
-      @template.frame[:margin][:bottom] = 30
-      @template.frame[:margin][:left] = 20
-      
-      # set the page background color
-      @template.page[:background_color] = "FFFF00"
+    should "have the correct frame attributes" do
+      assert_equal 50, @template.frame['margin']['top']
+      assert_equal 40, @template.frame['margin']['right']
+      assert_equal 30, @template.frame['margin']['bottom']
+      assert_equal 20, @template.frame['margin']['left']
+    end
+    
+    should "have the expected frame margin attributes" do
+      assert_equal @expected_styles['frame']['margin']['top'], @template.frame['margin']['top']
+      assert_equal @expected_styles['frame']['margin']['right'], @template.frame['margin']['right']
+      assert_equal @expected_styles['frame']['margin']['bottom'], @template.frame['margin']['bottom']
+      assert_equal @expected_styles['frame']['margin']['left'], @template.frame['margin']['left']
+    end
+    
+     should "have the correct page attributes" do
+       assert_equal "LETTER", @template.page['size']
+       assert_equal "A43368", @template.page['background_color']
+       assert_equal "../test/unit/data/newballotstylesheet/200px-Seal_of_Virginia.png", @template.page['background_watermark_asset_id']
+     end
 
-      @template.page[:background_watermark_asset_id] = "system/icons/3/original/200px-Seal_of_Virginia.png"
-      
+    should "set the page and frame attributes" do
       # TODO: recfactor how the Prawn::Document and the BallotConfig
       # are used. 
       @ballot_config = DcBallot::BallotConfig.new( @election, @template)
@@ -43,18 +59,18 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
       # absolute co-ordinates are offsets from edge of the page
       # puts "TGD: absolute top, right, bottom,left = #{@pdf.bounds.absolute_top},#{@pdf.bounds.absolute_right},#{@pdf.bounds.absolute_bottom},#{@pdf.bounds.absolute_left}"
       
-      assert_equal @pdf.bounds.absolute_top, @doc_height - @template.frame[:margin][:top]
-      assert_equal @pdf.bounds.absolute_right, @doc_width - @template.frame[:margin][:right]
-      assert_equal @pdf.bounds.absolute_bottom,  @template.frame[:margin][:bottom]
-      assert_equal @pdf.bounds.absolute_left,  @template.frame[:margin][:left]
+      assert_equal @pdf.bounds.absolute_top, @doc_height - @template.frame['margin']['top']
+      assert_equal @pdf.bounds.absolute_right, @doc_width - @template.frame['margin']['right']
+      assert_equal @pdf.bounds.absolute_bottom,  @template.frame['margin']['bottom']
+      assert_equal @pdf.bounds.absolute_left,  @template.frame['margin']['left']
 
       # bounding box coordinates
       # bounding box is the frame without it's margin
       # puts "TGD: top, right, bottom, left = #{@pdf.bounds.top},#{@pdf.bounds.right},#{@pdf.bounds.bottom},#{@pdf.bounds.left}"      
       
-      assert_equal @pdf.bounds.top, @doc_height - @template.frame[:margin][:top] - @template.frame[:margin][:bottom]
+      assert_equal @pdf.bounds.top, @doc_height - @template.frame['margin']['top'] - @template.frame['margin']['bottom']
       assert_equal @pdf.bounds.height, @pdf.bounds.top
-      assert_equal @pdf.bounds.right, @doc_width - @template.frame[:margin][:left] - @template.frame[:margin][:right]
+      assert_equal @pdf.bounds.right, @doc_width - @template.frame['margin']['left'] - @template.frame['margin']['right']
       assert_equal @pdf.bounds.width, @pdf.bounds.right
       assert_equal @pdf.bounds.bottom,  0
       assert_equal @pdf.bounds.left, 0
@@ -85,10 +101,10 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
   
   def draw_ballot_description
     # aliases
-    ftm = @template.frame[:margin][:top]
-    frm =  @template.frame[:margin][:right]
-    fbm = @template.frame[:margin][:bottom]
-    flm = @template.frame[:margin][:left]
+    ftm = @template.frame['margin']['top']
+    frm =  @template.frame['margin']['right']
+    fbm = @template.frame['margin']['bottom']
+    flm = @template.frame['margin']['left']
 
     @pdf.draw_text "Top Frame Margin = #{ftm}", :at => [@pdf.bounds.width/2, @pdf.bounds.height+ ftm/2]
     @pdf.draw_text "Right Frame Margin = #{frm}", :at => [@pdf.bounds.width + frm/2, @pdf.bounds.height/2], :rotate => -90
@@ -98,7 +114,7 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
     # draw red border around the frame
     draw_border 'FF0000' # red border
     @pdf.draw_text "Frame origin [x,y] = [0,0]", :at => [0,0]
-    @pdf.draw_text "Page background color = 'FFFF00' (yellow)", :at => [@pdf.bounds.width/2,@pdf.bounds.height/2]
+    @pdf.draw_text "Page background color = #{@template.page['background_color']}", :at => [@pdf.bounds.width/2,@pdf.bounds.height/2]
     @pdf.draw_text "Red border outlines the Frame", :at => [0,@pdf.bounds.height]
   end
 end

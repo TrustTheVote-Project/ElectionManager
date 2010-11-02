@@ -21,12 +21,12 @@ module DcBallot
       
       # hack to override these geting set in the superclass
 
-      @page_size = @template.page[:size]
-      @page_layout = @template.page[:layout]
-      @left_margin = @template.frame[:margin][:left]
-      @right_margin = @template.frame[:margin][:right]
-      @top_margin =  @template.frame[:margin][:top]
-      @bottom_margin =  @template.frame[:margin][:bottom]
+      @page_size = @template.page['size']
+      @page_layout = @template.page['layout']
+      @left_margin = @template.frame['margin']['left']
+      @right_margin = @template.frame['margin']['right']
+      @top_margin =  @template.frame['margin']['top']
+      @bottom_margin =  @template.frame['margin']['bottom']
 
     end
 

@@ -81,8 +81,8 @@ module DefaultBallot
     end
     
     def draw_page_watermark
-      if @template.page[:background_watermark_asset_id]
-        image_file = "#{RAILS_ROOT}/public/#{@template.page[:background_watermark_asset_id]}"
+      if @template.page['background_watermark_asset_id']
+        image_file = "#{RAILS_ROOT}/public/#{@template.page['background_watermark_asset_id']}"
         # position the watermark in the middle of page, not the middle
         # of the frame
         @pdf.canvas do
@@ -92,10 +92,10 @@ module DefaultBallot
     end
     
     def draw_page_background_color
-      if @template.page[:background_color]
+      if @template.page['background_color']
         orig_color =  @pdf.fill_color
         @pdf.canvas do
-          @pdf.fill_color @template.page[:background_color]
+          @pdf.fill_color @template.page['background_color']
           @pdf.fill_rectangle([@pdf.bounds.left, @pdf.bounds.top], @pdf.bounds.width, @pdf.bounds.height)
           # restore color
           @pdf.fill_color = orig_color

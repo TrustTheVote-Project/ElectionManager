@@ -26,6 +26,8 @@ class BallotStyleTemplate < ActiveRecord::Base
   serialize :contents
   serialize :ballot_layout
   
+  attr_accessor :frame, :page, :contents, :ballot_layout
+  
   validates_presence_of [:display_name], :on => :create, :message => "can't be blank"
   
   has_attached_file :instructions_image,
@@ -36,20 +38,19 @@ class BallotStyleTemplate < ActiveRecord::Base
     #       :large =>   "400x400>" 
   }
   
-  def after_initialize
+#   def after_initialize
 
-    # default page params
-    self.page ||= { :size =>  "LETTER",
-      :layout => :portrait,
-      :background => '000000',
-      :margin => { :top => 0, :right => 0, :bottom => 0, :left => 0}
-    }
-
-    default_frame
-    default_ballot_layout
-    default_contents
+#     # default page params
+#     self.page ||= { :size =>  "LETTER",
+#       :layout => :portrait,
+#       :background => '000000',
+#       :margin => { :top => 0, :right => 0, :bottom => 0, :left => 0}
+#     }
+#     default_frame
+#     default_ballot_layout
+#     default_contents
     
-  end
+#   end
   
   def default_frame
 
@@ -166,12 +167,12 @@ class BallotStyleTemplate < ActiveRecord::Base
   
   # given a hash of styles update the page, frame and contents attributes/hashes.
   def update_styles(styles_hash)
-    page.merge!(styles_hash[:page]) if styles_hash[:page]
-    frame.merge!(styles_hash[:frame]) if styles_hash[:frame]
-    contents.merge!(styles_hash[:contents]) if styles_hash[:contents]
-    ballot_layout.merge!(styles_hash[:ballot_layout]) if styles_hash[:ballot_layout]
+    @page = { }; @frame = { }; @contents = { }; @ballot_layout = {}
+    @page.merge!(styles_hash['page']) if styles_hash['page']
+    @frame.merge!(styles_hash['frame']) if styles_hash['frame']
+    @contents.merge!(styles_hash['contents']) if styles_hash['contents']
+    @ballot_layout.merge!(styles_hash['ballot_layout']) if styles_hash['ballot_layout']
     save!
-
   end
   
   def reload_style
@@ -182,9 +183,14 @@ class BallotStyleTemplate < ActiveRecord::Base
   def load_style(filename)
     self.ballot_style_file = filename
     
-    style_hash = YAML.load(filename)
-
-#     logger.debug "TGD: style_hash[:page] = #{style_hash[:page].inspect}"
+    style_hash = {}
+    
+    File.open(filename) do |yaml_file|
+      #logger.debug "TGD: opening yamle file #{filename}"
+      style_hash = YAML.load(yaml_file)
+    end
+    
+    # puts  "TGD: style_hash = #{style_hash.inspect}"
     
 #     logger.debug "="*30    
 #     logger.debug "\nTGD: style_hash[:frame][:margin] = #{style_hash[:frame][:margin].inspect}"
