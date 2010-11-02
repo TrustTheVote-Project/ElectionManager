@@ -97,9 +97,7 @@ module ApplicationHelper
       content_tag(:h1, "?")
     end
   end
-  
-  
-  
+   
   # HTML for breadcrums
   def breadcrumb_helper_old(cc)
     html = ""

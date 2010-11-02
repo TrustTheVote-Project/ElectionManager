@@ -134,6 +134,10 @@ DistrictType.blueprint(:congressional) do
   title { "Congressional"}
 end
 
+Asset.blueprint do
+  display_name
+end
+
 Party.blueprint do
   display_name
   ident
