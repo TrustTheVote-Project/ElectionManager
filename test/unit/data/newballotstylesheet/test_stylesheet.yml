@@ -37,12 +37,13 @@ contents:
   header: 
     background_color: "84B538"
     text:
-    padding:                                   # Points inside the header before content of header 
+    margin:                                   # Points inside the header before content of header 
       top: 0
       left: 0
       bottom: 0
       right: 0
     height: 0.2                                # Height of box in points or 0.0 - 1.0 fraction  
+    width: 1.0
     border: 
       style: :single                           # Border style for header. Values :none, :single (default)
       color: "000000"
@@ -64,5 +65,6 @@ contents:
     margin: 
       {top: 10, left: 10, bottom: 10, right: 10}
     height: 0.1                          
+    width: 1.0
     border: {style: :solid, color: "FF0000", width: 2} 
  

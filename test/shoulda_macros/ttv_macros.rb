@@ -164,7 +164,7 @@ class Test::Unit::TestCase
     #  612/72, 792/72  where 72 pts/in
     # width = 8.5 in, heigth= 11 in
     page = {}
-    page[:size] = "LETTER" 
+    page[size] = "LETTER" 
     page[:layout] = :portrait # :portrait or :landscape
     page[:background] = '#000000'
     page[:background_color] = 'F0E68C'
@@ -444,6 +444,13 @@ class Test::Unit::TestCase
     # document size 
     @doc_width, @doc_height = Prawn::Document::PageGeometry::SIZES["LETTER"]
     pdf
+  end
+  
+  def draw_border(color='FFFFFF')
+    orig_color = @pdf.stroke_color color
+    @pdf.stroke_color color
+    @pdf.stroke_bounds
+    @pdf.stroke_color orig_color
   end
 
 end

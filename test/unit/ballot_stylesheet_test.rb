@@ -91,14 +91,6 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
     end
   end # intialize context
   
-  def draw_border(color='FFFFFF')
-    orig_color = @pdf.stroke_color color
-    @pdf.stroke_color color
-    @pdf.stroke_bounds
-    @pdf.stroke_color orig_color
-  end
-  
-  
   def draw_ballot_description
     # aliases
     ftm = @template.frame['margin']['top']
