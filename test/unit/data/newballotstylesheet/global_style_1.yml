@@ -6,7 +6,7 @@ ballot_layout:
   column-spacing: 10                        # Points between columns (0 default)
   questions_columns: 2                      # Span questions across n cols. (default: 1)
   questions_placement: :with_district       # New property. Values are :at_end or :with_
-
+  create_A_headers: true
 page: 
   size: "LETTER"                            # Choices are pdf named sizes. Default "LETTER"
   background_color: "A43368"                # Hex color. (default "00000000")
