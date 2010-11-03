@@ -20,6 +20,16 @@ class BallotStyleSheetPageTest < ActiveSupport::TestCase
       # @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/global_style_1.yml")
     end # end setup
     
+    should "have been updated after loading styles" do
+      bst = BallotStyleTemplate.find(@template.id)
+      assert_equal @template.id, bst.id
+      assert_equal @template.page, bst.page
+      assert_equal @template.frame, bst.frame
+      assert_equal @template.contents, bst.contents
+      assert_equal @template.ballot_layout, bst.ballot_layout
+      
+    end
+    
     should "have the correct frame attributes" do
       assert_equal 50, @template.frame['margin']['top']
       assert_equal 40, @template.frame['margin']['right']
