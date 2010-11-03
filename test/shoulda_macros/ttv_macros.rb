@@ -45,20 +45,6 @@ class Test::Unit::TestCase
 
   end
   
-  def create_pdf_from_template(template, election, precinct)
-    @pdf = ::Prawn::Document.new( :page_layout => template.page[:layout], 
-                                  :page_size => template.page[:size],
-                                  :left_margin => template.page[:margin][:left],
-                                  :right_margin => template.page[:margin][:right],
-                                  :top_margin =>  template.page[:margin][:top],
-                                  :bottom_margin =>  template.page[:margin][:bottom],
-                                  :skip_page_creation => true,
-                                  :info => { :Creator => "TrustTheVote",
-                                    :Title => "#{election.display_name}  #{precinct.display_name} ballot"} )
-
-  end
-
-  
   def print_bounds(bounds)
     puts "TGD: absolute top, left, bottom and right = #{bounds.absolute_top.inspect}, #{bounds.absolute_left.inspect}, #{bounds.absolute_bottom.inspect}, #{bounds.absolute_right.inspect}"
     puts "TGD: top, left, bottom and right = #{bounds.top.inspect}, #{bounds.left.inspect}, #{bounds.bottom.inspect},  #{bounds.right.inspect}"
