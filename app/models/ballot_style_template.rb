@@ -26,8 +26,6 @@ class BallotStyleTemplate < ActiveRecord::Base
   serialize :contents
   serialize :ballot_layout
   
-  attr_accessor :frame, :page, :contents, :ballot_layout
-  
   validates_presence_of [:display_name], :on => :create, :message => "can't be blank"
   
   has_attached_file :instructions_image,
@@ -38,8 +36,8 @@ class BallotStyleTemplate < ActiveRecord::Base
     #       :large =>   "400x400>" 
   }
   
-   def after_initialize
-     @page = { }; @frame = { }; @contents = {}; @ballot_layout = {} 
+  def after_initialize
+     self.page ||= { }; self.frame ||= { }; self.contents ||= {}; self.ballot_layout ||= {} 
      
 #      # default page params
 #      @page ||= { 'size' =>  "LETTER",
@@ -107,10 +105,10 @@ class BallotStyleTemplate < ActiveRecord::Base
   
   # given a hash of styles update the page, frame and contents attributes/hashes.
   def update_styles(styles_hash)
-    @page.merge!(styles_hash['page']) if styles_hash['page']
-    @frame.merge!(styles_hash['frame']) if styles_hash['frame']
-    @contents.merge!(styles_hash['contents']) if styles_hash['contents']
-    @ballot_layout.merge!(styles_hash['ballot_layout']) if styles_hash['ballot_layout']
+    page.merge!(styles_hash['page']) if styles_hash['page']
+    frame.merge!(styles_hash['frame']) if styles_hash['frame']
+    contents.merge!(styles_hash['contents']) if styles_hash['contents']
+    ballot_layout.merge!(styles_hash['ballot_layout']) if styles_hash['ballot_layout']
     save!
   end
   
@@ -203,8 +201,6 @@ class BallotStyleTemplate < ActiveRecord::Base
   def ballot_rules
     rule_struct = Struct.new(:id, :display_name)
     rule_map  = TTV::BallotRule::Base.rules.map{ |rule| rule_struct.new(rule.simple_class_name, rule.display_name) }
-
-    # puts "TGD: rule_map = #{rule_map.inspect}"
     rule_map
   end
 
