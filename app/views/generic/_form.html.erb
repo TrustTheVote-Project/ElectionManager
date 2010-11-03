@@ -1,0 +1,7 @@
+<% form_fields.each do |fld| %>
+  <div class="group">
+    <%= ttv_form_field(frm, fld)%>
+  </div>
+<% end %>
+<%= ttv_actions_bar(new_record, [:save, :cancel])%>
+
