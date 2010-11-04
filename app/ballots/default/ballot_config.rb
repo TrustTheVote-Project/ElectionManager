@@ -51,7 +51,7 @@ module DefaultBallot
       @pleaseVoteHeight = 30
       @padding = 8
       # @columns = @columns || 3
-      @columns = @template.ballot_layout['columns']
+      @columns = @template.ballot_layout['columns'] || 3
       @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
       @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
