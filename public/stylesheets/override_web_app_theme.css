@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/override_web_app_theme.css?1288736859 */
+
 /* Override here any style definide by web-app-theme */
 #wrapper {
     padding-top: 0px;
@@ -12,7 +14,7 @@ body {
 
 .actions-bar .buttons {
     float: left;
-    padding: 1px 0;
+    padding: 20px 0px 0px 0px;
 }
 
 .buttons a, .buttons span, .buttons em, .buttons button {
@@ -137,26 +139,30 @@ div#sidebar {
     margin-bottom: 5px;
 }
 
+#linkbox p {
+}
+
+#linkbox .left {
+	width: 50%;
+	position: left;
+}
+
+#linkbox .right {
+	width: 50%;
+	background-position: right;
+}
+
+#linkbox {
+	display: inline;
+}
+
 #breadcrumb h4 {
     margin-top: 5px;
     font-size: small;
 }
 
-#infobox ul {
-    padding: 20px;
-    list-style: none;
-    line-height: 2;
-}
-
-div#infobox.block {
-    margin: 0px;
-}
-
-#linkbox ul {
-    padding: 20px;
-    list-style: none;
-    line-height: 2;
-    width: 25%;
+.inner .table {
+	margin-bottom: 6px;
 }
 
 
