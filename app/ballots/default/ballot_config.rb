@@ -50,7 +50,8 @@ module DefaultBallot
       @top_margin = @bottom_margin = 30
       @pleaseVoteHeight = 30
       @padding = 8
-      @columns = @columns || 3
+      # @columns = @columns || 3
+      @columns = @template.ballot_layout['columns']
       @checkbox_orientation = @checkbox_orientation || :left 
       @scanner = scanner
       @scanner.set_checkbox(CHECKBOX_WIDTH, CHECKBOX_HEIGHT, @checkbox_orientation)
