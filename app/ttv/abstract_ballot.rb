@@ -51,13 +51,15 @@ module AbstractBallot
 
     def render
       @pdf = Prawn::Document.new(
-                                 :page_layout => @template.page[:layout],
-                                 :page_size => @template.page[:size], 
-                                 :left_margin => @template.frame[:margin][:left],
-                                 :right_margin => @template.frame[:margin][:right],
-                                 :top_margin => @template.frame[:margin][:top],
-                                 :bottom_margin => @template.frame[:margin][:bottom],
-                                 :background => @template.page[:background][:background_watermark_asset_ident],
+                                 :page_layout => @template.page['layout'],
+                                 :page_size => @template.page['size'], 
+                                 :left_margin => @template.frame['margin']['left'],
+                                 :right_margin => @template.frame['margin']['right'],
+                                 :top_margin => @template.frame['margin']['top'],
+                                 :bottom_margin => @template.frame['margin']['bottom'],
+                                 # image file is set in the
+                                 # BallotConfig#draw_page_watermark method
+                                 # :background => @template.page['background_watermark_asset_id'],
                                  :skip_page_creation => true,
                                  :info => { :Creator => "TrustTheVote",
                                    :Title => "#{@election.display_name} #{@precinct.display_name} ballot"

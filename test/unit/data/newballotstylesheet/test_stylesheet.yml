@@ -10,15 +10,13 @@ ballot_layout:
 page: 
   size: "LETTER"                            # Choices are pdf named sizes. Default "LETTER"
   background_color: "A43368"                # Hex color. (default "00000000")
-  background_watermark_asset_ident:         # Asset ident to use for a watermark 
+  # Asset ident to use for a watermark
+  background_watermark_asset_id: "../test/unit/data/newballotstylesheet/200px-Seal_of_Virginia.png"
   layout: :portrait
 
 frame: 
-  margin:                                    # Pixels outside the frame (to edge of paper)
-    top: 0
-    left: 0
-    bottom: 0
-    right: 0
+  # Pixels outside the frame (to edge of paper)
+  margin: { top: 50, right: 40, bottom: 30, left: 20 }
   content:
     font: {family: "Helvetica", size: 20, leading: 20, tracking: 0, aligntment: :left}
     top: {rotate: 0, text: "I am the top content", width: 1.0}
@@ -39,12 +37,13 @@ contents:
   header: 
     background_color: "84B538"
     text:
-    padding:                                   # Points inside the header before content of header 
+    margin:                                   # Points inside the header before content of header 
       top: 0
       left: 0
       bottom: 0
       right: 0
     height: 0.2                                # Height of box in points or 0.0 - 1.0 fraction  
+    width: 1.0
     border: 
       style: :single                           # Border style for header. Values :none, :single (default)
       color: "000000"
@@ -66,5 +65,6 @@ contents:
     margin: 
       {top: 10, left: 10, bottom: 10, right: 10}
     height: 0.1                          
+    width: 1.0
     border: {style: :solid, color: "FF0000", width: 2} 
  

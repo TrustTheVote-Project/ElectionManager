@@ -79,7 +79,7 @@ class RendererTest < ActiveSupport::TestCase
       # within2 points
       assert_instance_of TTV::Ballot::Rect, flow_rect
       # check_rect(rectangle, delta, width, height, top, left, bottom,right)
-      assert check_rect(flow_rect, 2.0, 462.0, 428.0, 558.0, 85, 130.0, 547.0)
+      assert check_rect(flow_rect, 2.0, 393.5, 466.0, 530.0, 19.5, 63.0, 413.0)
       
       # should have 3 columns on the page
       assert_instance_of TTV::Ballot::Columns, columns

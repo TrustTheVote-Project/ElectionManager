@@ -69,7 +69,7 @@ module ::TTV
         
         # center text at the top of the ballot
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2 ;
-        middle_y = pdf.bounds.top - frame[:content][:top][:width]/2 + pdf.height_of(text)/2 ;
+        middle_y = pdf.bounds.top - frame['content']['top']['width']/2 + pdf.height_of(text)/2 ;
         # draw text
         pdf.text(text, :style => :bold, :align => :center, :size => 8);
       end
@@ -83,7 +83,7 @@ module ::TTV
         text = "#{precinct.precinct.display_name} - #{precinct.display_name.gsub(/ds-\d+-/, '')}"
         # center text
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2;
-        middle_y = pdf.bounds.bottom + frame[:content][:bottom][:width]/2 - pdf.height_of(text)/2;
+        middle_y = pdf.bounds.bottom + frame['content']['bottom']['width']/2 - pdf.height_of(text)/2;
         #draw text
         pdf.draw_text(text, :at => [middle_x, middle_y+10], :size => 8, :style => :bold);
       end

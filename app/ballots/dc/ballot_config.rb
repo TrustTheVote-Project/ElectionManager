@@ -21,12 +21,12 @@ module DcBallot
       
       # hack to override these geting set in the superclass
 
-      @page_size = @template.page[:size]
-      @page_layout = @template.page[:layout]
-      @left_margin = @template.frame[:margin][:left]
-      @right_margin = @template.frame[:margin][:right]
-      @top_margin =  @template.frame[:margin][:top]
-      @bottom_margin =  @template.frame[:margin][:bottom]
+      @page_size = @template.page['size']
+      @page_layout = @template.page['layout']
+      @left_margin = @template.frame['margin']['left']
+      @right_margin = @template.frame['margin']['right']
+      @top_margin =  @template.frame['margin']['top']
+      @bottom_margin =  @template.frame['margin']['bottom']
 
     end
 
@@ -46,10 +46,10 @@ module DcBallot
 
           # Change the page_rect to be the size of ballot contents,
           # i.e. container for ballot header/footer and columns
-          page_rect.top -= (@frame[:margin][:top] + @frame[:border][:width] + @frame[:content][:top][:width])
-          page_rect.right -= (@frame[:margin][:right] + @frame[:border][:width] + @frame[:content][:right][:width])
-          page_rect.bottom += (@frame[:margin][:bottom] + @frame[:border][:width] + @frame[:content][:bottom][:width])
-          page_rect.left += (@frame[:margin][:left] + @frame[:border][:width] +@frame[:content][:left][:width])
+          page_rect.top -= (@frame['margin']['top'] + @frame['border']['width'] + @frame['content']['top']['width'])
+          page_rect.right -= (@frame['margin']['right'] + @frame['border']['width'] + @frame['content']['right']['width'])
+          page_rect.bottom += (@frame['margin']['bottom'] + @frame['border']['width'] + @frame['content']['bottom']['width'])
+          page_rect.left += (@frame['margin']['left'] + @frame['border']['width'] +@frame['content']['left']['width'])
         
           # reset the page rect's original_top as it's used to calculate fit of
           # containing items
@@ -72,14 +72,14 @@ module DcBallot
       
       @pdf.bounding_box [contents_rect.left, contents_rect.top], :width => contents_rect.width, :height => contents_rect.height do
 
-        unless @contents[:border][:width] == 0
+        unless @contents['border']['width'] == 0
           # draw the contents border
           orig_color = @pdf.stroke_color
-          dash unless @contents[:border][:style] = :solid
-          @pdf.stroke_color @contents[:border][:color]
+          dash unless @contents['border']['style'] = :solid
+          @pdf.stroke_color @contents['border']['color']
           @pdf.stroke_bounds
           @pdf.stroke_color orig_color
-          undash unless @contents[:border][:style] = :solid
+          undash unless @contents['border']['style'] = :solid
         end
         
         draw_header(contents_rect)
@@ -89,7 +89,7 @@ module DcBallot
         flow_rect = draw_body(contents_rect)
 
         # drawing the footer is optional
-        draw_footer(contents_rect) if @contents[:footer]
+        draw_footer(contents_rect) if @contents['footer']
 
       end
       flow_rect
@@ -103,21 +103,21 @@ module DcBallot
       # remember frame margin surrounds frame border, frame border
       # surrounds frame content
       
-      x = @frame[:margin][:left]
-      y = page_rect.top - @frame[:margin][:top]
-      w = page_rect.width - @frame[:margin][:left] - @frame[:margin][:right]
-      h = page_rect.top - @frame[:margin][:top] - @frame[:margin][:bottom]
+      x = @frame['margin']['left']
+      y = page_rect.top - @frame['margin']['top']
+      w = page_rect.width - @frame['margin']['left'] - @frame['margin']['right']
+      h = page_rect.top - @frame['margin']['top'] - @frame['margin']['bottom']
       
       @pdf.bounding_box([x,y], :width => w, :height => h) do      
 
-        unless @frame[:border][:width] == 0
+        unless @frame['border']['width'] == 0
           # draw the frame border
           orig_color = @pdf.stroke_color
-          dash unless @frame[:border][:style] = :solid
-          @pdf.stroke_color @frame[:border][:color]
+          dash unless @frame['border']['style'] = :solid
+          @pdf.stroke_color @frame['border']['color']
           @pdf.stroke_bounds
           @pdf.stroke_color orig_color
-          undash unless @frame[:border][:style] = :solid
+          undash unless @frame['border']['style'] = :solid
         end
         
         yield if block_given?
@@ -132,31 +132,30 @@ module DcBallot
       template.ballot_rule.frame_content_bottom(self)
       template.ballot_rule.frame_content_left(self)
 
-      # instance_eval(@frame[:content][:top][:graphics]) if  @frame[:content][:top][:graphics]
-      # instance_eval(@frame[:content][:right][:graphics]) if  @frame[:content][:right][:graphics]
-      # instance_eval(@frame[:content][:bottom][:graphics]) if @frame[:content][:bottom][:graphics]
-      # instance_eval(@frame[:content][:left][:graphics]) if @frame[:content][:left][:graphics]
+      # instance_eval(@frame['content']['top'][:graphics]) if  @frame['content']['top'][:graphics]
+      # instance_eval(@frame['content']['right'][:graphics]) if  @frame['content']['right'][:graphics]
+      # instance_eval(@frame['content']['bottom'][:graphics]) if @frame['content']['bottom'][:graphics]
+      # instance_eval(@frame['content']['left'][:graphics]) if @frame['content']['left'][:graphics]
 
       yield if block_given?
     end
     
     # TODO: DRY up draw code, lots of duplication
     def draw_header(contents_rect)
-
-      x = @pdf.bounds.left + @contents[:header][:margin][:left]
-      y = @pdf.bounds.top -  @contents[:header][:margin][:top]
+      x = @pdf.bounds.left + @contents['header']['margin']['left']
+      y = @pdf.bounds.top -  @contents['header']['margin']['top']
       
-      if @contents[:header][:width] <= 1.0
+      if @contents['header']['width'] <= 1.0
         # percentage of width
-        w = (@pdf.bounds.width * @contents[:header][:width]) - (@contents[:header][:margin][:left] +  @contents[:header][:margin][:right])
+        w = (@pdf.bounds.width * @contents['header']['width']) - (@contents['header']['margin']['left'] +  @contents['header']['margin']['right'])
       else
-        w = @contents[:header][:width]
+        w = @contents['header']['width']
       end
-      if @contents[:header][:height] <= 1.0
+      if @contents['header']['height'] <= 1.0
         # percentage of height
-        h = (@pdf.bounds.height * @contents[:header][:height]) - (@contents[:header][:margin][:top] +@contents[:header][:margin][:bottom])
+        h = (@pdf.bounds.height * @contents['header']['height']) - (@contents['header']['margin']['top'] +@contents['header']['margin']['bottom'])
       else
-        h = @contents[:header][:height]
+        h = @contents['header']['height']
       end
       
       # update the top of the contents rect
@@ -164,19 +163,19 @@ module DcBallot
 
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        unless @contents[:header][:border][:width] == 0
+        unless @contents['header']['border']['width'] == 0
           # draw the header border
           orig_color = @pdf.stroke_color
-          dash unless @contents[:header][:border][:style] = :solid
-          @pdf.stroke_color @contents[:header][:border][:color]
+          dash unless @contents['header']['border']['style'] = :solid
+          @pdf.stroke_color @contents['header']['border']['color']
           @pdf.stroke_bounds
           @pdf.stroke_color orig_color
-          undash unless @contents[:header][:border][:style] = :solid
+          undash unless @contents['header']['border']['style'] = :solid
         end
         
         # draw the header text
         template.ballot_rule.contents_header(self)
-        # instance_eval(@contents[:header][:graphics]) if @contents[:header][:graphics]
+        # instance_eval(@contents['header'][:graphics]) if @contents['header'][:graphics]
       end
     end
     
@@ -184,21 +183,22 @@ module DcBallot
       #
       new_flow_rectangle = nil
       
-      x = @pdf.bounds.left + @contents[:body][:margin][:left]
-      y = contents_rect.top -  @contents[:body][:margin][:top]
+      x = @pdf.bounds.left + @contents['body']['margin']['left']
+      y = contents_rect.top -  @contents['body']['margin']['top']
       
-      if @contents[:body][:width] <= 1.0
+      if @contents['body']['width'] <= 1.0
         # percentage of width
-        w = (@pdf.bounds.width * @contents[:body][:width]) - (@contents[:body][:margin][:left] +  @contents[:body][:margin][:right])
+        w = (@pdf.bounds.width * @contents['body']['width']) - (@contents['body']['margin']['left'] +  @contents['body']['margin']['right'])
       else
-        w = @contents[:body][:width]
+        w = @contents['body']['width']
       end
-      if @contents[:body][:height] <= 1.0
+      if @contents['body']['height'] <= 1.0
         # percentage of height
-        # The contents height at this point is the @pdf.bounds.height - the height contents[:header]. 
-        h = (contents_rect.height * @contents[:body][:height]) -(@contents[:body][:margin][:top] + @contents[:body][:margin][:bottom])  
+        # The contents height at this point is the @pdf.bounds.height
+        # - the height contents['header']. 
+        h = (contents_rect.height * @contents['body']['height']) -(@contents['body']['margin']['top'] + @contents['body']['margin']['bottom'])  
       else
-        h = @contents[:body][:height]
+        h = @contents['body']['height']
       end
 
       # update the top of the contents rect
@@ -207,23 +207,24 @@ module DcBallot
       # top, left, bottom, right
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        unless @contents[:body][:border][:width] == 0
+        unless @contents['body']['border']['width'] == 0
           # draw the body border
-          dash unless @contents[:body][:border][:style] = :solid
+          dash unless @contents['body']['border']['style'] = :solid
           orig_stroke_color = @pdf.stroke_color
-          @pdf.stroke_color = @contents[:body][:border][:color]
+          @pdf.stroke_color = @contents['body']['border']['color']
           @pdf.stroke_bounds
           @pdf.stroke_color orig_stroke_color
           
-          undash unless @contents[:body][:border][:style] = :solid
+          undash unless @contents['body']['border']['style'] = :solid
         end
         
         # draw the body text
         template.ballot_rule.contents_body(self)
-        #instance_eval(@contents[:body][:graphics]) if @contents[:body][:graphics]
+        #instance_eval(@contents['body'][:graphics]) if
+        #@contents['body'][:graphics]
         
         # new flow rectangle
-        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @frame[:margin][:top], @pdf.bounds.absolute_left- @frame[:margin][:left], @pdf.bounds.absolute_bottom - @frame[:margin][:bottom] , @pdf.bounds.absolute_right- @frame[:margin][:right])
+        new_flow_rectangle = TTV::Ballot::Rect.new(@pdf.bounds.absolute_top - @frame['margin']['top'], @pdf.bounds.absolute_left- @frame['margin']['left'], @pdf.bounds.absolute_bottom - @frame['margin']['bottom'] , @pdf.bounds.absolute_right- @frame['margin']['right'])
 
       end
 
@@ -232,42 +233,40 @@ module DcBallot
 
     def draw_footer(contents_rect)
       
-      x = @pdf.bounds.left + @contents[:footer][:margin][:left]
-      y = contents_rect.top -  @contents[:footer][:margin][:top]
+      x = @pdf.bounds.left + @contents['footer']['margin']['left']
+      y = contents_rect.top -  @contents['footer']['margin']['top']
       
-      if @contents[:footer][:width] <= 1.0
+      if @contents['footer']['width'] <= 1.0
         # percentage of contents width
-        w = (@pdf.bounds.width * @contents[:footer][:width]) - (@contents[:footer][:margin][:left] +  @contents[:footer][:margin][:right])
+        w = (@pdf.bounds.width * @contents['footer']['width']) - (@contents['footer']['margin']['left'] +  @contents['footer']['margin']['right'])
       else
-        w = @contents[:footer][:width]        
+        w = @contents['footer']['width']        
       end
       
-      if @contents[:footer][:height] <= 1.0
+      if @contents['footer']['height'] <= 1.0
         # percentage of contents height
-        h = (@pdf.bounds.height * @contents[:footer][:height]) -  (@contents[:footer][:margin][:top] +  @contents[:footer][:margin][:bottom])
+        h = (@pdf.bounds.height * @contents['footer']['height']) -  (@contents['footer']['margin']['top'] +  @contents['footer']['margin']['bottom'])
       else
-        h = @contents[:footer][:height]
+        h = @contents['footer']['height']
       end
       
       @pdf.bounding_box [x, y], :width => w, :height => h do
 
-        unless @contents[:footer][:border][:width] == 0
+        unless @contents['footer']['border']['width'] == 0
           # draw the body border
-          dash unless @contents[:footer][:border][:style] = :solid
+          dash unless @contents['footer']['border']['style'] = :solid
           orig_stroke_color = @pdf.stroke_color
-          @pdf.stroke_color = @contents[:footer][:border][:color]
+          @pdf.stroke_color = @contents['footer']['border']['color']
           @pdf.stroke_bounds
           @pdf.stroke_color orig_stroke_color
           
-          undash unless @contents[:footer][:border][:style] = :solid
+          undash unless @contents['footer']['border']['style'] = :solid
         end
         
         # draw the footer text
         template.ballot_rule.contents_footer(self)
-        # instance_eval(@contents[:footer][:graphics]) if @contents[:footer][:graphics]
+        # instance_eval(@contents['footer'][:graphics]) if @contents['footer'][:graphics]
       end
     end
-    
   end
-
 end

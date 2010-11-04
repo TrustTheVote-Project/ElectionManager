@@ -74,15 +74,12 @@ class RendererTest < ActiveSupport::TestCase
 
       # @template = BallotStyleTemplate.make(:display_name => "test template")
       @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form => true)
-      
-      @template.page =  page
-      @template.frame =  frame
-      @template.contents = contents
+      @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml")
+      @election.ballot_style_template_id = @template.id
       
       @ballot_config = DcBallot::BallotConfig.new( @election, @template)
 
-      @pdf = create_pdf_from_template(@template, @election, p1)
-      # @pdf = create_pdf_from_template("DC")
+      @pdf = create_document(@template)
       @ballot_config.setup( @pdf,  p1)
 
       

@@ -45,20 +45,6 @@ class Test::Unit::TestCase
 
   end
   
-  def create_pdf_from_template(template, election, precinct)
-    @pdf = ::Prawn::Document.new( :page_layout => template.page[:layout], 
-                                  :page_size => template.page[:size],
-                                  :left_margin => template.page[:margin][:left],
-                                  :right_margin => template.page[:margin][:right],
-                                  :top_margin =>  template.page[:margin][:top],
-                                  :bottom_margin =>  template.page[:margin][:bottom],
-                                  :skip_page_creation => true,
-                                  :info => { :Creator => "TrustTheVote",
-                                    :Title => "#{election.display_name}  #{precinct.display_name} ballot"} )
-
-  end
-
-  
   def print_bounds(bounds)
     puts "TGD: absolute top, left, bottom and right = #{bounds.absolute_top.inspect}, #{bounds.absolute_left.inspect}, #{bounds.absolute_bottom.inspect}, #{bounds.absolute_right.inspect}"
     puts "TGD: top, left, bottom and right = #{bounds.top.inspect}, #{bounds.left.inspect}, #{bounds.bottom.inspect},  #{bounds.right.inspect}"
@@ -164,7 +150,7 @@ class Test::Unit::TestCase
     #  612/72, 792/72  where 72 pts/in
     # width = 8.5 in, heigth= 11 in
     page = {}
-    page[:size] = "LETTER" 
+    page[size] = "LETTER" 
     page[:layout] = :portrait # :portrait or :landscape
     page[:background] = '#000000'
     page[:background_color] = 'F0E68C'
@@ -345,6 +331,8 @@ class Test::Unit::TestCase
     # @template.page = ballot_page
     # @template.frame = ballot_frame
     # @template.contents = ballot_contents
+    @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml")
+    @election.ballot_style_template_id = @template.id
     
     @ballot_config = ::DcBallot::BallotConfig.new( @election, @template)
 
@@ -432,18 +420,25 @@ class Test::Unit::TestCase
     # NOTE: The Prawn::Document :background  property places it's
     # background image in the top left of the ballot, not good!!
     # image_file = "#{RAILS_ROOT}/public/#{template.page[:background_watermark_asset_id]}"
-    pdf = ::Prawn::Document.new( :page_layout => template.page[:layout],
+    pdf = ::Prawn::Document.new( :page_layout => template.page['layout'],
                                   #:background => image_file,
-                                  :page_size => template.page[:size],
-                                  :left_margin => template.frame[:margin][:left],
-                                  :right_margin => template.frame[:margin][:right],
-                                  :top_margin =>  template.frame[:margin][:top],
-                                  :bottom_margin =>  template.frame[:margin][:bottom],
+                                  :page_size => template.page['size'],
+                                  :left_margin => template.frame['margin']['left'],
+                                  :right_margin => template.frame['margin']['right'],
+                                  :top_margin =>  template.frame['margin']['top'],
+                                  :bottom_margin =>  template.frame['margin']['bottom'],
                                   :info => { :Creator => "TrustTheVote",
                                     :Title => "Test ballot"} )
     # document size 
     @doc_width, @doc_height = Prawn::Document::PageGeometry::SIZES["LETTER"]
     pdf
+  end
+  
+  def draw_border(color='FFFFFF')
+    orig_color = @pdf.stroke_color color
+    @pdf.stroke_color color
+    @pdf.stroke_bounds
+    @pdf.stroke_color orig_color
   end
 
 end

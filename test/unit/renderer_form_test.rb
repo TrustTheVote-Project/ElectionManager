@@ -54,6 +54,9 @@ class RendererTest < ActiveSupport::TestCase
       
       # This will create a pdf form
       @template = BallotStyleTemplate.make(:display_name => "test template", :pdf_form=> true)
+      @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml")
+      e1.ballot_style_template_id = @template.id
+      
       @ballot_config = DefaultBallot::BallotConfig.new( e1, @template)
 
       @pdf = create_pdf("Test Renderer")

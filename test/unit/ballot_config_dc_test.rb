@@ -10,19 +10,23 @@ class BallotConfigDCTest < ActiveSupport::TestCase
       
       @template = BallotStyleTemplate.make(:display_name => "test template")
       
-      @template.page = ballot_page
-      @template.frame = ballot_frame
-      @template.contents = ballot_contents
+      # @template.page = ballot_page
+      # @template.frame = ballot_frame
+      # @template.contents = ballot_contents
+      @template.load_style("#{Rails.root}/test/unit/data/newballotstylesheet/test_stylesheet.yml")
+      #puts "TGD: @template.contents = #{@template.contents.inspect}"
+      #puts "TGD: bbb @template.contents['margin']['header'] = #{@template.contents['header']['margin'].inspect}"
       
       @c = @ballot_config = DcBallot::BallotConfig.new( @e1, @template)
-      @pdf = ::Prawn::Document.new( :page_layout => @template.page[:layout], 
-                                   :page_size => @template.page[:size],
-                                    :left_margin => @template.frame[:margin][:left],
-                                    :right_margin => @template.frame[:margin][:right],
-                                    :top_margin =>  @template.frame[:margin][:top],
-                                    :bottom_margin =>  @template.frame[:margin][:bottom],
-                                   :info => { :Creator => "TrustTheVote",
-                                   :Title => "#{@e1.display_name}  #{@p1.display_name} ballot"} )
+      @pdf = create_document(@template)      
+#      @pdf = ::Prawn::Document.new( :page_layout => @template.page['layout']# , 
+#                                    :page_size => @template.page['size'],
+#                                     :left_margin => @template.frame['margin']['left'],
+#                                     :right_margin => @template.frame['margin']['right'],
+#                                     :top_margin =>  @template.frame['margin']['top'],
+#                                     :bottom_margin =>  @template.frame[:margin][:bottom],
+#                                    :info => { :Creator => "TrustTheVote",
+#                                    :Title => "#{@e1.display_name}  #{@p1.display_name} ballot"} )
       
       # @pdf = create_pdf("Test Default Ballot")
       

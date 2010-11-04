@@ -50,7 +50,7 @@ module ::TTV
         text = "#{precinct.precinct.display_name} - #{precinct.display_name.gsub(/ds-\d+-/, '')}"
         # center text at the top of the ballot
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2 ;
-        middle_y = pdf.bounds.top - frame[:content][:top][:width]/2 + pdf.height_of(text)/2
+        middle_y = pdf.bounds.top - frame['content']['top']['width']/2 + pdf.height_of(text)/2
         # draw text
         pdf.draw_text(text, :at => [middle_x, middle_y], :style => :bold)
       end
@@ -64,7 +64,7 @@ module ::TTV
         text = "#{precinct.precinct.display_name} - #{precinct.display_name.gsub(/ds-\d+-/, '')}";
         # center text        
         middle_x = pdf.bounds.right/2 - pdf.width_of(text)/2;
-        middle_y = pdf.bounds.bottom + frame[:content][:bottom][:width]/2 - pdf.height_of(text)/2;
+        middle_y = pdf.bounds.bottom + frame['content']['bottom']['width']/2 - pdf.height_of(text)/2;
         #draw text
         pdf.draw_text(text, :at => [middle_x, middle_y], :style => :bold);
       end
@@ -101,7 +101,6 @@ module ::TTV
           pdf.font("Helvetica", :style => :bold, :size => 10) do;
             pdf.text("INSTRUCTIONS TO VOTER", :align => :center);
           end;
-          pdf.move_down(5);
           instr_text = "1. TO VOTE YOU MUST DARKEN THE OVAL TO THE LEFT OF YOUR CHOICE COMPLETELY. An oval darkened to the left of the name of any candidate indicates a vote for that candidate.\n2. For online completion of ballot, click on oval next to desired choices. For printed paper ballot, use only a number 2 pencil or blue or black ink, and darken the oval next to your desired choice.\n3. If you make a mistake DO NOT ERASE. Ask for a new ballot.\n4. For a Write-in candidate, write the name of the person on the line and darken the oval.";
           y = pdf.bounds.top - pdf.height_of("TEXT");
           pdf.text(instr_text, :size => 8);
