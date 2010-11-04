@@ -1,26 +1,5 @@
-<div class="block">
-    <h3>Toolbox</h3>
-    <div class="content">
-        <br/>
-        <%= render :partial => 'application/admin_toolbox' %>
-    </div>
-</div>
-<div class="block">
-    <h3>Commands</h3>
-    <div class="content">
-        <br/>
-        <ul class="list">
-            <% if current_context.jurisdiction? %>
-            <li>
-                <%= link_to "Import into this Jurisdiction", import_jurisdiction_path(:id => current_context.jurisdiction.id) %>
-            </li>
-            <li>
-                <%= link_to "Export from this Jurisdiction", export_jurisdiction_path(:id => current_context.jurisdiction.id) %>
-            </li>
-            <% end %>
-            <li>
-                <a href="#">And anything else? </a>
-            </li>
-        </ul>
-    </div>
-</div>
+<h2>Jurisdictions</h2>
+<p class="intro">Most election related data in ElectionManager is part of a single Jurisdiction. Elections, Candidates, Contests, Questions,
+all of these relate back to the Jurisdiction that they belong to. Some states refer to these as Counties or other local terminology.
+<p class="follow">Most prominently, you can find the list of Elections here. An Election is a single event for a specific date. Ballots are
+generated for a specific Election, for example.</p>

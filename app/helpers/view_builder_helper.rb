@@ -1,14 +1,24 @@
 # 'Macros' that build standard elements of ttv views 
 module ViewBuilderHelper
 
-# <%= ttv_view_list "asset", ["ident", "display_name"], ["list", "new"] %>
-  def ttv_view_list collection, headings, buttons
+  def ttv_view_list_basic title_of, collection, headings, buttons
     content_tag(:div, :class => "inner") do
-      view_list = content_tag(:table, :class => "table") do
-        ttv_view_list_hdr(headings) + ttv_view_list_body(collection, headings)
-      end      
+      view_list = ttv_view_list(collection, headings)
       actions_bar = ttv_actions_bar(collection, buttons)
-      view_list + actions_bar
+      title = ttv_view_list_title(title_of)
+      title + view_list + actions_bar
+    end
+  end
+  
+  def ttv_view_list_title(title_of)
+    content_tag(:h3, :class=>"title") do
+      t("ttv.all", :default => "All") + " " + title_of
+    end
+  end
+  
+  def ttv_view_list(collection, headings)
+    content_tag(:table, :class => "table") do
+      ttv_view_list_hdr(headings) + ttv_view_list_body(collection, headings)
     end
   end
 
@@ -57,12 +67,31 @@ module ViewBuilderHelper
     html = "".html_safe
     headings.each do
       |heading|
-      html += content_tag(:td, link_to(element.read_attribute(heading),   polymorphic_path([element])))
+      html += content_tag(:td, link_to(ttv_view_list_row_value(element, heading),   polymorphic_path([element])))
     end
     show_cmd = ttv_view_link_to(:show, element)
     edit_cmd = ttv_view_link_to(:edit, element)
     delete_cmd = ttv_view_link_to(:delete, element)
     html += content_tag(:td, show_cmd + " | " + edit_cmd + " | " + delete_cmd, :class => "last")
+  end
+  
+# Return the value fir a cell in a view list. The cell is determined by the active record object 'element'
+# and a string which is the heading for the cell. In most cases the heading corresponds to an attribute
+# but there are some special cases that are handled here.
+#  
+  def ttv_view_list_row_value(element, heading)
+    case heading
+    when "election"
+      element.display_name
+    when "contests"
+      element.contests.count
+    when "questions"
+      element.questions.count
+    when "date"
+      element.start_date.to_date.to_formatted_s(:long) 
+    else
+      element.read_attribute(heading)
+    end
   end
   
   def ttv_view_link_to(command, element)
