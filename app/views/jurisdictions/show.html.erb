@@ -1,32 +1,24 @@
 <div class="block">
-  <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first active">
-        <%= link_to "#{t("ttv.list", :default => "List")}", show_jurisdiction_path(current_context.jurisdiction) %>
-      </li>
-	  <% if can? :create, DistrictSet %> 
-	      <li>
-	        <%= link_to "#{t("ttv.new_election", :default => "New Election")}", new_election_path %>
-	      </li>
-	  <% end %>
-    </ul>
-  </div>
-  <div class="content">
-    <h2 class="title"><%= t("ttv.all", :default => "All ") %>Elections</h2>
-    <%= render :partial => 'election_list' %>
-  </div>
-</div>
-<div class="content">
-  <div class="inner">
-        <h3>Information about Jurisdiction: <%= @jurisdiction.display_name%></h3>   
-          <p>Number of precincts: <%=link_to "#{@jurisdiction.precincts.count} (click to view)", show_precincts_jurisdiction_path(@jurisdiction) %></p>
-          <p>Number of districts: <%=link_to "#{@jurisdiction.jur_districts.count} (click to view)", show_districts_jurisdiction_path(@jurisdiction) %></p></p>
-        </h3>
-      <div class="wat-cf">
-        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("ttv.edit", :default=> "Edit")}")} #{t("ttv.edit", :default=> "Edit")}", edit_district_set_path(current_context.jurisdiction), :class => "button" %> 
-        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("ttv.delete", :default=> "Delete")}")} #{t("ttv.delete", :default => "Delete")}", district_set_path(current_context.jurisdiction), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
-      </div>      
+    <div class="block">
+        <div class="content">
+            <div class="inner">
+                <%= ttv_view_list_title "Elections" %>
+                <%= ttv_view_list(@elections, ["election", "date", "questions", "contests"]) %>
+                <div id="linkbox">
+                    <div class="left">
+                        <p>
+                            Number of precincts: <%=link_to "#{@jurisdiction.precincts.count} (click to view)", show_precincts_jurisdiction_path(@jurisdiction) %>
+                        </p>
+                    </div>
+                    <div class="right">
+                        <p>
+                            Number of districts: <%=link_to "#{@jurisdiction.jur_districts.count} (click to view)", show_districts_jurisdiction_path(@jurisdiction) %>
+                        </p>
+                    </div>
+                </div>
+                <%= ttv_actions_bar @jurisdiction, [:delete, :edit] %>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

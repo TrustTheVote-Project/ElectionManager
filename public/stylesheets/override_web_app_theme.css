@@ -1,6 +1,8 @@
-/* @override http://localhost:3000/stylesheets/override_web_app_theme.css?1288736859 */
+/* @override 
+	http://localhost:3000/stylesheets/override_web_app_theme.css?1288907274
+	http://localhost:3000/stylesheets/override_web_app_theme.css?1288909698
+*/
 
-/* Override here any style definide by web-app-theme */
 #wrapper {
     padding-top: 0px;
     padding-right: 0px;
@@ -14,7 +16,12 @@ body {
 
 .actions-bar .buttons {
     float: left;
-    padding: 20px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
+}
+
+.inner .actions-bar
+{
+	padding: 0;
 }
 
 .buttons a, .buttons span, .buttons em, .buttons button {
@@ -25,7 +32,6 @@ body {
     margin-right: 5px;
     padding: 2px 5px;
 }
-
 
 .buttons a, .buttons button {
     -moz-border-radius: 5px;
@@ -139,21 +145,19 @@ div#sidebar {
     margin-bottom: 5px;
 }
 
-#linkbox p {
-}
-
 #linkbox .left {
 	width: 50%;
-	position: left;
+	float: left;
 }
 
 #linkbox .right {
 	width: 50%;
-	background-position: right;
+	float: right;
+	text-align: right;
 }
 
-#linkbox {
-	display: inline;
+#linkbox p {
+	margin: 5px;
 }
 
 #breadcrumb h4 {
@@ -162,7 +166,12 @@ div#sidebar {
 }
 
 .inner .table {
-	margin-bottom: 6px;
+	margin-bottom: 10px;
+}
+
+.inner h3.title {
+	font-size: 14px;
+	margin-bottom: 4px
 }
 
 
