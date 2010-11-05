@@ -19,7 +19,7 @@ frame:
     left: 0
     bottom: 0
     right: 0
-  content:
+  border_area:
     font:
       family:
       size:

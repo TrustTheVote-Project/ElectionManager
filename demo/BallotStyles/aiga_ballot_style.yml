@@ -17,10 +17,17 @@ frame:
     bottom: 12
     right: 12
   border-area:
-    position: { top: 0, left: 68. bottom: 32, right: 0}
+    top:
+      width: 0 
+    left: 
+      width: 68
+    bottom:
+      width: 32
+    right:
+      width: 12
   border: 
     style: :none                            # Values: :none, :single (default)
-  background_color: "FFFFFF"                  # Hex value for background color ("FFFFFF" default)
+  background_color: "FFFFFF"                # Hex value for background color ("FFFFFF" default)
 
 contents: 
   border: 
