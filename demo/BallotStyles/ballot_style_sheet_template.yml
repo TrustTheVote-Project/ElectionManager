@@ -208,3 +208,4 @@ question_text:
     bottom:
     right:
   background_color: "00000000"
+  controls_width: 32                          # Indentation to allow for placement of controls.
