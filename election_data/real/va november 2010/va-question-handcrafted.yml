@@ -1,0 +1,27 @@
+--- 
+body: 
+  questions:
+  - election_ident: "14"
+    ident: quest-e14-q1
+    display_name: Proposed Constitutional Amendment Question 1
+    question: Shall Section 6 of Article X of the Constitution of Virginia be amended to authorize legislation that will permit localities to establish their own income or financial worth limitations for purposes of granting property tax relief for homeowners not less than 65 years of age or permanently and totally disabled?
+    district_ident: 501686
+  - election_ident: "14"
+    ident: quest-e14-q2
+    display_name: Proposed Constitutional Amendment Question 2
+    question: Shall the Constitution be amended to require the General Assembly to provide a real property tax exemption for the principal residence of a veteran, or his or her surviving spouse, if the veteran has a 100 percent service-connected, permanent, and total disability?
+    district_ident: 501686
+  - election_ident: "14"
+    ident: quest-e14-q3
+    display_name: Proposed Constitutional Amendment Question 3
+    question: Shall Section 8 of Article X of the Constitution of Virginia be amended to increase the permissible size of the Revenue Stabilization Fund (also known as the "rainy day fund") from 10 percent to 15 percent of the Commonwealth's average annual tax revenues derived from income and retail sales taxes for the preceding three fiscal years?
+    district_ident: 501686
+
+audit_header: 
+  schema_version: "0.1"
+  operator: Pito Salas
+  type: jurisdiction_slate
+  create_date: 2010-09-09T21:30:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: TTV Tabulator TAB02
+  file_id: 9F023408009B11DF924800163E3DE33F
