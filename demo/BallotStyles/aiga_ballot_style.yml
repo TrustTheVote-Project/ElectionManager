@@ -1,102 +1,100 @@
 # AIGA Ballots.
+ballot_layout:
+  columns: 3
+page: 
+  size: "LETTER"  
+  background_color: "FFFFFF"
+  layout: :portrait
+frame: 
+  margin:  {top: 12, left: 12, bottom: 12, right: 12}
+  content:
+    margin: {top: 0, left: 68, bottom: 32, right: 0}
+    background_color: "FFFFFF"
+contents: 
+  border: 
+    style: :none
+  header: 
+    border: 
+      style: :none
+    header_font: {family: "Helvetica", size: 18, leading: 20, tracking: -20, alignment: "left", color: "000000"} 
+  body:
+    background_color: "FFFFFF"
+    margin:   {top: 12, left: 12, bottom: 12, right: 12}
+    height: 1.0
+    width: 1.0
+    column_spacing: 6
+    border: 
+      style: :none
+instructions:
+  type: :column
+  position: 1
+  background_color: "E1F4FD"
 
-:ballot_layout
-  :columns: 3
+district_header:
+  present:  :false
 
-:page: 
-  :size: "LETTER"  
-  :background_color: "FFFFFF"
-  :layout: :portrait
-:frame: 
-  :margin:  {:top: 12, :left: 12, :bottom: 12, :right: 12}
-  :content
-    :margin: {:top:0, :left: 68, :bottom: 32, :right: 0}
-    :background_color: "FFFFFF"
-:contents: 
-  :border: 
-    :style: :none
-  :header: 
-    :border: 
-      :style: :none
-    :header_font: {:family: "Helvetica", :size: 18, :leading: 20, :tracking: -20, :alignment: "left", :color: "000000"} 
-  :body:
-    :background_color: "FFFFFF"
-    :margin:   {:top: 12, :left: 12, :bottom: 12, :right: 12}
-    :height: 1.0
-    :width: 1.0
-    :column_spacing: 6
-    :border: 
-      :style: :none
-:instructions:
-  :type: :column
-  :position: 1
-  :background_color: "E1F4FD"
+contest_header:
+  present: :true 
+  font: {family: "Helvetica Bold", size: 12, leading: 13, tracking: -20, alignment: "left", color: "000000"} 
+  padding: {top: 10, left: 10, bottom: 10, right: 10}
+  borders:
+    top: {color: "000000", thickness: 3, style: :single_line}
+    left: {color: "000000", thickness: 2, style: :single_line}
+    bottom: {style: :none} 
+    right: {style: :none}
+  background_color: "DCDDDE"
 
-:district_header
-  :present:  :false
+voting_rule_header:
+  present: :true
+  font: {family: "Helvetica Bold", size: 12, leading: 13, tracking: -20, alignment: "left", color: "000000"} 
+  padding: {top: 10, left: 10, bottom: 10, right: 10}
+  borders:
+    top: {style: :none}
+    left: {color: "000000", thickness: 2, style: single_line}
+    bottom: {style: :none} 
+    right: {style: :none}
+  background_color: "E1F4FD"
 
-:contest_header
-  :present: :true 
-  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
-  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
-  :borders:
-    :top: {:color: "000000", :thickness: 3, :style: :single_line}
-    :left: {:color: "000000", :thickness: 2, :style: :single_line}
-    :bottom: {:style: :none} 
-    :right: {style: :none}
-  :background_color: "DCDDDE"
+candidates:
+  present: :true
+  name_font:
+  name_font: {family: "Helvetica Bold", size: 12, leading: 13, tracking: -20, alignment: :left, color: "000000"}
+  party_font:  {family: "Helvetica", size: 12, leading: 13, tracking: -20, alignment: :left, color: "000000"}
+  borders:
+    top: {style: :none}
+    left: {style: :none}
+    bottom: {color: "000000", thickness: 2, style: :single_line}
+    right: {style: :none}
+  controls_width: 32
 
-:voting_rule_header:
-  :present: :true
-  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
-  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
-  :borders:
-    :top: {:style: :none}
-    :left: {:color: "000000", :thickness: 2, :style: :single_line}
-    :bottom: {:style: :none} 
-    :right: {style: :none}
-  :background_color: "E1F4FD"
+question_header:
+  present: :true 
+  font: {family: "Helvetica Bold", size: 12, leading: 13, tracking: -20, alignment: "left", color: "000000"} 
+  padding: {top: 10, left: 10, bottom: 10, right: 10}
+  borders:
+    top: {color: "000000", thickness: 3, style: :single_line}
+    left: {color: "000000", thickness: 2, style: :single_line}
+    bottom: {style: :none} 
+    right: {style: :none}
+  background_color: "DCDDDE"
 
-:candidates
-  :present: :true
-  :name_font:
-  :name_font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: :left, :color: "000000"}
-  :party_font:  {:family: "Helvetica", :size: 12, :leading: 13, :tracking: -20, :alignment: :left, :color: "000000"}
-  :borders:
-    :top: {:style: :none}
-    :left: {:style: :none}
-    :bottom: {:color: "000000", :thickness: 2, :style: :single_line}
-    :right: {style: :none}
-  :controls_width: 32
+question_rule_header: 
+  present: :true
+  font: {family: "Helvetica Bold", size: 12, leading: 13, tracking: -20, alignment: "left", color: "000000"} 
+  padding: {top: 10, left: 10, bottom: 10, right: 10}
+  borders:
+    top: {style: :none}
+    left: {color: "000000", thickness: 2, style: :single_line}
+    bottom: {style: :none} 
+    right: {style: :none}
+  background_color: "E1F4FD"
 
-:question_header
-  :present: :true 
-  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
-  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
-  :borders:
-    :top: {:color: "000000", :thickness: 3, :style: :single_line}
-    :left: {:color: "000000", :thickness: 2, :style: :single_line}
-    :bottom: {:style: :none} 
-    :right: {style: :none}
-  :background_color: "DCDDDE"
-
-:question_rule_header, 
-  :present: :true
-  :font: {:family: "Helvetica Bold", :size: 12, :leading: 13, :tracking: -20, :alignment: "left", :color: "000000"} 
-  :padding: {:top: 10, :left: 10, :bottom: 10, :right: 10}
-  :borders:
-    :top: {:style: :none}
-    :left: {:color: "000000", :thickness: 2, :style: :single_line}
-    :bottom: {:style: :none} 
-    :right: {style: :none}
-  :background_color: "E1F4FD"
-
-:question_text
-  :present: :true
-  :font:  {:family: "Helvetica", :size: 12, :leading: 13, :tracking: -20, :alignment: :left, :color: "000000"}
-  :borders:
-    :top: {:style: :none}
-    :left: {:style: :none}
-    :bottom: {:style: :none}
-    :right: {style: :none}
-  :controls_width: 32
+question_text:
+  present: :true
+  font:  {family: "Helvetica", size: 12, leading: 13, tracking: -20, alignment: :left, color: "000000"}
+  borders:
+    top: {style: :none}
+    left: {style: :none}
+    bottom: {style: :none}
+    right: {style: :none}
+  controls_width: 32
