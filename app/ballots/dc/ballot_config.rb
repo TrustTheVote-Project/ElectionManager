@@ -127,11 +127,47 @@ module DcBallot
     # Invoke the methods that will draw the content for the top, right,
     # bottom and left sides of the frame
     def draw_frame_contents
+
+#       # draw frame contents top
+#       x = @frame['content']['margin']['top']
+#       y = @frame['content']['margin']['top']
+#       w = @pdf.bounds.width - @frame['content']['margin']['top'] * 2
+#       h = @pdf.bounds.height - @frame['content']['margin']['top'] * 2
+#       # bounding box is used to implement the frame contents margin
+#       @pdf.bounding_box([x, y], :width => w, :height => h) do
+#         template.ballot_rule.frame_content_top(self)
+#       end
+      
+#       # draw frame contents right
+#       x = @frame['content']['margin']['right']
+#       y = @frame['content']['margin']['right']
+#       w = @pdf.bounds.width - @frame['content']['margin']['right']*2
+#       h = @pdf.bounds.height - @frame['content']['margin']['right']*2
+#       @pdf.bounding_box([x, y], :width => w, :height => h) do
+#         template.ballot_rule.frame_content_right(self)
+#       end
+      
+#       # draw frame contents bottom
+#       x = @frame['content']['margin']['bottom']
+#       y = @frame['content']['margin']['bottom']
+#       w = @pdf.bounds.width - @frame['content']['margin']['bottom']*2
+#       h = @pdf.bounds.height - @frame['content']['margin']['bottom']*2
+#       @pdf.bounding_box([x, y], :width => w, :height => h) do      
+#         template.ballot_rule.frame_content_bottom(self)
+#       end
+      
+#       # draw frame contents bottom
+#       x = @frame['content']['margin']['left']
+#       y = @frame['content']['margin']['left']
+#       w = @pdf.bounds.width - @frame['content']['margin']['left']*2
+#       h = @pdf.bounds.height - @frame['content']['margin']['left']*2
+#       @pdf.bounding_box([x, y], :width => w, :height => h) do      
+#         template.ballot_rule.frame_content_left(self)
+      #       end
       template.ballot_rule.frame_content_top(self)
       template.ballot_rule.frame_content_right(self)
       template.ballot_rule.frame_content_bottom(self)
       template.ballot_rule.frame_content_left(self)
-
       # instance_eval(@frame['content']['top'][:graphics]) if  @frame['content']['top'][:graphics]
       # instance_eval(@frame['content']['right'][:graphics]) if  @frame['content']['right'][:graphics]
       # instance_eval(@frame['content']['bottom'][:graphics]) if @frame['content']['bottom'][:graphics]
