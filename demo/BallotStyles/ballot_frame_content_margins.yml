@@ -1,0 +1,84 @@
+--- 
+page: 
+  size: "LETTER"
+  background: "000000"
+  layout: :portrait
+frame: 
+  margin: 
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+  content: 
+    margin: {top: 0, left: 0, bottom: 0, right: 0}
+    background_color: "FFFFFF"
+    top: 
+      rotate: 0
+      text: Sample Ballot
+      width: 50
+    left: 
+      rotate: 90
+      graphics: 
+      text: "    132301113              Sample Ballot"
+      width: 36
+    bottom: 
+      rotate: 0
+      text: Sample Ballot
+      width: 36
+    right: 
+      rotate: 90
+      text: " tom D was here"
+      width: 36
+  border: 
+    style: :solid
+    color: "000000"
+    width: 0
+contents: 
+  border: 
+    style: :dashed
+    color: "000000"
+    width: 1
+  body: 
+    background_color: "000000"
+    text: Body Text
+    margin: 
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    height: 0.9
+    width: 1.0
+    border: 
+      style: :solid
+      color: "000000"
+      width: 0
+  footer: 
+    background_color: "#00FF00"
+    text: Footer Text
+    margin: 
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    height: 0.0
+    width: 1.0
+    border: 
+      style: :solid
+      color: FF0000
+      width: 0
+  header: 
+    background_color: "000000"
+    text: Header Text
+    margin: 
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    height: 154
+    width: 1.0
+    border: 
+      style: :solid
+      color: "000000"
+      width: 1
+ballot_layout: 
+  create_A_headers: false
