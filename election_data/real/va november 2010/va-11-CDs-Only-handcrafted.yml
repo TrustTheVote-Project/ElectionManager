@@ -1,0 +1,93 @@
+--- 
+body:
+  precincts: 
+  - ident: "58000"
+    display_name: 500 - CONGRESSIONAL DISTRICT
+  splits: 
+  - district_set_ident: "508001"
+    ident: "508001"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-01
+  - district_set_ident: "508002"
+    ident: "508002"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-02
+  - district_set_ident: "508003"
+    ident: "508003"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-03
+  - district_set_ident: "508004"
+    ident: "508004"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-04
+  - district_set_ident: "508005"
+    ident: "508005"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-05
+  - district_set_ident: "508006"
+    ident: "508006"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-06
+  - district_set_ident: "508007"
+    ident: "508007"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-07
+  - district_set_ident: "508008"
+    ident: "508008"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-08
+  - district_set_ident: "508009"
+    ident: "508001"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-09
+  - district_set_ident: "508010"
+    ident: "5080010"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-10
+  - district_set_ident: "508011"
+    ident: "508011"
+    precinct_ident: "58000"
+    display_name: 600000-500 - CONGRESSIONAL DISTRICT-11
+  district_sets: 
+  - ident: "508001"
+    district_list: 
+    - district_ident: "501680"
+  - ident: "508002"
+    district_list: 
+    - district_ident: "501674"
+  - ident: "508003"
+    district_list: 
+    - district_ident: "501676"
+  - ident: "508004"
+    district_list: 
+    - district_ident: "501681"
+  - ident: "508005"
+    district_list: 
+    - district_ident: "501677"
+  - ident: "508006"
+    district_list: 
+    - district_ident: "501682"
+  - ident: "508007"
+    district_list: 
+    - district_ident: "501673"
+  - ident: "508008"
+    district_list: 
+    - district_ident: "501678"
+  - ident: "508009"
+    district_list: 
+    - district_ident: "501679"
+  - ident: "508010"
+    district_list: 
+    - district_ident: "501675"
+  - ident: "508011"
+    district_list: 
+    - district_ident: "501683"
+audit_header: 
+  based_on: hand crafted
+  schema_version: "0.2"
+  operator: John Sebes
+  type: jurisdiction
+  create_date: 2010-09-21T15:20:02-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: n/a
+  file_id: 9F023408009B11DF924800163E3DE33F

@@ -111,7 +111,7 @@ module TTV
       # candidates.sort(&TTV::BallotRule::Base.new.candidate_ordering)
       def candidate_ordering
         return lambda do |c1, c2|
-          c1.position <=> c2.position
+          (c1.position && c2.position) ? c1.position <=> c2.position : 0
         end
       end
       
