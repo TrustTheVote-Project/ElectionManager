@@ -185,7 +185,8 @@ class UsersControllerTest < ActionController::TestCase
       should_render_template :show
       
       should "show user" do 
-        assert_equal  assigns(:user), subject
+#        assert_equal  assigns(:user), subject
+        assert_equal  assigns(:user), @show_user
         assert_not_equal  assigns(:user), @logged_in_user
         
         assert assigns(:user).valid?
