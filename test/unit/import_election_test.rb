@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'ap'
 
 class ImportElectionTest < ActiveSupport::TestCase
   

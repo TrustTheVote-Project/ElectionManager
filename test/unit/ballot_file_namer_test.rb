@@ -21,7 +21,6 @@
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
 
 require 'test_helper'
-require 'ap'
 
 class BallotFileNamerTest < ActiveSupport::TestCase
   context "BallotFileNamer" do
