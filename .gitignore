@@ -20,3 +20,4 @@ tmp/webrat-*
 tmp/*.pdf
 doc/*
 test/coverage
+
