@@ -2,8 +2,11 @@
     <div class="block">
         <div class="content">
             <div class="inner">
-                <%= ttv_view_list_title "Elections" %>
-                <%= ttv_view_list(@elections, ["election", "date", "questions", "contests"]) %>
+                <div class="subtable">
+                    <%= ttv_view_list_title "Elections" %>
+                    <%= ttv_view_list(Election, @elections, ["election", "date", "questions", "contests"]) %>
+                    <%= ttv_actions_bar Election, @elections, [:new] %>
+                </div>
                 <div id="linkbox">
                     <div class="left">
                         <p>
@@ -16,7 +19,7 @@
                         </p>
                     </div>
                 </div>
-                <%= ttv_actions_bar @jurisdiction, [:delete, :edit] %>
+                <%= ttv_actions_bar DistrictSet, @jurisdiction, [:new, :delete, :edit] %>
             </div>
         </div>
     </div>

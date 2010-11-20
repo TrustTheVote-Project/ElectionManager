@@ -1,2 +1,71 @@
-<%= link_to "Precincts and ballots", precincts_election_path, :method => 'get' %>
-<%= render :partial => 'show', :locals => {:election => @election } %>
+<div class="block">
+    <div class="content">
+        <div class="inner">
+          <% ["display_name", "ident"].each do |fld| %>
+            <%= ttv_show_field(@election, fld) %>
+          <% end %>
+          <%= ttv_actions_bar(Election, @election, [:edit, :delete, :back])%>
+        </div>
+    </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
+
+
+<div class="block">
+    <div class="content">
+        <div class="inner">
+            <p>
+                <b><%= t("ttv.display_name", :default => "Display Name") %>:</b>
+                <%= @election.display_name %>
+            </p>
+            <p>
+                <b><%= t("ttv.jurisdiction", :default => "Jurisdiction") %>:</b>
+                <%= DistrictSet.find_by_id(@election.district_set_id).display_name %>
+            </p>
+            <p>
+                <b><%= t("ttv.default_voting_method", :default => "Default Voting Method") %>:</b>
+                <%= link_to VotingMethod.find(@election.default_voting_method_id).display_name , edit_voting_method_path(VotingMethod.find(@election.default_voting_method_id)) %>
+            </p>
+            <p>
+                <b><%= t("ttv.ballot_style_template", :default => "Ballot Style Template") %>:</b>
+                <% unless @election.ballot_style_template_id == nil %>
+                <%= link_to BallotStyleTemplate.find(@election.ballot_style_template_id).display_name ,edit_ballot_style_template_path(BallotStyleTemplate.find(@election.ballot_style_template_id)) %>
+                <% end -%>
+            </p>
+            <p>
+                <b><%= t("ttv.start_date", :default => "Start date") %>:</b>
+                <%= @election.start_date %>
+            </p>
+            <p>
+                <%= link_to "#{t("ttv.download_all_ballots", :default => "Download All ballots")}", ballots_election_precinct_path(@election) %>
+            </p>
+            <p>
+                <%= link_to "#{t("ttv.ballot_listing_file", :default => "Download Ballot Proofing File")}", ballot_proofing_election_path(@election, :format => "csv") %>
+            </p>
+            <div class="wat-cf">
+                <% if can? :create, Election %>
+                <%= button_link_helper("Edit", edit_election_path(@election)) %>
+                <% end %>
+                <% if can? :destroy, Election %>
+                <%= button_link_helper("Delete", election_path(@election), :delete) %>
+                <% end %>
+            </div>
+        </div>
+        <br/>
+        <div class="content">
+            <h2 class="title">Ballots</h2>
+            <%= render(:partial => "ballot_list") %>
+        </div>
+        <a name="contests"></a>
+        <div class="content">
+            <h2 class="title">Contests</h2>
+            <%= render(:partial => 'contests/contest_list') %>
+        </div>
+        <a name="questions"></a>
+        <div class="content">
+            <h2 class="title">Questions</h2>
+            <%= render(:partial => 'questions/questions_list') %>
+        </div>
+    </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

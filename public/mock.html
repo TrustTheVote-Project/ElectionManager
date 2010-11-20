@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>TTV Election Manager</title>
+        <link href="/stylesheets/base.css?1290030639" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/themes/warehouse/style.css?1290030639" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/stylesheets/override_web_app_theme.css?1290030639" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="juris">
+                    <a href="/jurisdictions/current"><img alt="Ttv-100" class="avatar" src="/images/ttv-100.png?1282654974" /></a><h1>Test!</h1>
+                    <h2></h2>
+                </div>
+                <div id="user-navigation">
+                    <div class="banner_right">
+                        <ul class="wat-cf">
+                            <li>
+                                Test! <a href="/jurisdictions/change">(change)</a>
+                            </li>
+                            <li>
+                                moe@example.com
+                            </li>
+                            <li>
+                                <a href="/users/1/edit">Edit profile</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="wrapper" class="wat-cf">
+                <div class="flash" id="flash">
+                </div>
+                <div id="main">
+                    <div id="breadcrumb">
+                        <h1>Jurisdiction: <a href="/jurisdictions/6/set">Test!</a></h1>
+                    </div>
+                    <div class="block">
+                        <div class="block">
+                            <div class="content">
+                                <div class="inner">
+                                    <div class="subtable">
+                                        <h3 class="title">All Elections</h3>
+                                        <table class="table">
+                                            <tr>
+                                                <th>
+                                                    Election
+                                                </th>
+                                                <th>
+                                                    Date
+                                                </th>
+                                                <th>
+                                                    Questions
+                                                </th>
+                                                <th>
+                                                    Contests
+                                                </th>
+                                                <th class="last">
+                                                    &nbsp
+                                                </th>
+                                            </tr>
+                                            <tr class="emptysubtable">
+                                                <td>
+                                                    no elections defined yet...
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="actions-bar wat-cf">
+                                            <div class="buttons">
+                                                <a href="/jurisdictions/new">New</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="linkbox">
+                                        <div class="left">
+                                            <p>
+                                                Number of precincts: <a href="/jurisdictions/6/show_precincts">0 (click to view)</a>
+                                            </p>
+                                        </div>
+                                        <div class="right">
+                                            <p>
+                                                Number of districts: <a href="/jurisdictions/6/show_districts">0 (click to view)</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="actions-bar wat-cf">
+                                        <div class="buttons">
+                                            <a href="/jurisdictions/new">New</a>
+                                            <a href="/district_sets/6" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'FfgMV58TLFBP3C22ALowEVxcnFS4kvsjmiZm8pN9B48='); f.appendChild(s);f.submit(); };return false;">Delete</a>
+                                            <a href="/district_sets/6/edit">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sidebar">
+                    <div class="content block">
+                        <div class="inner">
+                            <div class="wat-cf" id="commands">
+                                <a class="button" href="http://www.salas.com"><img src="/images/ui_icons/searchicon.png" alt="Search"/>Search</a><a class="button" href="http://www.salas.com"><img src="/images/ui_icons/adminicon.png" alt="Admin"/>Admin</a>
+                            </div><h2>Jurisdictions</h2>
+                            <p class="intro">
+                            Most election related data in ElectionManager is part of a single Jurisdiction. Elections, Candidates, Contests, Questions,
+                            all of these relate back to the Jurisdiction that they belong to. Some states refer to these as Counties or other local terminology.
+                            <p class="follow">
+                                Most prominently, you can find the list of Elections here. An Election is a single event for a specific date. Ballots are
+                                generated for a specific Election, for example.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="block">
+                TTV Election Manager 0.3 
+                -- Copyright &copy; <a href="http://www.osdv.org">Open Source Digital Voting Foundation</a>
+            </div>
+        </div>
+    </body>
+</html>

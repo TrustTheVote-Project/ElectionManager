@@ -297,9 +297,14 @@ input.checkbox {
   text-align: center;
 }
 
-.table td {
+.table tr.odd td {
   border-bottom: 1px solid #AAA;
 }
+
+.table tr.even td {
+  border-bottom: 1px solid #AAA;
+}
+
 
 /* forms */
 

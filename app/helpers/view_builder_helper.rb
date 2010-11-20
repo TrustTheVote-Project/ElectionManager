@@ -1,11 +1,34 @@
+# OSDV Election Manager - View Builder Helpers
+# Author: Pito Salas
+# Date: 10/5/2010
+#
+# License Version: OSDV Public License 1.2
+#
+# The contents of this file are subject to the OSDV Public License
+# Version 1.2 (the "License"); you may not use this file except in
+# compliance with the License. You may obtain a copy of the License at
+# http://www.osdv.org/license/
+# Software distributed under the License is distributed on an "AS IS"
+# basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+# License for the specific language governing rights and limitations
+# under the License.
+
+# The Original Code is: TTV Election Manager and Ballot Design Studio.
+# The Initial Developer of the Original Code is Open Source Digital Voting Foundation.
+# Portions created by Open Source Digital Voting Foundation are Copyright (C) 2010.
+# All Rights Reserved.
+
+# Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
+
 # 'Macros' that build standard elements of ttv views 
+
 module ViewBuilderHelper
 
-  def ttv_view_list_basic title_of, collection, headings, buttons
+  def ttv_view_list_basic ems_class, collection, headings, buttons
     content_tag(:div, :class => "inner") do
-      view_list = ttv_view_list(collection, headings)
-      actions_bar = ttv_actions_bar(collection, buttons)
-      title = ttv_view_list_title(title_of)
+      title = ttv_view_list_title(ems_class.to_s.pluralize)
+      view_list = ttv_view_list(ems_class, collection, headings)
+      actions_bar = ttv_actions_bar(ems_class, collection, buttons)
       title + view_list + actions_bar
     end
   end
@@ -16,13 +39,13 @@ module ViewBuilderHelper
     end
   end
   
-  def ttv_view_list(collection, headings)
+  def ttv_view_list(ems_class, collection, headings)
     content_tag(:table, :class => "table") do
-      ttv_view_list_hdr(headings) + ttv_view_list_body(collection, headings)
+      ttv_view_list_hdr(headings) + ttv_view_list_body(ems_class, collection, headings)
     end
   end
 
-  def ttv_actions_bar(collection, buttons)
+  def ttv_actions_bar(ems_class, collection, buttons)
     content_tag(:div, :class => "actions-bar wat-cf") do
       content_tag(:div, :class => "buttons") do
         html = "".html_safe
@@ -32,7 +55,12 @@ module ViewBuilderHelper
           when :list 
             html += ttv_view_link_to(:list, class_symbol_p(collection))
           when :new
-            html += ttv_view_link_to(:new, class_symbol_s(collection))
+# TODO Change this when we create a real Jurisdiction Model
+            if ems_class == DistrictSet
+              html += ttv_view_link_to(:new, "jurisdiction")              
+            else
+              html += ttv_view_link_to(:new, ems_class.to_s.downcase)
+            end
           when :edit
             html += ttv_view_link_to(:edit, collection)
           when :show
@@ -44,7 +72,11 @@ module ViewBuilderHelper
           when :save
             html += content_tag(:button, t("ttv.save", :default => "Save"), :type => :submit)
           when :cancel
-            html += ttv_view_link_to(:cancel, collection)
+           if ems_class == DistrictSet
+              html += ttv_view_link_to(:cancel, "Jurisdiction")              
+            else
+              html += ttv_view_link_to(:cancel, collection)
+            end
           else
             raise "Unknown button type in view_builder_helper#ttv_actions_bar: #{btn}"
           end
@@ -54,44 +86,34 @@ module ViewBuilderHelper
     end
   end
     
-  def ttv_view_list_body collection, headings
+  def ttv_view_list_body ems_class, collection, headings
     html = "".html_safe
-    collection.each do 
-      |element|
-      html += content_tag(:tr, ttv_view_list_rows(element, headings), :class => cycle("odd", "even"))
+    if collection.length != 0
+      collection.each do 
+        |element|
+        html += content_tag(:tr, ttv_view_list_rows(element, headings), :class => cycle("odd", "even"))
+      end
+    else
+      html += ttv_none_defined_yet(ems_class)
     end
     html
+  end
+  
+  def ttv_none_defined_yet(ems_class)
+    message = object_not_defined_yet_message(ems_class)
+    content_tag(:tr, content_tag(:td, message ), :class => "emptysubtable")
   end
   
   def ttv_view_list_rows(element, headings)
     html = "".html_safe
     headings.each do
       |heading|
-      html += content_tag(:td, link_to(ttv_view_list_row_value(element, heading),   polymorphic_path([element])))
+      html += content_tag(:td, link_to(poly_get_value(element, heading),   polymorphic_path([element])))
     end
     show_cmd = ttv_view_link_to(:show, element)
     edit_cmd = ttv_view_link_to(:edit, element)
     delete_cmd = ttv_view_link_to(:delete, element)
     html += content_tag(:td, show_cmd + " | " + edit_cmd + " | " + delete_cmd, :class => "last")
-  end
-  
-# Return the value fir a cell in a view list. The cell is determined by the active record object 'element'
-# and a string which is the heading for the cell. In most cases the heading corresponds to an attribute
-# but there are some special cases that are handled here.
-#  
-  def ttv_view_list_row_value(element, heading)
-    case heading
-    when "election"
-      element.display_name
-    when "contests"
-      element.contests.count
-    when "questions"
-      element.questions.count
-    when "date"
-      element.start_date.to_date.to_formatted_s(:long) 
-    else
-      element.read_attribute(heading)
-    end
   end
   
   def ttv_view_link_to(command, element)
@@ -105,7 +127,8 @@ module ViewBuilderHelper
     when :back
       link_to(t("ttv.back", :default => "Back"), polymorphic_path([class_symbol_p([element])]))
     when :cancel
-      link_to(t("ttv.cancel", :default => "Cancel"), polymorphic_path([class_symbol_p([element])]))
+#      link_to(t("ttv.cancel", :default => "Cancel"), polymorphic_path([class_symbol_p([element])]))
+      link_to(t("ttv.cancel", :default => "Cancel"), :back)
     when :list
       link_to(t("ttv.list", :default => "List"), polymorphic_path([element]))
     when :new

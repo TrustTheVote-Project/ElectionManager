@@ -1,0 +1,254 @@
+--- 
+body: 
+  candidates: 
+  - party_display_name: Independent
+    ident: "500684-A"
+    contest_ident: "500022-A"
+    display_name: EUGENE C WINGFIELD
+  - party_display_name: Republican
+    ident: "500358-A"
+    contest_ident: "500006-A"
+    display_name: Robert Hurt
+  - party_display_name: Independent
+    ident: "500430-A"
+    contest_ident: "500006-A"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Democrat
+    ident: "500669-A"
+    contest_ident: "500006-A"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Libertarian
+    ident: "500595-A"
+    contest_ident: "500032-A"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414-A"
+    contest_ident: "500032-A"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554-A"
+    contest_ident: "500032-A"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500673-A"
+    contest_ident: "500022-A"
+    display_name: RONALD M. "Ron" IRVINE
+  - party_display_name: Independent
+    ident: "500430-A"
+    contest_ident: "500006-A"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Republican
+    ident: "500358-A"
+    contest_ident: "500006-A"
+    display_name: Robert Hurt
+  - party_display_name: Democrat
+    ident: "500669-A"
+    contest_ident: "500006-A"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Independent
+    ident: "500511-A"
+    contest_ident: "500076-A"
+    display_name: Diane Finch Harding
+  - party_display_name: Independent
+    ident: "500432-A"
+    contest_ident: "500076-A"
+    display_name: Theresa J. Crenshaw
+  - party_display_name: Democrat
+    ident: "500704-A"
+    contest_ident: "500076-A"
+    display_name: R. Christian Rickers
+  - party_display_name: Independent
+    ident: "500420-A"
+    contest_ident: "500076-A"
+    display_name: Nicholas O. "Nick" Daniel
+  - party_display_name: Independent
+    ident: "500522-A"
+    contest_ident: "500076-A"
+    display_name: T. L. "Tommy" Powell, Jr.
+  - party_display_name: Independent
+    ident: "500584-A"
+    contest_ident: "500076-A"
+    display_name: Amona W. Currin
+  - party_display_name: Libertarian
+    ident: "500595-A"
+    contest_ident: "500032-A"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414-A"
+    contest_ident: "500032-A"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554-A"
+    contest_ident: "500032-A"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500684"
+    contest_ident: "500022"
+    display_name: EUGENE C WINGFIELD
+  - party_display_name: Republican
+    ident: "500358"
+    contest_ident: "500006"
+    display_name: Robert Hurt
+  - party_display_name: Independent
+    ident: "500430"
+    contest_ident: "500006"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Democrat
+    ident: "500669"
+    contest_ident: "500006"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Libertarian
+    ident: "500595"
+    contest_ident: "500032"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414"
+    contest_ident: "500032"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554"
+    contest_ident: "500032"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500673"
+    contest_ident: "500022"
+    display_name: RONALD M. "Ron" IRVINE
+  - party_display_name: Independent
+    ident: "500430"
+    contest_ident: "500006"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Republican
+    ident: "500358"
+    contest_ident: "500006"
+    display_name: Robert Hurt
+  - party_display_name: Democrat
+    ident: "500669"
+    contest_ident: "500006"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Independent
+    ident: "500511"
+    contest_ident: "500076"
+    display_name: Diane Finch Harding
+  - party_display_name: Independent
+    ident: "500432"
+    contest_ident: "500076"
+    display_name: Theresa J. Crenshaw
+  - party_display_name: Democrat
+    ident: "500704"
+    contest_ident: "500076"
+    display_name: R. Christian Rickers
+  - party_display_name: Independent
+    ident: "500420"
+    contest_ident: "500076"
+    display_name: Nicholas O. "Nick" Daniel
+  - party_display_name: Independent
+    ident: "500522"
+    contest_ident: "500076"
+    display_name: T. L. "Tommy" Powell, Jr.
+  - party_display_name: Independent
+    ident: "500584"
+    contest_ident: "500076"
+    display_name: Amona W. Currin
+  - party_display_name: Libertarian
+    ident: "500595"
+    contest_ident: "500032"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414"
+    contest_ident: "500032"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554"
+    contest_ident: "500032"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500684-A"
+    contest_ident: "500022-A"
+    display_name: EUGENE C WINGFIELD
+  - party_display_name: Republican
+    ident: "500358-B"
+    contest_ident: "500006-B"
+    display_name: Robert Hurt
+  - party_display_name: Independent
+    ident: "500430-B"
+    contest_ident: "500006-B"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Democrat
+    ident: "500669-B"
+    contest_ident: "500006-B"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Libertarian
+    ident: "500595-B"
+    contest_ident: "500032-B"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414-B"
+    contest_ident: "500032-B"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554-B"
+    contest_ident: "500032-B"
+    display_name: Jeffrey W. Vanke
+  - party_display_name: Independent
+    ident: "500673-B"
+    contest_ident: "500022-B"
+    display_name: RONALD M. "Ron" IRVINE
+  - party_display_name: Independent
+    ident: "500430-B"
+    contest_ident: "500006-B"
+    display_name: Jeffrey A. Clark
+  - party_display_name: Republican
+    ident: "500358-B"
+    contest_ident: "500006-B"
+    display_name: Robert Hurt
+  - party_display_name: Democrat
+    ident: "500669-B"
+    contest_ident: "500006-B"
+    display_name: Tom S. P. Perriello
+  - party_display_name: Independent
+    ident: "500511-B"
+    contest_ident: "500076-B"
+    display_name: Diane Finch Harding
+  - party_display_name: Independent
+    ident: "500432-B"
+    contest_ident: "500076-B"
+    display_name: Theresa J. Crenshaw
+  - party_display_name: Democrat
+    ident: "500704-B"
+    contest_ident: "500076-B"
+    display_name: R. Christian Rickers
+  - party_display_name: Independent
+    ident: "500420-B"
+    contest_ident: "500076-B"
+    display_name: Nicholas O. "Nick" Daniel
+  - party_display_name: Independent
+    ident: "500522-B"
+    contest_ident: "500076-B"
+    display_name: T. L. "Tommy" Powell, Jr.
+  - party_display_name: Independent
+    ident: "500584-B"
+    contest_ident: "500076-B"
+    display_name: Amona W. Currin
+  - party_display_name: Libertarian
+    ident: "500595-B"
+    contest_ident: "500032-B"
+    display_name: Stuart M. Bain
+  - party_display_name: Republican
+    ident: "500414-B"
+    contest_ident: "500032-B"
+    display_name: Robert W. "Bob" Goodlatte
+  - party_display_name: Independent
+    ident: "500554-B"
+    contest_ident: "500032-B"
+    display_name: Jeffrey W. Vanke
+
+audit_header: 
+  based_on: inputs/VA/cand-vipFeedWithBallotQuestions.xml
+  notes: Manually edited by Pito
+  schema_version: "0.2"
+  operator: Pito Salas
+  type: candidates
+  create_date: 2010-10-04T16:01:12-04:00
+  software: TTV Election Management System 0.1 JAN-1-2010
+  hardware: n/a
+  file_id: 9F023408009B11DF924800163E3DE33F

@@ -35,11 +35,10 @@
       <div class="wat-cf">
       <% if can? :create, User %> 
 
-        <%= button_link_helper("web-app-theme/application_edit.png",
-        "edit", "Edit", edit_user_path(@user)) %>
+        <%= button_link_helper("Edit", edit_user_path(@user)) %>
       <% end %>
       <% if can? :destroy, User %> 
-        <%= button_link_helper("web-app-theme/cross.png", "delete",
+        <%= button_link_helper(
         "Delete", user_path(@user), :delete) %>
       <% end %>
 

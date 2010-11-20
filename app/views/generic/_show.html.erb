@@ -4,8 +4,7 @@
           <% fields.each do |fld| %>
             <%= ttv_show_field(record, fld) %>
           <% end %>
-          <%= ttv_actions_bar(record, [:edit, :delete, :back])%>
+          <%= ttv_actions_bar(ems_class, record, [:edit, :delete, :back])%>
         </div>
     </div>
 </div>
-<% content_for :sidebar, render(:partial => 'sidebar') -%>
