@@ -24,7 +24,7 @@ frame:
     right:
       width: 12
   border: 
-    style: :none                            # Values: :none, :single (default)
+    style: :none                              # Values: :none, :solid, :dashed 
   background_color: "FFFFFF"                # Hex value for background color ("FFFFFF" default)
 
 contents: 

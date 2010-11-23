@@ -35,7 +35,7 @@ frame:
     bottom: {rotate:, text:, width:, image_ident: } 
     right: {rotate:, text:, width:, image_ident: } 
   border: 
-    style: :single                            # Values: :none, :single (default)
+    style: :none                              # Values: :none, :solid, :dashed 
     color: "000000"                           # Hex value for color. ("000000" default)
     width: 1                                  # Points thickness. (1 default)
   background_color: "FFFFFF"                  # Hex value for background color ("FFFFFF" default)

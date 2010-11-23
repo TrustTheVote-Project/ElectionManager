@@ -24,7 +24,7 @@ frame:
     bottom: {rotate: 180, text: "I am the bottom", width: 0.8} 
     right: {rotate: 270, text: "I am the right", width: 100 } 
   border: 
-    style: :single                            # Values: :none, :single (default)
+    style: :solid
     color: "E6B0C9"                           # Hex value for color. ("000000" default)
     width: 1                                  # Points thickness. (1 default)
   background_color: "D5EBB3"                  # Hex value for background color ("FFFFFF" default)

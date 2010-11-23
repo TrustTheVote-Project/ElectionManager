@@ -43,11 +43,30 @@ class BallotConfigDCTest < ActiveSupport::TestCase
       assert @ballot_config
     end
     
-    should "render a frame around the entire page" do
+    should "render a frame with a solid border" do
       flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
       @ballot_config.render_frame flow_rect
       util = TTV::Prawn::Util.new(@pdf)
-      @pdf.render_file("#{Rails.root}/tmp/ballot_render_dc_frame.pdf")          
+      @pdf.render_file("#{Rails.root}/tmp/ballot_frame_solid_border.pdf")          
+    end
+    
+    should "render a frame around wit a dashed border" do
+      @template.frame['border']['style'] = :dashed
+      
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
+      @ballot_config.render_frame flow_rect
+      util = TTV::Prawn::Util.new(@pdf)
+      @pdf.render_file("#{Rails.root}/tmp/ballot_frame_dashed_border.pdf")          
+    end
+    
+    
+    should "render a frame around without a border" do
+      @template.frame['border']['style'] = :none
+      
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
+      @ballot_config.render_frame flow_rect
+      util = TTV::Prawn::Util.new(@pdf)
+      @pdf.render_file("#{Rails.root}/tmp/ballot_frame_no_border.pdf")          
     end
     
     should "render a contents for this page" do

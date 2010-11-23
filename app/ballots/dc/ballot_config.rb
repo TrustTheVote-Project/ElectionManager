@@ -101,23 +101,27 @@ module DcBallot
     def draw_frame_border(page_rect)
       # draw the frame border
       # remember frame margin surrounds frame border, frame border
-      # surrounds frame content
+      # surrounds frame border_area
       
       x = @frame['margin']['left']
       y = page_rect.top - @frame['margin']['top']
       w = page_rect.width - @frame['margin']['left'] - @frame['margin']['right']
-      h = page_rect.top - @frame['margin']['top'] - @frame['margin']['bottom']
+      h  = y - @frame['margin']['bottom']
+      # h = page_rect.top - @frame['margin']['top']
       
       @pdf.bounding_box([x,y], :width => w, :height => h) do      
 
-        unless @frame['border']['width'] == 0
+        unless @frame['border']['style'] == :none || @frame['border']['width'] == 0
           # draw the frame border
+          # TODO: May want to externize the dash length and space
+          dash_length = dash_space = 2 # 2 pts
           orig_color = @pdf.stroke_color
-          dash unless @frame['border']['style'] = :solid
-          @pdf.stroke_color @frame['border']['color']
-          @pdf.stroke_bounds
-          @pdf.stroke_color orig_color
-          undash unless @frame['border']['style'] = :solid
+           @pdf.dash(dash_length, :space => dash_space) if @frame['border']['style'] == :dashed
+           @pdf.stroke_color @frame['border']['color']
+           # TODO: implement frame['border']['width']
+           @pdf.stroke_bounds
+           @pdf.stroke_color orig_color
+           @pdf.undash unless @frame['border']['style'] == :dashed
         end
         
         yield if block_given?
