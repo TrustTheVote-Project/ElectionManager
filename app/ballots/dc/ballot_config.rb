@@ -50,7 +50,7 @@ module DcBallot
           page_rect.right -= (@frame['margin']['right'] + @frame['border']['width'] + @frame['content']['right']['width'])
           page_rect.bottom += (@frame['margin']['bottom'] + @frame['border']['width'] + @frame['content']['bottom']['width'])
           page_rect.left += (@frame['margin']['left'] + @frame['border']['width'] +@frame['content']['left']['width'])
-        
+          
           # reset the page rect's original_top as it's used to calculate fit of
           # containing items
           page_rect.original_top =  page_rect.top
@@ -116,12 +116,15 @@ module DcBallot
           # TODO: May want to externize the dash length and space
           dash_length = dash_space = 2 # 2 pts
           orig_color = @pdf.stroke_color
-           @pdf.dash(dash_length, :space => dash_space) if @frame['border']['style'] == :dashed
-           @pdf.stroke_color @frame['border']['color']
-           # TODO: implement frame['border']['width']
-           @pdf.stroke_bounds
-           @pdf.stroke_color orig_color
-           @pdf.undash unless @frame['border']['style'] == :dashed
+          orig_width = @pdf.line_width
+          @pdf.line_width(@frame['border']['width'])
+          @pdf.dash(dash_length, :space => dash_space) if @frame['border']['style'] == :dashed
+          @pdf.stroke_color @frame['border']['color']
+          # TODO: implement frame['border']['width']
+          @pdf.stroke_bounds
+          @pdf.stroke_color orig_color
+          @pdf.line_width(orig_width)
+          @pdf.undash unless @frame['border']['style'] == :dashed
         end
         
         yield if block_given?

@@ -43,6 +43,14 @@ class BallotConfigDCTest < ActiveSupport::TestCase
       assert @ballot_config
     end
     
+    should "render a frame with a solid very thick border" do
+      flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
+      @template.frame['border']['width'] = 30
+      @ballot_config.render_frame flow_rect
+      util = TTV::Prawn::Util.new(@pdf)
+      @pdf.render_file("#{Rails.root}/tmp/ballot_frame_thick_border.pdf")          
+    end
+    
     should "render a frame with a solid border" do
       flow_rect = TTV::Ballot::Rect.create_bound_box(@pdf.bounds)
       @ballot_config.render_frame flow_rect
