@@ -1,2 +1,2 @@
-<%= render :partial => "generic/show", :locals => { :record => @candidate, :fields => ["display_name", "party", "contest", "ident", "position"] } %>
+<%= render :partial => "generic/show", :locals => {:ems_class => Candidate, :record => @candidate, :fields => ["display_name", "party", "contest", "ident", "position"] } %>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

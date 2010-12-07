@@ -7,18 +7,8 @@
                     <%= ttv_view_list(Election, @elections, ["election", "date", "questions", "contests"]) %>
                     <%= ttv_actions_bar Election, @elections, [:new] %>
                 </div>
-                <div id="linkbox">
-                    <div class="left">
-                        <p>
-                            Number of precincts: <%=link_to "#{@jurisdiction.precincts.count} (click to view)", show_precincts_jurisdiction_path(@jurisdiction) %>
-                        </p>
-                    </div>
-                    <div class="right">
-                        <p>
-                            Number of districts: <%=link_to "#{@jurisdiction.jur_districts.count} (click to view)", show_districts_jurisdiction_path(@jurisdiction) %>
-                        </p>
-                    </div>
-                </div>
+                <%= ttv_linkbox("Number of precincts: " + link_to("#{@jurisdiction.precincts.count} (click to view)", show_precincts_jurisdiction_path(@jurisdiction)),
+                "Number of districts: " + link_to("#{@jurisdiction.jur_districts.count} (click to view)", show_districts_jurisdiction_path(@jurisdiction))) %>
                 <%= ttv_actions_bar DistrictSet, @jurisdiction, [:new, :delete, :edit] %>
             </div>
         </div>

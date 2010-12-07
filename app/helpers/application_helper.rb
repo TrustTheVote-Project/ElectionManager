@@ -81,7 +81,7 @@ module ApplicationHelper
       content_tag(:h1, t("ttv.election", :default => "Election") + ": " + link_to(cc.election.display_name, cc.election))
     when :contest
       content_tag(:h1, t("ttv.contest", :default => "Contest") + ": " + link_to(cc.contest.display_name, cc.contest)) + 
-      content_tag(:h4, "in " + s_electionsingular_name_for(Election) + ": " + link_to(cc.election.display_name, cc.election)) 
+      content_tag(:h4, "in " + singular_name_for(Election) + ": " + link_to(cc.election.display_name, cc.election)) 
     when :question
       content_tag(:h1, t("ttv.election", :default => "Question") + ": " + link_to(cc.question.display_name, cc.question))
     when :question

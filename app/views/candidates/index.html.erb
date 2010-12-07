@@ -1,2 +1,2 @@
-<%= render :partial => "generic/index", :locals => { :ems_class => Candidate, :collection => @candidates, :columns => ["ident", "display_name"], :commands => [:new] } %>
+<%= render :partial => "generic/index", :locals => { :ems_class => Candidate, :collection => @candidates, :columns => ["ident", "display_name"], :commands => [:new], :paginate => true } %>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

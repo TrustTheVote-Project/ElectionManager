@@ -25,15 +25,23 @@
 # are used in all kinds of places to construct views.
 
 module PolymorphicFieldsHelper
-
-# Return the value for a certain polyname for a certain ActiveRecord element. In most cases the polyname corresponds to an attribute name, but
-# not always. If the name as used in a view, for a UI reason, is different from what the model uses, the translation may happen here. This
-# avoids cluttering the model with lots of view specific stuff.
-#  
+  
+  # Return the value for a certain polyname for a certain ActiveRecord element. In most cases the polyname corresponds to an attribute name, but
+  # not always. If the name as used in a view, for a UI reason, is different from what the model uses, the translation may happen here. This
+  # avoids cluttering the model with lots of view specific stuff.
+  #  
   def poly_get_value(element, poly_name)
     case poly_name
     when "election"
       element.display_name
+    when "contest"
+      element.display_name
+    when "district"
+      element.display_name
+    when "default_voting_method"
+      VotingMethod.find(element.default_voting_method_id).display_name
+    when "ballot_style_template"
+       BallotStyleTemplate.find(element.ballot_style_template_id).display_name
     when "contests"
       element.contests.count
     when "questions"
@@ -46,14 +54,36 @@ module PolymorphicFieldsHelper
       element.contests.size
     when "n_questions"
       element.contests.size
+    when "n_candidates"
+      element.candidates.size
+    when "asset"
+      element.asset.url(:medium)
+    when "party_id"
+      element.party_id.to_s
+    when "contest_id"
+      element.contest_id.to_s
+    when "position"
+      element.position.to_s
+    when "contest"
+      element.contest.display_name
+    when "jurisdiction"
+      DistrictSet.find_by_id(element.district_set_id).display_name
     else
-      element.read_attribute(heading)
+      element.read_attribute(poly_name)
+    end
+  end
+ 
+  # Return a suitable column header for a certain polyname. 
+  def poly_name_column_header(poly_name)
+    case poly_name
+    when "n_contests"
+      t("ttv.n_questions", :default => "contests")
+    when "n_questions"
+      t("ttv.n_questions", :default => "questions")
+    when "n_candidates"
+      t("ttv.n_candidates", :default => "candidates")
+    else t("ttv."+poly_name, :default => poly_name.titleize)
     end
   end
   
-# Return a suitable column header for a certain polyname. 
-  def poly_name_column_header(poly_name)
-  end
 end
-
-  

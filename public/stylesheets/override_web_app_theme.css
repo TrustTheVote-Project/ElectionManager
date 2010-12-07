@@ -1,3 +1,5 @@
+/* @override http://localhost:3001/stylesheets/override_web_app_theme.css?1290477372 */
+
 #wrapper {
     padding-top: 0px;
     padding-right: 0px;
@@ -10,7 +12,6 @@ body {
 }
 
 .actions-bar .buttons {
-    float: left;
     padding: 5px 0px 0px 0px;
 }
 
@@ -152,7 +153,7 @@ div#sidebar {
 }
 
 #linkbox p {
-	margin: 15px;
+	margin: 10px 0px 5px 0px;
 }
 
 #breadcrumb h4 {
@@ -183,5 +184,19 @@ tr.emptysubtable
 {
 	font-style: italic;
 	color: green;
+}
+
+.actions-bar .pagination {
+	float: right;
+}
+
+.actions-bar .commandbuttons {
+	float: left;
+}
+
+#main div.content .content {
+	background-color: #fafafa;
+	margin:  20px;
+	border: none
 }
 
