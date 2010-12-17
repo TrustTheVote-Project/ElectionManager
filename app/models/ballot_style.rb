@@ -12,5 +12,4 @@
 
 class BallotStyle < ActiveRecord::Base
   # TODO: rename ballot_style_code attribute to code
-  
 end

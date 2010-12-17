@@ -33,7 +33,6 @@ group 'cucumber' do
   gem 'database_cleaner',  '>=0.5.0', :require => false
   gem 'webrat',  '>=0.7.0', :require => false
   gem 'pickle', :require => false
-
 end
 
 group :production do

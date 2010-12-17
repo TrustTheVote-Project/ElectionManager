@@ -10,9 +10,6 @@ class Ballot < ActiveRecord::Base
   def self.find_or_create_by_election(election)
     ballots = []
     election.precinct_splits.each do |split|
-      #result = find_or_create_by_election_id_and_precinct_split_id(:election_id => election.id, :precinct_split_id => split.id)
-      #puts "TGD: result = #{result.inspect}"
-      #ballots << result
       ballots << find_or_create_by_election_id_and_precinct_split_id(:election_id => election.id, :precinct_split_id => split.id)
     end
     ballots
@@ -25,11 +22,13 @@ class Ballot < ActiveRecord::Base
   end
   
   def contests
-    Contest.find_all_by_district_id(precinct_split.districts.map(&:id))
+#    Contest.find_all_by_district_id(precinct_split.districts.map(&:id))
+    Contest.district_id_is(precinct_split.districts.map(&:id)).election_id_is(election_id)
   end
   
   def questions
-    Question.find_all_by_requesting_district_id(precinct_split.districts.map(&:id))
+#    Question.find_all_by_requesting_district_id(precinct_split.districts.map(&:id))
+    Question.requesting_district_id_is(precinct_split.districts.map(&:id)).election_id_is(election_id)
   end
 
   def render_pdf

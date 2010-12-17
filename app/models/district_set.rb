@@ -1,5 +1,7 @@
   class DistrictSet < ActiveRecord::Base
   has_and_belongs_to_many :districts
+  #TODO: When Jurisdictions are disentangled from DistrictSets then this next line goes away. For now, read it as: "If this DistrictSet is the Jurisdiction, then
+  #all Districts that are part of this Jurisdiction point to it.
   has_many :jur_districts, :class_name => "District", :foreign_key => :jurisdiction_id
   has_many :elections
   has_many :audits
