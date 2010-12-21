@@ -86,12 +86,16 @@ module TTV
     
     # Import a question from EDH into EM database
     def load_question question
-      new_question = Question.find_or_create_by_ident(:display_name => question["display_name"],
-                                                      :ident => question["ident"],
-                                                      :question => question["question"])
-      new_question.requesting_district = District.find_by_ident(question["district_ident"])                                                      
-      new_question.election = Election.find_by_ident(question["election_ident"])
-      new_question.save!
+      the_election = Election.find_by_ident(question["election_ident"])
+      existing_questions = Question.election_ident_is(question["election_ident"]).ident_is(question["ident"]) 
+      if existing_questions.length > 0
+        raise "Trying to replace question during import. Need Audit code to handle this case"
+      end
+      Question.create(:display_name => question["display_name"],
+                      :election => the_election,
+                      :ident => question["ident"],
+                      :question => question["question"],
+                      :requesting_district => District.find_by_ident(question["district_ident"]))
     end
     
     # Imports all contests contained in the EDH
@@ -109,17 +113,13 @@ module TTV
       the_election = Election.find_by_ident(contest["election_ident"])
       existing_contests = Contest.election_ident_is(contest["election_ident"]).ident_is(contest["ident"]) 
       if existing_contests.length > 0
-#      if Contest.find_by_ident_and_election(contest["ident"], the_election)
-        raise "Trying to replace contest during import. Need code to handle this case"
+        raise "Trying to replace contest during import. Need Audit code to handle this case"
       end
       Contest.create(:display_name => contest["display_name"],
                      :election => the_election,
                      :ident => contest["ident"], 
                      :voting_method_id => voting_method_id, 
                      :district => District.find_by_ident(contest["district_ident"]))
-#      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
-#      new_contest.election = 
-#      new_contest.save!
     end
 
     # Imports all elections contained in the EDH
