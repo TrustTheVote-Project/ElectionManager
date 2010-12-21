@@ -1,6 +1,3 @@
-require "date"
-require "set"
-require "test/unit"
 # OSDV Election Manager - Shoulda Macros to create sample datamodel data
 # Author: Pito Salas
 # Date: 10/5/2010
@@ -22,15 +19,21 @@ require "test/unit"
 # All Rights Reserved.
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
-require 'test_helper'
+require "test/unit"
 #
 # Macros to create various structured Precincts, PrecinctSplits, DistrictSets and Districts
 #
 class Test::Unit::TestCase
-  def setup_precinct name, count=1
+  
+# Setup a Precinct
+# <tt>name:</tt>  Name of the Precinct
+# <tt>count:</tt> Number of PrecinctSplits in this precinct. Each split has a pre-ordained number of Districts. Default = 1. 0<Count<=4
+# <tt>juris:</tt> Jurisdiction that should own all of the generated bits. Default nil, meaning they are 'dangling'
+  def setup_precinct name, count=1, juris=nil
     district_counts = [3, 4, 3, 2, 3]
     assert count <= district_counts.length
     @prec_new = Precinct.create :display_name => name
+    @prec_new.jurisdiction = juris unless juris.nil?
     last_genned_dist = 0
     (0..count-1).each do |i|
       setup_precinct_split("#{name} Split #{i}", last_genned_dist, last_genned_dist + district_counts[i])
@@ -41,9 +44,13 @@ class Test::Unit::TestCase
     @prec_new
   end
 
- # TODO: why set up @district_set_new
-  def setup_precinct_split name, from, to
-    setup_districtset name, from, to
+# TODO: why set up @district_set_new
+# Setup a PrecinctSplit
+# <tt>name:</tt>name to give it
+# <tt>from, to:</tt>District number in name of Districts created. Also implies how many Ditricts to create
+# <tt>juris:</tt> Jurisdiction that should own all of the generated bits. Default nil, meaning they are 'dangling' 
+  def setup_precinct_split name, from, to, juris=nil
+    setup_districtset name, from, to, juris
     @prec_split_new = PrecinctSplit.create! :display_name => name
     @prec_split_new.district_set = @district_set_new
     @prec_split_new.save
@@ -51,10 +58,16 @@ class Test::Unit::TestCase
   end
 
 # TODO: why set up @district_set_new
-  def setup_districtset name, from, to
+# Setup a DistrictSet
+#<tt>name:</tt>Name for it
+# <tt>from, to:</tt>District number in name of Districts created. Also implies how many Ditricts to create
+# <tt>juris:</tt> Jurisdiction that should own all of the generated bits. Default nil, meaning they are 'dangling' 
+  def setup_districtset name, from, to, juris=nil
     @district_set_new = DistrictSet.make(:display_name => name)
     (from..to-1).each do |i|
-      @district_set_new.districts << District.create!(:display_name => "#{name} District #{i}", :district_type => DistrictType::COUNTY)
+      new_district = District.create!(:display_name => "#{name} District #{i}", :district_type => DistrictType::COUNTY)
+      new_district.jurisdiction = juris unless juris.nil?
+      @district_set_new.districts << new_district
       assert @district_set_new.valid?
     end
     @district_set_new.save
@@ -141,4 +154,31 @@ class Test::Unit::TestCase
     @election.district_set = @ds1
     @election.save!
   end
+  
+  
+    def create_question(name, district, election, text)
+    question = Question.make(:display_name => name,
+                                 :election => election,
+                                 :requesting_district => district,
+                                 :question => text)
+  
+  end
+  
+  def create_contest(name, voting_method, district, election, position = 0)
+    contest = Contest.make(:display_name => name,
+                           :voting_method => voting_method,
+                           :district => district,
+                           :election => election,
+                           :position => position,
+                           :ident => "ident-#{name}")
+    
+    position += 1
+    [:democrat, :republican, :independent].each do |party_sym|
+      party = Party.make(party_sym)
+      Candidate.make(:party => party, :display_name => "#{name}_#{party_sym.to_s[0..2]}", :contest => contest, :ident => "ident-#{name}_#{party_sym.to_s[0..2]}_#{contest.display_name}")
+    end
+    contest
+  end
+
+
 end

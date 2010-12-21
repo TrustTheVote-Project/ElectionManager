@@ -190,39 +190,37 @@ class BallotTest < ActiveSupport::TestCase
         assert_equal @ballot1, Ballot.first
       end
     end
-#     context "Contests" do
-#       setup do
-#         @ballot = Ballot.create(:election => @election, :precinct_split => @precinct_split)
+     context "Contests" do
+       setup do
+         @ballot = Ballot.create(:election => @election, :precinct_split => @precinct_split)
 
-#         # create 9 contests one in each district. 
-#         9.times do |i|
-#           # each contest will have 3 candidates name
-#           # "contest_#{i}_dem","contest_#{i}_repub", "contest_#{i}_ind"
-#           create_contest("contest_#{i}", VotingMethod::WINNER_TAKE_ALL, District.find_by_display_name("district_#{i}"), @election)
-#         end
-#       end
+         # create 9 contests one in each district. 
+         9.times do |i|
+           # each contest will have 3 candidates name
+           # "contest_#{i}_dem","contest_#{i}_repub", "contest_#{i}_ind"
+           create_contest("contest_#{i}", VotingMethod::WINNER_TAKE_ALL, District.find_by_display_name("district_#{i}"), @election)
+         end
+       end
 
-#       should "be those defined by the ballot districts" do
-#         assert_equal 3,  @ballot.contests.size
-#         contest_names = @ballot.contests.map(&:display_name)
-#         [3,4,5].each do |i|
-#           assert contest_names.include?("contest_#{i}")
-#         end
-#       end
-
-#     end # end Contests context
+       should "be those defined by the ballot districts" do
+         assert_equal 3,  @ballot.contests.size
+         contest_names = @ballot.contests.map(&:display_name)
+         [3,4,5].each do |i|
+           assert contest_names.include?("contest_#{i}")
+         end
+       end
+     end # end Contests context
     
     def add_three_contests
-      # create 3 district sets each with 3 districts
-      #       3.times do |i|
-      #         district_set = DistrictSet.make(:display_name => "district_set_#{i}")
-      #         3.times do |j|
-      #           d = (i*3)+j
-      #           district_set.districts << District.find_by_display_name("district_#{d}")
-      #         end
-      #       end
+#       create 3 district sets each with 3 districts
+             3.times do |i|
+               district_set = DistrictSet.make(:display_name => "district_set_#{i}")
+               3.times do |j|
+                 d = (i*3)+j
+                 district_set.districts << District.find_by_display_name("district_#{d}")
+               end
+             end
 
-      
     end
     
   end # end Ballot context

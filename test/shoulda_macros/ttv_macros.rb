@@ -120,30 +120,6 @@ class Test::Unit::TestCase
     end
   end
   
-  def create_question(name, district, election, text)
-    question = Question.make(:display_name => name,
-                                 :election => election,
-                                 :requesting_district => district,
-                                 :question => text)
-  
-  end
-  
-  def create_contest(name, voting_method, district, election, position = 0)
-    contest = Contest.make(:display_name => name,
-                           :voting_method => voting_method,
-                           :district => district,
-                           :election => election,
-                           :position => position,
-                           :ident => "ident-#{name}")
-    
-    position += 1
-    [:democrat, :republican, :independent].each do |party_sym|
-      party = Party.make(party_sym)
-      Candidate.make(:party => party, :display_name => "#{name}_#{party_sym.to_s[0..2]}", :contest => contest, :ident => "ident-#{name}_#{party_sym.to_s[0..2]}_#{contest.display_name}")
-    end
-    contest
-  end
-
   def create_ballot_config(pdf_form = false)
     @scanner = TTV::Scanner.new
     @election = Election.make(:display_name => "Election 1" )

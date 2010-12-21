@@ -15,7 +15,8 @@ class Precinct < ActiveRecord::Base
       self.save!
     end
   end
-  
+
+# TODO rename this method to just 'districts'
   def collect_districts
     precinct_splits.reduce([]) { |coll, ps| coll | ps.district_set.districts}
   end

@@ -24,6 +24,7 @@ group :test do
   gem 'faker'
   gem 'mocha'
   gem 'pdf-reader'
+  gem 'awesome_print'
 end
 
 group 'cucumber' do

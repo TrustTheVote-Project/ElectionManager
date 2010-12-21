@@ -21,14 +21,22 @@ class Ballot < ActiveRecord::Base
     precinct_split.districts
   end
   
+# Return list of contests that go onto this Ballot
   def contests
 #    Contest.find_all_by_district_id(precinct_split.districts.map(&:id))
     Contest.district_id_is(precinct_split.districts.map(&:id)).election_id_is(election_id)
   end
-  
+
+# Return list of questions that go onto this Ballot
   def questions
 #    Question.find_all_by_requesting_district_id(precinct_split.districts.map(&:id))
     Question.requesting_district_id_is(precinct_split.districts.map(&:id)).election_id_is(election_id)
+  end
+  
+# Return true if this Ballot is blank, i.e. should not be printed, because it has no questions or contests. This happens if this Election
+# covers a PrecinctSplit which happens not to have any questions or contest specified for the Election.
+  def blank?
+    questions.length == 0 && contests.length == 0
   end
 
   def render_pdf
