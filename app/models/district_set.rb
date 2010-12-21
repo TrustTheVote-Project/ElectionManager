@@ -5,6 +5,9 @@
   has_many :jur_districts, :class_name => "District", :foreign_key => :jurisdiction_id
   has_many :elections
   has_many :audits
+  
+  #TODO When Jurisidctions are disentangled from DistrictSets then this next line goes away. 
+  #For now read it as, "If this DistrictSet is the Jurisdiction, then all Precincts that are part of the Jurisdiction point to it"
   has_many :precincts, :foreign_key => :jurisdiction_id
   has_many :precinct_splits, :through => :precincts
   
