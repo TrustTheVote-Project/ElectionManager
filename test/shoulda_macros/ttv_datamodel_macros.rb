@@ -76,7 +76,9 @@ class Test::Unit::TestCase
   
 # Set up a jurisdiction with a single precinct. NB a different way of returning the
 # results. I am trying this to see if it's more useful.
+# TODO: Update when we disentangle Jurisdiction from DistrictSet
   def setup_jurisdiction name
+    jurisdiction = DistrictSet.new(:display_name => name)
     precinct = setup_precinct(:display_name => "Prec for #{name}")
     precinct.jurisdiction = jurisdiction
     precinct.save

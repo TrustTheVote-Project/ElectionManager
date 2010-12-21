@@ -1,0 +1,13 @@
+---
+body:  
+  elections: 
+  - start_date: "2010-11-02"
+    ident: elect-15
+    type: FEDERAL
+    display_name: Election TWO
+  
+  contests: 
+  - election_ident: elect-15
+    ident: cont-33
+    display_name: Mayor
+    district_ident: dist-DISTRICT OF COLUMBIA
