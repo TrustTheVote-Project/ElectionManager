@@ -61,8 +61,74 @@ class BallotMoreTest < ActiveSupport::TestCase
         assert @ball1.blank?
 
       end
-    
     end
+  end
+
+#
+# Now actually import a sample jurisdiction, election and contest set for testing.
+#
+#
+# helper method to string together the steps for doing an import when we know there will be no audit errors.
+#
+  def import_helper(filename, contenttype)
+      yaml_hash = YAML.load(File.new("#{RAILS_ROOT}/test/unit/data/ballot_more_test/#{filename}.yml"))
+      audit = Audit.new(:content_type => contenttype, :election_data_hash => yaml_hash, :district_set => @juris)
+      audit.audit 
+      import = TTV::ImportEDH.new(contenttype, audit.election_data_hash)
+      import.import @juris
+  end
+  context "using test yml files" do
+    setup do
+      @juris = DistrictSet.create!(:display_name => "Jurisdiction Test")
+# Import Precincts, Districts, etc.
+      import_helper("ballot_more_juris", "jurisdiction_info")
+# Import Contests Questions, etc. from ballot_more_elect1.yml
+      import_helper("ballot_more_elect1", "election_info")
+# Import Contests Questions, etc. from ballot_more_elect2.yml
+      import_helper("ballot_more_elect2", "election_info")
+    end
+    
+    should "result in reasonable results" do
+      assert 2, Election.all.count
+    end
+    
+    should "create a valid precinct split" do
+      elect = Election.find_by_display_name("Election ONE")
+      split = PrecinctSplit.find_by_display_name("split-1-SMD 02-ANC 6C")
+      assert_equal 4, split.districts.length
+# Grab contests for Districts that are in that PrecinctSplit
+      contests = Contest.district_id_is(split.districts.map(&:id))
+      assert 2, contests.length
+    end
+    
+    should "have a ballot with a single contest" do
+      split = PrecinctSplit.find_by_display_name("split-1-SMD 02-ANC 6C")
+      elect = Election.find_by_display_name("Election ONE")
+      ballot = Ballot.new(:election => elect, :precinct_split => split)
+      if ballot.contests.length != 1
+          ap ballot
+          ap split
+          ap elect
+          ap Contest.district_id_is(split.districts.map(&:id))
+        end
+      assert_equal 1, ballot.contests.length
+    end
+
+    should "all PrecinctSplits should have blank Ballots" do
+      elect = Election.find_by_display_name("My Election")
+      splitlist =["split-1-SMD 01-ANC 6C","split-1-SMD 03-ANC 6C","split-1-SMD 09-ANC 6C","split-2-SMD 01-ANC 2A","split-2-SMD 05-ANC 2A","split-2-SMD 06-ANC 2A"]
+      splitlist.each do
+        |nm| 
+        split = PrecinctSplit.find_by_display_name(nm)
+        ballot = Ballot.create(:election => elect, :precinct_split => split)
+        if ballot.contests.length != 0
+          ap ballot
+          ap split
+          ap Contest.district_id_is(split.districts.map(&:id))
+        end
+        assert_equal 0, ballot.contests.length
+      end
+    end  
   end
 end
 

@@ -36,6 +36,8 @@ module TTV
         load_questions
       elsif @import_type.eql? "candidate_info"
         load_candidates
+      else
+        raise ArgumentError, "invalid import_type in ImportEdh"
       end
     end
 
@@ -66,8 +68,6 @@ module TTV
       end
       new_district.save!
     end
-
-
     
     # Imports all precincts contained in the EDH
     def load_precincts
@@ -106,13 +106,20 @@ module TTV
       else
         voting_method_id = VotingMethod.find_by_display_name("Winner Take All")
       end
-      new_contest = Contest.find_or_create_by_ident(:display_name => contest["display_name"], 
-                                                    :ident => contest["ident"], 
-                                                    :voting_method_id => voting_method_id, 
-                                                    :district => District.find_by_ident(contest["district_ident"]))
-      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
-      new_contest.election = Election.find_by_ident(contest["election_ident"])
-      new_contest.save!
+      the_election = Election.find_by_ident(contest["election_ident"])
+      existing_contests = Contest.election_ident_is(contest["election_ident"]).ident_is(contest["ident"]) 
+      if existing_contests.length > 0
+#      if Contest.find_by_ident_and_election(contest["ident"], the_election)
+        raise "Trying to replace contest during import. Need code to handle this case"
+      end
+      Contest.create(:display_name => contest["display_name"],
+                     :election => the_election,
+                     :ident => contest["ident"], 
+                     :voting_method_id => voting_method_id, 
+                     :district => District.find_by_ident(contest["district_ident"]))
+#      contest["candidates"].each{ |cand| new_contest.candidates << Candidate.find_by_ident(cand["candidate_ident"])} if contest["candidates"]
+#      new_contest.election = 
+#      new_contest.save!
     end
 
     # Imports all elections contained in the EDH

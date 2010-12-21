@@ -1,0 +1,13 @@
+---
+body:  
+  elections: 
+  - start_date: "2010-11-02"
+    ident: elect-14
+    type: FEDERAL
+    display_name: Election ONE
+  
+  contests: 
+  - election_ident: elect-14
+    ident: cont-33
+    display_name: Member City Council
+    district_ident: dist-SMD 02-ANC 6C

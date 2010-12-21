@@ -32,8 +32,8 @@ class QuestionTest < ActiveSupport::TestCase
     #    should_create :question    
     
     subject { Question.last}
-    should_belong_to :election
-    should_belong_to :requesting_district
+    should belong_to :election
+    should belong_to :requesting_district
     
     should 'have a requesting district' do
       assert subject.requesting_district

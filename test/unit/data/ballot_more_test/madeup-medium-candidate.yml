@@ -1,0 +1,19 @@
+---
+body:  
+  
+  candidates:
+   - display_name: George G. Gray
+     ident: cand-1234
+     contest_ident: cont-33
+     party: Democratic
+     position: 2     
+   - display_name: Gladys G. Gray
+     ident: cand-1235
+     party: Democratic
+     contest_ident: cont-33
+     position: 1
+   - display_name: Gail G. Gray
+     ident: cand-1237
+     party: Democratic
+     contest_ident: cont-33
+     position: 3
