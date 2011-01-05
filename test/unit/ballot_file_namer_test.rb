@@ -1,6 +1,6 @@
-# OSDV Election Manager - Unit Test
-# Author: FillMeIn
-# Date: FillMeIn
+# OSDV Election Manager - Unit Test for BallotConfig for BallotFileNamer
+# Author: Pito Salas
+# Date: 10/5/2010
 #
 # License Version: OSDV Public License 1.2
 #
@@ -19,10 +19,9 @@
 # All Rights Reserved.
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
+require File.dirname(__FILE__) + '/../test_helper'
 
-require 'test_helper'
-require 'ap'
-
+# TODO: Is this class still being used?
 class BallotFileNamerTest < ActiveSupport::TestCase
   context "BallotFileNamer" do
     setup do

@@ -20,9 +20,7 @@
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
 
-require 'test_helper'
-require 'ap'
-
+require File.dirname(__FILE__) + '/../test_helper'
 
 class TestTest < ActiveSupport::TestCase
   context "context name" do

@@ -1,4 +1,4 @@
-# OSDV Election Manager - Ballot Proofing Report Test
+# OSDV Election Manager - Unit Test for Ballot Proofing Report
 # Author: Pito Salas
 # Date: 10/5/2010
 #
@@ -19,10 +19,7 @@
 # All Rights Reserved.
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
-
-require 'test_helper'
-require 'ap'
-
+require File.dirname(__FILE__) + '/../test_helper'
 
 class BallotProofingReportTests < ActiveSupport::TestCase
   context "BallotProofingReport name" do

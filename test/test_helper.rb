@@ -11,6 +11,9 @@ require "authlogic/test_case"
 require "pdf/reader"
 require 'ttv/prawn/util'
 
+begin; require 'turn'; rescue LoadError; end
+
+
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
