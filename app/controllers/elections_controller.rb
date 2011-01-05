@@ -19,7 +19,7 @@ class ElectionsController < ApplicationController
     current_context.election = @election
     @contests = @election.contests.paginate(:per_page => 10, :page => params[:page], :order => 'position')
     @questions = @election.questions.paginate(:per_page => 10, :page => params[:page])
-    @ballots = Ballot.find_or_create_by_election(@election).paginate(:per_page => 10, :page => params[:page])
+    @ballots = Ballot.find_or_create_by_election(@election).paginate(:per_page => 12, :page => params[:page])
   end
 
   def new

@@ -10,6 +10,8 @@ class Election < ActiveRecord::Base
   attr_accessible :default_voting_method_id, :ballot_style_template_id
 
   validates_presence_of :display_name
+  
+  # this election belongs to a certain Jurisdiction (the one running it.)
   belongs_to :district_set # @TODO Soon this will be :jurisdiction
   
   before_destroy :destroy_translations
@@ -29,6 +31,7 @@ class Election < ActiveRecord::Base
     district_set.precincts.map { |prec| prec.precinct_splits }.flatten
   end
   
+# All the districts of the Jurisdiction running this Election. TODO Will change when we disentangle Jurisdiction from DistrictSet 
   def districts
     district_set.jur_districts
   end

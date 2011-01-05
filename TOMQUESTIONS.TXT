@@ -1,0 +1,1 @@
+- what is going on in config/ttv/ballot_rule/base.rb
