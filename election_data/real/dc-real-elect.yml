@@ -1,0 +1,1205 @@
+---
+body:
+ elections:
+ - start_date: "2010-11-02"
+   ident: elect-14
+   type: GENERAL
+   display_name: "District of Columbia Mayoral Election"
+
+ contests:
+ - election_ident: elect-14
+   ident: cont-delegate
+   display_name: DELEGATE TO THE U.S. HOUSE OF REPRESENTATIVES
+   district_ident: dist-FEDERAL
+ - election_ident: elect-14
+   ident: cont-mayor
+   display_name: MAYOR OF THE DISTRICT OF COLUMBIA
+   district_ident: dist-DISTRICT OF COLUMBIA
+ - election_ident: elect-14
+   ident: cont-chairman
+   display_name: CHAIRMAN OF THE COUNCIL
+   district_ident: dist-DISTRICT OF COLUMBIA
+ - election_ident: elect-14
+   ident: cont-atlarge
+   display_name: AT-LARGE MEMBER OF THE COUNCIL
+   district_ident: dist-DISTRICT OF COLUMBIA
+ - election_ident: elect-14
+   ident: cont-council1
+   display_name: MEMBER OF THE COUNCIL WARD ONE
+   district_ident: dist-CITY OF WASHINGTON WARD 1
+ - election_ident: elect-14
+   ident: cont-council3
+   display_name: MEMBER OF THE COUNCIL WARD THREE
+   district_ident: dist-CITY OF WASHINGTON WARD 3
+ - election_ident: elect-14
+   ident: cont-council5
+   display_name: MEMBER OF THE COUNCIL WARD FIVE
+   district_ident: dist-CITY OF WASHINGTON WARD 5
+ - election_ident: elect-14
+   ident: cont-council6
+   display_name: MEMBER OF THE COUNCIL WARD SIX
+   district_ident: dist-CITY OF WASHINGTON WARD 6
+ - election_ident: elect-14
+   ident: cont-educ1
+   display_name: MEMBER OF STATE BOARD OF EDUCATION WARD ONE
+   district_ident: dist-CITY OF WASHINGTON WARD 1
+ - election_ident: elect-14
+   ident: cont-educ3
+   display_name: MEMBER OF STATE BOARD OF EDUCATION WARD THREE
+   district_ident: dist-CITY OF WASHINGTON WARD 3
+ - election_ident: elect-14
+   ident: cont-educ5
+   display_name: MEMBER OF STATE BOARD OF EDUCATION WARD FIVE
+   district_ident: dist-CITY OF WASHINGTON WARD 5
+ - election_ident: elect-14
+   ident: cont-educ6
+   display_name: MEMBER OF STATE BOARD OF EDUCATION WARD SIX
+   district_ident: dist-CITY OF WASHINGTON WARD 6
+ - election_ident: elect-14
+   ident: cont-usrep
+   display_name: UNITED STATES REPRESENTATIVE
+   district_ident: dist-1ST CONGRESSIONAL DIST
+ - election_ident: elect-14
+   ident: cont-anc1A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A01
+   district_ident: dist-SMD 01-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A02
+   district_ident: dist-SMD 02-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A03
+   district_ident: dist-SMD 03-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A04
+   district_ident: dist-SMD 04-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A05
+   district_ident: dist-SMD 05-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A06
+   district_ident: dist-SMD 06-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A07
+   district_ident: dist-SMD 07-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A08
+   district_ident: dist-SMD 08-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A09
+   district_ident: dist-SMD 09-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A10
+   district_ident: dist-SMD 10-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1A11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1A11
+   district_ident: dist-SMD 11-ANC 1A
+ - election_ident: elect-14
+   ident: cont-anc1B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B01
+   district_ident: dist-SMD 01-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B02
+   district_ident: dist-SMD 02-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B03
+   district_ident: dist-SMD 03-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B04
+   district_ident: dist-SMD 04-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B05
+   district_ident: dist-SMD 05-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B06
+   district_ident: dist-SMD 06-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B07
+   district_ident: dist-SMD 07-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B08
+   district_ident: dist-SMD 08-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B09
+   district_ident: dist-SMD 09-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B10
+   district_ident: dist-SMD 10-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1B11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1B11
+   district_ident: dist-SMD 11-ANC 1B
+ - election_ident: elect-14
+   ident: cont-anc1C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C01
+   district_ident: dist-SMD 01-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C02
+   district_ident: dist-SMD 02-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C03
+   district_ident: dist-SMD 03-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C04
+   district_ident: dist-SMD 04-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C05
+   district_ident: dist-SMD 05-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C06
+   district_ident: dist-SMD 06-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C07
+   district_ident: dist-SMD 07-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1C08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1C08
+   district_ident: dist-SMD 08-ANC 1C
+ - election_ident: elect-14
+   ident: cont-anc1D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D01
+   district_ident: dist-SMD 01-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc1D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D02
+   district_ident: dist-SMD 02-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc1D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D03
+   district_ident: dist-SMD 03-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc1D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D04
+   district_ident: dist-SMD 04-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc1D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D05
+   district_ident: dist-SMD 05-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc1D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 1D06
+   district_ident: dist-SMD 06-ANC 1D
+ - election_ident: elect-14
+   ident: cont-anc2A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A01
+   district_ident: dist-SMD 01-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A02
+   district_ident: dist-SMD 02-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A03
+   district_ident: dist-SMD 03-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A04
+   district_ident: dist-SMD 04-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A05
+   district_ident: dist-SMD 05-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2A06
+   district_ident: dist-SMD 06-ANC 2A
+ - election_ident: elect-14
+   ident: cont-anc2B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B01
+   district_ident: dist-SMD 01-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B02
+   district_ident: dist-SMD 02-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B03
+   district_ident: dist-SMD 03-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B04
+   district_ident: dist-SMD 04-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B05
+   district_ident: dist-SMD 05-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B06
+   district_ident: dist-SMD 06-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B07
+   district_ident: dist-SMD 07-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B08
+   district_ident: dist-SMD 08-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2B09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2B09
+   district_ident: dist-SMD 09-ANC 2B
+ - election_ident: elect-14
+   ident: cont-anc2C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2C01
+   district_ident: dist-SMD 01-ANC 2C
+ - election_ident: elect-14
+   ident: cont-anc2C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2C02
+   district_ident: dist-SMD 02-ANC 2C
+ - election_ident: elect-14
+   ident: cont-anc2C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2C03
+   district_ident: dist-SMD 03-ANC 2C
+ - election_ident: elect-14
+   ident: cont-anc2C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2C04
+   district_ident: dist-SMD 04-ANC 2C
+ - election_ident: elect-14
+   ident: cont-anc2D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2D01
+   district_ident: dist-SMD 01-ANC 2D
+ - election_ident: elect-14
+   ident: cont-anc2D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2D02
+   district_ident: dist-SMD 02-ANC 2D
+ - election_ident: elect-14
+   ident: cont-anc2E01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E01
+   district_ident: dist-SMD 01-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E02
+   district_ident: dist-SMD 02-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E03
+   district_ident: dist-SMD 03-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E04
+   district_ident: dist-SMD 04-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E05
+   district_ident: dist-SMD 05-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E06
+   district_ident: dist-SMD 06-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2E07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2E07
+   district_ident: dist-SMD 07-ANC 2E
+ - election_ident: elect-14
+   ident: cont-anc2F01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F01
+   district_ident: dist-SMD 01-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc2F02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F02
+   district_ident: dist-SMD 02-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc2F03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F03
+   district_ident: dist-SMD 03-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc2F04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F04
+   district_ident: dist-SMD 04-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc2F05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F05
+   district_ident: dist-SMD 05-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc2F06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 2F06
+   district_ident: dist-SMD 06-ANC 2F
+ - election_ident: elect-14
+   ident: cont-anc3B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3B01
+   district_ident: dist-SMD 01-ANC 3B
+ - election_ident: elect-14
+   ident: cont-anc3B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3B02
+   district_ident: dist-SMD 02-ANC 3B
+ - election_ident: elect-14
+   ident: cont-anc3B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3B03
+   district_ident: dist-SMD 03-ANC 3B
+ - election_ident: elect-14
+   ident: cont-anc3B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3B04
+   district_ident: dist-SMD 04-ANC 3B
+ - election_ident: elect-14
+   ident: cont-anc3B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3B05
+   district_ident: dist-SMD 05-ANC 3B
+ - election_ident: elect-14
+   ident: cont-anc3C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C01
+   district_ident: dist-SMD 01-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C02
+   district_ident: dist-SMD 02-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C03
+   district_ident: dist-SMD 03-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C04
+   district_ident: dist-SMD 04-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C05
+   district_ident: dist-SMD 05-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C06
+   district_ident: dist-SMD 06-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C07
+   district_ident: dist-SMD 07-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C08
+   district_ident: dist-SMD 08-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3C09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3C09
+   district_ident: dist-SMD 09-ANC 3C
+ - election_ident: elect-14
+   ident: cont-anc3D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D01
+   district_ident: dist-SMD 01-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D02
+   district_ident: dist-SMD 02-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D03
+   district_ident: dist-SMD 03-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D04
+   district_ident: dist-SMD 04-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D05
+   district_ident: dist-SMD 05-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D06
+   district_ident: dist-SMD 06-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D07
+   district_ident: dist-SMD 07-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D08
+   district_ident: dist-SMD 08-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3D09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3D09
+   district_ident: dist-SMD 09-ANC 3D
+ - election_ident: elect-14
+   ident: cont-anc3E01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3E01
+   district_ident: dist-SMD 01-ANC 3E
+ - election_ident: elect-14
+   ident: cont-anc3E02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3E02
+   district_ident: dist-SMD 02-ANC 3E
+ - election_ident: elect-14
+   ident: cont-anc3E03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3E03
+   district_ident: dist-SMD 03-ANC 3E
+ - election_ident: elect-14
+   ident: cont-anc3E04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3E04
+   district_ident: dist-SMD 04-ANC 3E
+ - election_ident: elect-14
+   ident: cont-anc3E05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3E05
+   district_ident: dist-SMD 05-ANC 3E
+ - election_ident: elect-14
+   ident: cont-anc3F01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F01
+   district_ident: dist-SMD 01-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F02
+   district_ident: dist-SMD 02-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F03
+   district_ident: dist-SMD 03-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F04
+   district_ident: dist-SMD 04-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F05
+   district_ident: dist-SMD 05-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F06
+   district_ident: dist-SMD 06-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3F07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3F07
+   district_ident: dist-SMD 07-ANC 3F
+ - election_ident: elect-14
+   ident: cont-anc3G01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G01
+   district_ident: dist-SMD 01-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G02
+   district_ident: dist-SMD 02-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G03
+   district_ident: dist-SMD 03-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G04
+   district_ident: dist-SMD 04-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G05
+   district_ident: dist-SMD 05-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G06
+   district_ident: dist-SMD 06-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc3G07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 3G07
+   district_ident: dist-SMD 07-ANC 3G
+ - election_ident: elect-14
+   ident: cont-anc4A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A01
+   district_ident: dist-SMD 01-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A02
+   district_ident: dist-SMD 02-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A03
+   district_ident: dist-SMD 03-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A04
+   district_ident: dist-SMD 04-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A05
+   district_ident: dist-SMD 05-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A06
+   district_ident: dist-SMD 06-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A07
+   district_ident: dist-SMD 07-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4A08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4A08
+   district_ident: dist-SMD 08-ANC 4A
+ - election_ident: elect-14
+   ident: cont-anc4B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B01
+   district_ident: dist-SMD 01-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B02
+   district_ident: dist-SMD 02-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B03
+   district_ident: dist-SMD 03-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B04
+   district_ident: dist-SMD 04-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B05
+   district_ident: dist-SMD 05-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B06
+   district_ident: dist-SMD 06-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B07
+   district_ident: dist-SMD 07-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B08
+   district_ident: dist-SMD 08-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4B09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4B09
+   district_ident: dist-SMD 09-ANC 4B
+ - election_ident: elect-14
+   ident: cont-anc4C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C01
+   district_ident: dist-SMD 01-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C02
+   district_ident: dist-SMD 02-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C03
+   district_ident: dist-SMD 03-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C04
+   district_ident: dist-SMD 04-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C05
+   district_ident: dist-SMD 05-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C06
+   district_ident: dist-SMD 06-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C07
+   district_ident: dist-SMD 07-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C08
+   district_ident: dist-SMD 08-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C09
+   district_ident: dist-SMD 09-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4C10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4C10
+   district_ident: dist-SMD 10-ANC 4C
+ - election_ident: elect-14
+   ident: cont-anc4D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D01
+   district_ident: dist-SMD 01-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc4D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D02
+   district_ident: dist-SMD 02-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc4D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D03
+   district_ident: dist-SMD 03-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc4D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D04
+   district_ident: dist-SMD 04-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc4D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D05
+   district_ident: dist-SMD 05-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc4D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 4D06
+   district_ident: dist-SMD 06-ANC 4D
+ - election_ident: elect-14
+   ident: cont-anc5A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A01
+   district_ident: dist-SMD 01-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A02
+   district_ident: dist-SMD 02-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A03
+   district_ident: dist-SMD 03-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A04
+   district_ident: dist-SMD 04-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A05
+   district_ident: dist-SMD 05-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A06
+   district_ident: dist-SMD 06-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A07
+   district_ident: dist-SMD 07-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A08
+   district_ident: dist-SMD 08-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A09
+   district_ident: dist-SMD 09-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A10
+   district_ident: dist-SMD 10-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A11
+   district_ident: dist-SMD 11-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5A12
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5A12
+   district_ident: dist-SMD 12-ANC 5A
+ - election_ident: elect-14
+   ident: cont-anc5B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B01
+   district_ident: dist-SMD 01-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B02
+   district_ident: dist-SMD 02-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B03
+   district_ident: dist-SMD 03-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B04
+   district_ident: dist-SMD 04-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B05
+   district_ident: dist-SMD 05-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B06
+   district_ident: dist-SMD 06-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B07
+   district_ident: dist-SMD 07-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B08
+   district_ident: dist-SMD 08-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B09
+   district_ident: dist-SMD 09-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B10
+   district_ident: dist-SMD 10-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B11
+   district_ident: dist-SMD 11-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5B12
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5B12
+   district_ident: dist-SMD 12-ANC 5B
+ - election_ident: elect-14
+   ident: cont-anc5C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C01
+   district_ident: dist-SMD 01-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C02
+   district_ident: dist-SMD 02-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C03
+   district_ident: dist-SMD 03-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C04
+   district_ident: dist-SMD 04-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C05
+   district_ident: dist-SMD 05-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C06
+   district_ident: dist-SMD 06-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C07
+   district_ident: dist-SMD 07-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C08
+   district_ident: dist-SMD 08-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C09
+   district_ident: dist-SMD 09-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C10
+   district_ident: dist-SMD 10-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C11
+   district_ident: dist-SMD 11-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc5C12
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 5C12
+   district_ident: dist-SMD 12-ANC 5C
+ - election_ident: elect-14
+   ident: cont-anc6A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A01
+   district_ident: dist-SMD 01-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A02
+   district_ident: dist-SMD 02-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A03
+   district_ident: dist-SMD 03-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A04
+   district_ident: dist-SMD 04-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A05
+   district_ident: dist-SMD 05-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A06
+   district_ident: dist-SMD 06-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A07
+   district_ident: dist-SMD 07-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6A08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6A08
+   district_ident: dist-SMD 08-ANC 6A
+ - election_ident: elect-14
+   ident: cont-anc6B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B01
+   district_ident: dist-SMD 01-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B02
+   district_ident: dist-SMD 02-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B03
+   district_ident: dist-SMD 03-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B04
+   district_ident: dist-SMD 04-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B05
+   district_ident: dist-SMD 05-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B06
+   district_ident: dist-SMD 06-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B07
+   district_ident: dist-SMD 07-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B08
+   district_ident: dist-SMD 08-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B09
+   district_ident: dist-SMD 09-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B10
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B10
+   district_ident: dist-SMD 10-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6B11
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6B11
+   district_ident: dist-SMD 11-ANC 6B
+ - election_ident: elect-14
+   ident: cont-anc6C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C01
+   district_ident: dist-SMD 01-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C02
+   district_ident: dist-SMD 02-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C03
+   district_ident: dist-SMD 03-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C04
+   district_ident: dist-SMD 04-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C05
+   district_ident: dist-SMD 05-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C06
+   district_ident: dist-SMD 06-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C07
+   district_ident: dist-SMD 07-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C08
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C08
+   district_ident: dist-SMD 08-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6C09
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6C09
+   district_ident: dist-SMD 09-ANC 6C
+ - election_ident: elect-14
+   ident: cont-anc6D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D01
+   district_ident: dist-SMD 01-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D02
+   district_ident: dist-SMD 02-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D03
+   district_ident: dist-SMD 03-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D04
+   district_ident: dist-SMD 04-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D05
+   district_ident: dist-SMD 05-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D06
+   district_ident: dist-SMD 06-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc6D07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 6D07
+   district_ident: dist-SMD 07-ANC 6D
+ - election_ident: elect-14
+   ident: cont-anc7A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A01
+   district_ident: dist-SMD 01-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A02
+   district_ident: dist-SMD 02-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A03
+   district_ident: dist-SMD 03-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A04
+   district_ident: dist-SMD 04-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A05
+   district_ident: dist-SMD 05-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A06
+   district_ident: dist-SMD 06-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7A07
+   district_ident: dist-SMD 07-ANC 7A
+ - election_ident: elect-14
+   ident: cont-anc7B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B01
+   district_ident: dist-SMD 01-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B02
+   district_ident: dist-SMD 02-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B03
+   district_ident: dist-SMD 03-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B04
+   district_ident: dist-SMD 04-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B05
+   district_ident: dist-SMD 05-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B06
+   district_ident: dist-SMD 06-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7B07
+   district_ident: dist-SMD 07-ANC 7B
+ - election_ident: elect-14
+   ident: cont-anc7C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C01
+   district_ident: dist-SMD 01-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C02
+   district_ident: dist-SMD 02-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C03
+   district_ident: dist-SMD 03-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C04
+   district_ident: dist-SMD 04-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C05
+   district_ident: dist-SMD 05-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C06
+   district_ident: dist-SMD 06-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7C07
+   district_ident: dist-SMD 07-ANC 7C
+ - election_ident: elect-14
+   ident: cont-anc7D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D01
+   district_ident: dist-SMD 01-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D02
+   district_ident: dist-SMD 02-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D03
+   district_ident: dist-SMD 03-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D04
+   district_ident: dist-SMD 04-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D05
+   district_ident: dist-SMD 05-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D06
+   district_ident: dist-SMD 06-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7D07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7D07
+   district_ident: dist-SMD 07-ANC 7D
+ - election_ident: elect-14
+   ident: cont-anc7E01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E01
+   district_ident: dist-SMD 01-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E02
+   district_ident: dist-SMD 02-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E03
+   district_ident: dist-SMD 03-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E04
+   district_ident: dist-SMD 04-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E05
+   district_ident: dist-SMD 05-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E06
+   district_ident: dist-SMD 06-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc7E07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 7E07
+   district_ident: dist-SMD 07-ANC 7E
+ - election_ident: elect-14
+   ident: cont-anc8A01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A01
+   district_ident: dist-SMD 01-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A02
+   district_ident: dist-SMD 02-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A03
+   district_ident: dist-SMD 03-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A04
+   district_ident: dist-SMD 04-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A05
+   district_ident: dist-SMD 05-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A06
+   district_ident: dist-SMD 06-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8A07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8A07
+   district_ident: dist-SMD 07-ANC 8A
+ - election_ident: elect-14
+   ident: cont-anc8B01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B01
+   district_ident: dist-SMD 01-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B02
+   district_ident: dist-SMD 02-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B03
+   district_ident: dist-SMD 03-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B04
+   district_ident: dist-SMD 04-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B05
+   district_ident: dist-SMD 05-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B06
+   district_ident: dist-SMD 06-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8B07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8B07
+   district_ident: dist-SMD 07-ANC 8B
+ - election_ident: elect-14
+   ident: cont-anc8C01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C01
+   district_ident: dist-SMD 01-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C02
+   district_ident: dist-SMD 02-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C03
+   district_ident: dist-SMD 03-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C04
+   district_ident: dist-SMD 04-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C05
+   district_ident: dist-SMD 05-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C06
+   district_ident: dist-SMD 06-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8C07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8C07
+   district_ident: dist-SMD 07-ANC 8C
+ - election_ident: elect-14
+   ident: cont-anc8D01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D01
+   district_ident: dist-SMD 01-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D02
+   district_ident: dist-SMD 02-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D03
+   district_ident: dist-SMD 03-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D04
+   district_ident: dist-SMD 04-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D05
+   district_ident: dist-SMD 05-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D06
+   district_ident: dist-SMD 06-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8D07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8D07
+   district_ident: dist-SMD 07-ANC 8D
+ - election_ident: elect-14
+   ident: cont-anc8E01
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E01
+   district_ident: dist-SMD 01-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E02
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E02
+   district_ident: dist-SMD 02-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E03
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E03
+   district_ident: dist-SMD 03-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E04
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E04
+   district_ident: dist-SMD 04-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E05
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E05
+   district_ident: dist-SMD 05-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E06
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E06
+   district_ident: dist-SMD 06-ANC 8E
+ - election_ident: elect-14
+   ident: cont-anc8E07
+   display_name: MEMBER OF ADVISORY NEIGHBORHOOD COMMISSION 8E07
+   district_ident: dist-SMD 07-ANC 8E
