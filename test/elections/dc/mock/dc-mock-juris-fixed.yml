@@ -1,0 +1,170 @@
+---
+body:
+ districts:
+ - ident: dist-FEDERAL
+   type: JOHN
+   display_name: FEDERAL
+ - ident: dist-DISTRICT OF COLUMBIA
+   type: CITYWI
+   display_name: DISTRICT OF COLUMBIA
+ - ident: dist-1ST CONGRESSIONAL DIST
+   type: COND
+   display_name: 1ST CONGRESSIONAL DIST
+ - ident: dist-CITY OF WASHINGTON WARD 1
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 1
+ - ident: dist-CITY OF WASHINGTON WARD 2
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 2
+ - ident: dist-CITY OF WASHINGTON WARD 3
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 3
+ - ident: dist-CITY OF WASHINGTON WARD 4
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 4
+ - ident: dist-CITY OF WASHINGTON WARD 5
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 5
+ - ident: dist-CITY OF WASHINGTON WARD 6
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 6
+ - ident: dist-CITY OF WASHINGTON WARD 7
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 7
+ - ident: dist-CITY OF WASHINGTON WARD 8
+   type: WARD
+   display_name: CITY OF WASHINGTON WARD 8
+ - ident: dist-SMD 04-ANC 1B
+   type: SMD
+   display_name: SMD 04-ANC 1B
+ - ident: dist-SMD 03-ANC 2C
+   type: SMD
+   display_name: SMD 03-ANC 2C
+ - ident: dist-SMD 05-ANC 3B
+   type: SMD
+   display_name: SMD 05-ANC 3B
+ - ident: dist-SMD 03-ANC 3G
+   type: SMD
+   display_name: SMD 03-ANC 3G
+ - ident: dist-SMD 11-ANC 5A
+   type: SMD
+   display_name: SMD 11-ANC 5A
+ - ident: dist-SMD 06-ANC 6C
+   type: SMD
+   display_name: SMD 06-ANC 6C
+ - ident: dist-SMD 06-ANC 7C
+   type: SMD
+   display_name: SMD 06-ANC 7C
+ - ident: dist-SMD 03-ANC 8C
+   type: SMD
+   display_name: SMD 03-ANC 8C
+
+ district_sets:
+ - ident: ds-22-SMD 04-ANC 1B
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 04-ANC 1B
+   - district_ident: dist-CITY OF WASHINGTON WARD 1
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-18-SMD 03-ANC 2C
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 03-ANC 2C
+   - district_ident: dist-CITY OF WASHINGTON WARD 2
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-11-SMD 05-ANC 3B
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 05-ANC 3B
+   - district_ident: dist-CITY OF WASHINGTON WARD 3
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-50-SMD 03-ANC 3G
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 03-ANC 3G
+   - district_ident: dist-CITY OF WASHINGTON WARD 3
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-69-SMD 11-ANC 5A
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 11-ANC 5A
+   - district_ident: dist-CITY OF WASHINGTON WARD 5
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-84-SMD 06-ANC 6C
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 06-ANC 6C
+   - district_ident: dist-CITY OF WASHINGTON WARD 6
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-95-SMD 06-ANC 7C
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 06-ANC 7C
+   - district_ident: dist-CITY OF WASHINGTON WARD 7
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+ - ident: ds-119-SMD 03-ANC 8C
+   district_list:
+   - district_ident: dist-FEDERAL
+   - district_ident: dist-SMD 03-ANC 8C
+   - district_ident: dist-CITY OF WASHINGTON WARD 8
+   - district_ident: dist-DISTRICT OF COLUMBIA
+   - district_ident: dist-1ST CONGRESSIONAL DIST
+
+ precincts:
+ - ident: 11
+   display_name: PRECINCT 11
+ - ident: 18
+   display_name: PRECINCT 18
+ - ident: 22
+   display_name: PRECINCT 22
+ - ident: 50
+   display_name: PRECINCT 50
+ - ident: 69
+   display_name: PRECINCT 69
+ - ident: 84
+   display_name: PRECINCT 84
+ - ident: 95
+   display_name: PRECINCT 95
+ - ident: 119
+   display_name: PRECINCT 119
+
+ splits:
+ - district_set_ident: ds-22-SMD 04-ANC 1B
+   ident: split-22-SMD 04-ANC 1B
+   precinct_ident: 22
+   display_name: split-22-SMD 04-ANC 1B
+ - district_set_ident: ds-18-SMD 03-ANC 2C
+   ident: split-18-SMD 03-ANC 2C
+   precinct_ident: 18
+   display_name: split-18-SMD 03-ANC 2C
+ - district_set_ident: ds-11-SMD 05-ANC 3B
+   ident: split-11-SMD 05-ANC 3B
+   precinct_ident: 11
+   display_name: split-11-SMD 05-ANC 3B
+ - district_set_ident: ds-50-SMD 03-ANC 3G
+   ident: split-50-SMD 03-ANC 3G
+   precinct_ident: 50
+   display_name: split-50-SMD 03-ANC 3G
+ - district_set_ident: ds-69-SMD 11-ANC 5A
+   ident: split-69-SMD 11-ANC 5A
+   precinct_ident: 69
+   display_name: split-69-SMD 11-ANC 5A
+ - district_set_ident: ds-84-SMD 06-ANC 6C
+   ident: split-84-SMD 06-ANC 6C
+   precinct_ident: 84
+   display_name: split-84-SMD 06-ANC 6C
+ - district_set_ident: ds-95-SMD 06-ANC 7C
+   ident: split-95-SMD 06-ANC 7C
+   precinct_ident: 95
+   display_name: split-95-SMD 06-ANC 7C
+ - district_set_ident: ds-119-SMD 03-ANC 8C
+   ident: split-119-SMD 03-ANC 8C
+   precinct_ident: 119
+   display_name: split-119-SMD 03-ANC 8C

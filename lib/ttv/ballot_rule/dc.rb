@@ -6,7 +6,7 @@ module ::TTV
     class DC < BallotRule::Base
       class << self
         def district_order
-          @district_order ||= { "SMD" => 0, "COND" => 1,  "WARD" => 2,"CITYWI" => 3, "JOHN" => 4}
+          @district_order ||= { "SMD" => 0, "COND" => 1, "WARD" => 2, "CITYWI" => 3, "JOHN" => 4, "LAST" => 5}
         end
       end
 
@@ -22,16 +22,18 @@ module ::TTV
       # in the import file
       def district_ordering
         return lambda do |d1, d2|
-          # from the story, 5280202
-          #%w{ FEDERAL COLUMBIA WARD CONGRESSIONAL SMD}.each_index do |i,ident|
-          #  District.all.map{ |d| d.position = i; d.save! if d.ident =~ /ident/ }.compact 
-          #end
-
-          # where the district.district_type.titles
-          # ["JOHN", "WARD", "CITYWI", "COND", "SMD"]
-          # map to district.ident with substrings: 
-          # ["FEDERAL", "WARD", "COLUMBIA", "CONGRESSIONAL", "SMD"]
-          self.class.district_order[d2.district_type.title] <=> self.class.district_order[d1.district_type.title] 
+          # Get the district type title for each of the two districts that we are comparing. Return +1, -1, 0 depending on
+          # how where the titles are in the district_order_list. Handle case when titles are not in the list at all.
+          d1_title = d1.district_type.title
+          d2_title = d2.district_type.title
+          district_order_list = self.class.district_order
+          if !district_order_list.include? d1_title
+            d1_title = "LAST"
+          end
+          if !district_order_list.include? d2_title
+            d2_title = "LAST"
+          end
+          district_order_list[d2_title] <=> district_order_list[d1_title] 
         end
       end # end district_ordering
 
