@@ -36,6 +36,7 @@ module TTV
         load_questions
       elsif @import_type.eql? "candidate_info"
         load_candidates
+        load_questions
       else
         raise ArgumentError, "invalid import_type in ImportEdh"
       end
@@ -91,11 +92,12 @@ module TTV
       if existing_questions.length > 0
         raise "Trying to replace question during import. Need Audit code to handle this case"
       end
-      Question.create(:display_name => question["display_name"],
+      q = Question.create(:display_name => question["display_name"],
                       :election => the_election,
                       :ident => question["ident"],
                       :question => question["question"],
                       :requesting_district => District.find_by_ident(question["district_ident"]))
+      puts q.inspect            
     end
     
     # Imports all contests contained in the EDH

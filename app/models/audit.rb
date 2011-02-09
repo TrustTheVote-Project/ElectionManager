@@ -40,7 +40,7 @@ class Audit < ActiveRecord::Base
       audit_questions
     elsif auditing_candidate?
       audit_sanity_check_body
-      audit_sanity_check ["candidates"]
+      audit_sanity_check ["candidates", "questions"]
       audit_candidates 
     end
     @audit_in_progress = false

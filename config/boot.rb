@@ -106,5 +106,20 @@ module Rails
   end
 end
 
+# Get Bundler to work with rails 2.3.x (http://gembundler.com/rails23.html)
+class Rails::Boot
+  def run
+    load_initializer
+
+    Rails::Initializer.class_eval do
+      def load_gems
+        @bundler_loaded ||= Bundler.require :default, Rails.env
+      end
+    end
+
+    Rails::Initializer.run(:set_load_path)
+  end
+end
+
 # All that for this:
 Rails.boot!

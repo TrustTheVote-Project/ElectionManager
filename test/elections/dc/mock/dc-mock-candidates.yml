@@ -1,5 +1,12 @@
 ---
 body:
+ questions:
+  - election_ident: elect-14
+    ident: quest-1
+    district_ident: dist-FEDERAL
+    display_name: Proposed Charter Amendment The Elected Attorney General Charter
+    question: "Currently, the Attorney General for the District of Columbia is appointed by the Mayor and confirmed by the Council of the District of Columbia. This Charter Amendment, if passed, would amend the District of Columbia Home Rule Act to allow voters to elect the Attorney General for a 4-year term of office. A candidate for the position of Attorney General must meet certain qualifications and requirements which include being a registered voter in the District of Columbia, and a member in good standing of the District of Columbia Bar for at least five years prior to assuming the position of Attorney General. If voters approve of this amendment and the U.S. Congress does not reject the measure, residents of the District of Columbia would begin voting for the Attorney General in 2014"
+
  candidates:
   - display_name: Alice Example
     ident: cand-1000
