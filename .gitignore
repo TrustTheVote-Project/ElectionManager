@@ -20,3 +20,6 @@ tmp/webrat-*
 tmp/*.pdf
 doc/*
 test/coverage
+vendor/bundle
+.bundle/*
+
