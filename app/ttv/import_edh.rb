@@ -99,7 +99,9 @@ module TTV
                       :requesting_district => District.find_by_ident(question["district_ident"]))
       q.election = the_election
       q.requesting_district = District.find_by_ident(question["district_ident"])
-      puts q.inspect            
+      q.save!  
+      puts "***************** #{q.valid}?
+      puts q.inspect
     end
     
     # Imports all contests contained in the EDH
