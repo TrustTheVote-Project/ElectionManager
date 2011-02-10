@@ -1,3 +1,5 @@
+# This seed data is added when $ rake db:seed
+
 # %w{ moe larry curly }.each do |name|
 #   User.create(:email => "#{name}@example.com", :password => "password", :password_confirmation => "password")
 # end

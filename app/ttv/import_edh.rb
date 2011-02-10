@@ -97,6 +97,8 @@ module TTV
                       :ident => question["ident"],
                       :question => question["question"],
                       :requesting_district => District.find_by_ident(question["district_ident"]))
+      q.election = the_election
+      q.requesting_district = District.find_by_ident(question["district_ident"])
       puts q.inspect            
     end
     

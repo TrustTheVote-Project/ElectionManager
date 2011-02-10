@@ -73,7 +73,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     display_name = @question.display_name
-    district = @question.district
+    district = @question.requesting_district
     election = @question.election
     @question.destroy
     flash[:notice] = "Question '#{display_name}' has been deleted." 

@@ -3,6 +3,7 @@ require 'ttv/yaml_import'
 
 Rake.application.remove_task 'db:test:prepare'
 
+# Does anyone know why it is necessary to override db:test:prepare?
 namespace :db do
   namespace :test do 
     task :prepare do |t|
@@ -21,7 +22,7 @@ namespace :ttv do
     Rake::Task['db:reset'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['ttv:seed'].invoke
-    Rake::Task['ttv:develop'].invoke
+    Rake::Task['ttv:develop_seed'].invoke
 
  end
   
@@ -39,13 +40,14 @@ namespace :ttv do
     Rake::Task['db:reset'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['ttv:seed'].invoke
-    Rake::Task['ttv:production'].invoke
+#    Rake::Task['ttv:production_seed'].invoke
   end
   
   desc "Full Reset of DB for test and development"
   task :full_reset => ['ttv:dev_reset', 'ttv:test_reset'] do
   end
 end
+
 namespace :ttv do
   desc "Seed the database with always fixtures."
   task :seed => :environment do 
@@ -54,13 +56,13 @@ namespace :ttv do
   end
 
   desc "Seed the database with develop/ fixtures."
-  task :develop => :environment do     
+  task :develop_seed => :environment do     
     load_fixtures 'seed/develop'
   end
 
   desc "Seed the database with production/ data."
-  task :production => :environment do 
-    import_yaml 'demo/**'
+  task :production_seed => :environment do 
+#    import_yaml 'demo/**'
   end
   
   private
