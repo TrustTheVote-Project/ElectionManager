@@ -38,10 +38,9 @@ module ApplicationHelper
     jurisdiction_secondary = current_context.jurisdiction_secondary_name
     
     if current_user() and current_context.jurisdiction?
-      content_tag(:h1, jurisdiction_name +
-                      "<br /><small>" + jurisdiction_secondary + "</small>", :class=>"title-header")
+      content_tag(:h1, jurisdiction_name) + content_tag(:h2, jurisdiction_secondary)
     else
-      content_tag(:h1, "TTV Election Manager", :class=>"title-header") 
+      content_tag(:h1, "TTV Election Manager") 
     end
     
   end
@@ -65,16 +64,37 @@ module ApplicationHelper
   end
   
   # HTML for nicely styled buttons in forms
-  def button_link_helper(image_file, alt_tag, button_label, link_path, delete=nil)
+  def button_link_helper(button_label, link_path, delete=nil)
     options = {}
     if (delete == :delete)
-      options = {:method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      options = {:method => "delete", :confirm => "#{t("ttv.areyousure", :default => "Are you sure?")}"}
     end
-    link_to("#{image_tag(image_file, :alt => alt_tag)} #{button_label}", link_path, {:class => "button"}.merge(options))
+    link_to(button_label, link_path, {:class => "button"}.merge(options))
   end
   
-  # HTML for breadcrums
+  
   def breadcrumb_helper(cc)
+    case cc.what
+    when :jurisdiction
+      content_tag(:h1, t("ttv.jurisdiction", :default => "Jurisdiction") + ": " + link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction)))
+    when :election
+      content_tag(:h1, t("ttv.election", :default => "Election") + ": " + link_to(cc.election.display_name, cc.election))
+    when :contest
+      content_tag(:h1, t("ttv.contest", :default => "Contest") + ": " + link_to(cc.contest.display_name, cc.contest)) + 
+      content_tag(:h4, "in " + singular_name_for(Election) + ": " + link_to(cc.election.display_name, cc.election)) 
+    when :question
+      content_tag(:h1, t("ttv.election", :default => "Question") + ": " + link_to(cc.question.display_name, cc.question))
+    when :question
+      content_tag(:h1, t("ttv.election", :default => "Precinct") + ": " + link_to(cc.precinct.display_name, cc.precinct))
+    when :nothing
+      content_tag(:h1)
+    else
+      content_tag(:h1, "?")
+    end
+  end
+   
+  # HTML for breadcrums
+  def breadcrumb_helper_old(cc)
     html = ""
     jur_link = ""
     el_link = ""
@@ -95,9 +115,9 @@ module ApplicationHelper
       jur_link = link_to(cc.jurisdiction.display_name, set_jurisdiction_path(cc.jurisdiction))
     end
     if c_or_q_or_p_link != ""
-      html = c_or_q_or_p_link + content_tag(:small, " (in " + el_link + " in " + jur_link + " )")
+      html = c_or_q_or_p_link + content_tag(:h1, " (in " + el_link + " in " + jur_link + " )")
     elsif el_link != ""
-      html = el_link + content_tag(:small, " (in " + jur_link + " )")
+      html = el_link + content_tag(:h1, " (in " + jur_link + " )")
     elsif jur_link
       html = jur_link
     end

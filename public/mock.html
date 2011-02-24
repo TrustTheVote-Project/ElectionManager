@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TTV Election Manager</title>
+    <link href="/stylesheets/base.css?1290030639" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/themes/warehouse/style.css?1290202419" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/override_web_app_theme.css?1290477372" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+  <div id="container">
+    <div id="header">
+      <div id="juris">
+        <a href="/jurisdictions/current"><img alt="Ttv-100" class="avatar" src="/images/ttv-100.png?1282654974" /></a>
+        <h1>Test!</h1><h2></h2>
+      </div>
+      <div id="user-navigation">
+        <div class="banner_right"><ul class="wat-cf"><li>Test! <a href="/jurisdictions/change"> (change)</a></li><li>moe@example.com</li><li><a href="/users/1/edit">Edit profile</a></li><li><a href="/logout">Logout</a></li></ul></div>
+      </div>
+    </div>
+    <div id="wrapper" class="wat-cf">
+      <div class="flash" id="flash">
+              </div>
+      <div id="main">
+        <div id="breadcrumb">
+          <h1>Election: <a href="/elections/2">Demo Election based on VA 2012</a></h1>
+        </div>
+        <div class="block">
+    <div class="content">
+        <div class="inner">
+            
+              <p><b>Display Name: </b>Demo Election based on VA 2012</p>
+            
+              <p><b>Jurisdiction</b>: Test!</p>
+            
+              <p><b>Default Voting Method: </b><a href="/voting_methods/0/edit">(built-in default voting method)</a></p>
+            
+              <p><b>Ballot Style Template: </b><a href="/ballot_style_templates/0/edit">(built-in default Ballot Style Template)</a></p>
+            
+              <p><b>Start Date</b>: Tue Nov 02 07:00:00 UTC 2010</p>
+            
+              <p><b>Ident: </b>14</p>
+            
+            <div class="actions-bar wat-cf"><div class="command buttons"><a href="/elections/2/edit">Edit</a><a href="/elections/2" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a><a href="/elections">Back</a></div></div>
+            <div id="linkbox"><div class="left"><p><a href="/elections/2/precincts/2/ballots">Download All ballots</a></p></div><div class="right"><p><a href="/elections/2/ballot_proofing.csv">Download Ballot Proofing File</a></p></div></div>
+
+        </div>
+        <div class="block">
+  <div class="content">
+    <div class="inner"><h3 class="title">Ballots for this election</h3><table class="table"><tr><th>Ballot</th><th>contests</th><th>questions</th><th class="last">&nbsp</th></tr><tr class="odd"><td><a href="/ballots/1">501750-201 - SECOND WARD FIRST PRECINCT-0000</a></td><td><a href="/ballots/1">6</a></td><td><a href="/ballots/1">6</a></td><td class="last"><a href="/ballots/1">Show</a> | <a href="/ballots/1/edit">Edit</a> | <a href="/ballots/1" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/ballots/2">501715-702 - MIDWAY-0000</a></td><td><a href="/ballots/2">3</a></td><td><a href="/ballots/2">3</a></td><td class="last"><a href="/ballots/2">Show</a> | <a href="/ballots/2/edit">Edit</a> | <a href="/ballots/2" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr></table><div class="actions-bar wat-cf"><div class="command buttons"></div></div></div>
+  </div>
+</div>
+
+        <div class="block">
+  <div class="content">
+    <div class="inner"><h3 class="title">Contests for this election</h3><table class="table"><tr><th>Contest</th><th>District</th><th>candidates</th><th class="last">&nbsp</th></tr><tr class="odd"><td><a href="/contests/8">Backup Member House of Representatives - 5th District</a></td><td><a href="/contests/8">Backup Member House of Representatives - 5th District</a></td><td><a href="/contests/8">3</a></td><td class="last"><a href="/contests/8">Show</a> | <a href="/contests/8/edit">Edit</a> | <a href="/contests/8" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/contests/9">Backup Member House of Representatives - 6th District</a></td><td><a href="/contests/9">Backup Member House of Representatives - 6th District</a></td><td><a href="/contests/9">3</a></td><td class="last"><a href="/contests/9">Show</a> | <a href="/contests/9/edit">Edit</a> | <a href="/contests/9" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="odd"><td><a href="/contests/10">Backup Clerk of Court</a></td><td><a href="/contests/10">Backup Clerk of Court</a></td><td><a href="/contests/10">1</a></td><td class="last"><a href="/contests/10">Show</a> | <a href="/contests/10/edit">Edit</a> | <a href="/contests/10" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/contests/11">Backup Treasurer</a></td><td><a href="/contests/11">Backup Treasurer</a></td><td><a href="/contests/11">6</a></td><td class="last"><a href="/contests/11">Show</a> | <a href="/contests/11/edit">Edit</a> | <a href="/contests/11" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="odd"><td><a href="/contests/12">Member House of Representatives - 5th District</a></td><td><a href="/contests/12">Member House of Representatives - 5th District</a></td><td><a href="/contests/12">3</a></td><td class="last"><a href="/contests/12">Show</a> | <a href="/contests/12/edit">Edit</a> | <a href="/contests/12" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/contests/13">Member House of Representatives - 6th District</a></td><td><a href="/contests/13">Member House of Representatives - 6th District</a></td><td><a href="/contests/13">3</a></td><td class="last"><a href="/contests/13">Show</a> | <a href="/contests/13/edit">Edit</a> | <a href="/contests/13" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="odd"><td><a href="/contests/14">Clerk of Court</a></td><td><a href="/contests/14">Clerk of Court</a></td><td><a href="/contests/14">2</a></td><td class="last"><a href="/contests/14">Show</a> | <a href="/contests/14/edit">Edit</a> | <a href="/contests/14" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/contests/15">Treasurer</a></td><td><a href="/contests/15">Treasurer</a></td><td><a href="/contests/15">6</a></td><td class="last"><a href="/contests/15">Show</a> | <a href="/contests/15/edit">Edit</a> | <a href="/contests/15" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="odd"><td><a href="/contests/16">Alternative Member House of Representatives - 5th District</a></td><td><a href="/contests/16">Alternative Member House of Representatives - 5th District</a></td><td><a href="/contests/16">3</a></td><td class="last"><a href="/contests/16">Show</a> | <a href="/contests/16/edit">Edit</a> | <a href="/contests/16" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/contests/17">Alternative Member House of Representatives - 6th District</a></td><td><a href="/contests/17">Alternative Member House of Representatives - 6th District</a></td><td><a href="/contests/17">3</a></td><td class="last"><a href="/contests/17">Show</a> | <a href="/contests/17/edit">Edit</a> | <a href="/contests/17" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr></table><div class="actions-bar wat-cf"><div class="command buttons"></div><div class="pagination buttons"><span class="disabled prev_page">&laquo; Previous</span> <span class="current">1</span> <a href="/elections/2?ballot_page=1&amp;page=2" rel="next">2</a> <a href="/elections/2?ballot_page=1&amp;page=2" class="next_page" rel="next">Next &raquo;</a></div></div></div>
+  </div>
+</div>
+
+        <div class="block">
+  <div class="content">
+    <div class="inner"><h3 class="title">Questions for this election</h3><table class="table"><tr><th>Question</th><th>District</th><th class="last">&nbsp</th></tr><tr class="odd"><td><a href="/questions/1">Shall Section 6 of Article X of the Constitution of Virginia be amended to authorize legislation that will permit localities to establish their own income or financial worth limitations for purposes of granting property tax relief for homeowners not less than 65 years of age or permanently and totally disabled?</a></td><td><a href="/questions/1">Proposed Constitutional Amendment Question 1</a></td><td class="last"><a href="/questions/1">Show</a> | <a href="/questions/1/edit">Edit</a> | <a href="/questions/1" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="even"><td><a href="/questions/2">Shall the Constitution be amended to require the General Assembly to provide a real property tax exemption for the principal residence of a veteran, or his or her surviving spouse, if the veteran has a 100 percent service-connected, permanent, and total disability?</a></td><td><a href="/questions/2">Proposed Constitutional Amendment Question 2</a></td><td class="last"><a href="/questions/2">Show</a> | <a href="/questions/2/edit">Edit</a> | <a href="/questions/2" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr><tr class="odd"><td><a href="/questions/3">Shall Section 8 of Article X of the Constitution of Virginia be amended to increase the permissible size of the Revenue Stabilization Fund (also known as the "rainy day fund") from 10 percent to 15 percent of the Commonwealth's average annual tax revenues derived from income and retail sales taxes for the preceding three fiscal years?</a></td><td><a href="/questions/3">Proposed Constitutional Amendment Question 3</a></td><td class="last"><a href="/questions/3">Show</a> | <a href="/questions/3/edit">Edit</a> | <a href="/questions/3" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'DPYpTh7raExOOMu1NP7GQbhWy0T5+LgRzq7pmebzyWM='); f.appendChild(s);f.submit(); };return false;">Delete</a></td></tr></table><div class="actions-bar wat-cf"><div class="command buttons"></div></div></div>
+  </div>
+</div>
+
+    </div>
+</div>
+
+         </div>
+
+   	  <div id="sidebar">
+          <div class="content block">
+            <div class="inner">
+              <div class="wat-cf" id="commands">
+                <a class="button" href="http://www.salas.com">
+                  <img src="/images/ui_icons/searchicon.png" alt="Search"/>Search
+                </a>
+                <a class="button" href="http://www.salas.com">
+                   <img src="/images/ui_icons/adminicon.png" alt="Admin"/>Admin
+                </a>
+              </div>
+              <h2>Election</h2>
+                <p>Elections occur within a single Jurisdiction, and on a specific date. In other words,  
+                within TTV's Election manager these are election 'events. </p>
+                <p>If the data is complete enough then ballots can immediately be generated so you can examnine
+                them to see that they contain the contests and questions expected. </p>
+
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="block">
+      TTV Election Manager 0.3
+ -- Copyright &copy; <a href="http://www.osdv.org">Open Source Digital Voting Foundation</a>
+    </div>
+  </div>
+  </body>
+</html>

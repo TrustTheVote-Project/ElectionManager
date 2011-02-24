@@ -1,0 +1,11 @@
+<div class="block">
+  <div class="content">            
+    <h2 class="title"><%= t("ttv.edit", :default => "Edit") + " " + title_of %></h2>
+    <div class="inner">
+      <% form_for new_record, :url => polymorphic_path([new_record]), :html => { :class => :form, :multipart => multipart } do |frm| -%>
+        <%= render :partial => "generic/form", :locals => {:frm => frm, :new_record => new_record, :form_fields => form_fields} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -16,13 +16,13 @@ class JurisdictionsController < ApplicationController
 # Show the currently selected jurisdiction.
 #
   def show
-    current_context.election = nil
     @jurisdiction = current_context.jurisdiction
     @elections = current_context.jurisdiction.elections.paginate(:per_page => 10, :page => params[:page])
   end
  
   def change
-    @district_sets = DistrictSet.display_name_not("").paginate(:per_page => 3, :page => params[:page])
+    current_context.reset
+    @district_sets = DistrictSet.display_name_not("").paginate(:per_page => 5, :page => params[:page])
   end
   
   def set
@@ -45,6 +45,34 @@ class JurisdictionsController < ApplicationController
   def edit
     @jurisdiction = current_context.jurisdiction
   end
+  
+  def new
+    @jurisdiction = DistrictSet.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @jurisdiction }
+    end
+  end
+
+  # POST /jurisdictions
+  # POST /jursidictionss.xml
+  def create
+# TODO: Update when Jurisdiction Model is created
+    @jurisdiction = DistrictSet.new(params[:district_set])
+
+    respond_to do |format|
+      if @jurisdiction.save
+        flash[:notice] = 'Juridiction was successfully created.'
+        format.html { redirect_to(@district_set) }
+        format.xml  { render :xml => @jurisdiction, :status => :created, :location => @jurisdiction }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @jurisdiction.errors, :status => :unprocessable_entity }
+      end
+    end
+  end  
+  
  
  
 # Actions to handle importing into the jurisdiction. There are 3 actions to represent the workflow.

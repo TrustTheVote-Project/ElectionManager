@@ -1,2 +1,44 @@
-<%= render :partial => 'show', :locals => {:candidate => @candidate } %>
-<%= link_to 'Back', candidates_path %>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first">
+        <%= link_to "#{t("ttv.list", :default => "List")}", candidates_path %>
+      </li>
+      <li>
+        <%= link_to "#{t("ttv.new", :default => "New")}", new_candidate_path %>
+      </li>
+      <li class="active">
+        <%= link_to "#{t("ttv.show", :default => "Show")}", candidate_path %>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="inner">
+      <p>
+        <b><%= t("ttv.display_name", :default => "Display name") %>:</b>
+        <%= @candidate.display_name %>
+      </p>
+      <p>
+        <b><%= t("ttv.party_id", :default => "Party") %>:</b>
+        <%= @candidate.party_id %>
+      </p>
+      <p>
+        <b><%= t("ttv.contest_id", :default => "Contest") %>:</b>
+        <%= @candidate.contest_id %>
+      </p>
+      <p>
+        <b><%= t("ttv.ident", :default => "Ident") %>:</b>
+        <%= @candidate.ident %>
+      </p>
+      <p>
+        <b><%= t("ttv.order", :default => "Order") %>:</b>
+        <%= @candidate.position %>
+      </p>
+      <div class="wat-cf">
+        <%= button_link_helper("web-app-theme/application_edit.png", "edit", "Edit", edit_candidate_path(@candidate)) %>
+        <%= button_link_helper("web-app-theme/cross.png", "delete", "Delete", candidate_path(@candidate), :delete) %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

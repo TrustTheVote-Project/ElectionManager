@@ -1,17 +1,2 @@
-<div class="block">
-  <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li class="first active">
-        <%= link_to "#{t("ttv.list", :default => "List")}", assets_path %>
-      </li>
-      <li>
-        <%= link_to "#{t("ttv.new", :default => "New")}", new_asset_path %>
-      </li>
-    </ul>
-  </div>
-  <div class="content">
-    <h2 class="title"><%= t("ttv.all", :default => "All") %> Assets</h2>
-    <%= render :partial => 'asset_list' %>
-  </div>
-</div>
+<%= render :partial => "generic/index", :locals => { :ems_class => Asset, :collection => @assets, :columns => ["ident", "display_name"], :commands => [:new] } %>
 <% content_for :sidebar, render(:partial => 'sidebar') -%>

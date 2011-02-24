@@ -1,0 +1,10 @@
+<div class="block">
+    <div class="content">
+        <div class="inner">
+          <% fields.each do |fld| %>
+            <%= ttv_show_field(record, fld) %>
+          <% end %>
+          <%= ttv_actions_bar(ems_class, record, [:edit, :delete, :back])%>
+        </div>
+    </div>
+</div>

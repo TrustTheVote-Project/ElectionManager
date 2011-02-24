@@ -1,8 +1,8 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", media_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_medium_path %></li>
+	    <li class="first active"><%= link_to "#{t("ttv.list", :default => "List")}", media_path  %></li>
+  		<li><%= link_to "#{t("ttv.new", :default => "New")}", new_medium_path %></li>
     </ul>
   </div>       
   <div class="content">          
@@ -12,10 +12,10 @@
         <tr>             
           <th class="first">ID</th>
 					<th>
-					  <%= t("activerecord.attributes.medium.display_name", :default => t("activerecord.labels.display_name", :default => "Display name")) %>
+					  <%= t("ttv.display_name", :default => "Display name") %>
           </th>
           <th>
-            <%= t("web-app-theme.created_at", :default => "Created at")  %>
+            <%= t("ttv.created_at", :default => "Created at")  %>
           </th>
 
           <th class="last">&nbsp;</th>

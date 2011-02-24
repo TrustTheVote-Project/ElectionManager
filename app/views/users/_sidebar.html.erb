@@ -1,25 +1,12 @@
-<div class="block">
-  <h3>Simple Block</h3>
-  <div class="Admin">
-    <p>
-      Welcome User
+<h2>Users</h2>
+
+<p>Users can view election data without having to log in. However in order to
+modify and update data, a log in is required. There are three levels of user
+access: System Admin, Jurisdiction Admin and regular user. </p>
+
+    <em>
+      Welcome User! You are registered with 
       <% if current_user && current_user.email %>
-        with email of <%= current_user.email %>
+        this email: "<%= current_user.email %>"
       <% end %>.
-      Any suggestions about what you'd like to see here would be greatly appreciated. 
-      Send them all to me, personally!!
-    </p>
-    
-  </div>
-</div>
-<div class="block">
-  <h3>Navigation</h3>
-  <ul class="navigation">
-    <li>
-      <a href="#">What kinds of things do you need to navigate to here?</a>
-    </li>
-    <li>
-      <a href="#">And anything else? </a>
-    </li>
-  </ul>
-</div>
+    </em >

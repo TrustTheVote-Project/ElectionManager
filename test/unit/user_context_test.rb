@@ -34,17 +34,19 @@ class UserContextTest < ActiveSupport::TestCase
     end
     
     should "not have any context yet" do
-      assert !@uc.election? && !@uc.jurisdiction
+      assert @uc.what == :nothing
     end
     
     context "with a basic jurisdiction" do
       setup do
         @jur = DistrictSet.make
+        @uc.what = :jurisdiction
         @uc.jurisdiction = @jur
       end
       
       should "locate primary name" do
         assert_equal @jur.display_name, @uc.jurisdiction_name
+        assert_equal :jurisdiction, @uc.what
       end
       
       should "locate secondary name" do
@@ -66,6 +68,7 @@ class UserContextTest < ActiveSupport::TestCase
       should "know which was the current jurisdiction" do
         @uc.jurisdiction = @jur
         @other_uc = UserContext.new(@sess)
+        assert_equal :jurisdiction, @other_uc.what
         assert @jur, @other_uc.jurisdiction
       end
       
@@ -73,6 +76,7 @@ class UserContextTest < ActiveSupport::TestCase
         @uc.jurisdiction = @jur
         @other_uc = UserContext.new(@sess)
         assert @other_uc.jurisdiction?
+        assert :jurisdiction, @other_uc.jurisdiction?
       end
 
       should "know that there was a current election" do
