@@ -1,3 +1,0 @@
-- what is going on in config/ttv/ballot_rule/base.rb
-
-- why isn't election -> ballotstyletemplate an association?
