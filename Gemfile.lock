@@ -12,6 +12,7 @@ GEM
     activeresource (2.3.8)
       activesupport (= 2.3.8)
     activesupport (2.3.8)
+    ansi (1.2.2)
     authlogic (2.1.6)
       activesupport
     awesome_print (0.1.4)
@@ -80,6 +81,8 @@ GEM
     term-ansicolor (1.0.5)
     thoughtbot-shoulda (2.11.1)
     tpitale-constant_cache (0.1.2)
+    turn (0.8.1)
+      ansi (>= 1.2.2)
     webrat (0.7.2)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -110,5 +113,6 @@ DEPENDENCIES
   sqlite3-ruby (= 1.2.5)
   thoughtbot-shoulda (>= 2.10.2)
   tpitale-constant_cache (>= 0.1.2)
+  turn
   webrat (>= 0.7.0)
   will_paginate (~> 2.3.11)
