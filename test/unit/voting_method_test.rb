@@ -23,7 +23,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VotingMethodTest < ActiveSupport::TestCase
  
-  def test_dbLoaded
+  def test_db_loaded
     assert_not_nil VotingMethod.find(1), "VotingMethods have not been loaded in the database. Run rake rake ttv:seed RAILS_ENV=test"
   end
 

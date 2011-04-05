@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 # for machinist blueprint file
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
-
 require 'test_help'
 require 'shoulda'
 require 'mocha'

@@ -20,11 +20,12 @@
 
 # Contributors: Aleks Totic, Pito Salas, Tom Dyer, Jeffrey Gray, Brian Jordan, John Sebes.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require 'spec_helper'
 
-class AssetTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+describe Election do
+  it "can be instantiated" do
+    Election.new(:display_name => "Wow").should be_valid
   end
+  it "can be exported"
+  it "can be double checked"
 end

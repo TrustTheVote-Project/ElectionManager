@@ -1,9 +1,11 @@
 require 'active_record/fixtures'
 require 'ttv/yaml_import'
 
+# Since we add a bunch of test data using ttv:rest_reset, the usual test:prepare would erase that
+# and cause tests to fail. I need to find out what the 'right way' to build test data is that 
+# would not require the cancelling of the default db:test_prepare. But until then...
 Rake.application.remove_task 'db:test:prepare'
 
-# Does anyone know why it is necessary to override db:test:prepare?
 namespace :db do
   namespace :test do 
     task :prepare do |t|

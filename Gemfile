@@ -1,8 +1,6 @@
 source :gemcutter
 
-gem 'rails', "2.3.8"
-# failed on my Mac/OSX unless I use version 1.2.5. Which was already
-# installed on my Mac. Probably should updgrade?
+gem 'rails', "2.3.11"
 gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
 
 gem "authlogic"
@@ -19,12 +17,16 @@ group :development do
 end
 
 group :test do
-  gem 'thoughtbot-shoulda', '>=2.10.2',  :require => 'shoulda'
+  gem 'shoulda'
   gem 'machinist'
   gem 'faker'
   gem 'mocha'
   gem 'pdf-reader'
   gem 'awesome_print'
+  gem 'turn'
+  gem 'rspec', '1.3.1'
+  gem 'rspec-rails', '1.3.3'
+  gem 'rcov'
 end
 
 group 'cucumber' do
