@@ -71,7 +71,10 @@ class JurisdictionsController < ApplicationController
           edh_to_audit = converter.convert
         end
       end
-      audit_obj = Audit.new(:content_type => params[:contents], :election_data_hash => edh_to_audit, :district_set => current_context.jurisdiction)
+      audit_obj = Audit.new
+      audit_obj.content_type = params[:contents]
+      audit_obj.election_data_hash = edh_to_audit
+      audit_obj.district_set = current_context.jurisdiction
       audit_obj.save!
       session[:audit_id] = audit_obj.id
       audit_obj.audit

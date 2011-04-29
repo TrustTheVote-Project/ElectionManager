@@ -12,7 +12,7 @@ class CandidatesController < ApplicationController
   def new
     @candidate = Candidate.new
     @candidate.contest_id = params[:contest_id];
-    raise "Invalid contest. Candidates must be created inside a contest" if params[:contest_id].nil?
+#    raise "Invalid contest. Candidates must be created inside a contest" if params[:contest_id].nil?
     render :update do |page|
       editor_id = "#{dom_id(@candidate.contest)}_candidates_new"
       page.insert_html :after, "#{dom_id(@candidate.contest)}_static", :partial => 'new.html.erb', :locals => { :model => @candidate }

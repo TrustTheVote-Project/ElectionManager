@@ -6,7 +6,7 @@ gem 'rails', "2.3.8"
 gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
 
 gem "authlogic"
-gem "prawn", '>= 0.7.2'
+gem "prawn", '~> 0.8.4'
 gem 'will_paginate', '~> 2.3.11'
 gem 'tpitale-constant_cache', '>= 0.1.2', :require => 'constant_cache'
 gem 'rubyzip', '>= 0.9.4', :require => 'zip/zip'

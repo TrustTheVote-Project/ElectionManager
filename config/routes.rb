@@ -24,7 +24,9 @@ ActionController::Routing::Routes.draw do |map|
                  :apply_audit => :put,
                  :do_import => :get}
   
-  map.resources :candidates, :except => [:create]
+#  map.resources :candidates, :except => [:create]
+  map.resources :candidates
+
   map.resources :contests, :has_many => :candidates, :member => { :move => :put }
   map.resources :questions, :member => { :move => :put}
   map.resources :districts

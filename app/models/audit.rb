@@ -1,4 +1,3 @@
-require 'ap'
 class Audit < ActiveRecord::Base
   serialize :election_data_hash # TODO: find maximum size for serialize
   attr_accessible :display_name, :election_data_hash, :district_set, :district_set_id, :content_type
@@ -90,7 +89,7 @@ class Audit < ActiveRecord::Base
   end
   
   def audit_district_sets
-    
+    # TODO: Make sure each district referenced in a district set actually exists
   end
   
   def audit_precinct_splits

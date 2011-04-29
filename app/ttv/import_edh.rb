@@ -163,7 +163,15 @@ module TTV
     def load_district_set distset
       if !DistrictSet.find_by_ident(distset["ident"])
         ds_new = DistrictSet.create!(:ident => distset["ident"])
-        distset["district_list"].each { |ds| ds_new.districts << District.find_by_ident(ds["district_ident"])}
+        distset["district_list"].each do 
+          |ds| 
+            district_to_add = District.find_by_ident(ds["district_ident"])
+            if district_to_add.nil? || !district_to_add.valid?
+              raise "load_district_set tried to add an invalid district <#{ds["district_ident"]}> to district_set <#{ds_new.ident}>"
+            end
+            ds_new.districts << district_to_add
+          end
+          
         ds_new.save!
       end
     end

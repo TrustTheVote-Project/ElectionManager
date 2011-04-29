@@ -1,4 +1,4 @@
-require "prawn/document/annotations"
+require "lib/ttv/prawn/annotations"
 
 module TTV
   module Prawn
